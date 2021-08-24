@@ -13,6 +13,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     @State var copyItemModel: PasteboardItemModel?
     @State var isShareModalDisplayed = false
     @State var isShareAddressShown = false
+    @State var openRequestMoney = false
     var qrImage: Image {
         if let img = QRCodeGenerator.generate(from: self.address) {
             return Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(self.address)") ))
@@ -88,8 +89,20 @@ struct DisplayAddress<AccesoryContent: View>: View {
             
             
             GrayButtonView(aTitle: "Request an Amount").onTapGesture {
-                // Do something here
+                openRequestMoney = true
             }
+            
+            NavigationLink(
+                destination: LazyView(
+                    RequestMoneyView(address: self.address,
+                                       badge: Image("QR-zcashlogo"),
+                                       accessoryContent: { EmptyView() })
+                        .navigationBarTitle("",displayMode: .inline)
+                        .navigationBarHidden(true)
+                ), isActive: self.$openRequestMoney
+            ) {
+                EmptyView()
+            }.isDetailLink(false)
             
             Button(action: {
                 tracker.track(.tap(action: .receiveScan), properties: [:])

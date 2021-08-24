@@ -426,6 +426,12 @@
 		29F066A426C810F900637E97 /* Bundle+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F066A326C810F900637E97 /* Bundle+Localized.swift */; };
 		29F066A526C810F900637E97 /* Bundle+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F066A326C810F900637E97 /* Bundle+Localized.swift */; };
 		29F066A626C810F900637E97 /* Bundle+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F066A326C810F900637E97 /* Bundle+Localized.swift */; };
+		29F314E526D51E7200745DBE /* RequestMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F314E426D51E7200745DBE /* RequestMoneyView.swift */; };
+		29F314E626D51E7200745DBE /* RequestMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F314E426D51E7200745DBE /* RequestMoneyView.swift */; };
+		29F314E726D51E7200745DBE /* RequestMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F314E426D51E7200745DBE /* RequestMoneyView.swift */; };
+		29F314E926D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F314E826D530A600745DBE /* AddressFragmentWithoutNumber.swift */; };
+		29F314EA26D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F314E826D530A600745DBE /* AddressFragmentWithoutNumber.swift */; };
+		29F314EB26D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F314E826D530A600745DBE /* AddressFragmentWithoutNumber.swift */; };
 		29FABBFC26D506E800306726 /* PirateChainPaymentURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBF626D506E800306726 /* PirateChainPaymentURI.swift */; };
 		29FABBFD26D506E800306726 /* PirateChainPaymentURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBF626D506E800306726 /* PirateChainPaymentURI.swift */; };
 		29FABBFE26D506E800306726 /* PirateChainPaymentURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBF626D506E800306726 /* PirateChainPaymentURI.swift */; };
@@ -656,6 +662,8 @@
 		29EA113326B492CC00601FDD /* RestorePhraseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePhraseScreen.swift; sourceTree = "<group>"; };
 		29F0669F26C8028C00637E97 /* SelectLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguage.swift; sourceTree = "<group>"; };
 		29F066A326C810F900637E97 /* Bundle+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Localized.swift"; sourceTree = "<group>"; };
+		29F314E426D51E7200745DBE /* RequestMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMoneyView.swift; sourceTree = "<group>"; };
+		29F314E826D530A600745DBE /* AddressFragmentWithoutNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressFragmentWithoutNumber.swift; sourceTree = "<group>"; };
 		29FABBF626D506E800306726 /* PirateChainPaymentURI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PirateChainPaymentURI.swift; sourceTree = "<group>"; };
 		29FABBF826D506E800306726 /* PirateChainPaymentURIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PirateChainPaymentURIProtocol.swift; sourceTree = "<group>"; };
 		29FABBF926D506E800306726 /* PirateChainPaymentURI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PirateChainPaymentURI.h; sourceTree = "<group>"; };
@@ -772,6 +780,7 @@
 				0DACBB32264980620085F1CD /* OhMyScreen.swift */,
 				290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */,
 				2924CF6C26BE99AE003E5C3B /* HomeTabView.swift */,
+				29F314E426D51E7200745DBE /* RequestMoneyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1028,6 +1037,7 @@
 				2931F36E26CEDD4200F68099 /* ARRRCloseButton.swift */,
 				2932002C26CEF2A30016D2E2 /* TransactionDetailsTitle.swift */,
 				294A88F026D0EA4400EEA4A9 /* BalanceViewHome.swift */,
+				29F314E826D530A600745DBE /* AddressFragmentWithoutNumber.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1660,6 +1670,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F314E926D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */,
 				0DF26E2724D1F88100F32978 /* Baseline.swift in Sources */,
 				0D0AAE1124102380009CD8F9 /* SyncingButton.swift in Sources */,
 				0DD8B9B824B6898F0031FF42 /* EventLogger.swift in Sources */,
@@ -1770,6 +1781,7 @@
 				0D7D5DDB24BFAC7C0028083C /* KeyboardResponder.swift in Sources */,
 				0D12510323B557E40014EE3A /* AppDelegate.swift in Sources */,
 				0DEC5DF923BD60CF002EFD0D /* Ring.swift in Sources */,
+				29F314E526D51E7200745DBE /* RequestMoneyView.swift in Sources */,
 				0D72330823E9CFE40004B6D1 /* QRCodeScannerView.swift in Sources */,
 				0D12510523B557E40014EE3A /* SceneDelegate.swift in Sources */,
 				0D11C22F23BF8181001CF6F7 /* QRCodeContainer.swift in Sources */,
@@ -1840,6 +1852,7 @@
 				0DCDFF9E24B6722B000F6999 /* ZECCWalletEnvironment.swift in Sources */,
 				0D7D5DDC24BFAC7C0028083C /* KeyboardResponder.swift in Sources */,
 				0DBA1E1C24CB5D5C009C654E /* ShareView.swift in Sources */,
+				29F314EB26D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */,
 				0DCDFF9F24B6722B000F6999 /* ZcashButton.swift in Sources */,
 				0DCDFFA024B6722B000F6999 /* ZcashTextField.swift in Sources */,
 				0DCDFFA124B6722B000F6999 /* String+localized.swift in Sources */,
@@ -1875,6 +1888,7 @@
 				0DCDFFAF24B6722B000F6999 /* SeedManagement.swift in Sources */,
 				0DCDFFB024B6722B000F6999 /* SendFlowEnvironment.swift in Sources */,
 				0D5E9B0B2637424C00D98569 /* WalletBalanceBreakdown.swift in Sources */,
+				29F314E726D51E7200745DBE /* RequestMoneyView.swift in Sources */,
 				29EA113626B492CC00601FDD /* RestorePhraseScreen.swift in Sources */,
 				0DCDFFB124B6722B000F6999 /* URL+Zcash.swift in Sources */,
 				0DCDFFB224B6722B000F6999 /* MnemonicSeedPhraseProvider.swift in Sources */,
@@ -1955,6 +1969,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29F314EA26D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */,
 				0DE30349263A158400CF877A /* Baseline.swift in Sources */,
 				0DE3034A263A158400CF877A /* SyncingButton.swift in Sources */,
 				0DE3034B263A158400CF877A /* EventLogger.swift in Sources */,
@@ -2065,6 +2080,7 @@
 				0DE3039E263A158400CF877A /* KeyboardResponder.swift in Sources */,
 				0DE3039F263A158400CF877A /* AppDelegate.swift in Sources */,
 				0DE303A0263A158400CF877A /* Ring.swift in Sources */,
+				29F314E626D51E7200745DBE /* RequestMoneyView.swift in Sources */,
 				0DE303A1263A158400CF877A /* QRCodeScannerView.swift in Sources */,
 				0DE303A2263A158400CF877A /* SceneDelegate.swift in Sources */,
 				0DE303A3263A158400CF877A /* QRCodeContainer.swift in Sources */,
