@@ -82,6 +82,7 @@ struct DetailCard: View {
                     HStack {
 //                        Text(model.title)
                         Text(model.date.aFormattedDate)
+                            .font(.barlowRegular(size: 20))
                             .truncationMode(.tail)
                             .lineLimit(1)
                             .foregroundColor(.white)

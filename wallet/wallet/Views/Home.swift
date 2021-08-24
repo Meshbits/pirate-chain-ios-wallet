@@ -37,6 +37,8 @@ final class HomeViewModel: ObservableObject {
         zecAmountFormatter.number(from: sendZecAmountText)?.doubleValue ?? 0.0
     }
     var diposables = Set<AnyCancellable>()
+    @Published var items = [DetailModel]()
+    var balance: Double = 0
     @Published var destination: ModalDestinations?
     @Published var sendZecAmountText: String = "0"
     @Published var isSyncing: Bool = false
@@ -50,7 +52,7 @@ final class HomeViewModel: ObservableObject {
     @Published var verifiedBalance: Double = 0
     @Published var shieldedBalance = ReadableBalance.zero
     @Published var transparentBalance = ReadableBalance.zero
-         
+    private var synchronizerEvents = Set<AnyCancellable>()
     var progress = CurrentValueSubject<Float,Never>(0)
     var pendingTransactions: [DetailModel] = []
     private var cancellable = [AnyCancellable]()
@@ -99,6 +101,41 @@ final class HomeViewModel: ObservableObject {
                        
                }
                .store(in: &diposables)
+        
+        subscribeToSynchonizerEvents()
+    }
+    
+    deinit {
+        unsubscribeFromSynchonizerEvents()
+        unbindSubcribedEnvironmentEvents()
+        cancellable.forEach { $0.cancel() }
+    }
+    
+    func subscribeToSynchonizerEvents() {
+        ZECCWalletEnvironment.shared.synchronizer.walletDetailsBuffer
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] (d) in
+                self?.items = d
+            })
+            .store(in: &synchronizerEvents)
+        
+        ZECCWalletEnvironment.shared.synchronizer.balance
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] (b) in
+                self?.balance = b
+            })
+            .store(in: &synchronizerEvents)
+    }
+    
+    func unsubscribeFromSynchonizerEvents() {
+        synchronizerEvents.forEach { (c) in
+            c.cancel()
+        }
+        synchronizerEvents.removeAll()
+    }
+    
+    func getSortedItems()-> [DetailModel]{
+        return self.items.sorted(by: { $0.date > $1.date })
     }
     
     func bindToEnvironmentEvents() {
@@ -155,10 +192,6 @@ final class HomeViewModel: ObservableObject {
         environmentCancellables.removeAll()
     }
     
-    deinit {
-        unbindSubcribedEnvironmentEvents()
-        cancellable.forEach { $0.cancel() }
-    }
     
     func show(error: UserFacingErrors) {
         self.lastError = error
@@ -232,7 +265,7 @@ struct Home: View {
     @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     @State var isAuthenticatedFlowInitiated = false
-    
+    @State var selectedModel: DetailModel? = nil
     var aTitleStatus: String {
         switch self.viewModel.syncStatus {
             case .error:
@@ -494,6 +527,21 @@ struct Home: View {
                 List {
                     
                     // Show recent transactions in here
+                    
+                    ForEach(self.viewModel.getSortedItems()) { row in
+                        Button(action: {
+                            self.selectedModel = row
+                        }) {
+                            DetailCard(model: row, backgroundColor: .zDarkGray2)
+                        }
+                        .listRowBackground(Color.zDarkGray2)
+                        .frame(height: 69)
+                        .padding(.horizontal, 16)
+                        .cornerRadius(0)
+                        .border(Color.zGray, width: 1)
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                          
+                   }
                     
                 }
                 .listStyle(PlainListStyle())
