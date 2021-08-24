@@ -535,6 +535,22 @@ struct Home: View {
                     EmptyView()
                 }.isDetailLink(false)
                 
+                
+//                NavigationLink(
+//                    destination: LazyView(
+//                        SendMoneyView()
+//                            .environmentObject(
+//                                SendFlow.current! //fixme
+//                        )
+//                            .navigationBarTitle("",displayMode: .inline)
+//                            .navigationBarHidden(true)
+//                    ), isActive: self.$sendingPushed
+//                ) {
+//                    EmptyView()
+//                }.isDetailLink(false)
+                
+                
+                
 //                buttonFor(syncStatus: self.viewModel.syncStatus)
 //                    .frame(height: self.buttonHeight)
 //                    .padding(.horizontal, buttonPadding)

@@ -401,6 +401,9 @@
 		2963F33326C946FE0008CD34 /* PrivateServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */; };
 		2963F33426C946FE0008CD34 /* PrivateServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */; };
 		2963F33526C946FE0008CD34 /* PrivateServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */; };
+		296CACE626D57757004DC784 /* SendMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CACE526D57757004DC784 /* SendMoneyView.swift */; };
+		296CACE726D57757004DC784 /* SendMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CACE526D57757004DC784 /* SendMoneyView.swift */; };
+		296CACE826D57757004DC784 /* SendMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CACE526D57757004DC784 /* SendMoneyView.swift */; };
 		298D50E326A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E426A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E526A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
@@ -662,6 +665,7 @@
 		294A88F026D0EA4400EEA4A9 /* BalanceViewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewHome.swift; sourceTree = "<group>"; };
 		29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPrivacy.swift; sourceTree = "<group>"; };
 		2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateServerConfig.swift; sourceTree = "<group>"; };
+		296CACE526D57757004DC784 /* SendMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyView.swift; sourceTree = "<group>"; };
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
@@ -793,6 +797,7 @@
 				290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */,
 				2924CF6C26BE99AE003E5C3B /* HomeTabView.swift */,
 				29F314E426D51E7200745DBE /* RequestMoneyView.swift */,
+				296CACE526D57757004DC784 /* SendMoneyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1776,6 +1781,7 @@
 				0D41AF9F23FCAA4700EE4FC0 /* TextView.swift in Sources */,
 				0D1C2F27240DAFE9001AA427 /* ZcashSeedPhraseGrid.swift in Sources */,
 				29D53C9126D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
+				296CACE626D57757004DC784 /* SendMoneyView.swift in Sources */,
 				29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				2924CF6D26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
@@ -1935,6 +1941,7 @@
 				0DBA1E1F24CB628B009C654E /* DisplayAddress.swift in Sources */,
 				0D3E6D0026814E5D000EF685 /* SaplingParameterDownloader+Combine.swift in Sources */,
 				0DCDFFC024B6722B000F6999 /* UIKit+Extensions.swift in Sources */,
+				296CACE826D57757004DC784 /* SendMoneyView.swift in Sources */,
 				0DCDFFC124B6722B000F6999 /* ZcashButtonBackground.swift in Sources */,
 				0DCDFFC224B6722B000F6999 /* ReceiveFunds.swift in Sources */,
 				2963F33526C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
@@ -2081,6 +2088,7 @@
 				0DE3038B263A158400CF877A /* TextView.swift in Sources */,
 				0DE3038C263A158400CF877A /* ZcashSeedPhraseGrid.swift in Sources */,
 				29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
+				296CACE726D57757004DC784 /* SendMoneyView.swift in Sources */,
 				29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				2924CF6E26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
