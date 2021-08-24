@@ -10,6 +10,8 @@ import SwiftUI
 
 struct RequestMoneyView<AccesoryContent: View>: View {
     let qrSize: CGFloat = 100
+    
+    @State var sendArrrValue =  "0"
 
     @State var copyItemModel: PasteboardItemModel?
     var address: String
@@ -97,15 +99,28 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 }
                 
                 ARRRMemoTextField().frame(height:60)
+                
+                
+                Text(self.sendArrrValue)
+                    .foregroundColor(.gray)
+                    .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
+                    .frame(height:40)
+                    .padding(.leading,10)
+                    .padding(.trailing,10)
+                    .modifier(BackgroundPlaceholderModifier())
+                
                               
-                KeyPadARRR(value: .constant("0"))
+                KeyPadARRR(value: self.$sendArrrValue)
                     .frame(alignment: .center)
                     .padding(.horizontal, 10)
                 
-                BlueButtonView(aTitle: "Share")
+                BlueButtonView(aTitle: "Share").onTapGesture {
+                    
+                }
             }
             
-        }.zcashNavigationBar(leadingItem: {
+        }
+        .zcashNavigationBar(leadingItem: {
             EmptyView()
          }, headerItem: {
              HStack{

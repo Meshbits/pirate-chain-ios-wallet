@@ -18,20 +18,11 @@ struct KeyPadARRR: View {
     
     init(value: Binding<String>) {
         self.viewModel = KeyPadViewModel(value: value)
-        self.viewModel.value = "0"
     }
     
     var body: some View {
             VStack(alignment: .center, spacing: self.vSpacing) {
-                
-                Text(self.viewModel.value)
-                    .foregroundColor(.gray)
-                    .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
-                    .frame(height:40)
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
-                    .modifier(BackgroundPlaceholderModifier())
-                
+             
                 ForEach(self.viewModel.visibleValues, id: \.self) {
                     row in
                     HStack(alignment: .center, spacing: self.hSpacing) {
@@ -86,7 +77,6 @@ struct KeyPadButtonStyleARRR: ButtonStyle {
             .contentShape(Circle())
             .animation(nil)
             .foregroundColor(configuration.isPressed ? Color.black : .white)
-            .background(Circle().fill(configuration.isPressed ? Color.white : .clear))
             .animation(.easeInOut(duration: 0.2))
     }
 }
