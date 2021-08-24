@@ -36,55 +36,65 @@ struct RequestMoneyView<AccesoryContent: View>: View {
     var body: some View {
         ZStack{
             ARRRBackground()
-            
-            HStack{
-                QRCodeContainer(qrImage: qrImage,
-                                badge: badge)
-                    .frame(width: qrSize, height: qrSize, alignment: .center)
-                    .layoutPriority(1)
-                    .cornerRadius(6)
-                    .modifier(QRCodeBackgroundPlaceholderModifier())
+            VStack{
                 
-                Button(action: {
-                    PasteboardAlertHelper.shared.copyToPasteBoard(value: self.address, notify: "feedback_addresscopied".localized())
-                    logger.debug("address copied to clipboard")
-             
-                    tracker.track(.tap(action: .copyAddress), properties: [:])
-                }) {
-                    VStack {
-                        if chips.count <= 2 {
-                            
-                            ForEach(0 ..< chips.count) { i in
-                                AddressFragment(number: i + 1, word: self.chips[i])
-                                    .frame(height: 24)
-                            }
-                            self.accessoryContent
-                        } else {
-                            ForEach(stride(from: 0, through: chips.count - 1, by: 2).map({ i in i}), id: \.self) { i in
-                                HStack {
-                                    AddressFragmentWithoutNumber(word: self.chips[i])
-                                        .frame(height: 24)
-                                    AddressFragmentWithoutNumber(word: self.chips[i+1])
+                HStack{
+                    QRCodeContainer(qrImage: qrImage,
+                                    badge: badge)
+                        .frame(width: qrSize, height: qrSize, alignment: .center)
+                        .layoutPriority(1)
+                        .cornerRadius(6)
+                        .modifier(QRCodeBackgroundPlaceholderModifier())
+                    
+                    Button(action: {
+                        PasteboardAlertHelper.shared.copyToPasteBoard(value: self.address, notify: "feedback_addresscopied".localized())
+                        logger.debug("address copied to clipboard")
+                 
+                        tracker.track(.tap(action: .copyAddress), properties: [:])
+                    }) {
+                        VStack {
+                            if chips.count <= 2 {
+                                
+                                ForEach(0 ..< chips.count) { i in
+                                    AddressFragment(number: i + 1, word: self.chips[i])
                                         .frame(height: 24)
                                 }
+                                self.accessoryContent
+                            } else {
+                                ForEach(stride(from: 0, through: chips.count - 1, by: 2).map({ i in i}), id: \.self) { i in
+                                    HStack {
+                                        AddressFragmentWithoutNumber(word: self.chips[i])
+                                            .frame(height: 24)
+                                        AddressFragmentWithoutNumber(word: self.chips[i+1])
+                                            .frame(height: 24)
+                                    }
+                                }
                             }
+                            
                         }
+                        .frame(minHeight: 96)
+                        .padding(.leading, -10)
                         
+                    }.alert(item: self.$copyItemModel) { (p) -> Alert in
+                        PasteboardAlertHelper.alert(for: p)
                     }
-                    .frame(minHeight: 96)
+                    .onReceive(PasteboardAlertHelper.shared.publisher) { (p) in
+                        self.copyItemModel = p
+                    }
                     
-                }.alert(item: self.$copyItemModel) { (p) -> Alert in
-                    PasteboardAlertHelper.alert(for: p)
+                    Spacer()
                 }
-                .onReceive(PasteboardAlertHelper.shared.publisher) { (p) in
-                    self.copyItemModel = p
+                TransactionRow(mTitle: "Memo",showLine: false, isYellowColor: false).padding(.leading, 10)
+                
+                if !ZECCWalletEnvironment.shared.isValidTransparentAddress(self.address) {
+                    ARRRMemoTextField()
+                } else {
+                    Spacer()
                 }
                 
                 Spacer()
-            }.padding(.leading, -10)
-            
-            Spacer()
-            Spacer()
+                Spacer()
+            }
             
         }.zcashNavigationBar(leadingItem: {
             EmptyView()

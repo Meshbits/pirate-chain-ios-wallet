@@ -152,6 +152,8 @@ extension Color {
     static let zARRRSubtitleColor = Color.init(red: 150.0/255.0, green: 150.0/255.0, blue: 160.0/255.0)
     
     static let zARRRTextColorLightYellow = Color.init(red: 132.0/255.0, green: 124.0/255.0, blue: 115.0/255.0)
+    
+    static let zARRRReplySelectedColor = Color.init(red: 106.0/255.0, green: 222.0/255.0, blue: 247.0/255.0)
 }
 
 extension Gradient {

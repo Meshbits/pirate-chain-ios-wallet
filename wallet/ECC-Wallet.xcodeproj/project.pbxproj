@@ -413,6 +413,12 @@
 		29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
 		29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
 		29D4F90F26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
+		29D53C9126D549A900A22656 /* ARRRMemoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */; };
+		29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */; };
+		29D53C9326D549A900A22656 /* ARRRMemoTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */; };
+		29D53C9526D5606700A22656 /* ARRRToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */; };
+		29D53C9626D5606700A22656 /* ARRRToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */; };
+		29D53C9726D5606700A22656 /* ARRRToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */; };
 		29DDA37426CCF95C0041406B /* OpenInAppBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */; };
 		29DDA37526CCF95C0041406B /* OpenInAppBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */; };
 		29DDA37626CCF95C0041406B /* OpenInAppBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */; };
@@ -658,6 +664,8 @@
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
 		29D1459C46D96D9D3DF2A55C /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlinkDevice.swift; sourceTree = "<group>"; };
+		29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRMemoTextField.swift; sourceTree = "<group>"; };
+		29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRToggleStyle.swift; sourceTree = "<group>"; };
 		29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenInAppBrowser.swift; sourceTree = "<group>"; };
 		29EA113326B492CC00601FDD /* RestorePhraseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePhraseScreen.swift; sourceTree = "<group>"; };
 		29F0669F26C8028C00637E97 /* SelectLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguage.swift; sourceTree = "<group>"; };
@@ -1038,6 +1046,8 @@
 				2932002C26CEF2A30016D2E2 /* TransactionDetailsTitle.swift */,
 				294A88F026D0EA4400EEA4A9 /* BalanceViewHome.swift */,
 				29F314E826D530A600745DBE /* AddressFragmentWithoutNumber.swift */,
+				29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */,
+				29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1720,6 +1730,7 @@
 				0D2607D724F42C46006FDC36 /* PasteboardHelper.swift in Sources */,
 				0DE51DB223BED85C00709636 /* ActionableMessage.swift in Sources */,
 				0D421AFF23C67DCF00E5E55E /* DetailCard.swift in Sources */,
+				29D53C9526D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				0D9E89BD23DA3BD600AFD118 /* SeedManagement.swift in Sources */,
 				0D4364C723CCF4CC008B7DAC /* SendFlowEnvironment.swift in Sources */,
 				0DDF876723DB5400002BF158 /* URL+Zcash.swift in Sources */,
@@ -1758,6 +1769,7 @@
 				0DF26E2124D1F75300F32978 /* ZcashMemoTextField.swift in Sources */,
 				0D41AF9F23FCAA4700EE4FC0 /* TextView.swift in Sources */,
 				0D1C2F27240DAFE9001AA427 /* ZcashSeedPhraseGrid.swift in Sources */,
+				29D53C9126D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
 				29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				2924CF6D26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
@@ -1882,6 +1894,7 @@
 				0DCDFFAB24B6722B000F6999 /* BalanceDetail.swift in Sources */,
 				0D4B91DE24CA395100A0E024 /* UIResponder+Current.swift in Sources */,
 				0D2D5C1E24CF827A001A58AD /* SendTransaction.swift in Sources */,
+				29D53C9326D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
 				0DCDFFAC24B6722B000F6999 /* Home.swift in Sources */,
 				0DCDFFAD24B6722B000F6999 /* ActionableMessage.swift in Sources */,
 				0DCDFFAE24B6722B000F6999 /* DetailCard.swift in Sources */,
@@ -1921,6 +1934,7 @@
 				0D82F32B261284060058B05D /* Alerts.swift in Sources */,
 				2932002F26CEF2A30016D2E2 /* TransactionDetailsTitle.swift in Sources */,
 				0D5E4AA82527B440001CB335 /* BackgroundTasks.swift in Sources */,
+				29D53C9726D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				0DCDFFC324B6722B000F6999 /* RestoreWallet.swift in Sources */,
 				0DCDFFC424B6722B000F6999 /* NavigationConfigurator.swift in Sources */,
 				0DD1C2D124F051EE0042C1E4 /* Foundation+Zcash.swift in Sources */,
@@ -2019,6 +2033,7 @@
 				0DE3036B263A158400CF877A /* PasteboardHelper.swift in Sources */,
 				0DE3036C263A158400CF877A /* ActionableMessage.swift in Sources */,
 				0DE3036D263A158400CF877A /* DetailCard.swift in Sources */,
+				29D53C9626D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				0DE3036E263A158400CF877A /* SeedManagement.swift in Sources */,
 				0DE3036F263A158400CF877A /* SendFlowEnvironment.swift in Sources */,
 				0DE30370263A158400CF877A /* URL+Zcash.swift in Sources */,
@@ -2057,6 +2072,7 @@
 				0DE3038A263A158400CF877A /* ZcashMemoTextField.swift in Sources */,
 				0DE3038B263A158400CF877A /* TextView.swift in Sources */,
 				0DE3038C263A158400CF877A /* ZcashSeedPhraseGrid.swift in Sources */,
+				29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
 				29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				2924CF6E26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
