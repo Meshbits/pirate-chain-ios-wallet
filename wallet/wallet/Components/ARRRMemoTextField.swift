@@ -9,14 +9,8 @@
 import SwiftUI
 
 struct ARRRMemoTextField: View {
-    
-    var paragraphStyle: NSParagraphStyle {
-        let p = NSMutableParagraphStyle()
-        p.firstLineHeadIndent = 50
-        return p
-    }
-    
-    @State var memoText = ""
+   
+    @Binding var memoText:String
     
     @State var isReplyTo = true
     
@@ -24,12 +18,11 @@ struct ARRRMemoTextField: View {
         ZStack{
            
             HStack{
-                  TextField("Memo Text...", text: $memoText)
+                TextField("Memo Text...", text: $memoText)
                   .font(.barlowRegular(size: 20))
                   .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.clear))
                   .foregroundColor(Color.gray)
                   .modifier(QRCodeBackgroundPlaceholderModifier())
-                  .padding(.leading, 10)
                 
                 Spacer()
                 VStack{
@@ -43,10 +36,18 @@ struct ARRRMemoTextField: View {
             }
         }
     }
-}
-
-struct ARRRMemoTextField_Previews: PreviewProvider {
-    static var previews: some View {
-        ARRRMemoTextField()
+    
+    
+    var paragraphStyle: NSParagraphStyle {
+        let p = NSMutableParagraphStyle()
+        p.firstLineHeadIndent = 50
+        return p
     }
+    
 }
+//
+//struct ARRRMemoTextField_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ARRRMemoTextField()
+//    }
+//}

@@ -10,8 +10,9 @@ import SwiftUI
 
 struct RequestMoneyView<AccesoryContent: View>: View {
     let qrSize: CGFloat = 100
-    
+    @State var isShareAddressShown = false
     @State var sendArrrValue =  "0"
+    @State var memoTextContent =  ""
 
     @State var copyItemModel: PasteboardItemModel?
     var address: String
@@ -92,14 +93,13 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
-                        .truncationMode(.middle)
-                        .padding(10).padding(.leading, 10)
+                        .truncationMode(.middle).padding(.leading, 10)
+                        .padding(10)
                     Spacer()
                     Spacer()
                 }
                 
-                ARRRMemoTextField().frame(height:60)
-                
+                ARRRMemoTextField(memoText:$memoTextContent).frame(height:60)
                 
                 Text(self.sendArrrValue)
                     .foregroundColor(.gray)
@@ -115,7 +115,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                     .padding(.horizontal, 10)
                 
                 BlueButtonView(aTitle: "Share").onTapGesture {
-                    
+                    self.isShareAddressShown = true
                 }
             }
             
@@ -137,6 +137,19 @@ struct RequestMoneyView<AccesoryContent: View>: View {
             tracker.track(.screen(screen: .receive), properties: [:])
         }
         .navigationBarHidden(true)
+        .sheet(isPresented: self.$isShareAddressShown) {
+            ShareSheet(activityItems: [getPirateChainURI()])
+        }
+    }
+    
+    func getPirateChainURI() -> String {
+        return PirateChainPaymentURI.init(build: {
+            $0.address = self.address
+            $0.amount = Double(self.sendArrrValue)
+            $0.label = ""
+            $0.message = self.memoTextContent
+            $0.isDeepLink = true
+        }).uri ?? self.address
     }
 }
 
