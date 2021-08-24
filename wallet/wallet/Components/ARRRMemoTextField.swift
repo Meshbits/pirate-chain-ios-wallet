@@ -22,8 +22,7 @@ struct ARRRMemoTextField: View {
     
     var body: some View {
         ZStack{
-            ARRRBackground()
-            
+           
             HStack{
                   TextField("Memo Text...", text: $memoText)
                   .font(.barlowRegular(size: 20))

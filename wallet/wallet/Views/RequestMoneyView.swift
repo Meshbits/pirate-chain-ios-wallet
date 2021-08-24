@@ -84,19 +84,25 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                     
                     Spacer()
                 }
-                TransactionRow(mTitle: "Memo",showLine: false, isYellowColor: false).padding(.leading, 10)
+
+                HStack{
+                    Text("Memo").font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
+                                    .frame(height: 22,alignment: .leading)
+                                    .foregroundColor(Color.white)
+                        .multilineTextAlignment(.leading)
+                        .truncationMode(.middle)
+                        .padding(10).padding(.leading, 10)
+                    Spacer()
+                    Spacer()
+                }
                 
-                ARRRMemoTextField()
+                ARRRMemoTextField().frame(height:60)
+                              
+                KeyPadARRR(value: .constant("0"))
+                    .frame(alignment: .center)
+                    .padding(.horizontal, 10)
                 
-                Text("0")
-                    .foregroundColor(.gray)
-                    .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
-                    .frame(height:50)
-                    .padding(10)
-                    .modifier(BackgroundPlaceholderModifier())
-                
-                Spacer()
-                Spacer()
+                BlueButtonView(aTitle: "Share")
             }
             
         }.zcashNavigationBar(leadingItem: {
