@@ -557,7 +557,9 @@ struct Home: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             
-            UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+            if UIApplication.shared.windows.count > 0 {
+                UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+            }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.showPassCodeScreen = true
@@ -570,6 +572,10 @@ struct Home: View {
         }.onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.showPassCodeScreen = false
+            }
+            
+            if UIApplication.shared.windows.count > 0 {
+                UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
             }
         }        
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in

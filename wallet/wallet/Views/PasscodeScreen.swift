@@ -223,7 +223,9 @@ struct PasscodeScreen: View {
                             return
                         }else{
 
-                            UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
+                            if UIApplication.shared.windows.count > 0 {
+                                UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                            }
                             
                             openHomeScreen = true
 

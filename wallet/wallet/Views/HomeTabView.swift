@@ -47,7 +47,9 @@ struct HomeTabView: View {
             .onAppear(){
                        
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil, queue: .main) { (_) in
-                    UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                    if UIApplication.shared.windows.count > 0 {
+                        UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                    }
                 }
             }
         }
