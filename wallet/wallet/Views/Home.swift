@@ -418,24 +418,7 @@ struct Home: View {
     var amountOpacity: Double {
         self.isSendingEnabled ? self.viewModel.sendZecAmount > 0 ? 1.0 : 0.6 : 0.3
     }
-    
-    struct SendRecieveButtonView : View {
-        
-        @State var title: String
-        
-        var body: some View {
-            ZStack {
-                Text(title).foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                    .barlowRegular(size: Device.isLarge ? 22 : 15)
-                ).modifier(ForegroundPlaceholderModifierHomeButtons())
-                .padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
-                .cornerRadius(30)
-                .background(Image("buttonbackground").resizable())
-            }
-        }
-    }
-
-    
+       
     var body: some View {
         ZStack {
             ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -576,16 +559,16 @@ struct Home: View {
             
             UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.showPassCodeScreen = true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 authenticate()
             }
             
         }.onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.showPassCodeScreen = false
             }
         }        
@@ -695,6 +678,22 @@ extension Home {
     }
 }
 
+
+struct SendRecieveButtonView : View {
+    
+    @State var title: String
+    
+    var body: some View {
+        ZStack {
+            Text(title).foregroundColor(Color.zARRRTextColorLightYellow).bold().multilineTextAlignment(.center).font(
+                .barlowRegular(size: Device.isLarge ? 22 : 15)
+            ).modifier(ForegroundPlaceholderModifierHomeButtons())
+            .padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+            .cornerRadius(30)
+            .background(Image("buttonbackground").resizable())
+        }
+    }
+}
 
 extension ReadableBalance {
     var isThereAnyBalance: Bool {

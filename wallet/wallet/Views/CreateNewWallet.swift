@@ -255,6 +255,25 @@ struct BlueButtonView : View {
     }
 }
 
+struct GrayButtonView : View {
+    
+    @State var aTitle: String = ""
+    
+    var body: some View {
+        ZStack {
+            
+            Image("buttonbackground").resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
+            
+            Text(aTitle).foregroundColor(Color.zARRRTextColorLightYellow).bold()
+                .frame(width: 225.0, height:84)
+                .cornerRadius(15)
+                .font(.barlowRegular(size: Device.isLarge ? 22 : 16))
+                .multilineTextAlignment(.center)
+        }.frame(width: 225.0, height:84)
+        
+    }
+}
+
 
 struct RecoveryWalletButtonView : View {
     
@@ -266,7 +285,7 @@ struct RecoveryWalletButtonView : View {
 
             Image(imageName).resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
             
-            Text(title).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+            Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
                 .frame(width: 225.0, height:84).padding(10)
                 .cornerRadius(15)
                 .font(.barlowRegular(size: Device.isLarge ? 22 : 16))

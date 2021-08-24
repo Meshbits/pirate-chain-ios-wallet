@@ -26,7 +26,7 @@ struct AddressFragment: View {
                         
                     
                     Text(self.word)
-                        .foregroundColor(.white)
+                        .foregroundColor(.gray)
                         .font(.system(size: 16))
                         
                         

@@ -37,16 +37,15 @@ struct DisplayAddress<AccesoryContent: View>: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 20) {
-            Text(title)
-                .foregroundColor(.white)
-                .font(.system(size: 21))
-            
+         
             QRCodeContainer(qrImage: qrImage,
                             badge: badge)
                 .frame(width: qrSize, height: qrSize, alignment: .center)
                 .layoutPriority(1)
             
-            Spacer()
+            Text(title)
+                .foregroundColor(.gray)
+                .font(.barlowRegular(size: 21))
             
             Button(action: {
                 PasteboardAlertHelper.shared.copyToPasteBoard(value: self.address, notify: "feedback_addresscopied".localized())
@@ -85,15 +84,16 @@ struct DisplayAddress<AccesoryContent: View>: View {
             
             Spacer()
             
+            
+            GrayButtonView(aTitle: "Request an Amount").onTapGesture {
+                // Do something here
+            }
+            
             Button(action: {
                 tracker.track(.tap(action: .receiveScan), properties: [:])
                 self.isShareAddressShown = true
             }) {
-                Text("button_share_address")
-                    .foregroundColor(Color.white)
-                    .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .white, lineWidth: 1)))
-                    .frame(height: 58)
-                
+                BlueButtonView(aTitle: "Share")
             }
         }.padding(30)
             .sheet(isPresented: self.$isShareAddressShown) {
