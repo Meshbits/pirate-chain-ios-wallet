@@ -485,14 +485,33 @@ struct Home: View {
                 
                 Spacer()
                 
-                KeyPad(value: $viewModel.sendZecAmountText)
-                    .frame(alignment: .center)
-                    .padding(.horizontal, buttonPadding)
-                    .opacity(self.isSendingEnabled ? 1.0 : 0.3)
-                    .disabled(!self.isSendingEnabled)
-                    .alert(isPresented: self.$viewModel.showError) {
-                        self.viewModel.errorAlert
+                Text("Recent Transfers")
+                    .multilineTextAlignment(.leading)
+                    .font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
+                    .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(10).padding(.leading, 10)
+                
+                
+                List {
+                    
+                    // Show recent transactions in here
+                    
                 }
+                .listStyle(PlainListStyle())
+                .cornerRadius(20)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.zGray, lineWidth: 1.0)
+                )
+                .padding()
+                
+//                KeyPad(value: $viewModel.sendZecAmountText)
+//                    .frame(alignment: .center)
+//                    .padding(.horizontal, buttonPadding)
+//                    .opacity(self.isSendingEnabled ? 1.0 : 0.3)
+//                    .disabled(!self.isSendingEnabled)
+//                    .alert(isPresented: self.$viewModel.showError) {
+//                        self.viewModel.errorAlert
+//                }
                 
                 Spacer()
                 
