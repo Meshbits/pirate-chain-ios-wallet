@@ -9,6 +9,8 @@
 import SwiftUI
 import Combine
 import ZcashLightClientKit
+import LocalAuthentication
+
 final class HomeViewModel: ObservableObject {
     
     enum ModalDestinations: Identifiable {
@@ -34,10 +36,12 @@ final class HomeViewModel: ObservableObject {
     var sendZecAmount: Double {
         zecAmountFormatter.number(from: sendZecAmountText)?.doubleValue ?? 0.0
     }
+    var diposables = Set<AnyCancellable>()
     @Published var destination: ModalDestinations?
     @Published var sendZecAmountText: String = "0"
     @Published var isSyncing: Bool = false
     @Published var sendingPushed: Bool = false
+    @Published var openQRCodeScanner: Bool
     @Published var showError: Bool = false
     @Published var showHistory = false
     @Published var syncStatus: SyncStatus = .disconnected
@@ -46,7 +50,7 @@ final class HomeViewModel: ObservableObject {
     @Published var verifiedBalance: Double = 0
     @Published var shieldedBalance = ReadableBalance.zero
     @Published var transparentBalance = ReadableBalance.zero
-    
+         
     var progress = CurrentValueSubject<Float,Never>(0)
     var pendingTransactions: [DetailModel] = []
     private var cancellable = [AnyCancellable]()
@@ -54,6 +58,7 @@ final class HomeViewModel: ObservableObject {
     private var zecAmountFormatter = NumberFormatter.zecAmountFormatter
     init() {
         self.destination = nil
+        openQRCodeScanner = false
         bindToEnvironmentEvents()
         
         NotificationCenter.default.publisher(for: .sendFlowStarted)
@@ -72,6 +77,28 @@ final class HomeViewModel: ObservableObject {
             }
         ).store(in: &cancellable)
         
+        
+        NotificationCenter.default.publisher(for: .qrCodeScanned)
+                   .receive(on: DispatchQueue.main)
+                   .debounce(for: 1, scheduler: RunLoop.main)
+                   .sink(receiveCompletion: { (completion) in
+                       switch completion {
+                       case .failure(let error):
+                           logger.error("error scanning: \(error)")
+                           tracker.track(.error(severity: .noncritical), properties:  [ErrorSeverity.messageKey : "\(error)"])
+
+                       case .finished:
+                           logger.debug("finished scanning")
+                       }
+                   }) { (notification) in
+                       guard let address = notification.userInfo?["zAddress"] as? String else {
+                           return
+                       }
+                       self.openQRCodeScanner = false
+//                       logger.debug("got address \(address)")
+                       
+               }
+               .store(in: &diposables)
     }
     
     func bindToEnvironmentEvents() {
@@ -204,6 +231,7 @@ struct Home: View {
     @State var openProfileScreen = false
     @EnvironmentObject var viewModel: HomeViewModel
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
+    @State var isAuthenticatedFlowInitiated = false
     
     var aTitleStatus: String {
         switch self.viewModel.syncStatus {
@@ -417,7 +445,21 @@ struct Home: View {
                 
                 ZcashNavigationBar(
                     leadingItem: {
-
+//                        NavigationLink(destination:  LazyView(
+//
+//                         QRCodeScanner(
+//                             viewModel: QRCodeScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: false),
+//                             cameraAccess: CameraAccessHelper.authorizationStatus,
+//                             isScanAddressShown: self.$viewModel.openQRCodeScanner
+//                         ).environmentObject(ZECCWalletEnvironment.shared)
+//
+//                     )
+//                        ) {
+//
+//                         Image("QRCodeIcon").resizable()
+//                             .frame(width: 35, height: 35)
+//                             .scaleEffect(0.5)
+//                        }
                     },
                    headerItem: {
 //                    if appEnvironment.synchronizer.synchronizer.getShieldedBalance() > 0 {
@@ -473,24 +515,42 @@ struct Home: View {
                 
                 HStack(alignment: .center, spacing: 2, content: {
                     
-                    Button {
-                        // Receive tapped
-                    } label: {
-                        SendRecieveButtonView(title: "Receive")
+                    SendRecieveButtonView(title: "Receive").onTapGesture {
+                        self.viewModel.destination = .receiveFunds
                     }
                     
-                    
-                    Button {
-                        // Send tapped
-                    } label: {
-                        SendRecieveButtonView(title: "Send")
+                    SendRecieveButtonView(title: "Send")
+                        .onTapGesture {
+                            // Send tapped
+                            if(self.viewModel.syncStatus.isSynced){
+                                tracker.track(.tap(action: .homeSend), properties: [:])
+                                self.startSendFlow()
+                            }
+                        }
+                        .onReceive(self.viewModel.$sendingPushed) { pushed in
+                        if pushed {
+                            self.startSendFlow()
+                        } else {
+                            self.endSendFlow()
+                        }
                     }
-                    
-                    
-
                 })
                 .frame(maxWidth:.infinity)
                 .padding()
+                
+                
+                NavigationLink(
+                    destination: LazyView(
+                        SendTransaction()
+                            .environmentObject(
+                                SendFlow.current! //fixme
+                        )
+                            .navigationBarTitle("",displayMode: .inline)
+                            .navigationBarHidden(true)
+                    ), isActive: self.$sendingPushed
+                ) {
+                    EmptyView()
+                }.isDetailLink(false)
                 
 //                buttonFor(syncStatus: self.viewModel.syncStatus)
 //                    .frame(height: self.buttonHeight)
@@ -519,11 +579,42 @@ struct Home: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.showPassCodeScreen = true
             }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                authenticate()
+            }
+            
         }.onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.showPassCodeScreen = false
             }
-        }
+        }        
+        .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
+                   switch output {
+                   case .failed(_), .userFailed:
+                       print("SOME ERROR OCCURRED")
+                        UserSettings.shared.isBiometricDisabled = true
+                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+
+                   case .success:
+                       print("SUCCESS")
+                        UserSettings.shared.biometricInAppStatus = true
+                        UserSettings.shared.isBiometricDisabled = false
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.showPassCodeScreen = false
+                        }
+                        NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
+                   case .userDeclined:
+                       print("DECLINED")
+                        UserSettings.shared.biometricInAppStatus = false
+                        UserSettings.shared.isBiometricDisabled = true
+                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+                       break
+                   }
+            
+
+       }
         .sheet(item: self.$viewModel.destination, onDismiss: nil) { item  in
             switch item {
             case .profile:
@@ -572,6 +663,16 @@ struct Home: View {
         }
     }
     
+    
+    func authenticate() {
+        if UserSettings.shared.biometricInAppStatus && !isAuthenticatedFlowInitiated{
+            isAuthenticatedFlowInitiated = true
+            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                isAuthenticatedFlowInitiated = false
+            }
+        }
+    }
 }
 
 extension BlockHeight {

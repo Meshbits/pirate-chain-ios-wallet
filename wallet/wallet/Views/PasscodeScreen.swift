@@ -142,7 +142,7 @@ struct PasscodeScreen: View {
     
    @State var isNewWallet = false
     
-    @State var isAuthenticatedFlowInitiated = false
+   @State var isAuthenticatedFlowInitiated = false
     
     var body: some View {
         ZStack {
@@ -206,14 +206,8 @@ struct PasscodeScreen: View {
                 EmptyView()
             }
             
-        }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                authenticate()
-            }
         }
         .highPriorityGesture(dragGesture)
-        .onAppear(perform: authenticate)
         .onAppear {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateLayout"), object: nil, queue: .main) { (_) in
                 
@@ -244,6 +238,9 @@ struct PasscodeScreen: View {
                     passcodeViewModel.mPressedKeys.removeAll()
                 }
             }
+            
+            authenticate()
+
         }
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
                    switch output {
@@ -374,9 +371,6 @@ struct PasscodeScreen: View {
         if UserSettings.shared.biometricInAppStatus && mScreenState != .newPasscode && !isAuthenticatedFlowInitiated{
             isAuthenticatedFlowInitiated = true
             AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                isAuthenticatedFlowInitiated = false
-            }
         }
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import TinyQRScanner
 import Combine
 
 public class BindingAdapter: QRScannerViewDelegate {

@@ -7,7 +7,6 @@ def base_pods
   pod 'gRPC-Swift', '~> 1.0.0'
   pod 'KeychainSwift', '~> 19.0.0'
   pod 'MnemonicSwift', :git => 'https://github.com/zcash-hackworks/MnemonicSwift.git', :branch => 'master'
-  pod 'TinyQRScanner'
   pod 'lottie-ios'
   pod 'CombineUrlSessionDownloader'
   pod 'BottomSheet', :git => 'https://github.com/weitieda/bottom-sheet.git'
