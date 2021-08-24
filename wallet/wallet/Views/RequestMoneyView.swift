@@ -86,11 +86,14 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 }
                 TransactionRow(mTitle: "Memo",showLine: false, isYellowColor: false).padding(.leading, 10)
                 
-                if !ZECCWalletEnvironment.shared.isValidTransparentAddress(self.address) {
-                    ARRRMemoTextField()
-                } else {
-                    Spacer()
-                }
+                ARRRMemoTextField()
+                
+                Text("0")
+                    .foregroundColor(.gray)
+                    .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
+                    .frame(height:50)
+                    .padding(10)
+                    .modifier(BackgroundPlaceholderModifier())
                 
                 Spacer()
                 Spacer()
