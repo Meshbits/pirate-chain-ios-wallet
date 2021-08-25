@@ -17,6 +17,17 @@ struct SendMoneyView: View {
     @EnvironmentObject var flow: SendFlowEnvironment
     @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+    
+    
+    var sufficientAmount: Bool {
+        let amount = (Double(sendArrrValue) ??  0 )
+        return amount > 0 && amount <= ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
+    }
+    
+    var validForm: Bool {
+        sufficientAmount
+    }
+    
     var availableBalance: Bool {
         ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
     }
@@ -126,7 +137,8 @@ struct SendMoneyView: View {
                 
                 BlueButtonView(aTitle: "Send").onTapGesture {
                     isSendTapped = true
-                }
+                }.opacity(validForm ? 1.0 : 0.7 )
+                .disabled(!validForm)
                 
             }.zcashNavigationBar(leadingItem: {
                 EmptyView()
