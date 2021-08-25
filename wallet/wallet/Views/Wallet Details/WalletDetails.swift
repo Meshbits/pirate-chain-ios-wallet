@@ -130,18 +130,16 @@ struct WalletDetails: View {
                     
                     ForEach(self.viewModel.headers, id: \.self) { header in
                      
-                       Section(header: Text(converDateToString(headerDate: header))) {
+                        Section(header: Text(converDateToString(headerDate: header)).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader).background(Color.clear).cornerRadius(20)) {
                             ForEach(self.viewModel.groupedByDate[header]!) { row in
                                 Button(action: {
                                     self.selectedModel = row
                                 }) {
                                     DetailCard(model: row, backgroundColor: .zDarkGray2)
                                 }
-                                .listRowBackground(Color.zDarkGray2)
+                                .listRowBackground(ARRRBackground())
                                 .frame(height: 69)
-                                .padding(.horizontal, 16)
                                 .cornerRadius(0)
-                                .border(Color.zGray, width: 1)
                                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                                   
                            }
@@ -150,6 +148,7 @@ struct WalletDetails: View {
                     
                 }
                 .listStyle(PlainListStyle())
+                .modifier(BackgroundPlaceholderModifierHome())
                 .cornerRadius(20)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)

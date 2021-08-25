@@ -68,10 +68,9 @@ struct BalanceViewHome: View {
             Text("Balance")
                 .foregroundColor(.zLightGray)
                 .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
-                .padding(.leading,10)
             HStack{
                 available.multilineTextAlignment(.leading)
-                    .padding(.leading,10)
+                    
                 Spacer()
                 Text(aTitleStatus)
                      .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
