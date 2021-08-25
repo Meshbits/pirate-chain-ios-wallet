@@ -17,6 +17,7 @@ final class HomeViewModel: ObservableObject {
         case profile
         case receiveFunds
         case feedback(score: Int)
+        case sendMoney
         
         var id: Int {
             switch self {
@@ -26,6 +27,8 @@ final class HomeViewModel: ObservableObject {
                 return 1
             case .feedback:
                 return 2
+            case .sendMoney:
+                return 3
             }
         }
     }
@@ -588,6 +591,10 @@ struct Home: View {
                             if(self.viewModel.syncStatus.isSynced){
                                 tracker.track(.tap(action: .homeSend), properties: [:])
                                 self.startSendFlow()
+                                
+                                if self.sendingPushed {
+                                    self.viewModel.destination = .sendMoney
+                                }
                             }
                         }
                         .onReceive(self.viewModel.$sendingPushed) { pushed in
@@ -602,18 +609,18 @@ struct Home: View {
                 .padding()
                 
                 
-                NavigationLink(
-                    destination: LazyView(
-                        SendTransaction()
-                            .environmentObject(
-                                SendFlow.current! //fixme
-                        )
-                            .navigationBarTitle("",displayMode: .inline)
-                            .navigationBarHidden(true)
-                    ), isActive: self.$sendingPushed
-                ) {
-                    EmptyView()
-                }.isDetailLink(false)
+//                NavigationLink(
+//                    destination: LazyView(
+//                        SendTransaction()
+//                            .environmentObject(
+//                                SendFlow.current! //fixme
+//                        )
+//                            .navigationBarTitle("",displayMode: .inline)
+//                            .navigationBarHidden(true)
+//                    ), isActive: self.$sendingPushed
+//                ) {
+//                    EmptyView()
+//                }.isDetailLink(false)
                 
                 
 //                NavigationLink(
@@ -717,6 +724,11 @@ struct Home: View {
                 ProfileScreen()
                     .environmentObject(self.appEnvironment)
                 #endif
+            case .sendMoney:
+                SendMoneyView()
+                    .environmentObject(
+                        SendFlow.current! //fixme
+                )
             }
         }
         .navigationBarBackButtonHidden(true)
