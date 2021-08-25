@@ -451,6 +451,15 @@ struct Home: View {
     var amountOpacity: Double {
         self.isSendingEnabled ? self.viewModel.sendZecAmount > 0 ? 1.0 : 0.6 : 0.3
     }
+    
+    func getFirstNModels() -> [DetailModel]{
+        
+        if self.viewModel.getSortedItems().count > 5 {
+            return Array(self.viewModel.getSortedItems()[..<5])
+        }else{
+            return self.viewModel.getSortedItems()
+        }
+    }
        
     var body: some View {
         ZStack {
@@ -517,40 +526,44 @@ struct Home: View {
 //                }
                 
                 Spacer()
-                
-                Text("Recent Transfers")
-                    .multilineTextAlignment(.leading)
-                    .font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
-                    .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(10).padding(.leading, 10)
-                
-                
-                List {
+              
+                if self.viewModel.getSortedItems().count > 0 {
                     
-                    // Show recent transactions in here
+                    Text("Recent Transfers")
+                        .multilineTextAlignment(.leading)
+                        .font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
+                        .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(10).padding(.leading, 10)
                     
-                    ForEach(self.viewModel.getSortedItems()) { row in
-                        Button(action: {
-                            self.selectedModel = row
-                        }) {
-                            DetailCard(model: row, backgroundColor: .zDarkGray2)
-                        }
-                        .listRowBackground(Color.zDarkGray2)
-                        .frame(height: 69)
-                        .padding(.horizontal, 16)
-                        .cornerRadius(0)
-                        .border(Color.zGray, width: 1)
-                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                          
-                   }
-                    
+                    List {
+                        
+                        // Show recent transactions in here
+                        // Max 5 recent transactions will be pulled here on the UI
+                        ForEach(getFirstNModels()) { row in
+                            Button(action: {
+                                self.selectedModel = row
+                            }) {
+                                DetailCard(model: row, backgroundColor: .zDarkGray2)
+                            }
+                            .listRowBackground(ARRRBackground())
+                            .frame(height: 69)
+                            .cornerRadius(0)
+                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                              
+                       }
+                        
+                    }
+                    .listStyle(PlainListStyle())
+                    .modifier(BackgroundPlaceholderModifierHome())
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.zGray, lineWidth: 1.0)
+                    )
+                    .padding()
+                }else{
+                    Text("No Recent transfers").font(.barlowRegular(size: 30)).foregroundColor(Color.zSettingsSectionHeader)
                 }
-                .listStyle(PlainListStyle())
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.zGray, lineWidth: 1.0)
-                )
-                .padding()
+                
                 
 //                KeyPad(value: $viewModel.sendZecAmountText)
 //                    .frame(alignment: .center)
@@ -791,5 +804,21 @@ extension ReadableBalance {
     
     var isSpendable: Bool {
         verified > 0
+    }
+}
+
+
+struct BackgroundPlaceholderModifierHome: ViewModifier {
+
+var backgroundColor = Color(.systemBackground)
+
+func body(content: Content) -> some View {
+    content
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 29.0/255.0, green: 32.0/255.0, blue: 34.0/255.0))
+                .softInnerShadow(RoundedRectangle(cornerRadius: 12), darkShadow: Color.init(red: 0.06, green: 0.07, blue: 0.07), lightShadow: Color.init(red: 0.26, green: 0.27, blue: 0.3), spread: 0.05, radius: 2))
+        
     }
 }
