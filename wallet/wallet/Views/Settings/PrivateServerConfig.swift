@@ -67,6 +67,7 @@ struct PrivateServerConfig: View {
                             self.didEndEditingAddressTextField()
                         }.font(.barlowRegular(size: 14))
                         .disabled(isAutoConfigEnabled)
+                        .foregroundColor(isAutoConfigEnabled ? .gray : .white)
                         .modifier(BackgroundPlaceholderModifier())
                         
                        Text("Port ").foregroundColor(.gray).multilineTextAlignment(.leading).font(.barlowRegular(size: 14))
@@ -78,6 +79,7 @@ struct PrivateServerConfig: View {
                            self.didEndEditingPortTextField()
                        }.font(.barlowRegular(size: 14))
                        .disabled(isAutoConfigEnabled)
+                       .foregroundColor(isAutoConfigEnabled ? .gray : .white)
                        .modifier(BackgroundPlaceholderModifier())
                                                 
                      }).modifier(ForegroundPlaceholderModifier())
@@ -192,7 +194,6 @@ func body(content: Content) -> some View {
         .background(
             RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 29.0/255.0, green: 32.0/255.0, blue: 34.0/255.0))
                 .softInnerShadow(RoundedRectangle(cornerRadius: 12), darkShadow: Color.init(red: 0.26, green: 0.27, blue: 0.3), lightShadow: Color.init(red: 0.06, green: 0.07, blue: 0.07), spread: 0.05, radius: 2))
-        .padding()
     }
 }
 
