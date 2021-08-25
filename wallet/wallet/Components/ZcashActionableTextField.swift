@@ -66,7 +66,7 @@ struct ZcashActionableTextField: View {
                     .frame(width: 25, height: 25)
                     .padding(.bottom,4)
             }.overlay(
-                Baseline().stroke(isActive ? activeColor : inactiveColor ,lineWidth: 2)
+                Baseline().stroke(isActive ? activeColor : inactiveColor ,lineWidth: 1)
             )
             .font(.body)
                 

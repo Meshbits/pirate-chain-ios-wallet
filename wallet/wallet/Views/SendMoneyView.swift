@@ -14,14 +14,82 @@ struct SendMoneyView: View {
     @State var isSendTapped = false
     @State var aMemoText: String = ""
     @State var sendArrrValue =  "0"
+    @EnvironmentObject var flow: SendFlowEnvironment
     @Environment(\.presentationMode) var presentationMode
+    @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+    var availableBalance: Bool {
+        ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
+    }
+    
+    var addressSubtitle: String {
+        let environment = ZECCWalletEnvironment.shared
+        guard !flow.address.isEmpty else {
+            return "feedback_default".localized()
+        }
+        
+        if environment.isValidShieldedAddress(flow.address) {
+            return "feedback_shieldedaddress".localized()
+        } else if environment.isValidTransparentAddress(flow.address) {
+            return "feedback_transparentaddress".localized()
+        } else if (environment.getShieldedAddress() ?? "") == flow.address {
+            return "feedback_sameaddress".localized()
+        } else {
+            return "feedback_invalidaddress".localized()
+        }
+    }
+    
+    var recipientActiveColor: Color {
+        let address = flow.address
+        if ZECCWalletEnvironment.shared.isValidShieldedAddress(address) {
+            return Color.zYellow
+        } else {
+            return Color.zGray2
+        }
+    }
+    
     var body: some View {
         ZStack{
             ARRRBackground()
             VStack{
                 
-                Spacer()
-                Spacer()
+                ZcashActionableTextField(
+                    title: "\("label_to".localized()):",
+                    subtitleView: AnyView(
+                        Text.subtitle(text: addressSubtitle)
+                    ),
+                    keyboardType: UIKeyboardType.alphabet,
+                    binding: $flow.address,
+                    action: {
+                        tracker.track(.tap(action: .sendAddressScan),
+                                      properties: [:])
+                        self.flow.showScanView = true
+                },
+                    accessoryIcon: Image("QRCodeIcon")
+                        .renderingMode(.original),
+                    activeColor: recipientActiveColor,
+                    onEditingChanged: { _ in },
+                    onCommit: {
+                        tracker.track(.tap(action: .sendAddressDoneAddress), properties: [:])
+                }
+                ).modifier(BackgroundPlaceholderModifierHome()).padding(.leading, 20).padding(.trailing, 20).padding(.top, 20)
+                    .onReceive(scanViewModel.addressPublisher, perform: { (address) in
+                        self.flow.address = address
+                        self.flow.showScanView = false
+                    })
+                    .sheet(isPresented: self.$flow.showScanView) {
+                        NavigationView {
+                            LazyView(
+                                
+                                ScanAddress(
+                                    viewModel: self.scanViewModel,
+                                    cameraAccess: CameraAccessHelper.authorizationStatus,
+                                    isScanAddressShown: self.$flow.showScanView
+                                ).environmentObject(ZECCWalletEnvironment.shared)
+                                
+                            )
+                        }
+                }
+                
                 HStack{
                     Text("Memo").font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
