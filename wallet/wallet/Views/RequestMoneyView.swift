@@ -29,6 +29,20 @@ struct RequestMoneyView<AccesoryContent: View>: View {
     
     var accessoryContent: AccesoryContent
     
+    
+    var validForm: Bool {
+        sufficientAmount && validMemo
+    }
+    
+    var sufficientAmount: Bool {
+        let amount = (Double(sendArrrValue) ??  0 )
+        return amount > 0 ? true : false
+    }
+    
+    var validMemo: Bool {
+        memoTextContent.count >= 0 && memoTextContent.count <= ZECCWalletEnvironment.memoLengthLimit
+    }
+    
     init(address: String, chips: Int = 8, badge: Image, @ViewBuilder accessoryContent: (() -> (AccesoryContent))) {
         self.address = address
         self.chips = address.slice(into: chips)
@@ -116,7 +130,8 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 
                 BlueButtonView(aTitle: "Share").onTapGesture {
                     self.isShareAddressShown = true
-                }
+                }.opacity(validForm ? 1.0 : 0.7 )
+                .disabled(!validForm)
             }
             
         }

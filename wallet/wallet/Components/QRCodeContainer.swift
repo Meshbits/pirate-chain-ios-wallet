@@ -29,7 +29,7 @@ struct QRCodeContainer_Previews: PreviewProvider {
         ZStack {
             ZcashBackground()
             QRCodeContainer(qrImage: Image("QrCode"),
-                            badge: Image("QR-zcashlogo"))
+                            badge: Image("skullcoin"))
             .frame(width: 285, height: 285)
             
         }

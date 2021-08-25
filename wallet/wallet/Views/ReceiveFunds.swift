@@ -21,7 +21,7 @@ struct ReceiveFunds: View {
                 VStack(alignment: .center, spacing: 10, content: {
                     DisplayAddress(address: unifiedAddress.zAddress,
                                    title: "address_shielded".localized(),
-                                   badge: Image("QR-zcashlogo"),
+                                   badge: Image("skullcoin"),
                                    accessoryContent: { EmptyView() })
                 })
             }.zcashNavigationBar(leadingItem: {

@@ -95,7 +95,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
             NavigationLink(
                 destination: LazyView(
                     RequestMoneyView(address: self.address,
-                                       badge: Image("QR-zcashlogo"),
+                                       badge: Image("skullcoin"),
                                        accessoryContent: { EmptyView() })
                         .navigationBarTitle("",displayMode: .inline)
                         .navigationBarHidden(true)
