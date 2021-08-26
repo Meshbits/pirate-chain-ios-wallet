@@ -12,24 +12,36 @@ import ZcashLightClientKit
 struct SendMoneyView: View {
     
     @State var isSendTapped = false
-    @State var aMemoText: String = ""
-    @State var sendArrrValue =  "0"
     @EnvironmentObject var flow: SendFlowEnvironment
     @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
     
+    var availableBalance: Bool {
+        ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
+    }
+    
+    var charLimit: Int {
+        if flow.includeSendingAddress {
+            return ZECCWalletEnvironment.memoLengthLimit - SendFlowEnvironment.replyToAddress((ZECCWalletEnvironment.shared.getShieldedAddress() ?? "")).count
+        }
+        return ZECCWalletEnvironment.memoLengthLimit
+    }
+    
+    var validAddress: Bool {
+        ZECCWalletEnvironment.shared.isValidAddress(flow.address)
+    }
     
     var sufficientAmount: Bool {
-        let amount = (Double(sendArrrValue) ??  0 )
+        let amount = (flow.doubleAmount ??  0 )
         return amount > 0 && amount <= ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
     }
     
     var validForm: Bool {
-        sufficientAmount
+        availableBalance && validAddress && sufficientAmount && validMemo
     }
     
-    var availableBalance: Bool {
-        ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
+    var validMemo: Bool {
+        flow.memo.count >= 0 && flow.memo.count <= charLimit
     }
     
     var addressSubtitle: String {
@@ -112,9 +124,9 @@ struct SendMoneyView: View {
                     Spacer()
                 }
                 
-                ARRRMemoTextField(memoText:$aMemoText).frame(height:60)
+                ARRRMemoTextField(memoText:self.$flow.memo).frame(height:60)
                 
-                Text(self.sendArrrValue)
+                Text(self.flow.amount)
                     .foregroundColor(.gray)
                     .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
                     .frame(height:40)
@@ -131,7 +143,7 @@ struct SendMoneyView: View {
                     Spacer()
                 }
                               
-                KeyPadARRR(value: $sendArrrValue)
+                KeyPadARRR(value: $flow.amount)
                     .frame(alignment: .center)
                     .padding(.horizontal, 10)
                 
