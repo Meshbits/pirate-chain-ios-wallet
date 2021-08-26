@@ -64,7 +64,7 @@ struct SendMoneyView: View {
     var recipientActiveColor: Color {
         let address = flow.address
         if ZECCWalletEnvironment.shared.isValidShieldedAddress(address) {
-            return Color.zYellow
+            return Color.arrrBlue
         } else {
             return Color.zGray2
         }

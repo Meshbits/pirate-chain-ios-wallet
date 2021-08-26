@@ -13,6 +13,8 @@ extension Color {
     /// \#FFB900 Color(red: 1, green: 185.0/255.0, blue: 0)
     static let zYellow = Color(red: 1, green: 185.0/255.0, blue: 0)
     
+    static let arrrBlue = Color(red: 62.0/255.0, green: 180.0/255.0, blue: 206.0/255.0)
+    
     /// Transparent things blue
     /// \#4A90E2 Color(red:24/255, red: 144/255, blue: 226/255)
     static let zTransparentBlue = Color(red: 24/255, green: 144/255, blue: 226/255)
