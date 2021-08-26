@@ -13,6 +13,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        
+        // This is the use case of handling the URL Contexts - Deep linking when app is running in the background
+        
+        logger.info("Opened up a deep link - App running in the background")
+        
+        if let url = URLContexts.first?.url {
+            let urlDataDict:[String: URL] = ["url": url]
+
+              NotificationCenter.default.post(name: .openTransactionScreen, object: nil, userInfo: urlDataDict)
+        }
+    }
+    
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -22,6 +36,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name("MoveToFirstViewLayout"), object: nil, queue: .main) { (_) in            
             self.addSwiftLayout(scene: scene)
+        }
+        
+        if let url = connectionOptions.urlContexts.first?.url {
+            let urlDataDict:[String: URL] = ["url": url]
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                logger.info("Opened up a deep link - App is not running in the background")
+                NotificationCenter.default.post(name: .openTransactionScreen, object: nil, userInfo: urlDataDict)
+            }
+             
         }
     }
     

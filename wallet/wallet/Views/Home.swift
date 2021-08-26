@@ -246,6 +246,13 @@ final class HomeViewModel: ObservableObject {
         self.sendZecAmountText = value
     }
     
+    
+    func setAmountWithoutFee(_ zecAmount: Double) {
+        guard let value = self.zecAmountFormatter.string(for: zecAmount) else { return }
+        self.sendZecAmountText = value
+    }
+    
+    
     func retrySyncing() {
         do {
            try ZECCWalletEnvironment.shared.synchronizer.start(retry: true)
@@ -397,10 +404,22 @@ struct Home: View {
         appEnvironment.synchronizer.syncStatus.value.isSynced && self.viewModel.shieldedBalance.verified > 0
     }
     
+    
+    func startSendFlow(memo:String, address:String) {
+        
+        if isAmountValid {
+            SendFlow.start(appEnviroment: appEnvironment,
+                           isActive: self.$sendingPushed,
+                           amount: viewModel.sendZecAmount,memoText: memo,address:address)
+            self.sendingPushed = true
+        }
+        
+    }
+    
     func startSendFlow() {
         SendFlow.start(appEnviroment: appEnvironment,
                        isActive: self.$sendingPushed,
-                       amount: viewModel.sendZecAmount)
+                       amount: viewModel.sendZecAmount,memoText: "",address: "")
         self.sendingPushed = true
     }
     
@@ -706,6 +725,10 @@ struct Home: View {
                    }
             
 
+       }.onReceive(NotificationCenter.default.publisher(for: .openTransactionScreen)) { notificationObject in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            initiateDeeplinkDirectSendFlow(notificationObject: notificationObject)
+        }
        }
         .sheet(item: self.$viewModel.destination, onDismiss: nil) { item  in
             switch item {
@@ -770,6 +793,51 @@ struct Home: View {
             }
         }
     }
+    
+    func initiateDeeplinkDirectSendFlow(notificationObject:Notification){
+        
+        if let userInfo = notificationObject.userInfo, let url:URL = userInfo["url"] as? URL {
+            
+            guard let aReplyAddress = url.host else {
+                logger.info("Invalid Reply Address, can't proceed")
+                return
+            }
+            
+            guard ZECCWalletEnvironment.shared.isValidAddress(aReplyAddress) else {
+                logger.info("Invalid Sheilded Address, can't proceed")
+                return
+            }
+
+            let queryComponents = url.getQueryParameters
+            
+            guard let amount = queryComponents["amount"] else {
+                logger.info("Invalid Amount, can't proceed")
+                return
+            }
+            
+            guard let memoMessage = queryComponents["message"] else {
+                logger.info("Memo message not found, can't proceed")
+                return
+            }
+
+            self.viewModel.setAmountWithoutFee(Double(amount)!)
+            
+            if self.viewModel.isSyncing == false{
+                logger.info("Syncing is not in progress, please proceed to transaction screen")
+                
+                let memoMessageDecoded = memoMessage.removingPercentEncoding
+                
+                self.startSendFlow(memo: memoMessageDecoded ?? "",address: aReplyAddress ?? "")
+                
+                
+            }else{
+                logger.info("Syncing is in progress, can't proceed")
+            }
+        }
+     
+        
+    }
+
 }
 
 extension BlockHeight {
