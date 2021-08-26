@@ -52,7 +52,7 @@ struct Sending: View {
     
     var body: some View {
         ZStack {
-            ARRRBackground()
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack(alignment: .center, spacing: 40) {
                 Spacer()
                 sendText
@@ -86,10 +86,9 @@ struct Sending: View {
                         tracker.track(.tap(action: .sendFinalDetails), properties: [:])
                         
                     }) {
-                        Text("button_seedetails")
-                            .foregroundColor(.black)
-                            .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: Color.black, lineWidth: 2)))
-                            .frame(height: 58)
+                        
+                        SendRecieveButtonView(title: "button_seedetails")
+                        
                     }
                 }
                 
@@ -99,9 +98,7 @@ struct Sending: View {
                         self.flow.close()
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
-                        Text("button_done")
-                            .foregroundColor(.black)
-                            .frame(height: 58)
+                        SendRecieveButtonView(title: "button_done")
                     }
                 }
             }
