@@ -50,7 +50,7 @@ struct DetailCard: View {
         
     var zecAmount: some View {
         let amount = model.arrrAmount.toZecAmount()
-        var text = ((model.arrrAmount > 0 && model.arrrAmount >= 0.001) ? "+" : "") + ((model.arrrAmount < 0.001 && model.arrrAmount > 0) ? "< 0.001" : amount)
+        let text = ((model.arrrAmount > 0 && model.arrrAmount >= 0.001) ? "+" : "") + ((model.arrrAmount < 0.001 && model.arrrAmount > 0) ? "< 0.001" : amount)
         var color = Color.zARRRReceivedColor
         var opacity = Double(1)
         switch model.status {
