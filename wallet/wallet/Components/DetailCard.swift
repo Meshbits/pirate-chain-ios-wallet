@@ -97,6 +97,7 @@ struct DetailCard: View {
                 .padding(.vertical, 8)
                 Spacer()
                 zecAmount
+                    .padding(.trailing,10)
                
             }
             
