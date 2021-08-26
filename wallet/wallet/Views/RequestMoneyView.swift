@@ -134,6 +134,8 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 .disabled(!validForm)
             }
             
+        }.onTapGesture {
+            UIApplication.shared.endEditing()
         }
         .zcashNavigationBar(leadingItem: {
             EmptyView()

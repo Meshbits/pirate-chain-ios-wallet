@@ -52,7 +52,7 @@ struct Sending: View {
     
     var body: some View {
         ZStack {
-            ZcashBackground.amberGradient
+            ARRRBackground()
             VStack(alignment: .center, spacing: 40) {
                 Spacer()
                 sendText

@@ -71,6 +71,7 @@ struct SendMoneyView: View {
     }
     
     var body: some View {
+        NavigationView {
         ZStack{
             ARRRBackground()
             VStack{
@@ -152,6 +153,23 @@ struct SendMoneyView: View {
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
                 
+                
+                
+                
+                NavigationLink(
+                    destination: LazyView(
+                        Sending().environmentObject(flow)
+                            .navigationBarTitle("",displayMode: .inline)
+                            .navigationBarBackButtonHidden(true)
+                    ), isActive: self.$isSendTapped
+                ) {
+                    EmptyView()
+                }.isDetailLink(false)
+                
+                
+                
+            }.onTapGesture {
+                UIApplication.shared.endEditing()
             }.zcashNavigationBar(leadingItem: {
                 EmptyView()
              }, headerItem: {
@@ -159,7 +177,6 @@ struct SendMoneyView: View {
                      Text("Send Money")
                          .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
                          .frame(alignment: Alignment.center)
-                        .padding(.top,20)
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
@@ -167,8 +184,16 @@ struct SendMoneyView: View {
                      }).frame(width: 30, height: 30)
                  .padding(.top,20)
              })
+            .navigationBarHidden(true)
+        }
         }
     }
+    
+    
+    var includesMemo: Bool {
+        !self.flow.memo.isEmpty || self.flow.includeSendingAddress
+    }
+
 }
 
 //struct SendMoneyView_Previews: PreviewProvider {
