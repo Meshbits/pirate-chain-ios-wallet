@@ -37,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                 Text("test")
                             }
                         )
-                    )
+                ,ignoreSafeArea: true)
                 self.window = window
                 _zECCWalletNavigationBarLookTweaks()
                 window.makeKeyAndVisible()
@@ -50,7 +50,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                             TheNoScreen().environmentObject(ZECCWalletEnvironment.shared)
                         }
                     )
-                )
+            ,ignoreSafeArea: true)
             self.window = window
             _zECCWalletNavigationBarLookTweaks()
             window.makeKeyAndVisible()
