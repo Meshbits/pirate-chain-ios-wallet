@@ -404,6 +404,12 @@
 		2960026C26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026D26D9350C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026E26D9350D00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
+		2960027026D93BBF00B41DD0 /* HowItWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026F26D93BBF00B41DD0 /* HowItWorks.swift */; };
+		2960027126D93BBF00B41DD0 /* HowItWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026F26D93BBF00B41DD0 /* HowItWorks.swift */; };
+		2960027226D93BBF00B41DD0 /* HowItWorks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026F26D93BBF00B41DD0 /* HowItWorks.swift */; };
+		2960027426D93E4300B41DD0 /* ARRRBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960027326D93E4300B41DD0 /* ARRRBackButton.swift */; };
+		2960027526D93E4300B41DD0 /* ARRRBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960027326D93E4300B41DD0 /* ARRRBackButton.swift */; };
+		2960027626D93E4300B41DD0 /* ARRRBackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960027326D93E4300B41DD0 /* ARRRBackButton.swift */; };
 		2963F33326C946FE0008CD34 /* PrivateServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */; };
 		2963F33426C946FE0008CD34 /* PrivateServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */; };
 		2963F33526C946FE0008CD34 /* PrivateServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */; };
@@ -672,6 +678,8 @@
 		294A88F026D0EA4400EEA4A9 /* BalanceViewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewHome.swift; sourceTree = "<group>"; };
 		29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPrivacy.swift; sourceTree = "<group>"; };
 		2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyPhraseInitiate.swift; sourceTree = "<group>"; };
+		2960026F26D93BBF00B41DD0 /* HowItWorks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorks.swift; sourceTree = "<group>"; };
+		2960027326D93E4300B41DD0 /* ARRRBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackButton.swift; sourceTree = "<group>"; };
 		2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateServerConfig.swift; sourceTree = "<group>"; };
 		296CACE526D57757004DC784 /* SendMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyView.swift; sourceTree = "<group>"; };
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
@@ -1068,6 +1076,7 @@
 				29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */,
 				29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */,
 				290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */,
+				2960027326D93E4300B41DD0 /* ARRRBackButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1099,6 +1108,7 @@
 			isa = PBXGroup;
 			children = (
 				2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */,
+				2960026F26D93BBF00B41DD0 /* HowItWorks.swift */,
 			);
 			path = GenerateKeyPhrase;
 			sourceTree = "<group>";
@@ -1723,6 +1733,7 @@
 				0D9E89C223DA620E00AFD118 /* ZECCWalletEnvironment.swift in Sources */,
 				0DD1C2D024F051EE0042C1E4 /* Foundation+Zcash.swift in Sources */,
 				29FABBFC26D506E800306726 /* PirateChainPaymentURI.swift in Sources */,
+				2960027026D93BBF00B41DD0 /* HowItWorks.swift in Sources */,
 				29F066A426C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DD1C2CD24F04D470042C1E4 /* BlockExplorerUrlHandling.swift in Sources */,
 				2963F33326C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
@@ -1738,6 +1749,7 @@
 				0D92AEBE2422D6F30028AD53 /* ZcashTapToSendButton.swift in Sources */,
 				0D9C203D23D77D4B006F1510 /* WalletDetails.swift in Sources */,
 				0DC167B123BE37B300332890 /* BalanceUtils.swift in Sources */,
+				2960027426D93E4300B41DD0 /* ARRRBackButton.swift in Sources */,
 				298D50E326A726E000585699 /* ARRRLogo.swift in Sources */,
 				0D0AAE15241048B4009CD8F9 /* FundsAtRisk.swift in Sources */,
 				0DBA1E1E24CB628B009C654E /* DisplayAddress.swift in Sources */,
@@ -1940,6 +1952,7 @@
 				0DCDFFB224B6722B000F6999 /* MnemonicSeedPhraseProvider.swift in Sources */,
 				0D2D5C2124CF85CF001A58AD /* ZecAmountHeader.swift in Sources */,
 				0DCDFFB324B6722B000F6999 /* zECC+SwiftUI.swift in Sources */,
+				2960027226D93BBF00B41DD0 /* HowItWorks.swift in Sources */,
 				0DCDFFB424B6722B000F6999 /* ZcashLogo.swift in Sources */,
 				0DCDFFB524B6722B000F6999 /* ZcashCheckCircle.swift in Sources */,
 				0DCDFFB624B6722B000F6999 /* CameraAccessHelper.swift in Sources */,
@@ -1990,6 +2003,7 @@
 				0D0565DA24EC89C200B6AAE8 /* DetailListing.swift in Sources */,
 				29414BC926D41A140022401F /* QRCodeScanner.swift in Sources */,
 				0DBA1E2224CB6951009C654E /* AddressFragment.swift in Sources */,
+				2960027626D93E4300B41DD0 /* ARRRBackButton.swift in Sources */,
 				0D0565DE24EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift in Sources */,
 				0DCDFFCB24B6722B000F6999 /* AppDelegate.swift in Sources */,
 				0DCDFFCC24B6722B000F6999 /* Ring.swift in Sources */,
@@ -2034,6 +2048,7 @@
 				0DE30352263A158400CF877A /* ZECCWalletEnvironment.swift in Sources */,
 				0DE30353263A158400CF877A /* Foundation+Zcash.swift in Sources */,
 				29FABBFD26D506E800306726 /* PirateChainPaymentURI.swift in Sources */,
+				2960027126D93BBF00B41DD0 /* HowItWorks.swift in Sources */,
 				29F066A526C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DE30354263A158400CF877A /* BlockExplorerUrlHandling.swift in Sources */,
 				2963F33426C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
@@ -2049,6 +2064,7 @@
 				0DE3035C263A158400CF877A /* ZcashTapToSendButton.swift in Sources */,
 				0DE3035D263A158400CF877A /* WalletDetails.swift in Sources */,
 				0DE3035E263A158400CF877A /* BalanceUtils.swift in Sources */,
+				2960027526D93E4300B41DD0 /* ARRRBackButton.swift in Sources */,
 				298D50E426A726E000585699 /* ARRRLogo.swift in Sources */,
 				0DE3035F263A158400CF877A /* FundsAtRisk.swift in Sources */,
 				0DE30360263A158400CF877A /* DisplayAddress.swift in Sources */,

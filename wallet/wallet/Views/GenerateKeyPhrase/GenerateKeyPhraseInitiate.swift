@@ -9,6 +9,11 @@
 import SwiftUI
 
 struct GenerateKeyPhraseInitiate: View {
+    
+    @State var openHowItWorks = false
+    
+    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -19,8 +24,18 @@ struct GenerateKeyPhraseInitiate: View {
                     Spacer()
                     Spacer()
                     
+                    NavigationLink(destination:
+                                    HowItWorks().environmentObject(HowItWorksViewModel())
+                            .navigationBarTitle("", displayMode: .inline)
+                            .navigationBarBackButtonHidden(true)
+                        ,isActive: $openHowItWorks
+                    ) {
+                        EmptyView()
+                    }.isDetailLink(false)
+                    
+                    
                     Button {
-                        // open next screen
+                        openHowItWorks = true
                     } label: {
                         BlueButtonView(aTitle: "Continue")
                     }
