@@ -105,6 +105,7 @@ struct PasscodeScreen: View {
    @ObservedObject var passcodeViewModel = PasscodeViewModel()
     
     @State var openHomeScreen = false
+    @State var initiateNewWalletPhraseSetup = false
     
     enum Destinations: Int {
         case createNew
@@ -147,17 +148,27 @@ struct PasscodeScreen: View {
     var body: some View {
         ZStack {
             
-            NavigationLink(destination:
-                LazyView (
-                    BackupWallet().environmentObject(self.appEnvironment)
-                    .navigationBarHidden(true)
-                ),
-                           tag: Destinations.createNew,
-                           selection: $destination
-                
+//            NavigationLink(destination:
+//                LazyView (
+//                    BackupWallet().environmentObject(self.appEnvironment)
+//                    .navigationBarHidden(true)
+//                ),
+//                           tag: Destinations.createNew,
+//                           selection: $destination
+//
+//            ) {
+//              EmptyView()
+//            }
+            
+            NavigationLink(destination:                
+                    GenerateKeyPhraseInitiate().environmentObject(self.appEnvironment)
+                    .navigationBarTitle("", displayMode: .inline)
+                    .navigationBarBackButtonHidden(true)
+                ,isActive: $initiateNewWalletPhraseSetup
             ) {
-              EmptyView()
-            }
+                EmptyView()
+            }.isDetailLink(false)
+            
             
             PasscodeBackgroundView()
             
@@ -219,7 +230,8 @@ struct PasscodeScreen: View {
                         
                         if isNewWallet {
                             // Initiate Create New Wallet flow from here
-                            createNewWalletFlow()
+//                            createNewWalletFlow()
+                            initiateNewWalletPhraseSetup = true
                             return
                         }else{
 
