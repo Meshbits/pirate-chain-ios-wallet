@@ -10,15 +10,65 @@ import SwiftUI
 
 final class HowItWorksViewModel: ObservableObject {
     
-    @State var mScreenTitle = "How it works - Step 1"
-    @State var mDescriptionTitle = "Write down your key"
-    @State var mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons."
+    @Published var mScreenTitle = "How it works - Step 1"
+    @Published var mDescriptionTitle = "Write down your key"
+    @Published var mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons."
+    
+    @Published var destination: ScreenSteps = ScreenSteps.step_one
         
-    enum Steps: Int {
+    enum ScreenSteps: Int {
         case step_one
         case step_two
         case step_three
         case move_next
+        
+        
+        var id: Int {
+            switch self {
+            case .step_one:
+                return 0
+            case .step_two:
+                return 1
+            case .step_three:
+                return 2
+            case .move_next:
+                return 3
+            }
+        }
+        
+        mutating func next(){
+              self = ScreenSteps(rawValue: rawValue + 1) ?? ScreenSteps(rawValue: 0)!
+        }
+    }
+    
+    
+    func updateLayoutTextOrMoveToNextScreen(){
+        
+        destination.next()
+        
+        switch (destination) {
+        case .step_one:
+            mScreenTitle = "How it works - Step 1"
+            mDescriptionTitle = "Write down your key"
+            mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons."
+            break
+        case .step_two:
+            mScreenTitle = "How it works - Step 2"
+            mDescriptionTitle = "Keep it secure"
+            mDescriptionSubTitle = "Store your key in a secure location. This is the only way to recover your wallet. Pirate Wallet does not keep a copy."
+            break
+        case .step_three:
+            mScreenTitle = "How it works - Step 3"
+            mDescriptionTitle = "Store, send or receive"
+            mDescriptionSubTitle = "Store, send or receive knowing that your funds are protected by the best security and privacy in the business"
+            break
+        case .move_next:
+            mScreenTitle = "Move To next screen - recovery phrase"
+            mDescriptionTitle = "Move To next screen - recovery phrase"
+            mDescriptionSubTitle = "Move To next screen - recovery phrase."
+            break
+        }
+        
     }
     
 }
@@ -40,7 +90,7 @@ struct HowItWorks: View {
                 Spacer()
                 
                 Button {
-
+                    self.viewModel.updateLayoutTextOrMoveToNextScreen()
                 } label: {
                     BlueButtonView(aTitle: "Continue")
                 }
