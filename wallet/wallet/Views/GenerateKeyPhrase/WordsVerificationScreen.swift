@@ -11,7 +11,11 @@ import SwiftUI
 struct WordsVerificationScreen: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
     var body: some View {
-        Text("WordsVerificationScreen")
+        ZStack{
+            ARRRBackground().edgesIgnoringSafeArea(.all)
+            Text("Your Recovery Phrase").padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
+        }
+        
     }
 }
 

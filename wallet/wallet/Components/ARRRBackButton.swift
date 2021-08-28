@@ -15,15 +15,18 @@ struct ARRRBackButton: View {
     var body: some View {
         
         ZStack {
-            Image("passcodenumericbg")
 
             Button(action: {
                 self.action()
             }) {
-                Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                    .barlowRegular(size: Device.isLarge ? 26 : 18))
+                VStack(alignment: .leading) {
+                    ZStack{
+                        Image("passcodenumericbg")
+                        Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+                    }
+                }.padding(.leading,-10).padding(.top,10)
             }
-        }.padding(2)
+        }.padding(5)
         
        
     }

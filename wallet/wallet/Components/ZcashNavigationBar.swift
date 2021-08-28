@@ -30,6 +30,7 @@ struct ZcashNavigationBar<LeadingContent: View, HeadingContent: View, TrailingCo
             Spacer()
             trailingItem
         }
+        .padding(.bottom,10)
     }
 }
 
@@ -67,9 +68,9 @@ struct ZcashNavigationBarModifier<LeadingContent: View, HeadingContent: View, Tr
                 ZcashNavigationBar(leadingItem: { leadingItem },
                                    headerItem: { headerItem },
                                    trailingItem: { trailingItem } )
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 25)
                 content
-            }.background(ARRRBackground())
+            }
         }
     }
 }

@@ -190,29 +190,27 @@ struct GenerateWordsView: View {
                     EmptyView()
                 }
                 
+            }).zcashNavigationBar(leadingItem: {
+                
+                
+                ARRRBackButton(action: {
+                    if self.viewModel.mWordIndex == 1 {
+                        presentationMode.wrappedValue.dismiss()
+                    }else{
+                        self.viewModel.backPressedToPopBack()
+                    }
+                    
+                }).frame(width: 30, height: 30)
+                
+            }, headerItem: {
+                HStack{
+                    EmptyView()
+                }
+            }, trailingItem: {
+                EmptyView()
             })
             
-        }.zcashNavigationBar(leadingItem: {
-            
-            
-            ARRRBackButton(action: {
-                if self.viewModel.mWordIndex == 1 {
-                    presentationMode.wrappedValue.dismiss()
-                }else{
-                    self.viewModel.backPressedToPopBack()
-                }
-                
-            }).frame(width: 30, height: 30)
-            .padding(.bottom,10)
-            
-            
-        }, headerItem: {
-            HStack{
-                EmptyView()
-            }
-        }, trailingItem: {
-            EmptyView()
-        })
+        }
     }
     
 }

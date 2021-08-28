@@ -103,23 +103,23 @@ struct HowItWorks: View {
                 ) {
                     EmptyView()
                 }
+            }).zcashNavigationBar(leadingItem: {
+                ARRRBackButton(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }).frame(width: 30, height: 30)
+            }, headerItem: {
+                HStack{
+                    Text(self.viewModel.mScreenTitle)
+                        .font(.barlowRegular(size: 18)).foregroundColor(Color.zSettingsSectionHeader)
+                        .frame(alignment: Alignment.center)
+                }
+            }, trailingItem: {
+                EmptyView()
             })
             
            
             
-        }.zcashNavigationBar(leadingItem: {
-            ARRRBackButton(action: {
-                presentationMode.wrappedValue.dismiss()
-            }).frame(width: 30, height: 30)
-        }, headerItem: {
-            HStack{
-                Text(self.viewModel.mScreenTitle)
-                    .font(.barlowRegular(size: 18)).foregroundColor(Color.zSettingsSectionHeader)
-                    .frame(alignment: Alignment.center)
-            }
-        }, trailingItem: {
-            EmptyView()
-        })
+        }
     }
     
 }
