@@ -62,14 +62,14 @@ struct ZcashNavigationBarModifier<LeadingContent: View, HeadingContent: View, Tr
     
     func body(content: Content) -> some View {
         ZStack {
-            ARRRBackground()
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack {
                 ZcashNavigationBar(leadingItem: { leadingItem },
                                    headerItem: { headerItem },
                                    trailingItem: { trailingItem } )
                     .padding(.horizontal, 24)
                 content
-            }
+            }.background(ARRRBackground())
         }
     }
 }

@@ -112,6 +112,8 @@ final class GenerateWordsViewModel: ObservableObject {
     
     var randomKeyPhrase:[String]?
     
+    @Published var mWordsVerificationScreen = false
+    
     init() {
         
         do {
@@ -143,7 +145,11 @@ final class GenerateWordsViewModel: ObservableObject {
         
         mWordIndex = mVisibleWord.rawValue + 1
         
-        mWordTitle = randomKeyPhrase![mVisibleWord.rawValue]
+        if mWordIndex > 24 {
+            mWordsVerificationScreen = true
+        }else{
+            mWordTitle = randomKeyPhrase![mVisibleWord.rawValue]
+        }
     }
     
 }
@@ -173,6 +179,15 @@ struct GenerateWordsView: View {
                     self.viewModel.updateLayoutTextOrMoveToNextScreen()
                 } label: {
                     BlueButtonView(aTitle: "Next")
+                }
+              
+                
+                NavigationLink(
+                    destination: WordsVerificationScreen().environmentObject(GenerateWordsViewModel()).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $viewModel.mWordsVerificationScreen
+                ) {
+                    EmptyView()
                 }
                 
             })

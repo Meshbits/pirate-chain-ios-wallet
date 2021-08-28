@@ -17,7 +17,7 @@ struct IntroWelcome: View {
          NavigationView
          {
             ZStack{
-                ARRRBackground()
+                ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                         VStack(alignment: .center, content: {
                             Text("Welcome to Pirate Wallet").padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)

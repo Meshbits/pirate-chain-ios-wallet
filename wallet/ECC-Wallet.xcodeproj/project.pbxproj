@@ -428,6 +428,9 @@
 		29AF023226DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
 		29AF023326DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
 		29AF023426DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
+		29AF023626DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
+		29AF023726DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
+		29AF023826DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
 		29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
@@ -689,6 +692,7 @@
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
+		29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsVerificationScreen.swift; sourceTree = "<group>"; };
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
 		29D1459C46D96D9D3DF2A55C /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlinkDevice.swift; sourceTree = "<group>"; };
@@ -1114,6 +1118,7 @@
 				2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */,
 				2960026F26D93BBF00B41DD0 /* HowItWorks.swift */,
 				29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */,
+				29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */,
 			);
 			path = GenerateKeyPhrase;
 			sourceTree = "<group>";
@@ -1793,6 +1798,7 @@
 				0DF26E2A24D2208A00F32978 /* AuthenticationHelper.swift in Sources */,
 				0D0565D924EC89C200B6AAE8 /* DetailListing.swift in Sources */,
 				29FABBFF26D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
+				29AF023626DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
 				0DF26E2424D1F75E00F32978 /* SquareToggleStyle.swift in Sources */,
 				0DC37D7624D3834E00ACFE12 /* AddressValidator.swift in Sources */,
 				0D6BE0B323EB1348006A71C5 /* CameraAccessHelper.swift in Sources */,
@@ -2024,6 +2030,7 @@
 				0DCDFFCF24B6722B000F6999 /* QRCodeContainer.swift in Sources */,
 				0DCDFFD024B6722B000F6999 /* TransactionDetail.swift in Sources */,
 				0DC0847A24BE583400F498A5 /* RateComponent.swift in Sources */,
+				29AF023826DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
 				0D9D4E3026336C0E007FD969 /* TabSelector.swift in Sources */,
 				0DCDFFD124B6722B000F6999 /* ZcashSeedWordPill.swift in Sources */,
 				0DCDFFD224B6722B000F6999 /* CreateNewWallet.swift in Sources */,
@@ -2110,6 +2117,7 @@
 				0DE30379263A158400CF877A /* AuthenticationHelper.swift in Sources */,
 				0DE3037A263A158400CF877A /* DetailListing.swift in Sources */,
 				29FABC0026D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
+				29AF023726DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
 				0DE3037B263A158400CF877A /* SquareToggleStyle.swift in Sources */,
 				0DE3037C263A158400CF877A /* AddressValidator.swift in Sources */,
 				0DE3037D263A158400CF877A /* CameraAccessHelper.swift in Sources */,
