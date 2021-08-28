@@ -18,6 +18,8 @@ struct WordsVerificationScreen: View {
                 Text("Almost done! Enter the following words from your recovery phrase").padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
                 Spacer()
                 Spacer()
+                
+                BlueButtonView(aTitle: "Confirm")
             }
         }
         
