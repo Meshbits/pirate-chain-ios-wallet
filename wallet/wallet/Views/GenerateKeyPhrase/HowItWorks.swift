@@ -8,38 +8,40 @@
 
 import SwiftUI
 
+
+enum ScreenSteps: Int {
+    case step_one
+    case step_two
+    case step_three
+    case move_next
+    
+    
+    var id: Int {
+        switch self {
+        case .step_one:
+            return 0
+        case .step_two:
+            return 1
+        case .step_three:
+            return 2
+        case .move_next:
+            return 3
+        }
+    }
+    
+    mutating func next(){
+        self = ScreenSteps(rawValue: rawValue + 1) ?? ScreenSteps(rawValue: 0)!
+    }
+}
+
 final class HowItWorksViewModel: ObservableObject {
     
     @Published var mScreenTitle = "How it works - Step 1"
     @Published var mDescriptionTitle = "Write down your key"
     @Published var mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons."
-    
+    @Published var mOpenGenerateWordsScreen = false
     @Published var destination: ScreenSteps = ScreenSteps.step_one
-        
-    enum ScreenSteps: Int {
-        case step_one
-        case step_two
-        case step_three
-        case move_next
-        
-        
-        var id: Int {
-            switch self {
-            case .step_one:
-                return 0
-            case .step_two:
-                return 1
-            case .step_three:
-                return 2
-            case .move_next:
-                return 3
-            }
-        }
-        
-        mutating func next(){
-              self = ScreenSteps(rawValue: rawValue + 1) ?? ScreenSteps(rawValue: 0)!
-        }
-    }
+    
     
     
     func updateLayoutTextOrMoveToNextScreen(){
@@ -63,9 +65,7 @@ final class HowItWorksViewModel: ObservableObject {
             mDescriptionSubTitle = "Store, send or receive knowing that your funds are protected by the best security and privacy in the business"
             break
         case .move_next:
-            mScreenTitle = "Move To next screen - recovery phrase"
-            mDescriptionTitle = "Move To next screen - recovery phrase"
-            mDescriptionSubTitle = "Move To next screen - recovery phrase."
+            mOpenGenerateWordsScreen = true
             break
         }
         
@@ -78,7 +78,7 @@ struct HowItWorks: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
     @EnvironmentObject var viewModel: HowItWorksViewModel
-  
+    
     var body: some View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -94,22 +94,32 @@ struct HowItWorks: View {
                 } label: {
                     BlueButtonView(aTitle: "Continue")
                 }
-
+                
+                
+                NavigationLink(
+                    destination: GenerateWordsView().environmentObject(GenerateWordsViewModel()).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $viewModel.mOpenGenerateWordsScreen
+                ) {
+                    EmptyView()
+                }
             })
+            
+           
             
         }.zcashNavigationBar(leadingItem: {
             ARRRBackButton(action: {
                 presentationMode.wrappedValue.dismiss()
-                }).frame(width: 30, height: 30)
-         }, headerItem: {
-             HStack{
+            }).frame(width: 30, height: 30)
+        }, headerItem: {
+            HStack{
                 Text(self.viewModel.mScreenTitle)
-                     .font(.barlowRegular(size: 18)).foregroundColor(Color.zSettingsSectionHeader)
-                     .frame(alignment: Alignment.center)
-             }
-         }, trailingItem: {
-             EmptyView()
-         })        
+                    .font(.barlowRegular(size: 18)).foregroundColor(Color.zSettingsSectionHeader)
+                    .frame(alignment: Alignment.center)
+            }
+        }, trailingItem: {
+            EmptyView()
+        })
     }
     
 }

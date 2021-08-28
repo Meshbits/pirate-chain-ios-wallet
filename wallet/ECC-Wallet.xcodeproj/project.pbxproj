@@ -425,6 +425,9 @@
 		29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651B26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
+		29AF023226DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
+		29AF023326DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
+		29AF023426DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
 		29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
@@ -685,6 +688,7 @@
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
+		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
 		29D1459C46D96D9D3DF2A55C /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlinkDevice.swift; sourceTree = "<group>"; };
@@ -1109,6 +1113,7 @@
 			children = (
 				2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */,
 				2960026F26D93BBF00B41DD0 /* HowItWorks.swift */,
+				29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */,
 			);
 			path = GenerateKeyPhrase;
 			sourceTree = "<group>";
@@ -1718,6 +1723,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AF023226DA2CF100B21EAC /* GenerateWordsView.swift in Sources */,
 				29F314E926D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */,
 				0DF26E2724D1F88100F32978 /* Baseline.swift in Sources */,
 				0D0AAE1124102380009CD8F9 /* SyncingButton.swift in Sources */,
@@ -1995,6 +2001,7 @@
 				29DDA37626CCF95C0041406B /* OpenInAppBrowser.swift in Sources */,
 				0DCDFFC624B6722B000F6999 /* SimpleLogger.swift in Sources */,
 				0DCDFFC724B6722B000F6999 /* BackupWallet.swift in Sources */,
+				29AF023426DA2CF100B21EAC /* GenerateWordsView.swift in Sources */,
 				0D89FF4724ED9E2C008E79DD /* Date+Zcash.swift in Sources */,
 				0DF26E2824D1F88100F32978 /* Baseline.swift in Sources */,
 				294A88F326D0EA4400EEA4A9 /* BalanceViewHome.swift in Sources */,
@@ -2033,6 +2040,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AF023326DA2CF100B21EAC /* GenerateWordsView.swift in Sources */,
 				29F314EA26D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */,
 				0DE30349263A158400CF877A /* Baseline.swift in Sources */,
 				0DE3034A263A158400CF877A /* SyncingButton.swift in Sources */,
