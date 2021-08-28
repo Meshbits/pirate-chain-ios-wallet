@@ -24,7 +24,7 @@ struct ARRRBackButton: View {
                         Image("passcodenumericbg")
                         Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
                     }
-                }.padding(.leading,-10).padding(.top,10)
+                }.padding(.leading,10).padding(.top,10)
             }
         }.padding(5)
         
