@@ -183,7 +183,7 @@ struct GenerateWordsView: View {
               
                 
                 NavigationLink(
-                    destination: WordsVerificationScreen().environmentObject(GenerateWordsViewModel()).navigationBarTitle("", displayMode: .inline)
+                    destination: WordsVerificationScreen().environmentObject(WordsVerificationViewModel()).navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true),
                     isActive: $viewModel.mWordsVerificationScreen
                 ) {
