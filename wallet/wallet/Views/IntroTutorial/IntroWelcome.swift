@@ -14,8 +14,8 @@ struct IntroWelcome: View {
     @State var isViewVisible = false
     @State var openNextIntroScreen = false
     var body: some View {
-         NavigationView
-         {
+//         NavigationView
+//         {
             ZStack{
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
@@ -78,7 +78,7 @@ struct IntroWelcome: View {
                         }
                     }.padding(.leading,-20).padding(.top,10)
                 })
-         }.navigationBarHidden(true)
+//         }.navigationBarHidden(true)
         
     }
 }

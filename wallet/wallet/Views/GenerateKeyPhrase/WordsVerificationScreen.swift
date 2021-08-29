@@ -10,6 +10,7 @@ import SwiftUI
 
 struct WordsVerificationScreen: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -21,7 +22,15 @@ struct WordsVerificationScreen: View {
                 
                 BlueButtonView(aTitle: "Confirm")
             }
-        }
+        }.zcashNavigationBar(leadingItem: {
+            ARRRBackButton(action: {
+                presentationMode.wrappedValue.dismiss()
+            }).frame(width: 30, height: 30)
+        }, headerItem: {
+            EmptyView()
+        }, trailingItem: {
+            EmptyView()
+        })
         
     }
 }

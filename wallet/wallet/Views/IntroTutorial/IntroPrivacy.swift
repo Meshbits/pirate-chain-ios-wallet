@@ -14,8 +14,8 @@ struct IntroPrivacy: View {
     @State var isViewVisible = false
     @State var openPincodeScreem = false
     var body: some View {
-         NavigationView
-         {
+//         NavigationView
+//         {
             ZStack{
                 ARRRBackground()
                 
@@ -77,7 +77,7 @@ struct IntroPrivacy: View {
                         }
                     }.padding(.leading,-20).padding(.top,10)
                 })
-         }.navigationBarHidden(true)
+//         }.navigationBarHidden(true)
         
     }
 }
