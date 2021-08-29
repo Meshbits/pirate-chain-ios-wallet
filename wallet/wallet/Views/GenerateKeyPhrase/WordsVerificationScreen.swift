@@ -19,6 +19,10 @@ final class WordsVerificationViewModel: ObservableObject {
     @Published var mCompletePhrase:[String]?
     @Published var mWordsVerificationCompleted = false
   
+    init(mPhrase:[String]) {
+        mCompletePhrase = mPhrase
+    }
+    
     
     func validateAndMoveToNextScreen(){
         
