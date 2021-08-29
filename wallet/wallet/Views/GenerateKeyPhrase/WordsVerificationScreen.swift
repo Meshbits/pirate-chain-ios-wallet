@@ -13,9 +13,9 @@ final class WordsVerificationViewModel: ObservableObject {
     @Published var firstWord = ""
     @Published var secondWord = ""
     @Published var thirdWord = ""
-    @Published var firstWordIndex = 0
-    @Published var secondWordIndex = 0
-    @Published var thirdWordIndex = 0
+    @State var firstWordIndex:Int = 0
+    @State var secondWordIndex:Int = 0
+    @State var thirdWordIndex:Int = 0
     @Published var mCompletePhrase:[String]?
     @Published var mWordsVerificationCompleted = false
   
@@ -23,11 +23,66 @@ final class WordsVerificationViewModel: ObservableObject {
         mCompletePhrase = mPhrase
     }
     
+    func assignElementsOnUI(){
+        
+        let indexes = getRandomWordsIndex()
+        
+        if (mCompletePhrase!.count > 0){
+            firstWordIndex = indexes[0]
+            secondWordIndex = indexes[1]
+            thirdWordIndex = indexes[2]
+        }
+        
+    }
+    
     
     func validateAndMoveToNextScreen(){
         
+        if (!firstWord.isEmpty && firstWord == mCompletePhrase![firstWordIndex]){
+            
+            if (!secondWord.isEmpty && secondWord == mCompletePhrase![secondWordIndex]){
+                
+                if (!thirdWord.isEmpty && thirdWord == mCompletePhrase![thirdWordIndex]){
+                    
+                    print("NOT MATCHED AND NOTIFY USER")
+                    
+                }else{
+                    print("NOT MATCHED AND NOTIFY USER")
+                }
+            }else{
+                print("NOT MATCHED AND NOTIFY USER")
+            }
+            
+        }else{
+            print("NOT MATCHED AND NOTIFY USER")
+        }
+        
         
     }
+    
+    func getRandomWordsIndex()->[Int]{
+          
+          var allIndexes = Array(0...23)
+        
+          var uniqueNumbers = [Int]()
+          
+          while allIndexes.count > 0 {
+              
+              let number = Int(arc4random_uniform(UInt32(allIndexes.count)))
+              
+                uniqueNumbers.append(allIndexes[number])
+              
+                allIndexes.swapAt(number, allIndexes.count-1)
+              
+                allIndexes.removeLast()
+            
+                if uniqueNumbers.count == 3 {
+                    break
+                }
+          }
+          
+          return uniqueNumbers
+      }
     
 }
 
@@ -47,7 +102,7 @@ struct WordsVerificationScreen: View {
                 HStack(spacing: nil, content: {
                    
                     VStack{
-                        Text("Word #8").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word # \(self.viewModel.firstWordIndex)").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.firstWord, onEditingChanged: { (changed) in
                         }) {
      //                       self.didEndEditingAddressTextField()
@@ -56,7 +111,7 @@ struct WordsVerificationScreen: View {
                     }
                     
                     VStack{
-                        Text("Word #2").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word # \(self.viewModel.secondWordIndex)").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.secondWord, onEditingChanged: { (changed) in
                         }) {
       //                      self.didEndEditingPortTextField()
@@ -65,7 +120,7 @@ struct WordsVerificationScreen: View {
                     }
                      
                     VStack{
-                        Text("Word #5").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word # \(self.viewModel.thirdWordIndex)").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.thirdWord, onEditingChanged: { (changed) in
                         }) {
       //                      self.didEndEditingPortTextField()
@@ -79,19 +134,19 @@ struct WordsVerificationScreen: View {
                 Spacer()
                 Spacer()
                 
-                Button {
-                    
+                BlueButtonView(aTitle: "Confirm").onTapGesture {
                     if self.viewModel.firstWord.isEmpty || self.viewModel.secondWord.isEmpty || self.viewModel.thirdWord.isEmpty {
                         self.isConfirmButtonEnabled = false
                     }else{
                         self.isConfirmButtonEnabled = true
                     }
                     
-                } label: {
-                    BlueButtonView(aTitle: "Confirm")
-                }.disabled(!isConfirmButtonEnabled)
-                .opacity(!isConfirmButtonEnabled ? 0.5 : 1)
-                
+                    self.viewModel.validateAndMoveToNextScreen()
+                    
+                }
+            }
+            .onAppear(){
+                self.viewModel.assignElementsOnUI()
             }
             .onTapGesture {
                 UIApplication.shared.endEditing()

@@ -121,7 +121,6 @@ final class GenerateWordsViewModel: ObservableObject {
             
             mWordTitle = randomKeyPhrase![0]
             
-            print(randomKeyPhrase)
         } catch {
             // Handle error in here
         }
@@ -147,6 +146,7 @@ final class GenerateWordsViewModel: ObservableObject {
         
         if mWordIndex > 24 {
             mWordsVerificationScreen = true
+            backPressedToPopBack()
         }else{
             mWordTitle = randomKeyPhrase![mVisibleWord.rawValue]
         }
