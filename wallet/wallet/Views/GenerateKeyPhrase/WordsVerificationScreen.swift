@@ -13,14 +13,18 @@ final class WordsVerificationViewModel: ObservableObject {
     @Published var firstWord = ""
     @Published var secondWord = ""
     @Published var thirdWord = ""
-    @State var firstWordIndex:Int = 0
-    @State var secondWordIndex:Int = 0
-    @State var thirdWordIndex:Int = 0
+    @Published var firstWordIndex:Int = 0
+    @Published var secondWordIndex:Int = 0
+    @Published var thirdWordIndex:Int = 0
     @Published var mCompletePhrase:[String]?
     @Published var mWordsVerificationCompleted = false
   
     init(mPhrase:[String]) {
         mCompletePhrase = mPhrase
+        
+        assignElementsOnUI()
+        
+        print(mCompletePhrase)
     }
     
     func assignElementsOnUI(){
@@ -38,13 +42,13 @@ final class WordsVerificationViewModel: ObservableObject {
     
     func validateAndMoveToNextScreen(){
         
-        if (!firstWord.isEmpty && firstWord == mCompletePhrase![firstWordIndex]){
+        if (!firstWord.isEmpty && firstWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == mCompletePhrase![firstWordIndex].lowercased().trimmingCharacters(in: .whitespacesAndNewlines)){
             
-            if (!secondWord.isEmpty && secondWord == mCompletePhrase![secondWordIndex]){
+            if (!secondWord.isEmpty && secondWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == mCompletePhrase![secondWordIndex].lowercased().trimmingCharacters(in: .whitespacesAndNewlines)){
                 
-                if (!thirdWord.isEmpty && thirdWord == mCompletePhrase![thirdWordIndex]){
+                if (!thirdWord.isEmpty && thirdWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == mCompletePhrase![thirdWordIndex].lowercased().trimmingCharacters(in: .whitespacesAndNewlines)){
                     
-                    print("NOT MATCHED AND NOTIFY USER")
+                    print("MATCHED AND NOTIFY USER")
                     
                 }else{
                     print("NOT MATCHED AND NOTIFY USER")
@@ -102,29 +106,35 @@ struct WordsVerificationScreen: View {
                 HStack(spacing: nil, content: {
                    
                     VStack{
-                        Text("Word # \(self.viewModel.firstWordIndex)").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word # \(self.viewModel.firstWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.firstWord, onEditingChanged: { (changed) in
                         }) {
      //                       self.didEndEditingAddressTextField()
                         }.font(.barlowRegular(size: 14))
+                        .multilineTextAlignment(.center)
+                        .textCase(.lowercase)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                     
                     VStack{
-                        Text("Word # \(self.viewModel.secondWordIndex)").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word # \(self.viewModel.secondWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.secondWord, onEditingChanged: { (changed) in
-                        }) {
+                        }){
       //                      self.didEndEditingPortTextField()
                         }.font(.barlowRegular(size: 14))
+                        .multilineTextAlignment(.center)
+                        .textCase(.lowercase)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                      
                     VStack{
-                        Text("Word # \(self.viewModel.thirdWordIndex)").foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word # \(self.viewModel.thirdWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.thirdWord, onEditingChanged: { (changed) in
                         }) {
       //                      self.didEndEditingPortTextField()
                         }.font(.barlowRegular(size: 14))
+                        .multilineTextAlignment(.center)
+                        .textCase(.lowercase)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                                            
@@ -145,9 +155,9 @@ struct WordsVerificationScreen: View {
                     
                 }
             }
-            .onAppear(){
-                self.viewModel.assignElementsOnUI()
-            }
+//            .onAppear(){
+//                self.viewModel.assignElementsOnUI()
+//            }
             .onTapGesture {
                 UIApplication.shared.endEditing()
             }
