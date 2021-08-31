@@ -48,7 +48,9 @@ final class WordsVerificationViewModel: ObservableObject {
                 
                 if (!thirdWord.isEmpty && thirdWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == mCompletePhrase![thirdWordIndex].lowercased().trimmingCharacters(in: .whitespacesAndNewlines)){
                     
-                    print("MATCHED AND NOTIFY USER")
+                    mWordsVerificationCompleted = true
+                    
+                    print("MATCHED")
                     
                 }else{
                     print("NOT MATCHED AND NOTIFY USER")
@@ -97,10 +99,11 @@ struct WordsVerificationScreen: View {
     @State var isConfirmButtonEnabled = false
     
     var body: some View {
+        NavigationView {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Confirm Recovery Phrase").padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,50)
+                Text("Confirm Recovery Phrase").padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,40)
                 Text("Almost done! Enter the following words from your recovery phrase").padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
                 
                 HStack(spacing: nil, content: {
@@ -140,9 +143,9 @@ struct WordsVerificationScreen: View {
                                            
                 }).modifier(ForegroundPlaceholderModifier())
                 .padding(10)
-                Spacer()
-                Spacer()
-                Spacer()
+                Spacer(minLength: 10)
+                Spacer(minLength: 10)
+                Spacer(minLength: 10)
                 
                 BlueButtonView(aTitle: "Confirm").onTapGesture {
                     if self.viewModel.firstWord.isEmpty || self.viewModel.secondWord.isEmpty || self.viewModel.thirdWord.isEmpty {
@@ -153,25 +156,35 @@ struct WordsVerificationScreen: View {
                     
                     self.viewModel.validateAndMoveToNextScreen()
                     
+                }.padding(.bottom,10)
+                
+                
+                NavigationLink(
+                    destination: CongratulationsRecoverySetup().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $viewModel.mWordsVerificationCompleted
+                ) {
+                    EmptyView()
                 }
-            }
+            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+
 //            .onAppear(){
 //                self.viewModel.assignElementsOnUI()
 //            }
             .onTapGesture {
                 UIApplication.shared.endEditing()
             }
-            .zcashNavigationBar(leadingItem: {
-                ARRRBackButton(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }).frame(width: 30, height: 30)
-            }, headerItem: {
-                EmptyView()
-            }, trailingItem: {
-                EmptyView()
-            })
+           
         }
-        
+        }.zcashNavigationBar(leadingItem: {
+            ARRRBackButton(action: {
+                presentationMode.wrappedValue.dismiss()
+            }).frame(width: 30, height: 30)
+        }, headerItem: {
+            EmptyView()
+        }, trailingItem: {
+            EmptyView()
+        })
     }
 }
 

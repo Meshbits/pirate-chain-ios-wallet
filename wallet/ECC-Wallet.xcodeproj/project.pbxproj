@@ -447,6 +447,9 @@
 		29DDA37526CCF95C0041406B /* OpenInAppBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */; };
 		29DDA37626CCF95C0041406B /* OpenInAppBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */; };
 		29DDA37926CCFA6A0041406B /* WKView in Frameworks */ = {isa = PBXBuildFile; productRef = 29DDA37826CCFA6A0041406B /* WKView */; };
+		29DE76D926DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76D826DE8E7F00559342 /* CongratulationsRecoverySetup.swift */; };
+		29DE76DA26DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76D826DE8E7F00559342 /* CongratulationsRecoverySetup.swift */; };
+		29DE76DB26DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DE76D826DE8E7F00559342 /* CongratulationsRecoverySetup.swift */; };
 		29EA113426B492CC00601FDD /* RestorePhraseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA113326B492CC00601FDD /* RestorePhraseScreen.swift */; };
 		29EA113526B492CC00601FDD /* RestorePhraseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA113326B492CC00601FDD /* RestorePhraseScreen.swift */; };
 		29EA113626B492CC00601FDD /* RestorePhraseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA113326B492CC00601FDD /* RestorePhraseScreen.swift */; };
@@ -699,6 +702,7 @@
 		29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRMemoTextField.swift; sourceTree = "<group>"; };
 		29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRToggleStyle.swift; sourceTree = "<group>"; };
 		29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenInAppBrowser.swift; sourceTree = "<group>"; };
+		29DE76D826DE8E7F00559342 /* CongratulationsRecoverySetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationsRecoverySetup.swift; sourceTree = "<group>"; };
 		29EA113326B492CC00601FDD /* RestorePhraseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePhraseScreen.swift; sourceTree = "<group>"; };
 		29F0669F26C8028C00637E97 /* SelectLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguage.swift; sourceTree = "<group>"; };
 		29F066A326C810F900637E97 /* Bundle+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Localized.swift"; sourceTree = "<group>"; };
@@ -1119,6 +1123,7 @@
 				2960026F26D93BBF00B41DD0 /* HowItWorks.swift */,
 				29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */,
 				29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */,
+				29DE76D826DE8E7F00559342 /* CongratulationsRecoverySetup.swift */,
 			);
 			path = GenerateKeyPhrase;
 			sourceTree = "<group>";
@@ -1852,6 +1857,7 @@
 				29F314E526D51E7200745DBE /* RequestMoneyView.swift in Sources */,
 				0D72330823E9CFE40004B6D1 /* QRCodeScannerView.swift in Sources */,
 				0D12510523B557E40014EE3A /* SceneDelegate.swift in Sources */,
+				29DE76D926DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */,
 				0D11C22F23BF8181001CF6F7 /* QRCodeContainer.swift in Sources */,
 				0DB826222645E9C100CEA2B6 /* TheNoScreen.swift in Sources */,
 				0D3AAB45244652700010EA3C /* TransactionDetail.swift in Sources */,
@@ -2027,6 +2033,7 @@
 				0DCDFFCE24B6722B000F6999 /* SceneDelegate.swift in Sources */,
 				290F6DAE26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */,
 				0D562FD5257841FD00E843DD /* MemoUtils.swift in Sources */,
+				29DE76DB26DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */,
 				0DCDFFCF24B6722B000F6999 /* QRCodeContainer.swift in Sources */,
 				0DCDFFD024B6722B000F6999 /* TransactionDetail.swift in Sources */,
 				0DC0847A24BE583400F498A5 /* RateComponent.swift in Sources */,
@@ -2171,6 +2178,7 @@
 				29F314E626D51E7200745DBE /* RequestMoneyView.swift in Sources */,
 				0DE303A1263A158400CF877A /* QRCodeScannerView.swift in Sources */,
 				0DE303A2263A158400CF877A /* SceneDelegate.swift in Sources */,
+				29DE76DA26DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */,
 				0DE303A3263A158400CF877A /* QRCodeContainer.swift in Sources */,
 				0DB826232645E9C100CEA2B6 /* TheNoScreen.swift in Sources */,
 				0DE303A4263A158400CF877A /* TransactionDetail.swift in Sources */,
