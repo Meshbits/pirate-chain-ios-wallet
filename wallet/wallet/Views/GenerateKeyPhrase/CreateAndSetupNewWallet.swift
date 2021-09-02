@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CreateAndSetupNewWallet: View {
     @EnvironmentObject var viewModel: WordsVerificationViewModel
-    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
 
     @State var openHomeScreen = false
     
