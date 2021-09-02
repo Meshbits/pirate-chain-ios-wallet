@@ -11,6 +11,7 @@ import SwiftUI
 struct CongratulationsRecoverySetup: View {
     @EnvironmentObject var viewModel: WordsVerificationViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State var openAuthenticatateFaceID = false
     var body: some View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -25,14 +26,17 @@ struct CongratulationsRecoverySetup: View {
                 Spacer(minLength: 10)
                 
                 BlueButtonView(aTitle: "Done").onTapGesture {
-                        
+                    openAuthenticatateFaceID = true
                 }
-            }
-//            .onAppear(){
-//                self.viewModel.assignElementsOnUI()
-//            }
-            .onTapGesture {
-                UIApplication.shared.endEditing()
+                
+                
+                NavigationLink(
+                    destination: AuthenticateFaceID().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $openAuthenticatateFaceID
+                ) {
+                    EmptyView()
+                }
             }
            
         }.navigationBarHidden(true)

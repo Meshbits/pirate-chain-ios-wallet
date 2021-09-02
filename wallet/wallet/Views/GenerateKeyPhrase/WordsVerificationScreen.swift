@@ -109,7 +109,7 @@ struct WordsVerificationScreen: View {
                 HStack(spacing: nil, content: {
                    
                     VStack{
-                        Text("Word # \(self.viewModel.firstWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word #\(self.viewModel.firstWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.firstWord, onEditingChanged: { (changed) in
                         }) {
      //                       self.didEndEditingAddressTextField()
@@ -120,7 +120,7 @@ struct WordsVerificationScreen: View {
                     }
                     
                     VStack{
-                        Text("Word # \(self.viewModel.secondWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word #\(self.viewModel.secondWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.secondWord, onEditingChanged: { (changed) in
                         }){
       //                      self.didEndEditingPortTextField()
@@ -131,7 +131,7 @@ struct WordsVerificationScreen: View {
                     }
                      
                     VStack{
-                        Text("Word # \(self.viewModel.thirdWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word #\(self.viewModel.thirdWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
                         TextField("".localized(), text: self.$viewModel.thirdWord, onEditingChanged: { (changed) in
                         }) {
       //                      self.didEndEditingPortTextField()
@@ -160,21 +160,19 @@ struct WordsVerificationScreen: View {
                 
                 
                 NavigationLink(
-                    destination: CongratulationsRecoverySetup().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
+                    destination: CongratulationsRecoverySetup().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline).navigationBarHidden(true)
                         .navigationBarBackButtonHidden(true),
                     isActive: $viewModel.mWordsVerificationCompleted
                 ) {
                     EmptyView()
                 }
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-
-//            .onAppear(){
-//                self.viewModel.assignElementsOnUI()
-//            }
             .onTapGesture {
                 UIApplication.shared.endEditing()
             }
            
+        } .onTapGesture {
+            UIApplication.shared.endEditing()
         }
         }.zcashNavigationBar(leadingItem: {
             ARRRBackButton(action: {
