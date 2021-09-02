@@ -123,6 +123,29 @@ final class ZECCWalletEnvironment: ObservableObject {
         }
     }
     
+    func createNewWalletWithPhrase(randomPhrase:String) throws {
+        
+        do {
+            let birthday = WalletBirthday.birthday(with: BlockHeight.max)
+            
+            try SeedManager.default.importBirthday(birthday.height)
+            
+            if randomPhrase.isEmpty {
+                let mPhrase = try MnemonicSeedProvider.default.randomMnemonic()
+                try SeedManager.default.importPhrase(bip39: mPhrase)
+            }else{
+                try SeedManager.default.importPhrase(bip39: randomPhrase)
+            }
+            
+            SeedManager.default.importLightWalletEndpoint(address: ZECCWalletEnvironment.defaultLightWalletEndpoint)
+            SeedManager.default.importLightWalletPort(port: ZECCWalletEnvironment.defaultLightWalletPort)
+            try self.initialize()
+        
+        } catch {
+            throw WalletError.createFailed(underlying: error)
+        }
+    }
+    
     func initialize() throws {
         let seedPhrase = try SeedManager.default.exportPhrase()
         let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: seedPhrase)

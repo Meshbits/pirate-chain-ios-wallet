@@ -404,6 +404,12 @@
 		29515DCC26B9885900DC5B92 /* IntroPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */; };
 		29515DCD26B9885900DC5B92 /* IntroPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */; };
 		29515DCE26B9885900DC5B92 /* IntroPrivacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */; };
+		29596D9A26E12294001F75B6 /* CongratulationsFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */; };
+		29596D9B26E12294001F75B6 /* CongratulationsFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */; };
+		29596D9C26E12294001F75B6 /* CongratulationsFaceID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */; };
+		29596D9E26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
+		29596D9F26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
+		29596DA026E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
 		2960026C26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026D26D9350C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026E26D9350D00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
@@ -690,6 +696,8 @@
 		2946090C26ADCEF200B0867F /* Barlow-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Barlow-Regular.ttf"; sourceTree = "<group>"; };
 		294A88F026D0EA4400EEA4A9 /* BalanceViewHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewHome.swift; sourceTree = "<group>"; };
 		29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPrivacy.swift; sourceTree = "<group>"; };
+		29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationsFaceID.swift; sourceTree = "<group>"; };
+		29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndSetupNewWallet.swift; sourceTree = "<group>"; };
 		2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyPhraseInitiate.swift; sourceTree = "<group>"; };
 		2960026F26D93BBF00B41DD0 /* HowItWorks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorks.swift; sourceTree = "<group>"; };
 		2960027326D93E4300B41DD0 /* ARRRBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackButton.swift; sourceTree = "<group>"; };
@@ -1129,6 +1137,8 @@
 				29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */,
 				29DE76D826DE8E7F00559342 /* CongratulationsRecoverySetup.swift */,
 				29249D6B26DFA67400B4CC9B /* AuthenticateFaceID.swift */,
+				29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */,
+				29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */,
 			);
 			path = GenerateKeyPhrase;
 			sourceTree = "<group>";
@@ -1766,6 +1776,7 @@
 				8D73959024A40E6C00936DE3 /* String+localized.swift in Sources */,
 				0D100EDE23BA92A50089DB22 /* Colors.swift in Sources */,
 				0DE51DB023BEBE5100709636 /* KeyPad.swift in Sources */,
+				29596D9E26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */,
 				294A88F126D0EA4400EEA4A9 /* BalanceViewHome.swift in Sources */,
 				0D92AEBE2422D6F30028AD53 /* ZcashTapToSendButton.swift in Sources */,
 				0D9C203D23D77D4B006F1510 /* WalletDetails.swift in Sources */,
@@ -1841,6 +1852,7 @@
 				0D421AFA23C66B7500E5E55E /* Sending.swift in Sources */,
 				0D8C3E2F23D8BA6500B94438 /* String+Zcash.swift in Sources */,
 				0D4C100123C52A9B00CD2854 /* UIKit+Extensions.swift in Sources */,
+				29596D9A26E12294001F75B6 /* CongratulationsFaceID.swift in Sources */,
 				0DF3075024DB31570080B0CF /* DeviceFeedbackHelper.swift in Sources */,
 				0D87E2CC240ECEC500648C09 /* ZcashButtonBackground.swift in Sources */,
 				0D11C22D23BF807E001CF6F7 /* ReceiveFunds.swift in Sources */,
@@ -1933,6 +1945,7 @@
 				0DCDFF9E24B6722B000F6999 /* ZECCWalletEnvironment.swift in Sources */,
 				0D7D5DDC24BFAC7C0028083C /* KeyboardResponder.swift in Sources */,
 				0DBA1E1C24CB5D5C009C654E /* ShareView.swift in Sources */,
+				29596D9C26E12294001F75B6 /* CongratulationsFaceID.swift in Sources */,
 				29F314EB26D530A600745DBE /* AddressFragmentWithoutNumber.swift in Sources */,
 				0DCDFF9F24B6722B000F6999 /* ZcashButton.swift in Sources */,
 				0DCDFFA024B6722B000F6999 /* ZcashTextField.swift in Sources */,
@@ -2001,6 +2014,7 @@
 				0DCDFFC024B6722B000F6999 /* UIKit+Extensions.swift in Sources */,
 				296CACE826D57757004DC784 /* SendMoneyView.swift in Sources */,
 				0DCDFFC124B6722B000F6999 /* ZcashButtonBackground.swift in Sources */,
+				29596DA026E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */,
 				0DCDFFC224B6722B000F6999 /* ReceiveFunds.swift in Sources */,
 				2960026D26D9350C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */,
 				2963F33526C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
@@ -2089,6 +2103,7 @@
 				0DE30359263A158400CF877A /* String+localized.swift in Sources */,
 				0DE3035A263A158400CF877A /* Colors.swift in Sources */,
 				0DE3035B263A158400CF877A /* KeyPad.swift in Sources */,
+				29596D9F26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */,
 				294A88F226D0EA4400EEA4A9 /* BalanceViewHome.swift in Sources */,
 				0DE3035C263A158400CF877A /* ZcashTapToSendButton.swift in Sources */,
 				0DE3035D263A158400CF877A /* WalletDetails.swift in Sources */,
@@ -2164,6 +2179,7 @@
 				0DE3038E263A158400CF877A /* Sending.swift in Sources */,
 				0DE3038F263A158400CF877A /* String+Zcash.swift in Sources */,
 				0DE30390263A158400CF877A /* UIKit+Extensions.swift in Sources */,
+				29596D9B26E12294001F75B6 /* CongratulationsFaceID.swift in Sources */,
 				0DE30391263A158400CF877A /* DeviceFeedbackHelper.swift in Sources */,
 				0DE30392263A158400CF877A /* ZcashButtonBackground.swift in Sources */,
 				0DE30393263A158400CF877A /* ReceiveFunds.swift in Sources */,

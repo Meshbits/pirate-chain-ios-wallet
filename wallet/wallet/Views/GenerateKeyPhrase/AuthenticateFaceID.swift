@@ -7,8 +7,16 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct AuthenticateFaceID: View {
+    
+    @EnvironmentObject var viewModel: WordsVerificationViewModel
+
+    @State var skipAndMoveToHomeTab = false
+    
+    @State var skipAndMoveToCongratulationsAfterFaceIDSuccess = false
+    
     var body: some View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -23,18 +31,61 @@ struct AuthenticateFaceID: View {
                 HStack{
                     
                     SmallRecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Skip")).onTapGesture {
-                        
+                        skipAndMoveToHomeTab = true
                     }
                     
                     SmallBlueButtonView(aTitle: "Allow").onTapGesture {
-                        // Initiate Authentication flow
+                        initiateFaceIDAuthentication()
                     }
+                    
+                    
                 }.padding(60)
                 
+
+                NavigationLink(
+                    destination: CongratulationsFaceID().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $skipAndMoveToCongratulationsAfterFaceIDSuccess
+                ) {
+                    EmptyView()
+                }
+                
+                NavigationLink(
+                    destination: CreateAndSetupNewWallet().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                    isActive: $skipAndMoveToHomeTab
+                ) {
+                    EmptyView()
+                }
             }
            
         }.navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
+            switch output {
+            case .failed(_), .userFailed:
+                print("SOME ERROR OCCURRED")
+                UserSettings.shared.isBiometricDisabled = true
+                skipAndMoveToHomeTab = true
+
+            case .success:
+                print("SUCCESS AND SHOW SOME ALERT HERE")
+                UserSettings.shared.biometricInAppStatus = true
+                UserSettings.shared.isBiometricDisabled = false
+                skipAndMoveToCongratulationsAfterFaceIDSuccess = true
+            case .userDeclined:
+                print("DECLINED AND SHOW SOME ALERT HERE")
+                UserSettings.shared.biometricInAppStatus = false
+                UserSettings.shared.isBiometricDisabled = true
+                skipAndMoveToHomeTab = true
+
+                break
+            }
+        }
+    }
+    
+    func initiateFaceIDAuthentication(){
+        AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
     }
 }
 
@@ -56,13 +107,13 @@ struct SmallRecoveryWalletButtonView : View {
     var body: some View {
         ZStack {
 
-            Image(imageName).resizable().frame(width: 145.0, height:84).padding(.top,5)
+            Image(imageName).resizable().frame(width: 175.0, height:84).padding(.top,5)
             
             Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
-                .frame(width: 145.0, height:84).padding(10)
+                .frame(width: 175.0, height:84).padding(10)
                 .cornerRadius(15)
                 .multilineTextAlignment(.center)
-        }.frame(width: 145.0, height:84)
+        }.frame(width: 175.0, height:84)
     }
 }
 
@@ -74,13 +125,13 @@ struct SmallBlueButtonView : View {
     var body: some View {
         ZStack {
             
-            Image("bluebuttonbackground").resizable().frame(width: 145.0, height:84).padding(.top,5)
+            Image("bluebuttonbackground").resizable().frame(width: 175.0, height:84).padding(.top,5)
             
             Text(aTitle).foregroundColor(Color.black)
-                .frame(width: 145.0, height:84)
+                .frame(width: 175.0, height:84)
                 .cornerRadius(15)
                 .multilineTextAlignment(.center)
-        }.frame(width: 145.0, height:84)
+        }.frame(width: 175.0, height:84)
         
     }
 }
