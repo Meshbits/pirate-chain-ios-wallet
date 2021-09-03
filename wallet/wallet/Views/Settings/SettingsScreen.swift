@@ -155,6 +155,16 @@ struct SettingsScreen: View {
                    EmptyView()
                 }
                 
+                
+                NavigationLink(
+                    destination: RecoveryBasedUnlink().environmentObject(RecoveryViewModel()).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                               tag: SettingsDestination.openRecoveryPhrase,
+                               selection: $destination
+                ) {
+                   EmptyView()
+                }
+                
                 NavigationLink(
                     destination: OpenInAppBrowser(aURLString: "privacyURL".localized()).environmentObject(self.appEnvironment),
                                tag: SettingsDestination.openPrivacyPolicy,

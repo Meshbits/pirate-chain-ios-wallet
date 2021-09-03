@@ -434,6 +434,9 @@
 		29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651B26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
+		29AC1C6326E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */; };
+		29AC1C6426E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */; };
+		29AC1C6526E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */; };
 		29AF023226DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
 		29AF023326DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
 		29AF023426DA2CF100B21EAC /* GenerateWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */; };
@@ -706,6 +709,7 @@
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
+		29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryBasedUnlink.swift; sourceTree = "<group>"; };
 		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
 		29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsVerificationScreen.swift; sourceTree = "<group>"; };
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
@@ -1152,6 +1156,7 @@
 				29F0669F26C8028C00637E97 /* SelectLanguage.swift */,
 				2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */,
 				29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */,
+				29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1794,6 +1799,7 @@
 				0D11C23723BFB666001CF6F7 /* ShareScreen.swift in Sources */,
 				0D0565DD24EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift in Sources */,
 				0D92967923BEEFFC001518F3 /* BalanceDetail.swift in Sources */,
+				29AC1C6326E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */,
 				0D64DF5125DC0E7F00669906 /* UserSettings.swift in Sources */,
 				0D60F2EB23BE1B87006F5FAD /* Home.swift in Sources */,
 				0DBA1E1B24CB5D5C009C654E /* ShareView.swift in Sources */,
@@ -2039,6 +2045,7 @@
 				0DF26E2824D1F88100F32978 /* Baseline.swift in Sources */,
 				294A88F326D0EA4400EEA4A9 /* BalanceViewHome.swift in Sources */,
 				0DCDFFC924B6722B000F6999 /* QRCodeGenerator.swift in Sources */,
+				29AC1C6526E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */,
 				0DCDFFCA24B6722B000F6999 /* ScanAddress.swift in Sources */,
 				0D0565DA24EC89C200B6AAE8 /* DetailListing.swift in Sources */,
 				29414BC926D41A140022401F /* QRCodeScanner.swift in Sources */,
@@ -2121,6 +2128,7 @@
 				0DE30363263A158400CF877A /* ShareScreen.swift in Sources */,
 				0DE30364263A158400CF877A /* HeaderFooterTxDetailView.swift in Sources */,
 				0DE30365263A158400CF877A /* BalanceDetail.swift in Sources */,
+				29AC1C6426E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */,
 				0DE30366263A158400CF877A /* UserSettings.swift in Sources */,
 				0DE30367263A158400CF877A /* Home.swift in Sources */,
 				0DE30368263A158400CF877A /* ShareView.swift in Sources */,
