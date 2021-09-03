@@ -125,7 +125,7 @@ struct PasscodeScreen: View {
         }
     }
     
-    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     @Environment(\.presentationMode) var presentationMode:Binding<PresentationMode>
       
