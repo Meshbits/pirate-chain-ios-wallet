@@ -126,10 +126,7 @@ final class ZECCWalletEnvironment: ObservableObject {
     func createNewWalletWithPhrase(randomPhrase:String) throws {
         
         do {
-            let birthday = WalletBirthday.birthday(with: BlockHeight.max)
-            
-            try SeedManager.default.importBirthday(birthday.height)
-            
+           
             if randomPhrase.isEmpty {
                 let mPhrase = try MnemonicSeedProvider.default.randomMnemonic()
                 try SeedManager.default.importPhrase(bip39: mPhrase)
@@ -137,6 +134,10 @@ final class ZECCWalletEnvironment: ObservableObject {
                 try SeedManager.default.importPhrase(bip39: randomPhrase)
             }
             
+            let birthday = WalletBirthday.birthday(with: BlockHeight.max)
+            
+            try SeedManager.default.importBirthday(birthday.height)
+             
             SeedManager.default.importLightWalletEndpoint(address: ZECCWalletEnvironment.defaultLightWalletEndpoint)
             SeedManager.default.importLightWalletPort(port: ZECCWalletEnvironment.defaultLightWalletPort)
             try self.initialize()
@@ -197,7 +198,7 @@ final class ZECCWalletEnvironment: ObservableObject {
         
     }
     
-    fileprivate func deleteWalletFiles() throws {
+    func deleteWalletFiles() throws {
         if self.synchronizer != nil {
             self.synchronizer.stop()
         }

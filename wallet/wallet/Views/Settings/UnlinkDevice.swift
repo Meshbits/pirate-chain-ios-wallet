@@ -41,6 +41,7 @@ struct UnlinkDevice: View {
                                         action: {
                                             UserSettings.shared.removeAllSettings()
                                             self.appEnvironment.nuke(abortApplication: true)
+//                                            try! self.appEnvironment.deleteWalletFiles()
 //                                            presentationMode.wrappedValue.dismiss()
                                             ZECCWalletEnvironment.shared.state = .uninitialized
                                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

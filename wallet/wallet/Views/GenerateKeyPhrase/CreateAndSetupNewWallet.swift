@@ -41,15 +41,11 @@ struct CreateAndSetupNewWallet: View {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             
             NavigationLink(destination:
-                LazyView (
-                    BackupWallet().environmentObject(self.appEnvironment)
-                    .navigationBarHidden(true)
-                ),
-                           tag: Destinations.createNew,
-                           selection: $destination
-
-            ) {
-              EmptyView()
+                            LazyView(
+                                HomeTabView()
+                                //.environmentObject(appEnvironment)
+            ), isActive: $openHomeScreen) {
+                EmptyView()
             }
             
         }.navigationBarHidden(true)
@@ -62,7 +58,7 @@ struct CreateAndSetupNewWallet: View {
     func createNewWalletFlow(){
         do {
             tracker.track(.tap(action: .landingBackupWallet), properties: [:])
-            try self.appEnvironment.createNewWalletWithPhrase(randomPhrase: self.viewModel.mCompletePhrase!.joined(separator: ""))
+            try self.appEnvironment.createNewWalletWithPhrase(randomPhrase: self.viewModel.mCompletePhrase!.joined(separator: " "))
             openHomeScreen = true
         } catch WalletError.createFailed(let e) {
             if case SeedManager.SeedManagerError.alreadyImported = e {
