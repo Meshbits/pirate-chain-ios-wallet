@@ -42,7 +42,7 @@ struct CreateAndSetupNewWallet: View {
             
             NavigationLink(destination:
                             LazyView(
-                                HomeTabView()
+                                HomeTabView(openPasscodeScreen: false)
                                 //.environmentObject(appEnvironment)
             ), isActive: $openHomeScreen) {
                 EmptyView()

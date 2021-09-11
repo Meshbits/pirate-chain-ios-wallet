@@ -122,7 +122,7 @@ struct SeedBackup: View {
                 if proceedsToHome {
                     NavigationLink(destination:
                                     LazyView(
-                                        HomeTabView()
+                                        HomeTabView(openPasscodeScreen: false)
                                         //.environmentObject(appEnvironment)
 //                                        Home().environmentObject(HomeViewModel())
                                     )) {

@@ -31,15 +31,16 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                     } label: {
                         BlueButtonView(aTitle: "Continue")
                     }
+                 
                     
-                    NavigationLink(
-                        destination: RecoveryWordsView().environmentObject(RecoveryWordsViewModel()).navigationBarTitle("", displayMode: .inline)
-                            .navigationBarBackButtonHidden(true).navigationBarHidden(true),
-                        isActive: $initiateRecoveryPhrase
-                    ) {
-                        EmptyView()
-                    }
-                    
+//                    NavigationLink(
+//                        destination: RecoveryWordsView().environmentObject(RecoveryWordsViewModel()).navigationBarTitle("", displayMode: .inline)
+//                            .navigationBarBackButtonHidden(true).navigationBarHidden(true),
+//                        isActive: $initiateRecoveryPhrase
+//                    ) {
+//                        EmptyView()
+//                    }
+//
                     Spacer(minLength: 10)
                 })
             
@@ -60,6 +61,9 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                 }
             }.padding(.leading,-20).padding(.top,10)
         })
+        .sheet(isPresented: $initiateRecoveryPhrase) {
+            LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validateAndDismiss, isNewWallet: true)).environmentObject(self.appEnvironment)
+        }
     }
 }
 

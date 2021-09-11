@@ -69,7 +69,7 @@ struct AuthenticateFaceID: View {
                 skipAndMoveToHomeTab = true
 
             case .success:
-                print("SUCCESS AND SHOW SOME ALERT HERE")
+                print("SUCCESS IN AUTH FACE ID")
                 UserSettings.shared.biometricInAppStatus = true
                 UserSettings.shared.isBiometricDisabled = false
                 skipAndMoveToCongratulationsAfterFaceIDSuccess = true

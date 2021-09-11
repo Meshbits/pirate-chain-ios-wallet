@@ -263,6 +263,8 @@ final class HomeViewModel: ObservableObject {
 }
 
 struct Home: View {
+
+    @Environment(\.currentTab) var mCurrentTab
     
     let buttonHeight: CGFloat = 64
     let buttonPadding: CGFloat = 40
@@ -708,14 +710,18 @@ struct Home: View {
                         NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
 
                    case .success:
-                       print("SUCCESS")
-                        UserSettings.shared.biometricInAppStatus = true
-                        UserSettings.shared.isBiometricDisabled = false
+                        print("SUCCESS ON HOME")
+                       
+                        if mCurrentTab == HomeTabView.Tab.home {
+                            UserSettings.shared.biometricInAppStatus = true
+                            UserSettings.shared.isBiometricDisabled = false
                         
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.showPassCodeScreen = false
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                self.showPassCodeScreen = false
+                            }
+                            NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
                         }
-                        NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
+                        
                    case .userDeclined:
                        print("DECLINED")
                         UserSettings.shared.biometricInAppStatus = false

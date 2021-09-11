@@ -156,6 +156,17 @@ struct SettingsScreen: View {
                 }
                 
                 
+             
+                NavigationLink(
+                    
+                    destination: LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isNewWallet: true)).environmentObject(self.appEnvironment),
+                    tag: SettingsDestination.openChangePIN,
+                    selection: $destination
+                ) {
+                    EmptyView()
+                }
+                
+                
                 NavigationLink(
                     destination: InitiateRecoveryKeyPhraseFlow().navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true),
@@ -207,7 +218,7 @@ struct SettingsScreen: View {
                     NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
 
                 case .success:
-                    print("SUCCESS AND SHOW SOME ALERT HERE")
+                    print("SUCCESS IN SETTINGS")
                     UserSettings.shared.biometricInAppStatus = true
                     UserSettings.shared.isBiometricDisabled = false
                 case .userDeclined:

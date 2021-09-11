@@ -125,6 +125,18 @@ struct PasscodeScreen: View {
         }
     }
     
+    
+    enum PasscodeScreenStates: Int {
+        case none = 0
+        case validatePasscode = 1
+        case newPasscode = 2
+        case confirmPasscode = 3
+        case passcodeAlreadyExists = 4
+        case changePasscode = 5
+        case validateAndDismiss = 6
+    }
+
+    
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     @Environment(\.presentationMode) var presentationMode:Binding<PresentationMode>
@@ -134,17 +146,13 @@ struct PasscodeScreen: View {
     @State var destination: Destinations?
     
     let dragGesture = DragGesture()
-    
-    enum ScreenStates {
-       case validatePasscode, newPasscode, confirmPasscode, passcodeAlreadyExists
-    }
-    
-   @State var mScreenState: ScreenStates?
+   
+   @State var mScreenState: PasscodeScreenStates?
     
    @State var isNewWallet = false
     
    @State var isAuthenticatedFlowInitiated = false
-    
+        
     var body: some View {
         ZStack {
             
@@ -174,21 +182,21 @@ struct PasscodeScreen: View {
             
             VStack(alignment: .center, spacing: 10, content: {
                 
-                if mScreenState == ScreenStates.passcodeAlreadyExists{
+                if mScreenState == PasscodeScreenStates.passcodeAlreadyExists{
                     PasscodeScreenTopImageView().padding(.leading,20).padding(.top,50)
-                }else if mScreenState == ScreenStates.validatePasscode{
+                }else if mScreenState == PasscodeScreenStates.validatePasscode{
                     PasscodeScreenTitle(aTitle: "LOGIN PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
                     PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
                     Spacer()
-                }else if mScreenState == ScreenStates.newPasscode{
+                }else if mScreenState == PasscodeScreenStates.newPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "SET PIN".localized())
                     PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
                     Spacer()
-                }else if mScreenState == ScreenStates.confirmPasscode{
+                }else if mScreenState == PasscodeScreenStates.confirmPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
@@ -211,7 +219,7 @@ struct PasscodeScreen: View {
             
             NavigationLink(destination:
                             LazyView(
-                                HomeTabView()
+                                HomeTabView(openPasscodeScreen: false)
                                 //.environmentObject(appEnvironment)
             ), isActive: $openHomeScreen) {
                 EmptyView()
@@ -228,6 +236,10 @@ struct PasscodeScreen: View {
                     
                     if !aTempPasscode.isEmpty && aTempPasscode == aPasscode{
                         
+                        if handleUseCasesRelatedToScreenStates() {
+                            return
+                        }
+
                         if isNewWallet {
                             // Initiate Create New Wallet flow from here
 //                            createNewWalletFlow()
@@ -246,8 +258,8 @@ struct PasscodeScreen: View {
                     }
                 }
                 
-                if mScreenState == ScreenStates.newPasscode {
-                    mScreenState = ScreenStates.confirmPasscode
+                if mScreenState == PasscodeScreenStates.newPasscode {
+                    mScreenState = PasscodeScreenStates.confirmPasscode
                     passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                     passcodeViewModel.mPressedKeys.removeAll()
                 }
@@ -264,11 +276,19 @@ struct PasscodeScreen: View {
                         NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
 
                    case .success:
-                       print("SUCCESS")
+                       print("SUCCESS IN PASSCODE")
+                        print(mScreenState)
                         UserSettings.shared.biometricInAppStatus = true
                         UserSettings.shared.isBiometricDisabled = false
-                        openHomeScreen = true
-                        NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
+                        if mScreenState == PasscodeScreenStates.validatePasscode {
+                            openHomeScreen = true
+                            NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
+                        }else{
+                            // Handle other use case here
+                            if handleUseCasesRelatedToScreenStates() {
+                                return
+                            }
+                        }
                    case .userDeclined:
                        print("DECLINED")
                         UserSettings.shared.biometricInAppStatus = false
@@ -297,6 +317,22 @@ struct PasscodeScreen: View {
 
                 }
             }
+    }
+    
+    func handleUseCasesRelatedToScreenStates()->Bool{
+        
+        var isReturnFromFlow = false
+        
+        switch mScreenState {
+            case .validateAndDismiss:
+                presentationMode.wrappedValue.dismiss()
+                mScreenState = .validateAndDismiss
+                isReturnFromFlow = true
+            default:
+                print("Default case")
+        }
+        
+        return isReturnFromFlow
     }
     
     func createNewWalletFlow(){
