@@ -190,6 +190,12 @@ struct PasscodeScreen: View {
                     PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
                     PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
                     Spacer()
+                }else if mScreenState == PasscodeScreenStates.validateAndDismiss{
+                    PasscodeScreenTitle(aTitle: "Enter PIN".localized())
+                    Spacer()
+                    PasscodeScreenSubTitle(aSubTitle: "PIN Required".localized())
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to conotinue".localized(),size:Device.isLarge ? 18 : 12,padding:50)
+                    Spacer()
                 }else if mScreenState == PasscodeScreenStates.newPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
@@ -326,6 +332,7 @@ struct PasscodeScreen: View {
             case .validateAndDismiss:
                 presentationMode.wrappedValue.dismiss()
                 mScreenState = .validateAndDismiss
+                NotificationCenter.default.post(name: NSNotification.Name("ValidationSuccessful"), object: nil)
                 isReturnFromFlow = true
             default:
                 print("Default case")

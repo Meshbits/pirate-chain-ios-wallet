@@ -97,6 +97,7 @@ struct RecoveryWordsView: View {
             })
             
         }
+        .navigationBarHidden(true)
         .zcashNavigationBar(leadingItem: {
             
             

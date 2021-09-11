@@ -11,7 +11,8 @@ import SwiftUI
 struct InitiateRecoveryKeyPhraseFlow: View {
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     @Environment(\.presentationMode) var presentationMode
-    @State var initiateRecoveryPhrase = false
+    @State var validatePinBeforeInitiatingFlow = false
+    @State var initiatePassphraseFlow = false
     
     var body: some View {
         ZStack{
@@ -25,30 +26,22 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                         .padding(.trailing,80).padding(.leading,80)
                     
                     Spacer(minLength: 10)
+                    
                     Button {
-                        initiateRecoveryPhrase = true
+                        validatePinBeforeInitiatingFlow = true
                        
                     } label: {
                         BlueButtonView(aTitle: "Continue")
                     }
-                    
-                    
-//                   NavigationLink(
-//
-//                       destination: LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validateAndDismiss, isNewWallet: true)).environmentObject(self.appEnvironment),
-//                        isActive: $initiateRecoveryPhrase
-//                   ) {
-//                       EmptyView()
-//                   }
-                    
+                 
                     NavigationLink(
                         destination: RecoveryWordsView().environmentObject(RecoveryWordsViewModel()).navigationBarTitle("", displayMode: .inline)
                             .navigationBarBackButtonHidden(true).navigationBarHidden(true),
-                        isActive: $initiateRecoveryPhrase
+                        isActive: $initiatePassphraseFlow
                     ) {
                         EmptyView()
                     }
-//
+
                     Spacer(minLength: 10)
                 })
             
@@ -69,6 +62,15 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                 }
             }.padding(.leading,-20).padding(.top,10)
         })
+        .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
+                   LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validateAndDismiss, isNewWallet: true)).environmentObject(self.appEnvironment)
+        }
+        .onAppear(){
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("ValidationSuccessful"), object: nil, queue: .main) { (_) in
+                initiatePassphraseFlow = true
+            }
+        }
+        
        
     }
 }
