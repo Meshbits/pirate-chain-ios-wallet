@@ -277,7 +277,6 @@ struct PasscodeScreen: View {
 
                    case .success:
                        print("SUCCESS IN PASSCODE")
-                        print(mScreenState)
                         UserSettings.shared.biometricInAppStatus = true
                         UserSettings.shared.isBiometricDisabled = false
                         if mScreenState == PasscodeScreenStates.validatePasscode {
@@ -590,3 +589,7 @@ struct PasscodeScreenDescription : View {
 //
 //    }
 //}
+
+struct PassCodeScreenDismiss {
+    var isDismiss:Bool
+}
