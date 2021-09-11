@@ -157,7 +157,7 @@ struct SettingsScreen: View {
                 
                 
                 NavigationLink(
-                    destination: RecoveryBasedUnlink().environmentObject(RecoveryViewModel()).navigationBarTitle("", displayMode: .inline)
+                    destination: InitiateRecoveryKeyPhraseFlow().navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true),
                                tag: SettingsDestination.openRecoveryPhrase,
                                selection: $destination

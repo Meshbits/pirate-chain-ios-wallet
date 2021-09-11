@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct UnlinkDevice: View {
-    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     @Environment(\.presentationMode) var presentationMode
-    @State var nukePressed = false
+    @State var goToRecoveryPhrase = false
     var body: some View {
                 ZStack{
                         ARRRBackground()
@@ -25,33 +25,20 @@ struct UnlinkDevice: View {
                             
                             Spacer(minLength: 10)
                             Button {
-                                nukePressed = true
+                                goToRecoveryPhrase = true
                                
                             } label: {
                                 BlueButtonView(aTitle: "Continue")
-                            }.alert(isPresented: $nukePressed) {
-                                Alert(title: Text("nuke_alerttitle"),
-                                      message: Text("nuke_alertmessage"),
-                                      primaryButton: .default(
-                                        Text("nuke_alertcancel")
-                                        ,action: { self.nukePressed = false}
-                                    ),
-                                      secondaryButton: .destructive(
-                                        Text("nuke_alertconfirm"),
-                                        action: {
-                                            UserSettings.shared.removeAllSettings()
-                                            self.appEnvironment.nuke(abortApplication: true)
-//                                            try! self.appEnvironment.deleteWalletFiles()
-//                                            presentationMode.wrappedValue.dismiss()
-                                            ZECCWalletEnvironment.shared.state = .uninitialized
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                                  NotificationCenter.default.post(name: NSNotification.Name("MoveToFirstViewLayout"), object: nil)
-                                            }
-                                      }
-                                    )
-                                )
+                                
                             }
                             
+                            NavigationLink(
+                                destination: RecoveryBasedUnlink().environmentObject(RecoveryViewModel()).navigationBarTitle("", displayMode: .inline)
+                                    .navigationBarBackButtonHidden(true),
+                                isActive: $goToRecoveryPhrase
+                            ) {
+                               EmptyView()
+                            }
                             
                             Spacer(minLength: 10)
                         })

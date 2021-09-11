@@ -425,6 +425,12 @@
 		296CACE626D57757004DC784 /* SendMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CACE526D57757004DC784 /* SendMoneyView.swift */; };
 		296CACE726D57757004DC784 /* SendMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CACE526D57757004DC784 /* SendMoneyView.swift */; };
 		296CACE826D57757004DC784 /* SendMoneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296CACE526D57757004DC784 /* SendMoneyView.swift */; };
+		296DA0E726ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */; };
+		296DA0E826ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */; };
+		296DA0E926ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */; };
+		296DA0EB26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
+		296DA0EC26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
+		296DA0ED26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
 		298D50E326A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E426A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E526A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
@@ -706,6 +712,8 @@
 		2960027326D93E4300B41DD0 /* ARRRBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackButton.swift; sourceTree = "<group>"; };
 		2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateServerConfig.swift; sourceTree = "<group>"; };
 		296CACE526D57757004DC784 /* SendMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyView.swift; sourceTree = "<group>"; };
+		296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateRecoveryKeyPhraseFlow.swift; sourceTree = "<group>"; };
+		296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryWordsView.swift; sourceTree = "<group>"; };
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
@@ -1157,6 +1165,8 @@
 				2963F33226C946FE0008CD34 /* PrivateServerConfig.swift */,
 				29DDA37326CCF95C0041406B /* OpenInAppBrowser.swift */,
 				29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */,
+				296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */,
+				296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1849,9 +1859,11 @@
 				0DF26E2124D1F75300F32978 /* ZcashMemoTextField.swift in Sources */,
 				0D41AF9F23FCAA4700EE4FC0 /* TextView.swift in Sources */,
 				0D1C2F27240DAFE9001AA427 /* ZcashSeedPhraseGrid.swift in Sources */,
+				296DA0E726ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9126D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
 				296CACE626D57757004DC784 /* SendMoneyView.swift in Sources */,
 				29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
+				296DA0EB26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */,
 				2924CF6D26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
 				0D0565DB24EC89C200B6AAE8 /* LittleViews.swift in Sources */,
@@ -1986,6 +1998,7 @@
 				0DCDFFAC24B6722B000F6999 /* Home.swift in Sources */,
 				0DCDFFAD24B6722B000F6999 /* ActionableMessage.swift in Sources */,
 				0DCDFFAE24B6722B000F6999 /* DetailCard.swift in Sources */,
+				296DA0ED26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */,
 				0DCDFFAF24B6722B000F6999 /* SeedManagement.swift in Sources */,
 				0DCDFFB024B6722B000F6999 /* SendFlowEnvironment.swift in Sources */,
 				0D5E9B0B2637424C00D98569 /* WalletBalanceBreakdown.swift in Sources */,
@@ -2006,6 +2019,7 @@
 				0D5E9B0E263748E400D98569 /* BalanceBreakdown.swift in Sources */,
 				0DCDFFB924B6722B000F6999 /* LottieAnimation.swift in Sources */,
 				0DCDFFBA24B6722B000F6999 /* ZcashCloseButton.swift in Sources */,
+				296DA0E926ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				0DCDFFBB24B6722B000F6999 /* NukeWarning.swift in Sources */,
 				29FABBFE26D506E800306726 /* PirateChainPaymentURI.swift in Sources */,
 				29207FDC26BFCDD500E9C4E4 /* SettingsScreen.swift in Sources */,
@@ -2178,9 +2192,11 @@
 				0DE3038A263A158400CF877A /* ZcashMemoTextField.swift in Sources */,
 				0DE3038B263A158400CF877A /* TextView.swift in Sources */,
 				0DE3038C263A158400CF877A /* ZcashSeedPhraseGrid.swift in Sources */,
+				296DA0E826ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
 				296CACE726D57757004DC784 /* SendMoneyView.swift in Sources */,
 				29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
+				296DA0EC26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */,
 				2924CF6E26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
 				0DE3038D263A158400CF877A /* LittleViews.swift in Sources */,

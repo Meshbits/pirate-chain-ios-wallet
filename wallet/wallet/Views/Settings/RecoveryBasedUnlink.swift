@@ -53,9 +53,11 @@ final class RecoveryViewModel: ObservableObject {
                     
                     print("MATCHED AND NOW UNLINK IT HERE")
                     
+                    
                 }else{
                     print("NOT MATCHED AND NOTIFY USER")
                 }
+                
             }else{
                 print("NOT MATCHED AND NOTIFY USER")
             }
@@ -168,6 +170,7 @@ struct RecoveryBasedUnlink: View {
                           secondaryButton: .destructive(
                             Text("nuke_alertconfirm"),
                             action: {
+                                presentationMode.wrappedValue.dismiss()
                                 UserSettings.shared.removeAllSettings()
                                 self.appEnvironment.nuke(abortApplication: true)
 //                                            try! self.appEnvironment.deleteWalletFiles()
@@ -209,3 +212,4 @@ struct RecoveryBasedUnlink: View {
         })
     }
 }
+

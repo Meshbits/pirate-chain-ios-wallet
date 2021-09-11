@@ -24,9 +24,19 @@ class UserSettings {
         static let aBiometricEnabled = "aBiometricEnabled"
         static let aLanguageSelectionIndex = "aLanguageSelectionIndex"
         static let isAutoConfigurationOn = "isAutoConfigurationOn"
+        static let lastUpdatedTime = "lastSavedTime"
     }
     
     
+    var lastUpdatedTime: String? {
+        get {
+            UserDefaults.standard.string(forKey: Keys.lastUpdatedTime)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Keys.lastUpdatedTime)
+        }
+    }
+        
     var aPasscode: String? {
         get {
             UserDefaults.standard.string(forKey: Keys.aPasscode)
