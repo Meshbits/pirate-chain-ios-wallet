@@ -41,12 +41,12 @@ struct SendTransaction: View {
             let balance = NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)),
             let amountToSend = NumberFormatter.zecAmountFormatter.number(from: flow.amount)?.doubleValue {
             if ZECCWalletEnvironment.shared.sufficientFundsToSend(amount: amountToSend) {
-                return String(format:NSLocalizedString("You Have %@ sendable ZEC", comment: ""), "\(balance)")
+                return String(format:NSLocalizedString("You Have %@ sendable ARRR", comment: ""), "\(balance)")
             } else {
-                return String(format: "%@ sendable ZEC. You don't have sufficient funds to cover the amount + Miner Fee of %@ ZEC", "\(balance)", "\(ZECCWalletEnvironment.minerFee)")
+                return String(format: "%@ sendable ARRR. You don't have sufficient funds to cover the amount + Miner Fee of %@ ARRR", "\(balance)", "\(ZECCWalletEnvironment.minerFee)")
             }
         } else {
-            return "You don't have any sendable ZEC yet"
+            return "You don't have any sendable ARRR yet"
         }
     }
     

@@ -103,7 +103,7 @@ struct WalletDetails: View {
             VStack(alignment: .center, spacing: 20) {
                 
                 VStack(alignment: .center, spacing: 10) {
-                    Text("Wallet History").font(.barlowRegular(size: 25)).multilineTextAlignment(.center).foregroundColor(.gray)
+                    Text("Wallet History".localized()).font(.barlowRegular(size: 25)).multilineTextAlignment(.center).foregroundColor(.gray)
                 }
                 
                 ZcashNavigationBar(
@@ -166,9 +166,9 @@ struct WalletDetails: View {
 
         }
         .alert(isPresented: self.$viewModel.showError) {
-            Alert(title: Text("Error"),
-                  message: Text("an error ocurred"),
-                  dismissButton: .default(Text("button_close")))
+            Alert(title: Text("Error".localized()),
+                  message: Text("an error ocurred".localized()),
+                  dismissButton: .default(Text("button_close".localized())))
         }
         .onDisappear() {
             UITableView.appearance().separatorStyle = .singleLine
