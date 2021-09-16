@@ -302,5 +302,39 @@
 "There was a problem initializing the wallet" = "There was a problem initializing the wallet";
 
 
+// QR Code Scanner
 
-//.localized()
+"Copied Valid Scanned Address to Clipboard" = "Copied Valid Scanned Address to Clipboard";
+"We don't have permission to access your camera" = "We don't have permission to access your camera";
+"Scan QR Code" = "Scan QR Code";
+
+// Transaction Details
+
+"Explore" = "Explore";
+"From: " = "From: ";
+"Memo" = "Memo";
+"Processing fee: " = "Processing fee: ";
+"Confirmed" = "Confirmed";
+"You are exiting your wallet" = "You are exiting your wallet";
+"While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?" = "While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?";
+"NEVERMIND" = "NEVERMIND";
+"SEE TX ONLINE" = "SEE TX ONLINE";
+"network fee" = "network fee";
+"from your shielded wallet" = "from your shielded wallet";
+"to your shielded wallet" = "to your shielded wallet";
+"Confirmed" = "Confirmed";
+ "Pending confirmation" =  "Pending confirmation";
+
+
+// Little Views
+
+"from " = "from ";
+"block" = "block";
+"with a" = "with a";
+"memo" = "memo";
+
+"You Failed to send" = "You Failed to send";
+"Total Spent" = "Total Spent";
+"You Received" = "You Received";
+
+

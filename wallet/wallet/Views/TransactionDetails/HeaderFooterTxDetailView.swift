@@ -71,7 +71,7 @@ struct HeaderFooterFactory {
                                       shielded: Bool,
                                       formatValue: (Double) -> String = Self.defaultFormatter) -> HeaderFooterTxDetailView {
         HeaderFooterTxDetailView(
-            caption: Text("You Failed to send")
+            caption: Text("You Failed to send".localized())
                 .foregroundColor(.white)
                 .font(.footnote)
                 .bold(),
@@ -86,7 +86,7 @@ struct HeaderFooterFactory {
                                       shielded: Bool,
                                       formatValue: (Double) -> String = Self.defaultFormatter) -> HeaderFooterTxDetailView {
         HeaderFooterTxDetailView(
-                           caption: Text("Total Spent")
+            caption: Text("Total Spent".localized())
                                .foregroundColor(.white)
                                .font(.footnote)
                                .bold(),
@@ -102,7 +102,7 @@ struct HeaderFooterFactory {
                                        sent: Bool,
                                        formatValue: (Double) -> String = Self.defaultFormatter) -> HeaderFooterTxDetailView {
         HeaderFooterTxDetailView(
-                           caption: (sent ? Text("Total Spent") : Text("You Received"))
+            caption: (sent ? Text("Total Spent".localized()) : Text("You Received".localized()))
                                .foregroundColor(.zYellow)
                                .font(.footnote),
                            mainText: Text("$\(formatValue(value))")
@@ -119,7 +119,7 @@ struct HeaderFooterFactory {
                                        formatValue: (Double) -> String = Self.defaultFormatter) -> HeaderFooterTxDetailView {
         
         HeaderFooterTxDetailView(
-                          caption: (sent ? Text("Total Spent") : Text("You Received"))
+            caption: (sent ? Text("Total Spent".localized()) : Text("You Received".localized()))
                               .foregroundColor(.zYellow)
                               .font(.footnote),
                           mainText: Text("$\(formatValue(value))")

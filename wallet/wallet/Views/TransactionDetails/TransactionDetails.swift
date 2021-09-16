@@ -24,7 +24,7 @@ struct TransactionDetails: View {
         }) {
             HStack {
                 Spacer()
-                Text("Explore")
+                Text("Explore".localized())
                     .foregroundColor(.white)
                 Image(systemName: "arrow.up.right.square")
                     .foregroundColor(.white)
@@ -64,20 +64,20 @@ struct TransactionDetails: View {
                             VStack {
 
                                 if let fullAddr = detail.arrrAddress, let toAddr = fullAddr.shortARRRaddress {
-                                    TransactionRow(mTitle: "From: " + toAddr, showLine: true, isYellowColor: false)
+                                    TransactionRow(mTitle: "From: ".localized() + toAddr, showLine: true, isYellowColor: false)
                                 }else{
-                                    TransactionRow(mTitle: "From: " + (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
+                                    TransactionRow(mTitle: "From: ".localized() + (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
                                 }
                                 
-                                TransactionRowTitleSubtitle(mTitle: converDateToString(aDate: detail.date), mSubTitle: ("Processing fee: " + "\(detail.defaultFee.asHumanReadableZecBalance().toZecAmount())" + " ARRR"), showLine: true)
+                                TransactionRowTitleSubtitle(mTitle: converDateToString(aDate: detail.date), mSubTitle: ("Processing fee: ".localized() + "\(detail.defaultFee.asHumanReadableZecBalance().toZecAmount())" + " ARRR"), showLine: true)
                                 
-                                TransactionRowTitleSubtitle(mTitle: "Memo", mSubTitle: (detail.memo ?? "-"), showLine: true)
+                                TransactionRowTitleSubtitle(mTitle: "Memo".localized(), mSubTitle: (detail.memo ?? "-"), showLine: true)
                                 
                                 if detail.success {
                                     let latestHeight = ZECCWalletEnvironment.shared.synchronizer.syncBlockHeight.value
                                     TransactionRow(mTitle: detail.makeStatusText(latestHeight: latestHeight), showLine: false,isYellowColor: true)
                                 } else {
-                                    TransactionRow(mTitle: "Confirmed", showLine: false,isYellowColor: true)
+                                    TransactionRow(mTitle: "Confirmed".localized(), showLine: false,isYellowColor: true)
                                 }
                                 
 
@@ -93,7 +93,7 @@ struct TransactionDetails: View {
                                 Button {
                                     self.alertItem = .explorerNotice
                                 } label: {
-                                    BlueButtonView(aTitle: "Explore")
+                                    BlueButtonView(aTitle: "Explore".localized())
                                 }
                         }
 
@@ -122,10 +122,10 @@ struct TransactionDetails: View {
             case .copiedItem(let p):
                 return PasteboardAlertHelper.alert(for: p)
             case .explorerNotice:
-                return Alert(title: Text("You are exiting your wallet"),
-                             message: Text("While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?"),
-                             primaryButton: .cancel(Text("NEVERMIND")),
-                             secondaryButton: .default(Text("SEE TX ONLINE"), action: {
+                return Alert(title: Text("You are exiting your wallet".localized()),
+                             message: Text("While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?".localized()),
+                             primaryButton: .cancel(Text("NEVERMIND".localized())),
+                             secondaryButton: .default(Text("SEE TX ONLINE".localized()), action: {
                                 
                                 guard let url = UrlHandler.blockExplorerURL(for: self.detail.id) else {
                                     return
@@ -152,7 +152,7 @@ struct SubwayPathBuilder {
         
         if detail.isOutbound {
             views.append(
-                Text("\(detail.defaultFee.asHumanReadableZecBalance()) network fee")
+                Text("\(detail.defaultFee.asHumanReadableZecBalance()) " + "network fee".localized())
                     .font(.body)
                     .foregroundColor(.gray)
                     .eraseToAnyView()
@@ -161,14 +161,14 @@ struct SubwayPathBuilder {
         
         if detail.isOutbound {
             views.append(
-                Text("from your shielded wallet")
+                Text("from your shielded wallet".localized())
                     .font(.body)
                     .foregroundColor(.gray)
                     .eraseToAnyView()
             )
         } else {
             views.append(
-                Text("to your shielded wallet")
+                Text("to your shielded wallet".localized())
                     .font(.body)
                     .foregroundColor(.gray)
                     .eraseToAnyView()
@@ -246,11 +246,11 @@ extension DetailModel {
     
     func makeStatusText(latestHeight: Int) -> String {
         guard !self.isConfirmed(latestHeight: latestHeight) else {
-            return "Confirmed"
+            return "Confirmed".localized()
         }
         
         guard minedHeight > 0, latestHeight > 0 else {
-            return "Pending confirmation"
+            return "Pending confirmation".localized()
         }
         
         return "\(abs(latestHeight - minedHeight)) \("of 10 Confirmations".localized())"

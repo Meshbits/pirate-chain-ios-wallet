@@ -20,10 +20,10 @@ struct DateAndHeight: View {
                 .foregroundColor(.gray)
             Spacer()
             if height > 0 {
-            Text("from ")
+                Text("from ".localized())
                 .font(.body)
                 .foregroundColor(.gray) +
-            Text("block \(height)")
+                Text("block".localized() + " \(height)")
                 .font(.body)
                 .foregroundColor(.zGray2)
             }
@@ -43,11 +43,11 @@ struct WithAMemoView: View {
             }
             ) {
                 HStack {
-                    Text("with a")
+                    Text("with a".localized())
                         .font(.body)
                         .foregroundColor(.gray)
                     Image("memo_icon")
-                    Text("memo")
+                    Text("memo".localized())
                         .font(.body)
                         .foregroundColor(.white)
                 }

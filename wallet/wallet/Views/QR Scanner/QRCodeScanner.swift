@@ -213,7 +213,7 @@ struct QRCodeScanner: View {
         switch state {
         case .authorized, .undetermined:
 
-            let auth = authorized.navigationBarTitle("Scan QR Code", displayMode: .inline)
+            let auth = authorized.navigationBarTitle("Scan QR Code".localized(), displayMode: .inline)
             
             if viewModel.showCloseButton {
                 return AnyView(
