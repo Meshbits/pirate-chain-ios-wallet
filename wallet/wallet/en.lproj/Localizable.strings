@@ -166,3 +166,37 @@
 "privacyURL" = "https://pirate.black/privacy-policy/";
 "termsURL" = "https://pirate.black/privacy-policy/";
 "supportURL" = "https://pirate.black/privacy-policy/";
+
+
+// Onboarding Screens
+
+// Intro Welcome
+"Welcome to Pirate Wallet" = "Welcome to Pirate Wallet";
+"Reliable, fast & Secure" = "Reliable, fast & Secure";
+"Get Started" = "Get Started";
+
+// Intro Privacy
+
+"Privacy! \n not Piracy" = "Privacy! \n not Piracy";
+"Continue" = "Continue";
+
+// Settings
+
+"Language" = "Language";
+"Private Server Config" = "Private Server Config";
+"Face ID" = "Face ID";
+"Recovery Phrase" = "Recovery Phrase";
+"Change PIN" = "Change PIN";
+"Unlink Device" = "Unlink Device";
+"Privacy Policy" = "Privacy Policy";
+"Terms & Conditions" = "Terms & Conditions";
+"Support" = "Support";
+"Settings" = "Settings";
+"General" = "General";
+"Security" = "Security";
+"About" = "About";
+"Permission Denied" = "Permission Denied";
+"Please enable the Face ID permission in the settings." = "Please enable the Face ID permission in the settings.";
+"Ok" = "Ok";
+
+//.localized()

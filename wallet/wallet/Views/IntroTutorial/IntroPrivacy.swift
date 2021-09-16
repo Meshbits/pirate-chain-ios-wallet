@@ -20,8 +20,8 @@ struct IntroPrivacy: View {
                 ARRRBackground()
                 
                         VStack(alignment: .center, content: {
-                            Text("Privacy! \nnot Piracy").padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
-                            Text("Reliable, fast & Secure").padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 10))
+                            Text("Privacy! \n not Piracy".localized()).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
+                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 10))
                             ZStack{
                                 Image("backgroundglow")
                                     .padding(.trailing,80).padding(.leading,80)
@@ -58,7 +58,7 @@ struct IntroPrivacy: View {
                                 Button(action: {
                                     openPincodeScreem = true
                                 }) {
-                                    BlueButtonView(aTitle: "Continue")
+                                    BlueButtonView(aTitle: "Continue".localized())
                                 }
                             }
                         })

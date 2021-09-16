@@ -34,17 +34,17 @@ enum SettingsDestination: Int {
 
 struct SettingsScreen: View {
     
-    var generalSection = [SettingsRowData(id:0,title:"Language"),SettingsRowData(id:6,title:"Private Server Config")]//,
+    var generalSection = [SettingsRowData(id:0,title:"Language".localized()),SettingsRowData(id:6,title:"Private Server Config".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
-    var securitySection = [SettingsRowData(id:2,title:"Face ID"),
-                           SettingsRowData(id:3,title:"Recovery Phrase"),
-                           SettingsRowData(id:4,title:"Change PIN"),
-                           SettingsRowData(id:5,title:"Unlink Device")]
+    var securitySection = [SettingsRowData(id:2,title:"Face ID".localized()),
+                           SettingsRowData(id:3,title:"Recovery Phrase".localized()),
+                           SettingsRowData(id:4,title:"Change PIN".localized()),
+                           SettingsRowData(id:5,title:"Unlink Device".localized())]
 //    var walletSection = [SettingsRowData(id:6,title:"Private Server Config")] //,
 //                         SettingsRowData(id:7,title:"iCloud backup")]
-    var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy"),
-                        SettingsRowData(id:9,title:"Terms & Conditions"),
-                        SettingsRowData(id:10,title:"Support")]
+    var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),
+                        SettingsRowData(id:9,title:"Terms & Conditions".localized()),
+                        SettingsRowData(id:10,title:"Support".localized())]
     
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
@@ -60,11 +60,11 @@ struct SettingsScreen: View {
                 
                 VStack(alignment: .center, spacing: 10) {
                     Spacer(minLength: 5)
-                    Text("Settings").font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
+                    Text("Settings".localized()).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
                         
                     ScrollView {
 
-                        SettingsSectionHeaderView(aTitle:"General")
+                        SettingsSectionHeaderView(aTitle:"General".localized())
                         VStack {
                             ForEach(generalSection, id: \.id) { settingsRowData in
                                     SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:1)
@@ -77,7 +77,7 @@ struct SettingsScreen: View {
                         }
                         .modifier(SettingsSectionBackgroundModifier())
                         
-                        SettingsSectionHeaderView(aTitle:"Security")
+                        SettingsSectionHeaderView(aTitle:"Security".localized())
                         VStack {
                             ForEach(securitySection, id: \.id) { settingsRowData in
                                 VStack {
@@ -115,7 +115,7 @@ struct SettingsScreen: View {
 //                        }
 //                        .modifier(SettingsSectionBackgroundModifier())
                         
-                        SettingsSectionHeaderView(aTitle:"About")
+                        SettingsSectionHeaderView(aTitle:"About".localized())
                         VStack {
                             ForEach(aboutSection, id: \.id) { settingsRowData in
                                SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:10)
@@ -351,7 +351,7 @@ struct SettingsRowWithToggle: View {
                     }
             }
             .alert(isPresented: $isPermissionDenied) {
-                Alert(title: Text("Permission Denied"), message: Text("Please enable the Face ID permission in the settings."), dismissButton: .default(Text("Ok")))
+                Alert(title: Text("Permission Denied".localized()), message: Text("Please enable the Face ID permission in the settings.".localized()), dismissButton: .default(Text("Ok".localized())))
             }
             
             Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
