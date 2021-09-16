@@ -199,4 +199,50 @@
 "Please enable the Face ID permission in the settings." = "Please enable the Face ID permission in the settings.";
 "Ok" = "Ok";
 
+
+// Unlink Device
+
+"Unlink your wallet from this device" = "Unlink your wallet from this device";
+"Start a new wallet by unlinking your device from the currently installed wallet" = "Start a new wallet by unlinking your device from the currently installed wallet";
+
+
+// Notification Screen
+"Push Notifications" = "Push Notifications";
+"Updates from us" = "Updates from us";
+"Notifications" = "Notifications";
+
+
+// Select Language Screen
+"Select Language" = "Select Language";
+"Cancel" = "Cancel";
+
+// Private Server Config
+
+"Private Server Config" = "Private Server Config";
+"Auto Config" = "Auto Config";
+"Chain lite server " = "Chain lite server ";
+"Port " = "Port ";
+"Invalid Lite Server Address, Reverting it to pirate chain address!" = "Invalid Lite Server Address, Reverting it to pirate chain address!";
+"Invalid Lite Server Port, Reverting it to pirate chain port!" = "Invalid Lite Server Port, Reverting it to pirate chain port!";
+
+
+// Recovery Based Unlink
+
+"Enter Recovery Phrase" = "Enter Recovery Phrase";
+"Please enter your recovery phrase to unlink the wallet from your device" = "Please enter your recovery phrase to unlink the wallet from your device";
+"Unlink" = "Unlink";
+
+
+// Initiate Recovery Key PhraseFlow 
+"Write down your key again" = "Write down your key again";
+"Last written down on " = "Last written down on ";
+
+// Recovery words 
+"Your Recovery Phrase" = "Your Recovery Phrase";
+"Write down the following words in order" = "Write down the following words in order";
+"For security purposes, do not screeshot or email these words." = "For security purposes, do not screeshot or email these words.";
+"Close" = "Close";
+"Next" = "Next";
+
+
 //.localized()

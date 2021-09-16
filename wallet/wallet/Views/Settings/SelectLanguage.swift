@@ -55,7 +55,7 @@ struct SelectLanguage: View {
             VStack(alignment: .center, spacing: 10) {
                 Spacer(minLength: 5)
                 
-                Text("Select Language").frame(height:40).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(Color.zSettingsSectionHeader)
+                Text("Select Language".localized()).frame(height:40).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(Color.zSettingsSectionHeader)
                     
                 ScrollView {
 
@@ -78,7 +78,7 @@ struct SelectLanguage: View {
                     Button {
                         dismissBottomSheet()
                     } label: {
-                        BlueButtonView(aTitle: "Cancel")
+                        BlueButtonView(aTitle: "Cancel".localized())
                     }
 
                 }

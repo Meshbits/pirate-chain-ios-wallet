@@ -10,8 +10,8 @@ import SwiftUI
 
 struct NotificationScreen: View {
     
-    var generalSection = [SettingsRowData(id:0,title:"Push Notifications"),
-                          SettingsRowData(id:1,title:"Updates from us")]
+    var generalSection = [SettingsRowData(id:0,title:"Push Notifications".localized()),
+                          SettingsRowData(id:1,title:"Updates from us".localized())]
     
     @State var mSelectedSettingsRowData: SettingsRowData?
     
@@ -41,7 +41,7 @@ struct NotificationScreen: View {
            
         }
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("Notifications")
+        .navigationTitle("Notifications".localized())
             .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()

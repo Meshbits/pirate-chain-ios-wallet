@@ -35,11 +35,11 @@ struct PrivateServerConfig: View {
           
             VStack(alignment: .center, spacing: 5){
 
-                Text("Private Server Config").foregroundColor(.gray).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
+                Text("Private Server Config".localized()).foregroundColor(.gray).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
                 
                 VStack(alignment: .leading, spacing: 10) {
                      HStack {
-                         Text("Auto Config").foregroundColor(.gray).font(.barlowRegular(size: 14)).multilineTextAlignment(.center).foregroundColor(.white)
+                        Text("Auto Config".localized()).foregroundColor(.gray).font(.barlowRegular(size: 14)).multilineTextAlignment(.center).foregroundColor(.white)
                          
                          Toggle("", isOn: $isAutoConfigEnabled)
                             .toggleStyle(ColoredToggleStyle()).labelsHidden().onChange(of: isAutoConfigEnabled, perform: { isEnabled  in
@@ -58,7 +58,7 @@ struct PrivateServerConfig: View {
                      Divider().foregroundColor(.white).frame(height:2).padding()
                      
                      VStack(alignment: .leading, spacing: nil, content: {
-                         Text("Chain lite server ").font(.barlowRegular(size: 14)).foregroundColor(.gray).multilineTextAlignment(.leading)
+                        Text("Chain lite server ".localized()).font(.barlowRegular(size: 14)).foregroundColor(.gray).multilineTextAlignment(.leading)
                         
                         TextField("".localized(), text: $lightServerString, onEditingChanged: { (changed) in
                                 isUserEditingAddress = true
@@ -70,7 +70,7 @@ struct PrivateServerConfig: View {
                         .foregroundColor(isAutoConfigEnabled ? .gray : .white)
                         .modifier(BackgroundPlaceholderModifier())
                         
-                       Text("Port ").foregroundColor(.gray).multilineTextAlignment(.leading).font(.barlowRegular(size: 14))
+                        Text("Port ".localized()).foregroundColor(.gray).multilineTextAlignment(.leading).font(.barlowRegular(size: 14))
                                      
                        TextField("".localized(), text: $lightPortString, onEditingChanged: { (changed) in
                            isUserEditingPort = true

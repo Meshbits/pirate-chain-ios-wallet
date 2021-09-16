@@ -25,7 +25,7 @@ final class RecoveryViewModel: ObservableObject {
         
         mCompletePhrase = mSeedPhrase.components(separatedBy: " ")
         assignElementsOnUI()
-        print(mCompletePhrase)
+//        print(mCompletePhrase)
     }
     
     func assignElementsOnUI(){
@@ -106,8 +106,8 @@ struct RecoveryBasedUnlink: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Enter Recovery Phrase").padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,40)
-                Text("Please enter your recovery phrase to unlink the wallet from your device").padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
+                Text("Enter Recovery Phrase".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,40)
+                Text("Please enter your recovery phrase to unlink the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
                 
                 HStack(spacing: nil, content: {
                    
@@ -150,7 +150,7 @@ struct RecoveryBasedUnlink: View {
                 Spacer(minLength: 10)
                 Spacer(minLength: 10)
                 
-                BlueButtonView(aTitle: "Unlink").onTapGesture {
+                BlueButtonView(aTitle: "Unlink".localized()).onTapGesture {
                     if self.viewModel.firstWord.isEmpty || self.viewModel.secondWord.isEmpty || self.viewModel.thirdWord.isEmpty {
                         self.isConfirmButtonEnabled = false
                     }else{
@@ -161,14 +161,14 @@ struct RecoveryBasedUnlink: View {
                     
                 }.padding(.bottom,10)
                 .alert(isPresented: $viewModel.mWordsVerificationCompleted) {
-                    Alert(title: Text("nuke_alerttitle"),
-                          message: Text("nuke_alertmessage"),
+                    Alert(title: Text("nuke_alerttitle".localized()),
+                          message: Text("nuke_alertmessage".localized()),
                           primaryButton: .default(
-                            Text("nuke_alertcancel")
+                            Text("nuke_alertcancel".localized())
                             ,action: { }
                         ),
                           secondaryButton: .destructive(
-                            Text("nuke_alertconfirm"),
+                            Text("nuke_alertconfirm".localized()),
                             action: {
                                 presentationMode.wrappedValue.dismiss()
                                 UserSettings.shared.removeAllSettings()
