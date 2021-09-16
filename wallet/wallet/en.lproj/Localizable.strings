@@ -245,4 +245,62 @@
 "Next" = "Next";
 
 
+// Generate Key Phrase
+"Generate your private recovery phrase" = "Generate your private recovery phrase";
+"The key is required to recover your money if you upgrade or lose your phone" = "The key is required to recover your money if you upgrade or lose your phone";
+
+// How it works
+
+"How it works - Step 1" = "How it works - Step 1";
+"Write down your key" = "Write down your key";
+"Write down your key on paper and confirm it. Screenshots are not recommended for security reasons." = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons.";
+
+"How it works - Step 2" = "How it works - Step 2";
+"Keep it secure" = "Keep it secure";
+"Store your key in a secure location. This is the only way to recover your wallet. Pirate Wallet does not keep a copy." = "Store your key in a secure location. This is the only way to recover your wallet. Pirate Wallet does not keep a copy.";
+
+"How it works - Step 3" = "How it works - Step 3";
+"Store, send or receive" = "Store, send or receive";
+"Store, send or receive knowing that your funds are protected by the best security and privacy in the business" = "Store, send or receive knowing that your funds are protected by the best security and privacy in the business";
+
+
+"Next" = "Next";
+
+
+// Words Verification Screen
+
+"Confirm Recovery Phrase" = "Confirm Recovery Phrase";
+"Almost done! Enter the following words from your recovery phrase" = "Almost done! Enter the following words from your recovery phrase";
+"Confirm" = "Confirm";
+"Congratulation! You completed your recovery phrase setup" = "Congratulation! You completed your recovery phrase setup";
+"You’re all set to deposit, receive, and store crypto in your Pirate wallet" = "You’re all set to deposit, receive, and store crypto in your Pirate wallet";
+"Done" = "Done";
+
+// Authenticate Face ID
+"Authenticate Face ID" = "Authenticate Face ID";
+"Login quickly using your Face ID" = "Login quickly using your Face ID";
+
+"Skip" = "Skip";
+"Allow" = "Allow";
+
+// Congratulations
+
+"Congratulation! \nFace ID setup successfully" = "Congratulation! \nFace ID setup successfully";
+"You have successfuly enabled Face ID based authentication. \n\nNow securely login using your Face ID" = "You have successfuly enabled Face ID based authentication. \n\nNow securely login using your Face ID";
+"Login" = "Login";
+
+
+// Create new wallet
+
+"could not create new wallet:" = "could not create new wallet:";
+"Existing keys found!" = "Existing keys found!";
+"it appears that this device already has keys stored on it. What do you want to do?" = "it appears that this device already has keys stored on it. What do you want to do?";
+"Restore existing keys" = "Restore existing keys";
+
+"Discard them and continue" = "Discard them and continue";
+"Error Initializing Wallet" = "Error Initializing Wallet";
+"There was a problem initializing the wallet" = "There was a problem initializing the wallet";
+
+
+
 //.localized()

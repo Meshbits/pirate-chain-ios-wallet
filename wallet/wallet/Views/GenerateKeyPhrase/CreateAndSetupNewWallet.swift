@@ -72,7 +72,7 @@ struct CreateAndSetupNewWallet: View {
     }
     
     func fail(_ error: Error) {
-        let message = "could not create new wallet:"
+        let message = "could not create new wallet:".localized()
         logger.error("\(message) \(error)")
         tracker.track(.error(severity: .critical),
                       properties: [
@@ -85,9 +85,9 @@ struct CreateAndSetupNewWallet: View {
     }
     
     func existingCredentialsFound(originalDestination: Destinations) -> Alert {
-        Alert(title: Text("Existing keys found!"),
-              message: Text("it appears that this device already has keys stored on it. What do you want to do?"),
-              primaryButton: .default(Text("Restore existing keys"),
+        Alert(title: Text("Existing keys found!".localized()),
+              message: Text("it appears that this device already has keys stored on it. What do you want to do?".localized()),
+              primaryButton: .default(Text("Restore existing keys".localized()),
                                       action: {
                                         do {
                                             try ZECCWalletEnvironment.shared.initialize()
@@ -98,7 +98,7 @@ struct CreateAndSetupNewWallet: View {
                                             }
                                         }
                                       }),
-              secondaryButton: .destructive(Text("Discard them and continue"),
+              secondaryButton: .destructive(Text("Discard them and continue".localized()),
                                             action: {
                                                 
                                                 ZECCWalletEnvironment.shared.nuke(abortApplication: false)
@@ -126,14 +126,14 @@ struct CreateAndSetupNewWallet: View {
     
     func defaultAlert(_ error: Error? = nil) -> Alert {
         guard let e = error else {
-            return Alert(title: Text("Error Initializing Wallet"),
+            return Alert(title: Text("Error Initializing Wallet".localized()),
                  message: Text("There was a problem initializing the wallet"),
-                 dismissButton: .default(Text("button_close")))
+                 dismissButton: .default(Text("button_close".localized())))
         }
         
         return Alert(title: Text("Error"),
                      message: Text(mapToUserFacingError(ZECCWalletEnvironment.mapError(error: e)).message),
-                     dismissButton: .default(Text("button_close")))
+                     dismissButton: .default(Text("button_close".localized())))
         
     }
 }

@@ -36,9 +36,9 @@ enum ScreenSteps: Int {
 
 final class HowItWorksViewModel: ObservableObject {
     
-    @Published var mScreenTitle = "How it works - Step 1"
-    @Published var mDescriptionTitle = "Write down your key"
-    @Published var mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons."
+    @Published var mScreenTitle = "How it works - Step 1".localized()
+    @Published var mDescriptionTitle = "Write down your key".localized()
+    @Published var mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons.".localized()
     @Published var mOpenGenerateWordsScreen = false
     @Published var destination: ScreenSteps = ScreenSteps.step_one
     
@@ -50,19 +50,19 @@ final class HowItWorksViewModel: ObservableObject {
         
         switch (destination) {
         case .step_one:
-            mScreenTitle = "How it works - Step 1"
-            mDescriptionTitle = "Write down your key"
-            mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons."
+            mScreenTitle = "How it works - Step 1".localized()
+            mDescriptionTitle = "Write down your key".localized()
+            mDescriptionSubTitle = "Write down your key on paper and confirm it. Screenshots are not recommended for security reasons.".localized()
             break
         case .step_two:
-            mScreenTitle = "How it works - Step 2"
-            mDescriptionTitle = "Keep it secure"
-            mDescriptionSubTitle = "Store your key in a secure location. This is the only way to recover your wallet. Pirate Wallet does not keep a copy."
+            mScreenTitle = "How it works - Step 2".localized()
+            mDescriptionTitle = "Keep it secure".localized()
+            mDescriptionSubTitle = "Store your key in a secure location. This is the only way to recover your wallet. Pirate Wallet does not keep a copy.".localized()
             break
         case .step_three:
-            mScreenTitle = "How it works - Step 3"
-            mDescriptionTitle = "Store, send or receive"
-            mDescriptionSubTitle = "Store, send or receive knowing that your funds are protected by the best security and privacy in the business"
+            mScreenTitle = "How it works - Step 3".localized()
+            mDescriptionTitle = "Store, send or receive".localized()
+            mDescriptionSubTitle = "Store, send or receive knowing that your funds are protected by the best security and privacy in the business".localized()
             break
         case .move_next:
             mOpenGenerateWordsScreen = true
@@ -92,7 +92,7 @@ struct HowItWorks: View {
                 Button {
                     self.viewModel.updateLayoutTextOrMoveToNextScreen()
                 } label: {
-                    BlueButtonView(aTitle: "Continue")
+                    BlueButtonView(aTitle: "Continue".localized())
                 }
                 
                 
