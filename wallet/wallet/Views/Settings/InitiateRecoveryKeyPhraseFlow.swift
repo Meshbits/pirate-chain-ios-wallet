@@ -16,11 +16,11 @@ struct InitiateRecoveryKeyPhraseFlow: View {
     
     var body: some View {
         ZStack{
-                ARRRBackground()
+//            ARRRBackground().edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, content: {
                     Spacer(minLength: 10)
                     Text("Write down your key again".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
-                    Text("Last written down on ".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 10))
+                    Text("Last written down on ".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 10)).hidden()
                     Spacer(minLength: 10)
                     Image("hook")
                         .padding(.trailing,80).padding(.leading,80)
@@ -46,22 +46,24 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                 })
             
             
-            }.edgesIgnoringSafeArea(.all)
-        .navigationBarBackButtonHidden(true)
-        .navigationTitle("")
-            .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading:  Button(action: {
-            presentationMode.wrappedValue.dismiss()
-        }) {
-            VStack(alignment: .leading) {
-                ZStack{
-                    Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                        .barlowRegular(size: Device.isLarge ? 26 : 18)
-                    ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
-                }
-            }.padding(.leading,-20).padding(.top,10)
+            }
+        .navigationBarHidden(true)
+        .zcashNavigationBar(leadingItem: {
+            ARRRBackButton(action: {
+                presentationMode.wrappedValue.dismiss()
+            }).frame(width: 30, height: 30)
+            .padding(.top,10)
+            
+        }, headerItem: {
+            HStack{
+                EmptyView()
+            }
+        }, trailingItem: {
+            HStack{
+                EmptyView()
+            }
         })
+        
         .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
                    LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validateAndDismiss, isNewWallet: true)).environmentObject(self.appEnvironment)
         }

@@ -312,6 +312,7 @@ struct SettingsRowWithToggle: View {
                 Text(mCurrentRowData.title).font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
                                 .frame(width: 200, height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
+                    .padding(.leading,8)
                     .padding()
                 
                 
