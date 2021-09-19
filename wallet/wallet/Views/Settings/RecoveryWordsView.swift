@@ -24,6 +24,7 @@ final class RecoveryWordsViewModel: ObservableObject {
         
         do {
             randomKeyPhrase =  try MnemonicSeedProvider.default.savedMnemonicWords()
+            print(randomKeyPhrase)
             
             mWordTitle = randomKeyPhrase![0]
             

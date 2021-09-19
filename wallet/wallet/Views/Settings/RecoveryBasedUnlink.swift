@@ -104,7 +104,7 @@ struct RecoveryBasedUnlink: View {
     var body: some View {
 //        NavigationView {
         ZStack{
-            ARRRBackground().edgesIgnoringSafeArea(.all)
+//            ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
                 Text("Enter Recovery Phrase".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,40)
                 Text("Please enter your recovery phrase to unlink the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
@@ -171,14 +171,10 @@ struct RecoveryBasedUnlink: View {
                             Text("nuke_alertconfirm".localized()),
                             action: {
                                 presentationMode.wrappedValue.dismiss()
-                                UserSettings.shared.removeAllSettings()
-                                self.appEnvironment.nuke(abortApplication: true)
-//                                            try! self.appEnvironment.deleteWalletFiles()
-//                                            presentationMode.wrappedValue.dismiss()
-                                ZECCWalletEnvironment.shared.state = .uninitialized
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                      NotificationCenter.default.post(name: NSNotification.Name("MoveToFirstViewLayout"), object: nil)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    NotificationCenter.default.post(name: NSNotification.Name("NukedUser"), object: nil)
                                 }
+                                
                           }
                         )
                     )

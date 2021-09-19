@@ -14,10 +14,10 @@ struct UnlinkDevice: View {
     @State var goToRecoveryPhrase = false
     var body: some View {
                 ZStack{
-                        ARRRBackground()
+//                    ARRRBackground().edgesIgnoringSafeArea(.all)
                         VStack(alignment: .center, content: {
                             Spacer(minLength: 10)
-                            Text("Unlink your wallet from this device".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
+                            Text("Unlink your wallet from this device".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,40)
                             Text("Start a new wallet by unlinking your device from the currently installed wallet".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 10))
                             Spacer(minLength: 10)
                             Image("bombIcon")
@@ -45,21 +45,35 @@ struct UnlinkDevice: View {
                     
                     
                     }.edgesIgnoringSafeArea(.all)
-                .navigationBarBackButtonHidden(true)
-                .navigationTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading:  Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    VStack(alignment: .leading) {
-                        ZStack{
-                            Image("passcodenumericbg")
-                            Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                                .barlowRegular(size: Device.isLarge ? 26 : 18)
-                            ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
-                        }
-                    }.padding(.leading,-20).padding(.top,10)
+                .navigationBarHidden(true)
+                .zcashNavigationBar(leadingItem: {
+                    ARRRBackButton(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }).frame(width: 30, height: 30)
+                    .padding(.top,10)
+                    .padding(.leading,10)
+                    
+                }, headerItem: {
+                    HStack{
+                        EmptyView()
+                    }
+                }, trailingItem: {
+                    HStack{
+                        EmptyView()
+                    }
                 })
+                .onAppear(){
+                    NotificationCenter.default.addObserver(forName: NSNotification.Name("NukedUser"), object: nil, queue: .main) { (_) in
+                        UserSettings.shared.removeAllSettings()
+                        self.appEnvironment.nuke(abortApplication: true)
+    //                                            try! self.appEnvironment.deleteWalletFiles()
+    //                                            presentationMode.wrappedValue.dismiss()
+                        ZECCWalletEnvironment.shared.state = .uninitialized
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                              NotificationCenter.default.post(name: NSNotification.Name("MoveToFirstViewLayout"), object: nil)
+                        }
+                    }
+                }
     }
 }
 
