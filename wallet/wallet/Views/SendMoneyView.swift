@@ -115,7 +115,7 @@ struct SendMoneyView: View {
                 }
                 
                 HStack{
-                    Text("Memo").font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
+                    Text("Memo".localized()).font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
@@ -137,7 +137,7 @@ struct SendMoneyView: View {
             
                 HStack{
                     Spacer()
-                    Text("Processing fee: " + "\(ZcashSDK.defaultFee().asHumanReadableZecBalance().toZecAmount())" + " ARRR").font(.barlowRegular(size: 14)).foregroundColor(Color.textTitleColor)
+                    Text("Processing fee: ".localized() + "\(ZcashSDK.defaultFee().asHumanReadableZecBalance().toZecAmount())" + " ARRR").font(.barlowRegular(size: 14)).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .truncationMode(.middle)
@@ -148,7 +148,7 @@ struct SendMoneyView: View {
                     .frame(alignment: .center)
                     .padding(.horizontal, 10)
                 
-                BlueButtonView(aTitle: "Send").onTapGesture {
+                BlueButtonView(aTitle: "Send".localized()).onTapGesture {
                     isSendTapped = true
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
@@ -174,7 +174,7 @@ struct SendMoneyView: View {
                 EmptyView()
              }, headerItem: {
                  HStack{
-                     Text("Send Money")
+                     Text("Send Money".localized())
                          .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
                          .frame(alignment: Alignment.center)
                  }

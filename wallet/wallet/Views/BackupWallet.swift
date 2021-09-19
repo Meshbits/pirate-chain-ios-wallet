@@ -28,7 +28,7 @@ struct BackupWallet: View {
                 VStack(spacing: itemSpacing){
                     ZcashLogo(fillStyle: LinearGradient.amberGradient)
                     
-                    Text("feedback_walletbackupstatus")
+                    Text("feedback_walletbackupstatus".localized())
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                         .font(.system(size: 18))
@@ -46,7 +46,7 @@ struct BackupWallet: View {
                 .padding(0)
                 Spacer()
                 NavigationLink(destination: SeedBackup(proceedsToHome: true).environmentObject(appEnvironment)){
-                    Text("button_backup")
+                    Text("button_backup".localized())
                         .font(.system(size: 20, weight: .regular, design: .default))
                         .foregroundColor(.black)
                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: LinearGradient.zButtonGradient)))
@@ -54,7 +54,7 @@ struct BackupWallet: View {
                 }.isDetailLink(false)
                 
                 NavigationLink(destination:  FundsAtRisk().environmentObject(appEnvironment)) {
-                    Text("button_skip")
+                    Text("button_skip".localized())
                         .foregroundColor(Color.zDarkGray3)
                         .font(.system(size: 20))
                         .frame(height: buttonHeight)

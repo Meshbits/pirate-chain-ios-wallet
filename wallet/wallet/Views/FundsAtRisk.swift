@@ -24,7 +24,7 @@ struct FundsAtRisk: View {
             ZcashBackground()
             VStack(spacing: 24) {
                 HStack {
-                    Text("seed_reminder")
+                    Text("seed_reminder".localized())
                         .foregroundColor(.white)
                         .font(.title)
                         .frame(alignment: .leading)
@@ -38,7 +38,7 @@ struct FundsAtRisk: View {
                 Spacer()
                 
                 NavigationLink(destination: SeedBackup(proceedsToHome: true).environmentObject(appEnvironment)) {
-                    Text("button_backup")
+                    Text("button_backup".localized())
                         .foregroundColor(.black)
                         .font(.system(size: 20, weight: .regular, design: .default))
                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: LinearGradient.zButtonGradient)))

@@ -12,9 +12,9 @@
 "expecting " = "expecting";
 "Create new Wallet" = "Create new Wallet";
 "button_backup" = "Backup Wallet";
-"Press and hold\nto send ZEC" = "Press and hold\nto send ZEC";
+"Press and hold\nto send ARRR" = "Press and hold\nto send ARRR";
 
-"Tap\nto send ZEC" = "Tap\nto send ZEC";
+"Tap\nto send ARRR" = "Tap\nto send ARRR";
 "Enter Shielded Address" = "Enter Shielded Address";
 "Error" = "Error";
 "an error ocurred" = "an error ocurred";

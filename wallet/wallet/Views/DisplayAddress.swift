@@ -88,7 +88,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
             Spacer()
             
             
-            GrayButtonView(aTitle: "Request an Amount").onTapGesture {
+            GrayButtonView(aTitle: "Request an Amount".localized()).onTapGesture {
                 openRequestMoney = true
             }
             
@@ -108,7 +108,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
                 tracker.track(.tap(action: .receiveScan), properties: [:])
                 self.isShareAddressShown = true
             }) {
-                BlueButtonView(aTitle: "Share")
+                BlueButtonView(aTitle: "Share".localized())
             }
         }.padding(30)
             .sheet(isPresented: self.$isShareAddressShown) {

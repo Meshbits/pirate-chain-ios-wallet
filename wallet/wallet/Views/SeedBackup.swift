@@ -24,7 +24,7 @@ struct SeedBackup: View {
             phrase = try SeedManager.default.exportPhrase()
             
         } catch {
-            return "there was an error retrieving your seed: \(error)"
+            return "there was an error retrieving your seed:".localized() + "\(error)"
         }
         
         do {
@@ -113,7 +113,7 @@ struct SeedBackup: View {
                     }
                     PasteboardAlertHelper.shared.copyToPasteBoard(value: self.copyText, notify: "send_onclipboard".localized())
                 }) {
-                    Text("button_copytoclipboard")
+                    Text("button_copytoclipboard".localized())
                         .font(.system(size: 20))
                         .foregroundColor(.white)
                         .frame(height: buttonHeight)
@@ -126,7 +126,7 @@ struct SeedBackup: View {
                                         //.environmentObject(appEnvironment)
 //                                        Home().environmentObject(HomeViewModel())
                                     )) {
-                        Text("button_done")
+                        Text("button_done".localized())
                             .foregroundColor(.black)
                             .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: LinearGradient.zButtonGradient)))
                             .frame(height: buttonHeight)
@@ -139,9 +139,9 @@ struct SeedBackup: View {
             }
         }
         .alert(isPresented: self.$showError) {
-            Alert(title: Text("Problem Retrieving your seed"),
-                  message: Text("we are unable to display your seed phrase. close the app and retry this operation"),
-                  dismissButton: .default(Text("button_close")))
+            Alert(title: Text("Problem Retrieving your seed".localized()),
+                  message: Text("we are unable to display your seed phrase. close the app and retry this operation".localized()),
+                  dismissButton: .default(Text("button_close".localized())))
         }
         .onAppear {
             tracker.track(.screen(screen: .backup), properties: [:])

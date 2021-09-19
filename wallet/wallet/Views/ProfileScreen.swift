@@ -71,7 +71,7 @@ struct ProfileScreen: View {
                             FeedbackForm(isActive: $destination)
                         ), tag: Destination.feedback, selection: $destination) {
                                         
-                                        Text("button_feedback")
+                            Text("button_feedback".localized())
                                             .foregroundColor(.black)
                                             .zcashButtonBackground(shape: .roundedCorners(fillStyle: .solid(color: Color.zYellow)))
                                             .frame(height: ScreenConstants.buttonHeight)
@@ -83,7 +83,7 @@ struct ProfileScreen: View {
                                 .environmentObject(self.appEnvironment)
                         ), tag: Destination.seedBackup, selection: $destination
                         ) {
-                            Text("button_backup")
+                            Text("button_backup".localized())
                                 .foregroundColor(.white)
                                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .white, lineWidth: 1)))
                                 .frame(height: ScreenConstants.buttonHeight)
@@ -150,8 +150,8 @@ struct ProfileScreen: View {
             }
             .actionSheet(isPresented: $showingSheet) {
                        ActionSheet(
-                           title: Text("Do you want to re-scan your wallet?"),
-                           message: Text("roll back your local data and sync it again"),
+                           title: Text("Do you want to re-scan your wallet?".localized()),
+                           message: Text("roll back your local data and sync it again".localized()),
                         buttons: [
                             .destructive(Text("Wipe"), action: {
                                 do {

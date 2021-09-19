@@ -35,7 +35,7 @@ final class HomeViewModel: ObservableObject {
     
     
     var isFirstAppear = true
-    let genericErrorMessage = "An error ocurred, please check your device logs"
+    let genericErrorMessage = "An error ocurred, please check your device logs".localized()
     var sendZecAmount: Double {
         zecAmountFormatter.number(from: sendZecAmountText)?.doubleValue ?? 0.0
     }
@@ -212,13 +212,13 @@ final class HomeViewModel: ObservableObject {
         }
         
         guard let error = lastError else {
-            return Alert(title: Text("Error"), message: Text(genericErrorMessage), dismissButton: .default(Text("button_close"),action: errorAction))
+            return Alert(title: Text("Error".localized()), message: Text(genericErrorMessage), dismissButton: .default(Text("button_close".localized()),action: errorAction))
         }
         
         
         let defaultAlert = Alert(title: Text(error.title),
                                 message: Text(error.message),
-                                dismissButton: .default(Text("button_close"),
+                                dismissButton: .default(Text("button_close".localized()),
                                                     action: errorAction))
         switch error {
         case .synchronizerError(let canRetry):
@@ -226,8 +226,8 @@ final class HomeViewModel: ObservableObject {
                 return Alert(
                         title: Text(error.title),
                         message: Text(error.message),
-                        primaryButton: .default(Text("button_close"),action: errorAction),
-                        secondaryButton: .default(Text("Retry"),
+                        primaryButton: .default(Text("button_close".localized()),action: errorAction),
+                        secondaryButton: .default(Text("Retry".localized()),
                                                      action: {
                                                         self.clearError()
                                                         try? ZECCWalletEnvironment.shared.synchronizer.start(retry: true)
@@ -285,21 +285,21 @@ struct Home: View {
             case .unprepared:
                 return ""
             case .downloading(let progress):
-                return "Downloading \(Int(progress.progress * 100))%"
+                return "Downloading".localized() + " \(Int(progress.progress * 100))%"
             case .validating:
-                return "Validating"
+                return "Validating".localized()
             case .scanning(let scanProgress):
-                return "Scan \(Int(scanProgress.progress * 100))%"
+                return "Scan".localized() + " \(Int(scanProgress.progress * 100))%"
             case .enhancing(let enhanceProgress):
-                return "Enhance \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)"
+                return "Enhance".localized() + " \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)"
             case .fetching:
-                return "Fetching"
+                return "Fetching".localized()
             case .stopped:
-                return "Stopped"
+                return "Stopped".localized()
             case .disconnected:
-                return "Offline"
+                return "Offline".localized()
             case .synced:
-                return "Synced 100%"
+                return "Synced 100%".localized()
         }
     }
     
@@ -310,42 +310,42 @@ struct Home: View {
             Button(action: {
                 self.viewModel.retrySyncing()
             }, label: {
-                Text("Error")
+                Text("Error".localized())
                     .foregroundColor(.red)
                     .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .red, lineWidth: 2))).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
             })
                 
                 
         case .unprepared:
-            Text("Unprepared")
+            Text("Unprepared".localized())
                 .foregroundColor(.red)
                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .zGray2, lineWidth: 2)))
                 
         case .downloading(let progress):
             SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
-                Text("Downloading \(Int(progress.progress * 100))%")
+                Text("Downloading".localized() + " \(Int(progress.progress * 100))%")
                     .foregroundColor(.white).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
             }
                 
         case .validating:
-            Text("Validating")
+            Text("Validating".localized())
                 .font(.system(size: 15)).italic()
                 .foregroundColor(.black)
                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: .zButtonGradient))).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
         case .scanning(let scanProgress):
             SyncingButton(animationType: .frameProgress(startFrame: 101, endFrame: 187,  progress: scanProgress.progress, loop: false)) {
-                Text("Scanning \(Int(scanProgress.progress * 100 ))%")
+                Text("Scanning".localized() + " \(Int(scanProgress.progress * 100 ))%")
                     .foregroundColor(.white).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
             }
         case .enhancing(let enhanceProgress):
             SyncingButton(animationType: .circularLoop) {
-                Text("Enhancing \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)")
+                Text("Enhancing".localized() + " \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)")
                     .foregroundColor(.white).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
             }
                
         case .fetching:
             SyncingButton(animationType: .circularLoop) {
-                Text("Fetching")
+                Text("Fetching".localized())
                     .foregroundColor(.white).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
             }
             
@@ -353,7 +353,7 @@ struct Home: View {
             Button(action: {
                 self.viewModel.retrySyncing()
             }, label: {
-                Text("Stopped")
+                Text("Stopped".localized())
                     .font(.system(size: 15)).italic()
                     .foregroundColor(.black)
                     .zcashButtonBackground(shape: .roundedCorners(fillStyle: .solid(color: .zLightGray))).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
@@ -363,7 +363,7 @@ struct Home: View {
             Button(action: {
                 self.viewModel.retrySyncing()
             }, label: {
-                Text("Offline")
+                Text("Offline".localized())
                     .font(.system(size: 15)).italic()
                     .foregroundColor(.black)
                     .zcashButtonBackground(shape: .roundedCorners(fillStyle: .solid(color: .zLightGray))).font(.barlowRegular(size: Device.isLarge ? 22 : 14))
@@ -435,7 +435,7 @@ struct Home: View {
             tracker.track(.tap(action: .homeSend), properties: [:])
             self.startSendFlow()
         }) {
-            Text("button_send")
+            Text("button_send".localized())
                 .foregroundColor(.black)
                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .solid(color: Color.zYellow)))
                 .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
@@ -464,7 +464,7 @@ struct Home: View {
         Button(action: {
             self.viewModel.showHistory = true
         }, label: {
-            Text("button_wallethistory")
+            Text("button_wallethistory".localized())
                 .foregroundColor(.white)
                 .font(.barlowRegular(size: Device.isLarge ? 16 : 10))
                 .opacity(0.6)
@@ -553,7 +553,7 @@ struct Home: View {
               
                 if self.viewModel.getSortedItems().count > 0 {
                     
-                    Text("Recent Transfers")
+                    Text("Recent Transfers".localized())
                         .multilineTextAlignment(.leading)
                         .font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
                         .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(10).padding(.leading, 10)
@@ -585,7 +585,7 @@ struct Home: View {
                     )
                     .padding()
                 }else{
-                    Text("No Recent transfers").font(.barlowRegular(size: 30)).foregroundColor(Color.zSettingsSectionHeader)
+                    Text("No Recent transfers".localized()).font(.barlowRegular(size: 30)).foregroundColor(Color.zSettingsSectionHeader)
                 }
                 
                 
@@ -602,11 +602,11 @@ struct Home: View {
                 
                 HStack(alignment: .center, spacing: 2, content: {
                     
-                    SendRecieveButtonView(title: "Receive").onTapGesture {
+                    SendRecieveButtonView(title: "Receive".localized()).onTapGesture {
                         self.viewModel.destination = .receiveFunds
                     }
                     
-                    SendRecieveButtonView(title: "Send")
+                    SendRecieveButtonView(title: "Send".localized())
                         .onTapGesture {
                             // Send tapped
                             if(self.viewModel.syncStatus.isSynced){
@@ -705,12 +705,12 @@ struct Home: View {
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
                    switch output {
                    case .failed(_), .userFailed:
-                       print("SOME ERROR OCCURRED")
+//                       print("SOME ERROR OCCURRED")
                         UserSettings.shared.isBiometricDisabled = true
                         NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
 
                    case .success:
-                        print("SUCCESS ON HOME")
+//                        print("SUCCESS ON HOME")
                        
                         if mCurrentTab == HomeTabView.Tab.home {
                             UserSettings.shared.biometricInAppStatus = true
@@ -723,7 +723,7 @@ struct Home: View {
                         }
                         
                    case .userDeclined:
-                       print("DECLINED")
+//                       print("DECLINED")
                         UserSettings.shared.biometricInAppStatus = false
                         UserSettings.shared.isBiometricDisabled = true
                         NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)

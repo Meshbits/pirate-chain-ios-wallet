@@ -26,7 +26,7 @@ struct NukeWarning: View {
             ZcashBackground()
             VStack(spacing: 24) {
                 HStack {
-                    Text("nuke_title")
+                    Text("nuke_title".localized())
                         .foregroundColor(.white)
                         .font(.title)
                         .frame(alignment: .leading)
@@ -43,7 +43,7 @@ struct NukeWarning: View {
                                                 .environmentObject(appEnvironment)
                                                 .navigationBarHidden(false)
                                                 .navigationBarTitle("", displayMode: .inline)) {
-                    Text("nuke_backupbutton")
+                    Text("nuke_backupbutton".localized())
                         .foregroundColor(.black)
                         .font(.system(size: 20, weight: .regular, design: .default))
                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: LinearGradient.zButtonGradient)))
@@ -53,19 +53,19 @@ struct NukeWarning: View {
                 Button(action: {
                     self.showNukeAlert = true
                 }) {
-                    Text("nuke_nukeButton")
+                    Text("nuke_nukeButton".localized())
                         .foregroundColor(.red)
                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .red, lineWidth: 2)))
                         .frame(height: self.buttonHeight)
                 }.alert(isPresented: $showNukeAlert) {
-                    Alert(title: Text("nuke_alerttitle"),
-                          message: Text("nuke_alertmessage"),
+                    Alert(title: Text("nuke_alerttitle".localized()),
+                          message: Text("nuke_alertmessage".localized()),
                           primaryButton: .default(
-                            Text("nuke_alertcancel")
+                            Text("nuke_alertcancel".localized())
                             ,action: { self.showNukeAlert = false}
                         ),
                           secondaryButton: .destructive(
-                            Text("nuke_alertconfirm"),
+                            Text("nuke_alertconfirm".localized()),
                             action: {
                                 self.appEnvironment.nuke(abortApplication: true)
                           }

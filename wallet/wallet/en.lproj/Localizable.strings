@@ -13,9 +13,9 @@
 "Create new Wallet" = "Create new Wallet";
 "button_done" = "Done";
 "button_backup" = "Backup Wallet";
-"Press and hold\nto send ZEC" = "Press and hold\nto send ARRR";
+"Press and hold\nto send ARRR" = "Press and hold\nto send ARRR";
 "Add Memo Here" = "Add Memo Here";
-"Tap\nto send ZEC" = "Tap\nto send ARRR";
+"Tap\nto send ARRR" = "Tap\nto send ARRR";
 "Enter Shielded Address" = "Enter Shielded Address";
 "Error" = "Error";
 "an error ocurred" = "an error ocurred";
@@ -51,9 +51,9 @@
 "label_to" = "To";
 "label_charactercount" = "%@ chars";
 "from %@" = "from %@";
-"You Have %@ sendable ZEC" = "You Have %@ sendable ARRR";
-"%@ sendable ZEC. You don't have sufficient funds to cover the amount + Miner Fee of %@ ZEC" = "%@ sendable ARRR. You don't have sufficient funds to cover the amount + Miner Fee of %@ ARRR";
-"You don't have any sendable ZEC yet" = "You don't have any sendable ARRR yet";
+"You Have %@ sendable ARRR" = "You Have %@ sendable ARRR";
+"%@ sendable ARRR. You don't have sufficient funds to cover the amount + Miner Fee of %@ ARRR" = "%@ sendable ARRR. You don't have sufficient funds to cover the amount + Miner Fee of %@ ARRR";
+"You don't have any sendable ARRR yet" = "You don't have any sendable ARRR yet";
 "send_securityauth" = "Authenticate to send";
 "label_add_memo" = "Add Memo (optional)";
 
@@ -120,10 +120,11 @@
 "scan_cameraunallowed" = "We don't have permission to access your camera";
 "scan_cameraunallowed2" = "Allow camera access in your device settings";
 "scan_cameraunavaliable" = "Camera Unavailable";
-"scan_invalidQR" = "This QR Code does not contain a Zcash valid address!";
+"scan_invalidQR" = "This QR Code does not contain a ARRR valid address!";
 
 //ShareScreen
 "Share Screen" = "Share";
+"Share" = "Share";
 
 //ProfileScreen
 "button_feedback" = "Send Feedback";
@@ -132,7 +133,7 @@
 "profile_screen" = "Shielded User";
 
 //FundsAtRisk
-"seed_remindertext" = "Remember, with Zcash YOU are the bank. Anyone with your seed phrase has access to your wallet.";
+"seed_remindertext" = "Remember, with ARRR YOU are the bank. Anyone with your seed phrase has access to your wallet.";
 "seed_remindertext2" = "You should back this up immediately as no one else can restore it for you.";
 "seed_reminder" = "Your funds are at risk!";
 "button_backup" = "Back up";
@@ -142,7 +143,7 @@
 
 
 "nuke_title" = "You are about to NUKE your wallet";
-"nuke_nukewarning" = "Remember, with Zcash YOU are the bank. Anyone with your seed phrase has access to your wallet.";
+"nuke_nukewarning" = "Remember, with ARRR YOU are the bank. Anyone with your seed phrase has access to your wallet.";
 "nuke_nukewarning2" = "Make sure you backed up your wallet before proceeding.";
 "nuke_nukewarning3" = "If you nuke  your wallet without backing up your seed, there's no way to recover it";
 "nuke_nukeButton" = "NUKE WALLET";
@@ -342,6 +343,93 @@
 "Wallet History" = "Wallet History";
 "Error" = "Error";
 "an error ocurred" = "an error ocurred";
+
+
+// Create new wallet
+
+"iCloud Backup" = "iCloud Backup";
+"Recovery Phase" = "Recovery Phase";
+"Create New Wallet" =  "Create New Wallet";
+"Could not restore wallet" = "Could not restore wallet";
+"There's a problem restoring your wallet. Please verify your seed phrase and try again." = "There's a problem restoring your wallet. Please verify your seed phrase and try again.";
+
+"there was an error retrieving your seed:" = "there was an error retrieving your seed:";
+
+"Problem Retrieving your seed" = "Problem Retrieving your seed";
+"we are unable to display your seed phrase. close the app and retry this operation" = "we are unable to display your seed phrase. close the app and retry this operation";
+
+"An error ocurred, please check your device logs" = "An error ocurred, please check your device logs";
+
+// Home 
+"Downloading" = "Downloading";
+"Validating" = "Validating";
+"Scan" = "Scan";
+"Enhance" = "Enhance";
+"Fetching" = "Fetching";
+"Stopped" = "Stopped";
+"Offline" = "Offline";
+"Synced 100%" = "Synced 100%";
+"Unprepared" = "Unprepared";
+
+"Recent Transfers" = "Recent Transfers";
+"No Recent transfers" = "No Recent transfers";
+"Receive" = "Receive";
+"Send" = "Send";
+
+// Feedback Form
+
+"Please Rank Your Experience" = "Please Rank Your Experience";
+"We improve and iterate with YOUR feedback" = "We improve and iterate with YOUR feedback";
+"Any details to share?" = "Any details to share?";
+"My Experience was..." = "My Experience was...";
+"Was your Balance Clear?" = "Was your Balance Clear?";
+"My balance was..." = "My balance was...";
+"What feature would you like to see next?" = "What feature would you like to see next?";
+"I'd like..." = "I'd like...";
+
+"Rate your Experience!" = "Rate your Experience!";
+"Very Bad" = "Very Bad";
+"Very Good" = "Very Good";
+"Want to share details?" = "Want to share details?";
+"Yes!" = "Yes!";
+"Nope" = "Nope";
+
+// Display Address
+
+"Request an Amount" = "Request an Amount";
+
+"Transaction Details" = "Transaction Details";
+"Your once transparent funds, are now being shielded!" = "Your once transparent funds, are now being shielded!";
+
+"ARRR pending" = "ARRR pending";
+"Shield Transparent Funds" = "Shield Transparent Funds";
+"Shielding" = "Shielding";
+"Do not close this screen" = "Do not close this screen";
+
+
+
+// Passcode Screen
+
+"LOGIN PIN" = "LOGIN PIN";
+"Enter PIN" = "Enter PIN";
+"Please enter your PIN to unlock your Pirate wallet and send money" = "Please enter your PIN to unlock your Pirate wallet and send money";
+"PIN Required" = "PIN Required";
+"Please enter your PIN to conotinue" = "Please enter your PIN to conotinue";
+"Change PIN" = "Change PIN";
+"SET PIN" = "SET PIN";
+"Your PIN will be used to unlock your Pirate wallet and send money" = "Your PIN will be used to unlock your Pirate wallet and send money";
+"Re-Enter PIN" = "Re-Enter PIN";
+"Your PIN will be used to unlock your Pirate wallet and send money" = "Your PIN will be used to unlock your Pirate wallet and send money";
+"Remember your PIN. If you forget it, you won't be able to access your assets." = "Remember your PIN. If you forget it, you won't be able to access your assets.";
+
+// Home Tab 
+
+"Wallet" = "Wallet";
+"History" = "History";
+"Settings" = "Settings";
+
+"Request Money" = "Request Money";
+"Send Money" = "Send Money";
 
 
 

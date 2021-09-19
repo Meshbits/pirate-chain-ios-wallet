@@ -28,7 +28,7 @@ struct ReceiveFunds: View {
                 EmptyView()
              }, headerItem: {
                  HStack{
-                     Text("receive_title")
+                    Text("receive_title".localized())
                          .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
                          .frame(alignment: Alignment.center).padding(.top,20)
                  }

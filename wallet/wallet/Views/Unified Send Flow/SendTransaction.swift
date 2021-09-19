@@ -46,7 +46,7 @@ struct SendTransaction: View {
                 return String(format: "%@ sendable ARRR. You don't have sufficient funds to cover the amount + Miner Fee of %@ ARRR", "\(balance)", "\(ZECCWalletEnvironment.minerFee)")
             }
         } else {
-            return "You don't have any sendable ARRR yet"
+            return "You don't have any sendable ARRR yet".localized()
         }
     }
     

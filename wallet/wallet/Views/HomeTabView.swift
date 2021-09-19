@@ -37,7 +37,7 @@ struct HomeTabView: View {
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("walleticon").renderingMode(.template)
-                        Text("Wallet").font(.barlowRegular(size: 10))
+                        Text("Wallet".localized()).font(.barlowRegular(size: 10))
                     }.tag(Tab.home)
                     .environment(\.currentTab, mSelectedTab)
              
@@ -47,7 +47,7 @@ struct HomeTabView: View {
                 .navigationBarHidden(true))
                     .tabItem {
                         Image("historyicon").renderingMode(.template)
-                        Text("History").font(.barlowRegular(size: 10))
+                        Text("History".localized()).font(.barlowRegular(size: 10))
                     }
                     .tag(Tab.wallet)
                     .environment(\.currentTab, mSelectedTab)
@@ -56,7 +56,7 @@ struct HomeTabView: View {
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("settingsicon").renderingMode(.template)
-                        Text("Settings").font(.barlowRegular(size: 10))
+                        Text("Settings".localized()).font(.barlowRegular(size: 10))
                     }
                     .tag(Tab.settings)
                     .environment(\.currentTab, mSelectedTab)

@@ -26,9 +26,9 @@ struct RestorePhraseScreen: View {
         
         do {
            try MnemonicSeedProvider.default.isValid(mnemonic: seedPhrase)
-           return Text.subtitle(text: "Your seed phrase is valid").font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+            return Text.subtitle(text: "Your seed phrase is valid".localized()).font(.barlowRegular(size: Device.isLarge ? 18 : 12))
         } catch {
-            return Text.subtitle(text: "Your seed phrase is invalid!").font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+            return Text.subtitle(text: "Your seed phrase is invalid!".localized()).font(.barlowRegular(size: Device.isLarge ? 18 : 12))
                 .foregroundColor(.red)
                 .bold()
         }
@@ -78,7 +78,7 @@ struct RestorePhraseScreen: View {
                         tracker.track(.tap(action: .walletImport), properties: [:])
                         self.proceed = true
                     }) {
-                        BlueButtonView(aTitle: "Proceed")
+                        BlueButtonView(aTitle: "Proceed".localized())
                     }
                     .disabled(disableProceed)
                     .opacity(disableProceed ? 0.4 : 1.0)
@@ -91,9 +91,9 @@ struct RestorePhraseScreen: View {
                 UIApplication.shared.endEditing()
             }
             .alert(isPresented: $showError) {
-                Alert(title: Text("Could not restore wallet"),
-                      message: Text("There's a problem restoring your wallet. Please verify your seed phrase and try again."),
-                      dismissButton: .default(Text("button_close")))
+                Alert(title: Text("Could not restore wallet".localized()),
+                      message: Text("There's a problem restoring your wallet. Please verify your seed phrase and try again.".localized()),
+                      dismissButton: .default(Text("button_close".localized())))
             }
             .onAppear {
                 tracker.track(.screen(screen: .restore), properties: [:])
@@ -124,7 +124,7 @@ struct RestorePhraseScreen: View {
             }.edgesIgnoringSafeArea(.all)
 //        }
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("Recovery Phrase")
+        .navigationTitle("Recovery Phrase".localized())
             .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()

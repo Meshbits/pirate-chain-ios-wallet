@@ -103,7 +103,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 }
 
                 HStack{
-                    Text("Memo").font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
+                    Text("Memo".localized()).font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
@@ -128,7 +128,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                     .frame(alignment: .center)
                     .padding(.horizontal, 10)
                 
-                BlueButtonView(aTitle: "Share").onTapGesture {
+                BlueButtonView(aTitle: "Share".localized()).onTapGesture {
                     self.isShareAddressShown = true
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
@@ -141,7 +141,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
             EmptyView()
          }, headerItem: {
              HStack{
-                 Text("Request Money")
+                 Text("Request Money".localized())
                      .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
                      .frame(alignment: Alignment.center).padding(.top,20)
              }

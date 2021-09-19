@@ -46,7 +46,7 @@ struct ZcashHoldToSendButton: View {
                         x: self.completionStrokeWidth/2,
                         y: self.completionStrokeWidth/2)
                 
-                Text("Press and hold\nto send ZEC")
+                Text("Press and hold\nto send ARRR".localized())
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .frame(minWidth: geometry.size.width, idealWidth: geometry.size.width, maxWidth: geometry.size.width, minHeight: geometry.size.height, idealHeight: geometry.size.height, maxHeight: geometry.size.height, alignment: .center)

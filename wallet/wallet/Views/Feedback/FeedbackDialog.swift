@@ -64,7 +64,7 @@ struct FeedbackDialog: View {
     @ViewBuilder func buildStep() -> some View {
         if case Step.initial = step {
             VStack(alignment: .center, spacing: 20) {
-                Text("Rate your Experience!")
+                Text("Rate your Experience!".localized())
                     .foregroundColor(.black)
                     .font(.title)
                 VStack(spacing: 4) {
@@ -73,11 +73,11 @@ struct FeedbackDialog: View {
                     }
                     
                     HStack {
-                        Text("Very Bad")
+                        Text("Very Bad".localized())
                             .font(.caption)
                             .foregroundColor(.zDarkGray1)
                         Spacer()
-                        Text("Very Good")
+                        Text("Very Good".localized())
                             .font(.caption)
                             .foregroundColor(.zDarkGray1)
                     }
@@ -86,7 +86,7 @@ struct FeedbackDialog: View {
             }
         } else {
             VStack(alignment: .center, spacing: 20) {
-                Text("Want to share details?")
+                Text("Want to share details?".localized())
                     .foregroundColor(.black)
                     .font(.title)
                 Button(action: {
@@ -94,7 +94,7 @@ struct FeedbackDialog: View {
                         feedBackResult(.requestAdditional(rating: score))
                     }
                 }, label: {
-                    Text("Yes!")
+                    Text("Yes!".localized())
                         .foregroundColor(.black)
                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .solid(color: .white)))
                 })
@@ -105,7 +105,7 @@ struct FeedbackDialog: View {
                         feedBackResult(.score(rating: score))
                     }
                 }, label: {
-                    Text("Nope")
+                    Text("Nope".localized())
                         .foregroundColor(.black)
                 })
                 .frame(height: 48)

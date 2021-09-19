@@ -80,13 +80,13 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
                     UserSettings.shared.userEverShielded = true
                     tracker.track(.tap(action: .shieldFundsEnd), properties: ["success" : "true"])
                     self.status = .finished
-                    self.alertType = .feedback(message: Text("Your once transparent funds, are now being shielded!"))
+                    self.alertType = .feedback(message: Text("Your once transparent funds, are now being shielded!".localized()))
                     
                 case .failure(let error):
                     tracker.report(handledException: DeveloperFacingErrors.handledException(error: error))
                     tracker.track(.tap(action: .shieldFundsEnd), properties: ["success" : "false"])
                     self.status = .failed(error: error)
-                    self.alertType = .error(title: Text("Error"), message: Text(error.localizedDescription))
+                    self.alertType = .error(title: Text("Error".localized()), message: Text(error.localizedDescription))
                 }
             } receiveValue: { [weak self](s) in
                 guard let self = self else {
@@ -130,7 +130,7 @@ struct WalletBalanceBreakdown: View {
                 .cornerRadius(5)
             Spacer()
             if model.unconfirmedFunds > 0 {
-                Text("(\(model.unconfirmedFunds.toZecAmount()) ZEC pending)")
+                Text("(\(model.unconfirmedFunds.toZecAmount()) " + "ARRR pending".localized() + ")")
                     .foregroundColor(.zGray3)
                 Spacer()
             }
@@ -139,7 +139,7 @@ struct WalletBalanceBreakdown: View {
                 tracker.track(.tap(action: .shieldFundsStart), properties: [:])
                 self.model.shieldConfirmedFunds()
             }) {
-                Text("Shield Transparent Funds")
+                Text("Shield Transparent Funds".localized())
                     .foregroundColor(.black)
                     .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: .zButtonGradient)))
                     .frame(height: 48)
@@ -165,10 +165,10 @@ struct WalletBalanceBreakdown: View {
     
     @ViewBuilder func shieldingScreen() -> some View {
         VStack {
-            Text("Shielding")
+            Text("Shielding".localized())
                 .foregroundColor(.white)
                 .font(.title)
-            Text("Do not close this screen")
+            Text("Do not close this screen".localized())
                 .foregroundColor(.white)
                 .font(.caption)
                 .opacity(0.6)

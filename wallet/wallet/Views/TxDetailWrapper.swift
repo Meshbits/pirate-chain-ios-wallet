@@ -21,7 +21,7 @@ struct TxDetailsWrapper: View {
                        EmptyView()
                     }, headerItem: {
                         HStack{
-                            Text("Transaction Details")
+                            Text("Transaction Details".localized())
                                 .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
                                 .frame(alignment: Alignment.center)
                         }

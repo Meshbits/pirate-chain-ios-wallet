@@ -62,7 +62,7 @@ struct CreateNewWallet: View {
                 VStack(alignment: .center, spacing: 10.0, content: {
                     
                     ZStack {
-                        RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("iCloud Backup"))
+                        RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("iCloud Backup".localized()))
                     }.frame(width: 225.0, height:84).hidden()
                     
                     NavigationLink(
@@ -79,7 +79,7 @@ struct CreateNewWallet: View {
                             }
                             self.destination = .restoreWallet
                         }) {
-                            RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Recovery Phase"))
+                            RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Recovery Phase".localized()))
                         }
                     }
                    
@@ -101,7 +101,7 @@ struct CreateNewWallet: View {
 //                      createNewWalletFlow()
                         openCreateNewWalletFlow = true
                     }) {
-                        BlueButtonView(aTitle: "Create New Wallet")
+                        BlueButtonView(aTitle: "Create New Wallet".localized())
                     }
                 }
                 
@@ -160,7 +160,7 @@ struct CreateNewWallet: View {
     }
     
     func fail(_ error: Error) {
-        let message = "could not create new wallet:"
+        let message = "could not create new wallet:".localized()
         logger.error("\(message) \(error)")
         tracker.track(.error(severity: .critical),
                       properties: [
@@ -173,9 +173,9 @@ struct CreateNewWallet: View {
     }
     
     func existingCredentialsFound(originalDestination: Destinations) -> Alert {
-        Alert(title: Text("Existing keys found!"),
-              message: Text("it appears that this device already has keys stored on it. What do you want to do?"),
-              primaryButton: .default(Text("Restore existing keys"),
+        Alert(title: Text("Existing keys found!".localized()),
+              message: Text("it appears that this device already has keys stored on it. What do you want to do?".localized()),
+              primaryButton: .default(Text("Restore existing keys".localized()),
                                       action: {
                                         do {
                                             try ZECCWalletEnvironment.shared.initialize()
@@ -186,7 +186,7 @@ struct CreateNewWallet: View {
                                             }
                                         }
                                       }),
-              secondaryButton: .destructive(Text("Discard them and continue"),
+              secondaryButton: .destructive(Text("Discard them and continue".localized()),
                                             action: {
                                                 
                                                 ZECCWalletEnvironment.shared.nuke(abortApplication: false)
@@ -214,12 +214,12 @@ struct CreateNewWallet: View {
     
     func defaultAlert(_ error: Error? = nil) -> Alert {
         guard let e = error else {
-            return Alert(title: Text("Error Initializing Wallet"),
-                 message: Text("There was a problem initializing the wallet"),
+            return Alert(title: Text("Error Initializing Wallet".localized()),
+                 message: Text("There was a problem initializing the wallet".localized()),
                  dismissButton: .default(Text("button_close")))
         }
         
-        return Alert(title: Text("Error"),
+        return Alert(title: Text("Error".localized()),
                      message: Text(mapToUserFacingError(ZECCWalletEnvironment.mapError(error: e)).message),
                      dismissButton: .default(Text("button_close")))
         

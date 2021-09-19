@@ -72,9 +72,9 @@ struct RestoreWallet: View {
         
         do {
            try MnemonicSeedProvider.default.isValid(mnemonic: seedPhrase)
-           return Text.subtitle(text: "Your seed phrase is valid")
+            return Text.subtitle(text: "Your seed phrase is valid".localized())
         } catch {
-            return Text.subtitle(text: "Your seed phrase is invalid!")
+            return Text.subtitle(text: "Your seed phrase is invalid!".localized())
                 .foregroundColor(.red)
                 .bold()
         }
@@ -143,9 +143,9 @@ struct RestoreWallet: View {
             UIApplication.shared.endEditing()
         }
         .alert(isPresented: $showError) {
-            Alert(title: Text("Could not restore wallet"),
-                  message: Text("There's a problem restoring your wallet. Please verify your seed phrase and try again."),
-                  dismissButton: .default(Text("button_close")))
+            Alert(title: Text("Could not restore wallet".localized()),
+                  message: Text("There's a problem restoring your wallet. Please verify your seed phrase and try again.".localized()),
+                  dismissButton: .default(Text("button_close".localized())))
         }
         .onAppear {
             tracker.track(.screen(screen: .restore), properties: [:])
