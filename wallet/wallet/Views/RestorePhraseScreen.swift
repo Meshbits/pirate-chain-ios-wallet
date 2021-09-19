@@ -113,9 +113,10 @@ struct RestorePhraseScreen: View {
                 VStack(alignment: .center) {
                     centerBody
                 }
+                
                 NavigationLink(destination:
                                 LazyView(
-                                        PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode)
+                                        PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode,isFirstTimeSetup: true)
                 ), isActive: $proceed) {
                     EmptyView()
                 }

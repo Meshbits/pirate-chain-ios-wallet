@@ -119,6 +119,7 @@ struct RecoveryBasedUnlink: View {
                         }.font(.barlowRegular(size: 14))
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
+                        .autocapitalization(.none)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                     
@@ -130,6 +131,7 @@ struct RecoveryBasedUnlink: View {
                         }.font(.barlowRegular(size: 14))
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
+                        .autocapitalization(.none)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                      
@@ -141,6 +143,7 @@ struct RecoveryBasedUnlink: View {
                         }.font(.barlowRegular(size: 14))
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
+                        .autocapitalization(.none)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                                            
@@ -171,7 +174,7 @@ struct RecoveryBasedUnlink: View {
                             Text("nuke_alertconfirm".localized()),
                             action: {
                                 presentationMode.wrappedValue.dismiss()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     NotificationCenter.default.post(name: NSNotification.Name("NukedUser"), object: nil)
                                 }
                                 

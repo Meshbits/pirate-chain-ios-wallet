@@ -65,11 +65,12 @@ struct UnlinkDevice: View {
                 .onAppear(){
                     NotificationCenter.default.addObserver(forName: NSNotification.Name("NukedUser"), object: nil, queue: .main) { (_) in
                         UserSettings.shared.removeAllSettings()
-                        self.appEnvironment.nuke(abortApplication: true)
+                        ZECCWalletEnvironment.shared.nuke(abortApplication: false)
     //                                            try! self.appEnvironment.deleteWalletFiles()
     //                                            presentationMode.wrappedValue.dismiss()
                         ZECCWalletEnvironment.shared.state = .uninitialized
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                               NotificationCenter.default.post(name: NSNotification.Name("MoveToFirstViewLayout"), object: nil)
                         }
                     }

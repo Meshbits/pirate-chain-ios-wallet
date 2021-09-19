@@ -152,6 +152,8 @@ struct PasscodeScreen: View {
    @State var isNewWallet = false
     
    @State var isAuthenticatedFlowInitiated = false
+    
+   @State var isFirstTimeSetup = false
         
     var body: some View {
         ZStack {
@@ -253,8 +255,10 @@ struct PasscodeScreen: View {
                             return
                         }else{
 
-                            if UIApplication.shared.windows.count > 0 {
-                                UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                            if (!isFirstTimeSetup){
+                                if UIApplication.shared.windows.count > 0 {
+                                    UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                                }
                             }
                             
                             openHomeScreen = true
