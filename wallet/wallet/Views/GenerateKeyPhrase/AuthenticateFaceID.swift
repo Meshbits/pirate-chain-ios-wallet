@@ -21,7 +21,7 @@ struct AuthenticateFaceID: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Authenticate Face ID".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,20)
+                Text("Authenticate Face ID".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,50)
                 Text("Login quickly using your Face ID".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
                 
                 Spacer(minLength: 10)
@@ -44,7 +44,7 @@ struct AuthenticateFaceID: View {
 
                 NavigationLink(
                     destination: CongratulationsFaceID().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
-                        .navigationBarBackButtonHidden(true),
+                        .navigationBarBackButtonHidden(true).navigationBarHidden(true),
                     isActive: $skipAndMoveToCongratulationsAfterFaceIDSuccess
                 ) {
                     EmptyView()
@@ -52,7 +52,7 @@ struct AuthenticateFaceID: View {
                 
                 NavigationLink(
                     destination: CreateAndSetupNewWallet().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
-                        .navigationBarBackButtonHidden(true),
+                        .navigationBarBackButtonHidden(true).navigationBarHidden(true),
                     isActive: $skipAndMoveToHomeTab
                 ) {
                     EmptyView()

@@ -23,7 +23,7 @@ struct NukeWarning: View {
     }
     var body: some View {
         ZStack {
-            ZcashBackground()
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack(spacing: 24) {
                 HStack {
                     Text("nuke_title".localized())

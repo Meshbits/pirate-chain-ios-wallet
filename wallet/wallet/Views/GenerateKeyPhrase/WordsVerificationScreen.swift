@@ -99,7 +99,7 @@ struct WordsVerificationScreen: View {
     @State var isConfirmButtonEnabled = false
     
     var body: some View {
-        NavigationView {
+//        NavigationView {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
@@ -166,7 +166,7 @@ struct WordsVerificationScreen: View {
                 ) {
                     EmptyView()
                 }
-            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+            }
             .onTapGesture {
                 UIApplication.shared.endEditing()
             }
@@ -174,7 +174,7 @@ struct WordsVerificationScreen: View {
         } .onTapGesture {
             UIApplication.shared.endEditing()
         }
-        }
+//        }
         .zcashNavigationBar(leadingItem: {
             ARRRBackButton(action: {
                 presentationMode.wrappedValue.dismiss()

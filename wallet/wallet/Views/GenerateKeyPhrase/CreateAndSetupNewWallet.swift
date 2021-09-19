@@ -41,12 +41,14 @@ struct CreateAndSetupNewWallet: View {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             
             NavigationLink(destination:
-                            LazyView(
-                                HomeTabView(openPasscodeScreen: false)
-                                //.environmentObject(appEnvironment)
-            ), isActive: $openHomeScreen) {
+                            HomeTabView(openPasscodeScreen: false)
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true)
+                                .environmentObject(appEnvironment)
+                            
+            , isActive: $openHomeScreen) {
                 EmptyView()
-            }
+            }.isDetailLink(false)
             
         }.navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

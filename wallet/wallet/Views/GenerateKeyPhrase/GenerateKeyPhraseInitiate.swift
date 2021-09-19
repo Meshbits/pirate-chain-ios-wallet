@@ -28,10 +28,11 @@ struct GenerateKeyPhraseInitiate: View {
                                     HowItWorks().environmentObject(HowItWorksViewModel())
                             .navigationBarTitle("", displayMode: .inline)
                             .navigationBarBackButtonHidden(true)
+                               
                         ,isActive: $openHowItWorks
                     ) {
                         EmptyView()
-                    }.isDetailLink(false)
+                    }
                     
                     
                     Button {

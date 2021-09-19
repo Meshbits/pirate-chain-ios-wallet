@@ -16,7 +16,7 @@ struct CongratulationsRecoverySetup: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Congratulation! You completed your recovery phrase setup".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,20)
+                Text("Congratulation! You completed your recovery phrase setup".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,40)
                 Text("You’re all set to deposit, receive, and store crypto in your Pirate wallet".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
                 
                 Spacer(minLength: 10)
@@ -32,7 +32,7 @@ struct CongratulationsRecoverySetup: View {
                 
                 NavigationLink(
                     destination: AuthenticateFaceID().environmentObject(viewModel).navigationBarTitle("", displayMode: .inline)
-                        .navigationBarBackButtonHidden(true),
+                        .navigationBarBackButtonHidden(true).navigationBarHidden(true),
                     isActive: $openAuthenticatateFaceID
                 ) {
                     EmptyView()
