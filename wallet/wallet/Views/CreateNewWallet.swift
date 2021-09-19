@@ -130,7 +130,7 @@ struct CreateNewWallet: View {
                 let userFacingError = mapToUserFacingError(ZECCWalletEnvironment.mapError(error: cause))
                 return Alert(title: Text(userFacingError.title),
                              message: Text(userFacingError.message),
-                dismissButton: .default(Text("button_close")))
+                dismissButton: .default(Text("button_close".localized())))
             case .feedback(let destination, let cause):
                 if let feedbackCause = cause as? SeedManager.SeedManagerError,
                    case SeedManager.SeedManagerError.alreadyImported = feedbackCause {
@@ -216,12 +216,12 @@ struct CreateNewWallet: View {
         guard let e = error else {
             return Alert(title: Text("Error Initializing Wallet".localized()),
                  message: Text("There was a problem initializing the wallet".localized()),
-                 dismissButton: .default(Text("button_close")))
+                 dismissButton: .default(Text("button_close".localized())))
         }
         
         return Alert(title: Text("Error".localized()),
                      message: Text(mapToUserFacingError(ZECCWalletEnvironment.mapError(error: e)).message),
-                     dismissButton: .default(Text("button_close")))
+                     dismissButton: .default(Text("button_close".localized())))
         
     }
 }

@@ -127,11 +127,11 @@ struct CreateAndSetupNewWallet: View {
     func defaultAlert(_ error: Error? = nil) -> Alert {
         guard let e = error else {
             return Alert(title: Text("Error Initializing Wallet".localized()),
-                 message: Text("There was a problem initializing the wallet"),
+                         message: Text("There was a problem initializing the wallet".localized()),
                  dismissButton: .default(Text("button_close".localized())))
         }
         
-        return Alert(title: Text("Error"),
+        return Alert(title: Text("Error".localized()),
                      message: Text(mapToUserFacingError(ZECCWalletEnvironment.mapError(error: e)).message),
                      dismissButton: .default(Text("button_close".localized())))
         

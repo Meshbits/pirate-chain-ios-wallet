@@ -230,7 +230,7 @@ struct SubwayPathBuilder {
             )
         } else {
             views.append(
-                Text("failed!")
+                Text("failed!".localized())
                     .font(.body)
                     .foregroundColor(.red)
                     .eraseToAnyView()

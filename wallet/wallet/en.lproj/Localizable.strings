@@ -460,3 +460,35 @@
  "You Sent" =  "You Sent";
 "Memo Text..." = "Memo Text...";
 "Reply to" = "Reply to";
+
+
+// Error handling
+
+"Wallet Improperly Initialized" = "Wallet Improperly Initialized";
+"Processor Error" = "Processor Error";
+"Connection Error" = "Connection Error";
+"Failed to Send" = "Failed to Send";
+"Critical Error" = "Critical Error";
+"Oops Something happened" = "Oops Something happened";
+"This wallet has not been initialized correctly! Perhaps an error occurred during install. If you just created a new wallet close the app and retry.\n\n If this is an existing wallet, it can be fixed with a reset. First, locate your backup seed phrase, then \"Nuke Wallet\" and reimport it." = "This wallet has not been initialized correctly! Perhaps an error occurred during install. If you just created a new wallet close the app and retry.\n\n If this is an existing wallet, it can be fixed with a reset. First, locate your backup seed phrase, then \"Nuke Wallet\" and reimport it.";
+"An error ocurred while syncing the blockchain. If the problem persists, back up your seed phrase and restore your wallet." = "An error ocurred while syncing the blockchain. If the problem persists, back up your seed phrase and restore your wallet.";
+"We are having problems with the network connection." = "We are having problems with the network connection.";
+"We were unable to send your transaction. Your funds are safe, we just need to wait until the transaction expires before you can send them again." = "We were unable to send your transaction. Your funds are safe, we just need to wait until the transaction expires before you can send them again.";
+
+
+// Others
+
+"Word" = "Word";
+"failed!" = "failed!";
+
+
+// Oh my screen
+
+"We couldn't initialize your wallet" = "We couldn't initialize your wallet";
+"Close the app and try to restart it." = "Close the app and try to restart it.";
+"If you have done so, here are some options:" = "If you have done so, here are some options:";
+"Backup Seed" = "Backup Seed";
+"SUCCESS! Wallet data cleared. Please relaunch to rescan!" = "SUCCESS! Wallet data cleared. Please relaunch to rescan!";
+"Wipe Failed" = "Wipe Failed";
+ "Close App" =  "Close App";
+ "Wipe" = "Wipe";

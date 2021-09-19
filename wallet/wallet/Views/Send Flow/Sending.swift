@@ -44,10 +44,10 @@ struct Sending: View {
     
     var sendText: some View {
         guard flow.error == nil else {
-            return Text("label_unabletosend")
+            return Text("label_unabletosend".localized())
         }
         
-        return flow.isDone ? Text("send_sent") :     Text(String(format: NSLocalizedString(ZcashSDK.isMainnet ? "send_sending" : "send_sending_taz", comment: ""), flow.amount))
+        return flow.isDone ? Text("send_sent".localized()) :     Text(String(format: NSLocalizedString(ZcashSDK.isMainnet ? "send_sending" : "send_sending_taz", comment: ""), flow.amount))
     }
     
     var body: some View {
@@ -87,7 +87,7 @@ struct Sending: View {
                         
                     }) {
                         
-                        SendRecieveButtonView(title: "button_seedetails")
+                        SendRecieveButtonView(title: "button_seedetails".localized())
                         
                     }
                 }
@@ -98,7 +98,7 @@ struct Sending: View {
                         self.flow.close()
                         self.presentationMode.wrappedValue.dismiss()
                     }) {
-                        SendRecieveButtonView(title: "button_done")
+                        SendRecieveButtonView(title: "button_done".localized())
                     }
                 }
             }

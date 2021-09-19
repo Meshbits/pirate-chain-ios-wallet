@@ -45,7 +45,7 @@ struct ProfileScreen: View {
                             .accessibility(label: Text(UserSettings.shared.userEverShielded ? "A Golden zebra" : "A Zebra"))
                             
                         VStack {
-                            Text("profile_screen")
+                            Text("profile_screen".localized())
                                 .font(.system(size: 18))
                                 .foregroundColor(.white)
                             Button(action: {

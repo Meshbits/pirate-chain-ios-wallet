@@ -12,17 +12,17 @@ extension UserFacingErrors {
     var title: String {
         switch self {
         case .initalizationFailed:
-            return "Wallet Improperly Initialized"
+            return "Wallet Improperly Initialized".localized()
         case .synchronizerError:
-            return "Processor Error"
+            return "Processor Error".localized()
         case .connectionFailed:
-            return "Connection Error"
+            return "Connection Error".localized()
         case .transactionSubmissionError:
-            return "Failed to Send"
+            return "Failed to Send".localized()
         case .internalError, .internalErrorWithMessage:
-            return "Oops Something happened"
+            return "Oops Something happened".localized()
         case .criticalError:
-            return "Critical Error"
+            return "Critical Error".localized()
         }
     }
     
@@ -30,13 +30,13 @@ extension UserFacingErrors {
         switch self {
             
         case .initalizationFailed:
-            return "This wallet has not been initialized correctly! Perhaps an error occurred during install. If you just created a new wallet close the app and retry.\n\n If this is an existing wallet, it can be fixed with a reset. First, locate your backup seed phrase, then \"Nuke Wallet\" and reimport it."
+            return "This wallet has not been initialized correctly! Perhaps an error occurred during install. If you just created a new wallet close the app and retry.\n\n If this is an existing wallet, it can be fixed with a reset. First, locate your backup seed phrase, then \"Nuke Wallet\" and reimport it.".localized()
         case .synchronizerError:
-            return "An error ocurred while syncing the blockchain. If the problem persists, back up your seed phrase and restore your wallet."
+            return "An error ocurred while syncing the blockchain. If the problem persists, back up your seed phrase and restore your wallet.".localized()
         case .connectionFailed:
-            return "We are having problems with the network connection."
+            return "We are having problems with the network connection.".localized()
         case .transactionSubmissionError:
-            return "We were unable to send your transaction. Your funds are safe, we just need to wait until the transaction expires before you can send them again."
+            return "We were unable to send your transaction. Your funds are safe, we just need to wait until the transaction expires before you can send them again.".localized()
         case .internalError(let error):
             return "We got this error: \(error.localizedDescription). :/"
         case .criticalError(let error):

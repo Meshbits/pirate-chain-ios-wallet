@@ -39,11 +39,11 @@ struct OhMyScreen: View {
     
     var body: some View {
         ZStack {
-            ZcashBackground.amberSplashScreen
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             ScrollView {
                 VStack(spacing: 24) {
 
-                    Text("We couldn't initialize your wallet")
+                    Text("We couldn't initialize your wallet".localized())
                         .foregroundColor(.black)
                         .font(.system(size: 24))
                     if let error = environment.error {
@@ -54,8 +54,8 @@ struct OhMyScreen: View {
                     }
                     
                     VStack(alignment: .leading) {
-                        Text("Close the app and try to restart it.")
-                        Text("If you have done so, here are some options:")
+                        Text("Close the app and try to restart it.".localized())
+                        Text("If you have done so, here are some options:".localized())
                     }
                     .padding(0)
                     NavigationLink(destination: SeedBackup(hideNavBar: false,
@@ -66,7 +66,7 @@ struct OhMyScreen: View {
                                    tag: Destination.seedBackup,
                                    selection: self.$destination,
                                    label: {
-                                    Text("Backup Seed")
+                                    Text("Backup Seed".localized())
                                         .foregroundColor(.black)
                                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .black, lineWidth: 1)))
                                             .frame(height: 48)
@@ -77,7 +77,7 @@ struct OhMyScreen: View {
                         FeedbackForm(isActive: $destination)
                     ), tag: Destination.feedback, selection: $destination) {
                                     
-                                    Text("button_feedback")
+                                    Text("button_feedback".localized())
                                         .foregroundColor(.black)
                                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .black, lineWidth: 1)))
                                         .frame(height: 48)
@@ -108,31 +108,31 @@ struct OhMyScreen: View {
                         do {
                             try appEnvironment.wipe(abortApplication: false)
                             self.alertItem = AlertItem(type: .feedback(
-                                                        message: "SUCCESS! Wallet data cleared. Please relaunch to rescan!",
+                                                        message: "SUCCESS! Wallet data cleared. Please relaunch to rescan!".localized(),
                                                         action: {
                                 abort()
                             }))
                         } catch {
                             self.alertItem = AlertItem(
                                 type: AlertType.actionable(
-                                                        title: "Wipe Failed",
+                                    title: "Wipe Failed".localized(),
                                                         message: "Wipe operation failed with error \(error). You might want to screenshot this. Your app could work properly. You can close it and restart it, or nuke it.",
                                                         destructiveText: "NUKE WALLET".localized(),
                                     destructiveAction: { appEnvironment.nuke() },
-                                                        dismissText: "Close App",
+                                    dismissText: "Close App".localized(),
                                                         dismissAction: {
                                                             abort()
                                                         })
                             )
                         }
                     }, label: {
-                        Text("Wipe")
+                        Text("Wipe".localized())
                             .foregroundColor(.black)
                             .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .black, lineWidth: 1)))
                                 .frame(height: 48)
                     })
                     
-                    ActionableMessage(message: "\(ZECCWalletEnvironment.appName) v\(ZECCWalletEnvironment.appVersion ?? "Unknown")", actionText: "Build \(ZECCWalletEnvironment.appBuild ?? "Unknown")", action: {})
+                    ActionableMessage(message: "\(ZECCWalletEnvironment.appName) v\(ZECCWalletEnvironment.appVersion ?? "Unknown".localized())", actionText: "Build \(ZECCWalletEnvironment.appBuild ?? "Unknown")", action: {})
                         .disabled(true)
                     
                     Button(action: {

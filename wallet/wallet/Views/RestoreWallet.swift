@@ -150,7 +150,7 @@ struct RestoreWallet: View {
         .onAppear {
             tracker.track(.screen(screen: .restore), properties: [:])
         }
-        .navigationBarTitle("Restore from Seed Phrase", displayMode: .inline)
+        .navigationBarTitle("Restore from Seed Phrase".localized(), displayMode: .inline)
         .navigationBarHidden(false)
     }
 }

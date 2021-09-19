@@ -19,7 +19,7 @@ extension Text {
 
 extension ZcashButton {
     static func nukeButton() -> ZcashButton {
-        ZcashButton(color: Color.red, fill: Color.clear, text: "NUKE WALLET")
+        ZcashButton(color: Color.red, fill: Color.clear, text: "NUKE WALLET".localized())
     }
 }
 
