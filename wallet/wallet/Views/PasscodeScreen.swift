@@ -226,12 +226,11 @@ struct PasscodeScreen: View {
             })
             
             NavigationLink(destination:
-                            LazyView(
-                                HomeTabView(openPasscodeScreen: false)
-                                //.environmentObject(appEnvironment)
-            ), isActive: $openHomeScreen) {
+                            HomeTabView(openPasscodeScreen: false)
+                                .environmentObject(appEnvironment)
+            , isActive: $openHomeScreen) {
                 EmptyView()
-            }
+            }.isDetailLink(false)
             
         }
         .highPriorityGesture(dragGesture)
@@ -308,6 +307,7 @@ struct PasscodeScreen: View {
             
 
        }
+        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
             .alert(item: self.$showError) { (alertType) -> Alert in
                 switch alertType {
