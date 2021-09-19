@@ -23,7 +23,7 @@ struct BalanceDetail: View {
         Text(format(zec: availableZec) + " \(zec) ")
             .foregroundColor(.zLightGray)
             .font(.barlowRegular(size: Device.isLarge ? 18 : 10))
-        + Text("balance_available")
+            + Text("balance_available".localized())
             .foregroundColor(Color.zAmberGradient1)
             .font(.barlowRegular(size: Device.isLarge ? 18 : 10))
             + Text(transparentFundsAvailable ? "†" : "")
@@ -32,7 +32,7 @@ struct BalanceDetail: View {
     }
     
     func format(zec: Double) -> String {
-        NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: zec)) ?? "ERROR" //TODO: handle this weird stuff
+        NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: zec)) ?? "ERROR".localized() //TODO: handle this weird stuff
     }
     var includeCaption: Bool {
         switch status {

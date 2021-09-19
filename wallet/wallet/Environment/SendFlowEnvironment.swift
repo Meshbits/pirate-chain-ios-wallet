@@ -162,7 +162,7 @@ final class SendFlowEnvironment: ObservableObject {
     
     func send() {
         guard !txSent else {
-            let message = "attempt to send tx twice"
+            let message = "attempt to send tx twice".localized()
             logger.error(message)
             tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : message])
             fail(FlowError.duplicateSent)
@@ -171,7 +171,7 @@ final class SendFlowEnvironment: ObservableObject {
         self.state = .sending
         let environment = ZECCWalletEnvironment.shared
         guard let zatoshi = doubleAmount?.toZatoshi() else {
-            let message = "invalid zatoshi amount: \(String(describing: doubleAmount))"
+            let message = "invalid arrr amount:".localized() + " \(String(describing: doubleAmount))"
             logger.error(message)
             fail(FlowError.invalidAmount(message: message))
             return
@@ -181,14 +181,14 @@ final class SendFlowEnvironment: ObservableObject {
             let phrase = try SeedManager.default.exportPhrase()
             let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: phrase)
             guard let spendingKey = try DerivationTool.default.deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
-                let message = "no spending key for account 1"
+                let message = "no spending key for account 1".localized()
                 logger.error(message)
                 self.fail(FlowError.derivationFailed(message: "no spending key for account 1"))
                 return
             }
            
             guard let replyToAddress = environment.getShieldedAddress() else {
-                let message = "could not derive user's own address"
+                let message = "could not derive user's own address".localized()
                 logger.error(message)
                 self.fail(FlowError.derivationFailed(message: "could not derive user's own address"))
                 return
@@ -269,7 +269,7 @@ final class SendFlowEnvironment: ObservableObject {
         
         guard let isValidZAddr = try? DerivationTool.default.isValidShieldedAddress(address),
               isValidZAddr else {
-            let msg = "the provided reply-to address is invalid"
+            let msg = "the provided reply-to address is invalid".localized()
             logger.error(msg)
             throw SendFlowEnvironment.FlowError.derivationFailed(message: msg)
         }

@@ -26,7 +26,7 @@ struct BalanceBreakdown: View {
     @ViewBuilder var shieldedZecTitle: some View {
         HStack {
             Image("ic_shieldtick_yellow")
-            Text("SHIELDED ZEC")
+            Text("SHIELDED ARRR".localized())
                 .font(.system(size: 14))
                 .foregroundColor(.zYellow)
         }

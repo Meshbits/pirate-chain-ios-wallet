@@ -26,7 +26,7 @@ struct BalanceViewHome: View {
     }
     
     func format(zec: Double) -> String {
-        NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: zec)) ?? "ERROR" //TODO: handle this weird stuff
+        NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: zec)) ?? "ERROR".localized() //TODO: handle this weird stuff
     }
     var includeCaption: Bool {
         switch status {
@@ -65,7 +65,7 @@ struct BalanceViewHome: View {
     }
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Balance")
+            Text("Balance".localized())
                 .foregroundColor(.zLightGray)
                 .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
             HStack{

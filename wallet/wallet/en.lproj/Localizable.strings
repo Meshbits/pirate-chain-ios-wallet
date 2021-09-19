@@ -432,4 +432,31 @@
 "Send Money" = "Send Money";
 
 
+// Others
 
+"dismiss" = "dismiss";
+
+"attempt to send tx twice" = "attempt to send tx twice";
+"invalid arrr amount:" = "invalid arrr amount:";
+"no spending key for account 1" = "no spending key for account 1";
+"could not derive user's own address" = "could not derive user's own address";
+"the provided reply-to address is invalid" = "the provided reply-to address is invalid";
+ "attempt to initialize a db that was not empty" =  "attempt to initialize a db that was not empty";
+ "attempt to initialize an unprepared synchronizer" = "attempt to initialize an unprepared synchronizer";
+ "unable to rescan to specified height" = "unable to rescan to specified height";
+ "your wallet asked a balance for an account index that is not derived. This is probably a programming mistake." = "your wallet asked a balance for an account index that is not derived. This is probably a programming mistake.";
+ "An error ocurred, but we can't figure out what it is. Please check device logs for more details" = "An error ocurred, but we can't figure out what it is. Please check device logs for more details";
+ "unable to derive unified address. this is probably a programming error" = "unable to derive unified address. this is probably a programming error";
+ "Could Not Shield Funds" = "Could Not Shield Funds";
+"LAST USED" = "LAST USED";
+"Unknown (+)" = "Unknown (+)";
+"Unsent Transaction" = "Unsent Transaction";
+"Pending" = "Pending";
+"sent via " = "sent via ";
+"received via " = "received via ";
+"Received" = "Received";
+"SHIELDED ARRR" = "SHIELDED ARRR";
+"Balance" = "Balance";
+ "You Sent" =  "You Sent";
+"Memo Text..." = "Memo Text...";
+"Reply to" = "Reply to";

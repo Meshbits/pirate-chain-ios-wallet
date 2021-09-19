@@ -35,7 +35,7 @@ struct ZcashMemoTextField: View {
                     HStack {
                         Text("\("label_memo".localized()):")
                             .foregroundColor(isHighlighted ? inactiveColor : .white)
-                        Text("label_add_memo")
+                        Text("label_add_memo".localized())
                             .foregroundColor(inactiveColor)
                             .opacity(self.text.isEmpty ? 1 : 0)
                             .allowsHitTesting(false)
@@ -64,13 +64,13 @@ struct ZcashMemoTextField: View {
                         )
 
                     HStack {
-                        Text(String(format:NSLocalizedString("label_charactercount",comment:""), "\($text.wrappedValue.count)/\(charLimit)"))
+                        Text(String(format:NSLocalizedString("label_charactercount".localized(),comment:""), "\($text.wrappedValue.count)/\(charLimit)"))
                         .font(.footnote)
                         .foregroundColor(inactiveColor)
                         
                         Spacer()
                         Toggle(isOn: $includesReplyTo) {
-                            Text("label_replyto")
+                            Text("label_replyto".localized())
                         }
                     .toggleStyle(SquareToggleStyle(isHighlighted: $includesReplyTo))
                     }

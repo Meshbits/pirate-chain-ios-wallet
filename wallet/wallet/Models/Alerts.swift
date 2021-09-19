@@ -38,14 +38,14 @@ extension AlertType {
     func asAlert() -> Alert {
         switch self {
         case .error(let underlyingError):
-            return Alert(title: Text("Error"),
+            return Alert(title: Text("Error".localized()),
                          message: Text("An error occured \(underlyingError.localizedDescription)"),
-                         dismissButton: .default(Text("dismiss")))
+                         dismissButton: .default(Text("dismiss".localized())))
         case .feedback(let message,
                        let action):
             return Alert(title: Text(""),
                          message: Text(message),
-                         dismissButton: .default(Text("dismiss"), action: action))
+                         dismissButton: .default(Text("dismiss".localized()), action: action))
         case .actionable(let title,
                          let message,
                          let destructiveText,

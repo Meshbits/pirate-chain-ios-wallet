@@ -45,7 +45,7 @@ struct SquareToggleStyle_Previews: PreviewProvider {
         ZStack {
             ZcashBackground()
             Toggle(isOn: $isOn) {
-                Text("label_replyto")
+                Text("label_replyto".localized())
             }
             .toggleStyle(SquareToggleStyle(isHighlighted: $isOn))
             

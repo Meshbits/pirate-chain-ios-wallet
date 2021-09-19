@@ -25,16 +25,16 @@ struct TransactionDetailsTitle: View {
     }
     
     func format(zec: Double) -> String {
-        NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: zec)) ?? "ERROR" //TODO: handle this weird stuff
+        NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: zec)) ?? "ERROR".localized() //TODO: handle this weird stuff
     }
     
     var aTitle: String {
 
         switch status {
         case .paid:
-            return "You Sent"
+            return "You Sent".localized()
         case .received:
-            return "You Received"
+            return "You Received".localized()
         }
     }
     

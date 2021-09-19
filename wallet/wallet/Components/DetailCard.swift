@@ -27,9 +27,9 @@ struct DetailModel: Identifiable {
 
         switch status {
         case .paid(let success):
-            return success ? "You paid \(arrrAddress?.shortARRRaddress ?? "Unknown")" : "Unsent Transaction"
+            return success ? "You paid \(arrrAddress?.shortARRRaddress ?? "Unknown".localized())" : "Unsent Transaction".localized()
         case .received:
-            return "\(arrrAddress?.shortARRRaddress ?? "Unknown") paid you"
+            return "\(arrrAddress?.shortARRRaddress ?? "Unknown") paid you".localized()
         }
     }
     
@@ -124,16 +124,16 @@ extension Image {
 
 extension String {
     static func transactionSubTitle(for model: DetailModel) -> String {
-        var transactionSubTitle = "Pending"
+        var transactionSubTitle = "Pending".localized()
         switch model.status {
     
         case .paid(let success):
-            transactionSubTitle = (success ? "sent via " : "sent via ") + (model.arrrAddress ?? "NA") // TODO: need to check what should we show in case a transaction is sent but is in pending state
+            transactionSubTitle = ("sent via ".localized()) + (model.arrrAddress ?? "NA".localized()) // TODO: need to check what should we show in case a transaction is sent but is in pending state
         case .received:
-            transactionSubTitle = "received via "
+            transactionSubTitle = "received via ".localized()
         }
         
-        transactionSubTitle = transactionSubTitle + (model.arrrAddress ?? "NA")
+        transactionSubTitle = transactionSubTitle + (model.arrrAddress ?? "NA".localized())
         
         return transactionSubTitle
     }

@@ -114,7 +114,7 @@ final class MockFailingShieldFlow: ShieldingPowers {
     func shield() {
         status.send(.shielding)
         DispatchQueue.global().asyncAfter(deadline: .now() + 4) { [weak self] in
-            self?.status.send(completion: .failure(SynchronizerError.generalError(message: "Could Not Shield Funds")))
+            self?.status.send(completion: .failure(SynchronizerError.generalError(message: "Could Not Shield Funds".localized())))
         }
     }
 }

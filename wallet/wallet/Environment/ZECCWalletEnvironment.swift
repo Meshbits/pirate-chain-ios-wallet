@@ -22,7 +22,7 @@ enum WalletState {
 
 final class ZECCWalletEnvironment: ObservableObject {
     
-    static let genericErrorMessage = "An error ocurred, please check your device logs"
+    static let genericErrorMessage = "An error ocurred, please check your device logs".localized()
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
     static let defaultLightWalletEndpoint = "lightd.pirate.black"
@@ -236,7 +236,7 @@ final class ZECCWalletEnvironment: ObservableObject {
             case .dataDbInitFailed(let message):
                 return WalletError.initializationFailed(message: message)
             case .dataDbNotEmpty:
-                return WalletError.initializationFailed(message: "attempt to initialize a db that was not empty")
+                return WalletError.initializationFailed(message: "attempt to initialize a db that was not empty".localized())
             case .saplingSpendParametersNotFound:
                 return WalletError.createFailed(underlying: rustError)
             case .malformedStringInput:
@@ -249,7 +249,7 @@ final class ZECCWalletEnvironment: ObservableObject {
             case .lightwalletdValidationFailed(let underlyingError):
                 return WalletError.criticalError(error: underlyingError)
             case .notPrepared:
-                return WalletError.initializationFailed(message: "attempt to initialize an unprepared synchronizer")
+                return WalletError.initializationFailed(message: "attempt to initialize an unprepared synchronizer".localized())
             case .generalError(let message):
                 return WalletError.genericErrorWithMessage(message: message)
             case .initFailed(let message):
@@ -273,9 +273,9 @@ final class ZECCWalletEnvironment: ObservableObject {
             case .rewindError(let underlyingError):
                 return WalletError.genericErrorWithError(error: underlyingError)
             case .rewindErrorUnknownArchorHeight:
-                return WalletError.genericErrorWithMessage(message: "unable to rescan to specified height")
+                return WalletError.genericErrorWithMessage(message: "unable to rescan to specified height".localized())
             case .invalidAccount:
-                return WalletError.genericErrorWithMessage(message: "your wallet asked a balance for an account index that is not derived. This is probably a programming mistake.")
+                return WalletError.genericErrorWithMessage(message: "your wallet asked a balance for an account index that is not derived. This is probably a programming mistake.".localized())
             }
         } else if let serviceError = error as? LightWalletServiceError {
             switch serviceError {

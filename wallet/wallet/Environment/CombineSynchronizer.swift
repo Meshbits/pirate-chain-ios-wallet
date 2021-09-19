@@ -131,7 +131,7 @@ class CombineSynchronizer {
             guard let self = self else { return }
             
             guard let error = notification.userInfo?[SDKSynchronizer.NotificationKeys.error] as? Error else {
-                self.errorPublisher.send(WalletError.genericErrorWithMessage(message: "An error ocurred, but we can't figure out what it is. Please check device logs for more details")
+                self.errorPublisher.send(WalletError.genericErrorWithMessage(message: "An error ocurred, but we can't figure out what it is. Please check device logs for more details".localized())
                 )
                 return
             }
@@ -223,7 +223,7 @@ class CombineSynchronizer {
     
     func prepare() throws {
         guard let uvk = self.initializer.viewingKeys.first else {
-            throw SynchronizerError.initFailed(message: "unable to derive unified address. this is probably a programming error")
+            throw SynchronizerError.initFailed(message: "unable to derive unified address. this is probably a programming error".localized())
         }
         do {
             self.unifiedAddress = try DerivationTool.default.deriveUnifiedAddressFromUnifiedViewingKey(uvk)
