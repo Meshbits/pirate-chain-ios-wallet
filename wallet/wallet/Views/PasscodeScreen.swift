@@ -52,11 +52,7 @@ public class PasscodeViewModel: ObservableObject{
         }
 
     }
-    
-    func getTemporaryPasscode()->String {
-        return aTempPasscode
-    }
-    
+   
     func comparePasscodes(){
         
         if !aTempPasscode.isEmpty {
@@ -66,7 +62,7 @@ public class PasscodeViewModel: ObservableObject{
                 print("PASSCODE ARE SAME")
                 NotificationCenter.default.post(name: NSNotification.Name("UpdateLayout"), object: nil)
             }else{
-                print("PASSCODE ARE NOT SAME")
+                print("PASSCODE IS NOT SAME")
                 NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
             }
         }else{
@@ -158,6 +154,8 @@ struct PasscodeScreen: View {
    @State var isAuthenticatedFlowInitiated = false
     
    @State var isFirstTimeSetup = false
+    
+   @State var isChangePinFlow = false
        
     var body: some View {
         ZStack {
@@ -238,19 +236,22 @@ struct PasscodeScreen: View {
             
         }
         .highPriorityGesture(dragGesture)
+        .onDisappear{
+            NotificationCenter.default.removeObserver(NSNotification.Name("UpdateLayout"))
+        }
         .onAppear {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateLayout"), object: nil, queue: .main) { (_) in
                 
-                if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty{
+                if let aPasscode = passcodeViewModel.aSavedPasscode, !aPasscode.isEmpty{
                     
-                    let aTempPasscode = passcodeViewModel.getTemporaryPasscode()
+                    let aTempPasscode = passcodeViewModel.aTempPasscode
                     
                     if !aTempPasscode.isEmpty && aTempPasscode == aPasscode{
                         
                         if handleUseCasesRelatedToScreenStates() {
                             return
                         }
-
+                        
                         if isNewWallet {
                             // Initiate Create New Wallet flow from here
 //                            createNewWalletFlow()
@@ -269,12 +270,14 @@ struct PasscodeScreen: View {
                             return
                         }
                     }else{
-                        NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
+                        if (!isChangePinFlow){
+                            NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
+                        }
                     }
                 }
                 
-                if mScreenState == PasscodeScreenStates.newPasscode {
-                    mScreenState = PasscodeScreenStates.confirmPasscode
+                if mScreenState == .newPasscode {
+                    mScreenState = .confirmPasscode
                     passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                     passcodeViewModel.mPressedKeys.removeAll()
                 }
@@ -285,17 +288,12 @@ struct PasscodeScreen: View {
                 passcodeViewModel.aTempPasscode = ""
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()
-                //Choose .hud to toast alert from the top of the screen
-                //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
-//                showErrorToast = false
             }
             
-            if mScreenState != PasscodeScreenStates.changePasscode {
+            if mScreenState != .changePasscode {
                 authenticate()
             }
-//            AlertToast(type: .regular, title: "Message Sent!")
-            
-            
+
         }
         .toast(isPresenting: $showErrorToast){
 
@@ -363,6 +361,16 @@ struct PasscodeScreen: View {
                 mScreenState = .validateAndDismiss
                 NotificationCenter.default.post(name: NSNotification.Name("ValidationSuccessful"), object: nil)
                 isReturnFromFlow = true
+                break
+            case .changePasscode:
+                self.mScreenState = .newPasscode
+                isReturnFromFlow = true
+                self.passcodeViewModel.aSavedPasscode = ""
+                self.passcodeViewModel.aTempPasscode = ""
+                self.passcodeViewModel.aTempConfirmPasscode = ""
+                self.passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
+                self.passcodeViewModel.mPressedKeys.removeAll()
+                break
             default:
                 print("Default case")
         }
