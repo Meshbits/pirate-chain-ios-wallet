@@ -10,6 +10,7 @@ def base_pods
   pod 'lottie-ios'
   pod 'CombineUrlSessionDownloader'
   pod 'BottomSheet', :git => 'https://github.com/weitieda/bottom-sheet.git'
+  pod 'AlertToast'
 end
 
 inhibit_all_warnings!

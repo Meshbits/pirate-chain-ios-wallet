@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import AlertToast
 import LocalAuthentication
 
 public class PasscodeViewModel: ObservableObject{
@@ -21,6 +21,8 @@ public class PasscodeViewModel: ObservableObject{
     var aTempConfirmPasscode = ""
     
     var aSavedPasscode = UserSettings.shared.aPasscode
+    
+    var changePinFlowInitiated = false
     
     init() {
         
@@ -62,10 +64,11 @@ public class PasscodeViewModel: ObservableObject{
             if aTempPasscode == aTempConfirmPasscode {
                 UserSettings.shared.aPasscode = aTempPasscode
                 print("PASSCODE ARE SAME")
+                NotificationCenter.default.post(name: NSNotification.Name("UpdateLayout"), object: nil)
             }else{
                 print("PASSCODE ARE NOT SAME")
+                NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
             }
-            NotificationCenter.default.post(name: NSNotification.Name("UpdateLayout"), object: nil)
         }else{
             aTempPasscode = mPressedKeys.map{String($0)}.joined(separator: "")
             NotificationCenter.default.post(name: NSNotification.Name("UpdateLayout"), object: nil)
@@ -144,7 +147,8 @@ struct PasscodeScreen: View {
     @State var error: UserFacingErrors?
     @State var showError: AlertType?
     @State var destination: Destinations?
-    
+    @State private var showErrorToast = false
+
     let dragGesture = DragGesture()
    
    @State var mScreenState: PasscodeScreenStates?
@@ -154,7 +158,7 @@ struct PasscodeScreen: View {
    @State var isAuthenticatedFlowInitiated = false
     
    @State var isFirstTimeSetup = false
-        
+       
     var body: some View {
         ZStack {
             
@@ -204,7 +208,7 @@ struct PasscodeScreen: View {
                     PasscodeScreenSubTitle(aSubTitle: "SET PIN".localized())
                     PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
                     Spacer()
-                }else if mScreenState == PasscodeScreenStates.confirmPasscode{
+                }else if mScreenState == PasscodeScreenStates.confirmPasscode ||  mScreenState == PasscodeScreenStates.changePasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
@@ -264,6 +268,8 @@ struct PasscodeScreen: View {
 
                             return
                         }
+                    }else{
+                        NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
                     }
                 }
                 
@@ -274,7 +280,25 @@ struct PasscodeScreen: View {
                 }
             }
             
-            authenticate()
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayout"), object: nil, queue: .main) { (_) in
+                showErrorToast = true
+                passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
+                passcodeViewModel.mPressedKeys.removeAll()
+                //Choose .hud to toast alert from the top of the screen
+                //AlertToast(displayMode: .hud, type: .regular, title: "Message Sent!")
+//                showErrorToast = false
+            }
+            
+            if mScreenState != PasscodeScreenStates.changePasscode {
+                authenticate()
+            }
+//            AlertToast(type: .regular, title: "Message Sent!")
+            
+            
+        }
+        .toast(isPresenting: $showErrorToast){
+
+                    AlertToast(displayMode: .hud, type: .regular, title:"Invalid passcode!")
 
         }
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
