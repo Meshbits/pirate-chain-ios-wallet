@@ -159,7 +159,7 @@ struct SettingsScreen: View {
              
                 NavigationLink(
                     
-                    destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: false).environmentObject(self.appEnvironment),
+                    destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: true).environmentObject(self.appEnvironment),
                     tag: SettingsDestination.openChangePIN,
                     selection: $destination
                 ) {

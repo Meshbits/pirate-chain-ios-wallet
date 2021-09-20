@@ -144,6 +144,7 @@ struct PasscodeScreen: View {
     @State var showError: AlertType?
     @State var destination: Destinations?
     @State private var showErrorToast = false
+    @State private var showPasscodeChangeSuccessToast = false
 
     let dragGesture = DragGesture()
    
@@ -265,6 +266,12 @@ struct PasscodeScreen: View {
                                 }
                             }
                             
+                            if (isChangePinFlow){
+                                showPasscodeChangeSuccessToast = true
+                                presentationMode.wrappedValue.dismiss()
+                                return
+                            }
+                            
                             openHomeScreen = true
 
                             return
@@ -280,6 +287,11 @@ struct PasscodeScreen: View {
                     mScreenState = .confirmPasscode
                     passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                     passcodeViewModel.mPressedKeys.removeAll()
+                }
+                
+                if mScreenState == .changePasscode {
+                    isChangePinFlow = true
+                    mScreenState = .newPasscode
                 }
             }
             
@@ -298,6 +310,11 @@ struct PasscodeScreen: View {
         .toast(isPresenting: $showErrorToast){
 
             AlertToast(displayMode: .hud, type: .regular, title:"Invalid passcode!".localized())
+
+        }
+        .toast(isPresenting: $showPasscodeChangeSuccessToast){
+
+            AlertToast(displayMode: .hud, type: .regular, title:"Passcode changed successfully!".localized())
 
         }
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
