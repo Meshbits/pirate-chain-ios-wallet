@@ -282,6 +282,7 @@ struct PasscodeScreen: View {
             
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayout"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
+                passcodeViewModel.aTempPasscode = ""
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()
                 //Choose .hud to toast alert from the top of the screen
