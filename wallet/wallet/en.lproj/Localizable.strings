@@ -492,3 +492,5 @@
 "Wipe Failed" = "Wipe Failed";
  "Close App" =  "Close App";
  "Wipe" = "Wipe";
+"Invalid passphrase!" = "Invalid passphrase!";
+"Invalid passcode!" = "Invalid passcode!";

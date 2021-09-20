@@ -298,7 +298,7 @@ struct PasscodeScreen: View {
         }
         .toast(isPresenting: $showErrorToast){
 
-                    AlertToast(displayMode: .hud, type: .regular, title:"Invalid passcode!")
+            AlertToast(displayMode: .hud, type: .regular, title:"Invalid passcode!".localized())
 
         }
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in

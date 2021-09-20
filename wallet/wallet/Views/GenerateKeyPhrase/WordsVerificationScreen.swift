@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import AlertToast
 final class WordsVerificationViewModel: ObservableObject {
     
     @Published var firstWord = ""
@@ -53,13 +53,16 @@ final class WordsVerificationViewModel: ObservableObject {
                     print("MATCHED")
                     
                 }else{
+                    NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayoutInvalidDetails"), object: nil)
                     print("NOT MATCHED AND NOTIFY USER")
                 }
             }else{
+                NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayoutInvalidDetails"), object: nil)
                 print("NOT MATCHED AND NOTIFY USER")
             }
             
         }else{
+            NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayoutInvalidDetails"), object: nil)
             print("NOT MATCHED AND NOTIFY USER")
         }
         
@@ -97,7 +100,8 @@ struct WordsVerificationScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var viewModel: WordsVerificationViewModel
     @State var isConfirmButtonEnabled = false
-    
+    @State private var showErrorToast = false
+
     var body: some View {
 //        NavigationView {
         ZStack{
@@ -173,6 +177,15 @@ struct WordsVerificationScreen: View {
            
         } .onTapGesture {
             UIApplication.shared.endEditing()
+        }
+        .onAppear(){
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayoutInvalidDetails"), object: nil, queue: .main) { (_) in
+                showErrorToast = true
+            }
+        }.toast(isPresenting: $showErrorToast){
+            
+            AlertToast(displayMode: .hud, type: .regular, title:"Invalid passphrase!".localized())
+
         }
 //        }
         .zcashNavigationBar(leadingItem: {
