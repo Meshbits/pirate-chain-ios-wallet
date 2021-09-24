@@ -258,10 +258,16 @@ struct SettingsSectionHeaderView : View {
         
         ZStack {
             
-            Text(aTitle).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
-                            .frame(width: 230, height: 22,alignment: .leading)
-                            .foregroundColor(Color.white)
-                .padding(.trailing, 150)
+            VStack(alignment: .trailing, spacing: 6) {
+
+              Text(aTitle).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
+                                .foregroundColor(Color.white)
+              .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 20)
+             
+            }
+            .frame(width: 380)
+           
         }
     }
 }
