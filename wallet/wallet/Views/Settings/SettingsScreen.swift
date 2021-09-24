@@ -284,14 +284,17 @@ struct SettingsRow: View {
 //
         VStack {
             HStack{
-                Text(mCurrentRowData.title).font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
-                                .frame(width: 230, height: 22,alignment: .leading)
+                Text(mCurrentRowData.title)
+                    .multilineTextAlignment(.leading)
+                    .font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
+                    .frame(height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
-                    .padding(.trailing, 80)
                     .padding()
-                
+                Spacer()
                 Image("arrow_right").resizable().frame(width: 20, height: 20, alignment: .trailing)
+                .padding()
             }
+            
             if mCurrentRowData.id < noLineAfter {
                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
             }
@@ -315,12 +318,12 @@ struct SettingsRowWithToggle: View {
 
         VStack {
             HStack{
-                Text(mCurrentRowData.title).font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
+                Text(mCurrentRowData.title).multilineTextAlignment(.leading).font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
                                 .frame(width: 200, height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
-                    .padding(.leading,8)
                     .padding()
                 
+                Spacer()
                 
                 Toggle("", isOn: $isFaceIdEnabled)
                     .onChange(of: isFaceIdEnabled, perform: { isEnabled in
@@ -338,6 +341,7 @@ struct SettingsRowWithToggle: View {
                             }
                         
                     })
+                    .multilineTextAlignment(.trailing)
                     .toggleStyle(ColoredToggleStyle()).labelsHidden()
                     .disabled(isDisableBioMetric)
                     .onAppear(){
@@ -422,6 +426,7 @@ struct SettingsSectionBackgroundModifier: ViewModifier {
                 .background(
                     RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 29.0/255.0, green: 32.0/255.0, blue: 34.0/255.0))
                         .softInnerShadow(RoundedRectangle(cornerRadius: 12), darkShadow: Color.init(red: 0.06, green: 0.07, blue: 0.07), lightShadow: Color.init(red: 0.26, green: 0.27, blue: 0.3), spread: 0.05, radius: 2))
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             }
 }
