@@ -59,9 +59,8 @@ struct SettingsScreen: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .center, spacing: 10) {
-                    Spacer(minLength: 5)
                     Text("Settings".localized()).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
-                        
+
                     ScrollView {
 
                         SettingsSectionHeaderView(aTitle:"General".localized())
@@ -127,6 +126,7 @@ struct SettingsScreen: View {
                         }
                         .modifier(SettingsSectionBackgroundModifier())
                     }
+                    .padding(.top,20)
                     .background(Color.screenBgColor)
           
                 }
