@@ -243,7 +243,7 @@ struct PasscodeScreen: View {
         .onAppear {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateLayout"), object: nil, queue: .main) { (_) in
                 
-                if let aPasscode = passcodeViewModel.aSavedPasscode, !aPasscode.isEmpty{
+                if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty{
                     
                     let aTempPasscode = passcodeViewModel.aTempPasscode
                     
