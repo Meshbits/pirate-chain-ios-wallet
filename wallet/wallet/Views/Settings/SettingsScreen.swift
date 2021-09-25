@@ -59,7 +59,8 @@ struct SettingsScreen: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .center, spacing: 10) {
-                    Text("Settings".localized()).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
+                    Text("Settings".localized())
+                        .scaledFont(size: 20).multilineTextAlignment(.center).foregroundColor(.white)
 
                     ScrollView {
 
@@ -260,7 +261,8 @@ struct SettingsSectionHeaderView : View {
             
             VStack(alignment: .trailing, spacing: 6) {
 
-              Text(aTitle).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
+              Text(aTitle)
+                .scaledFont(size: 20).foregroundColor(Color.zSettingsSectionHeader)
                                 .foregroundColor(Color.white)
               .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 20)
@@ -286,7 +288,7 @@ struct SettingsRow: View {
             HStack{
                 Text(mCurrentRowData.title)
                     .multilineTextAlignment(.leading)
-                    .font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
+                    .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
                     .frame(height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
                     .padding()
@@ -318,7 +320,8 @@ struct SettingsRowWithToggle: View {
 
         VStack {
             HStack{
-                Text(mCurrentRowData.title).multilineTextAlignment(.leading).font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
+                Text(mCurrentRowData.title).multilineTextAlignment(.leading)
+                    .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
                                 .frame(width: 200, height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
                     .padding()

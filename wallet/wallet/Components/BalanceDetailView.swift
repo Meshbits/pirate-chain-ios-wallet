@@ -18,9 +18,10 @@ struct BalanceDetailView: View {
         HStack{
             Text(format(zec: availableZec))
                 .foregroundColor(.white)
-                .scaledFont(size: 22)
+                .scaledFont(size: 30)
+                
             Text(" \(zec) ")
-                .scaledFont(size: 12)
+                .scaledFont(size: 20)
                 .foregroundColor(.zAmberGradient1)
         }
     }
