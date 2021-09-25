@@ -20,15 +20,20 @@ struct BalanceDetail: View {
     var status: BalanceStatus
     
     var available: some View {
-        Text(format(zec: availableZec) + " \(zec) ")
-            .foregroundColor(.zLightGray)
-            .font(.barlowRegular(size: Device.isLarge ? 18 : 10))
-            + Text("balance_available".localized())
-            .foregroundColor(Color.zAmberGradient1)
-            .font(.barlowRegular(size: Device.isLarge ? 18 : 10))
-            + Text(transparentFundsAvailable ? "†" : "")
-                .foregroundColor(.zTransparentBlue)
-                .font(.footnote)
+        HStack{
+            Text(format(zec: availableZec) + " \(zec) ")
+                .foregroundColor(.zLightGray)
+                .scaledFont(size: 14)
+                
+            Text("balance_available".localized())
+                .foregroundColor(Color.zAmberGradient1)
+                .scaledFont(size: 14)
+               
+            Text(transparentFundsAvailable ? "†" : "")
+                    .foregroundColor(.zTransparentBlue)
+                    .font(.footnote)
+
+        }
     }
     
     func format(zec: Double) -> String {

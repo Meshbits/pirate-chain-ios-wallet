@@ -32,7 +32,7 @@ struct KeyPad: View {
                                         self.viewModel.valuePressed(pad)
                                     }) {
                                             Text(pad)
-                                                .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
+                                                .scaledFont(size: 17)
 
                                     }
                                     .buttonStyle(KeyPadButtonStyle(size: self.keySize))
@@ -44,7 +44,7 @@ struct KeyPad: View {
                                         self.viewModel.valuePressed(pad)
                                     }) {
                                             Text(pad)
-                                                .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
+                                                .scaledFont(size: 17)
 
                                     }
                                     .buttonStyle(KeyPadButtonStyle(size: self.keySize))

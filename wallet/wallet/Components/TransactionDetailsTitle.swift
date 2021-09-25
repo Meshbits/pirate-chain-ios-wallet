@@ -16,12 +16,14 @@ struct TransactionDetailsTitle: View {
     var status: DetailModel.Status
     
     var available: some View {
-        Text(format(zec: availableZec < 0 ? -availableZec : availableZec))
-            .foregroundColor(.white)
-            .font(.barlowRegular(size: Device.isLarge ? 44 : 35))
-       + Text(" \(arrr) ")
-            .font(.barlowRegular(size: Device.isLarge ? 17 : 12))
-            .foregroundColor(.zAmberGradient1)
+        HStack{
+           Text(format(zec: availableZec < 0 ? -availableZec : availableZec))
+                .foregroundColor(.white)
+                .scaledFont(size: 40)
+           Text(" \(arrr) ")
+                .scaledFont(size: 15)
+                .foregroundColor(.zAmberGradient1)
+        }
     }
     
     func format(zec: Double) -> String {
@@ -53,14 +55,14 @@ struct TransactionDetailsTitle: View {
             
             Text(aTitle)
                 .foregroundColor(.zLightGray)
-                .font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+                .scaledFont(size: 16)
                 .padding(.leading,10)
             HStack{
                 available.multilineTextAlignment(.leading)
                     .padding(.leading,10)
                 Spacer()
                 Text("")
-                     .font(.barlowRegular(size: Device.isLarge ? 16 : 9))
+                    .scaledFont(size: 12)
                     .foregroundColor(.gray).multilineTextAlignment(.trailing)
                 
                 Image(anImage).resizable().frame(width:60,height:60).multilineTextAlignment(.trailing)

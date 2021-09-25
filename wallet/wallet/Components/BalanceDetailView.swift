@@ -15,12 +15,14 @@ struct BalanceDetailView: View {
     var status: BalanceStatus
     
     var available: some View {
-        Text(format(zec: availableZec))
-            .foregroundColor(.white)
-            .font(.barlowRegular(size: Device.isLarge ? 26 : 17))
-       + Text(" \(zec) ")
-            .font(.barlowRegular(size: Device.isLarge ? 16 : 9))
-            .foregroundColor(.zAmberGradient1)
+        HStack{
+            Text(format(zec: availableZec))
+                .foregroundColor(.white)
+                .scaledFont(size: 22)
+            Text(" \(zec) ")
+                .scaledFont(size: 12)
+                .foregroundColor(.zAmberGradient1)
+        }
     }
     
     func format(zec: Double) -> String {
@@ -65,14 +67,14 @@ struct BalanceDetailView: View {
         VStack(alignment: .leading) {
             Text("Balance".localized())
                 .foregroundColor(.zLightGray)
-                .font(.barlowRegular(size: Device.isLarge ? 22 : 14))
+                .scaledFont(size: 18)
                 .padding(.leading,10)
             HStack{
                 available.multilineTextAlignment(.leading)
                     .padding(.leading,10)
                 Spacer()
                 Text("")
-                     .font(.barlowRegular(size: Device.isLarge ? 16 : 9))
+                    .scaledFont(size: 12)
                     .foregroundColor(.gray).multilineTextAlignment(.trailing)
             }
             if includeCaption {

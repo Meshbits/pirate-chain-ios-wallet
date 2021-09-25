@@ -549,14 +549,13 @@ struct Home: View {
 //                        })
 //                }
                 
-                Spacer()
-              
                 if self.viewModel.getSortedItems().count > 0 {
                     
                     Text("Recent Transfers".localized())
                         .multilineTextAlignment(.leading)
                         .font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
                         .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(10).padding(.leading, 10)
+                        .padding(.top, 20)
                     
                     List {
                         
@@ -585,7 +584,10 @@ struct Home: View {
                     )
                     .padding()
                 }else{
+                    Spacer()
                     Text("No Recent transfers".localized()).font(.barlowRegular(size: 30)).foregroundColor(Color.zSettingsSectionHeader)
+                        .multilineTextAlignment(.center)
+                    Spacer()
                 }
                 
                 
@@ -597,8 +599,6 @@ struct Home: View {
 //                    .alert(isPresented: self.$viewModel.showError) {
 //                        self.viewModel.errorAlert
 //                }
-                
-                Spacer()
                 
                 HStack(alignment: .center, spacing: 2, content: {
                     
@@ -906,5 +906,24 @@ func body(content: Content) -> some View {
             RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 29.0/255.0, green: 32.0/255.0, blue: 34.0/255.0))
                 .softInnerShadow(RoundedRectangle(cornerRadius: 12), darkShadow: Color.init(red: 0.06, green: 0.07, blue: 0.07), lightShadow: Color.init(red: 0.26, green: 0.27, blue: 0.3), spread: 0.05, radius: 2))
         
+    }
+}
+
+
+@available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
+struct ScaledFont: ViewModifier {
+    @Environment(\.sizeCategory) var sizeCategory
+    var size: CGFloat
+
+    func body(content: Content) -> some View {
+       let scaledSize = UIFontMetrics.default.scaledValue(for: size)
+        return content.font(.custom("Barlow-Regular", size: scaledSize))
+    }
+}
+
+@available(iOS 13, macCatalyst 13, tvOS 13, watchOS 6, *)
+extension View {
+    func scaledFont(size: CGFloat) -> some View {
+        return self.modifier(ScaledFont(size: size))
     }
 }

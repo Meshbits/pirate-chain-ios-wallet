@@ -19,7 +19,7 @@ struct ARRRMemoTextField: View {
            
             HStack{
                 TextField("Memo Text...".localized(), text: $memoText)
-                  .font(.barlowRegular(size: 20))
+                  .scaledFont(size: 20)
                   .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.clear))
                   .foregroundColor(Color.gray)
                   .modifier(QRCodeBackgroundPlaceholderModifier())
@@ -30,7 +30,8 @@ struct ARRRMemoTextField: View {
                         Text("")
                     }
                     .toggleStyle(ARRRToggleStyle(isHighlighted: $isReplyTo))
-                    Text("Reply to".localized()).font(.barlowRegular(size: 12)).foregroundColor(.gray)
+                    Text("Reply to".localized())
+                        .scaledFont(size: 12).foregroundColor(.gray)
                 }.padding(.trailing, 10)
                 Spacer()
             }

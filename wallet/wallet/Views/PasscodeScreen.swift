@@ -193,25 +193,25 @@ struct PasscodeScreen: View {
                     PasscodeScreenTitle(aTitle: "LOGIN PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
                 }else if mScreenState == PasscodeScreenStates.validateAndDismiss{
                     PasscodeScreenTitle(aTitle: "Enter PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "PIN Required".localized())
-                    PasscodeScreenDescription(aDescription: "Please enter your PIN to conotinue".localized(),size:Device.isLarge ? 18 : 12,padding:50)
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to continue".localized(),size:15,padding:50)
                     Spacer()
                 }else if mScreenState == PasscodeScreenStates.newPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "SET PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
                 }else if mScreenState == PasscodeScreenStates.confirmPasscode ||  mScreenState == PasscodeScreenStates.changePasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 18 : 12,padding:50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
                 }
                 
@@ -222,11 +222,11 @@ struct PasscodeScreen: View {
                     }
                 }).padding(20)
 
-                PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:Device.isLarge ? 14 : 8,padding:90)
+                PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:Device.isLarge ? 14 : 8,padding:50)
                 
                 PasscodeNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
                                 
-            })
+            }).padding(.top,30)
             
             NavigationLink(destination:
                             HomeTabView(openPasscodeScreen: false)
@@ -510,9 +510,8 @@ struct PasscodeNumber: View {
                         Text("").foregroundColor(.white)
                         Image(systemName: "delete.left.fill").foregroundColor(.gray)
                     }else {
-                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                            .barlowRegular(size: Device.isLarge ? 32 : 24)
-                        )
+                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 28)
+                        
                     }
                 }.padding(2)
             })
@@ -583,9 +582,7 @@ struct PasscodeScreenTitle : View {
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
-            Text(aTitle).foregroundColor(.gray).font(
-                .barlowRegular(size: Device.isLarge ? 28 : 18)
-            ).padding(.top,20)
+            Text(aTitle).foregroundColor(.gray).scaledFont(size: 23).padding(.top,20)
             Spacer()
         })
     }
@@ -596,9 +593,8 @@ struct PasscodeScreenSubTitle : View {
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
-            Text(aSubTitle).foregroundColor(.white).font(
-                .barlowRegular(size: Device.isLarge ? 28 : 18)
-            )
+            Text(aSubTitle).foregroundColor(.white)
+            .scaledFont(size: 22)
             Spacer()
         })
     }
@@ -611,9 +607,9 @@ struct PasscodeScreenDescription : View {
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
-            Text(aDescription).lineLimit(nil).foregroundColor(.white).font(
-                .barlowRegular(size: size)
-            ).padding(.leading,padding).padding(.trailing,padding).multilineTextAlignment(.center)
+            Text(aDescription).lineLimit(nil).foregroundColor(.white)
+                .scaledFont(size: size).padding(.leading,padding).padding(.trailing,padding).multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
             Spacer()
         })
     }

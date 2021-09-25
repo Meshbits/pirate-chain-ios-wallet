@@ -84,8 +84,10 @@ struct HowItWorks: View {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .center, content: {
-                Text(self.viewModel.mDescriptionTitle).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
-                Text(self.viewModel.mDescriptionSubTitle).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
+                Text(self.viewModel.mDescriptionTitle).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
+                    .scaledFont(size: 32).padding(.top,80)
+                Text(self.viewModel.mDescriptionSubTitle).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
+                    .scaledFont(size: 17)
                 Spacer()
                 Spacer()
                 
@@ -111,7 +113,8 @@ struct HowItWorks: View {
             }, headerItem: {
                 HStack{
                     Text(self.viewModel.mScreenTitle)
-                        .font(.barlowRegular(size: 18)).foregroundColor(Color.zSettingsSectionHeader)
+                        .scaledFont(size: 18)
+                        .foregroundColor(Color.zSettingsSectionHeader)
                         .frame(alignment: Alignment.center)
                 }
             }, trailingItem: {

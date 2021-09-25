@@ -19,8 +19,10 @@ struct GenerateKeyPhraseInitiate: View {
             ZStack{
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, content: {
-                    Text("Generate your private recovery phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
-                    Text("The key is required to recover your money if you upgrade or lose your phone".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
+                    Text("Generate your private recovery phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
+                        .scaledFont(size: 32).padding(.top,80)
+                    Text("The key is required to recover your money if you upgrade or lose your phone".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
+                        .scaledFont(size: 17)
                     Spacer()
                     Spacer()
                     

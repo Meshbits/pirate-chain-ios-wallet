@@ -34,7 +34,8 @@ struct KeyPadARRR: View {
                                     }) {
                                         ZStack{
                                             Image("passcodenumericbg")
-                                            Image(systemName: "delete.left.fill").foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 22 : 14)).foregroundColor(.gray)
+                                            Image(systemName: "delete.left.fill").foregroundColor(.gray)
+                                                .scaledFont(size: 20).foregroundColor(.gray)
                                         }
                                     }
                                     .buttonStyle(KeyPadButtonStyleARRR(size: self.keySize))
@@ -48,7 +49,7 @@ struct KeyPadARRR: View {
                                         ZStack{
                                             Image("passcodenumericbg")
                                             Text(pad)
-                                                .font(.barlowRegular(size: Device.isLarge ? 22 : 14)).foregroundColor(.gray)
+                                                .scaledFont(size: 20).foregroundColor(.gray)
                                         }
 
                                     }

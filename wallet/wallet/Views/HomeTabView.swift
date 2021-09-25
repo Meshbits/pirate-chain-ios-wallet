@@ -26,7 +26,7 @@ struct HomeTabView: View {
             UITabBar.appearance().isTranslucent = false
             UITabBar.appearance().barTintColor = UIColor.init(Color.arrrBarTintColor)
             self.mOpenPasscodeScreen = openPasscodeScreen
-        }
+    }
   
     var body: some View {
         ZStack {

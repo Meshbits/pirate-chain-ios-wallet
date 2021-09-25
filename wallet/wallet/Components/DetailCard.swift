@@ -68,7 +68,8 @@ struct DetailCard: View {
         return
             Text(text)
                 .foregroundColor(color)
-                .opacity(opacity).font(.barlowRegular(size: 18))
+                .opacity(opacity)
+            .scaledFont(size: 16)
             
     }
     
@@ -81,7 +82,7 @@ struct DetailCard: View {
                     HStack {
 //                        Text(model.title)
                         Text(model.date.aFormattedDate)
-                            .font(.barlowRegular(size: 20))
+                            .scaledFont(size: 20)
                             .truncationMode(.tail)
                             .lineLimit(1)
                             .foregroundColor(.white)

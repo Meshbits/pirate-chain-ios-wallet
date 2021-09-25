@@ -34,7 +34,7 @@ struct ActionableMessage: View {
             Text(message)
             .foregroundColor(.white)
                 .multilineTextAlignment(.center)
-                .font(.barlowRegular(size: Device.isLarge ? 22 : 16))
+                .scaledFont(size: 19)
             actionView
                 
         }
