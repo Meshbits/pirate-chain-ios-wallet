@@ -522,9 +522,8 @@ struct Home: View {
                    },
                    trailingItem: { EmptyView() }
                 )
-                .padding(.horizontal, 10)
                 .frame(height: 64)
-                .padding([.leading, .trailing], 16)
+                .padding([.leading, .trailing], 10)
                 .padding([.top], geo.safeAreaInsets.top-10)
                 
 //                SendZecView(zatoshi: self.$viewModel.sendZecAmountText)

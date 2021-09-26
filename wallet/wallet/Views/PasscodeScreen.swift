@@ -239,6 +239,7 @@ struct PasscodeScreen: View {
         .highPriorityGesture(dragGesture)
         .onDisappear{
             NotificationCenter.default.removeObserver(NSNotification.Name("UpdateLayout"))
+            NotificationCenter.default.removeObserver(NSNotification.Name("UpdateErrorLayout"))
         }
         .onAppear {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateLayout"), object: nil, queue: .main) { (_) in
