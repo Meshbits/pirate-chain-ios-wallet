@@ -107,8 +107,10 @@ struct WordsVerificationScreen: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Confirm Recovery Phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28))
-                Text("Almost done! Enter the following words from your recovery phrase".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                Text("Confirm Recovery Phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
+                    .scaledFont(size: 32)
+                Text("Almost done! Enter the following words from your recovery phrase".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
+                    .scaledFont(size: 14)
                 
                 HStack(spacing: nil, content: {
                    
@@ -117,29 +119,30 @@ struct WordsVerificationScreen: View {
                         TextField("".localized(), text: self.$viewModel.firstWord, onEditingChanged: { (changed) in
                         }) {
      //                       self.didEndEditingAddressTextField()
-                        }.font(.barlowRegular(size: 14))
+                        }
+                        .scaledFont(size: 14)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                     
                     VStack{
-                        Text("Word #\(self.viewModel.secondWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word #\(self.viewModel.secondWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).scaledFont(size: 14)
                         TextField("".localized(), text: self.$viewModel.secondWord, onEditingChanged: { (changed) in
                         }){
       //                      self.didEndEditingPortTextField()
-                        }.font(.barlowRegular(size: 14))
+                        }.scaledFont(size: 14)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                      
                     VStack{
-                        Text("Word #\(self.viewModel.thirdWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word #\(self.viewModel.thirdWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).scaledFont(size: 14)
                         TextField("".localized(), text: self.$viewModel.thirdWord, onEditingChanged: { (changed) in
                         }) {
       //                      self.didEndEditingPortTextField()
-                        }.font(.barlowRegular(size: 14))
+                        }.scaledFont(size: 14)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
                         .modifier(WordBackgroundPlaceholderModifier())

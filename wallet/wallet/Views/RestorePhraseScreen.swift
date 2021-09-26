@@ -21,14 +21,14 @@ struct RestorePhraseScreen: View {
     
     var seedPhraseSubtitle: some View {
         if seedPhrase.isEmpty {
-            return Text.subtitle(text: "Make sure nobody is watching you!".localized()).font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+            return Text.subtitle(text: "Make sure nobody is watching you!".localized()).font(.barlowRegular(size: 15))
         }
         
         do {
            try MnemonicSeedProvider.default.isValid(mnemonic: seedPhrase)
-            return Text.subtitle(text: "Your seed phrase is valid".localized()).font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+            return Text.subtitle(text: "Your seed phrase is valid".localized()).font(.barlowRegular(size: 15))
         } catch {
-            return Text.subtitle(text: "Your seed phrase is invalid!".localized()).font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+            return Text.subtitle(text: "Your seed phrase is invalid!".localized()).font(.barlowRegular(size: 15))
                 .foregroundColor(.red)
                 .bold()
         }
@@ -48,19 +48,20 @@ struct RestorePhraseScreen: View {
                         binding: $seedPhrase,
                         onEditingChanged: { _ in },
                         onCommit: {}
-                    ).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
+                    ).scaledFont(size: 17)
                     .multilineTextAlignment(.leading).padding(.top,100)
                     
                     ZcashTextField(
                         title: "Wallet Birthday height".localized(),
                         subtitleView: AnyView(
-                            Text.subtitle(text: "If you don't know it, leave it blank. First Sync will take longer.".localized()).font(.barlowRegular(size: Device.isLarge ? 18 : 12))
+                            Text.subtitle(text: "If you don't know it, leave it blank. First Sync will take longer.".localized())
+                                .scaledFont(size: 15)
                         ),
                         keyboardType: UIKeyboardType.decimalPad,
                         binding: $walletBirthDay,
                         onEditingChanged: { _ in },
                         onCommit: {}
-                    ).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
+                    ).scaledFont(size: 17)
                     .multilineTextAlignment(.leading)
                     
                     Button(action: {
@@ -133,9 +134,9 @@ struct RestorePhraseScreen: View {
             VStack(alignment: .leading) {
                 ZStack{
                     Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                        .barlowRegular(size: Device.isLarge ? 26 : 18)
-                    ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center)
+                        .scaledFont(size: 22)
+                    .padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
                 }
             }.padding(.leading,-20).padding(.top,10)
         })

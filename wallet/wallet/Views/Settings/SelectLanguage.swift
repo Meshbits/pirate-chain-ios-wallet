@@ -55,7 +55,7 @@ struct SelectLanguage: View {
             VStack(alignment: .center, spacing: 10) {
                 Spacer(minLength: 5)
                 
-                Text("Select Language".localized()).frame(height:40).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(Color.zSettingsSectionHeader)
+                Text("Select Language".localized()).frame(height:40).scaledFont(size: 20).multilineTextAlignment(.center).foregroundColor(Color.zSettingsSectionHeader)
                     
                 ScrollView {
 
@@ -147,7 +147,7 @@ struct SettingsRowWithCheckbox: View {
         VStack {
             HStack{
                 
-                Text(mCurrentRowData.title).font(.barlowRegular(size: 16))
+                Text(mCurrentRowData.title).scaledFont(size: 16)
                                 .frame(width: 230, height: 22,alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(isCurrentIndexSelected() ? Color.arrrBarAccentColor : Color.textTitleColor)

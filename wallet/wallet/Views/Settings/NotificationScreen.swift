@@ -49,9 +49,7 @@ struct NotificationScreen: View {
             VStack(alignment: .leading) {
                 ZStack{
                     Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                        .barlowRegular(size: Device.isLarge ? 26 : 18)
-                    ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 22).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
                 }
             }.padding(.leading,-20).padding(.top,10)
         })
@@ -81,7 +79,7 @@ struct NotificationsRowWithToggle: View {
 
         VStack {
             HStack{
-                Text(mCurrentRowData.title).font(.barlowRegular(size: 16)).foregroundColor(Color.textTitleColor)
+                Text(mCurrentRowData.title).scaledFont(size: 16).foregroundColor(Color.textTitleColor)
                                 .frame(width: 200, height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
                     .padding()
