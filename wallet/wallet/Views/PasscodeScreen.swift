@@ -300,7 +300,10 @@ struct PasscodeScreen: View {
                             
                             if (isChangePinFlow){
                                 showPasscodeChangeSuccessToast = true
-                                presentationMode.wrappedValue.dismiss()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                                
                                 return
                             }
                             
@@ -329,7 +332,9 @@ struct PasscodeScreen: View {
             
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayout"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
-                passcodeViewModel.aTempPasscode = ""
+                if mScreenState == .validatePasscode{
+                    passcodeViewModel.aTempPasscode = ""
+                }
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()
             }
