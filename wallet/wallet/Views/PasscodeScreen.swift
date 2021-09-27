@@ -20,6 +20,8 @@ public class PasscodeViewModel: ObservableObject{
         
     var aTempConfirmPasscode = ""
     
+    var aTempChangeConfirmPasscode = ""
+    
     var aSavedPasscode = UserSettings.shared.aPasscode
     
     var changePinFlowInitiated = false
@@ -48,11 +50,34 @@ public class PasscodeViewModel: ObservableObject{
         }
         
         if mPressedKeys.count == 6 {
-            comparePasscodes()
+            if (!changePinFlowInitiated){
+                comparePasscodes()
+            }else{
+                comparePasscodesForTemp()
+            }
         }
 
     }
    
+    func comparePasscodesForTemp(){
+        if !aTempPasscode.isEmpty {
+            aTempChangeConfirmPasscode = mPressedKeys.map{String($0)}.joined(separator: "")
+            if aTempPasscode == aTempChangeConfirmPasscode {
+                aTempConfirmPasscode = aTempChangeConfirmPasscode
+                UserSettings.shared.aPasscode = aTempPasscode
+                print("PASSCODE ARE SAME")
+                NotificationCenter.default.post(name: NSNotification.Name("UpdateLayout"), object: nil)
+            }else{
+                print("PASSCODE IS NOT SAME")
+                NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
+            }
+        }else{
+            aTempPasscode = mPressedKeys.map{String($0)}.joined(separator: "")
+            NotificationCenter.default.post(name: NSNotification.Name("UpdateLayout"), object: nil)
+        }
+        
+    }
+    
     func comparePasscodes(){
         
         if !aTempPasscode.isEmpty {
@@ -246,9 +271,15 @@ struct PasscodeScreen: View {
                 
                 if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty{
                     
-                    let aTempPasscode = passcodeViewModel.aTempPasscode
+                    print("aPasscode: \(aPasscode)")
+                    
+                    let aTempPasscode = passcodeViewModel.changePinFlowInitiated ? passcodeViewModel.aTempChangeConfirmPasscode : passcodeViewModel.aTempPasscode
+                    
+                    print("aTempPasscode: \(aTempPasscode)")
                     
                     if !aTempPasscode.isEmpty && aTempPasscode == aPasscode{
+                        
+                        print("SAME PASSCODE: \(aTempPasscode)")
                         
                         if handleUseCasesRelatedToScreenStates() {
                             return
@@ -383,9 +414,10 @@ struct PasscodeScreen: View {
             case .changePasscode:
                 self.mScreenState = .newPasscode
                 isReturnFromFlow = true
+                self.passcodeViewModel.changePinFlowInitiated = true
                 self.passcodeViewModel.aSavedPasscode = ""
-                self.passcodeViewModel.aTempPasscode = ""
                 self.passcodeViewModel.aTempConfirmPasscode = ""
+                self.passcodeViewModel.aTempPasscode = ""
                 self.passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 self.passcodeViewModel.mPressedKeys.removeAll()
                 break
