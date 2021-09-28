@@ -115,7 +115,7 @@ struct WordsVerificationScreen: View {
                 HStack(spacing: nil, content: {
                    
                     VStack{
-                        Text("Word #\(self.viewModel.firstWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).font(.barlowRegular(size: Device.isLarge ? 16 : 12))
+                        Text("Word #\(self.viewModel.firstWordIndex + 1)").foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).scaledFont(size: 14)
                         TextField("".localized(), text: self.$viewModel.firstWord, onEditingChanged: { (changed) in
                         }) {
      //                       self.didEndEditingAddressTextField()
