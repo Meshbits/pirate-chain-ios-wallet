@@ -115,7 +115,9 @@ struct SendMoneyView: View {
                 }
                 
                 HStack{
-                    Text("Memo".localized()).font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
+                    Text("Memo".localized())
+                        .scaledFont(size: 20)
+                        .foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
@@ -129,7 +131,7 @@ struct SendMoneyView: View {
                 
                 Text(self.flow.amount)
                     .foregroundColor(.gray)
-                    .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
+                    .scaledFont(size: 30)
                     .frame(height:40)
                     .padding(.leading,10)
                     .padding(.trailing,10)
@@ -137,7 +139,8 @@ struct SendMoneyView: View {
             
                 HStack{
                     Spacer()
-                    Text("Processing fee: ".localized() + "\(ZcashSDK.defaultFee().asHumanReadableZecBalance().toZecAmount())" + " ARRR").font(.barlowRegular(size: 14)).foregroundColor(Color.textTitleColor)
+                    Text("Processing fee: ".localized() + "\(ZcashSDK.defaultFee().asHumanReadableZecBalance().toZecAmount())" + " ARRR")
+                        .scaledFont(size: 14).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .truncationMode(.middle)
@@ -176,13 +179,14 @@ struct SendMoneyView: View {
                  HStack{
                      Text("Send Money".localized())
                          .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
-                         .frame(alignment: Alignment.center)
+                         .frame(alignment: Alignment.center).padding(.top,30)
+                        
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
                      presentationMode.wrappedValue.dismiss()
                      }).frame(width: 30, height: 30)
-                 .padding(.top,20)
+                 .padding(.top,40)
              })
             .navigationBarHidden(true)
         }
