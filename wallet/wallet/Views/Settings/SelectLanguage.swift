@@ -36,6 +36,22 @@ class SelectLanguageViewModel: ObservableObject {
             }
         }
     }
+    
+    func updateAllLanguagesLayoutAfterChange(){
+
+        allLanguages.removeAll()
+        
+        let aTitles = ["English", "Spanish  (Español)","Russian  (pусский)"]
+        
+        for index in 0...2 {
+            if index == UserSettings.shared.languageSelectionIndex {
+                allLanguages.append(CheckBoxRowData(id:index,title:aTitles[index],isSelected: true))
+            }else{
+                allLanguages.append(CheckBoxRowData(id:index,title:aTitles[index],isSelected: false))
+            }
+        }
+        
+    }
 }
 
 
@@ -112,6 +128,7 @@ struct SelectLanguage: View {
     }
     
     func dismissBottomSheet(){
+        languageViewModel.updateAllLanguagesLayoutAfterChange()
         NotificationCenter.default.post(name: NSNotification.Name("DismissSettings"), object: nil)
     }
     
@@ -147,15 +164,19 @@ struct SettingsRowWithCheckbox: View {
         VStack {
             HStack{
                 
-                Text(mCurrentRowData.title).scaledFont(size: 16)
-                                .frame(width: 230, height: 22,alignment: .leading)
+                Text(mCurrentRowData.title)
                     .multilineTextAlignment(.leading)
+                    .scaledFont(size: 16)
                     .foregroundColor(isCurrentIndexSelected() ? Color.arrrBarAccentColor : Color.textTitleColor)
                     .padding(.trailing, isCurrentIndexSelected() ? 60 : 80)
+                    .frame(height: 22,alignment: .leading)
+                                .foregroundColor(Color.white)
                     .padding()
-                
+                Spacer()
+              
                 if isCurrentIndexSelected() {
                     Image(systemName: "checkmark").resizable().frame(width: 10, height: 10, alignment: .trailing).foregroundColor(isCurrentIndexSelected() ? Color.arrrBarAccentColor : Color.textTitleColor)
+                        .padding(.trailing,10)
                 }
             }
             if mCurrentRowData.id < noLineAfter {
