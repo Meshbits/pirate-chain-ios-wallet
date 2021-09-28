@@ -184,6 +184,7 @@ struct WordsVerificationScreen: View {
         .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayoutInvalidDetails"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
+                aSmallErrorVibration()
             }
         }.toast(isPresenting: $showErrorToast){
             
@@ -200,6 +201,11 @@ struct WordsVerificationScreen: View {
         }, trailingItem: {
             EmptyView()
         })
+    }
+    
+    func aSmallErrorVibration(){
+        let vibrationGenerator = UINotificationFeedbackGenerator()
+        vibrationGenerator.notificationOccurred(.error)
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import AlertToast
 
 
 final class RecoveryViewModel: ObservableObject {
@@ -55,14 +56,17 @@ final class RecoveryViewModel: ObservableObject {
                     
                     
                 }else{
+                    NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayoutInvalidDetailsRecovery"), object: nil)
                     print("NOT MATCHED AND NOTIFY USER")
                 }
                 
             }else{
+                NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayoutInvalidDetailsRecovery"), object: nil)
                 print("NOT MATCHED AND NOTIFY USER")
             }
             
         }else{
+            NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayoutInvalidDetailsRecovery"), object: nil)
             print("NOT MATCHED AND NOTIFY USER")
         }
         
@@ -100,7 +104,7 @@ struct RecoveryBasedUnlink: View {
     @EnvironmentObject var viewModel: RecoveryViewModel
     @State var isConfirmButtonEnabled = false
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
-    
+    @State private var showErrorToast = false
     var body: some View {
 //        NavigationView {
         ZStack{
@@ -197,6 +201,15 @@ struct RecoveryBasedUnlink: View {
                 UIApplication.shared.endEditing()
             }
            
+        } .onAppear(){
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayoutInvalidDetailsRecovery"), object: nil, queue: .main) { (_) in
+                showErrorToast = true
+                aSmallErrorVibration()
+            }
+        }.toast(isPresenting: $showErrorToast){
+            
+            AlertToast(displayMode: .hud, type: .regular, title:"Invalid passphrase!".localized())
+
         } .onTapGesture {
             UIApplication.shared.endEditing()
 //        }
@@ -210,5 +223,11 @@ struct RecoveryBasedUnlink: View {
             EmptyView()
         })
     }
+    
+    func aSmallErrorVibration(){
+        let vibrationGenerator = UINotificationFeedbackGenerator()
+        vibrationGenerator.notificationOccurred(.error)
+    }
+    
 }
 
