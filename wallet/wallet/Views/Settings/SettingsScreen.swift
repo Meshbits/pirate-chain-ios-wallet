@@ -54,6 +54,11 @@ struct SettingsScreen: View {
     
     @State var mSelectedSettingsRowData: SettingsRowData?
     
+    func aSmallVibration(){
+        let vibrationGenerator = UINotificationFeedbackGenerator()
+        vibrationGenerator.notificationOccurred(.warning)
+    }
+    
     var body: some View {
             ZStack{
                 ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -71,6 +76,7 @@ struct SettingsScreen: View {
                                     .onTapGesture {
                                         self.mSelectedSettingsRowData = settingsRowData
                                         openRespectiveScreenBasisSelection()
+                                        aSmallVibration()
                                     }
                             }
                             
@@ -93,6 +99,7 @@ struct SettingsScreen: View {
                                             .onTapGesture {
                                                 self.mSelectedSettingsRowData = settingsRowData
                                                 openRespectiveScreenBasisSelection()
+                                                aSmallVibration()
                                             }
                                     }
                                 }
@@ -122,6 +129,7 @@ struct SettingsScreen: View {
                                 .onTapGesture {
                                     self.mSelectedSettingsRowData = settingsRowData
                                     openRespectiveScreenBasisSelection()
+                                    aSmallVibration()
                                 }
                             }
                         }

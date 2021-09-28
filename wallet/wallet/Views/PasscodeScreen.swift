@@ -529,6 +529,11 @@ struct PasscodeNumber: View {
     
     @Binding var passcodeViewModel: PasscodeViewModel
     
+    func aSmallVibration(){
+        let vibrationGenerator = UINotificationFeedbackGenerator()
+        vibrationGenerator.notificationOccurred(.warning)
+    }
+    
     var body: some View {
         
             Button(action: {
@@ -539,6 +544,8 @@ struct PasscodeNumber: View {
                 }else{
                     passcodeViewModel.captureKeyPress(mKeyPressed: Int(passcodeValue)!, isBackPressed: false)
                 }
+                
+                aSmallVibration()
 
             }, label: {
                 ZStack {

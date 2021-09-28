@@ -20,6 +20,11 @@ struct KeyPadARRR: View {
         self.viewModel = KeyPadViewModel(value: value)
     }
     
+    func aSmallVibration(){
+        let vibrationGenerator = UINotificationFeedbackGenerator()
+        vibrationGenerator.notificationOccurred(.warning)
+    }
+    
     var body: some View {
             VStack(alignment: .center, spacing: self.vSpacing) {
              
@@ -30,6 +35,7 @@ struct KeyPadARRR: View {
                             HStack {
                                 if pad == "<" {
                                     Button(action: {
+                                        aSmallVibration()
                                         self.viewModel.valuePressed(pad)
                                     }) {
                                         ZStack{
@@ -44,6 +50,7 @@ struct KeyPadARRR: View {
                                     })
                                 } else {
                                     Button(action: {
+                                        aSmallVibration()
                                         self.viewModel.valuePressed(pad)
                                     }) {
                                         ZStack{
