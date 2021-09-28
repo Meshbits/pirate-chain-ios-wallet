@@ -178,7 +178,7 @@ struct SettingsRowWithCheckbox: View {
                     Image(systemName: "checkmark").resizable().frame(width: 10, height: 10, alignment: .trailing).foregroundColor(isCurrentIndexSelected() ? Color.arrrBarAccentColor : Color.textTitleColor)
                         .padding(.trailing,10)
                 }
-            }
+            }.contentShape(Rectangle())
             if mCurrentRowData.id < noLineAfter {
                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
             }

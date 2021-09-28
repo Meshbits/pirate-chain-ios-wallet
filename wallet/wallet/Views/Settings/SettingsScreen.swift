@@ -295,7 +295,7 @@ struct SettingsRow: View {
                 Spacer()
                 Image("arrow_right").resizable().frame(width: 20, height: 20, alignment: .trailing)
                 .padding()
-            }
+            }.contentShape(Rectangle())
             
             if mCurrentRowData.id < noLineAfter {
                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)

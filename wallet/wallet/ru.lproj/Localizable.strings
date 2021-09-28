@@ -38,7 +38,8 @@
 "address_transparent" = "Ваш прозрачный адрес";
 "feedback_addresscopied" = "Адрес скопирован!";
 "Request ZEC" = "Запросить сумму в ZEC";
-"Receive" = "Получите ZEC";
+"Receive" = "Получать";
+"Send" = "послать";
 "button_copytoclipboard" = "Скопировать в буфер обмена";
 // Profile Screen
 "profile_screen" = "Защищенный пользователь";

@@ -128,8 +128,11 @@
 "QR Code for %@" = "Código QR para %@";
 "address_shielded" = "Tu dirección blindada";
 "address_transparent" = "Tu dirección transparente";
-"receive_title" = "Recibir ZEC";
+"receive_title" = "Recibir";
 "label_to" = "Para";
+
+"Receive" = "Recibir";
+"Send" = "Enviar";
 
 //ScanAddress
 "scan_cameraunallowed" = "Habilita el uso de la cámara en la configuración de tu dispositivo";
