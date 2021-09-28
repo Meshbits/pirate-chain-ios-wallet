@@ -127,7 +127,8 @@ struct SettingsScreen: View {
                         }
                         .modifier(SettingsSectionBackgroundModifier())
                     }
-                    .padding(.top,20)
+                    .padding(.top,10)
+                    .padding(.bottom,2)
                     .background(Color.screenBgColor)
           
                 }
