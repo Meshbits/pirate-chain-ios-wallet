@@ -22,8 +22,8 @@ struct ARRRLogo<S: ShapeStyle>: View {
         ZStack {
            
             VStack (alignment: .center) {
-                Image("splashicon").padding(.horizontal)
-                    .frame(width: 225.0, height:84, alignment: .center)
+                Image("splashicon").resizable().padding(.horizontal)
+                    .frame(width: 200.0, height:200, alignment: .center)
                 
             }
         }
