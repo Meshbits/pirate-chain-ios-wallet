@@ -303,7 +303,7 @@ struct PasscodeScreen: View {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     presentationMode.wrappedValue.dismiss()
                                 }
-                                
+                                // handle use case when change pin code is started with a wrong passcode and add a cross button
                                 return
                             }
                             

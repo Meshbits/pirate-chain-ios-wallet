@@ -142,7 +142,8 @@ struct RequestMoneyView<AccesoryContent: View>: View {
          }, headerItem: {
              HStack{
                  Text("Request Money".localized())
-                     .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
+                    .scaledFont(size: 24)
+                    .foregroundColor(Color.zSettingsSectionHeader)
                      .frame(alignment: Alignment.center).padding(.top,20)
              }
          }, trailingItem: {
