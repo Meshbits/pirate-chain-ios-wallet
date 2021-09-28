@@ -103,22 +103,22 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 }
 
                 HStack{
-                    Text("Memo".localized()).font(.barlowRegular(size: 22)).foregroundColor(Color.textTitleColor)
+                    Text("Memo".localized())
+                        .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
                         .truncationMode(.middle).padding(.leading, 10)
                         .padding(10)
                     Spacer()
-                    Spacer()
                 }
                 
-                ARRRMemoTextField(memoText:$memoTextContent).frame(height:60)
+                ARRRMemoTextField(memoText:$memoTextContent).frame(height:55)
                 
                 Text(self.sendArrrValue)
                     .foregroundColor(.gray)
-                    .font(.barlowRegular(size: Device.isLarge ? 40 : 30))
-                    .frame(height:40)
+                    .scaledFont(size: 30)
+                    .frame(height:35)
                     .padding(.leading,10)
                     .padding(.trailing,10)
                     .modifier(BackgroundPlaceholderModifier())
@@ -142,14 +142,14 @@ struct RequestMoneyView<AccesoryContent: View>: View {
          }, headerItem: {
              HStack{
                  Text("Request Money".localized())
-                    .scaledFont(size: 24)
+                    .scaledFont(size: 22)
                     .foregroundColor(Color.zSettingsSectionHeader)
-                     .frame(alignment: Alignment.center).padding(.top,20)
+                     .frame(alignment: Alignment.center).padding(.top,40)
              }
          }, trailingItem: {
              ARRRCloseButton(action: {
                  presentationMode.wrappedValue.dismiss()
-                 }).frame(width: 30, height: 30).padding(.top,20)
+                 }).frame(width: 30, height: 30).padding(.top,60)
          })
         .onAppear {
             tracker.track(.screen(screen: .receive), properties: [:])

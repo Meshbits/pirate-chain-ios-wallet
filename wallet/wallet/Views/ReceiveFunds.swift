@@ -23,6 +23,7 @@ struct ReceiveFunds: View {
                                    title: "address_shielded".localized(),
                                    badge: Image("skullcoin"),
                                    accessoryContent: { EmptyView() })
+                        
                 })
             }.zcashNavigationBar(leadingItem: {
                 EmptyView()
@@ -30,12 +31,12 @@ struct ReceiveFunds: View {
                  HStack{
                     Text("receive_title".localized())
                          .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
-                         .frame(alignment: Alignment.center).padding(.top,20)
+                         .frame(alignment: Alignment.center).padding(.top,40)
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
                      presentationMode.wrappedValue.dismiss()
-                     }).frame(width: 30, height: 30).padding(.top,20)
+                     }).frame(width: 30, height: 30).padding(.top,40)
              })
             .onAppear {
                 tracker.track(.screen(screen: .receive), properties: [:])

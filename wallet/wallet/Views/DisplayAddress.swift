@@ -37,7 +37,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     }
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
+        VStack(alignment: .center, spacing: 5) {
          
             QRCodeContainer(qrImage: qrImage,
                             badge: badge)
@@ -48,7 +48,9 @@ struct DisplayAddress<AccesoryContent: View>: View {
             
             Text(title)
                 .foregroundColor(.gray)
-                .font(.barlowRegular(size: 21))
+                .scaledFont(size: 20)
+                .padding(.top,10)
+                .padding(.bottom,10)
             
             Button(action: {
                 PasteboardAlertHelper.shared.copyToPasteBoard(value: self.address, notify: "feedback_addresscopied".localized())
@@ -110,7 +112,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
             }) {
                 BlueButtonView(aTitle: "Share".localized())
             }
-        }.padding(30)
+        }.padding(10)
             .sheet(isPresented: self.$isShareAddressShown) {
                 ShareSheet(activityItems: [self.address])
         }
