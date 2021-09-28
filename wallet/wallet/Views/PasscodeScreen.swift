@@ -198,6 +198,8 @@ struct PasscodeScreen: View {
 //              EmptyView()
 //            }
             
+            
+            
             NavigationLink(destination:                
                     GenerateKeyPhraseInitiate().environmentObject(self.appEnvironment)
                     .navigationBarTitle("", displayMode: .inline)
@@ -212,7 +214,8 @@ struct PasscodeScreen: View {
             
             VStack(alignment: .center, spacing: 10, content: {
                 
-                if mScreenState == PasscodeScreenStates.passcodeAlreadyExists{
+                
+                if mScreenState == .passcodeAlreadyExists{
                     PasscodeScreenTopImageView().padding(.leading,20).padding(.top,50)
                 }else if mScreenState == PasscodeScreenStates.validatePasscode{
                     PasscodeScreenTitle(aTitle: "LOGIN PIN".localized())
@@ -220,19 +223,19 @@ struct PasscodeScreen: View {
                     PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
                     PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
-                }else if mScreenState == PasscodeScreenStates.validateAndDismiss{
+                }else if mScreenState == .validateAndDismiss{
                     PasscodeScreenTitle(aTitle: "Enter PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "PIN Required".localized())
                     PasscodeScreenDescription(aDescription: "Please enter your PIN to continue".localized(),size:15,padding:50)
                     Spacer()
-                }else if mScreenState == PasscodeScreenStates.newPasscode{
+                }else if mScreenState == .newPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "SET PIN".localized())
                     PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
-                }else if mScreenState == PasscodeScreenStates.confirmPasscode ||  mScreenState == PasscodeScreenStates.changePasscode{
+                }else if mScreenState == .confirmPasscode ||  mScreenState == .changePasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
@@ -339,7 +342,7 @@ struct PasscodeScreen: View {
                 passcodeViewModel.mPressedKeys.removeAll()
             }
             
-            if mScreenState != .changePasscode {
+            if mScreenState != .changePasscode && mScreenState != .validateAndDismiss{
                 authenticate()
             }
 

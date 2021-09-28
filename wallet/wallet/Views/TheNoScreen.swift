@@ -53,10 +53,8 @@ struct TheNoScreen: View {
             
             NavigationView {
                 if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty {
-//                    PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validateAndDismiss)
                     LazyView(
                         HomeTabView(openPasscodeScreen: true))
-//                        .environmentObject(appEnvironment))
                 }else{
                     PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode)
                 }
