@@ -120,7 +120,15 @@ struct PasscodeValidationScreen: View {
 
             PasscodeBackgroundView()
             
+           
             VStack(alignment: .center, spacing: 10, content: {
+                HStack{
+                    Spacer()
+                    ARRRCloseButton(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }).frame(width: 30, height: 30).padding(.top,30).multilineTextAlignment(.trailing)
+                    .padding(.trailing,30)
+                }
                 
                 Spacer()
                 PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
@@ -158,17 +166,6 @@ struct PasscodeValidationScreen: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
-        .zcashNavigationBar(leadingItem: {
-            EmptyView()
-        }, headerItem: {
-            HStack{
-                EmptyView()
-            }
-        }, trailingItem: {
-            ARRRCloseButton(action: {
-                presentationMode.wrappedValue.dismiss()
-                }).frame(width: 30, height: 30).padding(.top,20)
-        })
     }
 }
 
