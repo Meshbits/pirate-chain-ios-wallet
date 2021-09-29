@@ -364,6 +364,9 @@
 		290A0EEC26D5661900B6D74F /* KeyPadARRR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */; };
 		290A0EED26D5661900B6D74F /* KeyPadARRR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */; };
 		290A0EEE26D5661900B6D74F /* KeyPadARRR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */; };
+		290B22EE27045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */; };
+		290B22EF27045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */; };
+		290B22F027045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */; };
 		290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
 		290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
 		290BEF8326A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
@@ -691,6 +694,7 @@
 		18C69464FD3770D35A524106 /* Pods-wallet-no-logging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-wallet-no-logging.debug.xcconfig"; path = "Target Support Files/Pods-wallet-no-logging/Pods-wallet-no-logging.debug.xcconfig"; sourceTree = "<group>"; };
 		2905274326D7B11D007CA5AA /* UIHostingController-Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIHostingController-Keyboard.swift"; sourceTree = "<group>"; };
 		290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadARRR.swift; sourceTree = "<group>"; };
+		290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeValidationScreen.swift; sourceTree = "<group>"; };
 		290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeScreen.swift; sourceTree = "<group>"; };
 		290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceDetailView.swift; sourceTree = "<group>"; };
 		29207FD926BFCDD500E9C4E4 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
@@ -851,6 +855,7 @@
 				2924CF6C26BE99AE003E5C3B /* HomeTabView.swift */,
 				29F314E426D51E7200745DBE /* RequestMoneyView.swift */,
 				296CACE526D57757004DC784 /* SendMoneyView.swift */,
+				290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1821,6 +1826,7 @@
 				0D421AFF23C67DCF00E5E55E /* DetailCard.swift in Sources */,
 				29D53C9526D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				0D9E89BD23DA3BD600AFD118 /* SeedManagement.swift in Sources */,
+				290B22EE27045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */,
 				0D4364C723CCF4CC008B7DAC /* SendFlowEnvironment.swift in Sources */,
 				0DDF876723DB5400002BF158 /* URL+Zcash.swift in Sources */,
 				0DDAF3A924098D1000EA9427 /* MnemonicSeedPhraseProvider.swift in Sources */,
@@ -1948,6 +1954,7 @@
 				298D50E526A726E000585699 /* ARRRLogo.swift in Sources */,
 				0DF26E2524D1F75E00F32978 /* SquareToggleStyle.swift in Sources */,
 				0DCDFF9824B6722B000F6999 /* SyncingButton.swift in Sources */,
+				290B22F027045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */,
 				29F066A626C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DE8668724BD195C00F3B883 /* EventLogger.swift in Sources */,
 				0DCDFF9924B6722B000F6999 /* SeedBackup.swift in Sources */,
@@ -2154,6 +2161,7 @@
 				0DE3036D263A158400CF877A /* DetailCard.swift in Sources */,
 				29D53C9626D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				0DE3036E263A158400CF877A /* SeedManagement.swift in Sources */,
+				290B22EF27045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */,
 				0DE3036F263A158400CF877A /* SendFlowEnvironment.swift in Sources */,
 				0DE30370263A158400CF877A /* URL+Zcash.swift in Sources */,
 				0DE30371263A158400CF877A /* MnemonicSeedPhraseProvider.swift in Sources */,
