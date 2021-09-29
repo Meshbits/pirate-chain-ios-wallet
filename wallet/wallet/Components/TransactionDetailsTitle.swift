@@ -55,7 +55,7 @@ struct TransactionDetailsTitle: View {
             
             Text(aTitle)
                 .foregroundColor(.zLightGray)
-                .scaledFont(size: 20)
+                .scaledFont(size: 28)
                 .padding(.leading,10)
             HStack{
                 available.multilineTextAlignment(.leading)
