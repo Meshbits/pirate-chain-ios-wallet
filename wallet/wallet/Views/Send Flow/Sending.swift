@@ -47,7 +47,7 @@ struct Sending: View {
             return Text("label_unabletosend".localized())
         }
         
-        return flow.isDone ? Text("send_sent".localized()) :     Text(String(format: NSLocalizedString(ZcashSDK.isMainnet ? "send_sending" : "send_sending_taz", comment: ""), flow.amount))
+        return flow.isDone ? Text("send_sent".localized()).foregroundColor(.white) :     Text(String(format: NSLocalizedString(ZcashSDK.isMainnet ? "send_sending" : "send_sending_taz", comment: ""), flow.amount)).foregroundColor(.white)
     }
     
     var body: some View {
@@ -56,11 +56,11 @@ struct Sending: View {
             VStack(alignment: .center, spacing: 40) {
                 Spacer()
                 sendText
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.title)
                 Text("\(flow.address)")
                     .truncationMode(.middle)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .font(.title)
                     .lineLimit(1)
                 

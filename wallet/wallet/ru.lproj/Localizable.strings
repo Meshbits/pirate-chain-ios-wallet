@@ -94,4 +94,4 @@
 "nuke_alertmessage" = "You are about to nuke your wallet. Are you sure you want to proceed?";
 "nuke_alertcancel" = "I'm not sure";
 "nuke_alertconfirm" = "NUKE WALLET!";
-"Please wait, ARRR Wallet Syncing is in progress."
+"Please wait, ARRR Wallet Syncing is in progress.";

@@ -15,6 +15,7 @@ struct SendMoneyView: View {
     @EnvironmentObject var flow: SendFlowEnvironment
     @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+    @State var validatePinBeforeInitiatingFlow = false
     
     var availableBalance: Bool {
         ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
@@ -152,7 +153,7 @@ struct SendMoneyView: View {
                     .padding(.horizontal, 10)
                 
                 BlueButtonView(aTitle: "Send".localized()).onTapGesture {
-                    isSendTapped = true
+                    validatePinBeforeInitiatingFlow = true
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
                 
@@ -189,6 +190,13 @@ struct SendMoneyView: View {
                  .padding(.top,40)
              })
             .navigationBarHidden(true)
+        } .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
+            LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel()))
+        }
+        .onAppear(){
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("ValidationSuccessful"), object: nil, queue: .main) { (_) in
+                isSendTapped = true
+            }
         }
         }
     }
