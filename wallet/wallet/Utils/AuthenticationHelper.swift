@@ -37,9 +37,13 @@ class AuthenticationHelper {
         // check whether biometric authentication is possible
         if context.canEvaluatePolicy(authenticationPolicy, error: &error) {
             // it's possible, so go ahead and use it
-            
+            AppDelegate.isTouchIDVisible = true
             context.evaluatePolicy(authenticationPolicy, localizedReason: localizedReason) { success, authenticationError in
                 // authentication has now completed
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    AppDelegate.isTouchIDVisible = false
+                }
+                
                 DispatchQueue.main.async {
                     if success {
                         // authenticated successfully

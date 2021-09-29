@@ -9,7 +9,7 @@
 import SwiftUI
 import AlertToast
 import Combine
-
+import LocalAuthentication
 
 public class PasscodeValidationViewModel: ObservableObject{
     
@@ -172,10 +172,38 @@ struct PasscodeValidationScreen: View {
                                     NotificationCenter.default.post(name: NSNotification.Name("ValidationSuccessful"), object: nil)
                                 }
                             }
-                        )
+            )
+            
+            if(isAuthenticationEnabled){
+                authenticate()
+            }
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
+        .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
+                   switch output {
+                   case .failed(_), .userFailed:
+                        UserSettings.shared.isBiometricDisabled = true
+                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+                   case .success:
+                        UserSettings.shared.biometricInAppStatus = true
+                        UserSettings.shared.isBiometricDisabled = false
+                        self.passcodeViewModel.mDismissAfterValidation = true
+                   case .userDeclined:
+                        UserSettings.shared.biometricInAppStatus = false
+                        UserSettings.shared.isBiometricDisabled = true
+                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+                       break
+                   }
+            
+
+       }
+    }
+    
+    func authenticate() {
+        if UserSettings.shared.biometricInAppStatus{
+            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+        }
     }
 }
 

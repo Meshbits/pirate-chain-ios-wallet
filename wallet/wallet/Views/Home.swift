@@ -689,26 +689,41 @@ struct Home: View {
 
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-            
-            if UIApplication.shared.windows.count > 0 {
-                UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+          
+            if AppDelegate.isTouchIDVisible {
+                print("AppDelegate.isTouchIDVisible: \(AppDelegate.isTouchIDVisible)")
+                return
+            }else{
+                             
+                if UIApplication.shared.windows.count > 0 {
+                    UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                }
+                                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.showPassCodeScreen = true
+                    print("showPassCodeScreen: \(showPassCodeScreen)")
+                }
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.showPassCodeScreen = true
-            }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                authenticate()
-            }
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                authenticate()
+//            }
             
         }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.showPassCodeScreen = false
-            }
-            
-            if UIApplication.shared.windows.count > 0 {
-                UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                        
+            if AppDelegate.isTouchIDVisible {
+                print("AppDelegate.isTouchIDVisible: \(AppDelegate.isTouchIDVisible)")
+                return
+            }else{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.showPassCodeScreen = false
+                    print("showPassCodeScreen: \(showPassCodeScreen)")
+                }
+                
+                if UIApplication.shared.windows.count > 0 {
+                    UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
+                }
             }
         }        
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
@@ -724,10 +739,7 @@ struct Home: View {
                         if mCurrentTab == HomeTabView.Tab.home {
                             UserSettings.shared.biometricInAppStatus = true
                             UserSettings.shared.isBiometricDisabled = false
-                        
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                self.showPassCodeScreen = false
-                            }
+                            self.showPassCodeScreen = false
                             NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
                         }
                         
@@ -800,13 +812,13 @@ struct Home: View {
     
     
     func authenticate() {
-        if UserSettings.shared.biometricInAppStatus && !isAuthenticatedFlowInitiated{
-            isAuthenticatedFlowInitiated = true
-            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                isAuthenticatedFlowInitiated = false
-            }
-        }
+//        if UserSettings.shared.biometricInAppStatus && !isAuthenticatedFlowInitiated{
+//            isAuthenticatedFlowInitiated = true
+//            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//                isAuthenticatedFlowInitiated = false
+//            }
+//        }
     }
     
     func initiateDeeplinkDirectSendFlow(notificationObject:Notification){

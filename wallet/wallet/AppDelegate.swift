@@ -21,8 +21,11 @@ let logger = SimpleLogger(logLevel: .debug)
 #endif
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {  
     
+    static var isTouchIDVisible = false
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
