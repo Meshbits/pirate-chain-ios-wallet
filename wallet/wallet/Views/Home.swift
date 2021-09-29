@@ -10,6 +10,7 @@ import SwiftUI
 import Combine
 import ZcashLightClientKit
 import LocalAuthentication
+import AlertToast
 
 final class HomeViewModel: ObservableObject {
     
@@ -278,6 +279,7 @@ struct Home: View {
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     @State var isAuthenticatedFlowInitiated = false
     @State var selectedModel: DetailModel? = nil
+    @State var cantSendError = false
     var aTitleStatus: String {
         switch self.viewModel.syncStatus {
             case .error:
@@ -607,6 +609,7 @@ struct Home: View {
                     
                     SendRecieveButtonView(title: "Send".localized())
                         .onTapGesture {
+                            cantSendError = false
                             // Send tapped
                             if(self.viewModel.syncStatus.isSynced){
                                 tracker.track(.tap(action: .homeSend), properties: [:])
@@ -615,6 +618,8 @@ struct Home: View {
                                 if self.sendingPushed {
                                     self.viewModel.destination = .sendMoney
                                 }
+                            }else{
+                                cantSendError = true
                             }
                         }
                         .onReceive(self.viewModel.$sendingPushed) { pushed in
@@ -677,6 +682,11 @@ struct Home: View {
             }
             .padding([.bottom], 20)
           }
+        }
+        .toast(isPresenting: $cantSendError){
+
+            AlertToast(displayMode: .hud, type: .regular, title:"Please wait, ARRR Wallet Syncing is in progress.".localized())
+
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             
