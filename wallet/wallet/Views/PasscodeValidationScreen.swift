@@ -131,8 +131,13 @@ struct PasscodeValidationScreen: View {
                 }
                 
                 Spacer()
-                PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
-                PasscodeScreenDescription(aDescription: "Please enter your PIN to proceed".localized(),size:15,padding:50)
+                HStack(alignment: .center, spacing: nil, content: {
+                    Spacer()
+                    Text("Enter PIN".localized()).foregroundColor(.white).scaledFont(size: 28).padding(.top,20)
+                    Spacer()
+                })
+
+                PasscodeScreenDescription(aDescription: "Please enter your PIN to proceed".localized(),size:20,padding:50)
                 Spacer()
                 
                 HStack(alignment: .center, spacing: 0, content: {

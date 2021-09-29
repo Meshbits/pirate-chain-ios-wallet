@@ -72,7 +72,10 @@ struct HomeTabView: View {
                 }
             }.sheet(isPresented: $mOpenPasscodeScreen){
                 PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validatePasscode)
+//                LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel())).environmentObject(self.appEnvironment)
             }
+            
+            
         }
     }
 }
