@@ -556,7 +556,7 @@ struct PasscodeNumber: View {
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left.fill").foregroundColor(.gray)
+                        Image(systemName: "delete.left.fill").foregroundColor(.gray).scaledFont(size: 20)
                     }else {
                         Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 28)
                         
@@ -597,7 +597,7 @@ struct PasscodeValidationNumber: View {
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left.fill").foregroundColor(.gray)
+                        Image(systemName: "delete.left.fill").foregroundColor(.gray).scaledFont(size: 20)
                     }else {
                         Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 28)
                         
