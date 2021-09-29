@@ -688,13 +688,13 @@ struct Home: View {
             AlertToast(displayMode: .hud, type: .regular, title:"Please wait, ARRR Wallet Syncing is in progress.".localized())
 
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
             
             if UIApplication.shared.windows.count > 0 {
                 UIApplication.shared.windows[0].rootViewController?.dismiss(animated: false, completion: nil)
             }
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.showPassCodeScreen = true
             }
             
@@ -702,7 +702,7 @@ struct Home: View {
                 authenticate()
             }
             
-        }.onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+        }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.showPassCodeScreen = false
             }
@@ -773,7 +773,7 @@ struct Home: View {
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarHidden(true)        
         .sheet(isPresented: $showPassCodeScreen){
-            PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .validatePasscode)
+            LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: true)).environmentObject(self.appEnvironment)
         }
         .onAppear {
             tracker.track(.screen(screen: .home), properties: [:])

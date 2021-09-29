@@ -191,7 +191,7 @@ struct SendMoneyView: View {
              })
             .navigationBarHidden(true)
         } .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
-            LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel()))
+            LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
         }
         .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("ValidationSuccessful"), object: nil, queue: .main) { (_) in

@@ -108,6 +108,8 @@ struct PasscodeValidationScreen: View {
     
     @State var validateAndDismiss = false
     
+    @State var isAuthenticationEnabled:Bool
+    
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     @Environment(\.presentationMode) var presentationMode:Binding<PresentationMode>
@@ -126,8 +128,11 @@ struct PasscodeValidationScreen: View {
                     Spacer()
                     ARRRCloseButton(action: {
                         presentationMode.wrappedValue.dismiss()
-                    }).frame(width: 30, height: 30).padding(.top,30).multilineTextAlignment(.trailing)
+                    })
+                    .hidden(isAuthenticationEnabled)
+                    .frame(width: 30, height: 30).padding(.top,30).multilineTextAlignment(.trailing)
                     .padding(.trailing,30)
+                    
                 }
                 
                 Spacer()
@@ -174,8 +179,15 @@ struct PasscodeValidationScreen: View {
     }
 }
 
-struct PasscodeValidationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        PasscodeValidationScreen()
+//struct PasscodeValidationScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+////        PasscodeValidationScreen()
+//    }
+//}
+
+
+extension View {
+    func hidden(_ shouldHide: Bool) -> some View {
+        opacity(shouldHide ? 0 : 1)
     }
 }
