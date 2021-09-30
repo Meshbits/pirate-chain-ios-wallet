@@ -213,7 +213,17 @@ struct PasscodeScreen: View {
             PasscodeBackgroundView()
             
             VStack(alignment: .center, spacing: 10, content: {
-                
+               
+                HStack{
+                    Spacer()
+                    ARRRCloseButton(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    })
+                    .hidden(isChangePinFlow ? false : true) // unhide when its a change pin flow otherwise keep it hidden
+                    .frame(width: 30, height: 30).padding(.top,30).multilineTextAlignment(.trailing)
+                    .padding(.trailing,30)
+                    
+                }
                 
                 if mScreenState == .passcodeAlreadyExists{
                     PasscodeScreenTopImageView().padding(.leading,20).padding(.top,50)
