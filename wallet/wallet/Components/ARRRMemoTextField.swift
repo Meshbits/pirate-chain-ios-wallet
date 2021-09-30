@@ -31,7 +31,7 @@ struct ARRRMemoTextField: View {
                     }
                     .toggleStyle(ARRRToggleStyle(isHighlighted: $isReplyTo))
                     Text("Reply to".localized())
-                        .scaledFont(size: 12).foregroundColor(.gray)
+                        .scaledFont(size: 14).foregroundColor(.gray)
                 }.padding(.trailing, 10)
                 Spacer()
             }

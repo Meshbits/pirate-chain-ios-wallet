@@ -20,15 +20,14 @@ struct AddressFragment: View {
                     
                     Text(String(self.number))
                         .baselineOffset(geometry.size.height/8)
-                        .font(.system(size: 10))
+                        .scaledFont(size: 12)
                         .foregroundColor(Color.zYellow)
                         .frame(minWidth: geometry.size.width*0.18, alignment: .trailing)
                         
                     
                     Text(self.word)
                         .foregroundColor(.gray)
-                        .font(.system(size: 16))
-                        
+                        .scaledFont(size: 18)
                         
                    
                 }

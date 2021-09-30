@@ -104,7 +104,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
 
                 HStack{
                     Text("Memo".localized())
-                        .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
+                        .scaledFont(size: 20).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
@@ -117,7 +117,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 
                 Text(self.sendArrrValue)
                     .foregroundColor(.gray)
-                    .scaledFont(size: 30)
+                    .scaledFont(size: 32)
                     .frame(height:35)
                     .padding(.leading,10)
                     .padding(.trailing,10)
@@ -142,7 +142,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
          }, headerItem: {
              HStack{
                  Text("Request Money".localized())
-                    .scaledFont(size: 22)
+                    .scaledFont(size: 24)
                     .foregroundColor(Color.zSettingsSectionHeader)
                      .frame(alignment: Alignment.center).padding(.top,40)
              }
