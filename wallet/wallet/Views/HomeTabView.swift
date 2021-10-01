@@ -42,7 +42,7 @@ struct HomeTabView: View {
             ARRRBackground()
             TabView(selection: $mSelectedTab){
                 LazyView(
-                        Home().environmentObject(HomeViewModel()))
+                        Home().navigationBarHidden(true).environmentObject(HomeViewModel()))
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("walleticon").renderingMode(.template)
@@ -52,9 +52,9 @@ struct HomeTabView: View {
                     .environment(\.currentTab, mSelectedTab)
              
                 LazyView(WalletDetails(isActive: Binding.constant(true))
+                            .navigationBarHidden(true)
                 .environmentObject(WalletDetailsViewModel())
-                .navigationBarTitle(Text(""), displayMode: .inline)
-                .navigationBarHidden(true))
+                .navigationBarTitle(Text(""), displayMode: .inline))
                     .tabItem {
                         Image("historyicon").renderingMode(.template)
                         Text("History".localized()).scaledFont(size: 10)
@@ -62,7 +62,7 @@ struct HomeTabView: View {
                     .tag(Tab.wallet)
                     .environment(\.currentTab, mSelectedTab)
              
-                SettingsScreen().environmentObject(self.appEnvironment).navigationBarHidden(true)
+                SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment)
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("settingsicon").renderingMode(.template)
@@ -71,7 +71,9 @@ struct HomeTabView: View {
                     .tag(Tab.settings)
                     .environment(\.currentTab, mSelectedTab)
                 
-            }.accentColor(Color.arrrBarAccentColor)
+            }
+            .accentColor(Color.arrrBarAccentColor)
+                
             .onAppear(){
                        
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil, queue: .main) { (_) in

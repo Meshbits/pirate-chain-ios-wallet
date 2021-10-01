@@ -210,7 +210,8 @@ struct SettingsScreen: View {
                    EmptyView()
                 }
                 
-            }.bottomSheet(isPresented: $openLanguageScreen,
+            }.navigationBarHidden(true)
+            .bottomSheet(isPresented: $openLanguageScreen,
                           height: 500,
                           topBarHeight: 0,
                           topBarCornerRadius: 20,
