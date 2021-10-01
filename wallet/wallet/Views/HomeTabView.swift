@@ -23,9 +23,18 @@ struct HomeTabView: View {
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     init(openPasscodeScreen:Bool) {
+        
+        if #available(iOS 15.0, *) {
+           let appearance = UITabBarAppearance()
+           appearance.configureWithOpaqueBackground()
+           appearance.backgroundColor = UIColor.init(Color.arrrBarTintColor)
+            UITabBar.appearance().standardAppearance = appearance
+        }else{
             UITabBar.appearance().isTranslucent = false
             UITabBar.appearance().barTintColor = UIColor.init(Color.arrrBarTintColor)
-            self.mOpenPasscodeScreen = openPasscodeScreen
+        }
+        
+        self.mOpenPasscodeScreen = openPasscodeScreen
     }
   
     var body: some View {
