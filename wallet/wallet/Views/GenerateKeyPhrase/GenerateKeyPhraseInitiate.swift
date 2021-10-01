@@ -45,7 +45,8 @@ struct GenerateKeyPhraseInitiate: View {
 
                 })
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }
+        //.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
