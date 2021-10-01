@@ -194,7 +194,7 @@ struct SendMoneyView: View {
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
         }
         .onAppear(){
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("ValidationSuccessful"), object: nil, queue: .main) { (_) in
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in
                 isSendTapped = true
             }
         }
