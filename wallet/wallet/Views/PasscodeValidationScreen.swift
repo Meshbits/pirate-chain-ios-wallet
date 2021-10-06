@@ -86,10 +86,13 @@ public class PasscodeValidationViewModel: ObservableObject{
 
         if !isBackPressed {
             mCurrentSelectedIndex += 1
+        }else{
+            if mPressedKeys.count > 0 {
+                mPressedKeys.removeLast()
+            }
         }
 
-       if mCurrentSelectedIndex < mStateOfPins.count {
-        
+        if mCurrentSelectedIndex < mStateOfPins.count && mPressedKeys.count > 0{
         if isBackPressed {
             mStateOfPins[mCurrentSelectedIndex] = false
         }else{
