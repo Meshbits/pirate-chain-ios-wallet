@@ -23,7 +23,7 @@ struct IntroWelcome: View {
                             Text("Welcome to Pirate Wallet".localized()).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
                                 .scaledFont(size: 30)
                                 .padding(.top,80)
-                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
+                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
                                 .scaledFont(size: 14)
                             ZStack{
                                 Image("backgroundglow")
@@ -77,7 +77,7 @@ struct IntroWelcome: View {
                     VStack(alignment: .leading) {
                         ZStack{
                             Image("passcodenumericbg")
-                            Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+                            Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 233/255, green: 233/255, blue: 233/255))
                         }
                     }.padding(.leading,-20).padding(.top,10)
                 })

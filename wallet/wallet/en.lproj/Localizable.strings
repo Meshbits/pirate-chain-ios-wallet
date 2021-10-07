@@ -496,3 +496,5 @@
 "Invalid passcode!" = "Invalid passcode!";
 "Passcode changed successfully!" = "Passcode changed successfully!";
 "Please wait, ARRR Wallet Syncing is in progress.";
+
+"Restore from" = "Restore from";

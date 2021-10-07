@@ -23,7 +23,7 @@ struct ARRRLogo<S: ShapeStyle>: View {
            
             VStack (alignment: .center) {
                 Image("splashicon").resizable().padding(.horizontal)
-                    .frame(width: 200.0, height:200, alignment: .center)
+                    .frame(width: 250.0, height:250.0, alignment: .center)
                 
             }
         }
