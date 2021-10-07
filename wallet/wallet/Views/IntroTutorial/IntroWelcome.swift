@@ -21,10 +21,9 @@ struct IntroWelcome: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                         VStack(alignment: .center, content: {
-                            Text("Welcome to Pirate Wallet".localized()).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                                .scaledFont(size: 30)
-                                .padding(.top,80)
-                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
+                            Text("Welcome to Pirate Wallet".localized()).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
+                                .scaledFont(size: 26)
+                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
                                 .scaledFont(size: 14)
                             ZStack{
                                 Image("backgroundglow")
@@ -62,26 +61,33 @@ struct IntroWelcome: View {
                                     openNextIntroScreen = true
                                 }) {
                                     BlueButtonView(aTitle: "Get Started".localized())
-                                }
+                                }.padding(.bottom,20)
                             }
                             
                             
                         })
-
-                    }.edgesIgnoringSafeArea(.all)
-                .navigationBarBackButtonHidden(true)
-                .navigationTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading:  Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    VStack(alignment: .leading) {
-                        ZStack{
-                            Image("passcodenumericbg")
-                            Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 233/255, green: 233/255, blue: 233/255))
+                    .navigationBarHidden(true)
+                    .edgesIgnoringSafeArea(.all)
+                    .zcashNavigationBar(leadingItem: {
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            ZStack{
+                               Image("passcodenumericbg")
+                               Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 233/255, green: 233/255, blue: 233/255))
+                            }.padding(.leading,40)
                         }
-                    }.padding(.leading,-20).padding(.top,10)
-                })
+
+                    }, headerItem: {
+                        EmptyView()
+                    }, trailingItem: {
+                        EmptyView()
+                    })
+
+                    }
+
+        
+                       
 //         }.navigationBarHidden(true)
         
     }
