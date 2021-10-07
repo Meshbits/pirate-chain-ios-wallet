@@ -13,6 +13,7 @@ struct IntroPrivacy: View {
     @Environment(\.presentationMode) var presentationMode
     @State var isViewVisible = false
     @State var openPincodeScreem = false
+    let mAnimationDuration = 1.5
     var body: some View {
 //         NavigationView
 //         {
@@ -30,16 +31,16 @@ struct IntroPrivacy: View {
                                 
                                 HStack(alignment: .center, spacing: -30, content: {
 
-                                    withAnimation(Animation.linear(duration: 2).delay(1).repeatForever(autoreverses: true)){
+                                    withAnimation(Animation.linear(duration: mAnimationDuration).repeatForever(autoreverses: true)){
                                         Image("skullcoin")
                                             .offset(y: isViewVisible ? 40:0)
-                                            .animation(Animation.linear(duration: 2).delay(1).repeatForever(autoreverses: true), value: isViewVisible)
+                                            .animation(Animation.linear(duration: mAnimationDuration).repeatForever(autoreverses: true), value: isViewVisible)
                                     }
                                     
                                     Image("coin").padding(.top,50)
                                         .rotationEffect(Angle(degrees: isViewVisible ? -40 : 0))
 //                                        .transition(.move(edge: .top))
-                                        .animation(Animation.linear(duration: 2).delay(1).repeatForever(autoreverses: true), value: isViewVisible)
+                                        .animation(Animation.linear(duration: mAnimationDuration).repeatForever(autoreverses: true), value: isViewVisible)
                                         .onAppear {
                                         withAnimation(.linear){
                                             DispatchQueue.main.asyncAfter(deadline:.now()+0.5){
