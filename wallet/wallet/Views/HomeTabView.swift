@@ -39,7 +39,7 @@ struct HomeTabView: View {
   
     var body: some View {
         ZStack {
-            ARRRBackground()
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             TabView(selection: $mSelectedTab){
                 LazyView(
                         Home().navigationBarHidden(true).environmentObject(HomeViewModel()))

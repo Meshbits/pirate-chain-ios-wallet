@@ -40,7 +40,7 @@ public class PasscodeValidationViewModel: ObservableObject{
             if mPressedKeys.count > 0 {
                 mPressedKeys.removeLast()
             }
-            
+
             return
         }
         
@@ -76,6 +76,12 @@ public class PasscodeValidationViewModel: ObservableObject{
     }
     
     func updateLayout(isBackPressed:Bool){
+        
+        if mPressedKeys.count == 0 {
+            mStateOfPins = mStateOfPins.map { _ in false }
+            return
+        }
+        
        var mCurrentSelectedIndex = -1
 
        for index in 0 ..< mStateOfPins.count {
@@ -86,20 +92,17 @@ public class PasscodeValidationViewModel: ObservableObject{
 
         if !isBackPressed {
             mCurrentSelectedIndex += 1
-        }else{
-            if mPressedKeys.count > 0 {
-                mPressedKeys.removeLast()
+        }
+        
+        if mCurrentSelectedIndex < mStateOfPins.count && mPressedKeys.count > 0 {
+            
+            if isBackPressed {
+                mStateOfPins[mCurrentSelectedIndex] = false
+            }else{
+                mStateOfPins[mCurrentSelectedIndex] = true
             }
-        }
-
-        if mCurrentSelectedIndex < mStateOfPins.count && mPressedKeys.count > 0{
-        if isBackPressed {
-            mStateOfPins[mCurrentSelectedIndex] = false
-        }else{
-            mStateOfPins[mCurrentSelectedIndex] = true
-        }
            
-       }
+        }
     }
     
 }

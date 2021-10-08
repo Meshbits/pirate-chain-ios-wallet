@@ -99,6 +99,12 @@ public class PasscodeViewModel: ObservableObject{
     }
     
     func updateLayout(isBackPressed:Bool){
+        
+       if mPressedKeys.count == 0 {
+            mStateOfPins = mStateOfPins.map { _ in false }
+            return
+       }
+        
        var mCurrentSelectedIndex = -1
 
        for index in 0 ..< mStateOfPins.count {
@@ -109,19 +115,15 @@ public class PasscodeViewModel: ObservableObject{
 
         if !isBackPressed {
             mCurrentSelectedIndex += 1
-        }else{
-            if mPressedKeys.count > 0 {
-                mPressedKeys.removeLast()
-            }
         }
 
        if mCurrentSelectedIndex < mStateOfPins.count  && mPressedKeys.count > 0{
         
-        if isBackPressed {
-            mStateOfPins[mCurrentSelectedIndex] = false
-        }else{
-            mStateOfPins[mCurrentSelectedIndex] = true
-        }
+            if isBackPressed {
+                mStateOfPins[mCurrentSelectedIndex] = false
+            }else{
+                mStateOfPins[mCurrentSelectedIndex] = true
+            }
            
        }
     }
@@ -554,13 +556,14 @@ struct PasscodeNumber: View {
     var body: some View {
         
             Button(action: {
-                passcodeViewModel.updateLayout(isBackPressed: passcodeValue == "delete" ? true : false)
-                
+               
                 if passcodeValue == "delete" {
                     passcodeViewModel.captureKeyPress(mKeyPressed: -1, isBackPressed: true)
                 }else{
                     passcodeViewModel.captureKeyPress(mKeyPressed: Int(passcodeValue)!, isBackPressed: false)
                 }
+                
+                passcodeViewModel.updateLayout(isBackPressed: passcodeValue == "delete" ? true : false)
                 
                 aSmallVibration()
 
@@ -595,13 +598,14 @@ struct PasscodeValidationNumber: View {
     var body: some View {
         
             Button(action: {
-                passcodeViewModel.updateLayout(isBackPressed: passcodeValue == "delete" ? true : false)
                 
                 if passcodeValue == "delete" {
                     passcodeViewModel.captureKeyPress(mKeyPressed: -1, isBackPressed: true)
                 }else{
                     passcodeViewModel.captureKeyPress(mKeyPressed: Int(passcodeValue)!, isBackPressed: false)
                 }
+                
+                passcodeViewModel.updateLayout(isBackPressed: passcodeValue == "delete" ? true : false)
                 
                 aSmallVibration()
 
