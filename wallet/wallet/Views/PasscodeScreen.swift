@@ -251,10 +251,16 @@ struct PasscodeScreen: View {
                     PasscodeScreenSubTitle(aSubTitle: "SET PIN".localized())
                     PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
-                }else if mScreenState == .confirmPasscode ||  mScreenState == .changePasscode{
+                }else if mScreenState == .confirmPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    Spacer()
+                }else if mScreenState == .changePasscode{
+                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
+                    Spacer()
+                    PasscodeScreenSubTitle(aSubTitle: "Enter Current PIN".localized())
                     PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
                 }
@@ -284,21 +290,17 @@ struct PasscodeScreen: View {
         .onDisappear{
             NotificationCenter.default.removeObserver(NSNotification.Name("UpdateLayout"))
             NotificationCenter.default.removeObserver(NSNotification.Name("UpdateErrorLayout"))
+            NotificationCenter.default.removeObserver(NSNotification.Name("UpdateChangeCodeErrorLayout"))
+            
         }
         .onAppear {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateLayout"), object: nil, queue: .main) { (_) in
                 
                 if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty{
                     
-                    print("aPasscode: \(aPasscode)")
-                    
                     let aTempPasscode = passcodeViewModel.changePinFlowInitiated ? passcodeViewModel.aTempChangeConfirmPasscode : passcodeViewModel.aTempPasscode
                     
-                    print("aTempPasscode: \(aTempPasscode)")
-                    
                     if !aTempPasscode.isEmpty && aTempPasscode == aPasscode{
-                        
-                        print("SAME PASSCODE: \(aTempPasscode)")
                         
                         if handleUseCasesRelatedToScreenStates() {
                             return
@@ -331,9 +333,17 @@ struct PasscodeScreen: View {
                             return
                         }
                     }else{
-                        if (!isChangePinFlow){
-                            NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
+                        
+                        if (mScreenState == .changePasscode){
+                            NotificationCenter.default.post(name: NSNotification.Name("UpdateChangeCodeErrorLayout"), object: nil)
+                            return
+                        }else{
+                            if (!isChangePinFlow){
+                                NotificationCenter.default.post(name: NSNotification.Name("UpdateErrorLayout"), object: nil)
+                            }
                         }
+                        
+                       
                     }
                 }
                 
@@ -354,6 +364,13 @@ struct PasscodeScreen: View {
                 if mScreenState == .validatePasscode{
                     passcodeViewModel.aTempPasscode = ""
                 }
+                passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
+                passcodeViewModel.mPressedKeys.removeAll()
+            }
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateChangeCodeErrorLayout"), object: nil, queue: .main) { (_) in
+                showErrorToast = true
+                passcodeViewModel.aTempPasscode = ""
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()
             }
