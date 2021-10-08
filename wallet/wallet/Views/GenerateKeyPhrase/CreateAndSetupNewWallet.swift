@@ -44,11 +44,10 @@ struct CreateAndSetupNewWallet: View {
                             HomeTabView(openPasscodeScreen: false)
                             .navigationBarHidden(true)
                             .navigationBarBackButtonHidden(true)
-                                .environmentObject(appEnvironment)
                             
             , isActive: $openHomeScreen) {
                 EmptyView()
-            }.isDetailLink(false)
+            }
             
         }.navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

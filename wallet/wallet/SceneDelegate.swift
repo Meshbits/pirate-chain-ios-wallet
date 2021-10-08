@@ -74,6 +74,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     AnyView(
                         NavigationView {
                             TheNoScreen().environmentObject(ZECCWalletEnvironment.shared)
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
                         }
                     )
             ,ignoreSafeArea: true)
