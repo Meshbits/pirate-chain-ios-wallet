@@ -188,6 +188,8 @@ struct PasscodeScreen: View {
    @State var isFirstTimeSetup = false
     
    @State var isChangePinFlow = false
+    
+   @State var isAllowedToPop = false
        
     var body: some View {
         ZStack {
@@ -230,6 +232,18 @@ struct PasscodeScreen: View {
                     .padding(.trailing,30)
                     
                 }
+                
+                HStack{
+                    
+                    ARRRBackButton(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }).frame(width: 30, height: 30)
+                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
+                    .padding(.top,30).multilineTextAlignment(.leading)
+                    .padding(.leading,30)
+                    Spacer()
+                }
+                
                 
                 if mScreenState == .passcodeAlreadyExists{
                     PasscodeScreenTopImageView().padding(.leading,20).padding(.top,50)

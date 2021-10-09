@@ -12,7 +12,7 @@ struct IntroPrivacy: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
     @Environment(\.presentationMode) var presentationMode
     @State var isViewVisible = false
-    @State var openPincodeScreem = false
+    @State var openPincodeScreen = false
     let mAnimationDuration = 1.5
     var body: some View {
 //         NavigationView
@@ -55,11 +55,11 @@ struct IntroPrivacy: View {
                             
                             NavigationLink(
                                 
-                                destination: LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode, isNewWallet: true)).environmentObject(self.appEnvironment),
-                                           isActive: $openPincodeScreem
+                                destination: LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode, isNewWallet: true,isAllowedToPop:true)).environmentObject(self.appEnvironment),
+                                           isActive: $openPincodeScreen
                             ) {
                                 Button(action: {
-                                    openPincodeScreem = true
+                                    openPincodeScreen = true
                                 }) {
                                     BlueButtonView(aTitle: "Continue".localized())
                                 }
