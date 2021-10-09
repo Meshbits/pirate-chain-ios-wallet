@@ -122,7 +122,9 @@ struct SeedBackup: View {
                 if proceedsToHome {
                     NavigationLink(destination:
                                     LazyView(
-                                        HomeTabView(openPasscodeScreen: false)
+                                        HomeTabView(openPasscodeScreen: false).navigationBarTitle("", displayMode: .inline)
+                                            .navigationBarBackButtonHidden(true)
+                                            .navigationBarHidden(true)
                                         //.environmentObject(appEnvironment)
 //                                        Home().environmentObject(HomeViewModel())
                                     )) {

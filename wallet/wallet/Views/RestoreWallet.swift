@@ -83,7 +83,9 @@ struct RestoreWallet: View {
         ZStack {
             NavigationLink(destination:
                             LazyView(
-                                HomeTabView(openPasscodeScreen: false) //.environmentObject(appEnvironment)
+                                HomeTabView(openPasscodeScreen: false).navigationBarTitle("", displayMode: .inline)
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarHidden(true) //.environmentObject(appEnvironment)
 //                                    Home().environmentObject(HomeViewModel())
             ), isActive: $proceed) {
                 EmptyView()

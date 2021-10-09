@@ -46,7 +46,9 @@ struct FundsAtRisk: View {
                 }.isDetailLink(false)
                 
                 NavigationLink(destination: LazyView(
-                    HomeTabView(openPasscodeScreen: false)
+                    HomeTabView(openPasscodeScreen: false).navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true)
+                        .navigationBarHidden(true)
                     //.environmentObject(appEnvironment)
 //                                Home().environmentObject(HomeViewModel())
                     )) {

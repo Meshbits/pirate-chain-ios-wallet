@@ -67,20 +67,6 @@ final class HomeViewModel: ObservableObject {
         openQRCodeScanner = false
         bindToEnvironmentEvents()
         
-        // ** Test to check if nav bar is there or not **//
-//        let coloredAppearance = UINavigationBarAppearance()
-//          coloredAppearance.configureWithOpaqueBackground()
-//          coloredAppearance.backgroundColor = .systemRed
-//          coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-//          coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-//
-//          UINavigationBar.appearance().standardAppearance = coloredAppearance
-//          UINavigationBar.appearance().compactAppearance = coloredAppearance
-//          UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
-//
-//          UINavigationBar.appearance().tintColor = .white
-        // ** Test to check if nav bar is there or not **//
-        
         NotificationCenter.default.publisher(for: .sendFlowStarted)
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] _ in

@@ -44,7 +44,9 @@ struct CreateAndSetupNewWallet: View {
                             HomeTabView(openPasscodeScreen: false)
                             .navigationBarHidden(true)
                             .navigationBarBackButtonHidden(true)
-                            
+                            .navigationBarTitle("", displayMode: .inline)
+                            .navigationBarBackButtonHidden(true)
+                            .navigationBarHidden(true)
             , isActive: $openHomeScreen) {
                 EmptyView()
             }

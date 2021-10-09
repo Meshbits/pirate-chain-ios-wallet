@@ -281,6 +281,9 @@ struct PasscodeScreen: View {
             NavigationLink(destination:
                             HomeTabView(openPasscodeScreen: false)
                                 .environmentObject(appEnvironment)
+                            .navigationBarTitle("", displayMode: .inline)
+                            .navigationBarBackButtonHidden(true)
+                            .navigationBarHidden(true)
             , isActive: $openHomeScreen) {
                 EmptyView()
             }.isDetailLink(false)

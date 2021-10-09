@@ -36,25 +36,64 @@ struct HomeTabView: View {
         
         self.mOpenPasscodeScreen = openPasscodeScreen
     }
+    
+    var mWalletView: some View {
+        LazyView(WalletDetails(isActive: Binding.constant(true))
+                    .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true).environmentObject(WalletDetailsViewModel())
+                    .navigationBarTitle(Text(""), displayMode: .inline))
+    }
+    var mHomeView : some View {
+        LazyView(
+                Home().navigationBarHidden(true)
+                    .navigationBarBackButtonHidden(true)
+                    .environmentObject(HomeViewModel()))
+    }
   
     var body: some View {
         ZStack {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             TabView(selection: $mSelectedTab){
-                LazyView(
-                        Home().navigationBarHidden(true).environmentObject(HomeViewModel()))
+                
+                if #available(iOS 15.0, *) {
+                        NavigationView{
+                            mHomeView
+                        }
+                        .font(.system(size: 30, weight: .bold, design: .rounded))
+                        .tabItem {
+                            Image("walleticon").renderingMode(.template)
+                            Text("Wallet".localized())
+                                .scaledFont(size: 10)
+                        }.tag(Tab.home)
+                        .environment(\.currentTab, mSelectedTab)
+                    
+                    
+                        NavigationView{
+                            mWalletView
+                        }
+                        .font(.system(size: 30, weight: .bold, design: .rounded))
+                        .tabItem {
+                            Image("historyicon").renderingMode(.template)
+                            Text("History".localized()).scaledFont(size: 10)
+                        }
+                        .tag(Tab.wallet)
+                        .environment(\.currentTab, mSelectedTab)
+                 
+                }else{
+                    
+                    mHomeView
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("walleticon").renderingMode(.template)
                         Text("Wallet".localized())
                             .scaledFont(size: 10)
-                    }.tag(Tab.home)
+                    }
+                    .tag(Tab.home)
                     .environment(\.currentTab, mSelectedTab)
-             
-                LazyView(WalletDetails(isActive: Binding.constant(true))
-                            .navigationBarHidden(true)
-                .environmentObject(WalletDetailsViewModel())
-                .navigationBarTitle(Text(""), displayMode: .inline))
+                
+                    
+                    mWalletView
+                    .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("historyicon").renderingMode(.template)
                         Text("History".localized()).scaledFont(size: 10)
@@ -62,7 +101,15 @@ struct HomeTabView: View {
                     .tag(Tab.wallet)
                     .environment(\.currentTab, mSelectedTab)
              
-                SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment)
+                }
+     
+                
+//                NavigationView{
+                    LazyView(SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment))
+                        .navigationBarBackButtonHidden(true)
+                        .navigationBarTitle(Text(""), displayMode: .inline)
+//                }
+                
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image("settingsicon").renderingMode(.template)
@@ -73,7 +120,6 @@ struct HomeTabView: View {
                 
             }
             .accentColor(Color.arrrBarAccentColor)
-                
             .onAppear(){
                        
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil, queue: .main) { (_) in
