@@ -232,17 +232,17 @@ struct PasscodeScreen: View {
                     .padding(.trailing,30)
                     
                 }
-                
-                HStack{
-                    
-                    ARRRBackButton(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }).frame(width: 30, height: 30)
-                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
-                    .padding(.top,30).multilineTextAlignment(.leading)
-                    .padding(.leading,30)
-                    Spacer()
-                }
+//                
+//                HStack{
+//                    
+//                    ARRRBackButton(action: {
+//                        presentationMode.wrappedValue.dismiss()
+//                    }).frame(width: 30, height: 30)
+//                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
+//                    .padding(.top,30).multilineTextAlignment(.leading)
+//                    .padding(.leading,30)
+//                    Spacer()
+//                }
                 
                 
                 if mScreenState == .passcodeAlreadyExists{
@@ -290,7 +290,7 @@ struct PasscodeScreen: View {
                 
                 PasscodeNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
                                 
-            }).padding(.top,30)
+            })
             
             NavigationLink(destination:
                             HomeTabView(openPasscodeScreen: false)
@@ -759,7 +759,7 @@ struct PasscodeScreenTitle : View {
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
-            Text(aTitle).foregroundColor(.gray).scaledFont(size: 23).padding(.top,20)
+            Text(aTitle).foregroundColor(.gray).scaledFont(size: 20).padding(.top,20)
             Spacer()
         })
     }
