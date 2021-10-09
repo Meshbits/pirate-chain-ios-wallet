@@ -12,7 +12,7 @@ import ZcashLightClientKit
 
 struct Sending: View {
     
-    
+    let dragGesture = DragGesture()
     @EnvironmentObject var flow: SendFlowEnvironment
     @State var details: DetailModel? = nil
     @Environment(\.presentationMode) var presentationMode
@@ -36,7 +36,7 @@ struct Sending: View {
                         Text("button_close"),
                         action: {
                             self.flow.close()
-                            
+                            NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
                      }
             )
         )
@@ -96,7 +96,7 @@ struct Sending: View {
                     Button(action: {
                         tracker.track(.tap(action: .sendFinalClose), properties: [:])
                         self.flow.close()
-                        self.presentationMode.wrappedValue.dismiss()
+                        NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
                     }) {
                         SendRecieveButtonView(title: "button_done".localized())
                     }
@@ -104,6 +104,7 @@ struct Sending: View {
             }
             .padding([.horizontal, .bottom], 40)
         }
+        .highPriorityGesture(dragGesture)
         .sheet(item: $details, onDismiss: { self.flow.close() }){ item in
             TxDetailsWrapper(row: item)
         }
