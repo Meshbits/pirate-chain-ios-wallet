@@ -56,7 +56,7 @@ struct DetailCard: View {
         switch model.status {
         case .paid(let success):
             color = Color.zARRRSentColor //success ? Color.zARRRSentColor : Color.zLightGray2
-            opacity = success ? 1 : 0.6
+            opacity = success ? 1 : 0.2
             
 //            text = success ? text : "(\(text) ARRR)"
             
@@ -129,7 +129,7 @@ extension String {
         switch model.status {
     
         case .paid(let success):
-            transactionSubTitle = ("sent via ".localized()) + (model.arrrAddress ?? "NA".localized()) // TODO: need to check what should we show in case a transaction is sent but is in pending state
+            transactionSubTitle = success ? (("sent via ".localized()) + (model.arrrAddress ?? "NA".localized())) : ("pending via ".localized()) + (model.arrrAddress ?? "NA".localized())
         case .received:
             transactionSubTitle = "received via ".localized()
         }

@@ -33,8 +33,8 @@ struct TransactionDetailsTitle: View {
     var aTitle: String {
 
         switch status {
-        case .paid:
-            return "You Sent".localized()
+        case .paid(let success):
+            return success ? "You Sent".localized() : "Pending".localized()
         case .received:
             return "You Received".localized()
         }

@@ -67,6 +67,20 @@ final class HomeViewModel: ObservableObject {
         openQRCodeScanner = false
         bindToEnvironmentEvents()
         
+        // ** Test to check if nav bar is there or not **//
+//        let coloredAppearance = UINavigationBarAppearance()
+//          coloredAppearance.configureWithOpaqueBackground()
+//          coloredAppearance.backgroundColor = .systemRed
+//          coloredAppearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//          coloredAppearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+//
+//          UINavigationBar.appearance().standardAppearance = coloredAppearance
+//          UINavigationBar.appearance().compactAppearance = coloredAppearance
+//          UINavigationBar.appearance().scrollEdgeAppearance = coloredAppearance
+//
+//          UINavigationBar.appearance().tintColor = .white
+        // ** Test to check if nav bar is there or not **//
+        
         NotificationCenter.default.publisher(for: .sendFlowStarted)
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] _ in
@@ -116,6 +130,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func subscribeToSynchonizerEvents() {
+      
         ZECCWalletEnvironment.shared.synchronizer.walletDetailsBuffer
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] (d) in
@@ -691,7 +706,7 @@ struct Home: View {
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
           
             if AppDelegate.isTouchIDVisible {
-                print("AppDelegate.isTouchIDVisible: \(AppDelegate.isTouchIDVisible)")
+//                print("AppDelegate.isTouchIDVisible: \(AppDelegate.isTouchIDVisible)")
                 return
             }else{
                              
@@ -775,10 +790,15 @@ struct Home: View {
                     .environmentObject(self.appEnvironment)
                 #endif
             case .sendMoney:
-                SendMoneyView()
-                    .environmentObject(
-                        SendFlow.current! //fixme
-                )
+                
+                if let sendflowCurrent = SendFlow.current{
+                    SendMoneyView()
+                        .environmentObject(
+                            sendflowCurrent
+                    )
+                }
+                
+               
             }
         }
         .navigationBarBackButtonHidden(true)

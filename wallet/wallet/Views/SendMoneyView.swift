@@ -168,7 +168,7 @@ struct SendMoneyView: View {
                     ), isActive: self.$isSendTapped
                 ) {
                     EmptyView()
-                }.isDetailLink(false)
+                }
                 
                 
                 

@@ -77,7 +77,7 @@ struct TransactionDetails: View {
                                     let latestHeight = ZECCWalletEnvironment.shared.synchronizer.syncBlockHeight.value
                                     TransactionRow(mTitle: detail.makeStatusText(latestHeight: latestHeight), showLine: false,isYellowColor: true)
                                 } else {
-                                    TransactionRow(mTitle: "Confirmed".localized(), showLine: false,isYellowColor: true)
+                                    TransactionRow(mTitle: "Pending".localized(), showLine: false,isYellowColor: true)
                                 }
                                 
 
