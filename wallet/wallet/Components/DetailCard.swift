@@ -114,7 +114,7 @@ extension Image {
         switch cardType {
     
         case .paid(let success):
-            imageName = success ? "senticon" : "gray_shield"
+            imageName = success ? "senticon" : "bombIcon"
         case .received:
             imageName = "receiveicon"
         }

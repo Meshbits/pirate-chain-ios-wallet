@@ -18,8 +18,19 @@ class WalletDetailsViewModel: ObservableObject {
     private var internalEvents = Set<AnyCancellable>()
     @State var showMockData = false // Change it to false = I have used it for mock data testing
     
+    func groupedTransactions(_ details: [DetailModel]) -> [Date: [DetailModel]] {
+      let empty: [Date: [DetailModel]] = [:]
+      return details.reduce(into: empty) { acc, cur in
+          let components = Calendar.current.dateComponents([.year, .month, .day], from: cur.date)
+          let date = Calendar.current.date(from: components)!
+          let existing = acc[date] ?? []
+          acc[date] = existing + [cur]
+      }
+    }
+
     var groupedByDate: [Date: [DetailModel]] {
-        Dictionary(grouping: self.items, by: {$0.date})
+//        Dictionary(grouping: self.items, by: {$0.date})
+        groupedTransactions(self.items)
     }
     
     var headers: [Date] {
@@ -181,6 +192,8 @@ struct WalletDetails: View {
         }
 
     }
+
+    
 }
 
 struct WalletDetails_Previews: PreviewProvider {
