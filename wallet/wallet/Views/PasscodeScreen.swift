@@ -603,7 +603,7 @@ struct PasscodeNumber: View {
 
             }, label: {
                 ZStack {
-                    Image("passcodenumericbg")
+                    Image("passcodenumericbg").resizable().frame(width: 90, height: 90, alignment: .center)
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
@@ -647,13 +647,15 @@ struct PasscodeValidationNumber: View {
 
             }, label: {
                 ZStack {
-                    Image("passcodenumericbg")
+                    Image("passcodenumericbg").resizable().frame(width: 90, height: 90, alignment: .center)
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 20)
+                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 17)
                     }else {
-                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 28)
+                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 24)
+                            .padding(.bottom,2)
+                            .padding(.trailing,2)
                         
                     }
                 }.padding(2)
@@ -670,7 +672,7 @@ struct PasscodeNumpadRow: View {
     @Binding var passcodeViewModel: PasscodeViewModel
     
     var body: some View {
-        HStack(alignment: .center, spacing: nil, content: {
+        HStack(alignment: .center, spacing: 5, content: {
             ForEach(startIndex ..< endIndex) { index in
                 PasscodeNumber(passcodeValue: Binding.constant(String(index)),passcodeViewModel: $passcodeViewModel)
             }
@@ -681,17 +683,18 @@ struct PasscodeNumpadRow: View {
 struct PasscodeNumberView : View {
     @Binding var passcodeViewModel: PasscodeViewModel
     var body: some View {
-        VStack {
+        VStack (spacing: 5, content:{
             PasscodeNumpadRow(startIndex: Binding.constant(1), endIndex: Binding.constant(4),passcodeViewModel: Binding.constant(passcodeViewModel))
             PasscodeNumpadRow(startIndex: Binding.constant(4), endIndex: Binding.constant(7),passcodeViewModel: Binding.constant(passcodeViewModel))
             PasscodeNumpadRow(startIndex: Binding.constant(7), endIndex: Binding.constant(10),passcodeViewModel: Binding.constant(passcodeViewModel))
-            HStack(alignment: .center, spacing: nil, content: {
+            HStack(alignment: .center, spacing: 5, content: {
                 
                 PasscodeNumber(passcodeValue: Binding.constant(""),passcodeViewModel: $passcodeViewModel).hidden()
                 PasscodeNumber(passcodeValue: Binding.constant("0"),passcodeViewModel: $passcodeViewModel)
                 PasscodeNumber(passcodeValue: Binding.constant("delete"),passcodeViewModel: $passcodeViewModel)
             })
-        }
+        })
+            .frame(width: 250, alignment: .center)
     }
 }
 
@@ -709,7 +712,7 @@ struct PasscodeValidationNumberView : View {
                 PasscodeValidationNumber(passcodeValue: Binding.constant("0"),passcodeViewModel: $passcodeViewModel)
                 PasscodeValidationNumber(passcodeValue: Binding.constant("delete"),passcodeViewModel: $passcodeViewModel)
             })
-        }
+        } .frame(width: 250, alignment: .center)
     }
 }
 

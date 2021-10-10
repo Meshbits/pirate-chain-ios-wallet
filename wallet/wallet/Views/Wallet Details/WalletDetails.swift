@@ -114,7 +114,7 @@ struct WalletDetails: View {
             VStack(alignment: .center, spacing: 20) {
                 
                 VStack(alignment: .center, spacing: 10) {
-                    Text("Wallet History".localized()).font(.barlowRegular(size: 25)).multilineTextAlignment(.center).foregroundColor(.white)
+                    Text("Wallet History".localized()).scaledFont(size: 20).multilineTextAlignment(.center).foregroundColor(.white)
                 }
                 
                 ZcashNavigationBar(

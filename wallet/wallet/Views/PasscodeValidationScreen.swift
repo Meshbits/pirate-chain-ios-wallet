@@ -144,12 +144,12 @@ struct PasscodeValidationScreen: View {
                 Spacer()
                 HStack(alignment: .center, spacing: nil, content: {
                     Spacer()
-                    Text("Enter PIN".localized()).foregroundColor(.white).scaledFont(size: 28).padding(.top,20)
+                    Text("Enter PIN".localized()).foregroundColor(.white).scaledFont(size: 20).padding(.top,20)
                     Spacer()
                 })
 
-                PasscodeScreenDescription(aDescription: "Please enter your PIN to proceed".localized(),size:20,padding:50)
-                Spacer()
+                PasscodeScreenDescription(aDescription: "Please enter your PIN to proceed".localized(),size:15,padding:50)
+                Spacer(minLength: 10)
                 
                 HStack(alignment: .center, spacing: 0, content: {
                     ForEach(0 ..< passcodeViewModel.mStateOfPins.count) { index in
@@ -157,8 +157,10 @@ struct PasscodeValidationScreen: View {
                     }
                 }).padding(20)
                 
+                PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:12,padding:50)
+                
                 PasscodeValidationNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
-                         
+                Spacer(minLength: 10)
             }).padding(.top,30)
             
         }

@@ -121,6 +121,8 @@ struct PasscodeView: View {
                     PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
                     Spacer()
                 }
+
+                Spacer(minLength: 10)
                 
                 HStack(alignment: .center, spacing: 0, content: {
                     
@@ -132,7 +134,7 @@ struct PasscodeView: View {
                 PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:12,padding:50)
                 
                 PasscodeNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
-                Spacer()
+                Spacer(minLength: 10)
             })
             .navigationBarHidden(true)
             .edgesIgnoringSafeArea(.all)
