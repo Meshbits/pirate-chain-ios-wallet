@@ -158,7 +158,7 @@
 "Thanks for your feedback!" = "Thanks for your feedback!";
 "Change PIN" = "Change PIN";
 "Enter Current PIN" = "Enter Current PIN";
-"SET PIN" = "SET PIN";
+"Set PIN" = "Set PIN";
 "Your PIN will be used to unlock your Pirate wallet and send money" = "Your PIN will be used to unlock your Pirate wallet and send money";
 "Remember your PIN. If you forget it, you won't be able to access your assets." = "Remember your PIN. If you forget it, you won't be able to access your assets.";
 
@@ -411,13 +411,13 @@
 
 // Passcode Screen
 
-"LOGIN PIN" = "LOGIN PIN";
+"Login PIN" = "Login PIN";
 "Enter PIN" = "Enter PIN";
 "Please enter your PIN to unlock your Pirate wallet and send money" = "Please enter your PIN to unlock your Pirate wallet and send money";
 "PIN Required" = "PIN Required";
 "Please enter your PIN to continue" = "Please enter your PIN to continue";
 "Change PIN" = "Change PIN";
-"SET PIN" = "SET PIN";
+"Set PIN" = "Set PIN";
 "Your PIN will be used to unlock your Pirate wallet and send money" = "Your PIN will be used to unlock your Pirate wallet and send money";
 "Re-Enter PIN" = "Re-Enter PIN";
 "Your PIN will be used to unlock your Pirate wallet and send money" = "Your PIN will be used to unlock your Pirate wallet and send money";
@@ -499,3 +499,4 @@
 "Please wait, ARRR Wallet Syncing is in progress.";
 
 "Restore from" = "Restore from";
+"PIN" = "PIN";

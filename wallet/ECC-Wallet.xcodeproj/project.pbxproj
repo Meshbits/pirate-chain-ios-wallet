@@ -443,6 +443,9 @@
 		29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651B26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
+		29A8019B2712DACD002DF6F9 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A8019A2712DACD002DF6F9 /* PasscodeView.swift */; };
+		29A8019C2712DACD002DF6F9 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A8019A2712DACD002DF6F9 /* PasscodeView.swift */; };
+		29A8019D2712DACD002DF6F9 /* PasscodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A8019A2712DACD002DF6F9 /* PasscodeView.swift */; };
 		29AC1C6326E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */; };
 		29AC1C6426E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */; };
 		29AC1C6526E29BD1009F8A9B /* RecoveryBasedUnlink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */; };
@@ -721,6 +724,7 @@
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
+		29A8019A2712DACD002DF6F9 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryBasedUnlink.swift; sourceTree = "<group>"; };
 		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
 		29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsVerificationScreen.swift; sourceTree = "<group>"; };
@@ -856,6 +860,7 @@
 				29F314E426D51E7200745DBE /* RequestMoneyView.swift */,
 				296CACE526D57757004DC784 /* SendMoneyView.swift */,
 				290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */,
+				29A8019A2712DACD002DF6F9 /* PasscodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1900,6 +1905,7 @@
 				0D72330823E9CFE40004B6D1 /* QRCodeScannerView.swift in Sources */,
 				0D12510523B557E40014EE3A /* SceneDelegate.swift in Sources */,
 				29DE76D926DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */,
+				29A8019B2712DACD002DF6F9 /* PasscodeView.swift in Sources */,
 				0D11C22F23BF8181001CF6F7 /* QRCodeContainer.swift in Sources */,
 				0DB826222645E9C100CEA2B6 /* TheNoScreen.swift in Sources */,
 				0D3AAB45244652700010EA3C /* TransactionDetail.swift in Sources */,
@@ -2055,6 +2061,7 @@
 				0DD1C2D124F051EE0042C1E4 /* Foundation+Zcash.swift in Sources */,
 				0DCDFFC524B6722B000F6999 /* ZcashSymbol.swift in Sources */,
 				0DC37D7424D37D7D00ACFE12 /* AddressHelperView.swift in Sources */,
+				29A8019D2712DACD002DF6F9 /* PasscodeView.swift in Sources */,
 				0D2D5C1A24CF8031001A58AD /* ZcashActionableTextField.swift in Sources */,
 				0DD1C2CE24F04D470042C1E4 /* BlockExplorerUrlHandling.swift in Sources */,
 				29F066A226C8028C00637E97 /* SelectLanguage.swift in Sources */,
@@ -2235,6 +2242,7 @@
 				0DE303A1263A158400CF877A /* QRCodeScannerView.swift in Sources */,
 				0DE303A2263A158400CF877A /* SceneDelegate.swift in Sources */,
 				29DE76DA26DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */,
+				29A8019C2712DACD002DF6F9 /* PasscodeView.swift in Sources */,
 				0DE303A3263A158400CF877A /* QRCodeContainer.swift in Sources */,
 				0DB826232645E9C100CEA2B6 /* TheNoScreen.swift in Sources */,
 				0DE303A4263A158400CF877A /* TransactionDetail.swift in Sources */,

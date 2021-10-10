@@ -55,7 +55,7 @@ struct IntroPrivacy: View {
                             
                             NavigationLink(
                                 
-                                destination: LazyView(PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode, isNewWallet: true,isAllowedToPop:true)).environmentObject(self.appEnvironment),
+                                destination: LazyView(PasscodeView(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode, isNewWallet: true,isAllowedToPop:true)).environmentObject(self.appEnvironment),
                                            isActive: $openPincodeScreen
                             ) {
                                 Button(action: {

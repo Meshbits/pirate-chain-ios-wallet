@@ -607,12 +607,14 @@ struct PasscodeNumber: View {
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left.fill").foregroundColor(.gray).scaledFont(size: 20)
+                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 17)
                     }else {
-                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 28)
+                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 24)
+                            .padding(.bottom,2)
+                            .padding(.trailing,2)
                         
                     }
-                }.padding(2)
+                }
             })
     }
     
@@ -649,7 +651,7 @@ struct PasscodeValidationNumber: View {
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left.fill").foregroundColor(.gray).scaledFont(size: 20)
+                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 20)
                     }else {
                         Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 28)
                         
@@ -759,7 +761,7 @@ struct PasscodeScreenTitle : View {
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
-            Text(aTitle).foregroundColor(.gray).scaledFont(size: 20).padding(.top,20)
+            Text(aTitle).foregroundColor(.gray).scaledFont(size: 18).padding(.top,20)
             Spacer()
         })
     }
@@ -772,6 +774,7 @@ struct PasscodeScreenSubTitle : View {
             Spacer()
             Text(aSubTitle).foregroundColor(.white)
             .scaledFont(size: 22)
+            .padding(.trailing,5)
             Spacer()
         })
     }
@@ -784,7 +787,7 @@ struct PasscodeScreenDescription : View {
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
-            Text(aDescription).lineLimit(nil).foregroundColor(.white)
+            Text(aDescription).lineLimit(nil).foregroundColor(Color.zARRRSubtitleColor)
                 .scaledFont(size: size).padding(.leading,padding).padding(.trailing,padding).multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer()

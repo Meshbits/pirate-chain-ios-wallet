@@ -40,7 +40,7 @@ struct KeyPadARRR: View {
                                     }) {
                                         ZStack{
                                             Image("passcodenumericbg")
-                                            Image(systemName: "delete.left.fill").foregroundColor(.gray)
+                                            Image(systemName: "delete.left").foregroundColor(.gray)
                                                 .scaledFont(size: 20).foregroundColor(.gray)
                                         }
                                     }
