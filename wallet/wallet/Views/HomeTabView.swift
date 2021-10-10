@@ -49,6 +49,12 @@ struct HomeTabView: View {
                     .navigationBarBackButtonHidden(true)
                     .environmentObject(HomeViewModel()))
     }
+    
+    var mSettingsView: some View {
+        LazyView(SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment))
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle(Text(""), displayMode: .inline)
+    }
   
     var body: some View {
         ZStack {
@@ -78,6 +84,19 @@ struct HomeTabView: View {
                         }
                         .tag(Tab.wallet)
                         .environment(\.currentTab, mSelectedTab)
+                    
+                    
+                               
+                       NavigationView{
+                           mSettingsView
+                       }
+                       .font(.system(size: 30, weight: .bold, design: .rounded))
+                       .tabItem {
+                           Image("settingsicon").renderingMode(.template)
+                           Text("Settings".localized()).scaledFont(size: 10)
+                       }
+                       .tag(Tab.settings)
+                       .environment(\.currentTab, mSelectedTab)
                  
                 }else{
                     
@@ -100,23 +119,20 @@ struct HomeTabView: View {
                     }
                     .tag(Tab.wallet)
                     .environment(\.currentTab, mSelectedTab)
+                    
+                    
+               
+                    mSettingsView
+                   .font(.system(size: 30, weight: .bold, design: .rounded))
+                   .tabItem {
+                       Image("settingsicon").renderingMode(.template)
+                       Text("Settings".localized()).scaledFont(size: 10)
+                   }
+                   .tag(Tab.settings)
+                   .environment(\.currentTab, mSelectedTab)
              
                 }
      
-                
-//                NavigationView{
-                    LazyView(SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment))
-                        .navigationBarBackButtonHidden(true)
-                        .navigationBarTitle(Text(""), displayMode: .inline)
-//                }
-                
-                    .font(.system(size: 30, weight: .bold, design: .rounded))
-                    .tabItem {
-                        Image("settingsicon").renderingMode(.template)
-                        Text("Settings".localized()).scaledFont(size: 10)
-                    }
-                    .tag(Tab.settings)
-                    .environment(\.currentTab, mSelectedTab)
                 
             }
             .accentColor(Color.arrrBarAccentColor)

@@ -59,6 +59,8 @@ struct SettingsScreen: View {
         vibrationGenerator.notificationOccurred(.warning)
     }
     
+    @State private var tabBar: UITabBar! = nil
+    
     var body: some View {
             ZStack{
                 ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -142,7 +144,8 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: UnlinkDevice().environmentObject(self.appEnvironment),
+                    destination: UnlinkDevice().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                                tag: SettingsDestination.openUnlinkDevice,
                                selection: $destination
                 ) {
@@ -150,7 +153,8 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: PrivateServerConfig().environmentObject(self.appEnvironment),
+                    destination: PrivateServerConfig().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                                tag: SettingsDestination.openPrivateServerConfig,
                                selection: $destination
                 ) {
@@ -158,7 +162,8 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: NotificationScreen().environmentObject(self.appEnvironment),
+                    destination: NotificationScreen().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                                tag: SettingsDestination.openNotifications,
                                selection: $destination
                 ) {
@@ -169,7 +174,9 @@ struct SettingsScreen: View {
              
                 NavigationLink(
                     
-                    destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: true).environmentObject(self.appEnvironment),
+                    destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: true).environmentObject(self.appEnvironment)
+                        .onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                     tag: SettingsDestination.openChangePIN,
                     selection: $destination
                 ) {
@@ -178,7 +185,8 @@ struct SettingsScreen: View {
                 
                 
                 NavigationLink(
-                    destination: InitiateRecoveryKeyPhraseFlow().navigationBarTitle("", displayMode: .inline)
+                    destination: InitiateRecoveryKeyPhraseFlow().onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false }.navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true),
                                tag: SettingsDestination.openRecoveryPhrase,
                                selection: $destination
@@ -187,7 +195,8 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "privacyURL".localized()).environmentObject(self.appEnvironment),
+                    destination: OpenInAppBrowser(aURLString: "privacyURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                                tag: SettingsDestination.openPrivacyPolicy,
                                selection: $destination
                 ) {
@@ -195,7 +204,9 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "termsURL".localized()).environmentObject(self.appEnvironment),
+                    destination: OpenInAppBrowser(aURLString: "termsURL".localized()).environmentObject(self.appEnvironment)
+                        .onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                                tag: SettingsDestination.openTermsAndConditions,
                                selection: $destination
                 ) {
@@ -203,20 +214,25 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "supportURL".localized()).environmentObject(self.appEnvironment),
+                    destination: OpenInAppBrowser(aURLString: "supportURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .onDisappear { self.tabBar.isHidden = false },
                                tag: SettingsDestination.openSupport,
                                selection: $destination
                 ) {
                    EmptyView()
                 }
                 
-            }.navigationBarHidden(true)
+            }.background(TabBarAccessor { tabbar in
+                self.tabBar = tabbar
+            })
+            .navigationBarHidden(true)
             .bottomSheet(isPresented: $openLanguageScreen,
                           height: 500,
                           topBarHeight: 0,
                           topBarCornerRadius: 20,
                           showTopIndicator: true) {
                 SelectLanguage().environmentObject(appEnvironment)
+                
             }.onAppear(){
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissSettings"), object: nil, queue: .main) { (_) in
                     openLanguageScreen = false
@@ -442,4 +458,32 @@ struct SettingsSectionBackgroundModifier: ViewModifier {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding()
             }
+}
+
+
+struct TabBarAccessor: UIViewControllerRepresentable {
+    var callback: (UITabBar) -> Void
+    private let proxyController = ViewController()
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<TabBarAccessor>) ->
+                              UIViewController {
+        proxyController.callback = callback
+        return proxyController
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<TabBarAccessor>) {
+    }
+
+    typealias UIViewControllerType = UIViewController
+
+    private class ViewController: UIViewController {
+        var callback: (UITabBar) -> Void = { _ in }
+
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            if let tabBar = self.tabBarController {
+                self.callback(tabBar.tabBar)
+            }
+        }
+    }
 }
