@@ -9,7 +9,6 @@
 import SwiftUI
 import AlertToast
 
-
 final class RecoveryViewModel: ObservableObject {
     
     @Published var firstWord = ""
@@ -18,7 +17,13 @@ final class RecoveryViewModel: ObservableObject {
     @Published var firstWordIndex:Int = 0
     @Published var secondWordIndex:Int = 0
     @Published var thirdWordIndex:Int = 0
-    var mSeedPhrase = try! SeedManager.default.exportPhrase()
+    var mSeedPhrase: String {
+        do {
+            return try SeedManager.default.exportPhrase()
+        } catch {
+            return ""
+        }
+    }
     @Published var mCompletePhrase:[String]?
     @Published var mWordsVerificationCompleted = false
   
