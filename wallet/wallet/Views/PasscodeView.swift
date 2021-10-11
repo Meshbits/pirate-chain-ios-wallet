@@ -136,6 +136,7 @@ struct PasscodeView: View {
                 PasscodeNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
                 Spacer(minLength: 10)
             })
+            .padding(.bottom, 20)
             .navigationBarHidden(true)
             .edgesIgnoringSafeArea(.all)
             .zcashNavigationBar(leadingItem: {

@@ -284,13 +284,16 @@ struct PasscodeScreen: View {
                     ForEach(0 ..< passcodeViewModel.mStateOfPins.count) { index in
                         PasscodePinImageView(isSelected: Binding.constant(passcodeViewModel.mStateOfPins[index]))
                     }
-                }).padding(20)
+                }).padding(.leading,20).padding(.trailing,20)
 
                 PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:Device.isLarge ? 14 : 8,padding:50)
                 
                 PasscodeNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
+                
+                Spacer(minLength: 10)
                                 
             })
+            .padding(.bottom, 20)
             
             NavigationLink(destination:
                             HomeTabView(openPasscodeScreen: false)

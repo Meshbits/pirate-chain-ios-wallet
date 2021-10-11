@@ -727,33 +727,34 @@ struct Home: View {
                 }
             }
         }        
-        .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
-                   switch output {
-                   case .failed(_), .userFailed:
-//                       print("SOME ERROR OCCURRED")
-                        UserSettings.shared.isBiometricDisabled = true
-                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
-
-                   case .success:
-//                        print("SUCCESS ON HOME")
-                       
-                        if mCurrentTab == HomeTabView.Tab.home {
-                            UserSettings.shared.biometricInAppStatus = true
-                            UserSettings.shared.isBiometricDisabled = false
-                            self.showPassCodeScreen = false
-                            NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
-                        }
-                        
-                   case .userDeclined:
-//                       print("DECLINED")
-                        UserSettings.shared.biometricInAppStatus = false
-                        UserSettings.shared.isBiometricDisabled = true
-                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
-                       break
-                   }
-            
-
-       }.onReceive(NotificationCenter.default.publisher(for: .openTransactionScreen)) { notificationObject in
+//        .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
+//                   switch output {
+//                   case .failed(_), .userFailed:
+////                       print("SOME ERROR OCCURRED")
+//                        UserSettings.shared.isBiometricDisabled = true
+//                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+//
+//                   case .success:
+////                        print("SUCCESS ON HOME")
+//
+//                        if mCurrentTab == HomeTabView.Tab.home {
+//                            UserSettings.shared.biometricInAppStatus = true
+//                            UserSettings.shared.isBiometricDisabled = false
+//                            self.showPassCodeScreen = false
+////                            NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
+//                        }
+//
+//                   case .userDeclined:
+////                       print("DECLINED")
+//                        UserSettings.shared.biometricInAppStatus = false
+//                        UserSettings.shared.isBiometricDisabled = true
+//                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+//                       break
+//                   }
+//
+//
+//       }
+        .onReceive(NotificationCenter.default.publisher(for: .openTransactionScreen)) { notificationObject in
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             initiateDeeplinkDirectSendFlow(notificationObject: notificationObject)
         }

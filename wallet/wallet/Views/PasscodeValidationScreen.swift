@@ -141,7 +141,6 @@ struct PasscodeValidationScreen: View {
                     
                 }
                 
-                Spacer()
                 HStack(alignment: .center, spacing: nil, content: {
                     Spacer()
                     Text("Enter PIN".localized()).foregroundColor(.white).scaledFont(size: 20).padding(.top,20)
@@ -161,7 +160,8 @@ struct PasscodeValidationScreen: View {
                 
                 PasscodeValidationNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
                 Spacer(minLength: 10)
-            }).padding(.top,30)
+            }).padding(.top,10)
+                .padding(.bottom,20)
             
         }
         .highPriorityGesture(dragGesture)
