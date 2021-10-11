@@ -198,6 +198,7 @@ struct SendMoneyView: View {
                 isSendTapped = true
             }
         }
+        .keyboardAdaptive()
         }
     }
     

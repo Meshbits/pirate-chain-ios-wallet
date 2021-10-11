@@ -137,6 +137,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
         }.onTapGesture {
             UIApplication.shared.endEditing()
         }
+        .keyboardAdaptive()
         .zcashNavigationBar(leadingItem: {
             EmptyView()
          }, headerItem: {

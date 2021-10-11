@@ -201,7 +201,8 @@ struct RecoveryBasedUnlink: View {
                 UIApplication.shared.endEditing()
             }
            
-        } .onAppear(){
+        }
+        .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayoutInvalidDetailsRecovery"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
                 aSmallErrorVibration()

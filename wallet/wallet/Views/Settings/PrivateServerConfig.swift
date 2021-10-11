@@ -92,6 +92,7 @@ struct PrivateServerConfig: View {
             }.padding(.top, 100)
             
         }
+        .keyboardAdaptive()
         .onTapGesture {
                        
                if isUserEditingPort {

@@ -144,8 +144,7 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: UnlinkDevice().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                    destination: UnlinkDevice().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
                                tag: SettingsDestination.openUnlinkDevice,
                                selection: $destination
                 ) {
@@ -154,7 +153,7 @@ struct SettingsScreen: View {
                 
                 NavigationLink(
                     destination: PrivateServerConfig().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                        ,
                                tag: SettingsDestination.openPrivateServerConfig,
                                selection: $destination
                 ) {
@@ -163,7 +162,7 @@ struct SettingsScreen: View {
                 
                 NavigationLink(
                     destination: NotificationScreen().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                        ,
                                tag: SettingsDestination.openNotifications,
                                selection: $destination
                 ) {
@@ -175,8 +174,7 @@ struct SettingsScreen: View {
                 NavigationLink(
                     
                     destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: true).environmentObject(self.appEnvironment)
-                        .onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                        .onAppear { self.tabBar.isHidden = true },
                     tag: SettingsDestination.openChangePIN,
                     selection: $destination
                 ) {
@@ -186,7 +184,7 @@ struct SettingsScreen: View {
                 
                 NavigationLink(
                     destination: InitiateRecoveryKeyPhraseFlow().onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false }.navigationBarTitle("", displayMode: .inline)
+                        .navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true),
                                tag: SettingsDestination.openRecoveryPhrase,
                                selection: $destination
@@ -196,7 +194,7 @@ struct SettingsScreen: View {
                 
                 NavigationLink(
                     destination: OpenInAppBrowser(aURLString: "privacyURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                        ,
                                tag: SettingsDestination.openPrivacyPolicy,
                                selection: $destination
                 ) {
@@ -206,7 +204,7 @@ struct SettingsScreen: View {
                 NavigationLink(
                     destination: OpenInAppBrowser(aURLString: "termsURL".localized()).environmentObject(self.appEnvironment)
                         .onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                        ,
                                tag: SettingsDestination.openTermsAndConditions,
                                selection: $destination
                 ) {
@@ -215,7 +213,7 @@ struct SettingsScreen: View {
                 
                 NavigationLink(
                     destination: OpenInAppBrowser(aURLString: "supportURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .onDisappear { self.tabBar.isHidden = false },
+                        ,
                                tag: SettingsDestination.openSupport,
                                selection: $destination
                 ) {
@@ -236,6 +234,10 @@ struct SettingsScreen: View {
             }.onAppear(){
                 NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissSettings"), object: nil, queue: .main) { (_) in
                     openLanguageScreen = false
+                }
+                
+                if self.tabBar != nil {
+                    self.tabBar.isHidden = false
                 }
             }.onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
                 switch output {
