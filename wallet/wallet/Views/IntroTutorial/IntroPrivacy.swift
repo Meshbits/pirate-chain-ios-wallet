@@ -68,14 +68,12 @@ struct IntroPrivacy: View {
                         })
                     .navigationBarHidden(true)
                     .edgesIgnoringSafeArea(.all)
-                    .zcashNavigationBar(leadingItem: {
+                    
+                    }.zcashNavigationBar(leadingItem: {
                         Button {
                             presentationMode.wrappedValue.dismiss()
                         } label: {
-                            ZStack{
-                               Image("passcodenumericbg")
-                               Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 233/255, green: 233/255, blue: 233/255))
-                            }.padding(.leading,40).padding(.top,20)
+                            Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
                         }
 
                     }, headerItem: {
@@ -83,8 +81,6 @@ struct IntroPrivacy: View {
                     }, trailingItem: {
                         EmptyView()
                     })
-
-                    }
 
 //         }.navigationBarHidden(true)
         

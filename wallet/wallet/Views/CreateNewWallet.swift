@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Neumorphic
 
 struct CreateNewWallet: View {
     
@@ -96,10 +97,10 @@ struct CreateNewWallet: View {
                 )
                 .padding(20)
                 
-                Divider().foregroundColor(Color.black).background(Color.zBlackGradient1).frame(height:2).padding(.leading,15).padding(.trailing,15)
+                Color.black.frame(height:CGFloat(1) / UIScreen.main.scale).frame(height:2).padding(.leading,15).padding(.trailing,15)
   
                 NavigationLink(
-                    destination: IntroWelcome().environmentObject(self.appEnvironment),
+                    destination: IntroWelcome().environmentObject(self.appEnvironment).navigationBarHidden(true),
                                isActive: $openCreateNewWalletFlow
                         
                 ) {
@@ -248,9 +249,7 @@ func body(content: Content) -> some View {
         .padding()
         .frame(maxWidth: .infinity)
         .background(
-            RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 32.0/255.0, green: 34.0/255.0, blue: 38.0/255.0)))
-                
-        
+            RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 32.0/255.0, green: 35.0/255.0, blue: 39.0/255.0)))
     }
 }
 

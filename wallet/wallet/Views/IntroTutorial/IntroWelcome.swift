@@ -9,11 +9,46 @@
 import SwiftUI
 
 struct IntroWelcome: View {
+    
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    
     @Environment(\.presentationMode) var presentationMode
+    
     @State var isViewVisible = false
-    @State var openNextIntroScreen = false
+    
+    @State var mMoveToPincode = false
+    
+    @State var mMoveToPrivacy = false
+    
+    @State var mTitle = "Welcome to \nPirate Wallet".localized()
+    
+    @State var mSubTitle = "Reliable, fast & Secure".localized()
+    
+    @State var mButtonTitle =  "Get Started".localized()
+    
+    func moveNext(){
+        if !mMoveToPrivacy {
+            mTitle = "Privacy! \n not Piracy".localized()
+            mButtonTitle = "Continue".localized()
+            mMoveToPrivacy = true
+        }else if !mMoveToPincode {
+            mMoveToPincode = true
+        }
+    }
+    
+    func moveBack(){
+        
+        if mMoveToPrivacy {
+            mTitle = "Welcome to \nPirate Wallet".localized()
+            mButtonTitle = "Get Started".localized()
+            mMoveToPincode = false
+            mMoveToPrivacy = false
+        }
+        
+    }
+    
     let mAnimationDuration = 1.5
+        
     var body: some View {
 //         NavigationView
 //         {
@@ -21,10 +56,10 @@ struct IntroWelcome: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                         VStack(alignment: .center, content: {
-                            Text("Welcome to Pirate Wallet".localized()).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
+                            Text(mTitle.localized()).transition(.move(edge: .trailing)).id("MyTitleComponent1" + mTitle).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
                                 .scaledFont(size: 26)
-                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
-                                .scaledFont(size: 14)
+                            Text(mSubTitle.localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
+                                .scaledFont(size: 14).padding(.top,20)
                             ZStack{
                                 Image("backgroundglow")
                                     .padding(.trailing,80).padding(.leading,80)
@@ -54,28 +89,49 @@ struct IntroWelcome: View {
                             
                             
                             NavigationLink(
-                                destination: IntroPrivacy().environmentObject(self.appEnvironment),
-                                           isActive: $openNextIntroScreen
+                                
+                                destination: LazyView(PasscodeView(passcodeViewModel: PasscodeViewModel(), mScreenState: .newPasscode, isNewWallet: true,isAllowedToPop:true)).environmentObject(self.appEnvironment),
+                                           isActive: $mMoveToPincode
                             ) {
                                 Button(action: {
-                                    openNextIntroScreen = true
+                                    withAnimation(.easeIn(duration: 1), {
+                                        moveNext()
+                                   })
+                                    
                                 }) {
-                                    BlueButtonView(aTitle: "Get Started".localized())
-                                }.padding(.bottom,20)
+                                    ZStack {
+                                        
+                                        Image("bluebuttonbackground").resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
+                                        
+                                        Text(mButtonTitle).foregroundColor(Color.black)
+                                            .frame(width: 225.0, height:84)
+                                            .cornerRadius(15)
+                                            .scaledFont(size: 19)
+                                            .multilineTextAlignment(.center)
+                                    }.frame(width: 225.0, height:84)
+                                    
+                                }
+                                .padding(.bottom,20)
                             }
                             
                             
                         })
                     .navigationBarHidden(true)
                     .edgesIgnoringSafeArea(.all)
-                    .zcashNavigationBar(leadingItem: {
+                  
+
+                    }.zcashNavigationBar(leadingItem: {
                         Button {
-                            presentationMode.wrappedValue.dismiss()
+                            if !mMoveToPincode && !mMoveToPrivacy {
+                                presentationMode.wrappedValue.dismiss()
+                            }else{
+                                withAnimation(.easeIn(duration: 1), {
+                                    moveBack()
+                               })
+                            }
+                            
                         } label: {
-                            ZStack{
-                               Image("passcodenumericbg")
-                               Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).padding([.bottom],8).foregroundColor(Color.init(red: 233/255, green: 233/255, blue: 233/255))
-                            }.padding(.leading,40)
+                            Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
                         }
 
                     }, headerItem: {
@@ -83,8 +139,6 @@ struct IntroWelcome: View {
                     }, trailingItem: {
                         EmptyView()
                     })
-
-                    }
 
         
                        

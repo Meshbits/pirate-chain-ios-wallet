@@ -788,9 +788,7 @@ struct Home: View {
                
             }
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarTitle("", displayMode: .inline)
-        .navigationBarHidden(true)        
+              
         .sheet(isPresented: $showPassCodeScreen){
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: true)).environmentObject(self.appEnvironment)
         }
@@ -799,6 +797,9 @@ struct Home: View {
             tracker.track(.tap(action: .balanceDetail), properties: [:])
             showFeedbackIfNeeded()
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarHidden(true)  
         .zOverlay(isOverlayShown: $isOverlayShown) {
             FeedbackDialog(rating: $feedbackRating) { feedbackResult in
                 self.isOverlayShown = false
