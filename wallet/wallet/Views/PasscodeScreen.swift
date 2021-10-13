@@ -606,16 +606,14 @@ struct PasscodeNumber: View {
 
             }, label: {
                 ZStack {
-                    Image("passcodenumericbg").resizable().frame(width: 90, height: 90, alignment: .center)
-
+                    Image("passcodenumericbg").resizable().frame(width: 100, height: 100, alignment: .center)
+                        .padding(.top,3)
+                        .padding(.leading,3)
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
                         Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 17)
                     }else {
-                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 24)
-                            .padding(.bottom,2)
-                            .padding(.trailing,2)
-                        
+                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 22)
                     }
                 }
             })
@@ -697,7 +695,7 @@ struct PasscodeNumberView : View {
                 PasscodeNumber(passcodeValue: Binding.constant("delete"),passcodeViewModel: $passcodeViewModel)
             })
         })
-            .frame(width: 250, alignment: .center)
+            .frame(width: 300, alignment: .center)
     }
 }
 

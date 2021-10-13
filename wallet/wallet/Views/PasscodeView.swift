@@ -105,14 +105,14 @@ struct PasscodeView: View {
                 }else if mScreenState == .newPasscode{
 //                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
 //                    Spacer()
-                    PasscodeScreenSubTitle(aSubTitle: "Set PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+//                    PasscodeScreenSubTitle(aSubTitle: "Set PIN".localized())
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50).padding(.top,50)
                     Spacer()
                 }else if mScreenState == .confirmPasscode{
 //                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
 //                    Spacer()
-                    PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+//                    PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50).padding(.top,50)
                     Spacer()
                 }else if mScreenState == .changePasscode{
 //                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
@@ -129,7 +129,7 @@ struct PasscodeView: View {
                     ForEach(0 ..< passcodeViewModel.mStateOfPins.count) { index in
                         PasscodePinImageView(isSelected: Binding.constant(passcodeViewModel.mStateOfPins[index]))
                     }
-                }).padding(20)
+                }).padding(10)
 
                 PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:12,padding:50)
                 
@@ -140,25 +140,27 @@ struct PasscodeView: View {
             .navigationBarHidden(true)
             .edgesIgnoringSafeArea(.all)
             .zcashNavigationBar(leadingItem: {
-                   ARRRBackButton(action: {
-                       presentationMode.wrappedValue.dismiss()
-                   }).frame(width: 30, height: 30)
+                                
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
+                }.frame(width: 30, height: 30)
                     .padding(.top,30)
                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
                    .multilineTextAlignment(.leading)
-            
                 
             }, headerItem: {
                 if mScreenState == .validatePasscode{
-                    PasscodeScreenTitle(aTitle: "Login PIN".localized())
+                    PasscodeLoginScreenTitle(aTitle: "Login PIN".localized())
                 }else if mScreenState == .validateAndDismiss{
-                    PasscodeScreenTitle(aTitle: "Enter PIN".localized())
+                    PasscodeLoginScreenTitle(aTitle: "Enter PIN".localized())
                 }else if mScreenState == .newPasscode{
-                    PasscodeScreenTitle(aTitle: "PIN".localized())
+                    PasscodeLoginScreenTitle(aTitle: "Set PIN".localized())
                 }else if mScreenState == .confirmPasscode{
-                    PasscodeScreenTitle(aTitle: "PIN".localized())
+                    PasscodeLoginScreenTitle(aTitle: "Re-Enter PIN".localized())
                 }else if mScreenState == .changePasscode{
-                    PasscodeScreenTitle(aTitle: "PIN".localized())
+                    PasscodeLoginScreenTitle(aTitle: "PIN".localized())
                 }else{
                     EmptyView()
                 }
@@ -211,7 +213,11 @@ struct PasscodeView: View {
                         if isNewWallet {
                             // Initiate Create New Wallet flow from here
 //                            createNewWalletFlow()
-                            initiateNewWalletPhraseSetup = true
+                            showPasscodeChangeSuccessToast = true
+                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                initiateNewWalletPhraseSetup = true
+                            }
                             return
                         }else{
 
@@ -289,7 +295,7 @@ struct PasscodeView: View {
         }
         .toast(isPresenting: $showPasscodeChangeSuccessToast){
 
-            AlertToast(displayMode: .hud, type: .regular, title:"Passcode changed successfully!".localized())
+            AlertToast(displayMode: .hud, type: .regular, title:"PIN SET Successfully!".localized())
 
         }
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
@@ -372,6 +378,15 @@ struct PasscodeView: View {
         return isReturnFromFlow
     }
     
+}
+
+struct PasscodeLoginScreenTitle : View {
+    @State var aTitle: String
+    var body: some View {
+        HStack(alignment: .center, spacing: nil, content: {
+            Text(aTitle).scaledFont(size: 22).padding(.top,40)
+        })
+    }
 }
 
 struct PasscodeView_Previews: PreviewProvider {

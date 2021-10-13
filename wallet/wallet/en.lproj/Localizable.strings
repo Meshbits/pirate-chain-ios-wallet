@@ -200,7 +200,7 @@
 "Permission Denied" = "Permission Denied";
 "Please enable the Face ID permission in the settings." = "Please enable the Face ID permission in the settings.";
 "Ok" = "Ok";
-
+"PIN SET Successfully!" = "PIN SET Successfully!";
 
 // Unlink Device
 
