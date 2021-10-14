@@ -8,8 +8,9 @@
 
 import SwiftUI
 import ZcashLightClientKit
+import AlertToast
 struct TransactionDetails: View {
-
+        
     enum Alerts {
         case explorerNotice
         case copiedItem(item: PasteboardItemModel)
@@ -18,6 +19,7 @@ struct TransactionDetails: View {
     @State var expandMemo = false
     @Environment(\.presentationMode) var presentationMode
     @State var alertItem: Alerts?
+    @State var isCopyAlertShown = false
     var exploreButton: some View {
         Button(action: {
             self.alertItem = .explorerNotice
@@ -63,10 +65,10 @@ struct TransactionDetails: View {
                         ScrollView {
                             VStack {
 
-                                if let fullAddr = detail.arrrAddress, let toAddr = fullAddr.shortARRRaddress {
-                                    TransactionRow(mTitle: "From: ".localized() + toAddr, showLine: true, isYellowColor: false)
+                                if let fullAddr = detail.arrrAddress{
+                                    TransactionRow(mTitle: "From: ".localized(), mSubTitle: fullAddr, showLine: true, isYellowColor: false)
                                 }else{
-                                    TransactionRow(mTitle: "From: ".localized() + (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
+                                    TransactionRow(mTitle: "From: ".localized(), mSubTitle: (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
                                 }
                                 
                                 TransactionRowTitleSubtitle(mTitle: converDateToString(aDate: detail.date), mSubTitle: ("Processing fee: ".localized() + "\(detail.defaultFee.asHumanReadableZecBalance().toZecAmount())" + " ARRR"), showLine: true)
@@ -75,9 +77,9 @@ struct TransactionDetails: View {
                                 
                                 if detail.success {
                                     let latestHeight = ZECCWalletEnvironment.shared.synchronizer.syncBlockHeight.value
-                                    TransactionRow(mTitle: detail.makeStatusText(latestHeight: latestHeight), showLine: false,isYellowColor: true)
+                                    TransactionRow(mTitle: detail.makeStatusText(latestHeight: latestHeight),mSubTitle :"", showLine: false,isYellowColor: true)
                                 } else {
-                                    TransactionRow(mTitle: "Pending".localized(), showLine: false,isYellowColor: true)
+                                    TransactionRow(mTitle: "Pending".localized(),mSubTitle :"", showLine: false,isYellowColor: true)
                                 }
                                 
 
@@ -113,7 +115,20 @@ struct TransactionDetails: View {
 //                    exploreButton
 //                }
             }
+            .onDisappear() {
+                NotificationCenter.default.removeObserver(NSNotification.Name("CopyToClipboard"))
+            }
+            .onAppear() {
+                NotificationCenter.default.addObserver(forName: NSNotification.Name("CopyToClipboard"), object: nil, queue: .main) { (_) in
+                    isCopyAlertShown = true
+                }
+            }
             .padding()
+        }
+        .toast(isPresenting: $isCopyAlertShown){
+            
+            AlertToast(displayMode:  .hud, type: .regular, title:"Address Copied to clipboard!".localized())
+
         }
         .padding(.vertical,0)
         .padding(.horizontal, 8)
@@ -318,14 +333,14 @@ func formatDateDetail(_ date: Date) -> String {
     date.transactionDetailFormat()
 }
 
-struct TransactionDetails_Previews: PreviewProvider {
-    static var previews: some View {
-        ZStack {
-            ZcashBackground()
-            TransactionDetails(detail: DetailModel(id: "fasdfasdf", date: Date(), arrrAmount: 4.32, status: .received, subtitle: "fasdfasd"))
-        }
-    }
-}
+//struct TransactionDetails_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ZStack {
+//            ZcashBackground()
+//            TransactionDetails(detail: DetailModel(id: "fasdfasdf", date: Date(), arrrAmount: 4.32, status: .received, subtitle: "fasdfasd"))
+//        }
+//    }
+//}
 
 
 extension TransactionDetails.Alerts: Identifiable {
@@ -345,6 +360,8 @@ struct TransactionRow: View {
     
     var mTitle:String
     
+    var mSubTitle:String
+    
     var showLine = false
     
     var isYellowColor = false
@@ -353,20 +370,31 @@ struct TransactionRow: View {
 
         VStack {
             HStack{
-                Text(mTitle).font(.barlowRegular(size: 22)).foregroundColor(isYellowColor ? Color.zARRRTextColor : Color.textTitleColor)
-                                .frame(height: 22,alignment: .leading)
+                Text(mTitle+mSubTitle).scaledFont(size: 18).foregroundColor(isYellowColor ? Color.zARRRTextColor : Color.textTitleColor)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .frame(alignment: .leading)
                                 .foregroundColor(Color.white)
                     .multilineTextAlignment(.leading)
-                    .truncationMode(.middle)
                     .padding(10)
                 Spacer()
                 Spacer()
+            } .onTapGesture {
+                if !isYellowColor && !mSubTitle.isEmpty && mSubTitle != "NA"{
+                    copyToClipBoard(mSubTitle)
+                }
             }
             
             if showLine {
                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale).padding(10)
             }
         }
+    }
+   
+    func copyToClipBoard(_ content: String) {
+        UIPasteboard.general.string = content
+        logger.debug("content copied to clipboard")
+        NotificationCenter.default.post(name: NSNotification.Name("CopyToClipboard"), object: nil)
     }
 }
 

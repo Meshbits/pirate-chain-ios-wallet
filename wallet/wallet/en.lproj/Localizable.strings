@@ -43,6 +43,7 @@
 "feedback_addresscopied" = "Address Copied!";
 "feedback_invalidaddress" = "Warning, this address is not valid!";
 "feedback_sameaddress" = "Warning, this appears to be your address!";
+"Address Copied to clipboard!" = "Address Copied to clipboard!";
 "label_replyto" = "include reply-to";
 "send_onclipboard" = "On Clipboard";
 "send_lastused" = "last used";
