@@ -128,17 +128,10 @@ struct RestorePhraseScreen: View {
         .navigationBarBackButtonHidden(true)
         .navigationTitle("Recovery Phrase".localized())
             .navigationBarTitleDisplayMode(.inline)
-        .navigationBarItems(leading:  Button(action: {
+        .navigationBarItems(leading:   Button {
             presentationMode.wrappedValue.dismiss()
-        }) {
-            VStack(alignment: .leading) {
-                ZStack{
-                    Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center)
-                        .scaledFont(size: 22)
-                    .padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
-                }
-            }.padding(.leading,-20).padding(.top,10)
+        } label: {
+            Image("backicon").resizable().frame(width: 60, height: 60)
         })
     }
     

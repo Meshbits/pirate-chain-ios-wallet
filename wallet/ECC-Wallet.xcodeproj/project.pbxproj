@@ -858,7 +858,6 @@
 				290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */,
 				2924CF6C26BE99AE003E5C3B /* HomeTabView.swift */,
 				29F314E426D51E7200745DBE /* RequestMoneyView.swift */,
-				296CACE526D57757004DC784 /* SendMoneyView.swift */,
 				290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */,
 				29A8019A2712DACD002DF6F9 /* PasscodeView.swift */,
 			);
@@ -998,6 +997,7 @@
 		0D27C4A523C4C3480044B48E /* Send Flow */ = {
 			isa = PBXGroup;
 			children = (
+				296CACE526D57757004DC784 /* SendMoneyView.swift */,
 				0D421AF923C66B7500E5E55E /* Sending.swift */,
 			);
 			path = "Send Flow";

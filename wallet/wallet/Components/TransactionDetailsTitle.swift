@@ -19,9 +19,9 @@ struct TransactionDetailsTitle: View {
         HStack{
            Text(format(zec: availableZec < 0 ? -availableZec : availableZec))
                 .foregroundColor(.white)
-                .scaledFont(size: 40)
+                .scaledFont(size: 32)
            Text(" \(arrr) ")
-                .scaledFont(size: 15)
+                .scaledFont(size: 12)
                 .foregroundColor(.zAmberGradient1)
         }
     }
@@ -55,7 +55,7 @@ struct TransactionDetailsTitle: View {
             
             Text(aTitle)
                 .foregroundColor(.zLightGray)
-                .scaledFont(size: 28)
+                .scaledFont(size: 24)
                 .padding(.leading,10)
             HStack{
                 available.multilineTextAlignment(.leading)
@@ -65,7 +65,7 @@ struct TransactionDetailsTitle: View {
                     .scaledFont(size: 12)
                     .foregroundColor(.gray).multilineTextAlignment(.trailing)
                 
-                Image(anImage).resizable().frame(width:60,height:60).multilineTextAlignment(.trailing)
+                Image(anImage).resizable().frame(width:40,height:40).multilineTextAlignment(.trailing)
             }
            
         }
