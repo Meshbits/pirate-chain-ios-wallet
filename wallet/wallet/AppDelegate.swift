@@ -53,6 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        Bugsnag.start(withApiKey: Constants.bugsnagApiKey)
         #endif
         
+        // Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
+        application.isIdleTimerDisabled = true
+        
         return true
     }
     
