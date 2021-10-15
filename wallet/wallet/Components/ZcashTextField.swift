@@ -67,7 +67,6 @@ struct ZcashTextField: View {
             }.overlay(
                 Baseline().stroke(Color.white,lineWidth: 2)
             )
-            .font(.footnote)
             subtitleView
         }
     }

@@ -65,7 +65,6 @@ struct ZcashMemoTextField: View {
 
                     HStack {
                         Text(String(format:NSLocalizedString("label_charactercount".localized(),comment:""), "\($text.wrappedValue.count)/\(charLimit)"))
-                        .font(.footnote)
                         .foregroundColor(inactiveColor)
                         
                         Spacer()
