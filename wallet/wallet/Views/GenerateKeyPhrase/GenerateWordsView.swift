@@ -216,7 +216,7 @@ struct GenerateWordsView: View {
                 EmptyView()
             })
             
-        }
+        }.navigationBarHidden(true)
     }
     
 }

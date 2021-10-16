@@ -15,7 +15,7 @@ struct GenerateKeyPhraseInitiate: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
     
     var body: some View {
-        NavigationView{
+//        NavigationView{
             ZStack{
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, content: {
@@ -45,7 +45,7 @@ struct GenerateKeyPhraseInitiate: View {
 
                 })
             }
-        }
+//        }
         //.navigationViewStyle(StackNavigationViewStyle())
     }
 }
