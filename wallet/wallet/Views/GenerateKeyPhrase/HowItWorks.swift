@@ -106,7 +106,8 @@ struct HowItWorks: View {
                     EmptyView()
                 }
                 .isDetailLink(true)
-            }).zcashNavigationBar(leadingItem: {
+            }).navigationBarHidden(true)
+                .zcashNavigationBar(leadingItem: {
                 ARRRBackButton(action: {
                     presentationMode.wrappedValue.dismiss()
                 }).frame(width: 30, height: 30)
