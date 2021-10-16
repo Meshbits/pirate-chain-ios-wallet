@@ -669,7 +669,6 @@
 		0DDAF3A824098D1000EA9427 /* MnemonicSeedPhraseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicSeedPhraseProvider.swift; sourceTree = "<group>"; };
 		0DDF876623DB5400002BF158 /* URL+Zcash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Zcash.swift"; sourceTree = "<group>"; };
 		0DE303C4263A158400CF877A /* ECC-Wallet-Testnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ECC-Wallet-Testnet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0DE303C5263A158400CF877A /* ECC-Wallet-Testnet-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ECC-Wallet-Testnet-Info.plist"; path = "/Users/pacu/Repos/ECC/zcash-ios-wallet/wallet/ECC-Wallet-Testnet-Info.plist"; sourceTree = "<absolute>"; };
 		0DE51DAB23BEB03C00709636 /* Zboto.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zboto.otf; sourceTree = "<group>"; };
 		0DE51DAD23BEB0E500709636 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		0DE51DAF23BEBE5100709636 /* KeyPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPad.swift; sourceTree = "<group>"; };
@@ -917,7 +916,6 @@
 				EA66A8F666D2E80F5C4EC4F5 /* Pods */,
 				0F65A46FFC0823E2EE87ED5E /* Frameworks */,
 				0DCDFFE724B6722B000F6999 /* ECC-Wallet-no-logs-Info.plist */,
-				0DE303C5263A158400CF877A /* ECC-Wallet-Testnet-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
