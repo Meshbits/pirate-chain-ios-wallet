@@ -85,9 +85,9 @@ struct HowItWorks: View {
             
             VStack(alignment: .center, content: {
                 Text(self.viewModel.mDescriptionTitle).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                    .scaledFont(size: 32).padding(.top,80)
+                    .scaledFont(size: 26).padding(.top,80)
                 Text(self.viewModel.mDescriptionSubTitle).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
-                    .scaledFont(size: 17)
+                    .scaledFont(size: 15)
                 Spacer()
                 Spacer()
                 
