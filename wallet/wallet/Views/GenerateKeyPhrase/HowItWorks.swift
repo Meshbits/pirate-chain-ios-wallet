@@ -116,14 +116,21 @@ struct HowItWorks: View {
                 .isDetailLink(true)
             }).navigationBarHidden(true)
                 .zcashNavigationBar(leadingItem: {
-                ARRRBackButton(action: {
-                    if self.viewModel.destination.id == 0 {
-                        presentationMode.wrappedValue.dismiss()
-                    }else{
-                        self.viewModel.destination.back()
-                        self.viewModel.updateLayoutAccordingly()
-                    }
-                }).frame(width: 30, height: 30)
+                
+                    Button {
+                        if self.viewModel.destination.id == 0 {
+                            presentationMode.wrappedValue.dismiss()
+                        }else{
+                            self.viewModel.destination.back()
+                            self.viewModel.updateLayoutAccordingly()
+                        }
+                        
+                    } label: {
+                        Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
+                    }.frame(width: 30, height: 30)
+                    
+                    
+                    
             }, headerItem: {
                 HStack{
                     Text(self.viewModel.mScreenTitle)
