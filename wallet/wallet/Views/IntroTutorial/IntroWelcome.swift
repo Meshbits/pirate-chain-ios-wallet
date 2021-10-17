@@ -94,7 +94,7 @@ struct IntroWelcome: View {
                                            isActive: $mMoveToPincode
                             ) {
                                 Button(action: {
-                                    withAnimation(.easeIn(duration: 1), {
+                                    withAnimation(.easeIn(duration: 0.5), {
                                         moveNext()
                                    })
                                     
@@ -125,7 +125,7 @@ struct IntroWelcome: View {
                             if !mMoveToPincode && !mMoveToPrivacy {
                                 presentationMode.wrappedValue.dismiss()
                             }else{
-                                withAnimation(.easeIn(duration: 1), {
+                                withAnimation(.easeIn(duration: 0.5), {
                                     moveBack()
                                })
                             }

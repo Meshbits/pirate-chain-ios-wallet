@@ -35,6 +35,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
+//        Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         addSwiftLayout(scene: scene)
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name("MoveToFirstViewLayout"), object: nil, queue: .main) { (_) in            
@@ -94,6 +97,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
+//      Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
+        UIApplication.shared.isIdleTimerDisabled = true
+             
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }

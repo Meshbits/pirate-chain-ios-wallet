@@ -9,7 +9,6 @@
 import SwiftUI
 import ZcashLightClientKit
 
-
 enum Words: Int {
     case word_one
     case word_two
@@ -160,6 +159,8 @@ struct GenerateWordsView: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
     @EnvironmentObject var viewModel: GenerateWordsViewModel
     
+    @State var isForward = true
+    
     var body: some View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
@@ -170,7 +171,7 @@ struct GenerateWordsView: View {
                     .padding(.top,20)
                 Text("Write down the following words in order".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 15)
                 Spacer()
-                Text(self.viewModel.mWordTitle).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
+                Text(self.viewModel.mWordTitle).transition(.move(edge: isForward ? .trailing : .leading)).id("titleComponentID" + self.viewModel.mWordTitle).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
                     .scaledFont(size: 35)
                     .padding(.top,80)
                 Text("\(self.viewModel.mWordIndex) of 24").padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
@@ -182,7 +183,10 @@ struct GenerateWordsView: View {
                 Text("For security purposes, do not screeshot or email these words.".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).padding(.top,10)
                     .scaledFont(size: 12)
                 Button {
-                    self.viewModel.updateLayoutTextOrMoveToNextScreen()
+                    self.isForward = true
+//                    withAnimation(.easeInOut(duration: 0.2), {
+                        self.viewModel.updateLayoutTextOrMoveToNextScreen()
+//                   })
                 } label: {
                     BlueButtonView(aTitle: "Next".localized())
                 }
@@ -203,7 +207,10 @@ struct GenerateWordsView: View {
                     if self.viewModel.mWordIndex == 1 {
                         presentationMode.wrappedValue.dismiss()
                     }else{
-                        self.viewModel.backPressedToPopBack()
+                        isForward = false
+//                        withAnimation(.easeIn(duration: 0.2), {
+                            self.viewModel.backPressedToPopBack()
+//                       })
                     }
                     
                 } label: {
@@ -219,6 +226,23 @@ struct GenerateWordsView: View {
             })
             
         }.navigationBarHidden(true)
+        .highPriorityGesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local).onEnded { value in
+            print(value.translation)
+           
+            if value.translation.width < 0 && value.translation.height > -30 && value.translation.height < 30 {
+//                withAnimation(.easeInOut(duration: 0.2), {
+                    self.viewModel.updateLayoutTextOrMoveToNextScreen()
+//               })
+            }
+            else if value.translation.width > 0 && value.translation.height > -30 && value.translation.height < 30 {
+//                withAnimation(.easeIn(duration: 0.2), {
+                    self.viewModel.backPressedToPopBack()
+//               })
+            }
+            else {
+                print("other gesture we don't worry about")
+            }
+        })
     }
     
 }
@@ -228,3 +252,4 @@ struct GenerateWordsView_Previews: PreviewProvider {
         GenerateWordsView()
     }
 }
+
