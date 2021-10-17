@@ -32,6 +32,10 @@ enum ScreenSteps: Int {
     mutating func next(){
         self = ScreenSteps(rawValue: rawValue + 1) ?? ScreenSteps(rawValue: 0)!
     }
+    
+    mutating func back(){
+        self = ScreenSteps(rawValue: rawValue - 1) ?? ScreenSteps(rawValue: 0)!
+    }
 }
 
 final class HowItWorksViewModel: ObservableObject {
@@ -42,11 +46,15 @@ final class HowItWorksViewModel: ObservableObject {
     @Published var mOpenGenerateWordsScreen = false
     @Published var destination: ScreenSteps = ScreenSteps.step_one
     
-    
-    
     func updateLayoutTextOrMoveToNextScreen(){
         
         destination.next()
+        
+        updateLayoutAccordingly()
+        
+    }
+    
+    func updateLayoutAccordingly(){
         
         switch (destination) {
         case .step_one:
@@ -109,7 +117,12 @@ struct HowItWorks: View {
             }).navigationBarHidden(true)
                 .zcashNavigationBar(leadingItem: {
                 ARRRBackButton(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    if self.viewModel.destination.id == 0 {
+                        presentationMode.wrappedValue.dismiss()
+                    }else{
+                        self.viewModel.destination.back()
+                        self.viewModel.updateLayoutAccordingly()
+                    }
                 }).frame(width: 30, height: 30)
             }, headerItem: {
                 HStack{
