@@ -11,8 +11,8 @@ import BackgroundTasks
 import Combine
 //class BackgroundTaskSyncronizing {
 //    static let backgroundProcessingBlockThreshold = 1000
-//    static let backgroundProcessingTaskIdentifier = "co.electriccoin.backgroundProcessingTask"
-//    static let backgroundAppRefreshTaskIdentifier = "co.electriccoin.backgroundAppRefreshTask"
+//    static let backgroundProcessingTaskIdentifier = "io.meshbits.piratewallet.ios.backgroundProcessingTask"
+//    static let backgroundAppRefreshTaskIdentifier = "io.meshbits.piratewallet.ios.backgroundAppRefreshTask"
 //    var cancellables = [AnyCancellable]()
 //    static let `default` = BackgroundTaskSyncronizing()
 //    enum BGTaskError: Error {
