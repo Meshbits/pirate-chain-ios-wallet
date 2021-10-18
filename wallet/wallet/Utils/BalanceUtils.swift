@@ -47,7 +47,7 @@ extension NumberFormatter {
         fmt.alwaysShowsDecimalSeparator = false
         fmt.allowsFloats = true
         fmt.maximumFractionDigits = 8
-        fmt.minimumFractionDigits = 3
+        fmt.minimumFractionDigits = 0
         fmt.minimumIntegerDigits = 1
         return fmt
         
