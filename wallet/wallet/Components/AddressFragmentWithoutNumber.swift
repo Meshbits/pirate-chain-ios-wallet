@@ -19,7 +19,7 @@ struct AddressFragmentWithoutNumber: View {
                     
                     Text(self.word)
                         .foregroundColor(.gray)
-                        .scaledFont(size: 17)
+                        .scaledFont(size: 15)
                 }
                 .padding(.trailing, 4)
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)

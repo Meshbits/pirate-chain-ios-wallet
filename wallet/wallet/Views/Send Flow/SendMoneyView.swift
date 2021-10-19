@@ -179,14 +179,14 @@ struct SendMoneyView: View {
              }, headerItem: {
                  HStack{
                      Text("Send Money".localized())
-                         .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
+                         .font(.barlowRegular(size: 22)).foregroundColor(Color.zSettingsSectionHeader)
                          .frame(alignment: Alignment.center).padding(.top,30)
                         
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
                      presentationMode.wrappedValue.dismiss()
-                     }).frame(width: 30, height: 30)
+                     }).frame(width: 20, height: 20)
                  .padding(.top,40)
              })
             .navigationBarHidden(true)

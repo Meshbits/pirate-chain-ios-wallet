@@ -117,8 +117,8 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 
                 Text(self.sendArrrValue)
                     .foregroundColor(.gray)
-                    .scaledFont(size: 32)
-                    .frame(height:35)
+                    .scaledFont(size: 26)
+                    .frame(height:30)
                     .padding(.leading,10)
                     .padding(.trailing,10)
                     .modifier(BackgroundPlaceholderModifier())
@@ -132,6 +132,8 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                     self.isShareAddressShown = true
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
+                
+                Spacer()
             }
             
         }.onTapGesture {
@@ -145,12 +147,12 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                  Text("Request Money".localized())
                     .scaledFont(size: 24)
                     .foregroundColor(Color.zSettingsSectionHeader)
-                     .frame(alignment: Alignment.center).padding(.top,40)
+                    .padding(.top,20)
              }
          }, trailingItem: {
              ARRRCloseButton(action: {
                  presentationMode.wrappedValue.dismiss()
-                 }).frame(width: 30, height: 30).padding(.top,60)
+             }).frame(width: 15, height: 15).padding(.top,20)
          })
         .onAppear {
             tracker.track(.screen(screen: .receive), properties: [:])
