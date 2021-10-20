@@ -816,6 +816,11 @@ struct Home: View {
             }
             .frame(height: 240)
         }
+        .sheet(item: self.$selectedModel, onDismiss: {
+            self.selectedModel = nil
+        }) { (row)  in
+            TxDetailsWrapper(row: row)
+        }
     }
     
     
