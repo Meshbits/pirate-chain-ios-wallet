@@ -193,8 +193,12 @@ struct SendMoneyView: View {
         } .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
         }
+        .onDisappear() {
+            NotificationCenter.default.removeObserver(NSNotification.Name("PasscodeValidationSuccessful"))
+        }
         .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in
+                flow.includesMemo = true
                 isSendTapped = true
             }
         }
