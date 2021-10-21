@@ -58,6 +58,22 @@ struct DisplayAddress<AccesoryContent: View>: View {
          
                 tracker.track(.tap(action: .copyAddress), properties: [:])
             }) {
+                
+               
+                HStack{
+                    Spacer()
+                    Text(self.address)
+                        .foregroundColor(.gray)
+                        .scaledFont(size: 15)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Image(systemName: "doc.on.doc").foregroundColor(.gray)
+                        .scaledFont(size: 20).padding(.trailing, 10)
+                }.padding([.horizontal], 15)
+                .frame(minHeight: 50)
+               
+                /*
+                 // Removed the slices instead we would like to display the text in one go
                 VStack {
                     if chips.count <= 2 {
                         
@@ -79,7 +95,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
                     
                 }.padding([.horizontal], 15)
                 .frame(minHeight: 96)
-                
+                 */
             }.alert(item: self.$copyItemModel) { (p) -> Alert in
                 PasteboardAlertHelper.alert(for: p)
             }
