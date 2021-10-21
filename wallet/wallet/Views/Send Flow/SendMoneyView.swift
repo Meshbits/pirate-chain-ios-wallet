@@ -140,7 +140,7 @@ struct SendMoneyView: View {
             
                 HStack{
                     Spacer()
-                    Text("Processing fee: ".localized() + "\(ZcashSDK.defaultFee().asHumanReadableZecBalance().toZecAmount())" + " ARRR")
+                    Text("Processing fee: ".localized() + "\(Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
                         .scaledFont(size: 14).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                         .multilineTextAlignment(.leading)
