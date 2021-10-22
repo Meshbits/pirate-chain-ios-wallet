@@ -15,8 +15,9 @@ struct SendMoneyView: View {
     @EnvironmentObject var flow: SendFlowEnvironment
     @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+    @State var validateTransaction = false
     @State var validatePinBeforeInitiatingFlow = false
-    
+    let dragGesture = DragGesture()
     var availableBalance: Bool {
         ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
     }
@@ -133,7 +134,7 @@ struct SendMoneyView: View {
                 Text(self.flow.amount)
                     .foregroundColor(.gray)
                     .scaledFont(size: 30)
-                    .frame(height:40)
+                    .frame(height:30)
                     .padding(.leading,10)
                     .padding(.trailing,10)
                     .modifier(BackgroundPlaceholderModifier())
@@ -153,7 +154,8 @@ struct SendMoneyView: View {
                     .padding(.horizontal, 10)
                 
                 BlueButtonView(aTitle: "Send".localized()).onTapGesture {
-                    validatePinBeforeInitiatingFlow = true
+                    validateTransaction = true
+//                    validatePinBeforeInitiatingFlow = true
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
                 
@@ -185,27 +187,39 @@ struct SendMoneyView: View {
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
+                     self.onDismissRemoveObservers()
                      presentationMode.wrappedValue.dismiss()
                      }).frame(width: 20, height: 20)
                  .padding(.top,40)
              })
             .navigationBarHidden(true)
-        } .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
-            LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
         }
-        .onDisappear() {
-            NotificationCenter.default.removeObserver(NSNotification.Name("PasscodeValidationSuccessful"))
+        .highPriorityGesture(dragGesture)     
+        .sheet(isPresented: $validateTransaction) {
+            LazyView(ConfirmTransaction().environmentObject(flow))
+        }
+        .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
+            LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
         }
         .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in
                 flow.includesMemo = true
                 isSendTapped = true
             }
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("ConfirmedTransaction"), object: nil, queue: .main) { (_) in
+                DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                    validatePinBeforeInitiatingFlow = true
+                }
+            }
         }
         .keyboardAdaptive()
         }
     }
     
+    func onDismissRemoveObservers() {
+        NotificationCenter.default.removeObserver(NSNotification.Name("PasscodeValidationSuccessful"))
+        NotificationCenter.default.removeObserver(NSNotification.Name("ConfirmedTransaction"))
+    }
     
     var includesMemo: Bool {
         !self.flow.memo.isEmpty || self.flow.includeSendingAddress
