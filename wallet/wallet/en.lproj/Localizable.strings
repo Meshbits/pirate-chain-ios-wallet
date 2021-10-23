@@ -507,3 +507,4 @@
 "Do you want to Re-scan your wallet?" = "Do you want to Re-scan your wallet?";
 "Transaction Amount: "="Transaction Amount: ";
 "To: " = "To: ";
+"We found your wallet didn't had enough funds for the fees, the transaction needs to been adjusted to cater the fee of 0.0001 ARRR. Please, confirm the adjustment in the transaction to include miner fee." = "We found your wallet didn't had enough funds for the fees, the transaction needs to been adjusted to cater the fee of 0.0001 ARRR. Please, confirm the adjustment in the transaction to include miner fee.";

@@ -15,6 +15,7 @@ struct SendMoneyView: View {
     @EnvironmentObject var flow: SendFlowEnvironment
     @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+    @State var adjustTransaction = false
     @State var validateTransaction = false
     @State var validatePinBeforeInitiatingFlow = false
     let dragGesture = DragGesture()
@@ -36,6 +37,11 @@ struct SendMoneyView: View {
     var sufficientAmount: Bool {
         let amount = (flow.doubleAmount ??  0 )
         return amount > 0 && amount <= ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
+    }
+    
+    var isSendingAmountSameAsBalance:Bool{
+        let amount = (flow.doubleAmount ??  0 )
+        return amount > 0 && amount == ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
     }
     
     var validForm: Bool {
@@ -154,8 +160,13 @@ struct SendMoneyView: View {
                     .padding(.horizontal, 10)
                 
                 BlueButtonView(aTitle: "Send".localized()).onTapGesture {
-                    validateTransaction = true
-//                    validatePinBeforeInitiatingFlow = true
+                    
+                    if isSendingAmountSameAsBalance {
+                        // throw an alert here
+                        adjustTransaction = true
+                    }else{
+                        validateTransaction = true
+                    }
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
                 
@@ -200,6 +211,22 @@ struct SendMoneyView: View {
         }
         .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
+        }
+        .alert(isPresented:self.$adjustTransaction) {
+            Alert(title: Text("Pirate Chain Wallet".localized()),
+                         message: Text("We found your wallet didn't had enough funds for the fees, the transaction needs to been adjusted to cater the fee of 0.0001 ARRR. Please, confirm the adjustment in the transaction to include miner fee.".localized()),
+                         primaryButton: .cancel(Text("Cancel".localized())),
+                         secondaryButton: .default(Text("Confirm".localized()), action: {
+                            
+                            let amount = (flow.doubleAmount ??  0 )
+                            let defaultNetworkFee: Double = Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance() // 0.0001 minor fee
+                            if (amount > defaultNetworkFee && amount == ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value){
+                                flow.amount = String.init(format: "%.5f", (amount-defaultNetworkFee))
+                                validateTransaction = true
+                            }else{
+                                // Can't adjust the amount, as its less than the fee
+                            }
+                         }))
         }
         .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in

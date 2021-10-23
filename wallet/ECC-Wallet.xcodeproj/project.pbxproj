@@ -458,6 +458,9 @@
 		29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
+		29B6E5C62721AC37005D9EFC /* ConfirmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */; };
+		29B6E5C72721AC37005D9EFC /* ConfirmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */; };
+		29B6E5C82721AC37005D9EFC /* ConfirmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */; };
 		29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
 		29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
 		29D4F90F26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
@@ -728,6 +731,7 @@
 		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
 		29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsVerificationScreen.swift; sourceTree = "<group>"; };
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
+		29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransaction.swift; sourceTree = "<group>"; };
 		29D1459C46D96D9D3DF2A55C /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlinkDevice.swift; sourceTree = "<group>"; };
 		29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRMemoTextField.swift; sourceTree = "<group>"; };
@@ -997,6 +1001,7 @@
 			children = (
 				296CACE526D57757004DC784 /* SendMoneyView.swift */,
 				0D421AF923C66B7500E5E55E /* Sending.swift */,
+				29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */,
 			);
 			path = "Send Flow";
 			sourceTree = "<group>";
@@ -1842,6 +1847,7 @@
 				0D9D4E2F26336C0E007FD969 /* TabSelector.swift in Sources */,
 				0D4C100723C542D800CD2854 /* ZcashCheckCircle.swift in Sources */,
 				0DF26E2A24D2208A00F32978 /* AuthenticationHelper.swift in Sources */,
+				29B6E5C62721AC37005D9EFC /* ConfirmTransaction.swift in Sources */,
 				0D0565D924EC89C200B6AAE8 /* DetailListing.swift in Sources */,
 				29FABBFF26D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				29AF023626DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
@@ -2051,6 +2057,7 @@
 				2963F33526C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
 				0D82F32B261284060058B05D /* Alerts.swift in Sources */,
 				2932002F26CEF2A30016D2E2 /* TransactionDetailsTitle.swift in Sources */,
+				29B6E5C82721AC37005D9EFC /* ConfirmTransaction.swift in Sources */,
 				0D5E4AA82527B440001CB335 /* BackgroundTasks.swift in Sources */,
 				29D53C9726D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				2905274626D7B11D007CA5AA /* UIHostingController-Keyboard.swift in Sources */,
@@ -2179,6 +2186,7 @@
 				0DE30377263A158400CF877A /* TabSelector.swift in Sources */,
 				0DE30378263A158400CF877A /* ZcashCheckCircle.swift in Sources */,
 				0DE30379263A158400CF877A /* AuthenticationHelper.swift in Sources */,
+				29B6E5C72721AC37005D9EFC /* ConfirmTransaction.swift in Sources */,
 				0DE3037A263A158400CF877A /* DetailListing.swift in Sources */,
 				29FABC0026D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				29AF023726DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
