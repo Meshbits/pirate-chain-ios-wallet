@@ -290,6 +290,6 @@ struct SendMoneyButtonView : View {
             .padding([.bottom],4)
             .cornerRadius(30)
            
-        }.frame(width: 120)
+        }.frame(width: 120,height:80)
     }
 }
