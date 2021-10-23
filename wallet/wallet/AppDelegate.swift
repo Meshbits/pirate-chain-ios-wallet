@@ -8,7 +8,7 @@
 
 import UIKit
 import BackgroundTasks
-
+import AVFoundation
 
 #if ENABLE_LOGGING
 //import Bugsnag
@@ -28,30 +28,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
-        #if targetEnvironment(simulator)
-        if ProcessInfo.processInfo.environment["isTest"] != nil {
-            return true
-        }
-        #else
-
+       
         BGTaskScheduler.shared.register(
             forTaskWithIdentifier: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifier,
           using: nil) { (task) in
             BackgroundTaskSyncronizing.default.handleBackgroundProcessingTask(task as! BGProcessingTask)
         }
-        #endif
         
-        #if ENABLE_LOGGING
-//        Bugsnag.start(withApiKey: Constants.bugsnagApiKey)
-        #endif
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifierARRR,
+          using: nil) { (task) in
+            
+        }
+        
+        // To support background playing of audio
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
+        try? AVAudioSession.sharedInstance().setActive(true)
         
         // Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
         application.isIdleTimerDisabled = true
         
         return true
     }
-    
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

@@ -370,6 +370,7 @@
 		290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
 		290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
 		290BEF8326A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
+		290C0B422724374D008B530D /* bgsound.aac in Resources */ = {isa = PBXBuildFile; fileRef = 290C0B412724374C008B530D /* bgsound.aac */; };
 		290F6DAC26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */; };
 		290F6DAD26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */; };
 		290F6DAE26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */; };
@@ -701,6 +702,7 @@
 		290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadARRR.swift; sourceTree = "<group>"; };
 		290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeValidationScreen.swift; sourceTree = "<group>"; };
 		290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeScreen.swift; sourceTree = "<group>"; };
+		290C0B412724374C008B530D /* bgsound.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgsound.aac; sourceTree = "<group>"; };
 		290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceDetailView.swift; sourceTree = "<group>"; };
 		29207FD926BFCDD500E9C4E4 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		29249D6B26DFA67400B4CC9B /* AuthenticateFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateFaceID.swift; sourceTree = "<group>"; };
@@ -958,6 +960,7 @@
 				0D12511023B557E60014EE3A /* Info.plist */,
 				2946090C26ADCEF200B0867F /* Barlow-Regular.ttf */,
 				0DE51DAB23BEB03C00709636 /* Zboto.otf */,
+				290C0B412724374C008B530D /* bgsound.aac */,
 				0D12510A23B557E60014EE3A /* Preview Content */,
 			);
 			path = wallet;
@@ -1449,6 +1452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DC1430325C47880001D8E55 /* lottie_shield.json in Resources */,
+				290C0B422724374D008B530D /* bgsound.aac in Resources */,
 				0DF3075724DB4A440080B0CF /* lottie_success.json in Resources */,
 				2946090F26ADCEF200B0867F /* Barlow-Regular.ttf in Resources */,
 				0D4332872644A370005B5B8E /* Assets.xcassets in Resources */,

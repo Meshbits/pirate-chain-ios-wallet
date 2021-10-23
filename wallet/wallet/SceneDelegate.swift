@@ -9,6 +9,12 @@
 import UIKit
 import SwiftUI
 import BackgroundTasks
+import AVFoundation
+
+let mPlaySoundWhileSyncing = "PlaySoundWhenAppEntersBackground"
+
+let mStopSoundOnceFinishedOrInForeground = "StopSoundWhenAppEntersForeground"
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -42,6 +48,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name("MoveToFirstViewLayout"), object: nil, queue: .main) { (_) in            
             self.addSwiftLayout(scene: scene)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(mPlaySoundWhileSyncing), object: nil, queue: .main) { (_) in
+            self.playSoundWhileSyncing()
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil, queue: .main) { (_) in
+            self.stopSoundIfPlaying()
         }
         
         if let url = connectionOptions.urlContexts.first?.url {
@@ -99,7 +113,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
 //      Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
         UIApplication.shared.isIdleTimerDisabled = true
-             
+        NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }
@@ -118,11 +132,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
-        #if !targetEnvironment(simulator)
+//        #if !targetEnvironment(simulator)
         //FIXME: disable background tasks for the time being 
 //        BackgroundTaskSyncronizing.default.scheduleAppRefresh()
-//        BackgroundTaskSyncronizing.default.scheduleBackgroundProcessing()
-        #endif
+        BackgroundTaskSyncronizing.default.scheduleBackgroundProcessing()
+//        #endif
+    }
+    
+    
+    
+    var mAVAudioPlayerObj : AVAudioPlayer?
+
+    func playSoundWhileSyncing() {
+        // Play sound only in background
+        if (UIApplication.shared.applicationState == .background){
+            if let path = Bundle.main.path(forResource: "bgsound", ofType: "aac") {
+                let filePath = NSURL(fileURLWithPath:path)
+                mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
+                mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
+                mAVAudioPlayerObj?.prepareToPlay()
+                mAVAudioPlayerObj?.volume = 0.05 // Super low volume
+                mAVAudioPlayerObj?.play()
+            }
+
+            let audioSession = AVAudioSession.sharedInstance()
+            try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
+            //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
+        }
+    }
+    
+    func stopSoundIfPlaying(){
+        // If AVAudio player is playing a song then go ahead and kill it
+        if mAVAudioPlayerObj != nil && mAVAudioPlayerObj?.isPlaying == true {
+            mAVAudioPlayerObj?.stop()
+        }
+        
     }
     
     static var shared: SceneDelegate {

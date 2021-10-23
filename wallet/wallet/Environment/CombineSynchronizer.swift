@@ -113,6 +113,10 @@ class CombineSynchronizer {
             .sink(receiveValue: { [weak self] _ in
             guard let self = self else { return }
                 self.updatePublishers()
+                
+                if (UIApplication.shared.applicationState == .background){
+                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                }
         }).store(in: &cancellables)
         
         

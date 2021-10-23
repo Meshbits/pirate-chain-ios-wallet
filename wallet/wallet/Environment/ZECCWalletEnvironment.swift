@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import ZcashLightClientKit
 import Combine
+
 enum WalletState {
     case uninitialized
     case unprepared
@@ -100,6 +101,9 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     // Warning: Use with care
     func reset() throws {
+        if (UIApplication.shared.applicationState == .background){
+            NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+        }
         self.synchronizer.stop()
         self.state = Self.getInitialState()
         self.synchronizer = nil
@@ -329,12 +333,17 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     private func registerBackgroundActivity() {
         if self.taskIdentifier == .invalid {
-            self.taskIdentifier = UIApplication.shared.beginBackgroundTask(withName: "ZcashLightClientKit.SDKSynchronizer", expirationHandler: { [weak self, weak logger] in
+            self.taskIdentifier = UIApplication.shared.beginBackgroundTask(withName: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifierARRR, expirationHandler: { [weak self, weak logger] in
                 logger?.info("BackgroundTask Expiration Handler Called")
                 guard let self = self else { return }
                 self.synchronizer.stop()
                 self.invalidateBackgroundActivity()
+                NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
             })
+            
+            if self.synchronizer.syncStatus.value != .synced {
+                NotificationCenter.default.post(name: NSNotification.Name(mPlaySoundWhileSyncing), object: nil)
+            }
         }
     }
     
@@ -391,6 +400,9 @@ final class ZECCWalletEnvironment: ObservableObject {
         center.publisher(for: UIApplication.willTerminateNotification)
             .subscribe(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                if (UIApplication.shared.applicationState == .background){
+                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                }
                 self?.synchronizer.stop()
             }
             .store(in: &appCycleCancellables)
