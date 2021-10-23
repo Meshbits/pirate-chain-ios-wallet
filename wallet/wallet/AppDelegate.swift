@@ -9,6 +9,7 @@
 import UIKit
 import BackgroundTasks
 import AVFoundation
+import UserNotifications
 
 #if ENABLE_LOGGING
 //import Bugsnag
@@ -39,6 +40,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             forTaskWithIdentifier: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifierARRR,
           using: nil) { (task) in
             
+        }
+        
+        UNUserNotificationCenter.current().requestAuthorization(options:[.alert, .sound]) { (granted, error) in
+
+              if granted {
+                DispatchQueue.main.async {
+                  UIApplication.shared.registerForRemoteNotifications()
+                }
+              }
+
         }
         
         // To support background playing of audio

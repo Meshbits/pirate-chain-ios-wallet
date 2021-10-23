@@ -154,10 +154,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 mAVAudioPlayerObj?.volume = 0.05 // Super low volume
                 mAVAudioPlayerObj?.play()
             }
+            
+            showNotificationInNotificationTrayWhileSyncing()
 
+            //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
             let audioSession = AVAudioSession.sharedInstance()
             try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
-            //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
         }
     }
     
@@ -165,12 +167,42 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If AVAudio player is playing a song then go ahead and kill it
         if mAVAudioPlayerObj != nil && mAVAudioPlayerObj?.isPlaying == true {
             mAVAudioPlayerObj?.stop()
+            showNotificationInNotificationTrayWhileSyncingIsFinished()
         }
         
     }
     
     static var shared: SceneDelegate {
         UIApplication.shared.windows[0].windowScene?.delegate as! SceneDelegate
+    }
+    
+    func showNotificationInNotificationTrayWhileSyncingIsFinished(){
+        DispatchQueue.main.async {
+            let content = UNUserNotificationCenter.current()
+            content.removeAllDeliveredNotifications()
+            content.removeAllPendingNotificationRequests()
+        }
+    }
+    
+    func showNotificationInNotificationTrayWhileSyncing(){
+        DispatchQueue.main.async {
+            let content = UNMutableNotificationContent()
+            content.title = NSString.localizedUserNotificationString(forKey: "Pirate Chain Wallet", arguments: nil)
+            content.body = NSString.localizedUserNotificationString(forKey: "Please keep the app running in the background, while we sync your wallet and keep it up to date. Thank you!",
+                                                                    arguments: nil)
+            content.sound = UNNotificationSound.default
+            
+            let date = Date(timeIntervalSinceNow: 3) // Post notification after 3 seconds
+            let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
+            let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+
+            // Create the request object.
+            let request = UNNotificationRequest(identifier: "BackgroundSyncing", content: content, trigger: trigger)
+            
+            let center = UNUserNotificationCenter.current()
+              center.add(request) { (error) in
+           }
+        }
     }
   
 }
