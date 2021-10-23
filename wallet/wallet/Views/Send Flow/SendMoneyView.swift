@@ -137,14 +137,28 @@ struct SendMoneyView: View {
                 
                 ARRRMemoTextField(memoText:self.$flow.memo).frame(height:60)
                 
-                Text(self.flow.amount)
-                    .foregroundColor(.gray)
-                    .scaledFont(size: 30)
-                    .frame(height:30)
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
-                    .modifier(BackgroundPlaceholderModifier())
-            
+                HStack{
+                    Text(self.flow.amount)
+                        .foregroundColor(.gray)
+                        .scaledFont(size: 30)
+                        .frame(height:30)
+                        .padding(.leading,10)
+                        .padding(.trailing,10)
+                        .modifier(BackgroundPlaceholderModifier())
+                
+                    SendMoneyButtonView(title: "Send Max".localized())
+                        .onTapGesture {
+                            let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
+                            let defaultNetworkFee: Double = Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance() // 0.0001 minor fee
+                            if (actualAmount > defaultNetworkFee){
+                                flow.amount = String.init(format: "%.5f", (actualAmount-defaultNetworkFee))
+                            }else{
+                                // Can't adjust the amount, as its less than the fee
+                            }
+                        }
+                }
+                
+               
                 HStack{
                     Spacer()
                     Text("Processing fee: ".localized() + "\(Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
@@ -259,3 +273,23 @@ struct SendMoneyView: View {
 //        SendMoneyView()
 //    }
 //}
+
+struct SendMoneyButtonView : View {
+    
+    @State var title: String
+    
+    var body: some View {
+        ZStack{
+            
+            Image("buttonbackground").resizable().frame(width: 115)
+            
+            Text(title).foregroundColor(Color.zARRRTextColorLightYellow).bold().multilineTextAlignment(.center).font(
+                .barlowRegular(size: 12)
+            ).modifier(ForegroundPlaceholderModifierHomeButtons())
+            .frame(width: 140)
+            .padding([.bottom],4)
+            .cornerRadius(30)
+           
+        }.frame(width: 120)
+    }
+}
