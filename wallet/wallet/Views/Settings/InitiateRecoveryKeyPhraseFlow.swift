@@ -49,11 +49,11 @@ struct InitiateRecoveryKeyPhraseFlow: View {
             }
         .navigationBarHidden(true)
         .zcashNavigationBar(leadingItem: {
-            ARRRBackButton(action: {
-                presentationMode.wrappedValue.dismiss()
-            }).frame(width: 30, height: 30)
-            .padding(.top,10)
-            
+            Button {
+              presentationMode.wrappedValue.dismiss()
+          } label: {
+              Image("backicon").resizable().frame(width: 60, height: 60)
+          }
         }, headerItem: {
             HStack{
                 EmptyView()
