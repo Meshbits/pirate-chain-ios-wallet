@@ -36,6 +36,8 @@ enum SettingsDestination: Int {
 struct SettingsScreen: View {
     
     @State var showActionSheet: Bool = false
+    
+    var mVersionDetails = "Build Version: 1.0.0-1-13-ga31ee60"
 
     var generalSection = [SettingsRowData(id:0,title:"Language".localized()),SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
@@ -139,6 +141,10 @@ struct SettingsScreen: View {
                             }
                         }
                         .modifier(SettingsSectionBackgroundModifier())
+                        
+                        
+                      Text(mVersionDetails).scaledFont(size: 10).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,10)
+
                     }
                     .padding(.top,10)
                     .padding(.bottom,2)
