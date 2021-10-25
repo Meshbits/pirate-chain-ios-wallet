@@ -28,7 +28,7 @@ final class ZECCWalletEnvironment: ObservableObject {
     static let memoLengthLimit: Int = 512
     static let defaultLightWalletEndpoint = "lightd.pirate.black"
     static let defaultLightWalletPort: Int = 443
-    static let defaultFee = 10_000 // Earlier we have used ZcashSDK.defaultFee()
+//    static let defaultFee = 10_000 // Earlier we have used ZcashSDK.defaultFee()
     @Published var state: WalletState
     
     let endpoint = LightWalletEndpoint(address: SeedManager.default.exportLightWalletEndpoint(), port: Int(SeedManager.default.exportLightWalletPort()) ?? defaultLightWalletPort, secure: true)
@@ -449,11 +449,11 @@ extension ZECCWalletEnvironment {
     }
     
     private func sufficientFunds(availableBalance: Int64, zatoshiToSend: Int64) -> Bool {
-        availableBalance - zatoshiToSend  - Int64(ZECCWalletEnvironment.defaultFee) >= 0
+        availableBalance - zatoshiToSend  - Int64(ZcashSDK.defaultFee()) >= 0
     }
     
     static var minerFee: Double {
-        Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance()
+        Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance()
     }
     
     func credentialsAlreadyPresent() -> Bool {

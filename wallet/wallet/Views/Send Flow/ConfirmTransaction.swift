@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import ZcashLightClientKit
 
 struct ConfirmTransaction: View {
     @EnvironmentObject var flow: SendFlowEnvironment
@@ -52,7 +53,7 @@ struct ConfirmTransaction: View {
                     
                 ConfirmTableSectionHeaderView(aTitle:"Processing fee: ".localized().localized())
                     HStack{
-                        Text("\(Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
+                        Text("\(Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
                             .scaledFont(size: 15)
                             .frame(alignment: .leading)
                         Spacer()

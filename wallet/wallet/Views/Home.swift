@@ -244,7 +244,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func setAmount(_ zecAmount: Double) {
-        guard let value = self.zecAmountFormatter.string(for: zecAmount - Int64(ZECCWalletEnvironment.defaultFee).asHumanReadableZecBalance()) else { return }
+        guard let value = self.zecAmountFormatter.string(for: zecAmount - Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance()) else { return }
         self.sendZecAmountText = value
     }
     
