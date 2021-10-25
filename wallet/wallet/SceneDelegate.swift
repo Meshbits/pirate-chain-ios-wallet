@@ -51,7 +51,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(mPlaySoundWhileSyncing), object: nil, queue: .main) { (_) in
-            self.playSoundWhileSyncing()
+            self.playInitialSound()
         }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil, queue: .main) { (_) in
@@ -144,14 +144,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var mAVAudioPlayerObj : AVAudioPlayer?
 
     func playSoundWhileSyncing() {
-        // Play sound only in background
+        // Play sound only in background while syncing
         if (UIApplication.shared.applicationState == .background){
-            if let path = Bundle.main.path(forResource: "bgsound", ofType: "aac") {
+            if let path = Bundle.main.path(forResource: "bgSyncSound", ofType: "m4a") {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.05 // Super low volume
+                mAVAudioPlayerObj?.volume = 0.01 // Super low volume
                 mAVAudioPlayerObj?.play()
             }
             
@@ -163,11 +163,51 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
     
+    func playInitialSound(){
+        if (UIApplication.shared.applicationState == .background){
+            if let path = Bundle.main.path(forResource: "SyncStarted", ofType: "mp3") {
+                let filePath = NSURL(fileURLWithPath:path)
+                mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
+                mAVAudioPlayerObj?.prepareToPlay()
+                mAVAudioPlayerObj?.volume = 0.10 // Super low volume
+                mAVAudioPlayerObj?.play()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                self.mAVAudioPlayerObj?.stop()
+                self.playSoundWhileSyncing()
+            }
+                        
+            showNotificationInNotificationTrayWhileSyncing()
+            
+            //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
+            let audioSession = AVAudioSession.sharedInstance()
+            try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
+        }
+    }
+    
+    func playFinishingSound(){
+        if (UIApplication.shared.applicationState == .background){
+            if let path = Bundle.main.path(forResource: "SyncEnd", ofType: "mp3") {
+                let filePath = NSURL(fileURLWithPath:path)
+                mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
+                mAVAudioPlayerObj?.prepareToPlay()
+                mAVAudioPlayerObj?.volume = 0.10 // Super low volume
+                mAVAudioPlayerObj?.play()
+            }
+            
+            //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
+            let audioSession = AVAudioSession.sharedInstance()
+            try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
+        }
+    }
+    
     func stopSoundIfPlaying(){
         // If AVAudio player is playing a song then go ahead and kill it
         if mAVAudioPlayerObj != nil && mAVAudioPlayerObj?.isPlaying == true {
             mAVAudioPlayerObj?.stop()
-            showNotificationInNotificationTrayWhileSyncingIsFinished()
+            playFinishingSound()
+            removeNotificationInNotificationTrayWhileSyncingIsFinished()
         }
         
     }
@@ -176,7 +216,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIApplication.shared.windows[0].windowScene?.delegate as! SceneDelegate
     }
     
-    func showNotificationInNotificationTrayWhileSyncingIsFinished(){
+    func removeNotificationInNotificationTrayWhileSyncingIsFinished(){
         DispatchQueue.main.async {
             let content = UNUserNotificationCenter.current()
             content.removeAllDeliveredNotifications()

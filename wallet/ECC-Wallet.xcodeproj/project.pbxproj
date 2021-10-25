@@ -370,7 +370,6 @@
 		290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
 		290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
 		290BEF8326A73B5C00526EDA /* PasscodeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */; };
-		290C0B422724374D008B530D /* bgsound.aac in Resources */ = {isa = PBXBuildFile; fileRef = 290C0B412724374C008B530D /* bgsound.aac */; };
 		290F6DAC26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */; };
 		290F6DAD26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */; };
 		290F6DAE26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */; };
@@ -414,6 +413,10 @@
 		29596D9E26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
 		29596D9F26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
 		29596DA026E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
+		295E3734272721BD00831D37 /* SyncStarted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3732272721BD00831D37 /* SyncStarted.mp3 */; };
+		295E3735272721BD00831D37 /* SyncStarted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3732272721BD00831D37 /* SyncStarted.mp3 */; };
+		295E3736272721BD00831D37 /* SyncEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3733272721BD00831D37 /* SyncEnd.mp3 */; };
+		295E3737272721BD00831D37 /* SyncEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3733272721BD00831D37 /* SyncEnd.mp3 */; };
 		2960026C26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026D26D9350C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026E26D9350D00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
@@ -435,6 +438,7 @@
 		296DA0EB26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
 		296DA0EC26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
 		296DA0ED26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
+		2989E7B02727188B003FB57F /* bgSyncSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2989E7AF2727188B003FB57F /* bgSyncSound.m4a */; };
 		298D50E326A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E426A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E526A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
@@ -702,7 +706,6 @@
 		290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPadARRR.swift; sourceTree = "<group>"; };
 		290B22ED27045BF000D378A2 /* PasscodeValidationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeValidationScreen.swift; sourceTree = "<group>"; };
 		290BEF8026A73B5C00526EDA /* PasscodeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeScreen.swift; sourceTree = "<group>"; };
-		290C0B412724374C008B530D /* bgsound.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgsound.aac; sourceTree = "<group>"; };
 		290F6DAB26CAB4D800EA2CA7 /* BalanceDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceDetailView.swift; sourceTree = "<group>"; };
 		29207FD926BFCDD500E9C4E4 /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		29249D6B26DFA67400B4CC9B /* AuthenticateFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticateFaceID.swift; sourceTree = "<group>"; };
@@ -718,6 +721,8 @@
 		29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPrivacy.swift; sourceTree = "<group>"; };
 		29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationsFaceID.swift; sourceTree = "<group>"; };
 		29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndSetupNewWallet.swift; sourceTree = "<group>"; };
+		295E3732272721BD00831D37 /* SyncStarted.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SyncStarted.mp3; sourceTree = "<group>"; };
+		295E3733272721BD00831D37 /* SyncEnd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SyncEnd.mp3; sourceTree = "<group>"; };
 		2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyPhraseInitiate.swift; sourceTree = "<group>"; };
 		2960026F26D93BBF00B41DD0 /* HowItWorks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorks.swift; sourceTree = "<group>"; };
 		2960027326D93E4300B41DD0 /* ARRRBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackButton.swift; sourceTree = "<group>"; };
@@ -725,6 +730,7 @@
 		296CACE526D57757004DC784 /* SendMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyView.swift; sourceTree = "<group>"; };
 		296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateRecoveryKeyPhraseFlow.swift; sourceTree = "<group>"; };
 		296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryWordsView.swift; sourceTree = "<group>"; };
+		2989E7AF2727188B003FB57F /* bgSyncSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgSyncSound.m4a; sourceTree = "<group>"; };
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
@@ -960,7 +966,9 @@
 				0D12511023B557E60014EE3A /* Info.plist */,
 				2946090C26ADCEF200B0867F /* Barlow-Regular.ttf */,
 				0DE51DAB23BEB03C00709636 /* Zboto.otf */,
-				290C0B412724374C008B530D /* bgsound.aac */,
+				2989E7AF2727188B003FB57F /* bgSyncSound.m4a */,
+				295E3733272721BD00831D37 /* SyncEnd.mp3 */,
+				295E3732272721BD00831D37 /* SyncStarted.mp3 */,
 				0D12510A23B557E60014EE3A /* Preview Content */,
 			);
 			path = wallet;
@@ -1429,6 +1437,8 @@
 				0D12510C23B557E60014EE3A /* Preview Assets.xcassets in Resources */,
 				0DE51DAC23BEB03C00709636 /* Zboto.otf in Resources */,
 				8D3F362524A40FCF0087687A /* Localizable.strings in Resources */,
+				295E3736272721BD00831D37 /* SyncEnd.mp3 in Resources */,
+				295E3734272721BD00831D37 /* SyncStarted.mp3 in Resources */,
 				0DF3075424DB4A440080B0CF /* lottie_sending.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1452,11 +1462,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DC1430325C47880001D8E55 /* lottie_shield.json in Resources */,
-				290C0B422724374D008B530D /* bgsound.aac in Resources */,
+				295E3735272721BD00831D37 /* SyncStarted.mp3 in Resources */,
+				2989E7B02727188B003FB57F /* bgSyncSound.m4a in Resources */,
 				0DF3075724DB4A440080B0CF /* lottie_success.json in Resources */,
 				2946090F26ADCEF200B0867F /* Barlow-Regular.ttf in Resources */,
 				0D4332872644A370005B5B8E /* Assets.xcassets in Resources */,
 				0DCDFFDB24B6722B000F6999 /* LaunchScreen.storyboard in Resources */,
+				295E3737272721BD00831D37 /* SyncEnd.mp3 in Resources */,
 				0D2D5C1724CF3BD4001A58AD /* lottie_button_loading_new.json in Resources */,
 				0DCDFFDD24B6722B000F6999 /* Preview Assets.xcassets in Resources */,
 				0DCDFFDE24B6722B000F6999 /* Zboto.otf in Resources */,
