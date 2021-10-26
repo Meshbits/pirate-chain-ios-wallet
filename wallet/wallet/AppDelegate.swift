@@ -61,6 +61,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func clearKeyChainIfAnythingExists(){
+        let userDefaults = UserDefaults.standard
+
+        if userDefaults.bool(forKey: "didWeInstallItBefore") == false {
+
+               // removing all keychain items in here
+                SeedManager.default.nukeWallet()
+               // updating the local flag
+               userDefaults.set(true, forKey: "didWeInstallItBefore")
+               userDefaults.synchronize() // forces the app to update the NSUserDefaults
+
+               return
+           }
+    }
+    
     // MARK: UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

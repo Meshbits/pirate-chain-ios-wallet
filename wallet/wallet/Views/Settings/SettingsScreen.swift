@@ -143,7 +143,7 @@ struct SettingsScreen: View {
                         .modifier(SettingsSectionBackgroundModifier())
                         
                         
-                      Text(mVersionDetails).scaledFont(size: 13).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,10)
+                      Text(mVersionDetails).scaledFont(size: 15).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,10)
 
                     }
                     .padding(.top,10)
