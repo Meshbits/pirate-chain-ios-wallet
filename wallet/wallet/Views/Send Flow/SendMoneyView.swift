@@ -103,7 +103,7 @@ struct SendMoneyView: View {
                     onCommit: {
                         tracker.track(.tap(action: .sendAddressDoneAddress), properties: [:])
                 }
-                ).modifier(BackgroundPlaceholderModifierHome()).padding(.leading, 20).padding(.trailing, 20).padding(.top, 20)
+                ).modifier(BackgroundPlaceholderModifierHome()).padding(.leading, 15).padding(.trailing, 15).padding(.top, 20)
                     .onReceive(scanViewModel.addressPublisher, perform: { (address) in
                         self.flow.address = address
                         self.flow.showScanView = false
@@ -138,13 +138,8 @@ struct SendMoneyView: View {
                 ARRRMemoTextField(memoText:self.$flow.memo).frame(height:60)
                 
                 HStack{
-                    Text(self.flow.amount)
-                        .foregroundColor(.gray)
-                        .scaledFont(size: 30)
-                        .frame(height:30)
-                        .padding(.leading,10)
-                        .padding(.trailing,10)
-                        .modifier(BackgroundPlaceholderModifier())
+   
+                    ARRRSendReceiveMoneyTextField(anAmount: self.$flow.amount)
                 
                     SendMoneyButtonView(title: "Send Max".localized())
                         .onTapGesture {
@@ -169,9 +164,11 @@ struct SendMoneyView: View {
                     Spacer()
                 }
                               
-                KeyPadARRR(value: $flow.amount)
-                    .frame(alignment: .center)
-                    .padding(.horizontal, 10)
+//                KeyPadARRR(value: $flow.amount)
+//                    .frame(alignment: .center)
+//                    .padding(.horizontal, 10)
+                
+                Spacer()
                 
                 BlueButtonView(aTitle: "Send".localized()).onTapGesture {
                     
@@ -218,6 +215,9 @@ struct SendMoneyView: View {
                  .padding(.top,40)
              })
             .navigationBarHidden(true)
+        }
+        .onTapGesture {
+            UIApplication.shared.endEditing()
         }
         .highPriorityGesture(dragGesture)     
         .sheet(isPresented: $validateTransaction) {
@@ -292,4 +292,22 @@ struct SendMoneyButtonView : View {
            
         }.frame(width: 120,height:80)
     }
+}
+
+
+struct ARRRSendReceiveMoneyTextField: View {
+    
+     @Binding var anAmount:String
+    
+     var body: some View {
+             TextField("Enter Amount".localized(), text: $anAmount)
+               .scaledFont(size: 22)
+               .foregroundColor(.gray)
+               .frame(height:30)
+               .multilineTextAlignment(.center)
+               .padding(.leading,10)
+               .padding(.trailing,10)
+               .keyboardType(.decimalPad)
+               .modifier(BackgroundPlaceholderModifier())
+     }
 }

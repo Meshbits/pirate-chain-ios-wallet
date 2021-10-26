@@ -11,7 +11,7 @@ import SwiftUI
 struct RequestMoneyView<AccesoryContent: View>: View {
     let qrSize: CGFloat = 100
     @State var isShareAddressShown = false
-    @State var sendArrrValue =  "0"
+    @State var sendArrrValue =  ""
     @State var memoTextContent =  ""
 
     @State var copyItemModel: PasteboardItemModel?
@@ -115,25 +115,23 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                 
                 ARRRMemoTextField(memoText:$memoTextContent).frame(height:55)
                 
-                Text(self.sendArrrValue)
-                    .foregroundColor(.gray)
-                    .scaledFont(size: 26)
-                    .frame(height:30)
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
-                    .modifier(BackgroundPlaceholderModifier())
+//                Text(self.sendArrrValue)
+//                    .foregroundColor(.gray)
+//                    .scaledFont(size: 26)
+//                    .frame(height:30)
+//                    .padding(.leading,10)
+//                    .padding(.trailing,10)
+//                    .modifier(BackgroundPlaceholderModifier())
+//
+                ARRRSendReceiveMoneyTextField(anAmount: self.$sendArrrValue)
                 
-                              
-                KeyPadARRR(value: self.$sendArrrValue)
-                    .frame(alignment: .center)
-                    .padding(.horizontal, 10)
+                Spacer()
                 
                 BlueButtonView(aTitle: "Share".localized()).onTapGesture {
                     self.isShareAddressShown = true
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
                 
-                Spacer()
             }
             
         }.onTapGesture {

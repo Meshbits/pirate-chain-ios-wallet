@@ -84,6 +84,9 @@ final class SendFlowEnvironment: ObservableObject {
     
     fileprivate init(amount: Double, verifiedBalance: Double, address: String = "", isActive: Binding<Bool>) {
         self.amount = NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: amount)) ?? ""
+        if amount == 0 {
+            self.amount = ""
+        }
         self.verifiedBalance = verifiedBalance
         self.address = address
         self._isActive = isActive
