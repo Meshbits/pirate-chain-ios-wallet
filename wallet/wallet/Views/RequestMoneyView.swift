@@ -149,6 +149,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
              }
          }, trailingItem: {
              ARRRCloseButton(action: {
+                 UIApplication.shared.endEditing()
                  presentationMode.wrappedValue.dismiss()
              }).frame(width: 15, height: 15).padding(.top,20)
          })

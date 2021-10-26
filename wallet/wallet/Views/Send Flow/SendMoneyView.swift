@@ -298,9 +298,9 @@ struct SendMoneyButtonView : View {
 struct ARRRSendReceiveMoneyTextField: View {
     
      @Binding var anAmount:String
-    
+     @State var isFirstResponder = true
      var body: some View {
-             TextField("Enter Amount".localized(), text: $anAmount)
+                ARRRTextField(text: $anAmount,isFirstResponder: $isFirstResponder)
                .scaledFont(size: 22)
                .foregroundColor(.gray)
                .frame(height:30)

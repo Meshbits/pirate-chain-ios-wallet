@@ -506,6 +506,9 @@
 		29FABC0226D506E800306726 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBFB26D506E800306726 /* Parameter.swift */; };
 		29FABC0326D506E800306726 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBFB26D506E800306726 /* Parameter.swift */; };
 		29FABC0426D506E800306726 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBFB26D506E800306726 /* Parameter.swift */; };
+		29FBB5AD272890C4006C6186 /* ARRRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBB5AC272890C4006C6186 /* ARRRTextField.swift */; };
+		29FBB5AE272890C4006C6186 /* ARRRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBB5AC272890C4006C6186 /* ARRRTextField.swift */; };
+		29FBB5AF272890C4006C6186 /* ARRRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBB5AC272890C4006C6186 /* ARRRTextField.swift */; };
 		89F246E202A9ECE2F5FD8547 /* Pods_ECC_Wallet_Testnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A082D4B4F5F771D6BAABE094 /* Pods_ECC_Wallet_Testnet.framework */; };
 		8D3F362524A40FCF0087687A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F362724A40FCF0087687A /* Localizable.strings */; };
 		8D73959024A40E6C00936DE3 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73958F24A40E6C00936DE3 /* String+localized.swift */; };
@@ -755,6 +758,7 @@
 		29FABBF826D506E800306726 /* PirateChainPaymentURIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PirateChainPaymentURIProtocol.swift; sourceTree = "<group>"; };
 		29FABBF926D506E800306726 /* PirateChainPaymentURI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PirateChainPaymentURI.h; sourceTree = "<group>"; };
 		29FABBFB26D506E800306726 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		29FBB5AC272890C4006C6186 /* ARRRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRTextField.swift; sourceTree = "<group>"; };
 		2CA18E68C36455A44147853A /* Pods-ECC-Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-Wallet.debug.xcconfig"; path = "Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		2E7FFE45D0C33A74C7344A5E /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
 		36B81DA8FB2A74AD2728DEF5 /* Pods_ECC_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1137,6 +1141,7 @@
 				29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */,
 				290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */,
 				2960027326D93E4300B41DD0 /* ARRRBackButton.swift */,
+				29FBB5AC272890C4006C6186 /* ARRRTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1889,6 +1894,7 @@
 				29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */,
 				0DF26E2124D1F75300F32978 /* ZcashMemoTextField.swift in Sources */,
 				0D41AF9F23FCAA4700EE4FC0 /* TextView.swift in Sources */,
+				29FBB5AD272890C4006C6186 /* ARRRTextField.swift in Sources */,
 				0D1C2F27240DAFE9001AA427 /* ZcashSeedPhraseGrid.swift in Sources */,
 				296DA0E726ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9126D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
@@ -1991,6 +1997,7 @@
 				29FABC0126D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				0DCDFF9B24B6722B000F6999 /* CombineSynchronizer.swift in Sources */,
 				0DCDFF9C24B6722B000F6999 /* SendZecView.swift in Sources */,
+				29FBB5AF272890C4006C6186 /* ARRRTextField.swift in Sources */,
 				29249D6E26DFA67400B4CC9B /* AuthenticateFaceID.swift in Sources */,
 				0DCDFF9D24B6722B000F6999 /* ProfileScreen.swift in Sources */,
 				0DCDFF9E24B6722B000F6999 /* ZECCWalletEnvironment.swift in Sources */,
@@ -2228,6 +2235,7 @@
 				29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */,
 				0DE3038A263A158400CF877A /* ZcashMemoTextField.swift in Sources */,
 				0DE3038B263A158400CF877A /* TextView.swift in Sources */,
+				29FBB5AE272890C4006C6186 /* ARRRTextField.swift in Sources */,
 				0DE3038C263A158400CF877A /* ZcashSeedPhraseGrid.swift in Sources */,
 				296DA0E826ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */,

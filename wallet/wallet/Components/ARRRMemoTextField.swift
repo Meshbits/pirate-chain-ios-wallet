@@ -21,7 +21,7 @@ struct ARRRMemoTextField: View {
                 TextField("Memo Text...".localized(), text: $memoText)
                   .scaledFont(size: 20)
                   .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.clear))
-                  .foregroundColor(Color.gray)
+                  .foregroundColor(Color.white)
                   .modifier(QRCodeBackgroundPlaceholderModifier())
                 
                 Spacer()
