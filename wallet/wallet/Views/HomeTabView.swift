@@ -40,8 +40,7 @@ struct HomeTabView: View {
     var mWalletView: some View {
         LazyView(WalletDetails(isActive: Binding.constant(true))
                     .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true).environmentObject(WalletDetailsViewModel())
-                    .navigationBarTitle(Text(""), displayMode: .inline))
+            .navigationBarHidden(true).environmentObject(WalletDetailsViewModel()))
     }
     var mHomeView : some View {
         LazyView(
@@ -53,7 +52,6 @@ struct HomeTabView: View {
     var mSettingsView: some View {
         LazyView(SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment))
         .navigationBarBackButtonHidden(true)
-        .navigationBarTitle(Text(""), displayMode: .inline)
     }
   
     var body: some View {

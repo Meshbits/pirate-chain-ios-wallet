@@ -19,9 +19,9 @@ struct TransactionDetailsTitle: View {
         HStack{
            Text(format(zec: availableZec < 0 ? -availableZec : availableZec))
                 .foregroundColor(.white)
-                .scaledFont(size: 32)
-           Text(" \(arrr) ")
-                .scaledFont(size: 12)
+                .scaledFont(size: 36)
+            Text(" \(arrr) ").padding(.top,2)
+                .scaledFont(size: 22)
                 .foregroundColor(.zAmberGradient1)
         }
     }

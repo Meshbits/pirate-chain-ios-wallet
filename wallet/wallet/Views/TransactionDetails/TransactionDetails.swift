@@ -50,6 +50,16 @@ struct TransactionDetails: View {
         return dateFormatter.string(from: aDate)
     }
     
+    var aTitle: String {
+
+        switch detail.status {
+        case .paid(_):
+            return  "To: ".localized()
+        case .received:
+            return "From: ".localized()
+        }
+    }
+    
     
     var body: some View {
         
@@ -66,9 +76,9 @@ struct TransactionDetails: View {
                             VStack {
 
                                 if let fullAddr = detail.arrrAddress{
-                                    TransactionRow(mTitle: "From: ".localized(), mSubTitle: fullAddr, showLine: true, isYellowColor: false)
+                                    TransactionRow(mTitle: aTitle, mSubTitle: fullAddr, showLine: true, isYellowColor: false)
                                 }else{
-                                    TransactionRow(mTitle: "From: ".localized(), mSubTitle: (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
+                                    TransactionRow(mTitle: aTitle, mSubTitle: (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
                                 }
                                 
                                 TransactionRowTitleSubtitle(mTitle: converDateToString(aDate: detail.date), mSubTitle: ("Processing fee: ".localized() + "\(detail.defaultFee.asHumanReadableZecBalance().toZecAmount())" + " ARRR"), showLine: true)

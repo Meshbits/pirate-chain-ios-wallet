@@ -129,7 +129,7 @@ extension String {
         switch model.status {
     
         case .paid(let success):
-            transactionSubTitle = success ? (("sent via ".localized()) + (model.arrrAddress ?? "NA".localized())) : ("pending via ".localized()) + (model.arrrAddress ?? "NA".localized())
+            transactionSubTitle = success ? (("sent to ".localized()) + (model.arrrAddress ?? "NA".localized())) : ("pending via ".localized()) + (model.arrrAddress ?? "NA".localized())
         case .received:
             transactionSubTitle = "received via ".localized()
         }
