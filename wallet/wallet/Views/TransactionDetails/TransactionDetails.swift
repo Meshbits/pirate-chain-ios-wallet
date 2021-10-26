@@ -389,6 +389,11 @@ struct TransactionRow: View {
                     .padding(10)
                 Spacer()
                 Spacer()
+                if !isYellowColor && !mSubTitle.isEmpty && mSubTitle != "NA"{
+                    Image(systemName: "doc.on.doc").foregroundColor(.gray)
+                        .scaledFont(size: 20).padding(.trailing, 10)
+                }
+                
             } .onTapGesture {
                 if !isYellowColor && !mSubTitle.isEmpty && mSubTitle != "NA"{
                     copyToClipBoard(mSubTitle)
