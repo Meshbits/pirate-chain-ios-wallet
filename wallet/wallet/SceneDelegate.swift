@@ -151,12 +151,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.01 // Super low volume
+                mAVAudioPlayerObj?.volume = 0.01 // very very low volume
                 mAVAudioPlayerObj?.play()
             }
             
-            showNotificationInNotificationTrayWhileSyncing()
-
             //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
             let audioSession = AVAudioSession.sharedInstance()
             try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
