@@ -177,6 +177,7 @@ struct SendMoneyView: View {
                         adjustTransaction = true
                     }else{
                         validateTransaction = true
+                        UIApplication.shared.endEditing()
                     }
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
