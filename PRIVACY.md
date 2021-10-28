@@ -11,3 +11,5 @@ The Pirate Wallet application uses the following permissions for the following r
 - **Audio access:** Due to the current iOS limitations on running background processes for longer durations than 30 seconds, the Pirate Wallet application uses audio playback while background network sychronisation process is in progress.
 
 - **Permission to vibrate the mobile device:** The Pirate Wallet application uses the vibration feature of the mobile device it is running on at various UI/UX actions, in order to give feedback upon those actions.
+
+- **Bimatric access:** The Pirate Wallet application also allows user to use biomatric authentication, which includes FaceID and TouchID on iOS devices. If user chose to enable this setting in Pirate Wallet the wallet will prompt for Bimatric authentication permissions for the application. This feature is optional and can be enabled or disabled at any time by user.
