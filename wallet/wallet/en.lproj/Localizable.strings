@@ -166,9 +166,9 @@
 
 // URLs - Settings
 
-"privacyURL" = "https://pirate.black/privacy-policy/";
-"termsURL" = "https://pirate.black/privacy-policy/";
-"supportURL" = "https://pirate.black/privacy-policy/";
+"privacyURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/PRIVACY.md";
+"licenseURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/LICENSE";
+"supportURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/PRIVACY.md";
 
 
 // Onboarding Screens
@@ -193,6 +193,7 @@
 "Unlink Device" = "Unlink Device";
 "Privacy Policy" = "Privacy Policy";
 "Terms & Conditions" = "Terms & Conditions";
+"License" = "License";
 "Support" = "Support";
 "Settings" = "Settings";
 "General" = "General";

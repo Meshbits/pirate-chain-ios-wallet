@@ -27,8 +27,8 @@ enum SettingsDestination: Int {
     case openPrivateServerConfig = 6
     case openiCloudBackup = 7
     case openPrivacyPolicy = 8
-    case openTermsAndConditions = 9
-    case openSupport = 10
+    case openlicense = 9
+//    case openSupport = 10
     case startRescan = 11
 }
 
@@ -37,7 +37,7 @@ struct SettingsScreen: View {
     
     @State var showActionSheet: Bool = false
     
-    var mVersionDetails = "Build Version: 1.0.0-1-18-g00a24d3"
+    var mVersionDetails = "Build Version: 1.0.0-1-27-gbe28943"
 
     var generalSection = [SettingsRowData(id:0,title:"Language".localized()),SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
@@ -48,8 +48,9 @@ struct SettingsScreen: View {
 //    var walletSection = [SettingsRowData(id:6,title:"Private Server Config")] //,
 //                         SettingsRowData(id:7,title:"iCloud backup")]
     var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),
-                        SettingsRowData(id:9,title:"Terms & Conditions".localized()),
-                        SettingsRowData(id:10,title:"Support".localized())]
+                        SettingsRowData(id:9,title:"License".localized())
+                        /*,
+                        SettingsRowData(id:10,title:"Support".localized())*/]
     
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
@@ -132,7 +133,7 @@ struct SettingsScreen: View {
                         SettingsSectionHeaderView(aTitle:"About".localized())
                         VStack {
                             ForEach(aboutSection, id: \.id) { settingsRowData in
-                               SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:10)
+                               SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:9)
                                 .onTapGesture {
                                     self.mSelectedSettingsRowData = settingsRowData
                                     openRespectiveScreenBasisSelection()
@@ -143,7 +144,7 @@ struct SettingsScreen: View {
                         .modifier(SettingsSectionBackgroundModifier())
                         
                         
-                      Text(mVersionDetails).scaledFont(size: 15).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,10)
+                      Text(mVersionDetails).scaledFont(size: 15).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,20)
 
                     }
                     .padding(.top,10)
@@ -202,7 +203,7 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "privacyURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                    destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
                         ,
                                tag: SettingsDestination.openPrivacyPolicy,
                                selection: $destination
@@ -211,24 +212,24 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "termsURL".localized()).environmentObject(self.appEnvironment)
+                    destination: OpenInAppBrowser(aURLString: "licenseURL".localized(),aTitle: "License".localized()).environmentObject(self.appEnvironment)
                         .onAppear { self.tabBar.isHidden = true }
                         ,
-                               tag: SettingsDestination.openTermsAndConditions,
+                               tag: SettingsDestination.openlicense,
                                selection: $destination
                 ) {
                    EmptyView()
                 }
                 
-                NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "supportURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openSupport,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
-                
+//                NavigationLink(
+//                    destination: OpenInAppBrowser(aURLString: "supportURL".localized(),aTitle: "Support".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+//                        ,
+//                               tag: SettingsDestination.openSupport,
+//                               selection: $destination
+//                ) {
+//                   EmptyView()
+//                }
+//
             }.background(TabBarAccessor { tabbar in
                 self.tabBar = tabbar
             })

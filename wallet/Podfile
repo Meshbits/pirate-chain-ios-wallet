@@ -11,6 +11,7 @@ def base_pods
   pod 'CombineUrlSessionDownloader'
   pod 'BottomSheet', :git => 'https://github.com/weitieda/bottom-sheet.git'
   pod 'AlertToast'
+#  pod 'SecureDefaults',:git => 'https://github.com/Meshbits/SecureDefaults.git'
 end
 
 inhibit_all_warnings!
