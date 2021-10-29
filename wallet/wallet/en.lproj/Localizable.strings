@@ -166,8 +166,8 @@
 
 // URLs - Settings
 
-"privacyURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/PRIVACY.md";
-"licenseURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/LICENSE";
+"privacyURL" = "https://github.com/Meshbits/pirate-chain-ios-wallet/blob/master/PRIVACY.md";
+"licenseURL" = "https://github.com/Meshbits/pirate-chain-ios-wallet/blob/master/LICENSE";
 "supportURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/PRIVACY.md";
 
 

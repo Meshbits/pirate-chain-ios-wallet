@@ -10,6 +10,7 @@ import UIKit
 import BackgroundTasks
 import AVFoundation
 import UserNotifications
+import SecureDefaults
 
 #if ENABLE_LOGGING
 //import Bugsnag
@@ -59,9 +60,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
         application.isIdleTimerDisabled = true
         
+        let defaults = SecureDefaults()
+        
+        // Ensures that a password was not set before. Otherwise, if
+        // you set a password one more time, it will re-generate a key.
+        // That means that we lose old data as well.
+        if !defaults.isKeyCreated {
+            defaults.password = UUID().uuidString
+            defaults.synchronize()
+//            defaults.set("We're using SecureDefaults!", forKey: "secure.greeting")
+        }
         return true
     }
     
+    /*
+     Not required anymore
     func clearKeyChainIfAnythingExists(){
         let userDefaults = UserDefaults.standard
 
@@ -76,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                return
            }
     }
+    */
     
     // MARK: UISceneSession Lifecycle
     

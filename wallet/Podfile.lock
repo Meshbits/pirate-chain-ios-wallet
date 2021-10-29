@@ -30,6 +30,7 @@ PODS:
     - Mixpanel-swift/Complete (= 2.10.2)
   - Mixpanel-swift/Complete (2.10.2)
   - MnemonicSwift (2.0.0)
+  - SecureDefaults (1.0.6)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -87,6 +88,7 @@ DEPENDENCIES:
   - lottie-ios
   - Mixpanel-swift
   - MnemonicSwift (from `https://github.com/zcash-hackworks/MnemonicSwift.git`, branch `master`)
+  - SecureDefaults (from `https://github.com/Meshbits/SecureDefaults.git`)
   - ZcashLightClientKit (from `https://github.com/Meshbits/ZcashLightClientKit.git`, branch `v0.12.0-alpha.8`)
   - zealous-logger (from `https://github.com/zcash-hackworks/zealous-logger`, branch `master`)
 
@@ -127,6 +129,8 @@ EXTERNAL SOURCES:
   MnemonicSwift:
     :branch: master
     :git: https://github.com/zcash-hackworks/MnemonicSwift.git
+  SecureDefaults:
+    :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
     :branch: v0.12.0-alpha.8
     :git: https://github.com/Meshbits/ZcashLightClientKit.git
@@ -141,6 +145,9 @@ CHECKOUT OPTIONS:
   MnemonicSwift:
     :commit: 714cc6e2631ac322fc0067b2302358c1baad9275
     :git: https://github.com/zcash-hackworks/MnemonicSwift.git
+  SecureDefaults:
+    :commit: 370366e9db41ba4c318963a63bc544a4766fb827
+    :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
     :commit: 24d6fa616562e76f2f673fc5721fc509da7a63f6
     :git: https://github.com/Meshbits/ZcashLightClientKit.git
@@ -167,6 +174,7 @@ SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   Mixpanel-swift: dc07ae05df9ff47c80542531f55e2120ec2a410a
   MnemonicSwift: 36384fc6b2640d93df9fe9fb60a8da7957cec36d
+  SecureDefaults: c372beb04ca1abae13415d2640f72c01f9876946
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   SwiftNIO: f8ba4a53a934bf5ef6cd84ba9133903c9c760874
   SwiftNIOConcurrencyHelpers: 8b2657b5574ff83b8d82377d410e9272e0e16c79
@@ -182,6 +190,6 @@ SPEC CHECKSUMS:
   ZcashLightClientKit: 98b74ede09b395f9f1505d6834ad0f85cbbb496b
   zealous-logger: 2f33820d7d7e723796dabc51d60942b51b9ab024
 
-PODFILE CHECKSUM: 1dca8bcc41c303a9df53d6e9b90f50a5da565ed8
+PODFILE CHECKSUM: 3a77b06f282a7f0413177865bc7dfb19d5fd69f8
 
 COCOAPODS: 1.10.2

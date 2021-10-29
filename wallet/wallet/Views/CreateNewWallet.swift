@@ -61,7 +61,7 @@ struct CreateNewWallet: View {
                 Spacer()
 
                 Text("Restore from".localized()).foregroundColor(.gray).frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading,30).scaledFont(size: 12)
+                    .padding(.leading,30).scaledFont(size: 14)
 
                 VStack(alignment: .center, spacing: 10.0, content: {
                     
