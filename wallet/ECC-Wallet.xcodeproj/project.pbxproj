@@ -460,6 +460,9 @@
 		29AF023626DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
 		29AF023726DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
 		29AF023826DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
+		29B06F80272D92A8004C5C2F /* RescanOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */; };
+		29B06F81272D92A8004C5C2F /* RescanOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */; };
+		29B06F82272D92A8004C5C2F /* RescanOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */; };
 		29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
@@ -741,6 +744,7 @@
 		29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryBasedUnlink.swift; sourceTree = "<group>"; };
 		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
 		29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsVerificationScreen.swift; sourceTree = "<group>"; };
+		29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescanOptionsView.swift; sourceTree = "<group>"; };
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
 		29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransaction.swift; sourceTree = "<group>"; };
 		29D1459C46D96D9D3DF2A55C /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1196,6 +1200,7 @@
 				29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */,
 				296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */,
 				296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */,
+				29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1840,6 +1845,7 @@
 				29414BC726D41A140022401F /* QRCodeScanner.swift in Sources */,
 				29EA113426B492CC00601FDD /* RestorePhraseScreen.swift in Sources */,
 				29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */,
+				29B06F80272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				0D11C23723BFB666001CF6F7 /* ShareScreen.swift in Sources */,
 				0D0565DD24EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift in Sources */,
 				0D92967923BEEFFC001518F3 /* BalanceDetail.swift in Sources */,
@@ -1993,6 +1999,7 @@
 				0DCDFF9A24B6722B000F6999 /* Fonts.swift in Sources */,
 				0DACBB35264980630085F1CD /* OhMyScreen.swift in Sources */,
 				29FABC0426D506E800306726 /* Parameter.swift in Sources */,
+				29B06F82272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */,
 				29FABC0126D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				0DCDFF9B24B6722B000F6999 /* CombineSynchronizer.swift in Sources */,
@@ -2181,6 +2188,7 @@
 				29414BC826D41A140022401F /* QRCodeScanner.swift in Sources */,
 				29EA113526B492CC00601FDD /* RestorePhraseScreen.swift in Sources */,
 				29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */,
+				29B06F81272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				0DE30363263A158400CF877A /* ShareScreen.swift in Sources */,
 				0DE30364263A158400CF877A /* HeaderFooterTxDetailView.swift in Sources */,
 				0DE30365263A158400CF877A /* BalanceDetail.swift in Sources */,

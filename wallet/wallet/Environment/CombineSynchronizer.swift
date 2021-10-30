@@ -430,6 +430,15 @@ extension CombineSynchronizer {
         }
     }
     
+    func rescanWithBirthday(blockheight: BlockHeight) {
+        do {
+            try self.rewind(.height(blockheight: blockheight))
+            try self.start(retry: true)
+        } catch {
+            logger.error("Rescan failed with new height \(error)")
+        }
+    }
+    
     func getTransparentAddress(account: Int = 0) -> TransparentAddress? {
         self.synchronizer.getTransparentAddress(accountIndex: account)
     }

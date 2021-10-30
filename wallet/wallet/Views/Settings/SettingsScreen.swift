@@ -35,9 +35,7 @@ enum SettingsDestination: Int {
 
 struct SettingsScreen: View {
     
-    @State var showActionSheet: Bool = false
-    
-    var mVersionDetails = "Build Version: 1.0.0-1-27-gbe28943"
+    var mVersionDetails = "Build Version: 1.0.0-1-32-gc284a85"
 
     var generalSection = [SettingsRowData(id:0,title:"Language".localized()),SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
@@ -203,6 +201,17 @@ struct SettingsScreen: View {
                 }
                 
                 NavigationLink(
+                    destination: RescanOptionsView(rescanDataViewModel: RescanDataViewModel()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                               tag: SettingsDestination.startRescan,
+                               selection: $destination
+                ) {
+                   EmptyView()
+                }
+                
+                
+                NavigationLink(
                     destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
                         ,
                                tag: SettingsDestination.openPrivacyPolicy,
@@ -233,41 +242,18 @@ struct SettingsScreen: View {
             }.background(TabBarAccessor { tabbar in
                 self.tabBar = tabbar
             })
-            .actionSheet(isPresented: $showActionSheet) {
-                       ActionSheet(
-                           title: Text(""),
-                           message: Text("Do you want to Re-scan your wallet?".localized()),
-                        buttons: [
-//                            .destructive(Text("Cancel"), action: {
-//
-////                                do {
-////                                    try self.appEnvironment.wipe(abortApplication: false)
-////                                    self.alertItem = AlertItem(type: .feedback(
-////                                                                message: "SUCCESS! Wallet data cleared. Please relaunch to rescan!",
-////                                                                action: {
-////                                        abort()
-////                                    }))
-////                                } catch {
-////                                    self.alertItem = AlertItem(
-////                                        type: AlertType.actionable(
-////                                                                title: "Wipe Failed",
-////                                                                message: "Wipe operation failed with error \(error). You might want to screenshot this. Your app could work properly. You can close it and restart it, or nuke it.",
-////                                                                destructiveText: "NUKE WALLET".localized(),
-////                                                                destructiveAction: { self.nukeWallet() },
-////                                                                dismissText: "Close App",
-////                                                                dismissAction: {
-////                                                                    abort()
-////                                                                })
-////                                    )
-////                                }
+//            .actionSheet(isPresented: $showActionSheet) {
+//                       ActionSheet(
+//                           title: Text(""),
+//                           message: Text("Do you want to Re-scan your wallet?".localized()),
+//                        buttons: [
+//                            .default(Text("Quick Re-Scan".localized()), action: {
+//                                self.appEnvironment.synchronizer.quickRescan()
 //                            }),
-                            .default(Text("Quick Re-Scan".localized()), action: {
-                                self.appEnvironment.synchronizer.quickRescan()
-                            }),
-                            .default(Text("Later".localized()))
-                        ]
-                       )
-               }
+//                            .default(Text("Later".localized()))
+//                        ]
+//                       )
+//               }
             .navigationBarHidden(true)
             .bottomSheet(isPresented: $openLanguageScreen,
                           height: 500,
@@ -313,9 +299,6 @@ struct SettingsScreen: View {
         switch(self.mSelectedSettingsRowData?.id){
             case SettingsDestination.openLanguage.rawValue:
                 openLanguageScreen.toggle()
-            break
-            case SettingsDestination.startRescan.rawValue:
-            showActionSheet.toggle()
             break
             default:
                 print("Something else is tapped")

@@ -14,7 +14,7 @@ final class SeedManager {
         case alreadyImported
         case uninitializedWallet
     }
-    private let mDefaultHeight = 1390000
+    static let mDefaultHeight = 1390000
     static var `default`: SeedManager = SeedManager()
     private static let aRRRWalletBirthday = "aRRRWalletBirthday"
     private static let aRRRWalletPhrase = "aRRRWalletPhrase"
@@ -32,7 +32,20 @@ final class SeedManager {
         
         if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
             // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
-            userDefaults.set(String(mDefaultHeight), forKey: Self.aRRRWalletBirthday)
+            userDefaults.set(String(SeedManager.mDefaultHeight), forKey: Self.aRRRWalletBirthday)
+        }else{
+            userDefaults.set(String(height), forKey: Self.aRRRWalletBirthday)
+        }
+        
+        
+        userDefaults.synchronize()
+    }
+    
+    func importNewBirthdayOnRescan(_ height: BlockHeight) throws {
+       
+        if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
+            // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
+            userDefaults.set(String(SeedManager.mDefaultHeight), forKey: Self.aRRRWalletBirthday)
         }else{
             userDefaults.set(String(height), forKey: Self.aRRRWalletBirthday)
         }
