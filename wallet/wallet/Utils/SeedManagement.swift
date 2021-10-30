@@ -14,7 +14,7 @@ final class SeedManager {
         case alreadyImported
         case uninitializedWallet
     }
-    
+    private let mDefaultHeight = 1390000
     static var `default`: SeedManager = SeedManager()
     private static let aRRRWalletBirthday = "aRRRWalletBirthday"
     private static let aRRRWalletPhrase = "aRRRWalletPhrase"
@@ -29,7 +29,15 @@ final class SeedManager {
         guard userDefaults.string(forKey: Self.aRRRWalletBirthday) == nil else {
             throw SeedManagerError.alreadyImported
         }
-        userDefaults.set(String(height), forKey: Self.aRRRWalletBirthday)
+        
+        if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
+            // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
+            userDefaults.set(String(mDefaultHeight), forKey: Self.aRRRWalletBirthday)
+        }else{
+            userDefaults.set(String(height), forKey: Self.aRRRWalletBirthday)
+        }
+        
+        
         userDefaults.synchronize()
     }
     
@@ -158,6 +166,27 @@ final class SeedManager {
             return false
         }
         return true
+    }
+    
+    func updatePasswordForPinCode(){
+//        if secureDefaults.isKeyCreated {
+//            if let seedphrase = mTempRecoveryPhrase {
+//                if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty {
+//                    printLog(message: "Started resetting")
+//                    secureDefaults.removeObject(forKey: Self.aRRRWalletPhrase)
+//                    secureDefaults.synchronize()
+//                    printLog(message: "Deleted")
+//                    secureDefaults.password = aPasscode
+//                    secureDefaults.synchronize()
+//                    printLog(message: "DELETED SUCCESS")
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                        self.secureDefaults.set(seedphrase, forKey: Self.aRRRWalletPhrase)
+//                        self.secureDefaults.synchronize()
+//                        printLog(message: "Synch")
+//                    }
+//                }
+//            }
+//        }
     }
 }
 

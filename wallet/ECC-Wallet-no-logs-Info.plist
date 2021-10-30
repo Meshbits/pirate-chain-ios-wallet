@@ -42,7 +42,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Scan zAddress Qr Codes</string>
+	<string>Scan Arrr Address Qr Codes</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We might require you to use face ID or pin to Authorize payments</string>
 	<key>UIAppFonts</key>

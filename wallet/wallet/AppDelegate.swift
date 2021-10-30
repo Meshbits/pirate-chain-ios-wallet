@@ -66,9 +66,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // you set a password one more time, it will re-generate a key.
         // That means that we lose old data as well.
         if !defaults.isKeyCreated {
-            defaults.password = UUID().uuidString
-            defaults.synchronize()
-//            defaults.set("We're using SecureDefaults!", forKey: "secure.greeting")
+            if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty {
+//                print("No need to update it here")
+            }else{
+//                print("update it here please")
+                defaults.password = UUID().uuidString
+                defaults.synchronize()
+                defaults.set("We're using SecureDefaults!", forKey: "secure.greeting")
+            }
         }
         return true
     }
