@@ -178,6 +178,7 @@ struct RescanOptionsView: View {
               }
             }, headerItem: {
                 HStack{
+                    Spacer()
                     Text("Select Rescan Wallet Height".localized()).frame(height:50).scaledFont(size: 15)
                         .multilineTextAlignment(.center)
                     Spacer()
