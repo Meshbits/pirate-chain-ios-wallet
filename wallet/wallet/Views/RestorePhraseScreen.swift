@@ -18,6 +18,12 @@ struct RestorePhraseScreen: View {
     @State var walletBirthDay: String = ""
     @State var showError = false
     @State var proceed: Bool = false
+    @State var showListOfBirthdays = false
+    var anArrayOfBirthdays = [1390000,1380000,1370000,1360000,1350000,1340000,1330000,1320000,1310000,1300000,
+                              1290000,1280000,1270000,1260000,1250000,1240000,1230000,1220000,1210000,1200000,
+                              1190000,1180000,1170000,1160000,1150000,1140000,1130000,1120000,1110000,1100000,
+                              1090000,1080000,1070000,1060000,1050000,1040000,1030000,1020000,1010000,1000000,
+                               900000,800000,700000,600000,500000,400000,300000,200000]
     
     var seedPhraseSubtitle: some View {
         if seedPhrase.isEmpty {
@@ -50,20 +56,30 @@ struct RestorePhraseScreen: View {
                         onCommit: {}
                     ).scaledFont(size: 17)
                     .multilineTextAlignment(.leading).padding(.top,100)
-                    
-                    ZcashTextField(
-                        title: "Wallet Birthday height".localized(),
-                        subtitleView: AnyView(
-                            Text.subtitle(text: "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.".localized())
-                                .scaledFont(size: 15)
-                        ),
-                        keyboardType: UIKeyboardType.decimalPad,
-                        binding: $walletBirthDay,
-                        onEditingChanged: { _ in },
-                        onCommit: {}
-                    ).scaledFont(size: 17)
-                    .multilineTextAlignment(.leading)
-                    
+                  
+                    HStack{
+                        ZcashTextField(
+                            title: "Wallet Birthday height".localized(),
+                            subtitleView: AnyView(
+                                Text.subtitle(text: "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.".localized())
+                                    .scaledFont(size: 15)
+                            ),
+                            keyboardType: UIKeyboardType.decimalPad,
+                            binding: $walletBirthDay,
+                            onEditingChanged: { _ in },
+                            onCommit: {}
+                        ).scaledFont(size: 17)
+                        .multilineTextAlignment(.leading)
+                        
+                        Button {
+                            self.showListOfBirthdays = true
+                        } label: {
+                            Image(systemName: "chevron.down.circle.fill").foregroundColor(.gray)
+                                .scaledFont(size: 30).foregroundColor(.gray)
+                                .padding(.bottom, 5)
+                        }
+
+                    }
                     Button(action: {
                         do {
                             try self.importSeed()
@@ -98,8 +114,17 @@ struct RestorePhraseScreen: View {
             }
             .onAppear {
                 tracker.track(.screen(screen: .restore), properties: [:])
-            }
-
+            }.actionSheet(isPresented: self.$showListOfBirthdays, content: {
+                self.showBirthdayOptions()
+            })
+    }
+    
+    func showBirthdayOptions() -> ActionSheet {
+        return ActionSheet(title: Text("\nChoose a birthday height for sync, leave it default if you are not sure.\n".localized()).foregroundColor(.white), buttons:
+                            anArrayOfBirthdays.map { size in
+                .default(Text(String.init(format: "%d", size)).foregroundColor(.gray)) { self.walletBirthDay = String.init(format: "%d", size) }
+        } + [Alert.Button.cancel()]
+        )
     }
     
     init() {
