@@ -69,7 +69,7 @@ struct RescanOptionsView: View {
     
     @State var showErrorScanToast = false
     
-    @State var mCurrentWalletBirthday = 1390000
+    @State var mCurrentWalletBirthday = SeedManager.mDefaultHeight
        
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
@@ -115,7 +115,7 @@ struct RescanOptionsView: View {
                         // Index of selection
 //                        print("height=\(height)")
                         
-                        mCurrentWalletBirthday = Int(height) ?? 1390000
+                        mCurrentWalletBirthday = Int(height) ?? SeedManager.mDefaultHeight
                         
                         if self.appEnvironment.synchronizer.syncStatus.value != .synced {
                                 self.showErrorScanToast = true

@@ -94,6 +94,7 @@ struct SendMoneyView: View {
                     action: {
                         tracker.track(.tap(action: .sendAddressScan),
                                       properties: [:])
+                        UIApplication.shared.endEditing()
                         self.flow.showScanView = true
                 },
                     accessoryIcon: Image("QRCodeIcon")
@@ -107,6 +108,7 @@ struct SendMoneyView: View {
                     .onReceive(scanViewModel.addressPublisher, perform: { (address) in
                         self.flow.address = address
                         self.flow.showScanView = false
+                        DeviceFeedbackHelper.vibrate()
                     })
                     .sheet(isPresented: self.$flow.showScanView) {
                         NavigationView {

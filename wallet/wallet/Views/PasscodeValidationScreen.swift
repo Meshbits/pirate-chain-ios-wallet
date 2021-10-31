@@ -64,6 +64,7 @@ public class PasscodeValidationViewModel: ObservableObject{
             if aTempPasscode == aSavedPasscode {
                 mDismissAfterValidation = true
             }else{
+                DeviceFeedbackHelper.longVibrate()
                 mPasscodeValidationFailure = true
                 mStateOfPins = mStateOfPins.map { _ in false }
                 mPressedKeys.removeAll()
