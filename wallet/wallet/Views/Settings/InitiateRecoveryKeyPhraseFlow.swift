@@ -67,13 +67,10 @@ struct InitiateRecoveryKeyPhraseFlow: View {
         .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false)).environmentObject(self.appEnvironment)
         }
-        .onAppear(){
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in
-                initiatePassphraseFlow = true
-            }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PasscodeValidationSuccessful")))
+        { obj in
+            initiatePassphraseFlow = true
         }
-        
-       
     }
 }
 
