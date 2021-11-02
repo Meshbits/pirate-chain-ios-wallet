@@ -18,7 +18,7 @@ struct SettingsRowData : Equatable {
 
 
 enum SettingsDestination: Int {
-    case openLanguage = 0
+//    case openLanguage = 0
     case openNotifications = 1
     case handleFaceId = 2
     case openRecoveryPhrase = 3
@@ -35,9 +35,9 @@ enum SettingsDestination: Int {
 
 struct SettingsScreen: View {
     
-    var mVersionDetails = "Build Version: 1.0.0-1-32-gc284a85"
+    var mVersionDetails = "Build Version: 1.0.0-1-36-g4525b06"
 
-    var generalSection = [SettingsRowData(id:0,title:"Language".localized()),SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
+    var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
     var securitySection = [SettingsRowData(id:2,title:"Face ID".localized()),
                            SettingsRowData(id:3,title:"Recovery Phrase".localized()),
@@ -54,7 +54,7 @@ struct SettingsScreen: View {
     
     @State var destination: SettingsDestination?
     
-    @State var openLanguageScreen = false
+//    @State var openLanguageScreen = false
     
     @State var mSelectedSettingsRowData: SettingsRowData?
     
@@ -255,17 +255,17 @@ struct SettingsScreen: View {
 //                       )
 //               }
             .navigationBarHidden(true)
-            .bottomSheet(isPresented: $openLanguageScreen,
-                          height: 500,
-                          topBarHeight: 0,
-                          topBarCornerRadius: 20,
-                          showTopIndicator: true) {
-                SelectLanguage().environmentObject(appEnvironment)
-                
-            }.onAppear(){
-                NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissSettings"), object: nil, queue: .main) { (_) in
-                    openLanguageScreen = false
-                }
+//            .bottomSheet(isPresented: $openLanguageScreen,
+//                          height: 500,
+//                          topBarHeight: 0,
+//                          topBarCornerRadius: 20,
+//                          showTopIndicator: true) {
+//                SelectLanguage().environmentObject(appEnvironment)
+//            }
+            .onAppear(){
+//                NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissSettings"), object: nil, queue: .main) { (_) in
+//                    openLanguageScreen = false
+//                }
                 
                 if self.tabBar != nil {
                     self.tabBar.isHidden = false
@@ -297,9 +297,9 @@ struct SettingsScreen: View {
         
         
         switch(self.mSelectedSettingsRowData?.id){
-            case SettingsDestination.openLanguage.rawValue:
-                openLanguageScreen.toggle()
-            break
+//            case SettingsDestination.openLanguage.rawValue:
+//                openLanguageScreen.toggle()
+//            break
             default:
                 print("Something else is tapped")
         }
