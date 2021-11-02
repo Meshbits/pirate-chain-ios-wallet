@@ -12,12 +12,12 @@ struct AboutUs: View {
     @Environment(\.presentationMode) var presentationMode
     var anAppVersion = "App Version: 1.0.0"
     var aBuildversion = "Build: 2"
-    var aCommitsCount = "Commits Count: 1"
-    var aGitHash = "Short Git hash: g1eb3e23"
+    var aCommitsCount = "Commits Count: 4"
+    var aGitHash = "Short Git hash: ge47798e"
     var aSourceCode = "Source: "
     var aSourceCodeURL = "https://github.com/Meshbits/pirate-chain-ios-wallet"
     var aDevelopedBy = "Developed by Meshbits Limited"
-    
+    var aVersionDetails = "Release: Beta"
     var body: some View {
 
         ZStack {
@@ -65,6 +65,17 @@ struct AboutUs: View {
                 }
                 .listRowBackground(ARRRBackground())
                 .frame(minHeight: 50)
+            
+                HStack{
+                    Text(aVersionDetails).multilineTextAlignment(.leading)
+                        .lineLimit(nil)
+                        .scaledFont(size: 15)
+                        .frame(alignment: .leading)
+                    Spacer()
+                }
+                .listRowBackground(ARRRBackground())
+                .frame(minHeight: 50)
+               
                 
                 HStack{
                     Link(aSourceCode+aSourceCodeURL, destination: URL(string: aSourceCodeURL)!)
@@ -103,7 +114,7 @@ struct AboutUs: View {
                   Image("backicon").resizable().frame(width: 60, height: 60)
               }
             }, headerItem: {
-                    Text("About Pirate Chain").multilineTextAlignment(.leading)
+                    Text("About Pirate Wallet").multilineTextAlignment(.leading)
                         .lineLimit(nil)
                         .scaledFont(size: 22)
                         .frame(alignment: .leading)

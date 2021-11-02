@@ -36,7 +36,7 @@ enum SettingsDestination: Int {
 
 struct SettingsScreen: View {
     
-    var mVersionDetails = "Build Version: 1.0.0-2-1-g1eb3e23"
+    var mVersionDetails = "Build Version: 1.0.0-2-4-ge47798e (Beta)"
 
     var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
@@ -48,7 +48,7 @@ struct SettingsScreen: View {
 //                         SettingsRowData(id:7,title:"iCloud backup")]
     var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),
                         SettingsRowData(id:9,title:"License".localized()),
-                        SettingsRowData(id:12,title:"About Pirate Chain".localized())
+                        SettingsRowData(id:12,title:"About Pirate Wallet".localized())
                         /*,
                         SettingsRowData(id:10,title:"Support".localized())*/]
     
