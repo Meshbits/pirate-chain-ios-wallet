@@ -448,6 +448,9 @@
 		298D511026A728A800585699 /* ARRRBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D510F26A728A800585699 /* ARRRBackground.swift */; };
 		298D511126A728A800585699 /* ARRRBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D510F26A728A800585699 /* ARRRBackground.swift */; };
 		298D511226A728A800585699 /* ARRRBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D510F26A728A800585699 /* ARRRBackground.swift */; };
+		29962ECA2731526B0037F5BA /* CustomSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29962EC92731526B0037F5BA /* CustomSafariView.swift */; };
+		29962ECB2731526B0037F5BA /* CustomSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29962EC92731526B0037F5BA /* CustomSafariView.swift */; };
+		29962ECC2731526B0037F5BA /* CustomSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29962EC92731526B0037F5BA /* CustomSafariView.swift */; };
 		29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651B26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
@@ -743,6 +746,7 @@
 		2989E7AF2727188B003FB57F /* bgSyncSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgSyncSound.m4a; sourceTree = "<group>"; };
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
+		29962EC92731526B0037F5BA /* CustomSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSafariView.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		29A8019A2712DACD002DF6F9 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryBasedUnlink.swift; sourceTree = "<group>"; };
@@ -1206,6 +1210,7 @@
 				296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */,
 				29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */,
 				297046A327310C1300C73ED1 /* AboutUs.swift */,
+				29962EC92731526B0037F5BA /* CustomSafariView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1956,6 +1961,7 @@
 				2931F36F26CEDD4200F68099 /* ARRRCloseButton.swift in Sources */,
 				29207FDA26BFCDD500E9C4E4 /* SettingsScreen.swift in Sources */,
 				0D2D5C2324CF8AB2001A58AD /* ZcashNavigationBar.swift in Sources */,
+				29962ECA2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DC37D7324D37D7D00ACFE12 /* AddressHelperView.swift in Sources */,
 				0D11C23323BFA810001CF6F7 /* HostingController.swift in Sources */,
 				0D5E9B0D263748E400D98569 /* BalanceBreakdown.swift in Sources */,
@@ -2079,6 +2085,7 @@
 				0DCDFFBC24B6722B000F6999 /* TextView.swift in Sources */,
 				0DF3075124DB31570080B0CF /* DeviceFeedbackHelper.swift in Sources */,
 				0DCDFFBD24B6722B000F6999 /* ZcashSeedPhraseGrid.swift in Sources */,
+				29962ECC2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DCDFFBE24B6722B000F6999 /* Sending.swift in Sources */,
 				29414BC626D41A140022401F /* QRCodeImagePicker.swift in Sources */,
 				0DCDFFBF24B6722B000F6999 /* String+Zcash.swift in Sources */,
@@ -2301,6 +2308,7 @@
 				2931F37026CEDD4200F68099 /* ARRRCloseButton.swift in Sources */,
 				29207FDB26BFCDD500E9C4E4 /* SettingsScreen.swift in Sources */,
 				0DE303AA263A158400CF877A /* ZcashNavigationBar.swift in Sources */,
+				29962ECB2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DE303AB263A158400CF877A /* AddressHelperView.swift in Sources */,
 				0DE303AC263A158400CF877A /* HostingController.swift in Sources */,
 				0DE303AD263A158400CF877A /* BalanceBreakdown.swift in Sources */,

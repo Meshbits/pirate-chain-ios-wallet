@@ -37,6 +37,10 @@ enum SettingsDestination: Int {
 struct SettingsScreen: View {
     
     var mVersionDetails = "Build Version: 1.0.0-2-4-ge47798e (Beta)"
+    
+    @State var mURLString = ""
+    
+    @State var mOpenSafari = false
 
     var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
@@ -223,28 +227,28 @@ struct SettingsScreen: View {
                 }
                 
                 
-                Group {
+//                Group {
+//
+//                    NavigationLink(
+//                        destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+//                            ,
+//                                   tag: SettingsDestination.openPrivacyPolicy,
+//                                   selection: $destination
+//                    ) {
+//                       EmptyView()
+//                    }
                     
-                    NavigationLink(
-                        destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                            ,
-                                   tag: SettingsDestination.openPrivacyPolicy,
-                                   selection: $destination
-                    ) {
-                       EmptyView()
-                    }
-                    
-                    NavigationLink(
-                        destination: OpenInAppBrowser(aURLString: "licenseURL".localized(),aTitle: "License".localized()).environmentObject(self.appEnvironment)
-                            .onAppear { self.tabBar.isHidden = true }
-                            ,
-                                   tag: SettingsDestination.openlicense,
-                                   selection: $destination
-                    ) {
-                       EmptyView()
-                    }
-                    
-                 }
+//                    NavigationLink(
+//                        destination: OpenInAppBrowser(aURLString: "licenseURL".localized(),aTitle: "License".localized()).environmentObject(self.appEnvironment)
+//                            .onAppear { self.tabBar.isHidden = true }
+//                            ,
+//                                   tag: SettingsDestination.openlicense,
+//                                   selection: $destination
+//                    ) {
+//                       EmptyView()
+//                    }
+//
+//                 }
                 
 //                NavigationLink(
 //                    destination: OpenInAppBrowser(aURLString: "supportURL".localized(),aTitle: "Support".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
@@ -258,6 +262,9 @@ struct SettingsScreen: View {
             }.background(TabBarAccessor { tabbar in
                 self.tabBar = tabbar
             })
+            .sheet(isPresented: $mOpenSafari) {
+                CustomSafariView(url:URL(string: self.mURLString)!)
+            }
 //            .actionSheet(isPresented: $showActionSheet) {
 //                       ActionSheet(
 //                           title: Text(""),
@@ -316,6 +323,14 @@ struct SettingsScreen: View {
 //            case SettingsDestination.openLanguage.rawValue:
 //                openLanguageScreen.toggle()
 //            break
+        case SettingsDestination.openlicense.rawValue:
+            self.mURLString  = "licenseURL".localized()
+            mOpenSafari = true
+            break
+        case SettingsDestination.openPrivacyPolicy.rawValue:
+            self.mURLString  = "privacyURL".localized()
+            mOpenSafari = true
+            break
             default:
                 print("Something else is tapped")
         }
