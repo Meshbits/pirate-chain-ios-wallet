@@ -63,25 +63,25 @@ final class SeedManager {
     }
     
     func importPhrase(bip39 phrase: String) throws {
-        printLog(message: "import phrase initiated")
+//        printLog(message: "import phrase initiated")
         guard secureDefaults.string(forKey: Self.aRRRWalletPhrase) == nil else {
             throw SeedManagerError.alreadyImported
         }
-        printLog(message: "checked if already exists = no, then proceed")
+//        printLog(message: "checked if already exists = no, then proceed")
         secureDefaults.set(phrase, forKey: Self.aRRRWalletPhrase)
         secureDefaults.synchronize()
-        printLog(message: "import finished")
+//        printLog(message: "import finished")
     }
     
     func exportPhrase() throws -> String {
-        printLog(message: "Requested")
+//        printLog(message: "Requested")
         if let seedphrase = mTempRecoveryPhrase {
-            printLog(message: "Found Locally")
+//            printLog(message: "Found Locally")
             return seedphrase
         }
         
         guard let phrase = secureDefaults.string(forKey: Self.aRRRWalletPhrase) else { throw SeedManagerError.uninitializedWallet }
-        printLog(message: "Found in secure defaults")
+//        printLog(message: "Found in secure defaults")
         mTempRecoveryPhrase = phrase
         
         return phrase

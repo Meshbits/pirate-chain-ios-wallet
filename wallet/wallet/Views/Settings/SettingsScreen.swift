@@ -30,12 +30,13 @@ enum SettingsDestination: Int {
     case openlicense = 9
 //    case openSupport = 10
     case startRescan = 11
+    case openAboutUs = 12
 }
 
 
 struct SettingsScreen: View {
     
-    var mVersionDetails = "Build Version: 1.0.0-1-36-g4525b06"
+    var mVersionDetails = "Build Version: 1.0.0-2-1-g1eb3e23"
 
     var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
@@ -46,7 +47,8 @@ struct SettingsScreen: View {
 //    var walletSection = [SettingsRowData(id:6,title:"Private Server Config")] //,
 //                         SettingsRowData(id:7,title:"iCloud backup")]
     var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),
-                        SettingsRowData(id:9,title:"License".localized())
+                        SettingsRowData(id:9,title:"License".localized()),
+                        SettingsRowData(id:12,title:"About Pirate Chain".localized())
                         /*,
                         SettingsRowData(id:10,title:"Support".localized())*/]
     
@@ -131,7 +133,7 @@ struct SettingsScreen: View {
                         SettingsSectionHeaderView(aTitle:"About".localized())
                         VStack {
                             ForEach(aboutSection, id: \.id) { settingsRowData in
-                               SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:9)
+                               SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:12)
                                 .onTapGesture {
                                     self.mSelectedSettingsRowData = settingsRowData
                                     openRespectiveScreenBasisSelection()
@@ -210,25 +212,39 @@ struct SettingsScreen: View {
                    EmptyView()
                 }
                 
-                
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openPrivacyPolicy,
+                    destination: AboutUs().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                               tag: SettingsDestination.openAboutUs,
                                selection: $destination
                 ) {
                    EmptyView()
                 }
                 
-                NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "licenseURL".localized(),aTitle: "License".localized()).environmentObject(self.appEnvironment)
-                        .onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openlicense,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
+                
+                Group {
+                    
+                    NavigationLink(
+                        destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                            ,
+                                   tag: SettingsDestination.openPrivacyPolicy,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                    NavigationLink(
+                        destination: OpenInAppBrowser(aURLString: "licenseURL".localized(),aTitle: "License".localized()).environmentObject(self.appEnvironment)
+                            .onAppear { self.tabBar.isHidden = true }
+                            ,
+                                   tag: SettingsDestination.openlicense,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                 }
                 
 //                NavigationLink(
 //                    destination: OpenInAppBrowser(aURLString: "supportURL".localized(),aTitle: "Support".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }

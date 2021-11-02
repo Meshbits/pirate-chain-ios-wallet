@@ -132,12 +132,9 @@ struct PrivateServerConfig: View {
         }) {
             VStack(alignment: .leading) {
                 ZStack{
-                    Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                        .barlowRegular(size: Device.isLarge ? 26 : 18)
-                    ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+                    Image("backicon").resizable().frame(width: 60, height: 60)
                 }
-            }.padding(.leading,-20).padding(.top,10)
+            }
         })
     }
     
