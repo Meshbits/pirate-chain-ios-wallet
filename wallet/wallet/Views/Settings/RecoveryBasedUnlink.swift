@@ -113,7 +113,7 @@ struct RecoveryBasedUnlink: View {
     var body: some View {
 //        NavigationView {
         ZStack{
-//            ARRRBackground().edgesIgnoringSafeArea(.all)
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
                 Text("Enter Recovery Phrase".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).scaledFont(size: 32).padding(.top,40)
                 Text("Please enter your recovery phrase to unlink the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 17)
@@ -219,17 +219,14 @@ struct RecoveryBasedUnlink: View {
         } .onTapGesture {
             UIApplication.shared.endEditing()
 //        }
-        }.zcashNavigationBar(leadingItem: {
-            Button {
-              presentationMode.wrappedValue.dismiss()
-          } label: {
-              Image("backicon").resizable().frame(width: 60, height: 60)
-          }
-        }, headerItem: {
-            EmptyView()
-        }, trailingItem: {
-            EmptyView()
-        })
+        } .navigationBarBackButtonHidden(true)
+            .navigationTitle("".localized())
+                .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading:   Button {
+                presentationMode.wrappedValue.dismiss()
+            } label: {
+                Image("backicon").resizable().frame(width: 60, height: 60)
+            })
     }
     
     func aSmallErrorVibration(){
