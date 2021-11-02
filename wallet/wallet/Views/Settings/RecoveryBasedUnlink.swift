@@ -220,9 +220,11 @@ struct RecoveryBasedUnlink: View {
             UIApplication.shared.endEditing()
 //        }
         }.zcashNavigationBar(leadingItem: {
-            ARRRBackButton(action: {
-                presentationMode.wrappedValue.dismiss()
-            }).frame(width: 30, height: 30)
+            Button {
+              presentationMode.wrappedValue.dismiss()
+          } label: {
+              Image("backicon").resizable().frame(width: 60, height: 60)
+          }
         }, headerItem: {
             EmptyView()
         }, trailingItem: {

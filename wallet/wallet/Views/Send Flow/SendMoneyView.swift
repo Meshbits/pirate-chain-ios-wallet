@@ -143,16 +143,15 @@ struct SendMoneyView: View {
    
                     ARRRSendReceiveMoneyTextField(anAmount: self.$flow.amount)
                 
-                    SendMoneyButtonView(title: "Send Max".localized())
-                        .onTapGesture {
-                            let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
-                            let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
-                            if (actualAmount > defaultNetworkFee){
-                                flow.amount = String.init(format: "%.5f", (actualAmount-defaultNetworkFee))
-                            }else{
-                                // Can't adjust the amount, as its less than the fee
-                            }
+                    SendMoneyButtonView(title: "Send Max".localized()) {
+                        let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
+                        let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
+                        if (actualAmount > defaultNetworkFee){
+                            flow.amount = String.init(format: "%.5f", (actualAmount-defaultNetworkFee))
+                        }else{
+                            // Can't adjust the amount, as its less than the fee
                         }
+                    }
                 }
                 
                
@@ -281,19 +280,24 @@ struct SendMoneyButtonView : View {
     
     @State var title: String
     
+    var action: () -> Void
+    
     var body: some View {
         ZStack{
             
             Image("buttonbackground").resizable().frame(width: 115)
-            
-            Text(title).foregroundColor(Color.zARRRTextColorLightYellow).bold().multilineTextAlignment(.center).font(
-                .barlowRegular(size: 12)
-            ).modifier(ForegroundPlaceholderModifierHomeButtons())
-            .frame(width: 140)
-            .padding([.bottom],4)
-            .cornerRadius(30)
+       
+                Text(title).foregroundColor(Color.zARRRTextColorLightYellow).bold().multilineTextAlignment(.center).font(
+                    .barlowRegular(size: 12)
+                ).onTapGesture {
+                    self.action()
+                }
+                .modifier(ForegroundPlaceholderModifierHomeButtons())
+                .frame(width: 140)
+                .padding([.bottom],4)
+                .cornerRadius(30)
            
-        }.frame(width: 120,height:80)
+        }.frame(width: 120,height:50)
     }
 }
 
