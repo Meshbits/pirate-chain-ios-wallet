@@ -201,15 +201,16 @@ final class SeedManager {
 //            }
 //        }
     }
-}
+    
+    /**
+        For logging purpose - testing with timestamp
+     */
+    func printLog(message: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy hh:mm:ss.SSSS a"
+        let timestamp = formatter.string(from: Date())
+        let vMess = "\(timestamp) ------ \(message)"
+        print(vMess)
+    }
 
-/**
-    For logging purpose - testing with timestamp
- */
-func printLog(message: String) {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "dd-MM-yyyy hh:mm:ss.SSSS a"
-    let timestamp = formatter.string(from: Date())
-    let vMess = "\(timestamp) ------ \(message)"
-    print(vMess)
 }
