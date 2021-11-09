@@ -20,6 +20,8 @@ struct HomeTabView: View {
     
     @State var mOpenPasscodeScreen: Bool
 
+    @State var isNavigationBarHidden: Bool = true
+
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     init(openPasscodeScreen:Bool) {
@@ -62,6 +64,11 @@ struct HomeTabView: View {
                 if #available(iOS 15.0, *) {
                         NavigationView{
                             mHomeView
+                             .navigationBarTitle("")
+                            .navigationBarHidden(isNavigationBarHidden)
+                            .onAppear {
+                                self.isNavigationBarHidden = true
+                            }
                         }
                         .font(.system(size: 30, weight: .bold, design: .rounded))
                         .tabItem {
@@ -70,10 +77,15 @@ struct HomeTabView: View {
                                 .scaledFont(size: 10)
                         }.tag(Tab.home)
                         .environment(\.currentTab, mSelectedTab)
-                    
+                      
                     
                         NavigationView{
                             mWalletView
+                                .navigationBarTitle("Wallet History")
+                                .navigationBarHidden(isNavigationBarHidden)
+                                .onAppear {
+                                    self.isNavigationBarHidden = true
+                                }
                         }
                         .font(.system(size: 30, weight: .bold, design: .rounded))
                         .tabItem {
@@ -87,6 +99,11 @@ struct HomeTabView: View {
                                
                        NavigationView{
                            mSettingsView
+                               .navigationBarTitle("Settings")
+                               .navigationBarHidden(isNavigationBarHidden)
+                               .onAppear {
+                                   self.isNavigationBarHidden = true
+                               }
                        }
                        .font(.system(size: 30, weight: .bold, design: .rounded))
                        .tabItem {
