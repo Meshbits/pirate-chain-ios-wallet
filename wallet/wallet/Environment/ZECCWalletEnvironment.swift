@@ -419,7 +419,7 @@ extension ZECCWalletEnvironment {
     
     static var appName: String {
         if ZcashSDK.isMainnet {
-            return "ECC Wallet".localized()
+            return "Pirate Chain Wallet".localized()
         } else {
             return "ECC Testnet"
         }
