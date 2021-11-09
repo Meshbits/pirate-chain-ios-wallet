@@ -60,8 +60,8 @@ struct CreateNewWallet: View {
                 
                 Spacer()
 
-                Text("Restore from".localized()).foregroundColor(.gray).frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading,30).scaledFont(size: 14)
+//                Text("Restore from".localized()).foregroundColor(.gray).frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.leading,30).scaledFont(size: 14)
 
                 VStack(alignment: .center, spacing: 10.0, content: {
                     
@@ -83,7 +83,7 @@ struct CreateNewWallet: View {
                             }
                             self.destination = .restoreWallet
                         }) {
-                            RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Recovery Phase".localized()))
+                            RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Restore Wallet".localized()))
                         }
                     }
                    

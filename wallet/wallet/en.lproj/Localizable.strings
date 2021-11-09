@@ -353,6 +353,7 @@
 
 "iCloud Backup" = "iCloud Backup";
 "Recovery Phase" = "Recovery Phase";
+"Restore Wallet" = "Restore Wallet";
 "Create New Wallet" =  "Create New Wallet";
 "Could not restore wallet" = "Could not restore wallet";
 "There's a problem restoring your wallet. Please verify your seed phrase and try again." = "There's a problem restoring your wallet. Please verify your seed phrase and try again.";
