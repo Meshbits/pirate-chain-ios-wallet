@@ -14,11 +14,11 @@ struct UnlinkDevice: View {
     @State var goToRecoveryPhrase = false
     var body: some View {
                 ZStack{
-//                    ARRRBackground().edgesIgnoringSafeArea(.all)
+                    ARRRBackground().edgesIgnoringSafeArea(.all)
                         VStack(alignment: .center, content: {
                             Spacer(minLength: 10)
                             Text("Unlink your wallet from this device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                                .scaledFont(size: 32).padding(.top,20)
+                                .scaledFont(size: 26).padding(.top,40)
                             Text("Start a new wallet by unlinking your device from the currently installed wallet".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 15)
                             Spacer(minLength: 10)
                             Image("bombIcon")
@@ -45,21 +45,15 @@ struct UnlinkDevice: View {
                     
                     
                     }.edgesIgnoringSafeArea(.all)
-                .navigationBarHidden(true)
-                .zcashNavigationBar(leadingItem: {
-                    Button {
-                      presentationMode.wrappedValue.dismiss()
-                  } label: {
-                      Image("backicon").resizable().frame(width: 60, height: 60)
-                  }
-                    
-                }, headerItem: {
-                    HStack{
-                        EmptyView()
-                    }
-                }, trailingItem: {
-                    HStack{
-                        EmptyView()
+                .navigationBarBackButtonHidden(true)
+                .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading:  Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image("backicon").resizable().frame(width: 60, height: 60)
+                        }
                     }
                 })
                 .onAppear(){

@@ -105,23 +105,15 @@ struct AboutUs: View {
                     Spacer()
                 }
         }
-        }.navigationBarHidden(true)
-            .zcashNavigationBar(leadingItem: {
-                Button {
-                  presentationMode.wrappedValue.dismiss()
-              } label: {
-                  Image("backicon").resizable().frame(width: 60, height: 60)
-              }
-            }, headerItem: {
-                    Text("About Pirate Wallet").multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                        .scaledFont(size: 22)
-                        .frame(alignment: .leading)
-                        .padding(.trailing,20)
-    
-            }, trailingItem: {
-                HStack{
-                    EmptyView()
+        }  .navigationBarBackButtonHidden(true)
+            .navigationTitle("About Pirate Wallet").navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading:  Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                VStack(alignment: .leading) {
+                    ZStack{
+                        Image("backicon").resizable().frame(width: 60, height: 60)
+                    }
                 }
             })
     }

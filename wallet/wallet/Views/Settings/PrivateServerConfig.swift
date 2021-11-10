@@ -35,7 +35,7 @@ struct PrivateServerConfig: View {
           
             VStack(alignment: .center, spacing: 5){
 
-                Text("Private Server Config".localized()).foregroundColor(.gray).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
+//                Text("Private Server Config".localized()).foregroundColor(.gray).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
                 
                 VStack(alignment: .leading, spacing: 10) {
                      HStack {
@@ -126,7 +126,7 @@ struct PrivateServerConfig: View {
            })
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Private Server Config").navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {

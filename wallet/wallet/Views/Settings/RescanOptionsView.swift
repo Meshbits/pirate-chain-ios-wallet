@@ -166,28 +166,17 @@ struct RescanOptionsView: View {
             mSelectedSettingsRowData = rescanDataViewModel.getSelectedCheckboxObject()
             
         })
-        .navigationBarHidden(true)
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarBackButtonHidden(true)
-            .zcashNavigationBar(leadingItem: {
-                Button {
-                  presentationMode.wrappedValue.dismiss()
-              } label: {
-                  Image("backicon").resizable().frame(width: 60, height: 60)
-              }
-            }, headerItem: {
-                HStack{
-                    Spacer()
-                    Text("Select Rescan Wallet Height".localized()).frame(height:50).scaledFont(size: 15)
-                        .multilineTextAlignment(.center)
-                    Spacer()
+        .navigationBarBackButtonHidden(true)
+        .navigationTitle("Select Rescan Wallet Height").navigationBarTitleDisplayMode(.inline)
+        .navigationBarItems(leading:  Button(action: {
+            presentationMode.wrappedValue.dismiss()
+        }) {
+            VStack(alignment: .leading) {
+                ZStack{
+                    Image("backicon").resizable().frame(width: 60, height: 60)
                 }
-                     
-            }, trailingItem: {
-                HStack{
-                    EmptyView()
-                }
-            })
+            }
+        })
     }
 }
 
