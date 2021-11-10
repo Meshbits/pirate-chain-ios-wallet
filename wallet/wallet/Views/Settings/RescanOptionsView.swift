@@ -173,7 +173,7 @@ struct RescanOptionsView: View {
         }) {
             VStack(alignment: .leading) {
                 ZStack{
-                    Image("backicon").resizable().frame(width: 60, height: 60)
+                    Image("backicon").resizable().frame(width: 50, height: 50)
                 }
             }
         })

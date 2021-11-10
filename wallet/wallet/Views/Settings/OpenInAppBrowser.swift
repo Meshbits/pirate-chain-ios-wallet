@@ -38,7 +38,7 @@ struct OpenInAppBrowser: View {
               Button {
                   presentationMode.wrappedValue.dismiss()
               } label: {
-                  Image("backicon").resizable().frame(width: 60, height: 60)
+                  Image("backicon").resizable().frame(width: 50, height: 50)
               }
         })
     }
