@@ -158,7 +158,7 @@ struct WalletDetails: View {
                     }
                     
                 }
-                .listStyle(PlainListStyle())
+//                .listStyle(PlainListStyle())
                 .modifier(BackgroundPlaceholderModifierHome())
                 .cornerRadius(20)
                 .overlay(

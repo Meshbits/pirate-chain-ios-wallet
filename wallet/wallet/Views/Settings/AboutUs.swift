@@ -88,7 +88,6 @@ struct AboutUs: View {
             }
             .listRowBackground(ARRRBackground())
             .cornerRadius(0)
-            .listStyle(PlainListStyle())
             .modifier(BackgroundPlaceholderModifierHome())
             .cornerRadius(20)
             .overlay(

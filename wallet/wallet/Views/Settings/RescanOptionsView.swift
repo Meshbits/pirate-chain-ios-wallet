@@ -97,7 +97,6 @@ struct RescanOptionsView: View {
                     }
                     
                 }
-                .listStyle(PlainListStyle())
                 .modifier(BackgroundPlaceholderModifierHome())
                 .cornerRadius(20)
                 .overlay(
