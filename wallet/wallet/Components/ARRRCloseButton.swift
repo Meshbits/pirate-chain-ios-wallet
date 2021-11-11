@@ -15,12 +15,16 @@ struct ARRRCloseButton: View {
     var body: some View {
         
         ZStack {
-            Image("passcodenumericbg")
+//            Image("passcodenumericbg")
 
             Button(action: {
                 self.action()
             }) {
-                Image("close")
+                VStack(alignment: .leading) {
+                    ZStack{
+                        Image("closebutton").resizable().frame(width: 70, height: 70)
+                    }
+                }
             }
         }.padding(2)
         

@@ -65,7 +65,7 @@ struct ConfirmTransaction: View {
             }
             .listRowBackground(ARRRBackground())
             .cornerRadius(0)
-//            .listStyle(PlainListStyle())
+            .listStyle(PlainListStyle())
             .modifier(BackgroundPlaceholderModifierHome())
             .cornerRadius(20)
             .overlay(

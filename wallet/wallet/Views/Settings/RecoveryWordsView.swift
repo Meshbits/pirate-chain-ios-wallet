@@ -98,7 +98,6 @@ struct RecoveryWordsView: View {
                 
             })
         }
-                    self.viewModel.backPressedToPopBack()
         .navigationBarBackButtonHidden(true)
            .navigationTitle("").navigationBarTitleDisplayMode(.inline)
            .navigationBarItems(leading:  Button(action: {
