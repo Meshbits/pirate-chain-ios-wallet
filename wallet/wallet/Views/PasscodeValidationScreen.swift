@@ -133,9 +133,15 @@ struct PasscodeValidationScreen: View {
             VStack(alignment: .center, spacing: 10, content: {
                 HStack{
                     Spacer()
-                    ARRRCloseButton(action: {
+                    Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                    })
+                    }) {
+                        VStack(alignment: .leading) {
+                            ZStack{
+                                Image("closebutton").resizable().frame(width: 50, height: 50)
+                            }
+                        }
+                    }
                     .hidden(isAuthenticationEnabled)
                     .frame(width: 30, height: 30).padding(.top,30).multilineTextAlignment(.trailing)
                     .padding(.trailing,30)

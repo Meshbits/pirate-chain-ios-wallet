@@ -204,7 +204,7 @@ struct SettingsScreen: View {
                                selection: $destination
                 ) {
                    EmptyView()
-                }
+                }.isDetailLink(false)
                 
                 NavigationLink(
                     destination: RescanOptionsView(rescanDataViewModel: RescanDataViewModel()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }

@@ -36,11 +36,11 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                  
                     NavigationLink(
                         destination: RecoveryWordsView().environmentObject(RecoveryWordsViewModel()).navigationBarTitle("", displayMode: .inline)
-                            .navigationBarBackButtonHidden(true).navigationBarHidden(true),
+                            .navigationBarBackButtonHidden(true),
                         isActive: $initiatePassphraseFlow
                     ) {
                         EmptyView()
-                    }
+                    }.isDetailLink(false)
 
                     Spacer(minLength: 10)
                 })
@@ -50,7 +50,7 @@ struct InitiateRecoveryKeyPhraseFlow: View {
         .navigationBarHidden(true)
         .zcashNavigationBar(leadingItem: {
             Button {
-              presentationMode.wrappedValue.dismiss()
+                presentationMode.wrappedValue.dismiss()
           } label: {
               Image("backicon").resizable().frame(width: 50, height: 50)
           }
