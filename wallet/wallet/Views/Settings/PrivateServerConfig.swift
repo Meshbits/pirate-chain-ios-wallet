@@ -85,6 +85,7 @@ struct PrivateServerConfig: View {
                      }).modifier(ForegroundPlaceholderModifier())
                  }
                  .modifier(BackgroundPlaceholderModifier())
+                 .padding(.top,50)
                  
                
                 Spacer(minLength: 10)

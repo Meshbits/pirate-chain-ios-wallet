@@ -144,7 +144,7 @@ struct PasscodeView: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
+                    Image("backicon").resizable().frame(width: 60, height: 60).padding(.top,20)
                 }.frame(width: 30, height: 30)
                     .padding(.top,30)
                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
