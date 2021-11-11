@@ -17,7 +17,7 @@ struct CongratulationsRecoverySetup: View {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
                 Text("Congratulation! You completed your recovery phrase setup".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                    .scaledFont(size: 32).padding(.top,40)
+                    .scaledFont(size: 26).padding(.top,40)
                 Text("You’re all set to deposit, receive, and store crypto in your Pirate wallet".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 17)
                 
                 Spacer(minLength: 10)
