@@ -123,6 +123,7 @@ struct WordsVerificationScreen: View {
                         .scaledFont(size: 14)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
+                        .autocapitalization(.none)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                     
@@ -134,6 +135,7 @@ struct WordsVerificationScreen: View {
                         }.scaledFont(size: 14)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
+                        .autocapitalization(.none)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                      
@@ -145,6 +147,7 @@ struct WordsVerificationScreen: View {
                         }.scaledFont(size: 14)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
+                        .autocapitalization(.none)
                         .modifier(WordBackgroundPlaceholderModifier())
                     }
                                            
