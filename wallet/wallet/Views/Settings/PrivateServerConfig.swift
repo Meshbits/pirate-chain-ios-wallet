@@ -18,8 +18,8 @@ struct PrivateServerConfig: View {
     @State var isDisplayPortAlert = false
     @State var isUserEditingPort = false
     @State var isUserEditingAddress = false
-
-    
+    @State var showListOfConfigurations = false
+    var anArrayOfConfigurations = ["lightd.pirate.black","lightd.meshbits.io","Your Custom Server"]
     var isHighlightedAddress: Bool {
         lightServerString.count > 0
     }
@@ -59,17 +59,24 @@ struct PrivateServerConfig: View {
                      
                      VStack(alignment: .leading, spacing: nil, content: {
                         Text("Chain lite server ".localized()).font(.barlowRegular(size: 14)).foregroundColor(.gray).multilineTextAlignment(.leading)
-                        
-                        TextField("".localized(), text: $lightServerString, onEditingChanged: { (changed) in
-                                isUserEditingAddress = true
-                        }) {
-                            isUserEditingAddress = false
-                            self.didEndEditingAddressTextField()
-                        }.font(.barlowRegular(size: 14))
-                        .disabled(isAutoConfigEnabled)
-                        .foregroundColor(isAutoConfigEnabled ? .gray : .white)
-                        .modifier(BackgroundPlaceholderModifier())
-                        
+                        HStack {
+                            TextField("".localized(), text: $lightServerString, onEditingChanged: { (changed) in
+                                    isUserEditingAddress = true
+                            }) {
+                                isUserEditingAddress = false
+                                self.didEndEditingAddressTextField()
+                            }.font(.barlowRegular(size: 14))
+                            .disabled(isAutoConfigEnabled)
+                            .foregroundColor(isAutoConfigEnabled ? .gray : .white)
+                            .modifier(BackgroundPlaceholderModifier())
+                            Button {
+                                self.showListOfConfigurations = true
+                            } label: {
+                                Image(systemName: "chevron.down.circle.fill").foregroundColor(.gray)
+                                    .scaledFont(size: 30).foregroundColor(.white)
+                                    .padding(.bottom, 5)
+                            }.disabled(isAutoConfigEnabled)
+                        }
                         Text("Port ".localized()).foregroundColor(.gray).multilineTextAlignment(.leading).font(.barlowRegular(size: 14))
                                      
                        TextField("".localized(), text: $lightPortString, onEditingChanged: { (changed) in
@@ -93,6 +100,9 @@ struct PrivateServerConfig: View {
             }.padding(.top, 100)
             
         }
+        .actionSheet(isPresented: self.$showListOfConfigurations, content: {
+            self.showAllConfigurations()
+        })
         .keyboardAdaptive()
         .onTapGesture {
                        
@@ -138,7 +148,22 @@ struct PrivateServerConfig: View {
             }
         })
     }
-    
+
+    func showAllConfigurations() -> ActionSheet {
+        return ActionSheet(title: Text("\nChoose a server for sync, leave it as it is if you are not sure.\n".localized()).foregroundColor(.white), buttons:
+                            anArrayOfConfigurations.map { config in
+                .default(Text(config).foregroundColor(.gray)) {
+                    if config == "Your Custom Server" {
+                        self.lightServerString = ""
+                        return
+                    }
+                    
+                    self.lightServerString = config
+                    SeedManager.default.importLightWalletEndpoint(address: lightServerString)
+                }
+        } + [Alert.Button.cancel()]
+        )
+    }
     
        func didEndEditingAddressTextField(){
            if lightServerString.count == 0 {
