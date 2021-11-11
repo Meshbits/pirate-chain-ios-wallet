@@ -108,7 +108,7 @@ struct WordsVerificationScreen: View {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
                 Text("Confirm Recovery Phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                    .scaledFont(size: 28)
+                    .scaledFont(size: 28).padding(.top,20)
                 Text("Almost done! Enter the following words from your recovery phrase".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10)
                     .scaledFont(size: 14)
                 
@@ -191,16 +191,19 @@ struct WordsVerificationScreen: View {
             AlertToast(displayMode: .hud, type: .regular, title:"Invalid passphrase!".localized())
 
         }
+        .navigationBarBackButtonHidden(true)
+           .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+           .navigationBarItems(leading:  Button(action: {
+               presentationMode.wrappedValue.dismiss()
+           }) {
+               VStack(alignment: .leading) {
+                   ZStack{
+                       Image("backicon").resizable().frame(width: 50, height: 50)
+                   }
+               }
+           })
 //        }
-        .zcashNavigationBar(leadingItem: {
-            ARRRBackButton(action: {
-                presentationMode.wrappedValue.dismiss()
-            }).frame(width: 30, height: 30)
-        }, headerItem: {
-            EmptyView()
-        }, trailingItem: {
-            EmptyView()
-        })
+     
     }
     
     func aSmallErrorVibration(){

@@ -200,10 +200,9 @@ struct GenerateWordsView: View {
                     EmptyView()
                 }
                 
-            }).zcashNavigationBar(leadingItem: {
-                
-                
-                Button {
+            })  .navigationBarBackButtonHidden(true)
+                .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading:  Button(action: {
                     if self.viewModel.mWordIndex == 1 {
                         presentationMode.wrappedValue.dismiss()
                     }else{
@@ -213,19 +212,16 @@ struct GenerateWordsView: View {
 //                       })
                     }
                     
-                } label: {
-                    Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
-                }.frame(width: 30, height: 30)
+                }) {
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image("backicon").resizable().frame(width: 50, height: 50)
+                        }
+                    }
+                })
                 
-            }, headerItem: {
-                HStack{
-                    EmptyView()
-                }
-            }, trailingItem: {
-                EmptyView()
-            })
             
-        }.navigationBarHidden(true)
+        }
         .highPriorityGesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local).onEnded { value in
             print(value.translation)
            
