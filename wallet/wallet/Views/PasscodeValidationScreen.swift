@@ -184,7 +184,9 @@ struct PasscodeValidationScreen: View {
                                 guard isDismiss else { return }
                                 if (isDismiss){
                                     self.presentationMode.wrappedValue.dismiss()
-                                    NotificationCenter.default.post(name: NSNotification.Name("PasscodeValidationSuccessful"), object: nil)
+                                    if !isAuthenticationEnabled {
+                                        NotificationCenter.default.post(name: NSNotification.Name("PasscodeValidationSuccessful"), object: nil)
+                                    }
                                 }
                             }
             )
