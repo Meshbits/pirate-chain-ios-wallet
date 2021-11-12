@@ -62,6 +62,8 @@ final class HomeViewModel: ObservableObject {
     private var cancellable = [AnyCancellable]()
     private var environmentCancellables = [AnyCancellable]()
     private var zecAmountFormatter = NumberFormatter.zecAmountFormatter
+    var qrCodeImage: Image?
+
     init() {
         self.destination = nil
         openQRCodeScanner = false
@@ -107,6 +109,8 @@ final class HomeViewModel: ObservableObject {
                .store(in: &diposables)
         
         subscribeToSynchonizerEvents()
+        
+        generateQRCodeImage()
     }
     
     deinit {
@@ -130,6 +134,14 @@ final class HomeViewModel: ObservableObject {
                 self?.balance = b
             })
             .store(in: &synchronizerEvents)
+    }
+    
+    func generateQRCodeImage(){
+           if let img = QRCodeGenerator.generate(from: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress) {
+               qrCodeImage = Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress)") ))
+           } else {
+               qrCodeImage = Image("QRCodeIcon")
+           }
     }
     
     func unsubscribeFromSynchonizerEvents() {
@@ -764,7 +776,7 @@ struct Home: View {
                 ProfileScreen()
                     .environmentObject(self.appEnvironment)
             case .receiveFunds:
-                ReceiveFunds(unifiedAddress: self.appEnvironment.synchronizer.unifiedAddress)
+                ReceiveFunds(unifiedAddress: self.appEnvironment.synchronizer.unifiedAddress,qrImage:self.viewModel.qrCodeImage)
                     .environmentObject(self.appEnvironment)
             case .feedback(let score):
                 #if ENABLE_LOGGING
@@ -795,6 +807,7 @@ struct Home: View {
             tracker.track(.screen(screen: .home), properties: [:])
             tracker.track(.tap(action: .balanceDetail), properties: [:])
             showFeedbackIfNeeded()
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle("", displayMode: .inline)

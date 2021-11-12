@@ -13,6 +13,7 @@ struct ReceiveFunds: View {
     let unifiedAddress: UnifiedAddress
     @Environment(\.presentationMode) var presentationMode
     @State var selectedTab: Int = 0
+    @State var qrImage : Image?
     var body: some View {
         NavigationView {
             
@@ -22,6 +23,7 @@ struct ReceiveFunds: View {
                     DisplayAddress(address: unifiedAddress.zAddress,
                                    title: "address_shielded".localized(),
                                    badge: Image("skullcoin"),
+                                   qrImage: qrImage  ?? Image("QrCode"),
                                    accessoryContent: { EmptyView() })
                         
                 })
