@@ -169,6 +169,7 @@ struct PrivateServerConfig: View {
            if lightServerString.count == 0 {
                isDisplayAddressAlert = true
            }else{
+               lightServerString  = lightServerString.trimmingCharacters(in: .whitespacesAndNewlines)
                SeedManager.default.importLightWalletEndpoint(address: lightServerString)
            }
        }
