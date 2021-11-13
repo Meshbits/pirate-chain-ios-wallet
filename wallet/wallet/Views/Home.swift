@@ -578,7 +578,7 @@ struct Home: View {
                             Button(action: {
                                 self.selectedModel = row
                             }) {
-                                DetailCard(model: row, backgroundColor: .zDarkGray2)
+                                DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:false)
                             }
                             .listRowBackground(ARRRBackground())
                             .frame(height: 69)

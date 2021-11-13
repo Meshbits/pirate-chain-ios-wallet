@@ -146,10 +146,9 @@ struct WalletDetails: View {
                                 Button(action: {
                                     self.selectedModel = row
                                 }) {
-                                    DetailCard(model: row, backgroundColor: .zDarkGray2)
+                                    DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:true)
                                 }
-                                .listRowBackground(ARRRBackground())
-                                .frame(height: 69)
+                                .frame(height: 60)
                                 .cornerRadius(0)
                                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                                   
@@ -158,13 +157,7 @@ struct WalletDetails: View {
                     }
                     
                 }
-                .listStyle(PlainListStyle())
-                .modifier(BackgroundPlaceholderModifierHome())
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.zGray, lineWidth: 1.0)
-                )
+                .modifier(BackgroundPlaceholderModifierRescanOptions())
                 .padding()
                 
             }
