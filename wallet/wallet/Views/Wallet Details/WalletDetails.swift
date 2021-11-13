@@ -148,6 +148,7 @@ struct WalletDetails: View {
                                 }) {
                                     DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:true)
                                 }
+                                .buttonStyle(PlainButtonStyle())
                                 .frame(height: 60)
                                 .cornerRadius(0)
                                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
