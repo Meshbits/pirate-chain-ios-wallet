@@ -93,19 +93,16 @@ struct RescanOptionsView: View {
                                 self.rescanDataViewModel.mSelectedIndex = mSelectedSettingsRowData!.id
                                 self.rescanDataViewModel.updateBirthdaySelectionStatus()
                             }
-                            .listRowBackground(Color.clear)
-                            .frame(height: 69)
-                            .cornerRadius(0)
+                            .frame(height: 60)
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
                     
                 }
-                .modifier(BackgroundPlaceholderModifierHome())
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.zGray, lineWidth: 1.0)
-                )
+                .modifier(BackgroundPlaceholderModifierRescanOptions())
+//                .overlay(
+//                    RoundedRectangle(cornerRadius: 20)
+//                        .stroke(Color.zGray, lineWidth: 1.0)
+//                )
                 .padding()
                
                 
@@ -210,7 +207,7 @@ struct RescanRowWithCheckbox: View {
               
                 Image(systemName: "checkmark").resizable().frame(width: 10, height: 10, alignment: .trailing).foregroundColor(mSelectedSettingsRowData?.id == mCurrentRowData.id ? Color.arrrBarAccentColor : Color.textTitleColor)
                     .padding(.trailing,10).opacity(mSelectedSettingsRowData?.id == mCurrentRowData.id ? 1 : 0)
-            }.contentShape(Rectangle())
+            }.background(Rectangle().fill(Color.init(red: 27.0/255.0, green: 28.0/255.0, blue: 29.0/255.0)))
 //            if mCurrentRowData.id < noLineAfter {
 //                Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
 //            }
@@ -218,8 +215,17 @@ struct RescanRowWithCheckbox: View {
     }
 }
 
-//struct RescanOptionsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RescanOptionsView()
-//    }
-//}
+struct BackgroundPlaceholderModifierRescanOptions: ViewModifier {
+
+var backgroundColor = Color(.systemBackground)
+
+func body(content: Content) -> some View {
+    content
+        .padding(5)
+        .frame(maxWidth: .infinity)
+        .background(
+            RoundedRectangle(cornerRadius: 12).fill(Color.init(red: 29.0/255.0, green: 32.0/255.0, blue: 34.0/255.0))
+                .softInnerShadow(RoundedRectangle(cornerRadius: 12), darkShadow: Color.init(red: 0.06, green: 0.07, blue: 0.07), lightShadow: Color.init(red: 0.26, green: 0.27, blue: 0.3), spread: 0.05, radius: 2))
+        
+    }
+}
