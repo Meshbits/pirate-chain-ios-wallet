@@ -63,15 +63,12 @@ struct ConfirmTransaction: View {
                 
                 
             }
-            .listRowBackground(ARRRBackground())
-            .cornerRadius(0)
-            .listStyle(PlainListStyle())
-            .modifier(BackgroundPlaceholderModifierHome())
-            .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.zGray, lineWidth: 1.0)
-            )
+            .background(Rectangle().fill(Color.init(red: 24.0/255.0, green: 28.0/255.0, blue: 29.0/255.0)))
+            .modifier(BackgroundPlaceholderModifierRescanOptions())
+//            .overlay(
+//                RoundedRectangle(cornerRadius: 20)
+//                    .stroke(Color.zGray, lineWidth: 1.0)
+//            )
             .padding()
          
          BlueButtonView(aTitle: "Confirm".localized()).onTapGesture {
