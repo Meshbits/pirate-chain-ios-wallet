@@ -273,9 +273,9 @@ struct PasscodeView: View {
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayout"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
                 DeviceFeedbackHelper.longVibrate()
-                if mScreenState == .validatePasscode{
-                    passcodeViewModel.aTempPasscode = ""
-                }
+                // Making sure it should restart the process
+                mScreenState = .newPasscode
+                passcodeViewModel.aTempPasscode = ""
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()
             }

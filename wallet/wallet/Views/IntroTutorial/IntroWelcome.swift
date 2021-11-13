@@ -60,9 +60,9 @@ struct IntroWelcome: View {
                             Spacer()
                             
                             Text(mTitle.localized()).transition(.move(edge: .trailing)).id("MyTitleComponent1" + mTitle).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
-                                .scaledFont(size: 26).padding(.top,40)
+                                .scaledFont(size: 26)
                             Text(mSubTitle.localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
-                                .scaledFont(size: 16)
+                                .scaledFont(size: 16).padding(.top,10)
                             ZStack{
                                 Image("backgroundglow")
                                     .padding(.trailing,80).padding(.leading,80)
@@ -116,12 +116,15 @@ struct IntroWelcome: View {
                                 }
                                 .padding(.bottom,20)
                             }
-                            
+                            Spacer()
                         })
                     .edgesIgnoringSafeArea(.all)
                   
 
                     }
+            .onAppear(){
+                UserSettings.shared.aPasscode = "" // Resetting the passcode stuff here to make sure pin should be set again
+            }
             .navigationBarBackButtonHidden(true)
             .navigationTitle("").navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading:  Button(action: {
