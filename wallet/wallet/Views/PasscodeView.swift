@@ -144,11 +144,14 @@ struct PasscodeView: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Image("backicon").resizable().frame(width: 60, height: 60).padding(.top,20)
-                }.frame(width: 30, height: 30)
-                    .padding(.top,30)
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image("backicon").resizable().frame(width: 50, height: 50)
+                        }
+                    }
+                }  .padding(.top,30)
+                    .padding(.leading,-5)
                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
-                   .multilineTextAlignment(.leading)
                 
             }, headerItem: {
                 if mScreenState == .validatePasscode{

@@ -56,10 +56,13 @@ struct IntroWelcome: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                         VStack(alignment: .center, content: {
+                            
+                            Spacer()
+                            
                             Text(mTitle.localized()).transition(.move(edge: .trailing)).id("MyTitleComponent1" + mTitle).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
-                                .scaledFont(size: 26).padding(.top,20)
+                                .scaledFont(size: 26).padding(.top,40)
                             Text(mSubTitle.localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
-                                .scaledFont(size: 16).padding(.top,20)
+                                .scaledFont(size: 16)
                             ZStack{
                                 Image("backgroundglow")
                                     .padding(.trailing,80).padding(.leading,80)
@@ -113,8 +116,6 @@ struct IntroWelcome: View {
                                 }
                                 .padding(.bottom,20)
                             }
-                            
-                            Spacer()
                             
                         })
                     .edgesIgnoringSafeArea(.all)
