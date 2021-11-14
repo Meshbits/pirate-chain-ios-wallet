@@ -122,7 +122,7 @@ final class SeedManager {
     }
         
     /**
-     Use carefully: Deletes the seed phrase from the keychain
+     Use carefully: Deletes the seed phrase from the Secure Defaults
      */
     func nukePhrase() {
         mTempRecoveryPhrase = nil
@@ -130,8 +130,14 @@ final class SeedManager {
         secureDefaults.synchronize()
     }
     
+    func nukeAll(){
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+    }
+    
     /**
-     Use carefully: deletes the wallet birthday from the keychain
+     Use carefully: deletes the wallet birthday from the Secure Defaults
      */
     
     func nukeBirthday() {
@@ -139,7 +145,7 @@ final class SeedManager {
     }
     
     /**
-     Use carefully: deletes the wallet port from the keychain
+     Use carefully: deletes the wallet port from the Secure Defaults
      */
     
     func nukePort() {
@@ -147,7 +153,7 @@ final class SeedManager {
     }
     
     /**
-     Use carefully: deletes the wallet endpoint from the keychain
+     Use carefully: deletes the wallet endpoint from the Secure Defaults
      */
     
     func nukeEndpoint() {
@@ -158,6 +164,7 @@ final class SeedManager {
     There's no fate but what we make for ourselves - Sarah Connor
     */
     func nukeWallet() {
+        nukeAll()
         nukePhrase()
         nukeBirthday()
         nukePort()
