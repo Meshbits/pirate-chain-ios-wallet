@@ -130,10 +130,6 @@ struct RestorePhraseScreen: View {
         )
     }
     
-    init() {
-            UINavigationBar.appearance().titleTextAttributes = [.font : Font.custom("Barlow-Regular", size: Device.isLarge ? 26 : 18)]
-    }
-    
     var body: some View {
 //        NavigationView {
             ZStack{
