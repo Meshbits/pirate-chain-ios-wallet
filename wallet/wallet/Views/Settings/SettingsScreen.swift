@@ -36,7 +36,7 @@ enum SettingsDestination: Int {
 
 struct SettingsScreen: View {
     
-    var mVersionDetails = "Build Version: 1.0.0-2-6-ge79bf71 (Beta)"
+    var mVersionDetails = "Build Version: 1.0.0-2-42-g285340a (Beta)"
     
     @State var mURLString = ""
     
