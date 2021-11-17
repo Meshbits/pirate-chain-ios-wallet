@@ -123,7 +123,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
 //                    .padding(.trailing,10)
 //                    .modifier(BackgroundPlaceholderModifier())
 //
-                ARRRSendReceiveMoneyTextField(anAmount: self.$sendArrrValue,isFirstResponder: Binding.constant(true))
+                ARRRReceiveMoneyTextField(anAmount: self.$sendArrrValue)
                 
                 Spacer()
                 

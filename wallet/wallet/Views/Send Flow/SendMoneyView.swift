@@ -141,7 +141,7 @@ struct SendMoneyView: View {
                 
                 HStack{
    
-                    ARRRSendReceiveMoneyTextField(anAmount: self.$flow.amount,isFirstResponder: Binding.constant(false))
+                    ARRRSendMoneyTextField(anAmount: self.$flow.amount)
                 
                     SendMoneyButtonView(title: "Send Max".localized()) {
                         let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
@@ -306,12 +306,11 @@ struct SendMoneyButtonView : View {
 }
 
 
-struct ARRRSendReceiveMoneyTextField: View {
+struct ARRRReceiveMoneyTextField: View {
     
      @Binding var anAmount:String
-    @Binding var isFirstResponder:Bool
      var body: some View {
-                ARRRTextField(text: $anAmount,isFirstResponder: $isFirstResponder)
+         ARRRTextField(text: $anAmount,isFirstResponder: Binding.constant(true))
                .scaledFont(size: 22)
                .foregroundColor(.gray)
                .frame(height:30)
@@ -322,3 +321,29 @@ struct ARRRSendReceiveMoneyTextField: View {
                .modifier(BackgroundPlaceholderModifier())
      }
 }
+
+struct ARRRSendMoneyTextField: View {
+    
+     @Binding var anAmount:String
+     var body: some View {
+             
+         ZStack{
+             HStack{
+                 TextField("Enter Amount".localized(), text: $anAmount)
+                   .scaledFont(size: 20)
+                   .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.clear))
+                   .foregroundColor(Color.white)
+                   .keyboardType(.decimalPad)
+                   .foregroundColor(.gray)
+                   .frame(height:30)
+                   .multilineTextAlignment(.center)
+                   .padding(.leading,10)
+                   .padding(.trailing,10)
+                   .modifier(BackgroundPlaceholderModifier())
+                
+             }
+         }
+         
+     }
+}
+
