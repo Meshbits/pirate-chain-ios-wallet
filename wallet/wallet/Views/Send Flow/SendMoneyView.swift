@@ -141,7 +141,7 @@ struct SendMoneyView: View {
                 
                 HStack{
    
-                    ARRRSendReceiveMoneyTextField(anAmount: self.$flow.amount)
+                    ARRRSendReceiveMoneyTextField(anAmount: self.$flow.amount,isFirstResponder: Binding.constant(false))
                 
                     SendMoneyButtonView(title: "Send Max".localized()) {
                         let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
@@ -309,7 +309,7 @@ struct SendMoneyButtonView : View {
 struct ARRRSendReceiveMoneyTextField: View {
     
      @Binding var anAmount:String
-     @State var isFirstResponder = false // hide for now
+    @Binding var isFirstResponder:Bool
      var body: some View {
                 ARRRTextField(text: $anAmount,isFirstResponder: $isFirstResponder)
                .scaledFont(size: 22)
