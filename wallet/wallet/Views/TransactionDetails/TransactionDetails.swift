@@ -9,6 +9,7 @@
 import SwiftUI
 import ZcashLightClientKit
 import AlertToast
+
 struct TransactionDetails: View {
         
     enum Alerts {
@@ -20,6 +21,9 @@ struct TransactionDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @State var alertItem: Alerts?
     @State var isCopyAlertShown = false
+    @State var mURLString:URL?
+    @State var mOpenSafari = false
+
     var exploreButton: some View {
         Button(action: {
             self.alertItem = .explorerNotice
@@ -142,6 +146,9 @@ struct TransactionDetails: View {
         }
         .padding(.vertical,0)
         .padding(.horizontal, 8)
+        .sheet(isPresented: $mOpenSafari) {
+            CustomSafariView(url:self.mURLString!)
+        }
         .alert(item: self.$alertItem) { item -> Alert in
             switch item {
             case .copiedItem(let p):
@@ -150,13 +157,16 @@ struct TransactionDetails: View {
                 return Alert(title: Text("You are exiting your wallet".localized()),
                              message: Text("While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?".localized()),
                              primaryButton: .cancel(Text("NEVERMIND".localized())),
-                             secondaryButton: .default(Text("SEE TX ONLINE".localized()), action: {
+                             secondaryButton: .default(Text("SEE TX".localized()), action: {
                                 
                                 guard let url = UrlHandler.blockExplorerURL(for: self.detail.id) else {
                                     return
                                 }
+                    
+                                self.mURLString  = url
+                                mOpenSafari = true
                                 
-                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                              }))
             }
         }

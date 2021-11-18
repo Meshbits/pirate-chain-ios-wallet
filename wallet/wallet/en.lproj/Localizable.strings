@@ -322,8 +322,8 @@
 "Confirmed" = "Confirmed";
 "You are exiting your wallet" = "You are exiting your wallet";
 "While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?" = "While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?";
-"NEVERMIND" = "NEVERMIND";
-"SEE TX ONLINE" = "SEE TX ONLINE";
+"NEVERMIND" = "Nevermind";
+"SEE TX" = "See Transaction";
 "network fee" = "network fee";
 "from your shielded wallet" = "from your shielded wallet";
 "to your shielded wallet" = "to your shielded wallet";
