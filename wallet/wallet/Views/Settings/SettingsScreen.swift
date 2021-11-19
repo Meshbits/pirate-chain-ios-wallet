@@ -297,8 +297,8 @@ struct SettingsScreen: View {
                 switch output {
                 case .failed(_), .userFailed:
                     print("SOME ERROR OCCURRED")
-                    UserSettings.shared.isBiometricDisabled = true
-                    NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+//                    UserSettings.shared.isBiometricDisabled = true
+//                    NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
 
                 case .success:
                     print("SUCCESS IN SETTINGS")

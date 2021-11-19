@@ -200,8 +200,9 @@ struct PasscodeValidationScreen: View {
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
                    switch output {
                    case .failed(_), .userFailed:
-                        UserSettings.shared.isBiometricDisabled = true
-                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+                       print("auth failed")
+//                        UserSettings.shared.isBiometricDisabled = true
+//                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
                    case .success:
                         UserSettings.shared.biometricInAppStatus = true
                         UserSettings.shared.isBiometricDisabled = false
