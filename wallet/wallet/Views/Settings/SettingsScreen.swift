@@ -151,9 +151,7 @@ struct SettingsScreen: View {
                       Text(mVersionDetails).scaledFont(size: 15).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,20)
 
                     }
-                    .padding(.top,10)
                     .padding(.bottom,2)
-                    .background(Color.screenBgColor)
           
                 }
                 

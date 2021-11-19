@@ -115,7 +115,7 @@ struct WalletDetails: View {
                 
                 VStack(alignment: .center, spacing: 10) {
                     Text("Wallet History".localized()).scaledFont(size: 20).multilineTextAlignment(.center).foregroundColor(.white)
-                }
+                }.padding(.top,50)
                 
                 ZcashNavigationBar(
                     leadingItem: {
@@ -179,6 +179,7 @@ struct WalletDetails: View {
             UITableView.appearance().separatorStyle = .singleLine
         }
         .navigationBarHidden(true)
+        .edgesIgnoringSafeArea([.top])
         .sheet(item: self.$selectedModel, onDismiss: {
             self.selectedModel = nil
         }) { (row)  in

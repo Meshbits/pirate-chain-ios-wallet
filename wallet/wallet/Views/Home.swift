@@ -539,6 +539,7 @@ struct Home: View {
                 )
                 .frame(height: 64)
                 .padding([.leading, .trailing], 10)
+                .padding(.top,40)
                 
 //                SendZecView(zatoshi: self.$viewModel.sendZecAmountText)
 //                    .opacity(amountOpacity)
@@ -811,7 +812,8 @@ struct Home: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle("", displayMode: .inline)
-        .navigationBarHidden(true)  
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea([.top])
         .zOverlay(isOverlayShown: $isOverlayShown) {
             FeedbackDialog(rating: $feedbackRating) { feedbackResult in
                 self.isOverlayShown = false
