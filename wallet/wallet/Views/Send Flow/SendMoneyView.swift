@@ -147,7 +147,7 @@ struct SendMoneyView: View {
                         let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
                         let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
                         if (actualAmount > defaultNetworkFee){
-                            flow.amount = String.init(format: "%.5f", (actualAmount-defaultNetworkFee))
+                            flow.amount = formatAnARRRAmount(arrr: actualAmount-defaultNetworkFee)
                         }else{
                             // Can't adjust the amount, as its less than the fee
                         }
@@ -241,7 +241,7 @@ struct SendMoneyView: View {
                             let amount = (flow.doubleAmount ??  0 )
                             let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
                             if (amount > defaultNetworkFee && amount == ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value){
-                                flow.amount = String.init(format: "%.5f", (amount-defaultNetworkFee))
+                                flow.amount = formatAnARRRAmount(arrr: amount-defaultNetworkFee)
                                 validateTransaction = true
                             }else{
                                 // Can't adjust the amount, as its less than the fee
@@ -273,6 +273,12 @@ struct SendMoneyView: View {
     }
 
 }
+
+
+func formatAnARRRAmount(arrr: Double) -> String {
+    NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: arrr)) ?? "0"
+}
+
 
 //struct SendMoneyView_Previews: PreviewProvider {
 //    static var previews: some View {
