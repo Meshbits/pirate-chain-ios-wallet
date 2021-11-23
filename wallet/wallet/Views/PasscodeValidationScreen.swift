@@ -220,7 +220,7 @@ struct PasscodeValidationScreen: View {
     
     func authenticate() {
         if UserSettings.shared.biometricInAppStatus{
-            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+            AuthenticationHelper.authenticate(with: "Authenticate Biometric ID".localized())
         }
     }
 }

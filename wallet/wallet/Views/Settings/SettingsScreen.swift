@@ -44,7 +44,7 @@ struct SettingsScreen: View {
 
     var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
-    var securitySection = [SettingsRowData(id:2,title:"Face ID".localized()),
+    var securitySection = [SettingsRowData(id:2,title:"Biometric ID".localized()),
                            SettingsRowData(id:3,title:"Recovery Phrase".localized()),
                            SettingsRowData(id:4,title:"Change PIN".localized()),
                            SettingsRowData(id:5,title:"Unlink Device".localized())]
@@ -452,7 +452,7 @@ struct SettingsRowWithToggle: View {
                     }
             }
             .alert(isPresented: $isPermissionDenied) {
-                Alert(title: Text("Permission Denied".localized()), message: Text("Please enable the Face ID permission in the settings.".localized()), dismissButton: .default(Text("Ok".localized())))
+                Alert(title: Text("Permission Denied".localized()), message: Text("Please enable the Biometric ID permission in the settings.".localized()), dismissButton: .default(Text("Ok".localized())))
             }
             
             Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
@@ -468,7 +468,7 @@ struct SettingsRowWithToggle: View {
     
     func authenticate() {
          if UserSettings.shared.biometricInAppStatus {
-             AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+             AuthenticationHelper.authenticate(with: "Authenticate Biometric ID".localized())
          }
      }
 }

@@ -576,7 +576,7 @@ struct PasscodeScreen: View {
     func authenticate() {
         if UserSettings.shared.biometricInAppStatus && mScreenState != .newPasscode && !isAuthenticatedFlowInitiated{
             isAuthenticatedFlowInitiated = true
-            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+            AuthenticationHelper.authenticate(with: "Authenticate Biometric ID".localized())
         }
     }
 }

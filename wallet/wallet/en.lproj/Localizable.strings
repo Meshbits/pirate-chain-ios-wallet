@@ -188,7 +188,7 @@
 
 "Language" = "Language";
 "Private Server Config" = "Private Server Config";
-"Face ID" = "Face ID";
+"Biometric ID" = "Biometric ID";
 "Recovery Phrase" = "Recovery Phrase";
 "Change PIN" = "Change PIN";
 "Unlink Device" = "Unlink Device";
@@ -201,7 +201,7 @@
 "Security" = "Security";
 "About" = "About";
 "Permission Denied" = "Permission Denied";
-"Please enable the Face ID permission in the settings." = "Please enable the Face ID permission in the settings.";
+"Please enable the Biometric ID permission in the settings." = "Please enable the Biometric ID permission in the settings.";
 "Ok" = "Ok";
 "PIN SET Successfully!" = "PIN SET Successfully!";
 
@@ -281,17 +281,17 @@
 "You’re all set to deposit, receive, and store crypto in your Pirate wallet" = "You’re all set to deposit, receive, and store crypto in your Pirate wallet";
 "Done" = "Done";
 
-// Authenticate Face ID
-"Authenticate Face ID" = "Authenticate Face ID";
-"Login quickly using your Face ID" = "Login quickly using your Face ID";
+// Authenticate Biometric ID
+"Authenticate Biometric ID" = "Authenticate Biometric ID";
+"Login quickly using your Biometric ID" = "Login quickly using your Biometric ID";
 
 "Skip" = "Skip";
 "Allow" = "Allow";
 
 // Congratulations
 
-"Congratulation! \nFace ID setup successfully" = "Congratulation! \nFace ID setup successfully";
-"You have successfuly enabled Face ID based authentication. \n\nNow securely login using your Face ID" = "You have successfuly enabled Face ID based authentication. \n\nNow securely login using your Face ID";
+"Congratulation! \nBiometric ID setup successfully" = "Congratulation! \nBiometric ID setup successfully";
+"You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID" = "You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID";
 "Login" = "Login";
 
 
