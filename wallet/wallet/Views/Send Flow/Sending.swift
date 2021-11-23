@@ -107,7 +107,10 @@ struct Sending: View {
             .padding([.horizontal, .bottom], 40)
         }
         .highPriorityGesture(dragGesture)
-        .sheet(item: $details, onDismiss: { self.flow.close() }){ item in
+        .sheet(item: $details, onDismiss: {
+            self.flow.close()
+            NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
+        }){ item in
             TxDetailsWrapper(row: item)
         }
         .alert(isPresented: self.$flow.showError) {
