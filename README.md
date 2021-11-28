@@ -40,6 +40,19 @@ for more information about the security and privacy limitations of the wallet.
 
 7. build and run on simulator.
 
+## Or use these commands
+
+```shell
+git clone https://github.com/meshbits/pirate-chain-ios-wallet -b arrr-1.0
+cd pirate-chain-ios-wallet/wallet/
+cp env-vars.sh.example env-vars.sh
+./reset.sh
+open ECC-Wallet.xcworkspace
+```
+
+**NOTE: Use `wallet-no-logging` to build the app.**
+
+**IMPORTANT:** If you are switching to try building the app between a simulator and physical device, each time execute `./reset.sh`. For some reason the zcash library isn't compiled universal and has to use this workaround to build it properly for either simular or physical device.
 
 # To Log or not to Log
 
