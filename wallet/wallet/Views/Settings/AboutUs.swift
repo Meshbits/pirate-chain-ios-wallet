@@ -12,14 +12,14 @@ struct AboutUs: View {
     @Environment(\.presentationMode) var presentationMode
     var anAppVersion = "App Version: 1.0.0"
     var aBuildversion = "Build: 2"
-    var aCommitsCount = "Commits Count: 49"
-    var aGitHash = "Short Git hash: g027ca3c"
+    var aCommitsCount = "Commits Count: 54"
+    var aGitHash = "Short Git hash: g2c852e9"
     var aSourceCode = "Source: "
     var aSourceCodeURL = "https://github.com/Meshbits/pirate-chain-ios-wallet"
     var aDevelopedBy = "Developed by Meshbits Limited"
     var aVersionDetails = "Release: Beta"
     var body: some View {
-
+        
         ZStack {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack {
