@@ -154,8 +154,16 @@ final class ZECCWalletEnvironment: ObservableObject {
     func initialize() throws {
         let seedPhrase = try SeedManager.default.exportPhrase()
         let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: seedPhrase)
-        let viewingKeys = try DerivationTool.default.deriveUnifiedViewingKeysFromSeed(seedBytes, numberOfAccounts: 1)
         
+        var viewingKeys = try DerivationTool.default.deriveUnifiedViewingKeysFromSeed(seedBytes, numberOfAccounts: 2)
+//        car mViewingKeys = viewingKeys
+        SeedManager.default.printLog(message: "VIEWING keys count\(viewingKeys.count)")
+        
+        if viewingKeys.count > 1 {
+            SeedManager.default.printLog(message: "VIEWING first object deleted")
+            viewingKeys.remove(at: 0)
+        }
+
         let initializer = Initializer(
             cacheDbURL: self.cacheDbURL,
             dataDbURL: self.dataDbURL,
@@ -469,6 +477,7 @@ extension ZECCWalletEnvironment {
     }
     
     func getShieldedAddress() -> String? {
+//        self.synchronizer.initializer.getAddress(index: 1)
         self.synchronizer.initializer.getAddress()
     }
 }

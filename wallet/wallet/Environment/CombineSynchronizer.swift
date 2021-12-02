@@ -226,7 +226,7 @@ class CombineSynchronizer {
     
     
     func prepare() throws {
-        guard let uvk = self.initializer.viewingKeys.first else {
+        guard let uvk = self.initializer.viewingKeys.last else {
             throw SynchronizerError.initFailed(message: "unable to derive unified address. this is probably a programming error".localized())
         }
         do {
@@ -277,8 +277,8 @@ class CombineSynchronizer {
             self.transparentBalance.send(Balance(verified: 0, total: 0))
         }
         
-        let shieldedVerifiedBalance = synchronizer.getShieldedVerifiedBalance()
-        let shieldedTotalBalance = synchronizer.getShieldedBalance(accountIndex: 0)
+        let shieldedVerifiedBalance = synchronizer.getShieldedVerifiedBalance(accountIndex: 1)
+        let shieldedTotalBalance = synchronizer.getShieldedBalance(accountIndex: 1)
         
         self.shieldedBalance.send(Balance(verified: shieldedVerifiedBalance, total: shieldedTotalBalance))
         
@@ -301,7 +301,7 @@ class CombineSynchronizer {
         }
     }
     
-    func send(with spendingKey: String, zatoshi: Int64, to recipientAddress: String, memo: String?,from account: Int) -> Future<PendingTransactionEntity,Error>  {
+    func send(with spendingKey: String, zatoshi: Int64, to recipientAddress: String, memo: String?,from account: Int = 0) -> Future<PendingTransactionEntity,Error>  {
         Future<PendingTransactionEntity, Error>() { [weak self]
             promise in
             self?.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: recipientAddress, memo: memo, from: account) { [weak self](result) in
@@ -316,7 +316,7 @@ class CombineSynchronizer {
         }
     }
     
-    public func shieldFunds(spendingKey: String, transparentSecretKey: String, memo: String?, from accountIndex: Int) -> Future<PendingTransactionEntity, Error> {
+    public func shieldFunds(spendingKey: String, transparentSecretKey: String, memo: String?, from accountIndex: Int = 0) -> Future<PendingTransactionEntity, Error> {
         Future<PendingTransactionEntity, Error>() { [weak self]
             promise in
             self?.synchronizer.shieldFunds(spendingKey: spendingKey, transparentSecretKey: transparentSecretKey, memo: memo, from: accountIndex) {[weak self] (result) in
