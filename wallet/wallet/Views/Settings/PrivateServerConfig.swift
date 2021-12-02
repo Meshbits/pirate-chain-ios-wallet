@@ -19,7 +19,7 @@ struct PrivateServerConfig: View {
     @State var isUserEditingPort = false
     @State var isUserEditingAddress = false
     @State var showListOfConfigurations = false
-    var anArrayOfConfigurations = ["lightd.pirate.black","lightd.meshbits.io","Your Custom Server"]
+    var anArrayOfConfigurations = ["lightd.meshbits.io","lightd.pirate.black","Your Custom Server"]
     var isHighlightedAddress: Bool {
         lightServerString.count > 0
     }
@@ -159,6 +159,15 @@ struct PrivateServerConfig: View {
                     }
                     
                     self.lightServerString = config
+                    
+                    
+                    if anArrayOfConfigurations[0] == self.lightServerString {
+                        lightPortString = "9067"
+                        SeedManager.default.importLightWalletPort(port: Int(lightPortString) ?? ZECCWalletEnvironment.defaultLightWalletPort)
+                    }else if anArrayOfConfigurations[1] == self.lightServerString {
+                        lightPortString = "443"
+                        SeedManager.default.importLightWalletPort(port: Int(lightPortString) ?? ZECCWalletEnvironment.defaultLightWalletPort)
+                    }
                     SeedManager.default.importLightWalletEndpoint(address: lightServerString)
                 }
         } + [Alert.Button.cancel()]

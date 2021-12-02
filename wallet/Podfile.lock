@@ -172,7 +172,7 @@ CHECKOUT OPTIONS:
     :commit: 370366e9db41ba4c318963a63bc544a4766fb827
     :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
-    :commit: 3b0098084479c10394e5b7f198e79fd3f30e2893
+    :commit: 769ff3345a3766ed6f86b814ae872d143ea25e3f
     :git: https://github.com/Meshbits/ZcashLightClientKit.git
   zealous-logger:
     :commit: c9f8d8d9f74a456094b9143616da3b4eba91ddcf
@@ -219,4 +219,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 3a77b06f282a7f0413177865bc7dfb19d5fd69f8
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.2
