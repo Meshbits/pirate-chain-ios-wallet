@@ -43,7 +43,7 @@ for more information about the security and privacy limitations of the wallet.
 ## Or use these commands
 
 ```shell
-git clone https://github.com/meshbits/pirate-chain-ios-wallet -b arrr-1.0
+git clone https://github.com/meshbits/pirate-chain-ios-wallet
 cd pirate-chain-ios-wallet/wallet/
 cp env-vars.sh.example env-vars.sh
 ./reset.sh
