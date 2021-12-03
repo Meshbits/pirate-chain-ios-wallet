@@ -6,63 +6,98 @@
 //  Copyright © 2020 Francisco Gindre. All rights reserved.
 //
 import Foundation
-import KeychainSwift
 import ZcashLightClientKit
+import SecureDefaults
 final class SeedManager {
     
     enum SeedManagerError: Error {
         case alreadyImported
         case uninitializedWallet
     }
-    
+    static let mDefaultHeight = 1390000
     static var `default`: SeedManager = SeedManager()
-    private static let zECCWalletKeys = "zECCWalletKeys"
-    private static let zECCWalletSeedKey = "zEECWalletSeedKey"
-    private static let zECCWalletBirthday = "zECCWalletBirthday"
-    private static let zECCWalletPhrase = "zECCWalletPhrase"
+    private static let aRRRWalletBirthday = "aRRRWalletBirthday"
+    private static let aRRRWalletPhrase = "aRRRWalletPhrase"
     private static let aRRRLightWalletEndpoint = "aRRRLightWalletEndpoint"
     private static let aRRRLightWalletPort = "aRRRLightWalletPort"
     
-    
-    private let keychain = KeychainSwift()
+    private let secureDefaults = SecureDefaults.shared
+    private let userDefaults = UserDefaults.standard
+    private var mTempRecoveryPhrase:String?
     
     func importBirthday(_ height: BlockHeight) throws {
-        guard keychain.get(Self.zECCWalletBirthday) == nil else {
+        guard userDefaults.string(forKey: Self.aRRRWalletBirthday) == nil else {
             throw SeedManagerError.alreadyImported
         }
-        keychain.set(String(height), forKey: Self.zECCWalletBirthday)
+        
+        if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
+            // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
+            userDefaults.set(String(SeedManager.mDefaultHeight), forKey: Self.aRRRWalletBirthday)
+        }else{
+            userDefaults.set(String(height), forKey: Self.aRRRWalletBirthday)
+        }
+        
+        
+        userDefaults.synchronize()
+    }
+    
+    func importNewBirthdayOnRescan(_ height: BlockHeight) throws {
+       
+        if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
+            // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
+            userDefaults.set(String(SeedManager.mDefaultHeight), forKey: Self.aRRRWalletBirthday)
+        }else{
+            userDefaults.set(String(height), forKey: Self.aRRRWalletBirthday)
+        }
+        
+        
+        userDefaults.synchronize()
     }
     
     func exportBirthday() throws -> BlockHeight {
-        guard let birthday = keychain.get(Self.zECCWalletBirthday),
-            let value = BlockHeight(birthday) else {
-                throw SeedManagerError.uninitializedWallet
-        }
+        guard let birthday = userDefaults.string(forKey: Self.aRRRWalletBirthday),
+              let value = BlockHeight(birthday) else {
+                  throw SeedManagerError.uninitializedWallet
+              }
         return value
     }
     
     func importPhrase(bip39 phrase: String) throws {
-        guard keychain.get(Self.zECCWalletPhrase) == nil else { throw SeedManagerError.alreadyImported }
-        keychain.set(phrase, forKey: Self.zECCWalletPhrase)
+//        printLog(message: "import phrase initiated")
+        guard secureDefaults.string(forKey: Self.aRRRWalletPhrase) == nil else {
+            throw SeedManagerError.alreadyImported
+        }
+//        printLog(message: "checked if already exists = no, then proceed")
+        secureDefaults.set(phrase, forKey: Self.aRRRWalletPhrase)
+        secureDefaults.synchronize()
+//        printLog(message: "import finished")
     }
     
     func exportPhrase() throws -> String {
-        guard let seed = keychain.get(Self.zECCWalletPhrase) else { throw SeedManagerError.uninitializedWallet }
-        return seed
+//        printLog(message: "Requested")
+        if let seedphrase = mTempRecoveryPhrase {
+//            printLog(message: "Found Locally")
+            return seedphrase
+        }
+        
+        guard let phrase = secureDefaults.string(forKey: Self.aRRRWalletPhrase) else { throw SeedManagerError.uninitializedWallet }
+//        printLog(message: "Found in secure defaults")
+        mTempRecoveryPhrase = phrase
+        
+        return phrase
     }
-    
-    
+        
     func importLightWalletEndpoint(address: String) {
-        guard keychain.get(Self.aRRRLightWalletEndpoint) == nil
+        guard userDefaults.string(forKey: Self.aRRRLightWalletEndpoint) == nil
         else {
-            keychain.set(address, forKey: Self.aRRRLightWalletEndpoint)
+            userDefaults.set(address, forKey: Self.aRRRLightWalletEndpoint)
             return
         }
-        keychain.set(ZECCWalletEnvironment.defaultLightWalletEndpoint, forKey: Self.aRRRLightWalletEndpoint)
+        userDefaults.set(ZECCWalletEnvironment.defaultLightWalletEndpoint, forKey: Self.aRRRLightWalletEndpoint)
     }
 
     func exportLightWalletEndpoint() -> String {
-        guard let address = keychain.get(Self.aRRRLightWalletEndpoint) else
+        guard let address = userDefaults.string(forKey: Self.aRRRLightWalletEndpoint) else
         {
             return ZECCWalletEnvironment.defaultLightWalletEndpoint
         }
@@ -70,16 +105,16 @@ final class SeedManager {
     }
     
     func importLightWalletPort(port: Int) {
-        guard keychain.get(Self.aRRRLightWalletPort) == nil
+        guard userDefaults.string(forKey: Self.aRRRLightWalletPort) == nil
         else {
-            keychain.set(String.init(format: "%d", port), forKey: Self.aRRRLightWalletPort)
+            userDefaults.set(String.init(format: "%d", port), forKey: Self.aRRRLightWalletPort)
             return
         }
-        keychain.set(String.init(format: "%d", ZECCWalletEnvironment.defaultLightWalletPort), forKey: Self.aRRRLightWalletPort)
+        userDefaults.set(String.init(format: "%d", ZECCWalletEnvironment.defaultLightWalletPort), forKey: Self.aRRRLightWalletPort)
     }
 
     func exportLightWalletPort() -> Int {
-        guard let port = keychain.get(Self.aRRRLightWalletPort) else
+        guard let port = userDefaults.string(forKey: Self.aRRRLightWalletPort) else
         {
             return ZECCWalletEnvironment.defaultLightWalletPort
         }
@@ -87,48 +122,53 @@ final class SeedManager {
     }
         
     /**
-     Use carefully: Deletes the seed phrase from the keychain
+     Use carefully: Deletes the seed phrase from the Secure Defaults
      */
     func nukePhrase() {
-        keychain.delete(Self.zECCWalletPhrase)
+        mTempRecoveryPhrase = nil
+        secureDefaults.removeObject(forKey: Self.aRRRWalletPhrase)
+        secureDefaults.synchronize()
     }
-    /**
-        Use carefully: Deletes the keys from the keychain
-     */
-    func nukeKeys() {
-        keychain.delete(Self.zECCWalletKeys)
-    }
-
-    /**
-       Use carefully: Deletes the seed from the keychain.
-     */
-    func nukeSeed() {
-        keychain.delete(Self.zECCWalletSeedKey)
+    
+    func nukeAll(){
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
     }
     
     /**
-     Use carefully: deletes the wallet birthday from the keychain
+     Use carefully: deletes the wallet birthday from the Secure Defaults
      */
     
     func nukeBirthday() {
-        keychain.delete(Self.zECCWalletBirthday)
+        userDefaults.removeObject(forKey: Self.aRRRWalletBirthday)
     }
     
+    /**
+     Use carefully: deletes the wallet port from the Secure Defaults
+     */
+    
+    func nukePort() {
+        userDefaults.removeObject(forKey: Self.aRRRLightWalletPort)
+    }
+    
+    /**
+     Use carefully: deletes the wallet endpoint from the Secure Defaults
+     */
+    
+    func nukeEndpoint() {
+        userDefaults.removeObject(forKey: Self.aRRRLightWalletEndpoint)
+    }
     
     /**
     There's no fate but what we make for ourselves - Sarah Connor
     */
     func nukeWallet() {
-        nukeKeys()
-        nukeSeed()
+        nukeAll()
         nukePhrase()
         nukeBirthday()
-        
-        // Fix: retrocompatibility with old wallets, previous to IVK Synchronizer updates
-        for key in keychain.allKeys {
-            keychain.delete(key)
-        }
-        
+        nukePort()
+        nukeEndpoint()
         UserSettings.shared.removeAllSettings()
     }
     
@@ -147,4 +187,37 @@ final class SeedManager {
         }
         return true
     }
+    
+    func updatePasswordForPinCode(){
+//        if secureDefaults.isKeyCreated {
+//            if let seedphrase = mTempRecoveryPhrase {
+//                if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty {
+//                    printLog(message: "Started resetting")
+//                    secureDefaults.removeObject(forKey: Self.aRRRWalletPhrase)
+//                    secureDefaults.synchronize()
+//                    printLog(message: "Deleted")
+//                    secureDefaults.password = aPasscode
+//                    secureDefaults.synchronize()
+//                    printLog(message: "DELETED SUCCESS")
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                        self.secureDefaults.set(seedphrase, forKey: Self.aRRRWalletPhrase)
+//                        self.secureDefaults.synchronize()
+//                        printLog(message: "Synch")
+//                    }
+//                }
+//            }
+//        }
+    }
+    
+    /**
+        For logging purpose - testing with timestamp
+     */
+    func printLog(message: String) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy hh:mm:ss.SSSS a"
+        let timestamp = formatter.string(from: Date())
+        let vMess = "\(timestamp) ------ \(message)"
+        print(vMess)
+    }
+
 }

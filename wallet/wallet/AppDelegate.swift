@@ -8,7 +8,9 @@
 
 import UIKit
 import BackgroundTasks
-
+import AVFoundation
+import UserNotifications
+import SecureDefaults
 
 #if ENABLE_LOGGING
 //import Bugsnag
@@ -28,29 +30,71 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        
-        #if targetEnvironment(simulator)
-        if ProcessInfo.processInfo.environment["isTest"] != nil {
-            return true
-        }
-        #else
-
+       
         BGTaskScheduler.shared.register(
             forTaskWithIdentifier: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifier,
           using: nil) { (task) in
             BackgroundTaskSyncronizing.default.handleBackgroundProcessingTask(task as! BGProcessingTask)
         }
-        #endif
         
-        #if ENABLE_LOGGING
-//        Bugsnag.start(withApiKey: Constants.bugsnagApiKey)
-        #endif
+        BGTaskScheduler.shared.register(
+            forTaskWithIdentifier: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifierARRR,
+          using: nil) { (task) in
+            
+        }
+        
+        UNUserNotificationCenter.current().requestAuthorization(options:[.alert, .sound]) { (granted, error) in
+
+              if granted {
+                DispatchQueue.main.async {
+                  UIApplication.shared.registerForRemoteNotifications()
+                }
+              }
+
+        }
+        
+        // To support background playing of audio
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
+        try? AVAudioSession.sharedInstance().setActive(true)
         
         // Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
         application.isIdleTimerDisabled = true
         
+        let defaults = SecureDefaults()
+        
+        // Ensures that a password was not set before. Otherwise, if
+        // you set a password one more time, it will re-generate a key.
+        // That means that we lose old data as well.
+        if !defaults.isKeyCreated {
+            if let aPasscode = UserSettings.shared.aPasscode, !aPasscode.isEmpty {
+//                print("No need to update it here")
+            }else{
+//                print("update it here please")
+                defaults.password = UUID().uuidString
+                defaults.synchronize()
+                defaults.set("We're using SecureDefaults!", forKey: "secure.greeting")
+            }
+        }
         return true
     }
+    
+    /*
+     Not required anymore
+    func clearKeyChainIfAnythingExists(){
+        let userDefaults = UserDefaults.standard
+
+        if userDefaults.bool(forKey: "didWeInstallItBefore") == false {
+
+               // removing all keychain items in here
+                SeedManager.default.nukeWallet()
+               // updating the local flag
+               userDefaults.set(true, forKey: "didWeInstallItBefore")
+               userDefaults.synchronize() // forces the app to update the NSUserDefaults
+
+               return
+           }
+    }
+    */
     
     // MARK: UISceneSession Lifecycle
     

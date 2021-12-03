@@ -14,11 +14,11 @@ struct UnlinkDevice: View {
     @State var goToRecoveryPhrase = false
     var body: some View {
                 ZStack{
-//                    ARRRBackground().edgesIgnoringSafeArea(.all)
+                    ARRRBackground().edgesIgnoringSafeArea(.all)
                         VStack(alignment: .center, content: {
                             Spacer(minLength: 10)
-                            Text("Unlink your wallet from this device".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                                .scaledFont(size: 32).padding(.top,40)
+                            Text("Unlink your wallet from this device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
+                                .scaledFont(size: 26).padding(.top,40)
                             Text("Start a new wallet by unlinking your device from the currently installed wallet".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 15)
                             Spacer(minLength: 10)
                             Image("bombIcon")
@@ -34,8 +34,7 @@ struct UnlinkDevice: View {
                             }
                             
                             NavigationLink(
-                                destination: RecoveryBasedUnlink().environmentObject(RecoveryViewModel()).navigationBarTitle("", displayMode: .inline)
-                                    .navigationBarBackButtonHidden(true),
+                                destination: RecoveryBasedUnlink().environmentObject(RecoveryViewModel()),
                                 isActive: $goToRecoveryPhrase
                             ) {
                                EmptyView()
@@ -46,21 +45,15 @@ struct UnlinkDevice: View {
                     
                     
                     }.edgesIgnoringSafeArea(.all)
-                .navigationBarHidden(true)
-                .zcashNavigationBar(leadingItem: {
-                    ARRRBackButton(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }).frame(width: 30, height: 30)
-                    .padding(.top,10)
-                    .padding(.leading,20)
-                    
-                }, headerItem: {
-                    HStack{
-                        EmptyView()
-                    }
-                }, trailingItem: {
-                    HStack{
-                        EmptyView()
+                .navigationBarBackButtonHidden(true)
+                .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading:  Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image("backicon").resizable().frame(width: 50, height: 50)
+                        }
                     }
                 })
                 .onAppear(){

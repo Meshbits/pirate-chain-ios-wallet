@@ -14,4 +14,10 @@ class DeviceFeedbackHelper {
     static func vibrate() {
         AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
+    
+    static func longVibrate(){
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        }
+    }
 }

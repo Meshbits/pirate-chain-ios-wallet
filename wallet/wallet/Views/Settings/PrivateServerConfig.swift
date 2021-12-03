@@ -18,8 +18,8 @@ struct PrivateServerConfig: View {
     @State var isDisplayPortAlert = false
     @State var isUserEditingPort = false
     @State var isUserEditingAddress = false
-
-    
+    @State var showListOfConfigurations = false
+    var anArrayOfConfigurations = ["lightd.meshbits.io","lightd.pirate.black","Your Custom Server"]
     var isHighlightedAddress: Bool {
         lightServerString.count > 0
     }
@@ -35,7 +35,7 @@ struct PrivateServerConfig: View {
           
             VStack(alignment: .center, spacing: 5){
 
-                Text("Private Server Config".localized()).foregroundColor(.gray).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
+//                Text("Private Server Config".localized()).foregroundColor(.gray).font(.barlowRegular(size: 20)).multilineTextAlignment(.center).foregroundColor(.white)
                 
                 VStack(alignment: .leading, spacing: 10) {
                      HStack {
@@ -59,17 +59,24 @@ struct PrivateServerConfig: View {
                      
                      VStack(alignment: .leading, spacing: nil, content: {
                         Text("Chain lite server ".localized()).font(.barlowRegular(size: 14)).foregroundColor(.gray).multilineTextAlignment(.leading)
-                        
-                        TextField("".localized(), text: $lightServerString, onEditingChanged: { (changed) in
-                                isUserEditingAddress = true
-                        }) {
-                            isUserEditingAddress = false
-                            self.didEndEditingAddressTextField()
-                        }.font(.barlowRegular(size: 14))
-                        .disabled(isAutoConfigEnabled)
-                        .foregroundColor(isAutoConfigEnabled ? .gray : .white)
-                        .modifier(BackgroundPlaceholderModifier())
-                        
+                        HStack {
+                            TextField("".localized(), text: $lightServerString, onEditingChanged: { (changed) in
+                                    isUserEditingAddress = true
+                            }) {
+                                isUserEditingAddress = false
+                                self.didEndEditingAddressTextField()
+                            }.font(.barlowRegular(size: 14))
+                            .disabled(isAutoConfigEnabled)
+                            .foregroundColor(isAutoConfigEnabled ? .gray : .white)
+                            .modifier(BackgroundPlaceholderModifier())
+                            Button {
+                                self.showListOfConfigurations = true
+                            } label: {
+                                Image(systemName: "chevron.down.circle.fill").foregroundColor(.gray)
+                                    .scaledFont(size: 30).foregroundColor(.white)
+                                    .padding(.bottom, 5)
+                            }.disabled(isAutoConfigEnabled)
+                        }
                         Text("Port ".localized()).foregroundColor(.gray).multilineTextAlignment(.leading).font(.barlowRegular(size: 14))
                                      
                        TextField("".localized(), text: $lightPortString, onEditingChanged: { (changed) in
@@ -85,6 +92,7 @@ struct PrivateServerConfig: View {
                      }).modifier(ForegroundPlaceholderModifier())
                  }
                  .modifier(BackgroundPlaceholderModifier())
+                 .padding(.top,50)
                  
                
                 Spacer(minLength: 10)
@@ -92,6 +100,9 @@ struct PrivateServerConfig: View {
             }.padding(.top, 100)
             
         }
+        .actionSheet(isPresented: self.$showListOfConfigurations, content: {
+            self.showAllConfigurations()
+        })
         .keyboardAdaptive()
         .onTapGesture {
                        
@@ -126,26 +137,48 @@ struct PrivateServerConfig: View {
            })
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Private Server Config").navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {
             VStack(alignment: .leading) {
                 ZStack{
-                    Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                        .barlowRegular(size: Device.isLarge ? 26 : 18)
-                    ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
+                    Image("backicon").resizable().frame(width: 50, height: 50)
                 }
-            }.padding(.leading,-20).padding(.top,10)
+            }
         })
     }
-    
+
+    func showAllConfigurations() -> ActionSheet {
+        return ActionSheet(title: Text("\nChoose a server for sync, leave it as it is if you are not sure.\n".localized()).foregroundColor(.white), buttons:
+                            anArrayOfConfigurations.map { config in
+                .default(Text(config).foregroundColor(.gray)) {
+                    if config == "Your Custom Server" {
+                        self.lightServerString = ""
+                        return
+                    }
+                    
+                    self.lightServerString = config
+                    
+                    
+                    if anArrayOfConfigurations[0] == self.lightServerString {
+                        lightPortString = "9067"
+                        SeedManager.default.importLightWalletPort(port: Int(lightPortString) ?? ZECCWalletEnvironment.defaultLightWalletPort)
+                    }else if anArrayOfConfigurations[1] == self.lightServerString {
+                        lightPortString = "443"
+                        SeedManager.default.importLightWalletPort(port: Int(lightPortString) ?? ZECCWalletEnvironment.defaultLightWalletPort)
+                    }
+                    SeedManager.default.importLightWalletEndpoint(address: lightServerString)
+                }
+        } + [Alert.Button.cancel()]
+        )
+    }
     
        func didEndEditingAddressTextField(){
            if lightServerString.count == 0 {
                isDisplayAddressAlert = true
            }else{
+               lightServerString  = lightServerString.trimmingCharacters(in: .whitespacesAndNewlines)
                SeedManager.default.importLightWalletEndpoint(address: lightServerString)
            }
        }

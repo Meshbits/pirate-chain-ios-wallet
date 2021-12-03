@@ -413,6 +413,10 @@
 		29596D9E26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
 		29596D9F26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
 		29596DA026E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */; };
+		295E3734272721BD00831D37 /* SyncStarted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3732272721BD00831D37 /* SyncStarted.mp3 */; };
+		295E3735272721BD00831D37 /* SyncStarted.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3732272721BD00831D37 /* SyncStarted.mp3 */; };
+		295E3736272721BD00831D37 /* SyncEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3733272721BD00831D37 /* SyncEnd.mp3 */; };
+		295E3737272721BD00831D37 /* SyncEnd.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 295E3733272721BD00831D37 /* SyncEnd.mp3 */; };
 		2960026C26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026D26D9350C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
 		2960026E26D9350D00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */; };
@@ -434,12 +438,19 @@
 		296DA0EB26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
 		296DA0EC26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
 		296DA0ED26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */; };
+		297046A427310C1300C73ED1 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297046A327310C1300C73ED1 /* AboutUs.swift */; };
+		297046A527310C1300C73ED1 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297046A327310C1300C73ED1 /* AboutUs.swift */; };
+		297046A627310C1300C73ED1 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297046A327310C1300C73ED1 /* AboutUs.swift */; };
+		2989E7B02727188B003FB57F /* bgSyncSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 2989E7AF2727188B003FB57F /* bgSyncSound.m4a */; };
 		298D50E326A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E426A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D50E526A726E000585699 /* ARRRLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D50E226A726E000585699 /* ARRRLogo.swift */; };
 		298D511026A728A800585699 /* ARRRBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D510F26A728A800585699 /* ARRRBackground.swift */; };
 		298D511126A728A800585699 /* ARRRBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D510F26A728A800585699 /* ARRRBackground.swift */; };
 		298D511226A728A800585699 /* ARRRBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 298D510F26A728A800585699 /* ARRRBackground.swift */; };
+		29962ECA2731526B0037F5BA /* CustomSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29962EC92731526B0037F5BA /* CustomSafariView.swift */; };
+		29962ECB2731526B0037F5BA /* CustomSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29962EC92731526B0037F5BA /* CustomSafariView.swift */; };
+		29962ECC2731526B0037F5BA /* CustomSafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29962EC92731526B0037F5BA /* CustomSafariView.swift */; };
 		29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
 		29A5651B26C4250B00ECC367 /* NotificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A5651826C4250A00ECC367 /* NotificationScreen.swift */; };
@@ -455,9 +466,15 @@
 		29AF023626DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
 		29AF023726DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
 		29AF023826DA486900B21EAC /* WordsVerificationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */; };
+		29B06F80272D92A8004C5C2F /* RescanOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */; };
+		29B06F81272D92A8004C5C2F /* RescanOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */; };
+		29B06F82272D92A8004C5C2F /* RescanOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */; };
 		29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
 		29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B4E2D126B58D61008BB304 /* IntroWelcome.swift */; };
+		29B6E5C62721AC37005D9EFC /* ConfirmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */; };
+		29B6E5C72721AC37005D9EFC /* ConfirmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */; };
+		29B6E5C82721AC37005D9EFC /* ConfirmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */; };
 		29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
 		29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
 		29D4F90F26C9388C00360E40 /* UnlinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */; };
@@ -498,6 +515,9 @@
 		29FABC0226D506E800306726 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBFB26D506E800306726 /* Parameter.swift */; };
 		29FABC0326D506E800306726 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBFB26D506E800306726 /* Parameter.swift */; };
 		29FABC0426D506E800306726 /* Parameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FABBFB26D506E800306726 /* Parameter.swift */; };
+		29FBB5AD272890C4006C6186 /* ARRRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBB5AC272890C4006C6186 /* ARRRTextField.swift */; };
+		29FBB5AE272890C4006C6186 /* ARRRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBB5AC272890C4006C6186 /* ARRRTextField.swift */; };
+		29FBB5AF272890C4006C6186 /* ARRRTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FBB5AC272890C4006C6186 /* ARRRTextField.swift */; };
 		89F246E202A9ECE2F5FD8547 /* Pods_ECC_Wallet_Testnet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A082D4B4F5F771D6BAABE094 /* Pods_ECC_Wallet_Testnet.framework */; };
 		8D3F362524A40FCF0087687A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F362724A40FCF0087687A /* Localizable.strings */; };
 		8D73959024A40E6C00936DE3 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73958F24A40E6C00936DE3 /* String+localized.swift */; };
@@ -713,6 +733,8 @@
 		29515DCB26B9885900DC5B92 /* IntroPrivacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPrivacy.swift; sourceTree = "<group>"; };
 		29596D9926E12294001F75B6 /* CongratulationsFaceID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CongratulationsFaceID.swift; sourceTree = "<group>"; };
 		29596D9D26E1387E001F75B6 /* CreateAndSetupNewWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAndSetupNewWallet.swift; sourceTree = "<group>"; };
+		295E3732272721BD00831D37 /* SyncStarted.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SyncStarted.mp3; sourceTree = "<group>"; };
+		295E3733272721BD00831D37 /* SyncEnd.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SyncEnd.mp3; sourceTree = "<group>"; };
 		2960026B26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyPhraseInitiate.swift; sourceTree = "<group>"; };
 		2960026F26D93BBF00B41DD0 /* HowItWorks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorks.swift; sourceTree = "<group>"; };
 		2960027326D93E4300B41DD0 /* ARRRBackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackButton.swift; sourceTree = "<group>"; };
@@ -720,14 +742,19 @@
 		296CACE526D57757004DC784 /* SendMoneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMoneyView.swift; sourceTree = "<group>"; };
 		296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitiateRecoveryKeyPhraseFlow.swift; sourceTree = "<group>"; };
 		296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryWordsView.swift; sourceTree = "<group>"; };
+		297046A327310C1300C73ED1 /* AboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
+		2989E7AF2727188B003FB57F /* bgSyncSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bgSyncSound.m4a; sourceTree = "<group>"; };
 		298D50E226A726E000585699 /* ARRRLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRLogo.swift; sourceTree = "<group>"; };
 		298D510F26A728A800585699 /* ARRRBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRBackground.swift; sourceTree = "<group>"; };
+		29962EC92731526B0037F5BA /* CustomSafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSafariView.swift; sourceTree = "<group>"; };
 		29A5651826C4250A00ECC367 /* NotificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScreen.swift; sourceTree = "<group>"; };
 		29A8019A2712DACD002DF6F9 /* PasscodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeView.swift; sourceTree = "<group>"; };
 		29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoveryBasedUnlink.swift; sourceTree = "<group>"; };
 		29AF023126DA2CF100B21EAC /* GenerateWordsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateWordsView.swift; sourceTree = "<group>"; };
 		29AF023526DA486900B21EAC /* WordsVerificationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsVerificationScreen.swift; sourceTree = "<group>"; };
+		29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RescanOptionsView.swift; sourceTree = "<group>"; };
 		29B4E2D126B58D61008BB304 /* IntroWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroWelcome.swift; sourceTree = "<group>"; };
+		29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransaction.swift; sourceTree = "<group>"; };
 		29D1459C46D96D9D3DF2A55C /* Pods-walletUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletUITests.debug.xcconfig"; path = "Target Support Files/Pods-walletUITests/Pods-walletUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		29D4F90C26C9388C00360E40 /* UnlinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlinkDevice.swift; sourceTree = "<group>"; };
 		29D53C9026D549A900A22656 /* ARRRMemoTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRMemoTextField.swift; sourceTree = "<group>"; };
@@ -743,6 +770,7 @@
 		29FABBF826D506E800306726 /* PirateChainPaymentURIProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PirateChainPaymentURIProtocol.swift; sourceTree = "<group>"; };
 		29FABBF926D506E800306726 /* PirateChainPaymentURI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PirateChainPaymentURI.h; sourceTree = "<group>"; };
 		29FABBFB26D506E800306726 /* Parameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parameter.swift; sourceTree = "<group>"; };
+		29FBB5AC272890C4006C6186 /* ARRRTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARRRTextField.swift; sourceTree = "<group>"; };
 		2CA18E68C36455A44147853A /* Pods-ECC-Wallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-Wallet.debug.xcconfig"; path = "Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet.debug.xcconfig"; sourceTree = "<group>"; };
 		2E7FFE45D0C33A74C7344A5E /* Pods-walletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-walletTests.release.xcconfig"; path = "Target Support Files/Pods-walletTests/Pods-walletTests.release.xcconfig"; sourceTree = "<group>"; };
 		36B81DA8FB2A74AD2728DEF5 /* Pods_ECC_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -954,6 +982,9 @@
 				0D12511023B557E60014EE3A /* Info.plist */,
 				2946090C26ADCEF200B0867F /* Barlow-Regular.ttf */,
 				0DE51DAB23BEB03C00709636 /* Zboto.otf */,
+				2989E7AF2727188B003FB57F /* bgSyncSound.m4a */,
+				295E3733272721BD00831D37 /* SyncEnd.mp3 */,
+				295E3732272721BD00831D37 /* SyncStarted.mp3 */,
 				0D12510A23B557E60014EE3A /* Preview Content */,
 			);
 			path = wallet;
@@ -997,6 +1028,7 @@
 			children = (
 				296CACE526D57757004DC784 /* SendMoneyView.swift */,
 				0D421AF923C66B7500E5E55E /* Sending.swift */,
+				29B6E5C52721AC37005D9EFC /* ConfirmTransaction.swift */,
 			);
 			path = "Send Flow";
 			sourceTree = "<group>";
@@ -1121,6 +1153,7 @@
 				29D53C9426D5606700A22656 /* ARRRToggleStyle.swift */,
 				290A0EEB26D5661900B6D74F /* KeyPadARRR.swift */,
 				2960027326D93E4300B41DD0 /* ARRRBackButton.swift */,
+				29FBB5AC272890C4006C6186 /* ARRRTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1175,6 +1208,9 @@
 				29AC1C6226E29BD1009F8A9B /* RecoveryBasedUnlink.swift */,
 				296DA0E626ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift */,
 				296DA0EA26ECBA22003F6D20 /* RecoveryWordsView.swift */,
+				29B06F7F272D92A8004C5C2F /* RescanOptionsView.swift */,
+				297046A327310C1300C73ED1 /* AboutUs.swift */,
+				29962EC92731526B0037F5BA /* CustomSafariView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1421,6 +1457,8 @@
 				0D12510C23B557E60014EE3A /* Preview Assets.xcassets in Resources */,
 				0DE51DAC23BEB03C00709636 /* Zboto.otf in Resources */,
 				8D3F362524A40FCF0087687A /* Localizable.strings in Resources */,
+				295E3736272721BD00831D37 /* SyncEnd.mp3 in Resources */,
+				295E3734272721BD00831D37 /* SyncStarted.mp3 in Resources */,
 				0DF3075424DB4A440080B0CF /* lottie_sending.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1444,10 +1482,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DC1430325C47880001D8E55 /* lottie_shield.json in Resources */,
+				295E3735272721BD00831D37 /* SyncStarted.mp3 in Resources */,
+				2989E7B02727188B003FB57F /* bgSyncSound.m4a in Resources */,
 				0DF3075724DB4A440080B0CF /* lottie_success.json in Resources */,
 				2946090F26ADCEF200B0867F /* Barlow-Regular.ttf in Resources */,
 				0D4332872644A370005B5B8E /* Assets.xcassets in Resources */,
 				0DCDFFDB24B6722B000F6999 /* LaunchScreen.storyboard in Resources */,
+				295E3737272721BD00831D37 /* SyncEnd.mp3 in Resources */,
 				0D2D5C1724CF3BD4001A58AD /* lottie_button_loading_new.json in Resources */,
 				0DCDFFDD24B6722B000F6999 /* Preview Assets.xcassets in Resources */,
 				0DCDFFDE24B6722B000F6999 /* Zboto.otf in Resources */,
@@ -1814,6 +1855,7 @@
 				29414BC726D41A140022401F /* QRCodeScanner.swift in Sources */,
 				29EA113426B492CC00601FDD /* RestorePhraseScreen.swift in Sources */,
 				29A5651926C4250B00ECC367 /* NotificationScreen.swift in Sources */,
+				29B06F80272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				0D11C23723BFB666001CF6F7 /* ShareScreen.swift in Sources */,
 				0D0565DD24EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift in Sources */,
 				0D92967923BEEFFC001518F3 /* BalanceDetail.swift in Sources */,
@@ -1842,6 +1884,7 @@
 				0D9D4E2F26336C0E007FD969 /* TabSelector.swift in Sources */,
 				0D4C100723C542D800CD2854 /* ZcashCheckCircle.swift in Sources */,
 				0DF26E2A24D2208A00F32978 /* AuthenticationHelper.swift in Sources */,
+				29B6E5C62721AC37005D9EFC /* ConfirmTransaction.swift in Sources */,
 				0D0565D924EC89C200B6AAE8 /* DetailListing.swift in Sources */,
 				29FABBFF26D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				29AF023626DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
@@ -1856,6 +1899,7 @@
 				2932002D26CEF2A30016D2E2 /* TransactionDetailsTitle.swift in Sources */,
 				0D9C203F23D7827F006F1510 /* WalletDetailsHeader.swift in Sources */,
 				0D562FD4257841FD00E843DD /* MemoUtils.swift in Sources */,
+				297046A427310C1300C73ED1 /* AboutUs.swift in Sources */,
 				0D0AAE0F2410237A009CD8F9 /* LottieAnimation.swift in Sources */,
 				0DC0847924BE583400F498A5 /* RateComponent.swift in Sources */,
 				0DFC0CF323C8EA1C0009DD7E /* ZcashCloseButton.swift in Sources */,
@@ -1867,6 +1911,7 @@
 				29B4E2D226B58D61008BB304 /* IntroWelcome.swift in Sources */,
 				0DF26E2124D1F75300F32978 /* ZcashMemoTextField.swift in Sources */,
 				0D41AF9F23FCAA4700EE4FC0 /* TextView.swift in Sources */,
+				29FBB5AD272890C4006C6186 /* ARRRTextField.swift in Sources */,
 				0D1C2F27240DAFE9001AA427 /* ZcashSeedPhraseGrid.swift in Sources */,
 				296DA0E726ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9126D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
@@ -1916,6 +1961,7 @@
 				2931F36F26CEDD4200F68099 /* ARRRCloseButton.swift in Sources */,
 				29207FDA26BFCDD500E9C4E4 /* SettingsScreen.swift in Sources */,
 				0D2D5C2324CF8AB2001A58AD /* ZcashNavigationBar.swift in Sources */,
+				29962ECA2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DC37D7324D37D7D00ACFE12 /* AddressHelperView.swift in Sources */,
 				0D11C23323BFA810001CF6F7 /* HostingController.swift in Sources */,
 				0D5E9B0D263748E400D98569 /* BalanceBreakdown.swift in Sources */,
@@ -1965,10 +2011,12 @@
 				0DCDFF9A24B6722B000F6999 /* Fonts.swift in Sources */,
 				0DACBB35264980630085F1CD /* OhMyScreen.swift in Sources */,
 				29FABC0426D506E800306726 /* Parameter.swift in Sources */,
+				29B06F82272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */,
 				29FABC0126D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				0DCDFF9B24B6722B000F6999 /* CombineSynchronizer.swift in Sources */,
 				0DCDFF9C24B6722B000F6999 /* SendZecView.swift in Sources */,
+				29FBB5AF272890C4006C6186 /* ARRRTextField.swift in Sources */,
 				29249D6E26DFA67400B4CC9B /* AuthenticateFaceID.swift in Sources */,
 				0DCDFF9D24B6722B000F6999 /* ProfileScreen.swift in Sources */,
 				0DCDFF9E24B6722B000F6999 /* ZECCWalletEnvironment.swift in Sources */,
@@ -2037,12 +2085,14 @@
 				0DCDFFBC24B6722B000F6999 /* TextView.swift in Sources */,
 				0DF3075124DB31570080B0CF /* DeviceFeedbackHelper.swift in Sources */,
 				0DCDFFBD24B6722B000F6999 /* ZcashSeedPhraseGrid.swift in Sources */,
+				29962ECC2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DCDFFBE24B6722B000F6999 /* Sending.swift in Sources */,
 				29414BC626D41A140022401F /* QRCodeImagePicker.swift in Sources */,
 				0DCDFFBF24B6722B000F6999 /* String+Zcash.swift in Sources */,
 				0DBA1E1F24CB628B009C654E /* DisplayAddress.swift in Sources */,
 				0D3E6D0026814E5D000EF685 /* SaplingParameterDownloader+Combine.swift in Sources */,
 				0DCDFFC024B6722B000F6999 /* UIKit+Extensions.swift in Sources */,
+				297046A627310C1300C73ED1 /* AboutUs.swift in Sources */,
 				296CACE826D57757004DC784 /* SendMoneyView.swift in Sources */,
 				0DCDFFC124B6722B000F6999 /* ZcashButtonBackground.swift in Sources */,
 				29596DA026E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */,
@@ -2051,6 +2101,7 @@
 				2963F33526C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
 				0D82F32B261284060058B05D /* Alerts.swift in Sources */,
 				2932002F26CEF2A30016D2E2 /* TransactionDetailsTitle.swift in Sources */,
+				29B6E5C82721AC37005D9EFC /* ConfirmTransaction.swift in Sources */,
 				0D5E4AA82527B440001CB335 /* BackgroundTasks.swift in Sources */,
 				29D53C9726D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				2905274626D7B11D007CA5AA /* UIHostingController-Keyboard.swift in Sources */,
@@ -2151,6 +2202,7 @@
 				29414BC826D41A140022401F /* QRCodeScanner.swift in Sources */,
 				29EA113526B492CC00601FDD /* RestorePhraseScreen.swift in Sources */,
 				29A5651A26C4250B00ECC367 /* NotificationScreen.swift in Sources */,
+				29B06F81272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				0DE30363263A158400CF877A /* ShareScreen.swift in Sources */,
 				0DE30364263A158400CF877A /* HeaderFooterTxDetailView.swift in Sources */,
 				0DE30365263A158400CF877A /* BalanceDetail.swift in Sources */,
@@ -2179,6 +2231,7 @@
 				0DE30377263A158400CF877A /* TabSelector.swift in Sources */,
 				0DE30378263A158400CF877A /* ZcashCheckCircle.swift in Sources */,
 				0DE30379263A158400CF877A /* AuthenticationHelper.swift in Sources */,
+				29B6E5C72721AC37005D9EFC /* ConfirmTransaction.swift in Sources */,
 				0DE3037A263A158400CF877A /* DetailListing.swift in Sources */,
 				29FABC0026D506E800306726 /* PirateChainPaymentURIProtocol.swift in Sources */,
 				29AF023726DA486900B21EAC /* WordsVerificationScreen.swift in Sources */,
@@ -2193,6 +2246,7 @@
 				2932002E26CEF2A30016D2E2 /* TransactionDetailsTitle.swift in Sources */,
 				0DE30381263A158400CF877A /* WalletDetailsHeader.swift in Sources */,
 				0DE30382263A158400CF877A /* MemoUtils.swift in Sources */,
+				297046A527310C1300C73ED1 /* AboutUs.swift in Sources */,
 				0DE30383263A158400CF877A /* LottieAnimation.swift in Sources */,
 				0DE30384263A158400CF877A /* RateComponent.swift in Sources */,
 				0DE30385263A158400CF877A /* ZcashCloseButton.swift in Sources */,
@@ -2204,6 +2258,7 @@
 				29B4E2D326B58D61008BB304 /* IntroWelcome.swift in Sources */,
 				0DE3038A263A158400CF877A /* ZcashMemoTextField.swift in Sources */,
 				0DE3038B263A158400CF877A /* TextView.swift in Sources */,
+				29FBB5AE272890C4006C6186 /* ARRRTextField.swift in Sources */,
 				0DE3038C263A158400CF877A /* ZcashSeedPhraseGrid.swift in Sources */,
 				296DA0E826ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
@@ -2253,6 +2308,7 @@
 				2931F37026CEDD4200F68099 /* ARRRCloseButton.swift in Sources */,
 				29207FDB26BFCDD500E9C4E4 /* SettingsScreen.swift in Sources */,
 				0DE303AA263A158400CF877A /* ZcashNavigationBar.swift in Sources */,
+				29962ECB2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DE303AB263A158400CF877A /* AddressHelperView.swift in Sources */,
 				0DE303AC263A158400CF877A /* HostingController.swift in Sources */,
 				0DE303AD263A158400CF877A /* BalanceBreakdown.swift in Sources */,
@@ -2591,9 +2647,9 @@
 			baseConfigurationReference = 4561814BA5B2134841DF75E7 /* Pods-ECC-Wallet-no-logging.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 6;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = 9TR5BMPZP3;
@@ -2609,10 +2665,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.meshbits.piratewallet;
 				PRODUCT_NAME = "ECC-Wallet-no-logs";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Apple store provision profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2623,9 +2679,9 @@
 			baseConfigurationReference = CA0B4D8E758BD88483D3B5EE /* Pods-ECC-Wallet-no-logging.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = 9TR5BMPZP3;
 				ENABLE_BITCODE = NO;
@@ -2640,10 +2696,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.meshbits.piratewallet;
 				PRODUCT_NAME = "ECC-Wallet-no-logs";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Apple store provision profile";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -11,7 +11,6 @@ import ZcashLightClientKit
 
 struct TheNoScreen: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
-   
     @ViewBuilder func theUnscreen() -> some View {
         ZStack(alignment: .center) {
             ARRRBackground.darkSplashScreen
@@ -64,9 +63,14 @@ struct TheNoScreen: View {
             CreateNewWallet().environmentObject(appEnvironment)
         
         case .failure(let error):
-            OhMyScreen().environmentObject(
-                OhMyScreenViewModel(failure: mapToUserFacingError(ZECCWalletEnvironment.mapError(error: error)))
-            )
+            // Handled the case when it throws an error/failure in setup - so it's best to reset and clear it.
+            theUnscreen().onAppear(){
+                ZECCWalletEnvironment.shared.nuke(abortApplication: true)
+            }
+            // Keep error for later use and removed backup flow
+//            OhMyScreen().environmentObject(
+//                OhMyScreenViewModel(failure: mapToUserFacingError(ZECCWalletEnvironment.mapError(error: error)))
+//            )
         }
     }
     var body: some View {

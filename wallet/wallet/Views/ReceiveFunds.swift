@@ -11,8 +11,9 @@ import ZcashLightClientKit
 struct ReceiveFunds: View {
     
     let unifiedAddress: UnifiedAddress
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     @State var selectedTab: Int = 0
+    @State var qrImage : Image?
     var body: some View {
         NavigationView {
             
@@ -22,6 +23,7 @@ struct ReceiveFunds: View {
                     DisplayAddress(address: unifiedAddress.zAddress,
                                    title: "address_shielded".localized(),
                                    badge: Image("skullcoin"),
+                                   qrImage: qrImage  ?? Image("QrCode"),
                                    accessoryContent: { EmptyView() })
                         
                 })
@@ -35,7 +37,10 @@ struct ReceiveFunds: View {
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
-                     presentationMode.wrappedValue.dismiss()
+//                     presentationMode.wrappedValue.dismiss()
+                         if UIApplication.shared.windows.count > 0 {
+                             UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
+                         }
                      }).frame(width: 30, height: 30).padding(.top,40)
              })
             .onAppear {

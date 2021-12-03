@@ -114,34 +114,24 @@ struct HowItWorks: View {
                     EmptyView()
                 }
                 .isDetailLink(true)
-            }).navigationBarHidden(true)
-                .zcashNavigationBar(leadingItem: {
-                
-                    Button {
-                        if self.viewModel.destination.id == 0 {
-                            presentationMode.wrappedValue.dismiss()
-                        }else{
-                            self.viewModel.destination.back()
-                            self.viewModel.updateLayoutAccordingly()
-                        }
-                        
-                    } label: {
-                        Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
-                    }.frame(width: 30, height: 30)
-                    
-                    
-                    
-            }, headerItem: {
-                HStack{
-                    Text(self.viewModel.mScreenTitle)
-                        .scaledFont(size: 18)
-                        .foregroundColor(Color.zSettingsSectionHeader)
-                        .frame(alignment: Alignment.center)
-                }
-            }, trailingItem: {
-                EmptyView()
             })
-            
+                .navigationBarBackButtonHidden(true)
+                .navigationTitle(self.viewModel.mScreenTitle).navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading:  Button(action: {
+                    if self.viewModel.destination.id == 0 {
+                        presentationMode.wrappedValue.dismiss()
+                    }else{
+                        self.viewModel.destination.back()
+                        self.viewModel.updateLayoutAccordingly()
+                    }
+                    
+                }) {
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image("backicon").resizable().frame(width: 50, height: 50)
+                        }
+                    }
+                })
            
             
         }

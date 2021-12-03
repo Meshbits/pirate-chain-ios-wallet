@@ -14,13 +14,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     @State var isShareModalDisplayed = false
     @State var isShareAddressShown = false
     @State var openRequestMoney = false
-    var qrImage: Image {
-        if let img = QRCodeGenerator.generate(from: self.address) {
-            return Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(self.address)") ))
-        } else {
-            return Image("zebra_profile")
-        }
-    }
+    var qrImage: Image
     var badge: Image
     var title: String
     var address: String
@@ -28,11 +22,12 @@ struct DisplayAddress<AccesoryContent: View>: View {
     let qrSize: CGFloat = 200
     var accessoryContent: AccesoryContent
     
-    init(address: String, title: String, chips: Int = 8, badge: Image, @ViewBuilder accessoryContent: (() -> (AccesoryContent))) {
+    init(address: String, title: String, chips: Int = 8, badge: Image, qrImage:Image, @ViewBuilder accessoryContent: (() -> (AccesoryContent))) {
         self.address = address
         self.title = title
         self.chips = address.slice(into: chips)
         self.badge = badge
+        self.qrImage = qrImage
         self.accessoryContent = accessoryContent()
     }
     
@@ -58,6 +53,22 @@ struct DisplayAddress<AccesoryContent: View>: View {
          
                 tracker.track(.tap(action: .copyAddress), properties: [:])
             }) {
+                
+               
+                HStack{
+                    Spacer()
+                    Text(self.address)
+                        .foregroundColor(.gray)
+                        .scaledFont(size: 15)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Image(systemName: "doc.on.doc").foregroundColor(.gray)
+                        .scaledFont(size: 20).padding(.trailing, 10)
+                }.padding([.horizontal], 15)
+                .frame(minHeight: 50)
+               
+                /*
+                 // Removed the slices instead we would like to display the text in one go
                 VStack {
                     if chips.count <= 2 {
                         
@@ -79,7 +90,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
                     
                 }.padding([.horizontal], 15)
                 .frame(minHeight: 96)
-                
+                 */
             }.alert(item: self.$copyItemModel) { (p) -> Alert in
                 PasteboardAlertHelper.alert(for: p)
             }
@@ -112,10 +123,11 @@ struct DisplayAddress<AccesoryContent: View>: View {
             }) {
                 BlueButtonView(aTitle: "Share".localized())
             }
-        }.padding(10)
+        }
+        .padding(10)
             .sheet(isPresented: self.$isShareAddressShown) {
                 ShareSheet(activityItems: [self.address])
-        }
+            }
     }
 }
 //

@@ -44,13 +44,13 @@ struct OhMyScreen: View {
                 VStack(spacing: 24) {
 
                     Text("We couldn't initialize your wallet".localized())
-                        .foregroundColor(.black)
-                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                        .font(.system(size: 15))
                     if let error = environment.error {
                         Text("""
                              Reason:
                              \(error.localizedDescription)
-                             """)
+                             """).font(.system(size: 12))
                     }
                     
                     VStack(alignment: .leading) {
@@ -67,7 +67,7 @@ struct OhMyScreen: View {
                                    selection: self.$destination,
                                    label: {
                                     Text("Backup Seed".localized())
-                                        .foregroundColor(.black)
+                                        .foregroundColor(.white)
                                         .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .black, lineWidth: 1)))
                                             .frame(height: 48)
                                    })
@@ -98,8 +98,8 @@ struct OhMyScreen: View {
                         }
                     }) {
                         Text("button_applicationlogs".localized())
-                            .font(.system(size: 20))
-                            .foregroundColor(.black)
+                            .font(.system(size: 15))
+                            .foregroundColor(.white)
                             .opacity(0.6)
                             .frame(height: ScreenConstants.buttonHeight)
                     }
@@ -127,7 +127,7 @@ struct OhMyScreen: View {
                         }
                     }, label: {
                         Text("Wipe".localized())
-                            .foregroundColor(.black)
+                            .foregroundColor(.white)
                             .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .black, lineWidth: 1)))
                                 .frame(height: 48)
                     })

@@ -62,6 +62,8 @@ final class HomeViewModel: ObservableObject {
     private var cancellable = [AnyCancellable]()
     private var environmentCancellables = [AnyCancellable]()
     private var zecAmountFormatter = NumberFormatter.zecAmountFormatter
+    var qrCodeImage: Image?
+
     init() {
         self.destination = nil
         openQRCodeScanner = false
@@ -107,6 +109,8 @@ final class HomeViewModel: ObservableObject {
                .store(in: &diposables)
         
         subscribeToSynchonizerEvents()
+        
+        generateQRCodeImage()
     }
     
     deinit {
@@ -130,6 +134,14 @@ final class HomeViewModel: ObservableObject {
                 self?.balance = b
             })
             .store(in: &synchronizerEvents)
+    }
+    
+    func generateQRCodeImage(){
+           if let img = QRCodeGenerator.generate(from: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress) {
+               qrCodeImage = Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress)") ))
+           } else {
+               qrCodeImage = Image("QRCodeIcon")
+           }
     }
     
     func unsubscribeFromSynchonizerEvents() {
@@ -244,7 +256,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func setAmount(_ zecAmount: Double) {
-        guard let value = self.zecAmountFormatter.string(for: zecAmount - ZcashSDK.defaultFee().asHumanReadableZecBalance()) else { return }
+        guard let value = self.zecAmountFormatter.string(for: zecAmount - Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance()) else { return }
         self.sendZecAmountText = value
     }
     
@@ -527,7 +539,7 @@ struct Home: View {
                 )
                 .frame(height: 64)
                 .padding([.leading, .trailing], 10)
-                .padding([.top], geo.safeAreaInsets.top-10)
+                .padding(.top,40)
                 
 //                SendZecView(zatoshi: self.$viewModel.sendZecAmountText)
 //                    .opacity(amountOpacity)
@@ -567,7 +579,7 @@ struct Home: View {
                             Button(action: {
                                 self.selectedModel = row
                             }) {
-                                DetailCard(model: row, backgroundColor: .zDarkGray2)
+                                DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:false)
                             }
                             .listRowBackground(ARRRBackground())
                             .frame(height: 69)
@@ -765,7 +777,7 @@ struct Home: View {
                 ProfileScreen()
                     .environmentObject(self.appEnvironment)
             case .receiveFunds:
-                ReceiveFunds(unifiedAddress: self.appEnvironment.synchronizer.unifiedAddress)
+                ReceiveFunds(unifiedAddress: self.appEnvironment.synchronizer.unifiedAddress,qrImage:self.viewModel.qrCodeImage)
                     .environmentObject(self.appEnvironment)
             case .feedback(let score):
                 #if ENABLE_LOGGING
@@ -796,10 +808,12 @@ struct Home: View {
             tracker.track(.screen(screen: .home), properties: [:])
             tracker.track(.tap(action: .balanceDetail), properties: [:])
             showFeedbackIfNeeded()
+            
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitle("", displayMode: .inline)
-        .navigationBarHidden(true)  
+        .navigationBarHidden(true)
+        .edgesIgnoringSafeArea([.top])
         .zOverlay(isOverlayShown: $isOverlayShown) {
             FeedbackDialog(rating: $feedbackRating) { feedbackResult in
                 self.isOverlayShown = false
@@ -815,6 +829,11 @@ struct Home: View {
                 
             }
             .frame(height: 240)
+        }
+        .sheet(item: self.$selectedModel, onDismiss: {
+            self.selectedModel = nil
+        }) { (row)  in
+            TxDetailsWrapper(row: row)
         }
     }
     

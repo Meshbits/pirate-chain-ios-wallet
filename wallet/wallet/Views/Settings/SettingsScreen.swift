@@ -18,7 +18,7 @@ struct SettingsRowData : Equatable {
 
 
 enum SettingsDestination: Int {
-    case openLanguage = 0
+//    case openLanguage = 0
     case openNotifications = 1
     case handleFaceId = 2
     case openRecoveryPhrase = 3
@@ -27,33 +27,40 @@ enum SettingsDestination: Int {
     case openPrivateServerConfig = 6
     case openiCloudBackup = 7
     case openPrivacyPolicy = 8
-    case openTermsAndConditions = 9
-    case openSupport = 10
+    case openlicense = 9
+//    case openSupport = 10
     case startRescan = 11
+    case openAboutUs = 12
 }
 
 
 struct SettingsScreen: View {
     
-    @State var showActionSheet: Bool = false
+    var mVersionDetails = "Build Version: 1.0.0-2-54-g2c852e9 (Beta)"
+    
+    @State var mURLString = ""
+    
+    @State var mOpenSafari = false
 
-    var generalSection = [SettingsRowData(id:0,title:"Language".localized()),SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
+    var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
-    var securitySection = [SettingsRowData(id:2,title:"Face ID".localized()),
+    var securitySection = [SettingsRowData(id:2,title:"Biometric ID".localized()),
                            SettingsRowData(id:3,title:"Recovery Phrase".localized()),
                            SettingsRowData(id:4,title:"Change PIN".localized()),
                            SettingsRowData(id:5,title:"Unlink Device".localized())]
 //    var walletSection = [SettingsRowData(id:6,title:"Private Server Config")] //,
 //                         SettingsRowData(id:7,title:"iCloud backup")]
     var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),
-                        SettingsRowData(id:9,title:"Terms & Conditions".localized()),
-                        SettingsRowData(id:10,title:"Support".localized())]
+                        SettingsRowData(id:9,title:"License".localized()),
+                        SettingsRowData(id:12,title:"About Pirate Wallet".localized())
+                        /*,
+                        SettingsRowData(id:10,title:"Support".localized())*/]
     
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     @State var destination: SettingsDestination?
     
-    @State var openLanguageScreen = false
+//    @State var openLanguageScreen = false
     
     @State var mSelectedSettingsRowData: SettingsRowData?
     
@@ -130,7 +137,7 @@ struct SettingsScreen: View {
                         SettingsSectionHeaderView(aTitle:"About".localized())
                         VStack {
                             ForEach(aboutSection, id: \.id) { settingsRowData in
-                               SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:10)
+                               SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:12)
                                 .onTapGesture {
                                     self.mSelectedSettingsRowData = settingsRowData
                                     openRespectiveScreenBasisSelection()
@@ -139,10 +146,12 @@ struct SettingsScreen: View {
                             }
                         }
                         .modifier(SettingsSectionBackgroundModifier())
+                        
+                        
+                      Text(mVersionDetails).scaledFont(size: 15).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,20)
+
                     }
-                    .padding(.top,10)
                     .padding(.bottom,2)
-                    .background(Color.screenBgColor)
           
                 }
                 
@@ -193,86 +202,91 @@ struct SettingsScreen: View {
                                selection: $destination
                 ) {
                    EmptyView()
-                }
+                }.isDetailLink(false)
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "privacyURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openPrivacyPolicy,
+                    destination: RescanOptionsView(rescanDataViewModel: RescanDataViewModel()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                               tag: SettingsDestination.startRescan,
                                selection: $destination
                 ) {
                    EmptyView()
                 }
                 
                 NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "termsURL".localized()).environmentObject(self.appEnvironment)
-                        .onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openTermsAndConditions,
+                    destination: AboutUs().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                        .navigationBarTitle("", displayMode: .inline)
+                        .navigationBarBackButtonHidden(true),
+                               tag: SettingsDestination.openAboutUs,
                                selection: $destination
                 ) {
                    EmptyView()
                 }
                 
-                NavigationLink(
-                    destination: OpenInAppBrowser(aURLString: "supportURL".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openSupport,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
                 
+//                Group {
+//
+//                    NavigationLink(
+//                        destination: OpenInAppBrowser(aURLString: "privacyURL".localized(),aTitle: "Privacy Policy".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+//                            ,
+//                                   tag: SettingsDestination.openPrivacyPolicy,
+//                                   selection: $destination
+//                    ) {
+//                       EmptyView()
+//                    }
+                    
+//                    NavigationLink(
+//                        destination: OpenInAppBrowser(aURLString: "licenseURL".localized(),aTitle: "License".localized()).environmentObject(self.appEnvironment)
+//                            .onAppear { self.tabBar.isHidden = true }
+//                            ,
+//                                   tag: SettingsDestination.openlicense,
+//                                   selection: $destination
+//                    ) {
+//                       EmptyView()
+//                    }
+//
+//                 }
+                
+//                NavigationLink(
+//                    destination: OpenInAppBrowser(aURLString: "supportURL".localized(),aTitle: "Support".localized()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+//                        ,
+//                               tag: SettingsDestination.openSupport,
+//                               selection: $destination
+//                ) {
+//                   EmptyView()
+//                }
+//
             }.background(TabBarAccessor { tabbar in
                 self.tabBar = tabbar
             })
-            .actionSheet(isPresented: $showActionSheet) {
-                       ActionSheet(
-                           title: Text(""),
-                           message: Text("Do you want to Re-scan your wallet?".localized()),
-                        buttons: [
-//                            .destructive(Text("Cancel"), action: {
-//
-////                                do {
-////                                    try self.appEnvironment.wipe(abortApplication: false)
-////                                    self.alertItem = AlertItem(type: .feedback(
-////                                                                message: "SUCCESS! Wallet data cleared. Please relaunch to rescan!",
-////                                                                action: {
-////                                        abort()
-////                                    }))
-////                                } catch {
-////                                    self.alertItem = AlertItem(
-////                                        type: AlertType.actionable(
-////                                                                title: "Wipe Failed",
-////                                                                message: "Wipe operation failed with error \(error). You might want to screenshot this. Your app could work properly. You can close it and restart it, or nuke it.",
-////                                                                destructiveText: "NUKE WALLET".localized(),
-////                                                                destructiveAction: { self.nukeWallet() },
-////                                                                dismissText: "Close App",
-////                                                                dismissAction: {
-////                                                                    abort()
-////                                                                })
-////                                    )
-////                                }
+            .sheet(isPresented: $mOpenSafari) {
+                CustomSafariView(url:URL(string: self.mURLString)!)
+            }
+//            .actionSheet(isPresented: $showActionSheet) {
+//                       ActionSheet(
+//                           title: Text(""),
+//                           message: Text("Do you want to Re-scan your wallet?".localized()),
+//                        buttons: [
+//                            .default(Text("Quick Re-Scan".localized()), action: {
+//                                self.appEnvironment.synchronizer.quickRescan()
 //                            }),
-                            .default(Text("Quick Re-Scan".localized()), action: {
-                                self.appEnvironment.synchronizer.quickRescan()
-                            }),
-                            .default(Text("Later".localized()))
-                        ]
-                       )
-               }
+//                            .default(Text("Later".localized()))
+//                        ]
+//                       )
+//               }
             .navigationBarHidden(true)
-            .bottomSheet(isPresented: $openLanguageScreen,
-                          height: 500,
-                          topBarHeight: 0,
-                          topBarCornerRadius: 20,
-                          showTopIndicator: true) {
-                SelectLanguage().environmentObject(appEnvironment)
-                
-            }.onAppear(){
-                NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissSettings"), object: nil, queue: .main) { (_) in
-                    openLanguageScreen = false
-                }
+//            .bottomSheet(isPresented: $openLanguageScreen,
+//                          height: 500,
+//                          topBarHeight: 0,
+//                          topBarCornerRadius: 20,
+//                          showTopIndicator: true) {
+//                SelectLanguage().environmentObject(appEnvironment)
+//            }
+            .onAppear(){
+//                NotificationCenter.default.addObserver(forName: NSNotification.Name("DismissSettings"), object: nil, queue: .main) { (_) in
+//                    openLanguageScreen = false
+//                }
                 
                 if self.tabBar != nil {
                     self.tabBar.isHidden = false
@@ -281,8 +295,8 @@ struct SettingsScreen: View {
                 switch output {
                 case .failed(_), .userFailed:
                     print("SOME ERROR OCCURRED")
-                    UserSettings.shared.isBiometricDisabled = true
-                    NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+//                    UserSettings.shared.isBiometricDisabled = true
+//                    NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
 
                 case .success:
                     print("SUCCESS IN SETTINGS")
@@ -304,11 +318,16 @@ struct SettingsScreen: View {
         
         
         switch(self.mSelectedSettingsRowData?.id){
-            case SettingsDestination.openLanguage.rawValue:
-                openLanguageScreen.toggle()
+//            case SettingsDestination.openLanguage.rawValue:
+//                openLanguageScreen.toggle()
+//            break
+        case SettingsDestination.openlicense.rawValue:
+            self.mURLString  = "licenseURL".localized()
+            mOpenSafari = true
             break
-            case SettingsDestination.startRescan.rawValue:
-            showActionSheet.toggle()
+        case SettingsDestination.openPrivacyPolicy.rawValue:
+            self.mURLString  = "privacyURL".localized()
+            mOpenSafari = true
             break
             default:
                 print("Something else is tapped")
@@ -433,7 +452,7 @@ struct SettingsRowWithToggle: View {
                     }
             }
             .alert(isPresented: $isPermissionDenied) {
-                Alert(title: Text("Permission Denied".localized()), message: Text("Please enable the Face ID permission in the settings.".localized()), dismissButton: .default(Text("Ok".localized())))
+                Alert(title: Text("Permission Denied".localized()), message: Text("Please enable the Biometric ID permission in the settings.".localized()), dismissButton: .default(Text("Ok".localized())))
             }
             
             Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
@@ -449,7 +468,7 @@ struct SettingsRowWithToggle: View {
     
     func authenticate() {
          if UserSettings.shared.biometricInAppStatus {
-             AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+             AuthenticationHelper.authenticate(with: "Authenticate Biometric ID".localized())
          }
      }
 }

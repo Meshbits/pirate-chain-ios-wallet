@@ -47,7 +47,7 @@ struct DetailCard: View {
  
     var model: DetailModel
     var backgroundColor: Color = Color.init(red: 0.13, green: 0.14, blue: 0.15)
-        
+    var isFromWalletDetails = false
     var zecAmount: some View {
         let amount = model.arrrAmount.toZecAmount()
         let text = ((model.arrrAmount > 0 && model.arrrAmount >= 0.001) ? "+" : "") + ((model.arrrAmount < 0.001 && model.arrrAmount > 0) ? "< 0.001" : amount)
@@ -103,6 +103,9 @@ struct DetailCard: View {
             }
             
         }.cornerRadius(5)
+            .background(isFromWalletDetails ? Rectangle().fill(Color.init(red: 27.0/255.0, green: 28.0/255.0, blue: 29.0/255.0)) : Rectangle().fill((Color.clear)))
+            .padding()
+        
         
     }
     
@@ -129,7 +132,7 @@ extension String {
         switch model.status {
     
         case .paid(let success):
-            transactionSubTitle = success ? (("sent via ".localized()) + (model.arrrAddress ?? "NA".localized())) : ("pending via ".localized()) + (model.arrrAddress ?? "NA".localized())
+            transactionSubTitle = success ? (("sent to ".localized()) + (model.arrrAddress ?? "NA".localized())) : ("pending via ".localized()) + (model.arrrAddress ?? "NA".localized())
         case .received:
             transactionSubTitle = "received via ".localized()
         }

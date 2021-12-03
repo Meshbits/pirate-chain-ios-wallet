@@ -115,7 +115,7 @@ struct WalletDetails: View {
                 
                 VStack(alignment: .center, spacing: 10) {
                     Text("Wallet History".localized()).scaledFont(size: 20).multilineTextAlignment(.center).foregroundColor(.white)
-                }
+                }.padding(.top,50)
                 
                 ZcashNavigationBar(
                     leadingItem: {
@@ -146,10 +146,10 @@ struct WalletDetails: View {
                                 Button(action: {
                                     self.selectedModel = row
                                 }) {
-                                    DetailCard(model: row, backgroundColor: .zDarkGray2)
+                                    DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:true)
                                 }
-                                .listRowBackground(ARRRBackground())
-                                .frame(height: 69)
+                                .buttonStyle(PlainButtonStyle())
+                                .frame(height: 60)
                                 .cornerRadius(0)
                                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                                   
@@ -158,13 +158,7 @@ struct WalletDetails: View {
                     }
                     
                 }
-                .listStyle(PlainListStyle())
-                .modifier(BackgroundPlaceholderModifierHome())
-                .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.zGray, lineWidth: 1.0)
-                )
+                .modifier(BackgroundPlaceholderModifierRescanOptions())
                 .padding()
                 
             }
@@ -185,6 +179,7 @@ struct WalletDetails: View {
             UITableView.appearance().separatorStyle = .singleLine
         }
         .navigationBarHidden(true)
+        .edgesIgnoringSafeArea([.top])
         .sheet(item: self.$selectedModel, onDismiss: {
             self.selectedModel = nil
         }) { (row)  in

@@ -85,6 +85,7 @@ struct ScanAddress: View {
                     scanFrame
                     Text("scan_invalidQR".localized())
                         .bold()
+                        .scaledFont(size: 14)
                         .foregroundColor(.white)
                         .opacity(self.wrongAddressScanned ? 1 : 0)
                         .animation(.easeInOut)

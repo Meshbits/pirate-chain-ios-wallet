@@ -75,8 +75,9 @@
 "Enter your Seed Phrase" = "Enter your Seed Phrase";
 "Make sure nobody is watching you!" = "Make sure nobody is watching you!";
 "Wallet Birthday height" = "Wallet Birthday height";
-"If you don't know it, leave it blank. First Sync will take longer." = "If you don't know it, leave it blank. First Sync will take longer.";
+"If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000." = "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.";
 "Proceed" = "Proceed";
+"\nChoose a birthday height for sync, leave it default if you are not sure.\n"="\nChoose a birthday height for sync, leave it default if you are not sure.\n";
 "Restore from Seed Phrase" = "Restore from Seed Phrase";
 "Your seed phrase is valid" = "Your seed phrase is valid";
 "Your seed phrase is invalid!" = "Your seed phrase is invalid!";
@@ -130,7 +131,7 @@
 //ProfileScreen
 "button_feedback" = "Send Feedback";
 "button_applicationlogs" = "See Application Logs";
-"ECC Wallet" = "ECC Wallet";
+"ECC Wallet" = "Pirate Chain Wallet";
 "profile_screen" = "Shielded User";
 
 //FundsAtRisk
@@ -166,9 +167,9 @@
 
 // URLs - Settings
 
-"privacyURL" = "https://pirate.black/privacy-policy/";
-"termsURL" = "https://pirate.black/privacy-policy/";
-"supportURL" = "https://pirate.black/privacy-policy/";
+"privacyURL" = "https://github.com/Meshbits/pirate-chain-ios-wallet/blob/master/PRIVACY.md";
+"licenseURL" = "https://github.com/Meshbits/pirate-chain-ios-wallet/blob/master/LICENSE";
+"supportURL" = "https://raw.githubusercontent.com/Meshbits/pirate-chain-ios-wallet/master/PRIVACY.md";
 
 
 // Onboarding Screens
@@ -187,19 +188,20 @@
 
 "Language" = "Language";
 "Private Server Config" = "Private Server Config";
-"Face ID" = "Face ID";
+"Biometric ID" = "Biometric ID";
 "Recovery Phrase" = "Recovery Phrase";
 "Change PIN" = "Change PIN";
 "Unlink Device" = "Unlink Device";
 "Privacy Policy" = "Privacy Policy";
 "Terms & Conditions" = "Terms & Conditions";
+"License" = "License";
 "Support" = "Support";
 "Settings" = "Settings";
 "General" = "General";
 "Security" = "Security";
 "About" = "About";
 "Permission Denied" = "Permission Denied";
-"Please enable the Face ID permission in the settings." = "Please enable the Face ID permission in the settings.";
+"Please enable the Biometric ID permission in the settings." = "Please enable the Biometric ID permission in the settings.";
 "Ok" = "Ok";
 "PIN SET Successfully!" = "PIN SET Successfully!";
 
@@ -279,17 +281,17 @@
 "You’re all set to deposit, receive, and store crypto in your Pirate wallet" = "You’re all set to deposit, receive, and store crypto in your Pirate wallet";
 "Done" = "Done";
 
-// Authenticate Face ID
-"Authenticate Face ID" = "Authenticate Face ID";
-"Login quickly using your Face ID" = "Login quickly using your Face ID";
+// Authenticate Biometric ID
+"Authenticate Biometric ID" = "Authenticate Biometric ID";
+"Login quickly using your Biometric ID" = "Login quickly using your Biometric ID";
 
 "Skip" = "Skip";
 "Allow" = "Allow";
 
 // Congratulations
 
-"Congratulation! \nFace ID setup successfully" = "Congratulation! \nFace ID setup successfully";
-"You have successfuly enabled Face ID based authentication. \n\nNow securely login using your Face ID" = "You have successfuly enabled Face ID based authentication. \n\nNow securely login using your Face ID";
+"Congratulation! \nBiometric ID setup successfully" = "Congratulation! \nBiometric ID setup successfully";
+"You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID" = "You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID";
 "Login" = "Login";
 
 
@@ -320,8 +322,8 @@
 "Confirmed" = "Confirmed";
 "You are exiting your wallet" = "You are exiting your wallet";
 "While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?" = "While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?";
-"NEVERMIND" = "NEVERMIND";
-"SEE TX ONLINE" = "SEE TX ONLINE";
+"NEVERMIND" = "Nevermind";
+"SEE TX" = "See Transaction";
 "network fee" = "network fee";
 "from your shielded wallet" = "from your shielded wallet";
 "to your shielded wallet" = "to your shielded wallet";
@@ -351,6 +353,7 @@
 
 "iCloud Backup" = "iCloud Backup";
 "Recovery Phase" = "Recovery Phase";
+"Restore Wallet" = "Restore Wallet";
 "Create New Wallet" =  "Create New Wallet";
 "Could not restore wallet" = "Could not restore wallet";
 "There's a problem restoring your wallet. Please verify your seed phrase and try again." = "There's a problem restoring your wallet. Please verify your seed phrase and try again.";
@@ -505,3 +508,19 @@
 "Quick Re-Scan" = "Quick Re-Scan";
 "Later" = "Later";
 "Do you want to Re-scan your wallet?" = "Do you want to Re-scan your wallet?";
+"Transaction Amount: "="Transaction Amount: ";
+"To: " = "To: ";
+"We found your wallet didn't had enough funds for the fees, the transaction needs to been adjusted to cater the fee of 0.0001 ARRR. Please, confirm the adjustment in the transaction to include miner fee." = "We found your wallet didn't had enough funds for the fees, the transaction needs to been adjusted to cater the fee of 0.0001 ARRR. Please, confirm the adjustment in the transaction to include miner fee.";
+"Pirate Chain Wallet" = "Pirate Chain Wallet";
+"Please keep the app running in the background, while we sync your wallet and keep it up to date. Thank you!" = "Please keep the app running in the background, while we sync your wallet and keep it up to date. Thank you!";
+"sent to " = "sent to ";
+"Enter Amount" = "Enter Amount";
+
+
+// Rescan flow
+
+"Rescan Now" = "Rescan Now";
+"Rescanning started with height:" = "Rescanning started with height:";
+"Select Rescan Wallet Height" = "Select Rescan Wallet Height";
+"Please wait, existing scanning is in progress." = "Please wait, existing downloading/scanning is in progress.";
+"Please wait, while we setup your wallet!" = "Please wait, while we setup your wallet!";

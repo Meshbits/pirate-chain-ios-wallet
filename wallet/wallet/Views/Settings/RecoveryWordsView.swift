@@ -68,7 +68,7 @@ struct RecoveryWordsView: View {
     
     var body: some View {
         ZStack{
-           
+            ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack(alignment: .center, content: {
                 Text("Your Recovery Phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
                     .scaledFont(size: 32)
@@ -97,33 +97,32 @@ struct RecoveryWordsView: View {
                 }
                 
             })
-            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
-        .zcashNavigationBar(leadingItem: {
-            
-            
-            ARRRBackButton(action: {
-                if self.viewModel.mWordIndex == 1 {
-                    presentationMode.wrappedValue.dismiss()
-                }else{
-                    self.viewModel.backPressedToPopBack()
-                }
-                
-            }).frame(width: 30, height: 30)
-            .padding(.top,10)
-        }, headerItem: {
-            HStack{
-                EmptyView()
-            }
-        }, trailingItem: {
-            ARRRCloseButton(action: {
-                presentationMode.wrappedValue.dismiss()
-                }).frame(width: 30, height: 30).padding(.top,20)
-            
-        })
+        .navigationBarBackButtonHidden(true)
+           .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+           .navigationBarItems(leading:  Button(action: {
+               if self.viewModel.mWordIndex == 1 {
+                   presentationMode.wrappedValue.dismiss()
+               }else{
+                   self.viewModel.backPressedToPopBack()
+               }
+           }) {
+               VStack(alignment: .leading) {
+                   ZStack{
+                       Image("backicon").resizable().frame(width: 50, height: 50)
+                   }
+               }
+           },trailing: Button(action: {
+               presentationMode.wrappedValue.dismiss()
+           }) {
+               VStack(alignment: .leading) {
+                   ZStack{
+                       Image("closebutton").resizable().frame(width: 50, height: 50)
+                   }
+               }
+           })
     }
-    
+
 }
 
 struct RecoveryWordsView_Previews: PreviewProvider {

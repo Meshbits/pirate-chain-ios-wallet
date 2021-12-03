@@ -144,11 +144,14 @@ struct PasscodeView: View {
                 Button {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
-                }.frame(width: 30, height: 30)
-                    .padding(.top,30)
+                    VStack(alignment: .leading) {
+                        ZStack{
+                            Image("backicon").resizable().frame(width: 50, height: 50)
+                        }
+                    }
+                }  .padding(.top,30)
+                    .padding(.leading,-5)
                    .hidden(!isAllowedToPop) // unhide when its a change pin flow otherwise keep it hidden
-                   .multilineTextAlignment(.leading)
                 
             }, headerItem: {
                 if mScreenState == .validatePasscode{
@@ -269,15 +272,17 @@ struct PasscodeView: View {
             
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateErrorLayout"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
-                if mScreenState == .validatePasscode{
-                    passcodeViewModel.aTempPasscode = ""
-                }
+                DeviceFeedbackHelper.longVibrate()
+                // Making sure it should restart the process
+                mScreenState = .newPasscode
+                passcodeViewModel.aTempPasscode = ""
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()
             }
             
             NotificationCenter.default.addObserver(forName: NSNotification.Name("UpdateChangeCodeErrorLayout"), object: nil, queue: .main) { (_) in
                 showErrorToast = true
+                DeviceFeedbackHelper.longVibrate()
                 passcodeViewModel.aTempPasscode = ""
                 passcodeViewModel.mStateOfPins = passcodeViewModel.mStateOfPins.map { _ in false }
                 passcodeViewModel.mPressedKeys.removeAll()

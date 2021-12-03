@@ -109,7 +109,7 @@ struct RestoreWallet: View {
                 ZcashTextField(
                     title: "Wallet Birthday height".localized(),
                     subtitleView: AnyView(
-                        Text.subtitle(text: "If you don't know it, leave it blank. First Sync will take longer.".localized())
+                        Text.subtitle(text: "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.".localized())
                     ),
                     keyboardType: UIKeyboardType.decimalPad,
                     binding: $walletBirthDay,

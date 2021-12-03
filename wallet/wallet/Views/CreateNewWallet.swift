@@ -60,8 +60,8 @@ struct CreateNewWallet: View {
                 
                 Spacer()
 
-                Text("Restore from".localized()).foregroundColor(.gray).frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading,30).scaledFont(size: 12)
+//                Text("Restore from".localized()).foregroundColor(.gray).frame(maxWidth: .infinity, alignment: .leading)
+//                    .padding(.leading,30).scaledFont(size: 14)
 
                 VStack(alignment: .center, spacing: 10.0, content: {
                     
@@ -83,7 +83,7 @@ struct CreateNewWallet: View {
                             }
                             self.destination = .restoreWallet
                         }) {
-                            RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Recovery Phase".localized()))
+                            RecoveryWalletButtonView(imageName: Binding.constant("buttonbackground"), title: Binding.constant("Restore Wallet".localized()))
                         }
                     }
                    
@@ -100,7 +100,7 @@ struct CreateNewWallet: View {
                 Color.black.frame(height:CGFloat(1) / UIScreen.main.scale).frame(height:2).padding(.leading,15).padding(.trailing,15)
   
                 NavigationLink(
-                    destination: IntroWelcome().environmentObject(self.appEnvironment).navigationBarHidden(true),
+                    destination: IntroWelcome().environmentObject(self.appEnvironment),
                                isActive: $openCreateNewWalletFlow
                         
                 ) {

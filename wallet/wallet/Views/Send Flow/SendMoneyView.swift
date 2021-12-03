@@ -13,10 +13,12 @@ struct SendMoneyView: View {
     
     @State var isSendTapped = false
     @EnvironmentObject var flow: SendFlowEnvironment
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+    @State var adjustTransaction = false
+    @State var validateTransaction = false
     @State var validatePinBeforeInitiatingFlow = false
-    
+    let dragGesture = DragGesture()
     var availableBalance: Bool {
         ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
     }
@@ -35,6 +37,11 @@ struct SendMoneyView: View {
     var sufficientAmount: Bool {
         let amount = (flow.doubleAmount ??  0 )
         return amount > 0 && amount <= ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
+    }
+    
+    var isSendingAmountSameAsBalance:Bool{
+        let amount = (flow.doubleAmount ??  0 )
+        return amount > 0 && amount == ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
     }
     
     var validForm: Bool {
@@ -87,6 +94,7 @@ struct SendMoneyView: View {
                     action: {
                         tracker.track(.tap(action: .sendAddressScan),
                                       properties: [:])
+                        UIApplication.shared.endEditing()
                         self.flow.showScanView = true
                 },
                     accessoryIcon: Image("QRCodeIcon")
@@ -96,10 +104,11 @@ struct SendMoneyView: View {
                     onCommit: {
                         tracker.track(.tap(action: .sendAddressDoneAddress), properties: [:])
                 }
-                ).modifier(BackgroundPlaceholderModifierHome()).padding(.leading, 20).padding(.trailing, 20).padding(.top, 20)
+                ).modifier(BackgroundPlaceholderModifierHome()).padding(.leading, 15).padding(.trailing, 15).padding(.top, 20)
                     .onReceive(scanViewModel.addressPublisher, perform: { (address) in
                         self.flow.address = address
                         self.flow.showScanView = false
+                        DeviceFeedbackHelper.vibrate()
                     })
                     .sheet(isPresented: self.$flow.showScanView) {
                         NavigationView {
@@ -130,17 +139,25 @@ struct SendMoneyView: View {
                 
                 ARRRMemoTextField(memoText:self.$flow.memo).frame(height:60)
                 
-                Text(self.flow.amount)
-                    .foregroundColor(.gray)
-                    .scaledFont(size: 30)
-                    .frame(height:40)
-                    .padding(.leading,10)
-                    .padding(.trailing,10)
-                    .modifier(BackgroundPlaceholderModifier())
-            
+                HStack{
+   
+                    ARRRSendMoneyTextField(anAmount: self.$flow.amount)
+                
+                    SendMoneyButtonView(title: "Send Max".localized()) {
+                        let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
+                        let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
+                        if (actualAmount > defaultNetworkFee){
+                            flow.amount = formatAnARRRAmount(arrr: actualAmount-defaultNetworkFee)
+                        }else{
+                            // Can't adjust the amount, as its less than the fee
+                        }
+                    }
+                }
+                
+               
                 HStack{
                     Spacer()
-                    Text("Processing fee: ".localized() + "\(ZcashSDK.defaultFee().asHumanReadableZecBalance().toZecAmount())" + " ARRR")
+                    Text("Processing fee: ".localized() + "\(Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
                         .scaledFont(size: 14).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                         .multilineTextAlignment(.leading)
@@ -148,12 +165,21 @@ struct SendMoneyView: View {
                     Spacer()
                 }
                               
-                KeyPadARRR(value: $flow.amount)
-                    .frame(alignment: .center)
-                    .padding(.horizontal, 10)
+//                KeyPadARRR(value: $flow.amount)
+//                    .frame(alignment: .center)
+//                    .padding(.horizontal, 10)
+                
+                Spacer()
                 
                 BlueButtonView(aTitle: "Send".localized()).onTapGesture {
-                    validatePinBeforeInitiatingFlow = true
+                    
+                    if isSendingAmountSameAsBalance {
+                        // throw an alert here
+                        adjustTransaction = true
+                    }else{
+                        validateTransaction = true
+                        UIApplication.shared.endEditing()
+                    }
                 }.opacity(validForm ? 1.0 : 0.7 )
                 .disabled(!validForm)
                 
@@ -185,23 +211,62 @@ struct SendMoneyView: View {
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
-                     presentationMode.wrappedValue.dismiss()
+                     self.onDismissRemoveObservers()
+//                     presentationMode.wrappedValue.dismiss()
+                         if UIApplication.shared.windows.count > 0 {
+                             UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
+                         }
+
                      }).frame(width: 20, height: 20)
                  .padding(.top,40)
              })
             .navigationBarHidden(true)
-        } .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
+        }
+        .onTapGesture {
+            UIApplication.shared.endEditing()
+        }
+        .highPriorityGesture(dragGesture)     
+        .sheet(isPresented: $validateTransaction) {
+            LazyView(ConfirmTransaction().environmentObject(flow))
+        }
+        .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false))
+        }
+        .alert(isPresented:self.$adjustTransaction) {
+            Alert(title: Text("Pirate Chain Wallet".localized()),
+                         message: Text("We found your wallet didn't had enough funds for the fees, the transaction needs to been adjusted to cater the fee of 0.0001 ARRR. Please, confirm the adjustment in the transaction to include miner fee.".localized()),
+                         primaryButton: .cancel(Text("Cancel".localized())),
+                         secondaryButton: .default(Text("Confirm".localized()), action: {
+                            
+                            let amount = (flow.doubleAmount ??  0 )
+                            let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
+                            if (amount > defaultNetworkFee && amount == ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value){
+                                flow.amount = formatAnARRRAmount(arrr: amount-defaultNetworkFee)
+                                validateTransaction = true
+                            }else{
+                                // Can't adjust the amount, as its less than the fee
+                            }
+                         }))
         }
         .onAppear(){
             NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in
+                flow.includesMemo = true
                 isSendTapped = true
+            }
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("ConfirmedTransaction"), object: nil, queue: .main) { (_) in
+                DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                    validatePinBeforeInitiatingFlow = true
+                }
             }
         }
         .keyboardAdaptive()
         }
     }
     
+    func onDismissRemoveObservers() {
+        NotificationCenter.default.removeObserver(NSNotification.Name("PasscodeValidationSuccessful"))
+        NotificationCenter.default.removeObserver(NSNotification.Name("ConfirmedTransaction"))
+    }
     
     var includesMemo: Bool {
         !self.flow.memo.isEmpty || self.flow.includeSendingAddress
@@ -209,8 +274,82 @@ struct SendMoneyView: View {
 
 }
 
+
+func formatAnARRRAmount(arrr: Double) -> String {
+    NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: arrr)) ?? "0"
+}
+
+
 //struct SendMoneyView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SendMoneyView()
 //    }
 //}
+
+struct SendMoneyButtonView : View {
+    
+    @State var title: String
+    
+    var action: () -> Void
+    
+    var body: some View {
+        ZStack{
+            
+            Image("buttonbackground").resizable().frame(width: 115)
+       
+                Text(title).foregroundColor(Color.zARRRTextColorLightYellow).bold().multilineTextAlignment(.center).font(
+                    .barlowRegular(size: 12)
+                ).onTapGesture {
+                    self.action()
+                }
+                .modifier(ForegroundPlaceholderModifierHomeButtons())
+                .frame(width: 140)
+                .padding([.bottom],4)
+                .cornerRadius(30)
+           
+        }.frame(width: 120,height:50)
+    }
+}
+
+
+struct ARRRReceiveMoneyTextField: View {
+    
+     @Binding var anAmount:String
+     var body: some View {
+         ARRRTextField(text: $anAmount,isFirstResponder: Binding.constant(true))
+               .scaledFont(size: 22)
+               .foregroundColor(.gray)
+               .frame(height:30)
+               .multilineTextAlignment(.center)
+               .padding(.leading,10)
+               .padding(.trailing,10)
+               .keyboardType(.decimalPad)
+               .modifier(BackgroundPlaceholderModifier())
+     }
+}
+
+struct ARRRSendMoneyTextField: View {
+    
+     @Binding var anAmount:String
+     var body: some View {
+             
+         ZStack{
+             HStack{
+                 TextField("Enter Amount".localized(), text: $anAmount)
+                   .scaledFont(size: 20)
+                   .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.clear))
+                   .foregroundColor(Color.white)
+                   .keyboardType(.decimalPad)
+                   .foregroundColor(.gray)
+                   .frame(height:30)
+                   .multilineTextAlignment(.center)
+                   .padding(.leading,10)
+                   .padding(.trailing,10)
+                   .modifier(BackgroundPlaceholderModifier())
+                
+             }
+         }
+         
+     }
+}
+

@@ -9,6 +9,7 @@
 import SwiftUI
 import ZcashLightClientKit
 import AlertToast
+
 struct TransactionDetails: View {
         
     enum Alerts {
@@ -20,6 +21,9 @@ struct TransactionDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @State var alertItem: Alerts?
     @State var isCopyAlertShown = false
+    @State var mURLString:URL?
+    @State var mOpenSafari = false
+
     var exploreButton: some View {
         Button(action: {
             self.alertItem = .explorerNotice
@@ -50,6 +54,16 @@ struct TransactionDetails: View {
         return dateFormatter.string(from: aDate)
     }
     
+    var aTitle: String {
+
+        switch detail.status {
+        case .paid(_):
+            return  "To: ".localized()
+        case .received:
+            return "From: ".localized()
+        }
+    }
+    
     
     var body: some View {
         
@@ -66,9 +80,9 @@ struct TransactionDetails: View {
                             VStack {
 
                                 if let fullAddr = detail.arrrAddress{
-                                    TransactionRow(mTitle: "From: ".localized(), mSubTitle: fullAddr, showLine: true, isYellowColor: false)
+                                    TransactionRow(mTitle: aTitle, mSubTitle: fullAddr, showLine: true, isYellowColor: false)
                                 }else{
-                                    TransactionRow(mTitle: "From: ".localized(), mSubTitle: (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
+                                    TransactionRow(mTitle: aTitle, mSubTitle: (detail.arrrAddress ?? "NA"), showLine: true,isYellowColor: false)
                                 }
                                 
                                 TransactionRowTitleSubtitle(mTitle: converDateToString(aDate: detail.date), mSubTitle: ("Processing fee: ".localized() + "\(detail.defaultFee.asHumanReadableZecBalance().toZecAmount())" + " ARRR"), showLine: true)
@@ -132,6 +146,9 @@ struct TransactionDetails: View {
         }
         .padding(.vertical,0)
         .padding(.horizontal, 8)
+        .sheet(isPresented: $mOpenSafari) {
+            CustomSafariView(url:self.mURLString!)
+        }
         .alert(item: self.$alertItem) { item -> Alert in
             switch item {
             case .copiedItem(let p):
@@ -140,13 +157,16 @@ struct TransactionDetails: View {
                 return Alert(title: Text("You are exiting your wallet".localized()),
                              message: Text("While usually an acceptable risk, you are possibly exposing your behavior and interest in this transaction by going online. OH NO! What will you do?".localized()),
                              primaryButton: .cancel(Text("NEVERMIND".localized())),
-                             secondaryButton: .default(Text("SEE TX ONLINE".localized()), action: {
+                             secondaryButton: .default(Text("SEE TX".localized()), action: {
                                 
                                 guard let url = UrlHandler.blockExplorerURL(for: self.detail.id) else {
                                     return
                                 }
+                    
+                                self.mURLString  = url
+                                mOpenSafari = true
                                 
-                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//                                UIApplication.shared.open(url, options: [:], completionHandler: nil)
                              }))
             }
         }
@@ -379,6 +399,11 @@ struct TransactionRow: View {
                     .padding(10)
                 Spacer()
                 Spacer()
+                if !isYellowColor && !mSubTitle.isEmpty && mSubTitle != "NA"{
+                    Image(systemName: "doc.on.doc").foregroundColor(.gray)
+                        .scaledFont(size: 20).padding(.trailing, 10)
+                }
+                
             } .onTapGesture {
                 if !isYellowColor && !mSubTitle.isEmpty && mSubTitle != "NA"{
                     copyToClipBoard(mSubTitle)

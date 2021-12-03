@@ -36,11 +36,11 @@ struct InitiateRecoveryKeyPhraseFlow: View {
                  
                     NavigationLink(
                         destination: RecoveryWordsView().environmentObject(RecoveryWordsViewModel()).navigationBarTitle("", displayMode: .inline)
-                            .navigationBarBackButtonHidden(true).navigationBarHidden(true),
+                            .navigationBarBackButtonHidden(true),
                         isActive: $initiatePassphraseFlow
                     ) {
                         EmptyView()
-                    }
+                    }.isDetailLink(false)
 
                     Spacer(minLength: 10)
                 })
@@ -49,11 +49,11 @@ struct InitiateRecoveryKeyPhraseFlow: View {
             }
         .navigationBarHidden(true)
         .zcashNavigationBar(leadingItem: {
-            ARRRBackButton(action: {
+            Button {
                 presentationMode.wrappedValue.dismiss()
-            }).frame(width: 30, height: 30)
-            .padding(.top,10)
-            
+          } label: {
+              Image("backicon").resizable().frame(width: 50, height: 50)
+          }
         }, headerItem: {
             HStack{
                 EmptyView()
@@ -67,13 +67,10 @@ struct InitiateRecoveryKeyPhraseFlow: View {
         .sheet(isPresented: $validatePinBeforeInitiatingFlow) {
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: false)).environmentObject(self.appEnvironment)
         }
-        .onAppear(){
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("PasscodeValidationSuccessful"), object: nil, queue: .main) { (_) in
-                initiatePassphraseFlow = true
-            }
+        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name("PasscodeValidationSuccessful")))
+        { obj in
+            initiatePassphraseFlow = true
         }
-        
-       
     }
 }
 

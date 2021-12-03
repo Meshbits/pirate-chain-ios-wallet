@@ -20,6 +20,8 @@ struct HomeTabView: View {
     
     @State var mOpenPasscodeScreen: Bool
 
+    @State var isNavigationBarHidden: Bool = true
+
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
     
     init(openPasscodeScreen:Bool) {
@@ -40,8 +42,7 @@ struct HomeTabView: View {
     var mWalletView: some View {
         LazyView(WalletDetails(isActive: Binding.constant(true))
                     .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true).environmentObject(WalletDetailsViewModel())
-                    .navigationBarTitle(Text(""), displayMode: .inline))
+            .navigationBarHidden(true).environmentObject(WalletDetailsViewModel()))
     }
     var mHomeView : some View {
         LazyView(
@@ -53,7 +54,6 @@ struct HomeTabView: View {
     var mSettingsView: some View {
         LazyView(SettingsScreen() .navigationBarHidden(true).environmentObject(self.appEnvironment))
         .navigationBarBackButtonHidden(true)
-        .navigationBarTitle(Text(""), displayMode: .inline)
     }
   
     var body: some View {
@@ -64,6 +64,11 @@ struct HomeTabView: View {
                 if #available(iOS 15.0, *) {
                         NavigationView{
                             mHomeView
+                             .navigationBarTitle("")
+                            .navigationBarHidden(isNavigationBarHidden)
+                            .onAppear {
+                                self.isNavigationBarHidden = true
+                            }
                         }
                         .font(.system(size: 30, weight: .bold, design: .rounded))
                         .tabItem {
@@ -72,10 +77,15 @@ struct HomeTabView: View {
                                 .scaledFont(size: 10)
                         }.tag(Tab.home)
                         .environment(\.currentTab, mSelectedTab)
-                    
+                      
                     
                         NavigationView{
                             mWalletView
+                                .navigationBarTitle("Wallet History")
+                                .navigationBarHidden(isNavigationBarHidden)
+                                .onAppear {
+                                    self.isNavigationBarHidden = true
+                                }
                         }
                         .font(.system(size: 30, weight: .bold, design: .rounded))
                         .tabItem {
@@ -89,6 +99,11 @@ struct HomeTabView: View {
                                
                        NavigationView{
                            mSettingsView
+                               .navigationBarTitle("Settings")
+                               .navigationBarHidden(isNavigationBarHidden)
+                               .onAppear {
+                                   self.isNavigationBarHidden = true
+                               }
                        }
                        .font(.system(size: 30, weight: .bold, design: .rounded))
                        .tabItem {

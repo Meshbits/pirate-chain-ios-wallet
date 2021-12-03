@@ -113,6 +113,10 @@ class CombineSynchronizer {
             .sink(receiveValue: { [weak self] _ in
             guard let self = self else { return }
                 self.updatePublishers()
+                
+                if (UIApplication.shared.applicationState == .background){
+                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                }
         }).store(in: &cancellables)
         
         
@@ -423,6 +427,15 @@ extension CombineSynchronizer {
             try self.start(retry: true)
         } catch {
             logger.error("Quick rescan failed \(error)")
+        }
+    }
+    
+    func rescanWithBirthday(blockheight: BlockHeight) {
+        do {
+            try self.rewind(.height(blockheight: blockheight))
+            try self.start(retry: true)
+        } catch {
+            logger.error("Rescan failed with new height \(error)")
         }
     }
     

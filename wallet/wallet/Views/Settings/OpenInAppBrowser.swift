@@ -13,36 +13,33 @@ struct OpenInAppBrowser: View {
     @Environment(\.presentationMode) var presentationMode
     
     @State var aURLString:String
+    @State var aTitle:String
     
     var body: some View
     {
         ZStack{
-            ARRRBackground()
-            NavigationView {
+            ARRRBackground().edgesIgnoringSafeArea(.all)
                 
-                WebView(url: aURLString,
+            WebView(url: aURLString,
                         tintColor: Color.gray,
                         titleColor: .yellow,
                         backText: Text("").italic(),
                         reloadImage: Image(""),
                         goForwardImage: Image(systemName: "forward.frame.fill"),
-                        goBackImage: Image(systemName: "backward.frame.fill"))
-                
-            }
-        }.edgesIgnoringSafeArea(.all)
+                        goBackImage: Image(systemName: "backward.frame.fill"),
+                        title:aTitle
+             )
+        }
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle(aTitle, displayMode: .inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {
-            VStack(alignment: .leading) {
-                ZStack{
-                    Image("passcodenumericbg")
-                    Text("<").foregroundColor(.gray).bold().multilineTextAlignment(.center).font(
-                        .barlowRegular(size: Device.isLarge ? 26 : 18)
-                    ).padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
-                }
-            }.padding(.leading,-20).padding(.top,10)
+              Button {
+                  presentationMode.wrappedValue.dismiss()
+              } label: {
+                  Image("backicon").resizable().frame(width: 50, height: 50)
+              }
         })
     }
 }

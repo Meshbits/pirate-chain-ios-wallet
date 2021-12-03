@@ -64,6 +64,7 @@ public class PasscodeValidationViewModel: ObservableObject{
             if aTempPasscode == aSavedPasscode {
                 mDismissAfterValidation = true
             }else{
+                DeviceFeedbackHelper.longVibrate()
                 mPasscodeValidationFailure = true
                 mStateOfPins = mStateOfPins.map { _ in false }
                 mPressedKeys.removeAll()
@@ -132,9 +133,15 @@ struct PasscodeValidationScreen: View {
             VStack(alignment: .center, spacing: 10, content: {
                 HStack{
                     Spacer()
-                    ARRRCloseButton(action: {
+                    Button(action: {
                         presentationMode.wrappedValue.dismiss()
-                    })
+                    }) {
+                        VStack(alignment: .leading) {
+                            ZStack{
+                                Image("closebutton").resizable().frame(width: 70, height: 70)
+                            }
+                        }
+                    }
                     .hidden(isAuthenticationEnabled)
                     .frame(width: 30, height: 30).padding(.top,30).multilineTextAlignment(.trailing)
                     .padding(.trailing,30)
@@ -177,7 +184,9 @@ struct PasscodeValidationScreen: View {
                                 guard isDismiss else { return }
                                 if (isDismiss){
                                     self.presentationMode.wrappedValue.dismiss()
-                                    NotificationCenter.default.post(name: NSNotification.Name("PasscodeValidationSuccessful"), object: nil)
+                                    if !isAuthenticationEnabled {
+                                        NotificationCenter.default.post(name: NSNotification.Name("PasscodeValidationSuccessful"), object: nil)
+                                    }
                                 }
                             }
             )
@@ -191,8 +200,9 @@ struct PasscodeValidationScreen: View {
         .onReceive(AuthenticationHelper.authenticationPublisher) { (output) in
                    switch output {
                    case .failed(_), .userFailed:
-                        UserSettings.shared.isBiometricDisabled = true
-                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
+                       print("auth failed")
+//                        UserSettings.shared.isBiometricDisabled = true
+//                        NotificationCenter.default.post(name: NSNotification.Name("BioMetricStatusUpdated"), object: nil)
                    case .success:
                         UserSettings.shared.biometricInAppStatus = true
                         UserSettings.shared.isBiometricDisabled = false
@@ -210,7 +220,7 @@ struct PasscodeValidationScreen: View {
     
     func authenticate() {
         if UserSettings.shared.biometricInAppStatus{
-            AuthenticationHelper.authenticate(with: "Authenticate Biometric".localized())
+            AuthenticationHelper.authenticate(with: "Authenticate Biometric ID".localized())
         }
     }
 }

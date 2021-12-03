@@ -18,7 +18,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ECC Wallet</string>
+	<string>Pirate Chain Wallet</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -32,7 +32,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Scan zAddress Qr Codes</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>We might require you to use face ID or pin to Authorize payments</string>
+	<string>We might require you to use Biometric ID or pin to Authorize payments</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Zboto.otf</string>

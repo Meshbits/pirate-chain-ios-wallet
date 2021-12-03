@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>io.meshbits.piratewallet.ios.backgroundProcessingTask</string>
+		<string>io.meshbits.piratewallet.ios.backgroundAppRefreshTask</string>
+		<string>ZcashLightClientKit.SDKSynchronizer</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -13,7 +19,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ECC Wallet</string>
+	<string>Pirate Chain Wallet</string>
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
@@ -36,9 +42,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Scan zAddress Qr Codes</string>
+	<string>Scan Arrr Address Qr Codes</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>We might require you to use face ID or pin to Authorize payments</string>
+	<string>We might require you to use Biometric ID or pin to Authorize payments</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Zboto.otf</string>
@@ -63,6 +69,7 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>audio</string>
 		<string>fetch</string>
 		<string>processing</string>
 	</array>
@@ -75,11 +82,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-		<string>io.meshbits.piratewallet.ios.backgroundProcessingTask</string>
-		<string>io.meshbits.piratewallet.ios.backgroundAppRefreshTask</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Dark</string>

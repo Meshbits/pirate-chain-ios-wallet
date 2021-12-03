@@ -19,12 +19,12 @@ func _zECCWalletNavigationBarLookTweaks() {
     let appearance = UINavigationBarAppearance()
     appearance.configureWithTransparentBackground()
     appearance.largeTitleTextAttributes = [
-        .font : UIFont.systemFont(ofSize: 20),
+        .font : UIFont.systemFont(ofSize: 12),
         NSAttributedString.Key.foregroundColor : UIColor.white
     ]
     
     appearance.titleTextAttributes = [
-        .font : UIFont.systemFont(ofSize: 20),
+        .font : UIFont.systemFont(ofSize: 12),
         NSAttributedString.Key.foregroundColor : UIColor.white
     ]
     

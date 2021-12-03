@@ -45,11 +45,24 @@ struct CreateAndSetupNewWallet: View {
                             .navigationBarHidden(true)
                             .navigationBarBackButtonHidden(true)
                             .navigationBarTitle("", displayMode: .inline)
-                            .navigationBarBackButtonHidden(true)
-                            .navigationBarHidden(true)
             , isActive: $openHomeScreen) {
                 EmptyView()
             }
+            VStack(alignment: .center, spacing: 40) {
+                Spacer()
+                Text("Please wait, while we setup your wallet!".localized())
+                    .foregroundColor(.white)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.center)
+                    .scaledFont(size: 15)
+                
+                LottieAnimation(isPlaying: true,
+                                filename: "lottie_sending",
+                                animationType: .circularLoop)
+                    .frame(height: 48)
+                Spacer()
+            }
+         
             
         }.navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
@@ -61,8 +74,11 @@ struct CreateAndSetupNewWallet: View {
     func createNewWalletFlow(){
         do {
             tracker.track(.tap(action: .landingBackupWallet), properties: [:])
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                openHomeScreen = true
+            }
             try self.appEnvironment.createNewWalletWithPhrase(randomPhrase: self.viewModel.mCompletePhrase!.joined(separator: " "))
-            openHomeScreen = true
+            
         } catch WalletError.createFailed(let e) {
             if case SeedManager.SeedManagerError.alreadyImported = e {
                 self.showError = AlertType.feedback(destination: .createNew, cause: e)

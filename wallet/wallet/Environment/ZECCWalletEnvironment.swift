@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 import ZcashLightClientKit
 import Combine
+
 enum WalletState {
     case uninitialized
     case unprepared
@@ -25,9 +26,9 @@ final class ZECCWalletEnvironment: ObservableObject {
     static let genericErrorMessage = "An error ocurred, please check your device logs".localized()
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
-    static let defaultLightWalletEndpoint = "lightd.pirate.black"
-    static let defaultLightWalletPort: Int = 443
-       
+    static let defaultLightWalletEndpoint = "lightd.meshbits.io"
+    static let defaultLightWalletPort: Int = 9067
+//    static let defaultFee = 10_000 // Earlier we have used ZcashSDK.defaultFee()
     @Published var state: WalletState
     
     let endpoint = LightWalletEndpoint(address: SeedManager.default.exportLightWalletEndpoint(), port: Int(SeedManager.default.exportLightWalletPort()) ?? defaultLightWalletPort, secure: true)
@@ -100,6 +101,9 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     // Warning: Use with care
     func reset() throws {
+        if (UIApplication.shared.applicationState == .background){
+            NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+        }
         self.synchronizer.stop()
         self.state = Self.getInitialState()
         self.synchronizer = nil
@@ -329,12 +333,17 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     private func registerBackgroundActivity() {
         if self.taskIdentifier == .invalid {
-            self.taskIdentifier = UIApplication.shared.beginBackgroundTask(withName: "ZcashLightClientKit.SDKSynchronizer", expirationHandler: { [weak self, weak logger] in
+            self.taskIdentifier = UIApplication.shared.beginBackgroundTask(withName: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifierARRR, expirationHandler: { [weak self, weak logger] in
                 logger?.info("BackgroundTask Expiration Handler Called")
                 guard let self = self else { return }
                 self.synchronizer.stop()
                 self.invalidateBackgroundActivity()
+                NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
             })
+            
+            if self.synchronizer.syncStatus.value != .synced {
+                NotificationCenter.default.post(name: NSNotification.Name(mPlaySoundWhileSyncing), object: nil)
+            }
         }
     }
     
@@ -391,6 +400,9 @@ final class ZECCWalletEnvironment: ObservableObject {
         center.publisher(for: UIApplication.willTerminateNotification)
             .subscribe(on: DispatchQueue.main)
             .sink { [weak self] _ in
+                if (UIApplication.shared.applicationState == .background){
+                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                }
                 self?.synchronizer.stop()
             }
             .store(in: &appCycleCancellables)
@@ -407,7 +419,7 @@ extension ZECCWalletEnvironment {
     
     static var appName: String {
         if ZcashSDK.isMainnet {
-            return "ECC Wallet".localized()
+            return "Pirate Chain Wallet".localized()
         } else {
             return "ECC Testnet"
         }

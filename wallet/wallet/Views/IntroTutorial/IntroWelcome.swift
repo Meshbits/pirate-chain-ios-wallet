@@ -56,10 +56,13 @@ struct IntroWelcome: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
                 
                         VStack(alignment: .center, content: {
+                            
+                            Spacer()
+                            
                             Text(mTitle.localized()).transition(.move(edge: .trailing)).id("MyTitleComponent1" + mTitle).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
                                 .scaledFont(size: 26)
                             Text(mSubTitle.localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
-                                .scaledFont(size: 16).padding(.top,20)
+                                .scaledFont(size: 16).padding(.top,10)
                             ZStack{
                                 Image("backgroundglow")
                                     .padding(.trailing,80).padding(.leading,80)
@@ -113,33 +116,33 @@ struct IntroWelcome: View {
                                 }
                                 .padding(.bottom,20)
                             }
-                            
-                            
+                            Spacer()
                         })
-                    .navigationBarHidden(true)
                     .edgesIgnoringSafeArea(.all)
                   
 
-                    }.zcashNavigationBar(leadingItem: {
-                        Button {
-                            if !mMoveToPincode && !mMoveToPrivacy {
-                                presentationMode.wrappedValue.dismiss()
-                            }else{
-                                withAnimation(.easeIn(duration: 0.5), {
-                                    moveBack()
-                               })
-                            }
-                            
-                        } label: {
-                            Image("backicon").resizable().frame(width: 60, height: 60).padding(.leading,40).padding(.top,20)
-                        }
-
-                    }, headerItem: {
-                        EmptyView()
-                    }, trailingItem: {
-                        EmptyView()
-                    })
-
+                    }
+            .onAppear(){
+                UserSettings.shared.aPasscode = "" // Resetting the passcode stuff here to make sure pin should be set again
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationTitle("").navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading:  Button(action: {
+                if !mMoveToPincode && !mMoveToPrivacy {
+                    presentationMode.wrappedValue.dismiss()
+                }else{
+                    withAnimation(.easeIn(duration: 0.5), {
+                        moveBack()
+                   })
+                }
+                
+            }) {
+                VStack(alignment: .leading) {
+                    ZStack{
+                        Image("backicon").resizable().frame(width: 50, height: 50)
+                    }
+                }
+            })
         
                        
 //         }.navigationBarHidden(true)

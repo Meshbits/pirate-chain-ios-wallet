@@ -43,6 +43,7 @@ class UserSettings {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: Keys.aPasscode)
+//            SeedManager.default.updatePasswordForPinCode()
         }
     }
     
