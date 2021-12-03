@@ -1,4 +1,4 @@
-# zcash-ios-wallet
+# pirate-chain-ios-wallet
 
 [![Build Status](https://travis-ci.org/zcash/zcash-ios-wallet.svg?branch=master)](https://travis-ci.org/zcash/zcash-ios-wallet)
 
