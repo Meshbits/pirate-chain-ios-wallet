@@ -208,7 +208,7 @@
 // Delete Wallet
 
 "Delete your wallet from this device" = "Delete your wallet from this device";
-"Start a new wallet by deleting your device from the currently installed wallet" = "Start a new wallet by deleting your device from the currently installed wallet";
+"Start a new wallet by removing your device from the currently installed wallet" = "Start a new wallet by removing your device from the currently installed wallet";
 
 
 // Notification Screen

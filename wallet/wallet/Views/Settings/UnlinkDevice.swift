@@ -19,7 +19,7 @@ struct UnlinkDevice: View {
                             Spacer(minLength: 10)
                             Text("Delete your wallet from this device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
                                 .scaledFont(size: 26).padding(.top,40)
-                            Text("Start a new wallet by deleting your device from the currently installed wallet".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 15)
+                            Text("Start a new wallet by removing your device from the currently installed wallet".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 15)
                             Spacer(minLength: 10)
                             Image("bombIcon")
                                 .padding(.trailing,80).padding(.leading,80)
