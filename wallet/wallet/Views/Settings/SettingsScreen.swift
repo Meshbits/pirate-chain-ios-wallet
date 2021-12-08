@@ -47,7 +47,7 @@ struct SettingsScreen: View {
     var securitySection = [SettingsRowData(id:2,title:"Biometric ID".localized()),
                            SettingsRowData(id:3,title:"Recovery Phrase".localized()),
                            SettingsRowData(id:4,title:"Change PIN".localized()),
-                           SettingsRowData(id:5,title:"Unlink Device".localized())]
+                           SettingsRowData(id:5,title:"Delete Wallet".localized())]
 //    var walletSection = [SettingsRowData(id:6,title:"Private Server Config")] //,
 //                         SettingsRowData(id:7,title:"iCloud backup")]
     var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),

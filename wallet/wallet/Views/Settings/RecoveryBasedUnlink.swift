@@ -116,7 +116,7 @@ struct RecoveryBasedUnlink: View {
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
                 Text("Enter Recovery Phrase".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).scaledFont(size: 32).padding(.top,40)
-                Text("Please enter your recovery phrase to unlink the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 17)
+                Text("Please enter your recovery phrase to delete the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 17)
                 
                 HStack(spacing: nil, content: {
                    
@@ -162,7 +162,7 @@ struct RecoveryBasedUnlink: View {
                 Spacer(minLength: 10)
                 Spacer(minLength: 10)
                 
-                BlueButtonView(aTitle: "Unlink".localized()).onTapGesture {
+                BlueButtonView(aTitle: "Delete".localized()).onTapGesture {
                     if self.viewModel.firstWord.isEmpty || self.viewModel.secondWord.isEmpty || self.viewModel.thirdWord.isEmpty {
                         self.isConfirmButtonEnabled = false
                     }else{

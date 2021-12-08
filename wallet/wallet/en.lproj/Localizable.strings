@@ -191,7 +191,7 @@
 "Biometric ID" = "Biometric ID";
 "Recovery Phrase" = "Recovery Phrase";
 "Change PIN" = "Change PIN";
-"Unlink Device" = "Unlink Device";
+"Delete Wallet" = "Delete Wallet";
 "Privacy Policy" = "Privacy Policy";
 "Terms & Conditions" = "Terms & Conditions";
 "License" = "License";
@@ -205,10 +205,10 @@
 "Ok" = "Ok";
 "PIN SET Successfully!" = "PIN SET Successfully!";
 
-// Unlink Device
+// Delete Wallet
 
-"Unlink your wallet from this device" = "Unlink your wallet from this device";
-"Start a new wallet by unlinking your device from the currently installed wallet" = "Start a new wallet by unlinking your device from the currently installed wallet";
+"Delete your wallet from this device" = "Delete your wallet from this device";
+"Start a new wallet by deleting your device from the currently installed wallet" = "Start a new wallet by deleting your device from the currently installed wallet";
 
 
 // Notification Screen
@@ -234,8 +234,8 @@
 // Recovery Based Unlink
 
 "Enter Recovery Phrase" = "Enter Recovery Phrase";
-"Please enter your recovery phrase to unlink the wallet from your device" = "Please enter your recovery phrase to unlink the wallet from your device";
-"Unlink" = "Unlink";
+"Please enter your recovery phrase to delete the wallet from your device" = "Please enter your recovery phrase to delete the wallet from your device";
+"Delete" = "Delete";
 
 
 // Initiate Recovery Key PhraseFlow 
