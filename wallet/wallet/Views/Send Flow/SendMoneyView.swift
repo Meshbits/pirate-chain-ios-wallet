@@ -316,7 +316,7 @@ struct ARRRReceiveMoneyTextField: View {
     
      @Binding var anAmount:String
      var body: some View {
-         ARRRTextField(text: $anAmount,isFirstResponder: Binding.constant(true))
+         ARRRTextField(text: $anAmount,isFirstResponder: Binding.constant(false))
                .scaledFont(size: 22)
                .foregroundColor(.gray)
                .frame(height:30)

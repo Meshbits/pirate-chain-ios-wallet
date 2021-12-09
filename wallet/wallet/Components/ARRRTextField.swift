@@ -34,9 +34,10 @@ struct ARRRTextField: UIViewRepresentable {
         configuration(uiView)
         switch isFirstResponder {
         case true:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                uiView.becomeFirstResponder()
-            }
+            print("do nothing if first responder")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                uiView.becomeFirstResponder()
+//            }
         case false: uiView.resignFirstResponder()
         }
     }

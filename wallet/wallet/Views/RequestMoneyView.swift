@@ -7,29 +7,39 @@
 //
 
 import SwiftUI
+import BottomSheet
+
+struct FullScreenImageView: View {
+    @Binding var qrImage: Image
+    let dragGesture = DragGesture()
+    var body: some View {
+        VStack{
+        qrImage.resizable().aspectRatio(contentMode: .fit)
+            .frame(width: 250, height: 250)
+        }.padding(.top,50)
+        .padding(.bottom,50)
+        .highPriorityGesture(dragGesture)
+    }
+
+}
 
 struct RequestMoneyView<AccesoryContent: View>: View {
     let qrSize: CGFloat = 100
     @State var isShareAddressShown = false
+    @State var openFullScreenQRCode = false
     @State var sendArrrValue =  ""
     @State var memoTextContent =  ""
 
     @State var copyItemModel: PasteboardItemModel?
     var address: String
-    var qrImage: Image {
-        if let img = QRCodeGenerator.generate(from: self.address) {
-            return Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(self.address)") ))
-        } else {
-            return Image("zebra_profile")
-        }
-    }
+    @State var qrImage: Image = Image("zebra_profile")
     var badge: Image
     var chips: [String]
     @Environment(\.presentationMode) var presentationMode
     
     var accessoryContent: AccesoryContent
     
-    
+   
     var validForm: Bool {
         sufficientAmount && validMemo
     }
@@ -62,6 +72,9 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                         .layoutPriority(1)
                         .cornerRadius(6)
                         .modifier(QRCodeBackgroundPlaceholderModifier())
+                        .onTapGesture {
+                            openFullScreenQRCode = true
+                        }
                     
                     Button(action: {
                         PasteboardAlertHelper.shared.copyToPasteBoard(value: self.address, notify: "feedback_addresscopied".localized())
@@ -113,7 +126,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                     Spacer()
                 }
                 
-                ARRRMemoTextField(memoText:$memoTextContent).frame(height:55)
+                ARRRMemoTextField(memoText:$memoTextContent).frame(height:45)
                 
 //                Text(self.sendArrrValue)
 //                    .foregroundColor(.gray)
@@ -123,9 +136,15 @@ struct RequestMoneyView<AccesoryContent: View>: View {
 //                    .padding(.trailing,10)
 //                    .modifier(BackgroundPlaceholderModifier())
 //
-                ARRRReceiveMoneyTextField(anAmount: self.$sendArrrValue)
+//                ARRRReceiveMoneyTextField(anAmount: self.$sendArrrValue)
+                
+                ARRRSendMoneyTextField(anAmount: self.$sendArrrValue)
                 
                 Spacer()
+                
+                GrayButtonView(aTitle: "Update QR Code".localized()).onTapGesture {
+                    self.loadPirateChainURIAsQRCode()
+                }
                 
                 BlueButtonView(aTitle: "Share".localized()).onTapGesture {
                     self.isShareAddressShown = true
@@ -155,13 +174,30 @@ struct RequestMoneyView<AccesoryContent: View>: View {
          })
         .onAppear {
             tracker.track(.screen(screen: .receive), properties: [:])
+            self.loadPirateChainURIAsQRCode()
         }
         .navigationBarHidden(true)
         .sheet(isPresented: self.$isShareAddressShown) {
             ShareSheet(activityItems: [getPirateChainURI()])
         }
+        .bottomSheet(isPresented: $openFullScreenQRCode,
+                      height: 400,
+                      topBarHeight: 0,
+                      topBarCornerRadius: 20,
+                      showTopIndicator: true) {
+            FullScreenImageView(qrImage: $qrImage)
+        }
+
     }
     
+    func loadPirateChainURIAsQRCode(){
+        let mPirateChainAddress = getPirateChainURI()
+        if let img = QRCodeGenerator.generate(from: mPirateChainAddress) {
+            self.qrImage =  Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(mPirateChainAddress)") ))
+        }else{
+            self.qrImage = Image("zebra_profile")
+        }
+    }
     func getPirateChainURI() -> String {
         return PirateChainPaymentURI.init(build: {
             $0.address = self.address
