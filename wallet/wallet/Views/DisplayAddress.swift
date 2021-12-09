@@ -125,6 +125,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
             }
         }
         .padding(10)
+        .padding(.bottom,10)
             .sheet(isPresented: self.$isShareAddressShown) {
                 ShareSheet(activityItems: [self.address])
             }

@@ -14,7 +14,7 @@ struct FullScreenImageView: View {
     let dragGesture = DragGesture()
     var body: some View {
         VStack{
-        qrImage.resizable().aspectRatio(contentMode: .fit)
+            qrImage.resizable().aspectRatio(contentMode: .fit)
             .frame(width: 250, height: 250)
         }.padding(.top,50)
         .padding(.bottom,50)
