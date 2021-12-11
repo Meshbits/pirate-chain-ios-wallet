@@ -93,7 +93,7 @@ struct RescanOptionsView: View {
                                 self.rescanDataViewModel.mSelectedIndex = mSelectedSettingsRowData!.id
                                 self.rescanDataViewModel.updateBirthdaySelectionStatus()
                             }
-                            .frame(height: 60)
+                            .frame(height: Device.isLarge ?  60 : 40)
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                     }
                     
@@ -197,7 +197,7 @@ struct RescanRowWithCheckbox: View {
                 
                 Text(mCurrentRowData.title)
                     .multilineTextAlignment(.leading)
-                    .scaledFont(size: 16)
+                    .scaledFont(size: Device.isLarge ?  16 : 12)
                     .foregroundColor(mSelectedSettingsRowData?.id == mCurrentRowData.id ? Color.arrrBarAccentColor : Color.textTitleColor)
                     .padding(.trailing, mCurrentRowData.isSelected ? 60 : 80)
                     .frame(height: 22,alignment: .leading)

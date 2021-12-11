@@ -148,7 +148,7 @@ struct SettingsScreen: View {
                         .modifier(SettingsSectionBackgroundModifier())
                         
                         
-                      Text(mVersionDetails).scaledFont(size: 15).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,20)
+                        Text(mVersionDetails).scaledFont(size: Device.isLarge ? 15 : 12).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).padding(.bottom,20)
 
                     }
                     .padding(.bottom,2)

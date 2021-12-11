@@ -115,8 +115,8 @@ struct RecoveryBasedUnlink: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Enter Recovery Phrase".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).scaledFont(size: 32).padding(.top,40)
-                Text("Please enter your recovery phrase to delete the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 17)
+                Text("Enter Recovery Phrase".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).scaledFont(size: Device.isLarge ?  28 : 20).padding(.top,40)
+                Text("Please enter your recovery phrase to delete the wallet from your device".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: Device.isLarge ? 17 : 12)
                 
                 HStack(spacing: nil, content: {
                    
@@ -125,7 +125,7 @@ struct RecoveryBasedUnlink: View {
                         TextField("".localized(), text: self.$viewModel.firstWord, onEditingChanged: { (changed) in
                         }) {
      //                       self.didEndEditingAddressTextField()
-                        }.scaledFont(size: 17)
+                        }.scaledFont(size: Device.isLarge ?  14 : 12)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
                         .autocapitalization(.none)
@@ -137,7 +137,7 @@ struct RecoveryBasedUnlink: View {
                         TextField("".localized(), text: self.$viewModel.secondWord, onEditingChanged: { (changed) in
                         }){
       //                      self.didEndEditingPortTextField()
-                        }.scaledFont(size: 14)
+                        }.scaledFont(size: Device.isLarge ?  14 : 12)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
                         .autocapitalization(.none)
@@ -149,7 +149,7 @@ struct RecoveryBasedUnlink: View {
                         TextField("".localized(), text: self.$viewModel.thirdWord, onEditingChanged: { (changed) in
                         }) {
       //                      self.didEndEditingPortTextField()
-                        }.scaledFont(size: 14)
+                        }.scaledFont(size: Device.isLarge ?  14 : 12)
                         .multilineTextAlignment(.center)
                         .textCase(.lowercase)
                         .autocapitalization(.none)
