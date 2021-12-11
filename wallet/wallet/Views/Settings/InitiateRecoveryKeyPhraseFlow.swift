@@ -19,8 +19,7 @@ struct InitiateRecoveryKeyPhraseFlow: View {
 //            ARRRBackground().edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center, content: {
                     Spacer(minLength: 10)
-                    Text("Write down your key again".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 28)).padding(.top,80)
-                    Text("Last written down on ".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 16 : 10)).hidden()
+                    Text("Write down your key again".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 36 : 26)).padding(.top,Device.isLarge ? 80 : 60)
                     Spacer(minLength: 10)
                     Image("hook")
                         .padding(.trailing,80).padding(.leading,80)
@@ -52,7 +51,7 @@ struct InitiateRecoveryKeyPhraseFlow: View {
             Button {
                 presentationMode.wrappedValue.dismiss()
           } label: {
-              Image("backicon").resizable().frame(width: 50, height: 50)
+              Image("backicon").resizable().frame(width: 50, height: 50).padding(.leading,-10)
           }
         }, headerItem: {
             HStack{

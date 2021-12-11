@@ -355,7 +355,7 @@ struct SettingsSectionHeaderView : View {
                 .padding(.leading, 20)
              
             }
-            .frame(width: 380)
+//            .frame(width: 250)
            
         }
     }
@@ -409,7 +409,7 @@ struct SettingsRowWithToggle: View {
             HStack{
                 Text(mCurrentRowData.title).multilineTextAlignment(.leading)
                     .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
-                                .frame(width: 200, height: 22,alignment: .leading)
+                    .frame(width: Device.isLarge ? 200 : 180, height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
                     .padding()
                 

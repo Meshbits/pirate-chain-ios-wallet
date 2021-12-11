@@ -13,6 +13,7 @@ struct ARRRLogo<S: ShapeStyle>: View {
 
     var fillStyle: S
     
+    var dimension = Device.isLarge ? 265.0 :  225.0
     
     init(fillStyle: S) {
         self.fillStyle = fillStyle
@@ -23,7 +24,7 @@ struct ARRRLogo<S: ShapeStyle>: View {
            
             VStack (alignment: .center) {
                 Image("splashicon").resizable().padding(.horizontal)
-                    .frame(width: 265.0, height:265.0, alignment: .center)
+                    .frame(width: dimension, height: dimension, alignment: .center)
                 
             }
         }

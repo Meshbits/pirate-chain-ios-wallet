@@ -138,7 +138,7 @@ struct PasscodeValidationScreen: View {
                     }) {
                         VStack(alignment: .leading) {
                             ZStack{
-                                Image("closebutton").resizable().frame(width: 70, height: 70)
+                                Image("closebutton").resizable().frame(width: 50, height: 50)
                             }
                         }
                     }
