@@ -18,6 +18,9 @@ struct AboutUs: View {
     var aSourceCodeURL = "https://github.com/Meshbits/pirate-chain-ios-wallet"
     var aDevelopedBy = "Developed by Meshbits Limited"
     var aVersionDetails = "Release: Beta"
+    var mFontSize:CGFloat = Device.isLarge ? 15 : 12
+    var mHeight:CGFloat = Device.isLarge ? 50 : 30
+    
     var body: some View {
         
         ZStack {
@@ -29,61 +32,61 @@ struct AboutUs: View {
                  HStack{
                      Text(anAppVersion).multilineTextAlignment(.leading)
                          .lineLimit(nil)
-                         .scaledFont(size: 15)
+                         .scaledFont(size: mFontSize)
                          .frame(alignment: .leading)
                      Spacer()
                  }
                  .listRowBackground(ARRRBackground())
-                 .frame(minHeight: 50)
+                 .frame(minHeight: mHeight)
                 
                  HStack{
                      Text(aBuildversion).multilineTextAlignment(.leading)
                          .lineLimit(nil)
-                         .scaledFont(size: 15)
+                         .scaledFont(size: mFontSize)
                          .frame(alignment: .leading)
                      Spacer()
                  }
                  .listRowBackground(ARRRBackground())
-                 .frame(minHeight: 50)
+                 .frame(minHeight: mHeight)
                 
                 HStack{
                     Text(aCommitsCount).multilineTextAlignment(.leading)
                         .lineLimit(nil)
-                        .scaledFont(size: 15)
+                        .scaledFont(size: mFontSize)
                         .frame(alignment: .leading)
                     Spacer()
                 }
                 .listRowBackground(ARRRBackground())
-                .frame(minHeight: 50)
+                .frame(minHeight: mHeight)
                 
                 HStack{
                     Text(aGitHash).multilineTextAlignment(.leading)
                         .lineLimit(nil)
-                        .scaledFont(size: 15)
+                        .scaledFont(size: mFontSize)
                         .frame(alignment: .leading)
                     Spacer()
                 }
                 .listRowBackground(ARRRBackground())
-                .frame(minHeight: 50)
+                .frame(minHeight: mHeight)
             
                 HStack{
                     Text(aVersionDetails).multilineTextAlignment(.leading)
                         .lineLimit(nil)
-                        .scaledFont(size: 15)
+                        .scaledFont(size: mFontSize)
                         .frame(alignment: .leading)
                     Spacer()
                 }
                 .listRowBackground(ARRRBackground())
-                .frame(minHeight: 50)
+                .frame(minHeight: mHeight)
                
                 
                 HStack{
                     Link(aSourceCode+aSourceCodeURL, destination: URL(string: aSourceCodeURL)!)
-                        .scaledFont(size: 15)
+                        .scaledFont(size: mFontSize)
                     Spacer()
                 }
                 .listRowBackground(ARRRBackground())
-                .frame(minHeight: 50)
+                .frame(minHeight: mHeight)
                 
             }
             .listRowBackground(ARRRBackground())
@@ -100,10 +103,10 @@ struct AboutUs: View {
                     Spacer()
                     Text(aDevelopedBy).multilineTextAlignment(.leading)
                         .lineLimit(nil)
-                        .scaledFont(size: 15)
+                        .scaledFont(size: mFontSize)
                         .frame(alignment: .leading)
                     Spacer()
-                }
+                }.padding()
         }
         }  .navigationBarBackButtonHidden(true)
             .navigationTitle("About Pirate Wallet").navigationBarTitleDisplayMode(.inline)

@@ -73,7 +73,7 @@ struct PrivateServerConfig: View {
                                 self.showListOfConfigurations = true
                             } label: {
                                 Image(systemName: "chevron.down.circle.fill").foregroundColor(.gray)
-                                    .scaledFont(size: 30).foregroundColor(.white)
+                                    .scaledFont(size: Device.isLarge ? 30 : 15).foregroundColor(.white)
                                     .padding(.bottom, 5)
                             }.disabled(isAutoConfigEnabled)
                         }
@@ -92,12 +92,12 @@ struct PrivateServerConfig: View {
                      }).modifier(ForegroundPlaceholderModifier())
                  }
                  .modifier(BackgroundPlaceholderModifier())
-                 .padding(.top,50)
+                 .padding(.top,Device.isLarge ? 50 : 30)
                  
                
                 Spacer(minLength: 10)
                 
-            }.padding(.top, 100)
+            }.padding(.top, Device.isLarge ? 100 : 40)
             
         }
         .actionSheet(isPresented: self.$showListOfConfigurations, content: {
