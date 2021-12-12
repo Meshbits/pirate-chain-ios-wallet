@@ -21,8 +21,8 @@ struct AuthenticateFaceID: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Authenticate Biometric ID".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).scaledFont(size: 26).padding(.top,50)
-                Text("Login quickly using your Biometric ID".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 14)
+                Text("Authenticate Biometric ID".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).scaledFont(size: Device.isLarge ? 26 : 20).padding(.top,50)
+                Text("Login quickly using your Biometric ID".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: Device.isLarge ? 14 : 12)
                 
                 Spacer(minLength: 10)
 
