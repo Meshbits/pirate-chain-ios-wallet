@@ -608,14 +608,14 @@ struct PasscodeNumber: View {
 
             }, label: {
                 ZStack {
-                    Image("passcodenumericbg").resizable().frame(width: 100, height: 100, alignment: .center)
+                    Image("passcodenumericbg").resizable().frame(width: Device.isLarge ? 100 : 60, height: Device.isLarge ? 100 : 60, alignment: .center)
                         .padding(.top,3)
                         .padding(.leading,3)
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 17)
+                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: Device.isLarge ? 15 : 12)
                     }else {
-                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 22)
+                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: Device.isLarge ? 22 : 14)
                     }
                 }
             })
@@ -697,7 +697,7 @@ struct PasscodeNumberView : View {
                 PasscodeNumber(passcodeValue: Binding.constant("delete"),passcodeViewModel: $passcodeViewModel)
             })
         })
-            .frame(width: 300, alignment: .center)
+            .frame(width: Device.isLarge ? 300 : 200, alignment: .center)
     }
 }
 
@@ -779,7 +779,7 @@ struct PasscodeScreenSubTitle : View {
         HStack(alignment: .center, spacing: nil, content: {
             Spacer()
             Text(aSubTitle).foregroundColor(.white)
-            .scaledFont(size: 22)
+            .scaledFont(size: Device.isLarge ? 22 : 14)
             .padding(.trailing,5)
             Spacer()
         })

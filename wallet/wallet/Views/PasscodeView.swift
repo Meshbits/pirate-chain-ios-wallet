@@ -94,31 +94,31 @@ struct PasscodeView: View {
 //                    PasscodeScreenTitle(aTitle: "LOGIN PIN".localized())
 //                    Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 15 : 10,padding:50)
                     Spacer()
                 }else if mScreenState == .validateAndDismiss{
 //                    PasscodeScreenTitle(aTitle: "Enter PIN".localized())
 //                    Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "PIN Required".localized())
-                    PasscodeScreenDescription(aDescription: "Please enter your PIN to continue".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to continue".localized(),size:Device.isLarge ? 15 : 10,padding:50)
                     Spacer()
                 }else if mScreenState == .newPasscode{
 //                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
 //                    Spacer()
 //                    PasscodeScreenSubTitle(aSubTitle: "Set PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50).padding(.top,50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 15 : 10,padding:50).padding(.top,Device.isLarge ? 50 : 10)
                     Spacer()
                 }else if mScreenState == .confirmPasscode{
 //                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
 //                    Spacer()
 //                    PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50).padding(.top,50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 15 : 10,padding:50).padding(.top,Device.isLarge ? 50 : 10)
                     Spacer()
                 }else if mScreenState == .changePasscode{
 //                    PasscodeScreenTitle(aTitle: "Change PIN".localized())
 //                    Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Enter Current PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 15 : 10,padding:Device.isLarge ? 50 : 10)
                     Spacer()
                 }
 
@@ -131,7 +131,7 @@ struct PasscodeView: View {
                     }
                 }).padding(10)
 
-                PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:12,padding:50)
+                PasscodeScreenDescription(aDescription: "Remember your PIN. If you forget it, you won't be able to access your assets.".localized(),size:Device.isLarge ? 12 : 10,padding:50)
                 
                 PasscodeNumberView(passcodeViewModel: Binding.constant(passcodeViewModel))
                 Spacer(minLength: 10)
@@ -389,7 +389,7 @@ struct PasscodeLoginScreenTitle : View {
     @State var aTitle: String
     var body: some View {
         HStack(alignment: .center, spacing: nil, content: {
-            Text(aTitle).scaledFont(size: 22).padding(.top,40)
+            Text(aTitle).scaledFont(size: Device.isLarge ? 22 : 14).padding(.top,40)
         })
     }
 }
