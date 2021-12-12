@@ -251,31 +251,31 @@ struct PasscodeScreen: View {
                     PasscodeScreenTitle(aTitle: "LOGIN PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 12 : 10,padding:50)
                     Spacer()
                 }else if mScreenState == .validateAndDismiss{
                     PasscodeScreenTitle(aTitle: "Enter PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "PIN Required".localized())
-                    PasscodeScreenDescription(aDescription: "Please enter your PIN to continue".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Please enter your PIN to continue".localized(),size:Device.isLarge ? 12 : 10,padding:50)
                     Spacer()
                 }else if mScreenState == .newPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "SET PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 12 : 10,padding:50)
                     Spacer()
                 }else if mScreenState == .confirmPasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Re-Enter PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 12 : 10,padding:50)
                     Spacer()
                 }else if mScreenState == .changePasscode{
                     PasscodeScreenTitle(aTitle: "Change PIN".localized())
                     Spacer()
                     PasscodeScreenSubTitle(aSubTitle: "Enter Current PIN".localized())
-                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:15,padding:50)
+                    PasscodeScreenDescription(aDescription: "Your PIN will be used to unlock your Pirate wallet and send money".localized(),size:Device.isLarge ? 12 : 10,padding:50)
                     Spacer()
                 }
                 
@@ -650,13 +650,13 @@ struct PasscodeValidationNumber: View {
 
             }, label: {
                 ZStack {
-                    Image("passcodenumericbg").resizable().frame(width: 90, height: 90, alignment: .center)
+                    Image("passcodenumericbg").resizable().frame(width: Device.isLarge ? 100 : 60, height: Device.isLarge ? 100 : 60, alignment: .center)
 
                     if passcodeValue == "delete" {
                         Text("").foregroundColor(.white)
-                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: 17)
+                        Image(systemName: "delete.left").foregroundColor(.gray).scaledFont(size: Device.isLarge ? 15 : 12)
                     }else {
-                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: 24)
+                        Text(passcodeValue).foregroundColor(.gray).bold().multilineTextAlignment(.center).scaledFont(size: Device.isLarge ? 22 : 14)
                             .padding(.bottom,2)
                             .padding(.trailing,2)
                         

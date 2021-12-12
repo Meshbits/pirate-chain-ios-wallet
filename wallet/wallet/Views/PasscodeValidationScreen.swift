@@ -154,7 +154,7 @@ struct PasscodeValidationScreen: View {
                     Spacer()
                 })
 
-                PasscodeScreenDescription(aDescription: "Please enter your PIN to proceed".localized(),size:15,padding:50)
+                PasscodeScreenDescription(aDescription: "Please enter your PIN to proceed".localized(),size:Device.isLarge ? 15 : 10,padding:50)
                 Spacer(minLength: 10)
                 
                 HStack(alignment: .center, spacing: 0, content: {
