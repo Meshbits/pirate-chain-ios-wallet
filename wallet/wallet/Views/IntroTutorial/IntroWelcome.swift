@@ -60,9 +60,9 @@ struct IntroWelcome: View {
                             Spacer()
                             
                             Text(mTitle.localized()).transition(.move(edge: .trailing)).id("MyTitleComponent1" + mTitle).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,120).padding(.leading,120).foregroundColor(.white).multilineTextAlignment(.center)
-                                .scaledFont(size: 26)
+                                .scaledFont(size: Device.isLarge ? 26 : 19)
                             Text(mSubTitle.localized()).padding(.trailing,80).padding(.leading,80).multilineTextAlignment(.center).foregroundColor(.gray)
-                                .scaledFont(size: 16).padding(.top,10)
+                                .scaledFont(size: Device.isLarge ? 16 : 12).padding(.top,10)
                             ZStack{
                                 Image("backgroundglow")
                                     .padding(.trailing,80).padding(.leading,80)
@@ -75,7 +75,7 @@ struct IntroWelcome: View {
                                             .animation(Animation.linear(duration: mAnimationDuration).repeatForever(autoreverses: true), value: isViewVisible)
                                     }
                                     
-                                    Image("coin").padding(.top,50)
+                                    Image("coin").padding(.top,Device.isLarge ? 50 : 20)
                                         .rotationEffect(Angle(degrees: isViewVisible ? -40 : 0))
 //                                        .transition(.move(edge: .top))
                                         .animation(Animation.linear(duration: mAnimationDuration).repeatForever(autoreverses: true), value: isViewVisible)
@@ -109,9 +109,9 @@ struct IntroWelcome: View {
                                         Text(mButtonTitle).foregroundColor(Color.black)
                                             .frame(width: 225.0, height:84)
                                             .cornerRadius(15)
-                                            .scaledFont(size: 19)
+                                            .scaledFont(size: Device.isLarge ? 19 : 13)
                                             .multilineTextAlignment(.center)
-                                    }.frame(width: 225.0, height:84)
+                                    }.frame(width: 225.0, height:Device.isLarge ? 84 : 60)
                                     
                                 }
                                 .padding(.bottom,20)
