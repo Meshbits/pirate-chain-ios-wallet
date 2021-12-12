@@ -32,7 +32,7 @@ struct ReceiveFunds: View {
              }, headerItem: {
                  HStack{
                     Text("receive_title".localized())
-                         .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
+                         .font(.barlowRegular(size: Device.isLarge ? 26 : 16)).foregroundColor(Color.zSettingsSectionHeader)
                          .frame(alignment: Alignment.center).padding(.top,40)
                  }
              }, trailingItem: {
@@ -41,7 +41,7 @@ struct ReceiveFunds: View {
                          if UIApplication.shared.windows.count > 0 {
                              UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
                          }
-                     }).frame(width: 30, height: 30).padding(.top,40)
+                     }).frame(width: Device.isLarge ? 30 : 15, height: Device.isLarge ? 30 : 15).padding(.top,40)
              })
             .onAppear {
                 tracker.track(.screen(screen: .receive), properties: [:])

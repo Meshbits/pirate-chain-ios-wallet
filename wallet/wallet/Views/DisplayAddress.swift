@@ -19,7 +19,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     var title: String
     var address: String
     var chips: [String]
-    let qrSize: CGFloat = 200
+    let qrSize: CGFloat = Device.isLarge ? 200 : 140
     var accessoryContent: AccesoryContent
     
     init(address: String, title: String, chips: Int = 8, badge: Image, qrImage:Image, @ViewBuilder accessoryContent: (() -> (AccesoryContent))) {
@@ -43,7 +43,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
             
             Text(title)
                 .foregroundColor(.gray)
-                .scaledFont(size: 20)
+                .scaledFont(size: Device.isLarge ? 20 : 14)
                 .padding(.top,10)
                 .padding(.bottom,10)
             
@@ -63,7 +63,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
                         .multilineTextAlignment(.center)
                     Spacer()
                     Image(systemName: "doc.on.doc").foregroundColor(.gray)
-                        .scaledFont(size: 20).padding(.trailing, 10)
+                        .scaledFont(size: Device.isLarge ? 20 : 14).padding(.trailing, 10)
                 }.padding([.horizontal], 15)
                 .frame(minHeight: 50)
                

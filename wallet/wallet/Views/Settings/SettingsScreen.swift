@@ -77,7 +77,7 @@ struct SettingsScreen: View {
                 
                 VStack(alignment: .center, spacing: 10) {
                     Text("Settings".localized())
-                        .scaledFont(size: 20).multilineTextAlignment(.center).foregroundColor(.white)
+                        .scaledFont(size: Device.isLarge ? 20 : 14).multilineTextAlignment(.center).foregroundColor(.white)
 
                     ScrollView {
 
@@ -349,7 +349,7 @@ struct SettingsSectionHeaderView : View {
             VStack(alignment: .trailing, spacing: 6) {
 
               Text(aTitle)
-                .scaledFont(size: 20).foregroundColor(Color.zSettingsSectionHeader)
+                .scaledFont(size: Device.isLarge ? 20 : 14).foregroundColor(Color.zSettingsSectionHeader)
                                 .foregroundColor(Color.white)
               .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 20)
@@ -375,7 +375,7 @@ struct SettingsRow: View {
             HStack{
                 Text(mCurrentRowData.title)
                     .multilineTextAlignment(.leading)
-                    .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
+                    .scaledFont(size: Device.isLarge ? 16 : 12).foregroundColor(Color.textTitleColor)
                     .frame(height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
                     .padding()
@@ -408,7 +408,7 @@ struct SettingsRowWithToggle: View {
         VStack {
             HStack{
                 Text(mCurrentRowData.title).multilineTextAlignment(.leading)
-                    .scaledFont(size: 16).foregroundColor(Color.textTitleColor)
+                    .scaledFont(size: Device.isLarge ? 16 : 11).foregroundColor(Color.textTitleColor)
                     .frame(width: Device.isLarge ? 200 : 180, height: 22,alignment: .leading)
                                 .foregroundColor(Color.white)
                     .padding()

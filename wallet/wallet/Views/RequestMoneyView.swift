@@ -24,7 +24,7 @@ struct FullScreenImageView: View {
 }
 
 struct RequestMoneyView<AccesoryContent: View>: View {
-    let qrSize: CGFloat = 100
+    let qrSize: CGFloat = Device.isLarge ? 100 : 70
     @State var isShareAddressShown = false
     @State var openFullScreenQRCode = false
     @State var sendArrrValue =  ""
@@ -102,7 +102,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                             }
                             
                         }
-                        .frame(minHeight: 96)
+                        .frame(minHeight: Device.isLarge ? 96 : 70)
                         .padding(.leading, -10)
                         
                     }.alert(item: self.$copyItemModel) { (p) -> Alert in
@@ -117,7 +117,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
 
                 HStack{
                     Text("Memo".localized())
-                        .scaledFont(size: 20).foregroundColor(Color.textTitleColor)
+                        .scaledFont(size: Device.isLarge ? 20 : 12).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
                         .multilineTextAlignment(.leading)
@@ -126,7 +126,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
                     Spacer()
                 }
                 
-                ARRRMemoTextField(memoText:$memoTextContent).frame(height:45)
+                ARRRMemoTextField(memoText:$memoTextContent).frame(height:Device.isLarge ? 45 : 30)
                 
 //                Text(self.sendArrrValue)
 //                    .foregroundColor(.gray)
@@ -162,7 +162,7 @@ struct RequestMoneyView<AccesoryContent: View>: View {
          }, headerItem: {
              HStack{
                  Text("Request Money".localized())
-                    .scaledFont(size: 24)
+                    .scaledFont(size: Device.isLarge ? 24 : 14)
                     .foregroundColor(Color.zSettingsSectionHeader)
                     .padding(.top,20)
              }

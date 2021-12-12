@@ -22,7 +22,7 @@ struct ARRRCloseButton: View {
             }) {
                 VStack(alignment: .leading) {
                     ZStack{
-                        Image("closebutton").resizable().frame(width: 70, height: 70)
+                        Image("closebutton").resizable().frame(width: Device.isLarge ? 70 : 40, height: Device.isLarge ? 70 : 40)
                     }
                 }
             }

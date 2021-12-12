@@ -336,12 +336,12 @@ struct ARRRSendMoneyTextField: View {
          ZStack{
              HStack{
                  TextField("Enter Amount".localized(), text: $anAmount)
-                   .scaledFont(size: 20)
+                   .scaledFont(size: Device.isLarge ? 20 : 12)
                    .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.clear))
                    .foregroundColor(Color.white)
                    .keyboardType(.decimalPad)
                    .foregroundColor(.gray)
-                   .frame(height:30)
+                   .frame(height:Device.isLarge ? 30 : 20)
                    .multilineTextAlignment(.center)
                    .padding(.leading,10)
                    .padding(.trailing,10)
