@@ -167,7 +167,7 @@ struct GenerateWordsView: View {
             
             VStack(alignment: .center, content: {
                 Text("Your Recovery Phrase".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
-                    .scaledFont(size: 26)
+                    .scaledFont(size: Device.isLarge ? 26 : 20)
                     .padding(.top,20)
                 Text("Write down the following words in order".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: 15)
                 Spacer()
