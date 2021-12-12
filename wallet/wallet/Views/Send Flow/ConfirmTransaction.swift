@@ -83,7 +83,7 @@ struct ConfirmTransaction: View {
                 HStack {
                     Text("Confirm Transaction")
                         .foregroundColor(.white)
-                        .scaledFont(size: 20)
+                        .scaledFont(size: Device.isLarge ? 20 : 12)
                         .multilineTextAlignment(.center)
                 }
                 .padding(.top,40)

@@ -126,7 +126,7 @@ struct SendMoneyView: View {
                 
                 HStack{
                     Text("Memo".localized())
-                        .scaledFont(size: 20)
+                        .scaledFont(size: Device.isLarge ? 20 : 12)
                         .foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                                     .foregroundColor(Color.white)
@@ -137,7 +137,7 @@ struct SendMoneyView: View {
                     Spacer()
                 }
                 
-                ARRRMemoTextField(memoText:self.$flow.memo).frame(height:60)
+                ARRRMemoTextField(memoText:self.$flow.memo).frame(height:Device.isLarge ? 45 : 30)
                 
                 HStack{
    
@@ -158,7 +158,7 @@ struct SendMoneyView: View {
                 HStack{
                     Spacer()
                     Text("Processing fee: ".localized() + "\(Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
-                        .scaledFont(size: 14).foregroundColor(Color.textTitleColor)
+                        .scaledFont(size: Device.isLarge ? 14 : 12).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                         .multilineTextAlignment(.leading)
                         .truncationMode(.middle)
@@ -205,7 +205,7 @@ struct SendMoneyView: View {
              }, headerItem: {
                  HStack{
                      Text("Send Money".localized())
-                         .font(.barlowRegular(size: 22)).foregroundColor(Color.zSettingsSectionHeader)
+                         .font(.barlowRegular(size: Device.isLarge ? 22 : 14)).foregroundColor(Color.zSettingsSectionHeader)
                          .frame(alignment: Alignment.center).padding(.top,30)
                         
                  }

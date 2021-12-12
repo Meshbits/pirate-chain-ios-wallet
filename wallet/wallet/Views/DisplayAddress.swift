@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import BottomSheet
 
 struct DisplayAddress<AccesoryContent: View>: View {
     
@@ -14,6 +15,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     @State var isShareModalDisplayed = false
     @State var isShareAddressShown = false
     @State var openRequestMoney = false
+    @State var openFullScreenQRCode = false
     var qrImage: Image
     var badge: Image
     var title: String
@@ -40,6 +42,9 @@ struct DisplayAddress<AccesoryContent: View>: View {
                 .layoutPriority(1)
                 .cornerRadius(6)
                 .modifier(QRCodeBackgroundPlaceholderModifier())
+                .onTapGesture {
+                    openFullScreenQRCode = true
+                }
             
             Text(title)
                 .foregroundColor(.gray)
@@ -123,6 +128,13 @@ struct DisplayAddress<AccesoryContent: View>: View {
             }) {
                 BlueButtonView(aTitle: "Share".localized())
             }
+        }
+        .bottomSheet(isPresented: $openFullScreenQRCode,
+                      height: 400,
+                      topBarHeight: 0,
+                      topBarCornerRadius: 20,
+                      showTopIndicator: true) {
+            FullScreenImageView(qrImage: Binding.constant(qrImage))
         }
         .padding(10)
         .padding(.bottom,10)
