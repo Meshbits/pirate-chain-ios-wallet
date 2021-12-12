@@ -13,7 +13,7 @@ struct ARRRLogo<S: ShapeStyle>: View {
 
     var fillStyle: S
     
-    var dimension = Device.isLarge ? 265.0 :  225.0
+    var dimension = Device.isLarge ? 265.0 :  200.0
     
     init(fillStyle: S) {
         self.fillStyle = fillStyle

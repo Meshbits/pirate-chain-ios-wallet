@@ -30,14 +30,14 @@ struct RestorePhraseScreen: View {
     
     var seedPhraseSubtitle: some View {
         if seedPhrase.isEmpty {
-            return Text.subtitle(text: "Make sure nobody is watching you!".localized()).font(.barlowRegular(size: 15))
+            return Text.subtitle(text: "Make sure nobody is watching you!".localized()).font(.barlowRegular(size: Device.isLarge ? 15 : 10))
         }
         
         do {
            try MnemonicSeedProvider.default.isValid(mnemonic: seedPhrase)
-            return Text.subtitle(text: "Your seed phrase is valid".localized()).font(.barlowRegular(size: 15))
+            return Text.subtitle(text: "Your seed phrase is valid".localized()).font(.barlowRegular(size: Device.isLarge ? 15 : 10))
         } catch {
-            return Text.subtitle(text: "Your seed phrase is invalid!".localized()).font(.barlowRegular(size: 15))
+            return Text.subtitle(text: "Your seed phrase is invalid!".localized()).font(.barlowRegular(size: Device.isLarge ? 15 : 10))
                 .foregroundColor(.red)
                 .bold()
         }
@@ -65,7 +65,7 @@ struct RestorePhraseScreen: View {
                             title: "Wallet Birthday height".localized(),
                             subtitleView: AnyView(
                                 Text.subtitle(text: "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.".localized())
-                                    .scaledFont(size: 15)
+                                    .scaledFont(size: Device.isLarge ? 15 : 10)
                             ),
                             keyboardType: UIKeyboardType.decimalPad,
                             binding: $walletBirthDay,
@@ -78,7 +78,7 @@ struct RestorePhraseScreen: View {
                             self.showListOfBirthdays = true
                         } label: {
                             Image(systemName: "chevron.down.circle.fill").foregroundColor(.gray)
-                                .scaledFont(size: 30).foregroundColor(.gray)
+                                .scaledFont(size: Device.isLarge ? 30 : 20).foregroundColor(.gray)
                                 .padding(.bottom, 5)
                         }
 
@@ -157,7 +157,7 @@ struct RestorePhraseScreen: View {
         .navigationBarItems(leading:   Button {
             presentationMode.wrappedValue.dismiss()
         } label: {
-            Image("backicon").resizable().frame(width: 60, height: 60)
+            Image("backicon").resizable().frame(width: Device.isLarge ? 60 : 45, height: Device.isLarge ? 60 : 45)
         })
         
     }

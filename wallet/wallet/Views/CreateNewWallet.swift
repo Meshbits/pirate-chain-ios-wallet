@@ -307,10 +307,10 @@ struct RecoveryWalletButtonView : View {
             Image(imageName).resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
             
             Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
-                .frame(width: 225.0, height:84).padding(10)
+                .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60).padding(10)
                 .cornerRadius(15)
-                .scaledFont(size: 19)
+                .scaledFont(size: Device.isLarge ? 19 : 13)
                 .multilineTextAlignment(.center)
-        }.frame(width: 225.0, height:84)
+        }.frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
     }
 }
