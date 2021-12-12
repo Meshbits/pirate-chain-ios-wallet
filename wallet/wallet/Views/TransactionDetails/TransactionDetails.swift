@@ -37,7 +37,7 @@ struct TransactionDetails: View {
                 Spacer()
             }
             .padding()
-            .frame(height: 48)
+            .frame(height: Device.isLarge ? 48 : 24)
             
         }
         .overlay(
@@ -390,7 +390,7 @@ struct TransactionRow: View {
 
         VStack {
             HStack{
-                Text(mTitle+mSubTitle).scaledFont(size: 18).foregroundColor(isYellowColor ? Color.zARRRTextColor : Color.textTitleColor)
+                Text(mTitle+mSubTitle).scaledFont(size: Device.isLarge ? 18 : 12).foregroundColor(isYellowColor ? Color.zARRRTextColor : Color.textTitleColor)
                                 .lineLimit(nil)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .frame(alignment: .leading)
@@ -401,7 +401,7 @@ struct TransactionRow: View {
                 Spacer()
                 if !isYellowColor && !mSubTitle.isEmpty && mSubTitle != "NA"{
                     Image(systemName: "doc.on.doc").foregroundColor(.gray)
-                        .scaledFont(size: 20).padding(.trailing, 10)
+                        .scaledFont(size: Device.isLarge ? 18 : 12).padding(.trailing, 10)
                 }
                 
             } .onTapGesture {
@@ -435,7 +435,7 @@ struct TransactionRowTitleSubtitle: View {
 
         VStack {
             HStack{
-                Text(mTitle).font(.barlowRegular(size: 18)).foregroundColor(Color.white)
+                Text(mTitle).font(.barlowRegular(size: Device.isLarge ? 18 : 12)).foregroundColor(Color.white)
                                 .frame(height: 22,alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .truncationMode(.middle)
@@ -444,7 +444,7 @@ struct TransactionRowTitleSubtitle: View {
             }
             
             HStack{
-                Text(mSubTitle).font(.barlowRegular(size: 14)).foregroundColor(Color.textTitleColor)
+                Text(mSubTitle).font(.barlowRegular(size: Device.isLarge ? 14 : 10)).foregroundColor(Color.textTitleColor)
                                 .frame(height: 22,alignment: .leading)
                     .multilineTextAlignment(.leading)
                     .truncationMode(.middle)

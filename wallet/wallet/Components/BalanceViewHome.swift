@@ -20,10 +20,10 @@ struct BalanceViewHome: View {
         HStack{
             Text(format(zec: availableZec))
                 .foregroundColor(.white)
-                .scaledFont(size: 30)
+                .scaledFont(size: Device.isLarge ? 30 : 20)
                 
             Text(" \(zec) ")
-                .scaledFont(size: 20)
+                .scaledFont(size: Device.isLarge ? 20 : 12)
                 .foregroundColor(.zAmberGradient1)
         }
     }
@@ -70,13 +70,13 @@ struct BalanceViewHome: View {
         VStack(alignment: .leading) {
             Text("Balance".localized())
                 .foregroundColor(.zLightGray)
-                .scaledFont(size: 18)
+                .scaledFont(size: Device.isLarge ? 18 : 12)
             HStack{
                 available.multilineTextAlignment(.leading)
                     
                 Spacer()
                 Text(aTitleStatus)
-                    .scaledFont(size: 18)
+                    .scaledFont(size: Device.isLarge ? 18 : 12)
                     .foregroundColor(.gray).multilineTextAlignment(.trailing)
             }
             if includeCaption {

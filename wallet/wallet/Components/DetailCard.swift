@@ -69,7 +69,7 @@ struct DetailCard: View {
             Text(text)
                 .foregroundColor(color)
                 .opacity(opacity)
-            .scaledFont(size: 16)
+            .scaledFont(size: Device.isLarge ? 16 : 12)
             
     }
     
@@ -82,7 +82,7 @@ struct DetailCard: View {
                     HStack {
 //                        Text(model.title)
                         Text(model.date.aFormattedDate)
-                            .scaledFont(size: 20)
+                            .scaledFont(size: Device.isLarge ? 20 : 14)
                             .truncationMode(.tail)
                             .lineLimit(1)
                             .foregroundColor(.white)
@@ -90,7 +90,7 @@ struct DetailCard: View {
 
                     }
                     Text(String.transactionSubTitle(for: model))
-                        .font(.body)
+                        .scaledFont(size: Device.isLarge ? 20 : 14)
                         .truncationMode(.tail)
                         .foregroundColor(.zARRRSubtitleColor)
                         .opacity(0.6)

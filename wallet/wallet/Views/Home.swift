@@ -537,7 +537,7 @@ struct Home: View {
                    },
                    trailingItem: { EmptyView() }
                 )
-                .frame(height: 64)
+                       .frame(height: Device.isLarge ? 64 : 44)
                 .padding([.leading, .trailing], 10)
                 .padding(.top,40)
                 
@@ -567,9 +567,9 @@ struct Home: View {
                     
                     Text("Recent Transfers".localized())
                         .multilineTextAlignment(.leading)
-                        .font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader)
-                        .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(10).padding(.leading, 10)
-                        .padding(.top, 20)
+                        .font(.barlowRegular(size: Device.isLarge ? 20 : 13)).foregroundColor(Color.zSettingsSectionHeader)
+                        .frame(maxWidth: .infinity,alignment: Alignment.leading).padding(Device.isLarge ? 10 : 5).padding(.leading, 10)
+                        .padding(.top, Device.isLarge ? 20 : 5)
                     
                     List {
                         
@@ -582,7 +582,7 @@ struct Home: View {
                                 DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:false)
                             }
                             .listRowBackground(ARRRBackground())
-                            .frame(height: 69)
+                            .frame(height: Device.isLarge ? 69 : 49)
                             .cornerRadius(0)
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                               
@@ -599,7 +599,7 @@ struct Home: View {
                     .padding()
                 }else{
                     Spacer()
-                    Text("No Recent transfers".localized()).font(.barlowRegular(size: 30)).foregroundColor(Color.zSettingsSectionHeader)
+                    Text("No Recent transfers".localized()).font(.barlowRegular(size: Device.isLarge ? 30 : 20)).foregroundColor(Color.zSettingsSectionHeader)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
@@ -693,7 +693,7 @@ struct Home: View {
 //                    .opacity(viewModel.isSyncing ? 0.4 : 1.0)
 //                    .disabled(viewModel.isSyncing)
             }
-            .padding([.bottom], 20)
+            .padding([.bottom],  Device.isLarge ? 20 : 10)
           }
         }
         .toast(isPresenting: $cantSendError){
@@ -925,7 +925,7 @@ struct SendRecieveButtonView : View {
                 .barlowRegular(size: Device.isLarge ? 22 : 15)
             ).modifier(ForegroundPlaceholderModifierHomeButtons())
             .padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
-            .cornerRadius(30)
+            .cornerRadius(Device.isLarge ? 30 : 15)
             .background(Image("buttonbackground").resizable())
         }
     }

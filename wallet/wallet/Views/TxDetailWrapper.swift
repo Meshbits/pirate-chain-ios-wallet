@@ -22,7 +22,7 @@ struct TxDetailsWrapper: View {
                     }, headerItem: {
                         HStack{
                             Text("Transaction Details".localized())
-                                .font(.barlowRegular(size: 26)).foregroundColor(Color.zSettingsSectionHeader)
+                                .font(.barlowRegular(size: Device.isLarge ? 26 : 14)).foregroundColor(Color.zSettingsSectionHeader)
                                 .frame(alignment: Alignment.center)
                         }
                     }, trailingItem: {
