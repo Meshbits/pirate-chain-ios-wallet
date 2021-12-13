@@ -70,13 +70,13 @@ struct BalanceViewHome: View {
         VStack(alignment: .leading) {
             Text("Balance".localized())
                 .foregroundColor(.zLightGray)
-                .scaledFont(size: Device.isLarge ? 18 : 12)
+                .scaledFont(size: Device.isLarge ? 18 : 14)
             HStack{
                 available.multilineTextAlignment(.leading)
                     
                 Spacer()
                 Text(aTitleStatus)
-                    .scaledFont(size: Device.isLarge ? 18 : 12)
+                    .scaledFont(size: Device.isLarge ? 18 : 14)
                     .foregroundColor(.gray).multilineTextAlignment(.trailing)
             }
             if includeCaption {

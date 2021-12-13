@@ -68,7 +68,7 @@ struct BalanceDetailView: View {
         VStack(alignment: .leading) {
             Text("Balance".localized())
                 .foregroundColor(.zLightGray)
-                .scaledFont(size: Device.isLarge ? 18 : 12)
+                .scaledFont(size: Device.isLarge ? 18 : 14)
                 .padding(.leading,10)
             HStack{
                 available.multilineTextAlignment(.leading)
