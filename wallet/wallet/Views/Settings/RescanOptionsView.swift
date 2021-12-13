@@ -151,12 +151,12 @@ struct RescanOptionsView: View {
             
         }.toast(isPresenting: $showScanStartedToast){
             
-            AlertToast(displayMode: .hud, type: .regular, title:"Rescanning started with height:".localized() + "\(mCurrentWalletBirthday)")
+            AlertToast(displayMode: .banner(.pop), type: .regular, title:"Rescanning started with height:".localized() + "\(mCurrentWalletBirthday)")
 
         }
         .toast(isPresenting: $showErrorScanToast){
             
-            AlertToast(displayMode: .hud, type: .regular, title:"Please wait, existing downloading/scanning is in progress.".localized())
+            AlertToast(displayMode: .banner(.pop), type: .regular, title:"Please wait, existing downloading/scanning is in progress.".localized())
 
         }
         
