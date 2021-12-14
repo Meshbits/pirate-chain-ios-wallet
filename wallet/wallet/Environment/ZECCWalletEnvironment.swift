@@ -333,6 +333,9 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     private func registerBackgroundActivity() {
         if self.taskIdentifier == .invalid {
+            
+            let isSynced = (self.synchronizer.syncStatus.value == .synced) ? true : false
+            
             self.taskIdentifier = UIApplication.shared.beginBackgroundTask(withName: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifierARRR, expirationHandler: { [weak self, weak logger] in
                 logger?.info("BackgroundTask Expiration Handler Called")
                 guard let self = self else { return }
@@ -341,7 +344,7 @@ final class ZECCWalletEnvironment: ObservableObject {
                 NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
             })
             
-            if self.synchronizer.syncStatus.value != .synced {
+            if !isSynced {
                 NotificationCenter.default.post(name: NSNotification.Name(mPlaySoundWhileSyncing), object: nil)
             }
         }
