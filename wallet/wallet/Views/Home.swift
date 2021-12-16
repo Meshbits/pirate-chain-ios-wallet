@@ -425,10 +425,20 @@ struct Home: View {
     func startSendFlow(memo:String, address:String) {
         
         if isAmountValid {
-            SendFlow.start(appEnviroment: appEnvironment,
-                           isActive: self.$sendingPushed,
-                           amount: viewModel.sendZecAmount,memoText: memo,address:address)
-            self.sendingPushed = true
+           
+            if(self.viewModel.syncStatus.isSynced){
+
+                SendFlow.start(appEnviroment: appEnvironment,
+                               isActive: self.$sendingPushed,
+                               amount: viewModel.sendZecAmount,memoText: memo,address:address)
+                self.sendingPushed = true
+                
+                if self.sendingPushed {
+                    self.viewModel.destination = .sendMoney
+                }
+            }else{
+                cantSendError = true
+            }
         }
         
     }
