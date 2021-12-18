@@ -21,6 +21,7 @@ struct TransactionDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @State var alertItem: Alerts?
     @State var isCopyAlertShown = false
+    @State var mDisplayMemoAlert = false
     @State var mURLString:URL?
     @State var mOpenSafari = false
 
@@ -87,7 +88,11 @@ struct TransactionDetails: View {
                                 
                                 TransactionRowTitleSubtitle(mTitle: converDateToString(aDate: detail.date), mSubTitle: ("Processing fee: ".localized() + "\(detail.defaultFee.asHumanReadableZecBalance().toZecAmount())" + " ARRR"), showLine: true)
                                 
-                                TransactionRowTitleSubtitle(mTitle: "Memo".localized(), mSubTitle: (detail.memo ?? "-"), showLine: true)
+                                TransactionRowTitleSubtitle(mTitle: "Memo".localized(), mSubTitle: (detail.memo ?? "-"), showLine: true).onTapGesture {
+                                    if let _ = detail.memo {
+                                        mDisplayMemoAlert = true
+                                    }
+                                }
                                 
                                 if detail.success {
                                     let latestHeight = ZECCWalletEnvironment.shared.synchronizer.syncBlockHeight.value
@@ -142,6 +147,11 @@ struct TransactionDetails: View {
         .toast(isPresenting: $isCopyAlertShown){
             
             AlertToast(displayMode:  .hud, type: .regular, title:"Address Copied to clipboard!".localized())
+
+        }
+        .toast(isPresenting: $mDisplayMemoAlert){
+            
+            AlertToast(displayMode:  .alert, type: .regular, title:detail.memo)
 
         }
         .padding(.vertical,0)
