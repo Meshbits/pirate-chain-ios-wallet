@@ -62,7 +62,7 @@ struct RestorePhraseScreen: View {
                   
                     HStack{
                         ZcashTextField(
-                            title: "Wallet Birthday height".localized(),
+                            title: "Wallet Birthday Height".localized(),
                             subtitleView: AnyView(
                                 Text.subtitle(text: "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.".localized())
                                     .scaledFont(size: Device.isLarge ? 15 : 10)

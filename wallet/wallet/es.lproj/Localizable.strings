@@ -94,7 +94,7 @@
 //RestoreWallet
 "Enter Your Seed Phrase" = "Ingrese su frase semilla (Seed)";
 "Make sure nobody is watching you!" = "¡Asegúrate de que nadie te esté mirando!";
-"Wallet Birthday height" = "Numero de bloque de nacimiento";
+"Wallet Birthday Height" = "Numero de bloque de nacimiento";
 "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000." = "Si no lo sabe, déjelo en blanco. La primera sincronización llevará más tiempo.";
 "Proceed" = "Continuar";
 "Restore from Seed Phrase" = "Restaurar desde frase semilla";
