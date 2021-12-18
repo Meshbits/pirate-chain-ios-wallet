@@ -23,7 +23,7 @@ struct IntroPrivacy: View {
                         VStack(alignment: .center, content: {
                             Text("Privacy! \n not Piracy".localized()).lineLimit(nil).fixedSize(horizontal: false, vertical: true).padding(.trailing,80).padding(.leading,80).foregroundColor(.white).multilineTextAlignment(.center)
                                 .scaledFont(size: 26)
-                            Text("Reliable, fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray)
+                            Text("Reliable, Fast & Secure".localized()).padding(.trailing,80).padding(.leading,80).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray)
                                 .scaledFont(size: 14)
                             ZStack{
                                 Image("backgroundglow")

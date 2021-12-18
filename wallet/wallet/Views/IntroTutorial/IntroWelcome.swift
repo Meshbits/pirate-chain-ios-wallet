@@ -22,7 +22,7 @@ struct IntroWelcome: View {
     
     @State var mTitle = "Welcome to \nPirate Wallet".localized()
     
-    @State var mSubTitle = "Reliable, fast & Secure".localized()
+    @State var mSubTitle = "Reliable, Fast & Secure".localized()
     
     @State var mButtonTitle =  "Get Started".localized()
     
