@@ -277,7 +277,7 @@
 "Confirm Recovery Phrase" = "Confirm Recovery Phrase";
 "Almost done! Enter the following words from your recovery phrase" = "Almost done! Enter the following words from your recovery phrase";
 "Confirm" = "Confirm";
-"Congratulation! You completed your recovery phrase setup" = "Congratulation! You completed your recovery phrase setup";
+"Congratulations! You completed your recovery phrase setup" = "Congratulations! You completed your recovery phrase setup";
 "You’re all set to deposit, receive, and store crypto in your Pirate wallet" = "You’re all set to deposit, receive, and store crypto in your Pirate wallet";
 "Done" = "Done";
 
@@ -290,7 +290,7 @@
 
 // Congratulations
 
-"Congratulation! \nBiometric ID setup successfully" = "Congratulation! \nBiometric ID setup successfully";
+"Congratulations! \nBiometric ID setup successfully" = "Congratulations! \nBiometric ID setup successfully";
 "You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID" = "You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID";
 "Login" = "Login";
 

@@ -16,7 +16,7 @@ struct CongratulationsFaceID: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Congratulation! \nBiometric ID setup successfully".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 32 : 22)).padding(.top,40)
+                Text("Congratulations! \nBiometric ID setup successfully".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil).font(.barlowRegular(size: Device.isLarge ? 32 : 22)).padding(.top,40)
                 Text("You have successfuly enabled Biometric ID based authentication. \n\nNow securely login using your Biometric ID".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).font(.barlowRegular(size: Device.isLarge ? 20 : 14))
                 
                 Spacer(minLength: 10)

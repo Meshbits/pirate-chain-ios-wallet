@@ -16,7 +16,7 @@ struct CongratulationsRecoverySetup: View {
         ZStack{
             ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack{
-                Text("Congratulation! You completed your recovery phrase setup".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
+                Text("Congratulations! You completed your recovery phrase setup".localized()).padding(.trailing,30).padding(.leading,30).foregroundColor(.white).multilineTextAlignment(.center).lineLimit(nil)
                     .scaledFont(size: Device.isLarge ? 26 : 20).padding(.top,40)
                 Text("You’re all set to deposit, receive, and store crypto in your Pirate wallet".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: Device.isLarge ? 17 : 12)
                 
