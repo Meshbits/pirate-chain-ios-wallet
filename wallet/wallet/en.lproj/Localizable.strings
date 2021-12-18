@@ -72,7 +72,7 @@
 "Restore" = "Restore";
 
 //RestoreWallet
-"Enter your Seed Phrase" = "Enter your Seed Phrase";
+"Enter Your Seed Phrase" = "Enter Your Seed Phrase";
 "Make sure nobody is watching you!" = "Make sure nobody is watching you!";
 "Wallet Birthday height" = "Wallet Birthday height";
 "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000." = "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.";

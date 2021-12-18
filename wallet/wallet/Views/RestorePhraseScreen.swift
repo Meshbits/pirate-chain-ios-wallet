@@ -49,7 +49,7 @@ struct RestorePhraseScreen: View {
                 VStack(spacing: 40) {
                     
                     ZcashTextField(
-                        title: "Enter your Seed Phrase".localized(),
+                        title: "Enter Your Seed Phrase".localized(),
                         subtitleView: AnyView(
                             seedPhraseSubtitle
                         ),
