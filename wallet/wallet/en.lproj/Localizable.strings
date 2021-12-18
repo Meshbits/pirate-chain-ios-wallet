@@ -75,7 +75,7 @@
 "Enter Your Seed Phrase" = "Enter Your Seed Phrase";
 "Make sure nobody is watching you!" = "Make sure nobody is watching you!";
 "Wallet Birthday Height" = "Wallet Birthday Height";
-"If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000." = "If you don't know, leave it blank. First Sync will take longer with default birthday height to be 1390000.";
+"If you don't know, leave it blank. First sync will take longer with default birthday height to be 1390000." = "If you don't know, leave it blank. First sync will take longer with default birthday height to be 1390000.";
 "Proceed" = "Proceed";
 "\nChoose a birthday height for sync, leave it default if you are not sure.\n"="\nChoose a birthday height for sync, leave it default if you are not sure.\n";
 "Restore from Seed Phrase" = "Restore from Seed Phrase";
