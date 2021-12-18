@@ -195,7 +195,7 @@ struct GenerateWordsView: View {
 //                .animation(.default)
 //                .id(UUID())
                 
-                Text("For security purposes, do not screeshot or email these words.".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).padding(.top,10)
+                Text("For security purposes, do not screenshot or email these words.".localized()).padding(.trailing,40).padding(.leading,40).foregroundColor(.gray).multilineTextAlignment(.leading).foregroundColor(.gray).padding(.top,10)
                     .scaledFont(size: 12)
                 Button {
                     self.isForward = true

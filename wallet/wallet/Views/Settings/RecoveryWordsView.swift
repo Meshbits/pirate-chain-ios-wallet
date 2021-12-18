@@ -81,7 +81,7 @@ struct RecoveryWordsView: View {
                 
                 Spacer()
                 
-                Text("For security purposes, do not screeshot or email these words.".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: Device.isLarge ? 17 : 14)
+                Text("For security purposes, do not screenshot or email these words.".localized()).padding(.trailing,60).padding(.leading,60).foregroundColor(.gray).multilineTextAlignment(.center).foregroundColor(.gray).padding(.top,10).scaledFont(size: Device.isLarge ? 17 : 14)
                 
                 Button {
 
