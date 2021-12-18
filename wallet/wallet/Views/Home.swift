@@ -626,11 +626,11 @@ struct Home: View {
                 
                 HStack(alignment: .center, spacing: 2, content: {
                     
-                    SendRecieveButtonView(title: "Receive".localized()).onTapGesture {
+                    SendRecieveButtonView(title: "Receive".localized(),isSyncing:Binding.constant(false)).onTapGesture {
                         self.viewModel.destination = .receiveFunds
                     }
                     
-                    SendRecieveButtonView(title: "Send".localized())
+                    SendRecieveButtonView(title: "Send".localized(),isSyncing:$viewModel.isSyncing)
                         .onTapGesture {
                             cantSendError = false
                             // Send tapped
@@ -928,15 +928,17 @@ extension Home {
 struct SendRecieveButtonView : View {
     
     @State var title: String
+    @Binding var isSyncing:Bool
     
     var body: some View {
         ZStack {
-            Text(title).foregroundColor(Color.zARRRTextColorLightYellow).bold().multilineTextAlignment(.center).font(
+            Text(title).foregroundColor(isSyncing ? Color.zTextLightGray : Color.arrrBarAccentColor).bold().multilineTextAlignment(.center).font(
                 .barlowRegular(size: Device.isLarge ? 22 : 15)
             ).modifier(ForegroundPlaceholderModifierHomeButtons())
             .padding([.bottom],8).foregroundColor(Color.init(red: 132/255, green: 124/255, blue: 115/255))
             .cornerRadius(Device.isLarge ? 30 : 15)
-            .background(Image("buttonbackground").resizable())
+            .disabled(isSyncing)
+            .background(Image("buttonbackground").resizable().opacity(isSyncing ? 0.6 : 1.0))
         }
     }
 }

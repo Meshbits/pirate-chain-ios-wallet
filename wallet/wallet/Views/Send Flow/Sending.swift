@@ -89,7 +89,7 @@ struct Sending: View {
                         
                     }) {
                         
-                        SendRecieveButtonView(title: "button_seedetails".localized())
+                        SendRecieveButtonView(title: "button_seedetails".localized(),isSyncing:Binding.constant(false))
                         
                     }
                 }
@@ -100,7 +100,7 @@ struct Sending: View {
                         self.flow.close()
                         NotificationCenter.default.post(name: NSNotification.Name("DismissPasscodeScreenifVisible"), object: nil)
                     }) {
-                        SendRecieveButtonView(title: "button_done".localized())
+                        SendRecieveButtonView(title: "button_done".localized(),isSyncing:Binding.constant(false))
                     }
                 }
             }
