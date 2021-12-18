@@ -609,7 +609,7 @@ struct Home: View {
                     .padding()
                 }else{
                     Spacer()
-                    Text("No Recent transfers".localized()).font(.barlowRegular(size: Device.isLarge ? 30 : 20)).foregroundColor(Color.zSettingsSectionHeader)
+                    Text("No Recent Transfers".localized()).font(.barlowRegular(size: Device.isLarge ? 30 : 20)).foregroundColor(Color.zSettingsSectionHeader)
                         .multilineTextAlignment(.center)
                     Spacer()
                 }
