@@ -35,6 +35,7 @@ PODS:
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
+
   - SwiftNIO (2.32.3):
     - SwiftNIOCore (= 2.32.3)
     - SwiftNIOEmbedded (= 2.32.3)
@@ -172,6 +173,7 @@ CHECKOUT OPTIONS:
     :commit: 370366e9db41ba4c318963a63bc544a4766fb827
     :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
+
     :commit: 769ff3345a3766ed6f86b814ae872d143ea25e3f
     :git: https://github.com/Meshbits/ZcashLightClientKit.git
   zealous-logger:
@@ -220,3 +222,4 @@ SPEC CHECKSUMS:
 PODFILE CHECKSUM: 3a77b06f282a7f0413177865bc7dfb19d5fd69f8
 
 COCOAPODS: 1.10.2
+

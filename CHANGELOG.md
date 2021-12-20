@@ -1,5 +1,24 @@
 # Changelog
+## 0.5.0 build 128
+* Fix: t-address being displayed instead of Sapling
+* point to SDK 0.12.0-beta.5
 
+## 0.5.0 build 125
+* Issue #293 Crash when browsing Wallet History and sync happens
+
+## 0.5.0 build 124
+* [Enhancement] Remove the need for ZCASH_NETWORK_ENVIRONMENT env var. Use targets instead
+* bump to 0.12.0-beta.2
+## 0.5.0 build 123
+* Fix: Issue #286 Force the app to be awake while syncing
+## 0.5.0 build 122
+* Fix: layout problems on shield dialog. added blockheight to wallet breakdown
+## 0.5.0 build 121
+* Fix: Issue #285 Sync does not resume when app has been backgrounded and brought back to foreground
+* Minimum target iOS 14
+* [New] See Details and Done Buttons for autoshielding
+## 0.4.0 build 117
+* FIX: privacy-leak bug fix [(see link)](https://electriccoin.co/blog/privacy-leak-bug-discovered-in-nighthawk-and-ecc-wallets/)
 ##  0.4.0 build 116
 * FIX: Issue #126 Download params instead of bundling them
 * Fix Archive being broken

@@ -46,11 +46,15 @@ struct FundsAtRisk: View {
                 }.isDetailLink(false)
                 
                 NavigationLink(destination: LazyView(
+
                     HomeTabView(openPasscodeScreen: false).navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true)
                         .navigationBarHidden(true)
                     //.environmentObject(appEnvironment)
 //                                Home().environmentObject(HomeViewModel())
+
+//                    Home(viewModel: ModelFlyWeight.shared.modelBy(defaultValue: HomeViewModel()))
+
                     )) {
                     Text("button_skip".localized())
                         .foregroundColor(Color.zDarkGray3)

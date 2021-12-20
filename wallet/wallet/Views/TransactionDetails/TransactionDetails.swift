@@ -188,7 +188,7 @@ struct TransactionDetails: View {
 
 extension DetailModel {
     var defaultFee: Int64 {
-        ZcashSDK.defaultFee(for: self.minedHeight > 0 ? self.minedHeight : (self.expirationHeight > 0 ? self.expirationHeight : BlockHeight.max))
+        ZCASH_NETWORK.constants.defaultFee(for: self.minedHeight > 0 ? self.minedHeight : (self.expirationHeight > 0 ? self.expirationHeight : BlockHeight.max))
     }
 }
 struct SubwayPathBuilder {

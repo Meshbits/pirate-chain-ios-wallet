@@ -44,6 +44,15 @@ class UserSettings {
         set {
             UserDefaults.standard.setValue(newValue, forKey: Keys.aPasscode)
 //            SeedManager.default.updatePasswordForPinCode()
+        static let didShowAutoShieldingNotice = "didShowAutoShieldingNotice"
+    }
+    
+    var didShowAutoShieldingNotice: Bool {
+        get {
+            UserDefaults.standard.bool(forKey: Keys.didShowAutoShieldingNotice)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Keys.didShowAutoShieldingNotice)
         }
     }
     

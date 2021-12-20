@@ -27,6 +27,8 @@ struct BalanceBreakdown: View {
         HStack {
             Image("ic_shieldtick_yellow")
             Text("SHIELDED ARRR".localized())
+                .resizable()
+                .frame(width: 13, height: 16, alignment: .center)
                 .font(.system(size: 14))
                 .foregroundColor(.zYellow)
         }

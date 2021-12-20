@@ -16,7 +16,7 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
         case idle
         case shielding
         case failed(error: Error)
-        case finished
+        case finished(pendingTx: PendingTransactionEntity)
         var isShielding: Bool {
             switch self {
             case .shielding:
@@ -47,14 +47,14 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
     @Published var status: Status = .idle
     @Published var transparentBalance = ReadableBalance.zero
     @Published var shieldedBalance = ReadableBalance.zero
-    
+    @Published var seeDetailsActive: DetailModel? = nil
     @Published var alertType: AlertType? = nil
     
     var unconfirmedFunds: Double {
         transparentBalance.unconfirmedFunds + shieldedBalance.unconfirmedFunds
     }
     var appEnvironment = ZECCWalletEnvironment.shared
-    var shieldEnvironment = ShieldFlow.current
+    
     var cancellables = [AnyCancellable]()
     
     
@@ -68,8 +68,24 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
             .map({ return ReadableBalance(walletBalance: $0) })
             .assign(to: \.shieldedBalance , on: self)
             .store(in: &cancellables)
+    }
+    
+    var isShieldingButtonEnabled: Bool {
+        switch status {
+        case .idle:
+            return transparentBalance.verified >= ZECCWalletEnvironment.autoShieldingThresholdInZatoshi.asHumanReadableZecBalance()
+        default:
+            return false
+        }
+    }
+    
+    func shieldConfirmedFunds() {
+        self.status = .shielding
         
-        self.shieldEnvironment.status.receive(on: DispatchQueue.main)
+        do {
+          let shieldEnvironment = try ShieldFlow.startWithShilderOrFail(AutoShieldingBuilder.manualShielder(keyProvider: DefaultShieldingKeyProvider(), shielder: appEnvironment.synchronizer.synchronizer))
+        
+        shieldEnvironment.status.receive(on: DispatchQueue.main)
             .sink { [weak self](completion) in
                 guard let self = self else {
                     return
@@ -79,8 +95,8 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
                     
                     UserSettings.shared.userEverShielded = true
                     tracker.track(.tap(action: .shieldFundsEnd), properties: ["success" : "true"])
-                    self.status = .finished
-                    self.alertType = .feedback(message: Text("Your once transparent funds, are now being shielded!".localized()))
+//                    self.status = .finished
+//                    self.alertType = .feedback(message: Text("Your once transparent funds, are now being shielded!".localized()))
                     
                 case .failure(let error):
                     tracker.report(handledException: DeveloperFacingErrors.handledException(error: error))
@@ -93,41 +109,48 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
                     return
                 }
                 switch s {
-                case .ended:
-                    self.status = .finished
-                case .notStarted:
+                case .ended(let shieldingTx):
+                    self.status = .finished(pendingTx: shieldingTx)
+                case .notStarted, .notNeeded:
                     self.status = .idle
                 case .shielding:
                     self.status = .shielding
-                    
+                
                 }
             }.store(in: &cancellables)
-    }
-    
-    var isShieldingButtonEnabled: Bool {
-        switch status {
-        case .idle:
-            return transparentBalance.verified >= ZcashSDK.shieldingThreshold.asHumanReadableZecBalance()
-        default:
-            return false
+        
+        shieldEnvironment.shield()
+            
+        } catch {
+            self.status = .failed(error: error)
+            tracker.report(handledException: DeveloperFacingErrors.handledException(error: error))
         }
-    }
-    
-    func shieldConfirmedFunds() {
-        self.status = .shielding
-        self.shieldEnvironment.shield()
     }
 }
 
 struct WalletBalanceBreakdown: View {
     @EnvironmentObject var model: WalletBalanceBreakdownViewModel
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.walletEnvironment) var appEnvironment
+    @State var latestHeight: BlockHeight = ZECCWalletEnvironment.shared.synchronizer.syncBlockHeight.value
     
     @ViewBuilder func idleScreen() -> some View {
         VStack {
-            BalanceBreakdown(model: BalanceBreakdownViewModel(shielded: model.shieldedBalance, transparent: model.transparentBalance))
-                .frame(height: 270, alignment: .center)
-                .cornerRadius(5)
+            VStack(alignment: .trailing, spacing: 2) {
+                Text("Block: \(latestHeight)")
+                    .onReceive(appEnvironment.synchronizer.syncBlockHeight, perform: { value in
+                        latestHeight = value
+                    })
+                    .foregroundColor(.zLightGray)
+                    .frame(alignment: .trailing)
+                BalanceBreakdown(model: BalanceBreakdownViewModel(shielded: model.shieldedBalance, transparent: model.transparentBalance))
+                    .frame(height: 270, alignment: .center)
+                    .cornerRadius(5)
+                Text("Auto Shielding Threshold: \(ZECCWalletEnvironment.thresholdInZec) \(.ZEC)")
+                    .foregroundColor(.zLightGray)
+                    .frame(alignment: .trailing)
+                    .font(.caption)
+            }.padding(0)
             Spacer()
             if model.unconfirmedFunds > 0 {
                 Text("(\(model.unconfirmedFunds.toZecAmount()) " + "ARRR pending".localized() + ")")
@@ -162,7 +185,8 @@ struct WalletBalanceBreakdown: View {
         }
 
     }
-    
+
+/*    
     @ViewBuilder func shieldingScreen() -> some View {
         VStack {
             Text("Shielding".localized())
@@ -187,12 +211,27 @@ struct WalletBalanceBreakdown: View {
         }
     }
     
+*/
+
     @ViewBuilder func viewForState(_ state: WalletBalanceBreakdownViewModel.Status) -> some View {
         switch state {
-        case .idle, .failed,.finished:
+        case .idle, .failed:
             idleScreen()
         case .shielding:
-            shieldingScreen()
+            AutoShieldView.shieldingScreen()
+                .zcashNavigationBar {
+                    EmptyView()
+                } headerItem: {
+                    EmptyView()
+                } trailingItem: {
+                    EmptyView()
+                }
+        case .finished(let shieldingTx):
+            AutoShieldView.success(shieldingTx: DetailModel(pendingTransaction: shieldingTx)) {
+                self.model.seeDetailsActive = DetailModel(pendingTransaction: shieldingTx)
+            } dismissBlock: {
+                self.presentationMode.wrappedValue.dismiss()
+            }
         }
     }
     
@@ -216,6 +255,9 @@ struct WalletBalanceBreakdown: View {
                 return PasteboardAlertHelper.alert(for: item)
             }
         }
+        .sheet(item: self.$model.seeDetailsActive, content: { model in
+            TxDetailsWrapper(row: model)
+        })
         .onReceive(PasteboardAlertHelper.shared.publisher) { (p) in
             self.model.alertType = WalletBalanceBreakdownViewModel.AlertType.pasteBoardItem(item: p)
         }
@@ -224,6 +266,7 @@ struct WalletBalanceBreakdown: View {
         }
         .onDisappear() {
             ShieldFlow.endFlow()
+            ModelFlyWeight.shared.dispose(flyweight: model)
         }
         .navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarBackButtonHidden(true)
@@ -233,10 +276,18 @@ struct WalletBalanceBreakdown: View {
         ShieldFlow.endFlow()
         presentationMode.wrappedValue.dismiss()
     }
+    
 }
 
 struct WalletBalanceDetail_Previews: PreviewProvider {
     static var previews: some View {
         WalletBalanceBreakdown()
+    }
+}
+
+
+extension ZECCWalletEnvironment {
+    static var thresholdInZec: String {
+        String(Double(ZECCWalletEnvironment.autoShieldingThresholdInZatoshi) / Double(ZcashSDK.ZATOSHI_PER_ZEC))
     }
 }

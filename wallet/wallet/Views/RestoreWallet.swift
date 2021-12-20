@@ -33,7 +33,7 @@ struct RestoreWallet: View {
             return false
         }
         
-        return b >= ZcashSDK.SAPLING_ACTIVATION_HEIGHT
+        return b >= ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
     }
     
     func validateSeed(_ seed: String) -> Bool {
@@ -46,7 +46,7 @@ struct RestoreWallet: View {
     }
     
     func importBirthday() throws {
-        let b = BlockHeight(self.walletBirthDay.trimmingCharacters(in: .whitespacesAndNewlines)) ?? ZcashSDK.SAPLING_ACTIVATION_HEIGHT
+        let b = BlockHeight(self.walletBirthDay.trimmingCharacters(in: .whitespacesAndNewlines)) ?? ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
         try SeedManager.default.importBirthday(b)
     }
     
@@ -83,10 +83,14 @@ struct RestoreWallet: View {
         ZStack {
             NavigationLink(destination:
                             LazyView(
+
                                 HomeTabView(openPasscodeScreen: false).navigationBarTitle("", displayMode: .inline)
                                     .navigationBarBackButtonHidden(true)
                                     .navigationBarHidden(true) //.environmentObject(appEnvironment)
 //                                    Home().environmentObject(HomeViewModel())
+
+//                                Home(viewModel: ModelFlyWeight.shared.modelBy(defaultValue: HomeViewModel()))
+
             ), isActive: $proceed) {
                 EmptyView()
             }

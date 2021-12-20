@@ -127,6 +127,9 @@ struct SeedBackup: View {
                                             .navigationBarHidden(true)
                                         //.environmentObject(appEnvironment)
 //                                        Home().environmentObject(HomeViewModel())
+
+    //                                    Home(viewModel: ModelFlyWeight.shared.modelBy(defaultValue: HomeViewModel()))
+
                                     )) {
                         Text("button_done".localized())
                             .foregroundColor(.black)

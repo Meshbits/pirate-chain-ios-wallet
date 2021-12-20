@@ -30,6 +30,7 @@ class CombineSynchronizer {
     var verifiedBalance: CurrentValueSubject<Double,Never>
     var cancellables = [AnyCancellable]()
     var errorPublisher = PassthroughSubject<Error, Never>()
+    
     var receivedTransactions: Future<[ConfirmedTransactionEntity],Never> {
         Future<[ConfirmedTransactionEntity], Never>() {
             promise in
@@ -94,17 +95,18 @@ class CombineSynchronizer {
         try self.synchronizer.latestDownloadedHeight()
     }
     
+    
     init(initializer: Initializer) throws {
         self.walletDetailsBuffer = CurrentValueSubject([DetailModel]())
         self.synchronizer = try SDKSynchronizer(initializer: initializer)
         self.syncStatus = CurrentValueSubject(.disconnected)
         self.balance = CurrentValueSubject(0)
         self.shieldedBalance = CurrentValueSubject(Balance(verified: 0, total: 0))
-        self.transparentBalance = CurrentValueSubject(Balance(verified: 0, total: 0))
+        let transparentSubject = CurrentValueSubject<WalletBalance, Never>(Balance(verified: 0, total: 0))
+        self.transparentBalance = transparentSubject
         self.verifiedBalance = CurrentValueSubject(0)
-        self.syncBlockHeight = CurrentValueSubject(ZcashSDK.SAPLING_ACTIVATION_HEIGHT)
+        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT)
         self.connectionState = CurrentValueSubject(self.synchronizer.connectionState)
-        
         
         // Subscribe to SDKSynchronizer notifications
         
@@ -153,7 +155,7 @@ class CombineSynchronizer {
                 switch  n.name {
                 case .blockProcessorStatusChanged:
                     guard let status = userInfo[CompactBlockProcessorNotificationKey.newStatus] as? CompactBlockProcessor.State else {
-                        logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey(CompactBlockProcessorNotificationKey.progress))")
+                        logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey(CompactBlockProcessorNotificationKey.newStatus))")
                         return nil}
                     return status.syncStatus
                 case .blockProcessorUpdated:
@@ -221,16 +223,24 @@ class CombineSynchronizer {
                 self?.connectionState.send(value)
             })
             .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: .blockProcessorFinished)
+            .compactMap { n -> BlockHeight? in
+                n.userInfo?[CompactBlockProcessorNotificationKey.latestScannedBlockHeight] as? BlockHeight
+            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] value in
+                self?.syncBlockHeight.send(value)
+            })
+            .store(in: &cancellables)
     }
-    
-    
     
     func prepare() throws {
         guard let uvk = self.initializer.viewingKeys.first else {
             throw SynchronizerError.initFailed(message: "unable to derive unified address. this is probably a programming error".localized())
         }
         do {
-            self.unifiedAddress = try DerivationTool.default.deriveUnifiedAddressFromUnifiedViewingKey(uvk)
+            self.unifiedAddress = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveUnifiedAddressFromUnifiedViewingKey(uvk)
         } catch {
             throw SynchronizerError.initFailed(message: "unable to derive unified address: \(error.localizedDescription)")
         }
@@ -242,10 +252,7 @@ class CombineSynchronizer {
         self.updatePublishers()
     }
     
-   
-    
     func start(retry: Bool = false) throws {
-        
         do {
             if retry {
                 stop()
@@ -337,7 +344,7 @@ class CombineSynchronizer {
             
             guard let self = self else { return }
             
-            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZcashSDK.SAPLING_ACTIVATION_HEIGHT
+            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
             
             self.synchronizer.refreshUTXOs(address: tAddress, from: walletBirthday, result: { [weak self] (r) in
                 guard let self = self else { return }

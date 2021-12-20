@@ -10,7 +10,8 @@ import SwiftUI
 import ZcashLightClientKit
 
 struct TheNoScreen: View {
-    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+//    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
+    @StateObject var appEnvironment: ZECCWalletEnvironment
     @ViewBuilder func theUnscreen() -> some View {
         ZStack(alignment: .center) {
             ARRRBackground.darkSplashScreen
@@ -48,6 +49,7 @@ struct TheNoScreen: View {
              .syncing,
              .synced:
 
+
 //            Home().environmentObject(HomeViewModel())
             
 //            NavigationView {
@@ -59,6 +61,11 @@ struct TheNoScreen: View {
                 }
 //            }.navigationViewStyle(StackNavigationViewStyle())
             
+
+//            Home(viewModel: ModelFlyWeight.shared.modelBy(defaultValue: HomeViewModel()))
+                .environmentObject(appEnvironment)
+                
+
         case .uninitialized:
             CreateNewWallet().environmentObject(appEnvironment)
         
@@ -79,8 +86,8 @@ struct TheNoScreen: View {
     }
 }
 
-struct TheNoScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        TheNoScreen()
-    }
-}
+//struct TheNoScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TheNoScreen()
+//    }
+//}

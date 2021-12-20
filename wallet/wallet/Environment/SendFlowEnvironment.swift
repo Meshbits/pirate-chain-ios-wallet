@@ -160,7 +160,6 @@ final class SendFlowEnvironment: ObservableObject {
                 self?.send()
             }
             .store(in: &self.diposables)
-
     }
     
     func send() {
@@ -183,8 +182,12 @@ final class SendFlowEnvironment: ObservableObject {
         do {
             let phrase = try SeedManager.default.exportPhrase()
             let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: phrase)
+
             guard let spendingKey = try DerivationTool.default.deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
                 let message = "no spending key for account 1".localized()
+//            guard let spendingKey = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
+                let message = "no spending key for account 1"
+
                 logger.error(message)
                 self.fail(FlowError.derivationFailed(message: "no spending key for account 1"))
                 return
@@ -270,7 +273,7 @@ final class SendFlowEnvironment: ObservableObject {
     
     static func includeReplyTo(address: String, in memo: String, charLimit: Int = SendFlowEnvironment.maxMemoLength) throws -> String {
         
-        guard let isValidZAddr = try? DerivationTool.default.isValidShieldedAddress(address),
+        guard let isValidZAddr = try? DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidShieldedAddress(address),
               isValidZAddr else {
             let msg = "the provided reply-to address is invalid".localized()
             logger.error(msg)
