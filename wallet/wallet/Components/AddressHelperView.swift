@@ -46,9 +46,9 @@ struct AddressHelperView: View {
         case .lastUsed(let address):
             return VStack(spacing: 0) {
                 AddressHelperViewSection(title: "LAST USED".localized()) {
-                    AddrezzHelperViewCell(address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
+//                    AddrezzHelperViewCell(address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
 //                AddressHelperViewSection(title: "LAST USED") {
-//                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
+                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
 
                 }.onTapGesture {
                     self.onTap(selection: Selection.lastUsedSelection, value: address)
@@ -64,10 +64,10 @@ struct AddressHelperView: View {
                 }
 
                 AddressHelperViewSection(title: "LAST USED".localized()) {
-                    AddrezzHelperViewCell(address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
+//                    AddrezzHelperViewCell(address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
 
 //                AddressHelperViewSection(title: "LAST USED") {
-//                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
+                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
 
                 }
                 .onTapGesture {

@@ -145,7 +145,7 @@ struct SendMoneyView: View {
                 
                     SendMoneyButtonView(title: "Send Max".localized()) {
                         let actualAmount = (ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)
-                        let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
+                        let defaultNetworkFee: Double = Int64(ZCASH_NETWORK.constants.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
                         if (actualAmount > defaultNetworkFee){
                             flow.amount = formatAnARRRAmount(arrr: actualAmount-defaultNetworkFee)
                         }else{
@@ -157,7 +157,7 @@ struct SendMoneyView: View {
                
                 HStack{
                     Spacer()
-                    Text("Processing fee: ".localized() + "\(Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
+                    Text("Processing fee: ".localized() + "\(Int64(ZCASH_NETWORK.constants.defaultFee()).asHumanReadableZecBalance().toZecAmount())" + " ARRR")
                         .scaledFont(size: Device.isLarge ? 14 : 12).foregroundColor(Color.textTitleColor)
                                     .frame(height: 22,alignment: .leading)
                         .multilineTextAlignment(.leading)
@@ -239,7 +239,7 @@ struct SendMoneyView: View {
                          secondaryButton: .default(Text("Confirm".localized()), action: {
                             
                             let amount = (flow.doubleAmount ??  0 )
-                            let defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
+                            let defaultNetworkFee: Double = Int64(ZCASH_NETWORK.constants.defaultFee()).asHumanReadableZecBalance() // 0.0001 minor fee
                             if (amount > defaultNetworkFee && amount == ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value){
                                 flow.amount = formatAnARRRAmount(arrr: amount-defaultNetworkFee)
                                 validateTransaction = true

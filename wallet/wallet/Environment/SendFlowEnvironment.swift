@@ -183,10 +183,9 @@ final class SendFlowEnvironment: ObservableObject {
             let phrase = try SeedManager.default.exportPhrase()
             let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: phrase)
 
-            guard let spendingKey = try DerivationTool.default.deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
+//            guard let spendingKey = try DerivationTool.default.deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
                 let message = "no spending key for account 1".localized()
-//            guard let spendingKey = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
-                let message = "no spending key for account 1"
+            guard let spendingKey = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
 
                 logger.error(message)
                 self.fail(FlowError.derivationFailed(message: "no spending key for account 1"))

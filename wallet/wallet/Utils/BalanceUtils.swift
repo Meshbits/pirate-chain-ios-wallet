@@ -22,9 +22,9 @@ extension Double {
     
     
 
-    static var defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance()
+//    static var defaultNetworkFee: Double = Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance()
 
-//    static var defaultNetworkFee: Double = ZCASH_NETWORK.constants.defaultFee().asHumanReadableZecBalance()
+    static var defaultNetworkFee: Double = ZCASH_NETWORK.constants.defaultFee().asHumanReadableZecBalance()
 
     
     func toZatoshi() -> Int64 {

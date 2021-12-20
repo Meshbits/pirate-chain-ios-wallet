@@ -124,33 +124,33 @@ final class HomeViewModel: ObservableObject {
                }
                .store(in: &diposables)
         
-        subscribeToSynchonizerEvents()
+//        subscribeToSynchonizerEvents()
         
         generateQRCodeImage()
     }
     
     deinit {
-        unsubscribeFromSynchonizerEvents()
+//        unsubscribeFromSynchonizerEvents()
         unbindSubcribedEnvironmentEvents()
         cancellable.forEach { $0.cancel() }
     }
     
-    func subscribeToSynchonizerEvents() {
-      
-        ZECCWalletEnvironment.shared.synchronizer.walletDetailsBuffer
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { [weak self] (d) in
-                self?.items = d
-            })
-            .store(in: &synchronizerEvents)
-        
-        ZECCWalletEnvironment.shared.synchronizer.balance
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { [weak self] (b) in
-                self?.balance = b
-            })
-            .store(in: &synchronizerEvents)
-    }
+//    func subscribeToSynchonizerEvents() {
+//
+//        ZECCWalletEnvironment.shared.synchronizer.walletDetailsBuffer
+//            .receive(on: RunLoop.main)
+//            .sink(receiveValue: { [weak self] (d) in
+//                self?.items = d
+//            })
+//            .store(in: &synchronizerEvents)
+//
+//        ZECCWalletEnvironment.shared.synchronizer.balance
+//            .receive(on: RunLoop.main)
+//            .sink(receiveValue: { [weak self] (b) in
+//                self?.balance = b
+//            })
+//            .store(in: &synchronizerEvents)
+//    }
     
     func generateQRCodeImage(){
            if let img = QRCodeGenerator.generate(from: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress) {
@@ -160,12 +160,12 @@ final class HomeViewModel: ObservableObject {
            }
     }
     
-    func unsubscribeFromSynchonizerEvents() {
-        synchronizerEvents.forEach { (c) in
-            c.cancel()
-        }
-        synchronizerEvents.removeAll()
-    }
+//    func unsubscribeFromSynchonizerEvents() {
+//        synchronizerEvents.forEach { (c) in
+//            c.cancel()
+//        }
+//        synchronizerEvents.removeAll()
+//    }
     
     func getSortedItems()-> [DetailModel]{
         return self.items.sorted(by: { $0.date > $1.date })
@@ -308,7 +308,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     func setAmount(_ zecAmount: Double) {
-        guard let value = self.zecAmountFormatter.string(for: zecAmount - Int64(ZcashSDK.defaultFee()).asHumanReadableZecBalance()) else { return }
+        guard let value = self.zecAmountFormatter.string(for: zecAmount - Int64(ZCASH_NETWORK.constants.defaultFee()).asHumanReadableZecBalance()) else { return }
         self.sendZecAmountText = value
     }
     
@@ -921,6 +921,10 @@ struct Home: View {
         .edgesIgnoringSafeArea([.top])
         .zOverlay(isOverlayShown: $viewModel.isOverlayShown) {
             feedbackOrNotice()
+        }.sheet(item: self.$selectedModel, onDismiss: {
+            self.selectedModel = nil
+        }) { (row)  in
+            TxDetailsWrapper(row: row)
         }
     }
     
@@ -969,11 +973,7 @@ struct Home: View {
                 }
             }
         }
-        .sheet(item: self.$selectedModel, onDismiss: {
-            self.selectedModel = nil
-        }) { (row)  in
-            TxDetailsWrapper(row: row)
-        }
+       
     }
     
     

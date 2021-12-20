@@ -26,7 +26,6 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     static let genericErrorMessage = "An error ocurred, please check your device logs".localized()
     static let autoShieldingThresholdInZatoshi: Int64 = Int64(ZcashSDK.ZATOSHI_PER_ZEC / 100)
-    static let genericErrorMessage = "An error ocurred, please check your device logs"
 
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
@@ -146,7 +145,7 @@ final class ZECCWalletEnvironment: ObservableObject {
                 try SeedManager.default.importPhrase(bip39: randomPhrase)
             }
             
-            let birthday = WalletBirthday.birthday(with: BlockHeight.max)
+            let birthday = WalletBirthday.birthday(with: BlockHeight.max, network: ZCASH_NETWORK)
             
             try SeedManager.default.importBirthday(birthday.height)
              

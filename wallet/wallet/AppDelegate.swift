@@ -22,8 +22,7 @@ let tracker = NullLogger()
 let logger = SimpleLogger(logLevel: .debug)
 #endif
 
-@UIApplicationMain
-
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {  
     
     static var isTouchIDVisible = false
@@ -57,8 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // To support background playing of audio
         try? AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.ambient)
         try? AVAudioSession.sharedInstance().setActive(true)
-
-        #endif
 
         
         // Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)

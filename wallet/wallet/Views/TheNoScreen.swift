@@ -63,7 +63,7 @@ struct TheNoScreen: View {
             
 
 //            Home(viewModel: ModelFlyWeight.shared.modelBy(defaultValue: HomeViewModel()))
-                .environmentObject(appEnvironment)
+//                .environmentObject(appEnvironment)
                 
 
         case .uninitialized:

@@ -30,7 +30,7 @@ final class SeedManager {
             throw SeedManagerError.alreadyImported
         }
         
-        if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
+        if height == ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT {
             // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
             userDefaults.set(String(SeedManager.mDefaultHeight), forKey: Self.aRRRWalletBirthday)
         }else{
@@ -43,7 +43,7 @@ final class SeedManager {
     
     func importNewBirthdayOnRescan(_ height: BlockHeight) throws {
        
-        if height == ZcashSDK.SAPLING_ACTIVATION_HEIGHT {
+        if height == ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT {
             // Setting it to a default height to 1390000 instead of 152_855 - too small to deal with
             userDefaults.set(String(SeedManager.mDefaultHeight), forKey: Self.aRRRWalletBirthday)
         }else{

@@ -25,6 +25,7 @@ class UserSettings {
         static let aLanguageSelectionIndex = "aLanguageSelectionIndex"
         static let isAutoConfigurationOn = "isAutoConfigurationOn"
         static let lastUpdatedTime = "lastSavedTime"
+        static let didShowAutoShieldingNotice = "didShowAutoShieldingNotice"
     }
     
     
@@ -43,8 +44,7 @@ class UserSettings {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: Keys.aPasscode)
-//            SeedManager.default.updatePasswordForPinCode()
-        static let didShowAutoShieldingNotice = "didShowAutoShieldingNotice"
+        }
     }
     
     var didShowAutoShieldingNotice: Bool {

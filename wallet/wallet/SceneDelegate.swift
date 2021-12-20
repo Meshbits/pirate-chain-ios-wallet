@@ -100,7 +100,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = HostingController(rootView:
                     AnyView(
                         NavigationView {
-                            TheNoScreen().environmentObject(ZECCWalletEnvironment.shared)
+                            TheNoScreen(appEnvironment: ZECCWalletEnvironment.shared)
                                 .navigationBarHidden(true)
                                 .navigationBarBackButtonHidden(true)
                         }
