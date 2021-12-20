@@ -11,8 +11,8 @@ PODS:
   - CNIOHTTPParser (2.32.3)
   - CNIOLinux (2.32.3)
   - CNIOWindows (2.32.3)
-  - CocoaLumberjack/Core (3.7.2)
-  - CocoaLumberjack/Swift (3.7.2):
+  - CocoaLumberjack/Core (3.7.4)
+  - CocoaLumberjack/Swift (3.7.4):
     - CocoaLumberjack/Core
   - CombineUrlSessionDownloader (1.0.1)
   - gRPC-Swift (1.0.0):
@@ -26,16 +26,15 @@ PODS:
     - SwiftProtobuf (< 2.0.0, >= 1.9.0)
   - KeychainSwift (19.0.0)
   - Logging (1.4.0)
-  - lottie-ios (3.2.3)
-  - Mixpanel-swift (2.10.3):
-    - Mixpanel-swift/Complete (= 2.10.3)
-  - Mixpanel-swift/Complete (2.10.3)
+  - lottie-ios (3.3.0)
+  - Mixpanel-swift (2.10.4):
+    - Mixpanel-swift/Complete (= 2.10.4)
+  - Mixpanel-swift/Complete (2.10.4)
   - MnemonicSwift (2.0.0)
   - SecureDefaults (1.0.6)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
-
   - SwiftNIO (2.32.3):
     - SwiftNIOCore (= 2.32.3)
     - SwiftNIOEmbedded (= 2.32.3)
@@ -167,13 +166,12 @@ CHECKOUT OPTIONS:
     :commit: 98e2ae0b47875faef28e181cf968b9645f7678af
     :git: https://github.com/weitieda/bottom-sheet.git
   MnemonicSwift:
-    :commit: 714cc6e2631ac322fc0067b2302358c1baad9275
+    :commit: c77dd81784b8104b3c7bd9de9bdf4b5ea7c3f092
     :git: https://github.com/zcash-hackworks/MnemonicSwift.git
   SecureDefaults:
     :commit: 370366e9db41ba4c318963a63bc544a4766fb827
     :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
-
     :commit: 769ff3345a3766ed6f86b814ae872d143ea25e3f
     :git: https://github.com/Meshbits/ZcashLightClientKit.git
   zealous-logger:
@@ -192,13 +190,13 @@ SPEC CHECKSUMS:
   CNIOHTTPParser: f7a6816f7ddbe7dfa57a74cd36dc2db2c53b56e8
   CNIOLinux: 5921dfefbc4bbe017380b34c510855622147ea41
   CNIOWindows: f5aa9dfb401b440a7b4c9cd911e53e981a787193
-  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  CocoaLumberjack: 543c79c114dadc3b1aba95641d8738b06b05b646
   CombineUrlSessionDownloader: 8b740baf7d678a95b6972eb1edec324d6100ca39
   gRPC-Swift: 77154009a019e97f8c4bd8f2bb75fe9726801157
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
-  lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
-  Mixpanel-swift: 3220daad7d82ff50cf9b8c3e31efed5bad426978
+  lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
+  Mixpanel-swift: 9fabd0585985d32cb6951e759d307d615a9c6f7b
   MnemonicSwift: 36384fc6b2640d93df9fe9fb60a8da7957cec36d
   SecureDefaults: c372beb04ca1abae13415d2640f72c01f9876946
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
@@ -219,7 +217,6 @@ SPEC CHECKSUMS:
   ZcashLightClientKit: 98b74ede09b395f9f1505d6834ad0f85cbbb496b
   zealous-logger: 2f33820d7d7e723796dabc51d60942b51b9ab024
 
-PODFILE CHECKSUM: 3a77b06f282a7f0413177865bc7dfb19d5fd69f8
+PODFILE CHECKSUM: ea254712c66617fdb744880856c9c337915548f5
 
 COCOAPODS: 1.10.2
-
