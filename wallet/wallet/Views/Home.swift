@@ -66,7 +66,7 @@ final class HomeViewModel: ObservableObject {
     @Published var verifiedBalance: Double = 0
     @Published var shieldedBalance = ReadableBalance.zero
     @Published var transparentBalance = ReadableBalance.zero
-//    private var synchronizerEvents = Set<AnyCancellable>()
+    private var synchronizerEvents = Set<AnyCancellable>()
 
     @Published var overlayType: OverlayType? = nil
     @Published var isOverlayShown = false
@@ -124,33 +124,33 @@ final class HomeViewModel: ObservableObject {
                }
                .store(in: &diposables)
         
-//        subscribeToSynchonizerEvents()
+        subscribeToSynchonizerEvents()
         
         generateQRCodeImage()
     }
     
     deinit {
-//        unsubscribeFromSynchonizerEvents()
+        unsubscribeFromSynchonizerEvents()
         unbindSubcribedEnvironmentEvents()
         cancellable.forEach { $0.cancel() }
     }
     
-//    func subscribeToSynchonizerEvents() {
-//
-//        ZECCWalletEnvironment.shared.synchronizer.walletDetailsBuffer
-//            .receive(on: RunLoop.main)
-//            .sink(receiveValue: { [weak self] (d) in
-//                self?.items = d
-//            })
-//            .store(in: &synchronizerEvents)
-//
-//        ZECCWalletEnvironment.shared.synchronizer.balance
-//            .receive(on: RunLoop.main)
-//            .sink(receiveValue: { [weak self] (b) in
-//                self?.balance = b
-//            })
-//            .store(in: &synchronizerEvents)
-//    }
+    func subscribeToSynchonizerEvents() {
+
+        ZECCWalletEnvironment.shared.synchronizer.walletDetailsBuffer
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] (d) in
+                self?.items = d
+            })
+            .store(in: &synchronizerEvents)
+
+        ZECCWalletEnvironment.shared.synchronizer.balance
+            .receive(on: RunLoop.main)
+            .sink(receiveValue: { [weak self] (b) in
+                self?.balance = b
+            })
+            .store(in: &synchronizerEvents)
+    }
     
     func generateQRCodeImage(){
            if let img = QRCodeGenerator.generate(from: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress) {
@@ -160,12 +160,12 @@ final class HomeViewModel: ObservableObject {
            }
     }
     
-//    func unsubscribeFromSynchonizerEvents() {
-//        synchronizerEvents.forEach { (c) in
-//            c.cancel()
-//        }
-//        synchronizerEvents.removeAll()
-//    }
+    func unsubscribeFromSynchonizerEvents() {
+        synchronizerEvents.forEach { (c) in
+            c.cancel()
+        }
+        synchronizerEvents.removeAll()
+    }
     
     func getSortedItems()-> [DetailModel]{
         return self.items.sorted(by: { $0.date > $1.date })

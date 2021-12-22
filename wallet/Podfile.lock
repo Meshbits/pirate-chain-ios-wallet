@@ -108,7 +108,7 @@ DEPENDENCIES:
   - Mixpanel-swift
   - MnemonicSwift (from `https://github.com/zcash-hackworks/MnemonicSwift.git`, branch `master`)
   - SecureDefaults (from `https://github.com/Meshbits/SecureDefaults.git`)
-  - ZcashLightClientKit (from `https://github.com/zcash/ZcashLightClientKit.git`, tag `0.12.0-beta.5`)
+  - ZcashLightClientKit (from `https://github.com/Meshbits/ZcashLightClientKit.git`, tag `v12-beta-5.1`)
   - zealous-logger (from `https://github.com/zcash-hackworks/zealous-logger`, branch `master`)
 
 SPEC REPOS:
@@ -155,8 +155,8 @@ EXTERNAL SOURCES:
   SecureDefaults:
     :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
-    :git: https://github.com/zcash/ZcashLightClientKit.git
-    :tag: 0.12.0-beta.5
+    :git: https://github.com/Meshbits/ZcashLightClientKit.git
+    :tag: v12-beta-5.1
   zealous-logger:
     :branch: master
     :git: https://github.com/zcash-hackworks/zealous-logger
@@ -172,8 +172,8 @@ CHECKOUT OPTIONS:
     :commit: 370366e9db41ba4c318963a63bc544a4766fb827
     :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
-    :git: https://github.com/zcash/ZcashLightClientKit.git
-    :tag: 0.12.0-beta.5
+    :git: https://github.com/Meshbits/ZcashLightClientKit.git
+    :tag: v12-beta-5.1
   zealous-logger:
     :commit: c9f8d8d9f74a456094b9143616da3b4eba91ddcf
     :git: https://github.com/zcash-hackworks/zealous-logger
@@ -214,9 +214,9 @@ SPEC CHECKSUMS:
   SwiftNIOTLS: 1b8290ec775238ccc714ed842d929494df95a2c2
   SwiftNIOTransportServices: 1fbbdb58510af3c53a838a1dbea98f18132dc952
   SwiftProtobuf: c3c12645230d9b09c72267e0de89468c5543bd86
-  ZcashLightClientKit: 36355e1a185106eb3474a989a45c96d623643e2f
+  ZcashLightClientKit: 33a53baa9a1b5d85fa7d8d46eb7ab693d2618a05
   zealous-logger: 2f33820d7d7e723796dabc51d60942b51b9ab024
 
-PODFILE CHECKSUM: 4a4bef4a58ba128ecdbe1b622d4e0cc39ae60ae6
+PODFILE CHECKSUM: 0bb44507045a284e2f4866795a99c7acf55bff57
 
 COCOAPODS: 1.10.2
