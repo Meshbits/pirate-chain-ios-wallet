@@ -29,8 +29,8 @@ final class ZECCWalletEnvironment: ObservableObject {
 
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
-    static let defaultLightWalletEndpoint = "lightd.meshbits.io"
-    static let defaultLightWalletPort: Int = 9067
+    static let defaultLightWalletEndpoint = "lightd.pirate.black"
+    static let defaultLightWalletPort: Int = 443
 //    static let defaultFee = 10_000 // Earlier we have used ZcashSDK.defaultFee()
     @Published var state: WalletState
     
