@@ -27,9 +27,9 @@ PODS:
   - KeychainSwift (19.0.0)
   - Logging (1.4.0)
   - lottie-ios (3.3.0)
-  - Mixpanel-swift (2.10.4):
-    - Mixpanel-swift/Complete (= 2.10.4)
-  - Mixpanel-swift/Complete (2.10.4)
+  - Mixpanel-swift (3.1.0):
+    - Mixpanel-swift/Complete (= 3.1.0)
+  - Mixpanel-swift/Complete (3.1.0)
   - MnemonicSwift (2.0.0)
   - SecureDefaults (1.0.6)
   - SQLite.swift (0.12.2):
@@ -106,7 +106,7 @@ DEPENDENCIES:
   - KeychainSwift (~> 19.0.0)
   - lottie-ios
   - Mixpanel-swift
-  - MnemonicSwift (from `https://github.com/zcash-hackworks/MnemonicSwift.git`, branch `master`)
+  - MnemonicSwift
   - SecureDefaults (from `https://github.com/Meshbits/SecureDefaults.git`)
   - ZcashLightClientKit (from `https://github.com/Meshbits/ZcashLightClientKit.git`, tag `v12-beta-5.1`)
   - zealous-logger (from `https://github.com/zcash-hackworks/zealous-logger`, branch `master`)
@@ -130,6 +130,7 @@ SPEC REPOS:
     - Logging
     - lottie-ios
     - Mixpanel-swift
+    - MnemonicSwift
     - SQLite.swift
     - SwiftNIO
     - SwiftNIOConcurrencyHelpers
@@ -149,9 +150,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   BottomSheet:
     :git: https://github.com/weitieda/bottom-sheet.git
-  MnemonicSwift:
-    :branch: master
-    :git: https://github.com/zcash-hackworks/MnemonicSwift.git
   SecureDefaults:
     :git: https://github.com/Meshbits/SecureDefaults.git
   ZcashLightClientKit:
@@ -163,11 +161,8 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   BottomSheet:
-    :commit: 98e2ae0b47875faef28e181cf968b9645f7678af
+    :commit: 0eb23336119ee048fb48da52f5be4f28fd5431fb
     :git: https://github.com/weitieda/bottom-sheet.git
-  MnemonicSwift:
-    :commit: c77dd81784b8104b3c7bd9de9bdf4b5ea7c3f092
-    :git: https://github.com/zcash-hackworks/MnemonicSwift.git
   SecureDefaults:
     :commit: 370366e9db41ba4c318963a63bc544a4766fb827
     :git: https://github.com/Meshbits/SecureDefaults.git
@@ -196,7 +191,7 @@ SPEC CHECKSUMS:
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
   lottie-ios: 6ac74dcc09904798f59b18cb3075c089d76be9ae
-  Mixpanel-swift: 9fabd0585985d32cb6951e759d307d615a9c6f7b
+  Mixpanel-swift: 843e0f1beac9037044e5d30a5e7da80dd799a0a0
   MnemonicSwift: 36384fc6b2640d93df9fe9fb60a8da7957cec36d
   SecureDefaults: c372beb04ca1abae13415d2640f72c01f9876946
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
@@ -217,6 +212,6 @@ SPEC CHECKSUMS:
   ZcashLightClientKit: 33a53baa9a1b5d85fa7d8d46eb7ab693d2618a05
   zealous-logger: 2f33820d7d7e723796dabc51d60942b51b9ab024
 
-PODFILE CHECKSUM: 0bb44507045a284e2f4866795a99c7acf55bff57
+PODFILE CHECKSUM: e116484676de7d91a47923ac3fd8fdd88aed120a
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2

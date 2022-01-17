@@ -109,6 +109,7 @@ final class GenerateWordsViewModel: ObservableObject {
     
     @Published var mVisibleWord: Words = Words.word_one
     
+    
     var randomKeyPhrase:[String]?
     
     @Published var mWordsVerificationScreen = false
@@ -157,7 +158,7 @@ struct GenerateWordsView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
-    @EnvironmentObject var viewModel: GenerateWordsViewModel
+    @ObservedObject var viewModel: GenerateWordsViewModel
     
     @State var isForward = true
     
@@ -261,7 +262,7 @@ struct GenerateWordsView: View {
 
 struct GenerateWordsView_Previews: PreviewProvider {
     static var previews: some View {
-        GenerateWordsView()
+        GenerateWordsView(viewModel: GenerateWordsViewModel())
     }
 }
 

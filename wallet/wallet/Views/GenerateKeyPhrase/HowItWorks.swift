@@ -107,7 +107,7 @@ struct HowItWorks: View {
                 
                 
                 NavigationLink(
-                    destination: GenerateWordsView().environmentObject(GenerateWordsViewModel()).navigationBarTitle("", displayMode: .inline)
+                    destination: GenerateWordsView(viewModel: GenerateWordsViewModel()).navigationBarTitle("", displayMode: .inline)
                         .navigationBarBackButtonHidden(true),
                     isActive: $viewModel.mOpenGenerateWordsScreen
                 ) {
