@@ -102,16 +102,17 @@ struct IntroWelcome: View {
                                    })
                                     
                                 }) {
-                                    ZStack {
-                                        
-                                        Image("bluebuttonbackground").resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
-                                        
-                                        Text(mButtonTitle).foregroundColor(Color.black)
-                                            .frame(width: 225.0, height:84)
-                                            .cornerRadius(15)
-                                            .scaledFont(size: Device.isLarge ? 19 : 13)
-                                            .multilineTextAlignment(.center)
-                                    }.frame(width: 225.0, height:Device.isLarge ? 84 : 60)
+                                    BlueButtonView(aTitle: mButtonTitle.localized())
+//                                    ZStack {
+//
+//                                        Image("bluebuttonbackground").resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
+//
+//                                        Text(mButtonTitle).foregroundColor(Color.black)
+//                                            .frame(width: 225.0, height:84)
+//                                            .cornerRadius(15)
+//                                            .scaledFont(size: Device.isLarge ? 19 : 13)
+//                                            .multilineTextAlignment(.center)
+//                                    }.frame(width: 225.0, height:Device.isLarge ? 84 : 60)
                                     
                                 }
                                 .padding(.bottom,20)

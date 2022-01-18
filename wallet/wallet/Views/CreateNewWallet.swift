@@ -266,11 +266,21 @@ struct BlueButtonView : View {
             
             Image("bluebuttonbackground").resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
             
-            Text(aTitle).foregroundColor(Color.black)
-                .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
-                .cornerRadius(15)
-                .scaledFont(size: Device.isLarge ? 19 : 13)
-                .multilineTextAlignment(.center)
+            if #available(iOS 15.0, *) {
+                Text(aTitle).foregroundColor(Color.black)
+                    .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
+                    .cornerRadius(15)
+                    .dynamicTypeSize(.medium)
+                    .scaledFont(size: Device.isLarge ? 19 : 13)
+                    .multilineTextAlignment(.center)
+            } else {
+                // Fallback on earlier versions
+                Text(aTitle).foregroundColor(Color.black)
+                    .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
+                    .cornerRadius(15)
+                    .modifier(BarlowModifier(.footnote))
+                    .multilineTextAlignment(.center)
+            }
         }.frame(width: Device.isLarge ? 225.0 : 130.0, height:Device.isLarge ? 84 : 60)
         
     }
@@ -285,11 +295,21 @@ struct GrayButtonView : View {
             
             Image("buttonbackground").resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
             
-            Text(aTitle).foregroundColor(Color.zARRRTextColorLightYellow).bold()
-                .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
-                .cornerRadius(15)
-                .scaledFont(size: Device.isLarge ? 19 : 13)
-                .multilineTextAlignment(.center)
+            if #available(iOS 15.0, *) {
+                Text(aTitle).foregroundColor(Color.zARRRTextColorLightYellow).bold()
+                    .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
+                    .cornerRadius(15)
+                    .scaledFont(size: Device.isLarge ? 19 : 13)
+                    .dynamicTypeSize(.medium)
+                    .multilineTextAlignment(.center)
+            } else {
+                // Fallback on earlier versions
+                Text(aTitle).foregroundColor(Color.zARRRTextColorLightYellow).bold()
+                    .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
+                    .cornerRadius(15)
+                    .modifier(BarlowModifier(.footnote))
+                    .multilineTextAlignment(.center)
+            }
         }.frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
         
     }
@@ -306,11 +326,21 @@ struct RecoveryWalletButtonView : View {
 
             Image(imageName).resizable().fixedSize().frame(width: 225.0, height:84).padding(.top,5)
             
-            Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
-                .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60).padding(10)
-                .cornerRadius(15)
-                .scaledFont(size: Device.isLarge ? 19 : 13)
-                .multilineTextAlignment(.center)
+            if #available(iOS 15.0, *) {
+                Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
+                    .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60).padding(10)
+                    .cornerRadius(15)
+                    .dynamicTypeSize(.medium)
+                    .scaledFont(size: Device.isLarge ? 19 : 13)
+                    .multilineTextAlignment(.center)
+            } else {
+                Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
+                    .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60).padding(10)
+                    .cornerRadius(15)
+                    .modifier(BarlowModifier(.footnote))
+                    .multilineTextAlignment(.center)
+                
+            }
         }.frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
     }
 }
