@@ -98,7 +98,7 @@ final class WordsVerificationViewModel: ObservableObject {
 struct WordsVerificationScreen: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var viewModel: WordsVerificationViewModel
+    @ObservedObject var viewModel: WordsVerificationViewModel
     @State var isConfirmButtonEnabled = false
     @State private var showErrorToast = false
 
@@ -215,11 +215,11 @@ struct WordsVerificationScreen: View {
     }
 }
 
-struct WordsVerificationScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsVerificationScreen()
-    }
-}
+//struct WordsVerificationScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WordsVerificationScreen()
+//    }
+//}
 
 struct WordBackgroundPlaceholderModifier: ViewModifier {
 
