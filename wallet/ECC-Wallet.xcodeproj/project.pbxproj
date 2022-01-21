@@ -1458,7 +1458,7 @@
 			mainGroup = 0D1250F623B557E40014EE3A;
 			packageReferences = (
 				29491D6426C5613500BBF144 /* XCRemoteSwiftPackageReference "neumorphic" */,
-				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */,
+				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */,
 			);
 			productRefGroup = 0D12510023B557E40014EE3A /* Products */;
 			projectDirPath = "";
@@ -2701,7 +2701,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = 9TR5BMPZP3;
@@ -2733,7 +2733,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = 9TR5BMPZP3;
 				ENABLE_BITCODE = NO;
@@ -2880,7 +2880,7 @@
 				minimumVersion = 2.0.5;
 			};
 		};
-		29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */ = {
+		29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rebeloper/WKView.git";
 			requirement = {
@@ -2898,7 +2898,7 @@
 		};
 		29DDA37826CCFA6A0041406B /* WKView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */;
+			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */;
 			productName = WKView;
 		};
 /* End XCSwiftPackageProductDependency section */
