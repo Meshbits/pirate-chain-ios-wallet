@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CurrencyModel: Codable, Identifiable {
+struct CurrencyModel: Codable, Identifiable, Equatable {
     enum CodingKeys: CodingKey {
         case currency
         case abbreviation
