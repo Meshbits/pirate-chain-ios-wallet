@@ -167,7 +167,7 @@ struct RescanOptionsView: View {
             
         })
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("Select Rescan Wallet Height").navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Select Rescan Wallet Height".localized()).navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {

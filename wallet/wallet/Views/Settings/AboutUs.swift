@@ -109,7 +109,7 @@ struct AboutUs: View {
                 }.padding()
         }
         }  .navigationBarBackButtonHidden(true)
-            .navigationTitle("About Pirate Wallet").navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("About Pirate Wallet".localized()).navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading:  Button(action: {
                 presentationMode.wrappedValue.dismiss()
             }) {

@@ -137,7 +137,7 @@ struct PrivateServerConfig: View {
            })
         .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("Private Server Config").navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Private Server Config".localized()).navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading:  Button(action: {
             presentationMode.wrappedValue.dismiss()
         }) {

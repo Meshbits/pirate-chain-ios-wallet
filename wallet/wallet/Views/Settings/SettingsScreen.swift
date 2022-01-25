@@ -201,6 +201,13 @@ struct SettingsScreen: View {
                 }
                 
                 
+                NavigationLink(
+                    destination: FiatCurrencies().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
+                               tag: SettingsDestination.openFiatCurrencies,
+                               selection: $destination
+                ) {
+                   EmptyView()
+                }
              
                 NavigationLink(
                     
