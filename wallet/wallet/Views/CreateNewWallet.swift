@@ -270,7 +270,7 @@ struct BlueButtonView : View {
                 Text(aTitle).foregroundColor(Color.black)
                     .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
                     .cornerRadius(15)
-                    .dynamicTypeSize(.medium)
+//                    .dynamicTypeSize(.medium)
                     .scaledFont(size: Device.isLarge ? 19 : 13)
                     .multilineTextAlignment(.center)
             } else {
@@ -300,7 +300,7 @@ struct GrayButtonView : View {
                     .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60)
                     .cornerRadius(15)
                     .scaledFont(size: Device.isLarge ? 19 : 13)
-                    .dynamicTypeSize(.medium)
+//                    .dynamicTypeSize(.medium)
                     .multilineTextAlignment(.center)
             } else {
                 // Fallback on earlier versions
@@ -330,7 +330,7 @@ struct RecoveryWalletButtonView : View {
                 Text(title).foregroundColor(Color.zARRRTextColorLightYellow)
                     .frame(width: Device.isLarge ? 225.0 : 150.0, height:Device.isLarge ? 84 : 60).padding(10)
                     .cornerRadius(15)
-                    .dynamicTypeSize(.medium)
+//                    .dynamicTypeSize(.medium)
                     .scaledFont(size: Device.isLarge ? 19 : 13)
                     .multilineTextAlignment(.center)
             } else {
