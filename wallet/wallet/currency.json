@@ -12,6 +12,10 @@
     "abbreviation": "ARS"
   },
   {
+    "currency": "Armenian Dram",
+    "abbreviation": "AMD"
+  },
+  {
     "currency": "Aruba Guilder",
     "abbreviation": "AWG"
   },
@@ -434,6 +438,10 @@
   {
     "currency": "United States Dollar",
     "abbreviation": "USD"
+  },
+  {
+    "currency": "United Arab Emirates Dhiram",
+    "abbreviation": "AED"
   },
   {
     "currency": "Uruguay Peso",
