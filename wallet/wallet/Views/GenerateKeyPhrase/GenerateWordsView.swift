@@ -240,21 +240,21 @@ struct GenerateWordsView: View {
         }
         .highPriorityGesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local).onEnded { value in
             
-            if value.translation.width < 0 && value.translation.height > -80 && value.translation.height < 80 {
-//                withAnimation(.easeInOut(duration: 0.2), {
-                    self.isForward = true
-                    self.viewModel.updateLayoutTextOrMoveToNextScreen()
-//               })
-            }
-            else if value.translation.width > 0 && value.translation.height > -80 && value.translation.height < 80 {
-//                withAnimation(.easeIn(duration: 0.2), {
-                    self.isForward = false
-                    self.viewModel.backPressedToPopBack()
-//               })
-            }
-            else {
-                print("other gesture we don't worry about")
-            }
+//            if value.translation.width < 0 && value.translation.height > -80 && value.translation.height < 80 {
+////                withAnimation(.easeInOut(duration: 0.2), {
+//                    self.isForward = true
+//                    self.viewModel.updateLayoutTextOrMoveToNextScreen()
+////               })
+//            }
+//            else if value.translation.width > 0 && value.translation.height > -80 && value.translation.height < 80 {
+////                withAnimation(.easeIn(duration: 0.2), {
+//                    self.isForward = false
+//                    self.viewModel.backPressedToPopBack()
+////               })
+//            }
+//            else {
+//                print("other gesture we don't worry about")
+//            }
         })
     }
     

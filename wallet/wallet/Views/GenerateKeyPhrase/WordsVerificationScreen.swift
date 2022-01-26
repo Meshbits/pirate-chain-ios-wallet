@@ -24,7 +24,7 @@ final class WordsVerificationViewModel: ObservableObject {
         
         assignElementsOnUI()
         
-        print(mCompletePhrase)
+        debugPrint(mCompletePhrase)
     }
     
     func assignElementsOnUI(){
