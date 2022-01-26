@@ -26,8 +26,18 @@ class UserSettings {
         static let isAutoConfigurationOn = "isAutoConfigurationOn"
         static let lastUpdatedTime = "lastSavedTime"
         static let didShowAutoShieldingNotice = "didShowAutoShieldingNotice"
+        static let listOfSelectedCurrencies = "listOfSelectedCurrencies"
     }
+ 
     
+    var listOfSelectedCurrencies: [String]? {
+        get {
+            UserDefaults.standard.stringArray(forKey: Keys.listOfSelectedCurrencies)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Keys.listOfSelectedCurrencies)
+        }
+    }
     
     var lastUpdatedTime: String? {
         get {

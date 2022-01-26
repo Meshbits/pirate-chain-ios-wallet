@@ -13,12 +13,25 @@ final class FiatCurrenciesModel: ObservableObject {
     @Published var currencyList = CurrencyReader()
     
     @Published var mSelectedCurrencies: [CurrencyModel] = []
+    
+    init(){
+        let savedAbbveriviations = UserSettings.shared.listOfSelectedCurrencies ?? []
         
-     func isSelectedCurrency(currency: CurrencyModel) -> Bool{
+        for currency in currencyList.currencies {
+            
+            if savedAbbveriviations.contains(currency.abbreviation) {
+                mSelectedCurrencies.append(currency)
+            }
+            
+        }
+        
+    }
+        
+    func isSelectedCurrency(currency: CurrencyModel) -> Bool{
          
          return mSelectedCurrencies.contains(currency)
          
-     }
+    }
     
     func updateSelectedCurrencies(currency: CurrencyModel){
         if self.isSelectedCurrency(currency: currency) {
@@ -28,7 +41,17 @@ final class FiatCurrenciesModel: ObservableObject {
         }else{
             self.mSelectedCurrencies.append(currency)
         }
+    }
+    
+    func updateSelectedFiatCurrenciesPostDisappear(){
         
+        var mSelectedAbbreviations : [String] = []
+        
+        for model in mSelectedCurrencies {
+            mSelectedAbbreviations.append(model.abbreviation)
+        }
+        
+        UserSettings.shared.listOfSelectedCurrencies = mSelectedAbbreviations
     }
 }
 
@@ -57,7 +80,7 @@ struct FiatCurrencies: View {
                                            .font(.caption)
                                        Text("("+currency.abbreviation+")")
                                            .font(.caption)
-                                   }                                   
+                                   }
                                    Spacer()
                                    Image(systemName: self.viewModel.isSelectedCurrency(currency: currency) ? "checkmark.square.fill" : "square").resizable().frame(width: 12, height: 12, alignment: .trailing).foregroundColor(self.viewModel.isSelectedCurrency(currency: currency) ? Color.arrrBarAccentColor : Color.zDudeItsAlmostWhite)
                                        .padding(.trailing,10)
@@ -83,6 +106,9 @@ struct FiatCurrencies: View {
                     }
                 }
             })
+            .onDisappear {
+                self.viewModel.updateSelectedFiatCurrenciesPostDisappear()
+            }
    }
 }
 
