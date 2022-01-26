@@ -11,9 +11,9 @@ import SwiftUI
 struct AboutUs: View {
     @Environment(\.presentationMode) var presentationMode
     var anAppVersion = "App Version: 1.0.0"
-    var aBuildversion = "Build: 8"
-    var aCommitsCount = "Commits Count: 142"
-    var aGitHash = "Short Git hash: g69a303f"
+    var aBuildversion = "Build: 9"
+    var aCommitsCount = "Commits Count: 151"
+    var aGitHash = "Short Git hash: gb699e94"
     var aSourceCode = "Source: "
     var aSourceCodeURL = "https://github.com/Meshbits/pirate-chain-ios-wallet"
     var aDevelopedBy = "Developed by Meshbits Limited"
