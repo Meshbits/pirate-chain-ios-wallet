@@ -1,5 +1,5 @@
 //
-//  CurrencyAPISession.swift
+//  PirateAPISession.swift
 //  ECC-Wallet
 //
 //  Created by Lokesh on 28/01/22.
@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-struct CurrencyAPISession: CurrencyAPIService {
+struct PirateAPISession: PirateAPIService {
     func request<T>(with builder: RequestBuilder) -> AnyPublisher<T, CurrencyAPIError> where T: Decodable {
         
         let decoder = JSONDecoder()

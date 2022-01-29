@@ -11,12 +11,12 @@ import Combine
 import Foundation
 
 class MarketsViewModel: ObservableObject, CurrencyService {
-    var apiSession: CurrencyAPIService
+    var apiSession: PirateAPIService
     @Published var marketResponse :  MarketListAPIResponse?
     
     var cancellables = Set<AnyCancellable>()
     
-    init(apiSession: CurrencyAPIService = CurrencyAPISession()) {
+    init(apiSession: PirateAPIService = PirateAPISession()) {
         self.apiSession = apiSession
     }
     

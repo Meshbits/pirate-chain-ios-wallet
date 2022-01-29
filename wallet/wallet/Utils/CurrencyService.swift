@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 protocol CurrencyService {
-    var apiSession: CurrencyAPIService {get}
+    var apiSession: PirateAPIService {get}
     
     func getAllMarketsList() -> AnyPublisher<MarketListAPIResponse, CurrencyAPIError>
 }

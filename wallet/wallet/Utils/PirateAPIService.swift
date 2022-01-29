@@ -1,5 +1,5 @@
 //
-//  CurrencyAPIService.swift
+//  PirateAPIService.swift
 //  ECC-Wallet
 //
 //  Created by Lokesh on 28/01/22.
@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-protocol CurrencyAPIService{
+protocol PirateAPIService{
     func request<T: Decodable>(with builder: RequestBuilder) -> AnyPublisher<T, CurrencyAPIError>
 }
 

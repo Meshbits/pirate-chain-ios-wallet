@@ -558,12 +558,12 @@
 		CF4782D327A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
 		CF4782D427A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
 		CF4782D527A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
-		CF4FC90B27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */; };
-		CF4FC90C27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */; };
-		CF4FC90D27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */; };
-		CF4FC90F27A4137A00024BF8 /* CurrencyAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */; };
-		CF4FC91027A4137A00024BF8 /* CurrencyAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */; };
-		CF4FC91127A4137A00024BF8 /* CurrencyAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */; };
+		CF4FC90B27A4123C00024BF8 /* PirateAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */; };
+		CF4FC90C27A4123C00024BF8 /* PirateAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */; };
+		CF4FC90D27A4123C00024BF8 /* PirateAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */; };
+		CF4FC90F27A4137A00024BF8 /* PirateAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* PirateAPISession.swift */; };
+		CF4FC91027A4137A00024BF8 /* PirateAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* PirateAPISession.swift */; };
+		CF4FC91127A4137A00024BF8 /* PirateAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* PirateAPISession.swift */; };
 		CF4FC91327A415C100024BF8 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91227A415C100024BF8 /* CurrencyService.swift */; };
 		CF4FC91427A415C100024BF8 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91227A415C100024BF8 /* CurrencyService.swift */; };
 		CF4FC91527A415C100024BF8 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91227A415C100024BF8 /* CurrencyService.swift */; };
@@ -842,8 +842,8 @@
 		CF4782CA27A04AE7002079EE /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		CF4782CE27A04B3A002079EE /* currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currency.json; sourceTree = "<group>"; };
 		CF4782D227A04EE2002079EE /* CurrencyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyReader.swift; sourceTree = "<group>"; };
-		CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyAPIService.swift; sourceTree = "<group>"; };
-		CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyAPISession.swift; sourceTree = "<group>"; };
+		CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PirateAPIService.swift; sourceTree = "<group>"; };
+		CF4FC90E27A4137A00024BF8 /* PirateAPISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PirateAPISession.swift; sourceTree = "<group>"; };
 		CF4FC91227A415C100024BF8 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyEndpoint.swift; sourceTree = "<group>"; };
 		CF4FC91A27A5531E00024BF8 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
@@ -989,8 +989,8 @@
 				0D3E6CFD26814E5D000EF685 /* SaplingParameterDownloader+Combine.swift */,
 				2905274326D7B11D007CA5AA /* UIHostingController-Keyboard.swift */,
 				CF4782D227A04EE2002079EE /* CurrencyReader.swift */,
-				CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */,
-				CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */,
+				CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */,
+				CF4FC90E27A4137A00024BF8 /* PirateAPISession.swift */,
 				CF4FC91227A415C100024BF8 /* CurrencyService.swift */,
 				CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */,
 				CF4FC91A27A5531E00024BF8 /* APIConstants.swift */,
@@ -1911,7 +1911,7 @@
 				29F066A426C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DD1C2CD24F04D470042C1E4 /* BlockExplorerUrlHandling.swift in Sources */,
 				2963F33326C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
-				CF4FC90F27A4137A00024BF8 /* CurrencyAPISession.swift in Sources */,
+				CF4FC90F27A4137A00024BF8 /* PirateAPISession.swift in Sources */,
 				290F6DAC26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */,
 				0D100EDB23BA91F70089DB22 /* ZcashButton.swift in Sources */,
 				0D4B91DA24CA390B00A0E024 /* KeyboardAdaptive.swift in Sources */,
@@ -1951,7 +1951,7 @@
 				0D0565D724EC89C200B6AAE8 /* TransactionDetails.swift in Sources */,
 				0DB020B3268CECA50010ABC4 /* AutoShieldView.swift in Sources */,
 				0D3E6CFE26814E5D000EF685 /* SaplingParameterDownloader+Combine.swift in Sources */,
-				CF4FC90B27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */,
+				CF4FC90B27A4123C00024BF8 /* PirateAPIService.swift in Sources */,
 				0DE8668524BCE55400F3B883 /* Constants.generated.swift in Sources */,
 				0D2607D724F42C46006FDC36 /* PasteboardHelper.swift in Sources */,
 				0DE51DB223BED85C00709636 /* ActionableMessage.swift in Sources */,
@@ -2142,7 +2142,7 @@
 				0DF26E2B24D2208A00F32978 /* AuthenticationHelper.swift in Sources */,
 				0DCDFFA724B6722B000F6999 /* FundsAtRisk.swift in Sources */,
 				0D3E3F1F2686714D00784D8F /* AutoShielding.swift in Sources */,
-				CF4FC91127A4137A00024BF8 /* CurrencyAPISession.swift in Sources */,
+				CF4FC91127A4137A00024BF8 /* PirateAPISession.swift in Sources */,
 				0D81D0B0261FA12C003ECF47 /* FeedbackDialog.swift in Sources */,
 				0DCDFFA824B6722B000F6999 /* LazyView.swift in Sources */,
 				0D2D5C2424CF8AB2001A58AD /* ZcashNavigationBar.swift in Sources */,
@@ -2153,7 +2153,7 @@
 				0DC37D7724D3834E00ACFE12 /* AddressValidator.swift in Sources */,
 				0DCDFFAB24B6722B000F6999 /* BalanceDetail.swift in Sources */,
 				0D4B91DE24CA395100A0E024 /* UIResponder+Current.swift in Sources */,
-				CF4FC90D27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */,
+				CF4FC90D27A4123C00024BF8 /* PirateAPIService.swift in Sources */,
 				0D2D5C1E24CF827A001A58AD /* SendTransaction.swift in Sources */,
 				CF4782CD27A04AE7002079EE /* CurrencyModel.swift in Sources */,
 				29D53C9326D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
@@ -2356,7 +2356,7 @@
 				CF4782D427A04EE2002079EE /* CurrencyReader.swift in Sources */,
 				0DE3037C263A158400CF877A /* AddressValidator.swift in Sources */,
 				0DE3037D263A158400CF877A /* CameraAccessHelper.swift in Sources */,
-				CF4FC91027A4137A00024BF8 /* CurrencyAPISession.swift in Sources */,
+				CF4FC91027A4137A00024BF8 /* PirateAPISession.swift in Sources */,
 				0DE3037E263A158400CF877A /* AlertMessaging.swift in Sources */,
 				0DE3037F263A158400CF877A /* ZcashActionableTextField.swift in Sources */,
 				0DE30380263A158400CF877A /* ZcashHoldToSendButton.swift in Sources */,
@@ -2425,7 +2425,7 @@
 				0DE303A5263A158400CF877A /* ZcashSeedWordPill.swift in Sources */,
 				0DE303A6263A158400CF877A /* ReadableBalance.swift in Sources */,
 				0DE303A7263A158400CF877A /* LogfileUtils.swift in Sources */,
-				CF4FC90C27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */,
+				CF4FC90C27A4123C00024BF8 /* PirateAPIService.swift in Sources */,
 				0DE303A8263A158400CF877A /* CreateNewWallet.swift in Sources */,
 				29515DCD26B9885900DC5B92 /* IntroPrivacy.swift in Sources */,
 				0DE303A9263A158400CF877A /* BackgroundTasks.swift in Sources */,
