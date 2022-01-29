@@ -558,6 +558,21 @@
 		CF4782D327A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
 		CF4782D427A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
 		CF4782D527A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
+		CF4FC90B27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */; };
+		CF4FC90C27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */; };
+		CF4FC90D27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */; };
+		CF4FC90F27A4137A00024BF8 /* CurrencyAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */; };
+		CF4FC91027A4137A00024BF8 /* CurrencyAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */; };
+		CF4FC91127A4137A00024BF8 /* CurrencyAPISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */; };
+		CF4FC91327A415C100024BF8 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91227A415C100024BF8 /* CurrencyService.swift */; };
+		CF4FC91427A415C100024BF8 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91227A415C100024BF8 /* CurrencyService.swift */; };
+		CF4FC91527A415C100024BF8 /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91227A415C100024BF8 /* CurrencyService.swift */; };
+		CF4FC91727A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */; };
+		CF4FC91827A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */; };
+		CF4FC91927A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */; };
+		CF4FC91B27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
+		CF4FC91C27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
+		CF4FC91D27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -827,6 +842,11 @@
 		CF4782CA27A04AE7002079EE /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		CF4782CE27A04B3A002079EE /* currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currency.json; sourceTree = "<group>"; };
 		CF4782D227A04EE2002079EE /* CurrencyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyReader.swift; sourceTree = "<group>"; };
+		CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyAPIService.swift; sourceTree = "<group>"; };
+		CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyAPISession.swift; sourceTree = "<group>"; };
+		CF4FC91227A415C100024BF8 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
+		CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyEndpoint.swift; sourceTree = "<group>"; };
+		CF4FC91A27A5531E00024BF8 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		DD3D7B793DE6921B3FCB8A72 /* Pods_ECC_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E588C3F8BFCFFD097672B5DC /* Pods-ECC-Wallet-no-logging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-Wallet-no-logging.debug.xcconfig"; path = "Target Support Files/Pods-ECC-Wallet-no-logging/Pods-ECC-Wallet-no-logging.debug.xcconfig"; sourceTree = "<group>"; };
 		ECAAD2E9E29DF170A35B9B7B /* Pods_ECC_WalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_WalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -969,6 +989,11 @@
 				0D3E6CFD26814E5D000EF685 /* SaplingParameterDownloader+Combine.swift */,
 				2905274326D7B11D007CA5AA /* UIHostingController-Keyboard.swift */,
 				CF4782D227A04EE2002079EE /* CurrencyReader.swift */,
+				CF4FC90A27A4123C00024BF8 /* CurrencyAPIService.swift */,
+				CF4FC90E27A4137A00024BF8 /* CurrencyAPISession.swift */,
+				CF4FC91227A415C100024BF8 /* CurrencyService.swift */,
+				CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */,
+				CF4FC91A27A5531E00024BF8 /* APIConstants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1870,6 +1895,7 @@
 				0DF26E2724D1F88100F32978 /* Baseline.swift in Sources */,
 				0D0AAE1124102380009CD8F9 /* SyncingButton.swift in Sources */,
 				290A0EEC26D5661900B6D74F /* KeyPadARRR.swift in Sources */,
+				CF4FC91B27A5531E00024BF8 /* APIConstants.swift in Sources */,
 				0DD8B9B824B6898F0031FF42 /* EventLogger.swift in Sources */,
 				0D100EE223BAB1B80089DB22 /* SeedBackup.swift in Sources */,
 				0DE51DAE23BEB0E500709636 /* Fonts.swift in Sources */,
@@ -1885,6 +1911,7 @@
 				29F066A426C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DD1C2CD24F04D470042C1E4 /* BlockExplorerUrlHandling.swift in Sources */,
 				2963F33326C946FE0008CD34 /* PrivateServerConfig.swift in Sources */,
+				CF4FC90F27A4137A00024BF8 /* CurrencyAPISession.swift in Sources */,
 				290F6DAC26CAB4D800EA2CA7 /* BalanceDetailView.swift in Sources */,
 				0D100EDB23BA91F70089DB22 /* ZcashButton.swift in Sources */,
 				0D4B91DA24CA390B00A0E024 /* KeyboardAdaptive.swift in Sources */,
@@ -1924,6 +1951,7 @@
 				0D0565D724EC89C200B6AAE8 /* TransactionDetails.swift in Sources */,
 				0DB020B3268CECA50010ABC4 /* AutoShieldView.swift in Sources */,
 				0D3E6CFE26814E5D000EF685 /* SaplingParameterDownloader+Combine.swift in Sources */,
+				CF4FC90B27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */,
 				0DE8668524BCE55400F3B883 /* Constants.generated.swift in Sources */,
 				0D2607D724F42C46006FDC36 /* PasteboardHelper.swift in Sources */,
 				0DE51DB223BED85C00709636 /* ActionableMessage.swift in Sources */,
@@ -2008,7 +2036,9 @@
 				0D12510323B557E40014EE3A /* AppDelegate.swift in Sources */,
 				0DEC5DF923BD60CF002EFD0D /* Ring.swift in Sources */,
 				29F314E526D51E7200745DBE /* RequestMoneyView.swift in Sources */,
+				CF4FC91727A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */,
 				0D72330823E9CFE40004B6D1 /* QRCodeScannerView.swift in Sources */,
+				CF4FC91327A415C100024BF8 /* CurrencyService.swift in Sources */,
 				0D12510523B557E40014EE3A /* SceneDelegate.swift in Sources */,
 				29DE76D926DE8E7F00559342 /* CongratulationsRecoverySetup.swift in Sources */,
 				29A8019B2712DACD002DF6F9 /* PasscodeView.swift in Sources */,
@@ -2075,6 +2105,7 @@
 				0DCDFF9924B6722B000F6999 /* SeedBackup.swift in Sources */,
 				0DCDFF9A24B6722B000F6999 /* Fonts.swift in Sources */,
 				0DACBB35264980630085F1CD /* OhMyScreen.swift in Sources */,
+				CF4FC91927A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */,
 				29FABC0426D506E800306726 /* Parameter.swift in Sources */,
 				29B06F82272D92A8004C5C2F /* RescanOptionsView.swift in Sources */,
 				29B4E2D426B58D61008BB304 /* IntroWelcome.swift in Sources */,
@@ -2102,6 +2133,7 @@
 				0DCDFFA524B6722B000F6999 /* WalletDetails.swift in Sources */,
 				0DBE19F8268E666100F92FD9 /* ShieldNowDialog.swift in Sources */,
 				0D67489525C1CC3B00BE59C4 /* ShieldFlow.swift in Sources */,
+				CF4FC91D27A5531E00024BF8 /* APIConstants.swift in Sources */,
 				0DCDFFA624B6722B000F6999 /* BalanceUtils.swift in Sources */,
 				290BEF8326A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
 				29D4F90F26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
@@ -2110,6 +2142,7 @@
 				0DF26E2B24D2208A00F32978 /* AuthenticationHelper.swift in Sources */,
 				0DCDFFA724B6722B000F6999 /* FundsAtRisk.swift in Sources */,
 				0D3E3F1F2686714D00784D8F /* AutoShielding.swift in Sources */,
+				CF4FC91127A4137A00024BF8 /* CurrencyAPISession.swift in Sources */,
 				0D81D0B0261FA12C003ECF47 /* FeedbackDialog.swift in Sources */,
 				0DCDFFA824B6722B000F6999 /* LazyView.swift in Sources */,
 				0D2D5C2424CF8AB2001A58AD /* ZcashNavigationBar.swift in Sources */,
@@ -2120,6 +2153,7 @@
 				0DC37D7724D3834E00ACFE12 /* AddressValidator.swift in Sources */,
 				0DCDFFAB24B6722B000F6999 /* BalanceDetail.swift in Sources */,
 				0D4B91DE24CA395100A0E024 /* UIResponder+Current.swift in Sources */,
+				CF4FC90D27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */,
 				0D2D5C1E24CF827A001A58AD /* SendTransaction.swift in Sources */,
 				CF4782CD27A04AE7002079EE /* CurrencyModel.swift in Sources */,
 				29D53C9326D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
@@ -2146,6 +2180,7 @@
 				0DCDFFB824B6722B000F6999 /* WalletDetailsHeader.swift in Sources */,
 				0D2607D824F42C46006FDC36 /* PasteboardHelper.swift in Sources */,
 				0D5E9B0E263748E400D98569 /* BalanceBreakdown.swift in Sources */,
+				CF4FC91527A415C100024BF8 /* CurrencyService.swift in Sources */,
 				0DCDFFB924B6722B000F6999 /* LottieAnimation.swift in Sources */,
 				0DCDFFBA24B6722B000F6999 /* ZcashCloseButton.swift in Sources */,
 				296DA0E926ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
@@ -2249,6 +2284,7 @@
 				0DE30352263A158400CF877A /* ZECCWalletEnvironment.swift in Sources */,
 				0DE30353263A158400CF877A /* Foundation+Zcash.swift in Sources */,
 				29FABBFD26D506E800306726 /* PirateChainPaymentURI.swift in Sources */,
+				CF4FC91C27A5531E00024BF8 /* APIConstants.swift in Sources */,
 				2960027126D93BBF00B41DD0 /* HowItWorks.swift in Sources */,
 				29F066A526C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DE30354263A158400CF877A /* BlockExplorerUrlHandling.swift in Sources */,
@@ -2261,6 +2297,7 @@
 				0DE30359263A158400CF877A /* String+localized.swift in Sources */,
 				0DE3035A263A158400CF877A /* Colors.swift in Sources */,
 				0DE3035B263A158400CF877A /* KeyPad.swift in Sources */,
+				CF4FC91427A415C100024BF8 /* CurrencyService.swift in Sources */,
 				29596D9F26E1387E001F75B6 /* CreateAndSetupNewWallet.swift in Sources */,
 				294A88F226D0EA4400EEA4A9 /* BalanceViewHome.swift in Sources */,
 				0DE3035C263A158400CF877A /* ZcashTapToSendButton.swift in Sources */,
@@ -2319,6 +2356,7 @@
 				CF4782D427A04EE2002079EE /* CurrencyReader.swift in Sources */,
 				0DE3037C263A158400CF877A /* AddressValidator.swift in Sources */,
 				0DE3037D263A158400CF877A /* CameraAccessHelper.swift in Sources */,
+				CF4FC91027A4137A00024BF8 /* CurrencyAPISession.swift in Sources */,
 				0DE3037E263A158400CF877A /* AlertMessaging.swift in Sources */,
 				0DE3037F263A158400CF877A /* ZcashActionableTextField.swift in Sources */,
 				0DE30380263A158400CF877A /* ZcashHoldToSendButton.swift in Sources */,
@@ -2346,6 +2384,7 @@
 				296DA0E826ECB760003F6D20 /* InitiateRecoveryKeyPhraseFlow.swift in Sources */,
 				29D53C9226D549A900A22656 /* ARRRMemoTextField.swift in Sources */,
 				296CACE726D57757004DC784 /* SendMoneyView.swift in Sources */,
+				CF4FC91827A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */,
 				29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				296DA0EC26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */,
 				2924CF6E26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
@@ -2386,6 +2425,7 @@
 				0DE303A5263A158400CF877A /* ZcashSeedWordPill.swift in Sources */,
 				0DE303A6263A158400CF877A /* ReadableBalance.swift in Sources */,
 				0DE303A7263A158400CF877A /* LogfileUtils.swift in Sources */,
+				CF4FC90C27A4123C00024BF8 /* CurrencyAPIService.swift in Sources */,
 				0DE303A8263A158400CF877A /* CreateNewWallet.swift in Sources */,
 				29515DCD26B9885900DC5B92 /* IntroPrivacy.swift in Sources */,
 				0DE303A9263A158400CF877A /* BackgroundTasks.swift in Sources */,

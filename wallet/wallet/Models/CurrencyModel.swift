@@ -17,3 +17,16 @@ struct CurrencyModel: Codable, Identifiable, Equatable {
     var currency: String
     var abbreviation: String
 }
+
+
+// Model used to pull markets
+struct MarketListAPIResponse: Codable, Equatable {
+    var binance, fixer, kucoin, safetrade, tradeogre : [String]
+    enum CodingKeys: CodingKey {
+        case tradeogre
+        case binance
+        case fixer
+        case kucoin
+        case safetrade
+    }
+}

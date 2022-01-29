@@ -7,6 +7,36 @@
 //
 
 import SwiftUI
+import Combine
+import Foundation
+
+class MarketsViewModel: ObservableObject, CurrencyService {
+    var apiSession: CurrencyAPIService
+    @Published var marketResponse :  MarketListAPIResponse?
+    
+    var cancellables = Set<AnyCancellable>()
+    
+    init(apiSession: CurrencyAPIService = CurrencyAPISession()) {
+        self.apiSession = apiSession
+    }
+    
+    func getAllMarketsList() {
+        let cancellable = self.getAllMarketsList()
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    print("Handle error: \(error)")
+                case .finished:
+                    break
+                }
+                
+            }) { (response) in
+                self.marketResponse = response
+        }
+        cancellables.insert(cancellable)
+    }
+}
+
 
 final class FiatCurrenciesModel: ObservableObject {
    
@@ -60,7 +90,9 @@ struct FiatCurrencies: View {
     @StateObject var viewModel: FiatCurrenciesModel = FiatCurrenciesModel()
 
     @Environment(\.presentationMode) var presentationMode
-
+    
+//    @ObservedObject var marketsViewModel: MarketsViewModel = MarketsViewModel()
+    
     var body: some View {
         
         ZStack{
@@ -109,11 +141,14 @@ struct FiatCurrencies: View {
             .onDisappear {
                 self.viewModel.updateSelectedFiatCurrenciesPostDisappear()
             }
+            .onAppear(){
+//                self.marketsViewModel.getAllMarketsList()
+            }
    }
 }
 
-struct FiatCurrencies_Previews: PreviewProvider {
-    static var previews: some View {
-        FiatCurrencies()
-    }
-}
+//struct FiatCurrencies_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FiatCurrencies()
+//    }
+//}
