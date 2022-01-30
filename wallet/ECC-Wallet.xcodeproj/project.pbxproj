@@ -558,6 +558,9 @@
 		CF4782D327A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
 		CF4782D427A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
 		CF4782D527A04EE2002079EE /* CurrencyReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782D227A04EE2002079EE /* CurrencyReader.swift */; };
+		CF4BFC7027A56D780084EC4A /* ExchangeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BFC6F27A56D780084EC4A /* ExchangeSource.swift */; };
+		CF4BFC7127A56D780084EC4A /* ExchangeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BFC6F27A56D780084EC4A /* ExchangeSource.swift */; };
+		CF4BFC7227A56D780084EC4A /* ExchangeSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4BFC6F27A56D780084EC4A /* ExchangeSource.swift */; };
 		CF4FC90B27A4123C00024BF8 /* PirateAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */; };
 		CF4FC90C27A4123C00024BF8 /* PirateAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */; };
 		CF4FC90D27A4123C00024BF8 /* PirateAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */; };
@@ -842,6 +845,7 @@
 		CF4782CA27A04AE7002079EE /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		CF4782CE27A04B3A002079EE /* currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currency.json; sourceTree = "<group>"; };
 		CF4782D227A04EE2002079EE /* CurrencyReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyReader.swift; sourceTree = "<group>"; };
+		CF4BFC6F27A56D780084EC4A /* ExchangeSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeSource.swift; sourceTree = "<group>"; };
 		CF4FC90A27A4123C00024BF8 /* PirateAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PirateAPIService.swift; sourceTree = "<group>"; };
 		CF4FC90E27A4137A00024BF8 /* PirateAPISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PirateAPISession.swift; sourceTree = "<group>"; };
 		CF4FC91227A415C100024BF8 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
@@ -1294,6 +1298,7 @@
 				297046A327310C1300C73ED1 /* AboutUs.swift */,
 				29962EC92731526B0037F5BA /* CustomSafariView.swift */,
 				CF4782C627A04357002079EE /* FiatCurrencies.swift */,
+				CF4BFC6F27A56D780084EC4A /* ExchangeSource.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -2009,6 +2014,7 @@
 				29D4F90D26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				296DA0EB26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */,
 				2924CF6D26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
+				CF4BFC7027A56D780084EC4A /* ExchangeSource.swift in Sources */,
 				CF4782C727A04357002079EE /* FiatCurrencies.swift in Sources */,
 				290BEF8126A73B5C00526EDA /* PasscodeScreen.swift in Sources */,
 				0D0565DB24EC89C200B6AAE8 /* LittleViews.swift in Sources */,
@@ -2191,6 +2197,7 @@
 				0DF3075124DB31570080B0CF /* DeviceFeedbackHelper.swift in Sources */,
 				CF4782C927A04357002079EE /* FiatCurrencies.swift in Sources */,
 				0D76121F26B21F86001CA417 /* MainnetNetwork.swift in Sources */,
+				CF4BFC7227A56D780084EC4A /* ExchangeSource.swift in Sources */,
 				0DCDFFBD24B6722B000F6999 /* ZcashSeedPhraseGrid.swift in Sources */,
 				29962ECC2731526B0037F5BA /* CustomSafariView.swift in Sources */,
 				0DCDFFBE24B6722B000F6999 /* Sending.swift in Sources */,
@@ -2387,6 +2394,7 @@
 				CF4FC91827A54A0000024BF8 /* CurrencyEndpoint.swift in Sources */,
 				29D4F90E26C9388C00360E40 /* UnlinkDevice.swift in Sources */,
 				296DA0EC26ECBA22003F6D20 /* RecoveryWordsView.swift in Sources */,
+				CF4BFC7127A56D780084EC4A /* ExchangeSource.swift in Sources */,
 				2924CF6E26BE99AF003E5C3B /* HomeTabView.swift in Sources */,
 				CF4782C827A04357002079EE /* FiatCurrencies.swift in Sources */,
 				290BEF8226A73B5C00526EDA /* PasscodeScreen.swift in Sources */,

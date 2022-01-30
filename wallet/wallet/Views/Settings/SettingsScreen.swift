@@ -174,80 +174,94 @@ struct SettingsScreen: View {
           
                 }
                 
-                NavigationLink(
-                    destination: UnlinkDevice().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
-                               tag: SettingsDestination.openUnlinkDevice,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
                 
-                NavigationLink(
-                    destination: PrivateServerConfig().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openPrivateServerConfig,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
-                
-                NavigationLink(
-                    destination: NotificationScreen().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        ,
-                               tag: SettingsDestination.openNotifications,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
-                
-                
-                NavigationLink(
-                    destination: FiatCurrencies().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
-                               tag: SettingsDestination.openFiatCurrencies,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
-             
-                NavigationLink(
+                Group {
                     
-                    destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: true).environmentObject(self.appEnvironment)
-                        .onAppear { self.tabBar.isHidden = true },
-                    tag: SettingsDestination.openChangePIN,
-                    selection: $destination
-                ) {
-                    EmptyView()
-                }
-                
-                
-                NavigationLink(
-                    destination: InitiateRecoveryKeyPhraseFlow().onAppear { self.tabBar.isHidden = true }
-                        .navigationBarTitle("", displayMode: .inline)
-                        .navigationBarBackButtonHidden(true),
-                               tag: SettingsDestination.openRecoveryPhrase,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }.isDetailLink(false)
-                
-                NavigationLink(
-                    destination: RescanOptionsView(rescanDataViewModel: RescanDataViewModel()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .navigationBarTitle("", displayMode: .inline)
-                        .navigationBarBackButtonHidden(true),
-                               tag: SettingsDestination.startRescan,
-                               selection: $destination
-                ) {
-                   EmptyView()
-                }
-                
-                NavigationLink(
-                    destination: AboutUs().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                        .navigationBarTitle("", displayMode: .inline)
-                        .navigationBarBackButtonHidden(true),
-                               tag: SettingsDestination.openAboutUs,
-                               selection: $destination
-                ) {
-                   EmptyView()
+                    NavigationLink(
+                        destination: UnlinkDevice().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
+                                   tag: SettingsDestination.openUnlinkDevice,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                    NavigationLink(
+                        destination: PrivateServerConfig().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                            ,
+                                   tag: SettingsDestination.openPrivateServerConfig,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                    NavigationLink(
+                        destination: NotificationScreen().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                            ,
+                                   tag: SettingsDestination.openNotifications,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                    
+                    NavigationLink(
+                        destination: FiatCurrencies().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
+                                   tag: SettingsDestination.openFiatCurrencies,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                    NavigationLink(
+                        destination: ExchangeSource().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
+                                   tag: SettingsDestination.openExchangeSource,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                 
+                    NavigationLink(
+                        
+                        destination: PasscodeScreen(passcodeViewModel: PasscodeViewModel(), mScreenState: .changePasscode, isChangePinFlow: true).environmentObject(self.appEnvironment)
+                            .onAppear { self.tabBar.isHidden = true },
+                        tag: SettingsDestination.openChangePIN,
+                        selection: $destination
+                    ) {
+                        EmptyView()
+                    }
+                    
+                    
+                    NavigationLink(
+                        destination: InitiateRecoveryKeyPhraseFlow().onAppear { self.tabBar.isHidden = true }
+                            .navigationBarTitle("", displayMode: .inline)
+                            .navigationBarBackButtonHidden(true),
+                                   tag: SettingsDestination.openRecoveryPhrase,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }.isDetailLink(false)
+                    
+                    
+                    NavigationLink(
+                        destination: RescanOptionsView(rescanDataViewModel: RescanDataViewModel()).environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                            .navigationBarTitle("", displayMode: .inline)
+                            .navigationBarBackButtonHidden(true),
+                                   tag: SettingsDestination.startRescan,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
+                    NavigationLink(
+                        destination: AboutUs().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                            .navigationBarTitle("", displayMode: .inline)
+                            .navigationBarBackButtonHidden(true),
+                                   tag: SettingsDestination.openAboutUs,
+                                   selection: $destination
+                    ) {
+                       EmptyView()
+                    }
+                    
                 }
                 
                 

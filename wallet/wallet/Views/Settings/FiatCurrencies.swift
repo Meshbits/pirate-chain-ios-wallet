@@ -90,9 +90,7 @@ struct FiatCurrencies: View {
     @StateObject var viewModel: FiatCurrenciesModel = FiatCurrenciesModel()
 
     @Environment(\.presentationMode) var presentationMode
-    
-//    @ObservedObject var marketsViewModel: MarketsViewModel = MarketsViewModel()
-    
+        
     var body: some View {
         
         ZStack{
@@ -140,9 +138,6 @@ struct FiatCurrencies: View {
             })
             .onDisappear {
                 self.viewModel.updateSelectedFiatCurrenciesPostDisappear()
-            }
-            .onAppear(){
-//                self.marketsViewModel.getAllMarketsList()
             }
    }
 }

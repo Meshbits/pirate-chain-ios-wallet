@@ -27,6 +27,7 @@ class UserSettings {
         static let lastUpdatedTime = "lastSavedTime"
         static let didShowAutoShieldingNotice = "didShowAutoShieldingNotice"
         static let listOfSelectedCurrencies = "listOfSelectedCurrencies"
+        static let indexOfSelectedExchange = "listOfSelectedExchange"
     }
  
     
@@ -36,6 +37,15 @@ class UserSettings {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: Keys.listOfSelectedCurrencies)
+        }
+    }
+        
+    var indexOfSelectedExchange: Int? {
+        get {
+            UserDefaults.standard.integer(forKey: Keys.indexOfSelectedExchange)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Keys.indexOfSelectedExchange)
         }
     }
     
