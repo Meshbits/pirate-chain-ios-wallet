@@ -546,6 +546,9 @@
 		8D3F362524A40FCF0087687A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F362724A40FCF0087687A /* Localizable.strings */; };
 		8D73959024A40E6C00936DE3 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73958F24A40E6C00936DE3 /* String+localized.swift */; };
 		CEFF0B0FCBB305A5F3ADBA14 /* Pods_ECC_Wallet_no_logging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555185D7A01C76F2449023 /* Pods_ECC_Wallet_no_logging.framework */; };
+		CF3019E927AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
+		CF3019EA27AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
+		CF3019EB27AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
 		CF4782C727A04357002079EE /* FiatCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782C627A04357002079EE /* FiatCurrencies.swift */; };
 		CF4782C827A04357002079EE /* FiatCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782C627A04357002079EE /* FiatCurrencies.swift */; };
 		CF4782C927A04357002079EE /* FiatCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782C627A04357002079EE /* FiatCurrencies.swift */; };
@@ -841,6 +844,7 @@
 		91E6D79434022DD78D28E636 /* Pods-ECC-WalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-WalletTests.debug.xcconfig"; path = "Target Support Files/Pods-ECC-WalletTests/Pods-ECC-WalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6A9DFAF884359387747F23E /* Pods-ECC-Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-Wallet.release.xcconfig"; path = "Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		CB8B88C6D24FD0EB8BE42F24 /* Pods_ECC_Wallet_Testnet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_Wallet_Testnet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF3019E827AE827C00609F6F /* DiskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStatus.swift; sourceTree = "<group>"; };
 		CF4782C627A04357002079EE /* FiatCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiatCurrencies.swift; sourceTree = "<group>"; };
 		CF4782CA27A04AE7002079EE /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		CF4782CE27A04B3A002079EE /* currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currency.json; sourceTree = "<group>"; };
@@ -998,6 +1002,7 @@
 				CF4FC91227A415C100024BF8 /* CurrencyService.swift */,
 				CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */,
 				CF4FC91A27A5531E00024BF8 /* APIConstants.swift */,
+				CF3019E827AE827C00609F6F /* DiskStatus.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2035,6 +2040,7 @@
 				2960026C26D9345C00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */,
 				0D4B91DD24CA395100A0E024 /* UIResponder+Current.swift in Sources */,
 				0D2BCF5F23E8A59D0076C5B0 /* QRCodeGenerator.swift in Sources */,
+				CF3019E927AE827C00609F6F /* DiskStatus.swift in Sources */,
 				0D11C23123BF966C001CF6F7 /* ScanAddress.swift in Sources */,
 				0DBA1E2124CB6951009C654E /* AddressFragment.swift in Sources */,
 				0D24DA0625A64A8200504F29 /* TxDetailWrapper.swift in Sources */,
@@ -2146,6 +2152,7 @@
 				0DB826242645E9C100CEA2B6 /* TheNoScreen.swift in Sources */,
 				0D64DF5225DC0E7F00669906 /* UserSettings.swift in Sources */,
 				0DF26E2B24D2208A00F32978 /* AuthenticationHelper.swift in Sources */,
+				CF3019EB27AE827C00609F6F /* DiskStatus.swift in Sources */,
 				0DCDFFA724B6722B000F6999 /* FundsAtRisk.swift in Sources */,
 				0D3E3F1F2686714D00784D8F /* AutoShielding.swift in Sources */,
 				CF4FC91127A4137A00024BF8 /* PirateAPISession.swift in Sources */,
@@ -2415,6 +2422,7 @@
 				0DE30398263A158400CF877A /* BackupWallet.swift in Sources */,
 				2960026E26D9350D00B41DD0 /* GenerateKeyPhraseInitiate.swift in Sources */,
 				0DE30399263A158400CF877A /* UIResponder+Current.swift in Sources */,
+				CF3019EA27AE827C00609F6F /* DiskStatus.swift in Sources */,
 				0DE3039A263A158400CF877A /* QRCodeGenerator.swift in Sources */,
 				0DE3039B263A158400CF877A /* ScanAddress.swift in Sources */,
 				0DE3039C263A158400CF877A /* AddressFragment.swift in Sources */,

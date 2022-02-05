@@ -66,6 +66,7 @@ final class HomeViewModel: ObservableObject {
     @Published var verifiedBalance: Double = 0
     @Published var shieldedBalance = ReadableBalance.zero
     @Published var transparentBalance = ReadableBalance.zero
+    @Published var showLowSpaceAlert: Bool = false
 //    private var synchronizerEvents = Set<AnyCancellable>()
 
     @Published var overlayType: OverlayType? = nil
@@ -283,6 +284,15 @@ final class HomeViewModel: ObservableObject {
         self.showError = false
     }
     
+    var lowSpaceAlert: Alert {
+         
+        return Alert(title: Text("Low space"),
+                     
+                     message: Text("Low space message here"),
+                     dismissButton: .default(Text("button_close".localized()),
+                                         action: nil))
+    }
+    
     var errorAlert: Alert {
         let errorAction = {
             self.clearError()
@@ -343,6 +353,7 @@ final class HomeViewModel: ObservableObject {
             self.lastError = mapToUserFacingError(ZECCWalletEnvironment.mapError(error: error))
         }
     }
+    
 }
 
 struct Home: View {
@@ -923,10 +934,26 @@ struct Home: View {
         .sheet(isPresented: $showPassCodeScreen){
             LazyView(PasscodeValidationScreen(passcodeViewModel: PasscodeValidationViewModel(), isAuthenticationEnabled: true)).environmentObject(self.appEnvironment)
         }
+        .toast(isPresenting: $viewModel.showLowSpaceAlert, duration: 10, tapToDismiss: true, alert: {
+            AlertToast(displayMode: .alert,type: .error(.red), title:"Low storage space".localized())
+        }, onTap: {
+            //onTap would call either if `tapToDismis` is true/false
+            //If tapToDismiss is true, onTap would call and then dismis the alert
+         }, completion: {
+            //Completion block after dismiss
+         })
         .onAppear {
             tracker.track(.screen(screen: .home), properties: [:])
             showFeedbackIfNeeded()
+            let freeSpace = DiskStatus.freeDiskSpaceInBytes
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                if freeSpace <= 200000000 {
+                    viewModel.showLowSpaceAlert.toggle()
+                }
+            }
+           
+
         }
 
         .navigationBarBackButtonHidden(true)
@@ -1200,3 +1227,4 @@ struct BarlowModifier: ViewModifier {
     }
 
 }
+
