@@ -31,8 +31,8 @@ enum SettingsDestination: Int {
 //    case openSupport = 10
     case startRescan = 11
     case openAboutUs = 12
-    case openFiatCurrencies = 13
-    case openExchangeSource = 14
+//    case openFiatCurrencies = 13
+//    case openExchangeSource = 14
 }
 
 
@@ -51,8 +51,8 @@ struct SettingsScreen: View {
                            SettingsRowData(id:4,title:"Change PIN".localized()),
                            SettingsRowData(id:5,title:"Delete Wallet".localized())]
     
-    var currencySection = [SettingsRowData(id:13,title:"Fiat Currencies".localized()),
-                           SettingsRowData(id:14,title:"Exchange Source".localized())]
+//    var currencySection = [SettingsRowData(id:13,title:"Fiat Currencies".localized()),
+//                           SettingsRowData(id:14,title:"Exchange Source".localized())]
 //    var walletSection = [SettingsRowData(id:6,title:"Private Server Config")] //,
 //                         SettingsRowData(id:7,title:"iCloud backup")]
     var aboutSection = [SettingsRowData(id:8,title:"Privacy Policy".localized()),
@@ -123,22 +123,22 @@ struct SettingsScreen: View {
                             }
                         }
                         .modifier(SettingsSectionBackgroundModifier())
-                        
-                        SettingsSectionHeaderView(aTitle:"Currencies".localized())
-                        VStack {
-                            ForEach(currencySection, id: \.id) { settingsRowData in
-                                    SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:14)
-                                    .onTapGesture {
-                                        self.mSelectedSettingsRowData = settingsRowData
-                                        openRespectiveScreenBasisSelection()
-                                        aSmallVibration()
-                                    }
-                            }
-                            
-                        }
-                        .modifier(SettingsSectionBackgroundModifier())
-                        
-                        
+                        // Commented out this section for a while
+//                        SettingsSectionHeaderView(aTitle:"Currencies".localized())
+//                        VStack {
+//                            ForEach(currencySection, id: \.id) { settingsRowData in
+//                                    SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:14)
+//                                    .onTapGesture {
+//                                        self.mSelectedSettingsRowData = settingsRowData
+//                                        openRespectiveScreenBasisSelection()
+//                                        aSmallVibration()
+//                                    }
+//                            }
+//
+//                        }
+//                        .modifier(SettingsSectionBackgroundModifier())
+//
+//
                         // Commented out this section for a while
 //                        SettingsSectionHeaderView(aTitle:"Manage Wallet")
 //                        VStack {
@@ -204,21 +204,21 @@ struct SettingsScreen: View {
                     }
                     
                     
-                    NavigationLink(
-                        destination: FiatCurrencies().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
-                                   tag: SettingsDestination.openFiatCurrencies,
-                                   selection: $destination
-                    ) {
-                       EmptyView()
-                    }
+//                    NavigationLink(
+//                        destination: FiatCurrencies().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
+//                                   tag: SettingsDestination.openFiatCurrencies,
+//                                   selection: $destination
+//                    ) {
+//                       EmptyView()
+//                    }
                     
-                    NavigationLink(
-                        destination: ExchangeSource().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
-                                   tag: SettingsDestination.openExchangeSource,
-                                   selection: $destination
-                    ) {
-                       EmptyView()
-                    }
+//                    NavigationLink(
+//                        destination: ExchangeSource().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true },
+//                                   tag: SettingsDestination.openExchangeSource,
+//                                   selection: $destination
+//                    ) {
+//                       EmptyView()
+//                    }
                  
                     NavigationLink(
                         
