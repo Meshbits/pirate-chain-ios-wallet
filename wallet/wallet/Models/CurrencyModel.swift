@@ -30,3 +30,17 @@ struct MarketListAPIResponse: Codable, Equatable {
         case safetrade
     }
 }
+
+struct SelectedCurrencyAPIResponse: Codable, Equatable {
+    var timestamp : Int
+    var base : String
+    var market : String
+    var rates : [String:String]
+    
+    enum CodingKeys: CodingKey {
+        case timestamp
+        case base
+        case market
+        case rates
+    }
+}

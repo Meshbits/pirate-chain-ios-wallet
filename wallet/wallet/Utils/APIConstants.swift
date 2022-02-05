@@ -11,5 +11,6 @@ import Foundation
 struct APIConstants {
     static let baseURL = "https://api.piratewallet.io/v1/"
     static let marketAPI = "price/markets"
+    static let selectedCurrenciesAPI = "price/%@/%@?symbols=%@"
 }
 

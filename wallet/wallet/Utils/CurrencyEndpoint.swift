@@ -11,6 +11,7 @@ import Foundation
 
 enum CurrencyEndpoint {
     case marketList
+    case selectedCurrenciesAPI
 }
 
 extension CurrencyEndpoint : RequestBuilder {
@@ -24,6 +25,13 @@ extension CurrencyEndpoint : RequestBuilder {
                 }
                 let request = URLRequest(url: url)
                 return request
+            
+        case .selectedCurrenciesAPI:
+        guard let url = URL(string: String.init(format: "%@%@", APIConstants.baseURL,APIConstants.selectedCurrenciesAPI)) else {
+                preconditionFailure("Invalid URL")
             }
+            let request = URLRequest(url: url)
+            return request
+        }
     }
 }

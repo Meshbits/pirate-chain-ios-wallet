@@ -10,15 +10,24 @@ import Foundation
 import Combine
 
 protocol CurrencyService {
+    
     var apiSession: PirateAPIService {get}
     
     func getAllMarketsList() -> AnyPublisher<MarketListAPIResponse, CurrencyAPIError>
+    
+    func getSelectedCurrenciesPrice() -> AnyPublisher<SelectedCurrencyAPIResponse, CurrencyAPIError>
+    
 }
 
 extension CurrencyService {
     
     func getAllMarketsList() -> AnyPublisher<MarketListAPIResponse, CurrencyAPIError> {
         return apiSession.request(with: CurrencyEndpoint.marketList)
+            .eraseToAnyPublisher()
+    }
+    
+    func getSelectedCurrenciesPrice() -> AnyPublisher<SelectedCurrencyAPIResponse, CurrencyAPIError> {
+        return apiSession.request(with: CurrencyEndpoint.selectedCurrenciesAPI)
             .eraseToAnyPublisher()
     }
 }

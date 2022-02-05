@@ -1200,3 +1200,47 @@ struct BarlowModifier: ViewModifier {
     }
 
 }
+
+
+class MarketsViewModel: ObservableObject, CurrencyService {
+    var apiSession: PirateAPIService
+    @Published var marketResponse :  MarketListAPIResponse?
+    
+    var cancellables = Set<AnyCancellable>()
+    
+    init(apiSession: PirateAPIService = PirateAPISession()) {
+        self.apiSession = apiSession
+    }
+    
+    func getAllMarketsList() {
+        let cancellable = self.getAllMarketsList()
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    print("Handle error: \(error)")
+                case .finished:
+                    break
+                }
+                
+            }) { (response) in
+                self.marketResponse = response
+        }
+        cancellables.insert(cancellable)
+    }
+    
+    func getSelectedCurrenciesPrice(){
+        let cancellable = self.getSelectedCurrenciesPrice()
+            .sink(receiveCompletion: { result in
+                switch result {
+                case .failure(let error):
+                    print("Handle error: \(error)")
+                case .finished:
+                    break
+                }
+                
+            }) { (response) in
+                // Handle response here
+        }
+        cancellables.insert(cancellable)
+    }
+}
