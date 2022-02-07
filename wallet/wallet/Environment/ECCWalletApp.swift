@@ -13,6 +13,10 @@ struct ECCWalletApp: App {
 //    @StateObject var environment: ZECCWalletEnvironment = ZECCWalletEnvironment.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var phase
+    
+  
+    let sceneDelegate = SceneDelegate()
+    
     init() {
         _zECCWalletNavigationBarLookTweaks()
     }
@@ -21,25 +25,30 @@ struct ECCWalletApp: App {
         WindowGroup {
             NavigationView {
                 stateForBuild(isTest)
+                    .withHostingWindow { window in
+                        sceneDelegate.originalDelegate = window?.windowScene?.delegate
+                        sceneDelegate.window = window
+                        window?.windowScene?.delegate = sceneDelegate
+                     }
             }
             .navigationViewStyle(StackNavigationViewStyle())
-            .onChange(of: phase) { newPhase in
-                switch newPhase {
-                case .active:
-                // App became active
-                    logger.debug("App became active")
-                case .inactive:
-                // App became inactive
-                    logger.debug("App became inactive")
-                case .background:
-                // App is running in the background
-                    logger.debug("App is running in the background")
-                @unknown default:
-                // Fallback for future cases
-                    logger.debug("App State defaulted: \(newPhase)")
-                    break
-                }
-            }
+//            .onChange(of: phase) { newPhase in
+//                switch newPhase {
+//                case .active:
+//                // App became active
+//                    logger.debug("App became active")
+//                case .inactive:
+//                // App became inactive
+//                    logger.debug("App became inactive")
+//                case .background:
+//                // App is running in the background
+//                    logger.debug("App is running in the background")
+//                @unknown default:
+//                // Fallback for future cases
+//                    logger.debug("App State defaulted: \(newPhase)")
+//                    break
+//                }
+//            }
         }
     }
     
@@ -59,5 +68,26 @@ struct ECCWalletApp: App {
         }
         #endif
         return false
+    }
+}
+
+extension View {
+    func withHostingWindow(_ callback: @escaping (UIWindow?) -> Void) -> some View {
+        self.background(HostingWindowFinder(callback: callback))
+    }
+}
+
+struct HostingWindowFinder: UIViewRepresentable {
+    var callback: (UIWindow?) -> ()
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async { [weak view] in
+            self.callback(view?.window)
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: UIView, context: Context) {
     }
 }

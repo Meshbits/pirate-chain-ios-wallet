@@ -29,6 +29,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var mBlurrViewTag = 1001
     
+    var originalDelegate: UISceneDelegate?
+    
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         
         // This is the use case of handling the URL Contexts - Deep linking when app is running in the background
@@ -76,6 +78,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
              
         }
+        
+        originalDelegate?.scene!(scene, willConnectTo: session, options: connectionOptions)
+
     }
     
     func addSwiftLayout(scene: UIScene){
