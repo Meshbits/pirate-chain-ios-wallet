@@ -56,8 +56,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        Preventing screen from auto locking due to idle timer (usually happens while syncing/downloading)
         UIApplication.shared.isIdleTimerDisabled = true
         
-        addSwiftLayout(scene: scene)
-        
         NotificationCenter.default.addObserver(forName: NSNotification.Name("MoveToFirstViewLayout"), object: nil, queue: .main) { (_) in            
             self.addSwiftLayout(scene: scene)
         }
