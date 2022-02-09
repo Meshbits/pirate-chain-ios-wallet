@@ -2787,9 +2787,9 @@
 			baseConfigurationReference = E588C3F8BFCFFD097672B5DC /* Pods-ECC-Wallet-no-logging.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = 9TR5BMPZP3;
@@ -2808,7 +2808,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.meshbits.piratewallet;
 				PRODUCT_NAME = "ECC-Wallet-no-logs";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Apple Store Provision Profile New";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2819,9 +2819,9 @@
 			baseConfigurationReference = 116E12B9E1AD9945B82012F5 /* Pods-ECC-Wallet-no-logging.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = 9TR5BMPZP3;
 				ENABLE_BITCODE = NO;
@@ -2839,7 +2839,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.meshbits.piratewallet;
 				PRODUCT_NAME = "ECC-Wallet-no-logs";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Apple Store Provision Profile New";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
