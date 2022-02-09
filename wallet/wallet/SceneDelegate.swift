@@ -70,7 +70,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if let url = connectionOptions.urlContexts.first?.url {
             let urlDataDict:[String: URL] = ["url": url]
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                 logger.info("Opened up a deep link - App is not running in the background")
                 NotificationCenter.default.post(name: .openTransactionScreen, object: nil, userInfo: urlDataDict)
             }
@@ -79,6 +79,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         originalDelegate?.scene!(scene, willConnectTo: session, options: connectionOptions)
 
+        
     }
     
     func addSwiftLayout(scene: UIScene){
