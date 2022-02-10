@@ -17,7 +17,7 @@ struct AboutUs: View {
     var aSourceCode = "Source: "
     var aSourceCodeURL = "https://github.com/Meshbits/pirate-chain-ios-wallet"
     var aDevelopedBy = "Developed by Meshbits Limited"
-    var aVersionDetails = "Release: Beta"
+    var aVersionDetails = "Release: Stable"
     var mFontSize:CGFloat = Device.isLarge ? 15 : 12
     var mHeight:CGFloat = Device.isLarge ? 50 : 30
     
