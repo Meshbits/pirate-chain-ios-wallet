@@ -50,6 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           using: nil) { (task) in
             
         }
+        
+        if UserSettings.shared.mBackgroundSoundVolume == 0.0 { // Setting the default value to 0.1
+            UserSettings.shared.mBackgroundSoundVolume = 0.1
+        }
 
         
         UNUserNotificationCenter.current().requestAuthorization(options:[.alert, .sound]) { (granted, error) in

@@ -169,12 +169,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func playSoundWhileSyncing() {
         // Play sound only in background while syncing
         if (UIApplication.shared.applicationState == .background){
-            if let path = Bundle.main.path(forResource: "bgSyncSound", ofType: "m4a") {
+            if let path = Bundle.main.path(forResource: "BackgroundLongMusic", ofType: "aac") {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.01 // very very low volume
+                mAVAudioPlayerObj?.volume = 0.1 // very very low volume
                 mAVAudioPlayerObj?.play()
             }
             
@@ -190,7 +190,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.10 // Super low volume
+                mAVAudioPlayerObj?.volume = 0.50 // Super low volume
                 mAVAudioPlayerObj?.play()
             }
             
@@ -213,7 +213,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.10 // Super low volume
+                mAVAudioPlayerObj?.volume = 0.50 // Super low volume
                 mAVAudioPlayerObj?.play()
             }
             

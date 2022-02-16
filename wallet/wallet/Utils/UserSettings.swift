@@ -28,8 +28,17 @@ class UserSettings {
         static let didShowAutoShieldingNotice = "didShowAutoShieldingNotice"
         static let listOfSelectedCurrencies = "listOfSelectedCurrencies"
         static let indexOfSelectedExchange = "listOfSelectedExchange"
+        static let mBackgroundSoundVolume = "mBackgroundSoundVolume"
     }
  
+    var indexOfSelectedExchange: Int? {
+        get {
+            UserDefaults.standard.integer(forKey: Keys.indexOfSelectedExchange)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Keys.indexOfSelectedExchange)
+        }
+    }
     
     var listOfSelectedCurrencies: [String]? {
         get {
@@ -40,12 +49,12 @@ class UserSettings {
         }
     }
         
-    var indexOfSelectedExchange: Int? {
+    var mBackgroundSoundVolume: Double? {
         get {
-            UserDefaults.standard.integer(forKey: Keys.indexOfSelectedExchange)
+            UserDefaults.standard.double(forKey: Keys.mBackgroundSoundVolume)
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: Keys.indexOfSelectedExchange)
+            UserDefaults.standard.setValue(newValue, forKey: Keys.mBackgroundSoundVolume)
         }
     }
     
