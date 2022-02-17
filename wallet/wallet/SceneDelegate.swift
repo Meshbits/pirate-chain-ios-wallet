@@ -175,10 +175,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             switch(UserSettings.shared.mBackgroundSoundSelectionIndex){
                 case 0:
                     aFileName = "BackgroundLongMusic_1"
+                    break
                 case 1:
                     aFileName = "BackgroundLongMusic_2"
+                    break
                 case 2:
                     aFileName = "BackgroundLongMusic_3"
+                break
+                default:    
+                    print("None")
             }
             
             
