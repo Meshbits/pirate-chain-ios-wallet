@@ -552,10 +552,12 @@
 		CF2429FA27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */; };
 		CF2429FB27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */; };
 		CF2429FC27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */; };
+		CF242A0027BE300C00D9C305 /* BackgroundLongMusic_3.aac in Resources */ = {isa = PBXBuildFile; fileRef = CF2429FD27BE300C00D9C305 /* BackgroundLongMusic_3.aac */; };
+		CF242A0127BE300C00D9C305 /* BackgroundLongMusic_1.aac in Resources */ = {isa = PBXBuildFile; fileRef = CF2429FE27BE300C00D9C305 /* BackgroundLongMusic_1.aac */; };
+		CF242A0227BE300C00D9C305 /* BackgroundLongMusic_2.aac in Resources */ = {isa = PBXBuildFile; fileRef = CF2429FF27BE300C00D9C305 /* BackgroundLongMusic_2.aac */; };
 		CF3019E927AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
 		CF3019EA27AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
 		CF3019EB27AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
-		CF33DAD127BD868B003E7F90 /* BackgroundLongMusic.aac in Resources */ = {isa = PBXBuildFile; fileRef = CF33DAD027BD868B003E7F90 /* BackgroundLongMusic.aac */; };
 		CF4782C727A04357002079EE /* FiatCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782C627A04357002079EE /* FiatCurrencies.swift */; };
 		CF4782C827A04357002079EE /* FiatCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782C627A04357002079EE /* FiatCurrencies.swift */; };
 		CF4782C927A04357002079EE /* FiatCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4782C627A04357002079EE /* FiatCurrencies.swift */; };
@@ -853,8 +855,10 @@
 		CB8B88C6D24FD0EB8BE42F24 /* Pods_ECC_Wallet_Testnet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_Wallet_Testnet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF2429F527BE2DF000D9C305 /* AdjustBackgroundVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustBackgroundVolume.swift; sourceTree = "<group>"; };
 		CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBackgroundMusic.swift; sourceTree = "<group>"; };
+		CF2429FD27BE300C00D9C305 /* BackgroundLongMusic_3.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackgroundLongMusic_3.aac; sourceTree = "<group>"; };
+		CF2429FE27BE300C00D9C305 /* BackgroundLongMusic_1.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackgroundLongMusic_1.aac; sourceTree = "<group>"; };
+		CF2429FF27BE300C00D9C305 /* BackgroundLongMusic_2.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackgroundLongMusic_2.aac; sourceTree = "<group>"; };
 		CF3019E827AE827C00609F6F /* DiskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStatus.swift; sourceTree = "<group>"; };
-		CF33DAD027BD868B003E7F90 /* BackgroundLongMusic.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackgroundLongMusic.aac; sourceTree = "<group>"; };
 		CF4782C627A04357002079EE /* FiatCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiatCurrencies.swift; sourceTree = "<group>"; };
 		CF4782CA27A04AE7002079EE /* CurrencyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModel.swift; sourceTree = "<group>"; };
 		CF4782CE27A04B3A002079EE /* currency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currency.json; sourceTree = "<group>"; };
@@ -1062,7 +1066,9 @@
 				0DF3075224DB4A440080B0CF /* lottie_sending.json */,
 				0DC1430125C47880001D8E55 /* lottie_shield.json */,
 				0DF3075324DB4A440080B0CF /* lottie_success.json */,
-				CF33DAD027BD868B003E7F90 /* BackgroundLongMusic.aac */,
+				CF2429FE27BE300C00D9C305 /* BackgroundLongMusic_1.aac */,
+				CF2429FF27BE300C00D9C305 /* BackgroundLongMusic_2.aac */,
+				CF2429FD27BE300C00D9C305 /* BackgroundLongMusic_3.aac */,
 				0D12511023B557E60014EE3A /* Info.plist */,
 				2946090C26ADCEF200B0867F /* Barlow-Regular.ttf */,
 				0DE51DAB23BEB03C00709636 /* Zboto.otf */,
@@ -1582,19 +1588,21 @@
 			files = (
 				0DC1430325C47880001D8E55 /* lottie_shield.json in Resources */,
 				295E3735272721BD00831D37 /* SyncStarted.mp3 in Resources */,
+				CF242A0127BE300C00D9C305 /* BackgroundLongMusic_1.aac in Resources */,
 				2989E7B02727188B003FB57F /* bgSyncSound.m4a in Resources */,
 				0DF3075724DB4A440080B0CF /* lottie_success.json in Resources */,
 				2946090F26ADCEF200B0867F /* Barlow-Regular.ttf in Resources */,
+				CF242A0227BE300C00D9C305 /* BackgroundLongMusic_2.aac in Resources */,
 				0D4332872644A370005B5B8E /* Assets.xcassets in Resources */,
 				CF4782D127A04B3B002079EE /* currency.json in Resources */,
 				0DCDFFDB24B6722B000F6999 /* LaunchScreen.storyboard in Resources */,
 				295E3737272721BD00831D37 /* SyncEnd.mp3 in Resources */,
 				0D2D5C1724CF3BD4001A58AD /* lottie_button_loading_new.json in Resources */,
 				0DCDFFDD24B6722B000F6999 /* Preview Assets.xcassets in Resources */,
-				CF33DAD127BD868B003E7F90 /* BackgroundLongMusic.aac in Resources */,
 				0DCDFFDE24B6722B000F6999 /* Zboto.otf in Resources */,
 				0DCDFFDF24B6722B000F6999 /* Localizable.strings in Resources */,
 				0DF3075524DB4A440080B0CF /* lottie_sending.json in Resources */,
+				CF242A0027BE300C00D9C305 /* BackgroundLongMusic_3.aac in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

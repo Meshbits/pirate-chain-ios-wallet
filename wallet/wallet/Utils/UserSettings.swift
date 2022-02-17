@@ -29,6 +29,7 @@ class UserSettings {
         static let listOfSelectedCurrencies = "listOfSelectedCurrencies"
         static let indexOfSelectedExchange = "listOfSelectedExchange"
         static let mBackgroundSoundVolume = "mBackgroundSoundVolume"
+        static let mBackgroundSoundSelectionIndex = "mBackgroundSoundSelectionIndex"
     }
  
     var indexOfSelectedExchange: Int? {
@@ -55,6 +56,15 @@ class UserSettings {
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: Keys.mBackgroundSoundVolume)
+        }
+    }
+    
+    var mBackgroundSoundSelectionIndex: Int? {
+        get {
+            UserDefaults.standard.integer(forKey: Keys.mBackgroundSoundSelectionIndex)
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: Keys.mBackgroundSoundSelectionIndex)
         }
     }
     

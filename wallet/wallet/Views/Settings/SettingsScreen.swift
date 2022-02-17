@@ -33,8 +33,8 @@ enum SettingsDestination: Int {
     case openAboutUs = 12
 //    case openFiatCurrencies = 13
 //    case openExchangeSource = 14
-    case openBackgroundSoundSelection = 15
-    case openBackgroundSoundVolume = 16
+    case openBackgroundSoundVolume = 15
+    case openBackgroundSoundSelection = 16
 }
 
 

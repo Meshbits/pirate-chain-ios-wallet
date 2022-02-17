@@ -169,7 +169,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func playSoundWhileSyncing() {
         // Play sound only in background while syncing
         if (UIApplication.shared.applicationState == .background){
-            if let path = Bundle.main.path(forResource: "BackgroundLongMusic", ofType: "aac") {
+            
+            var aFileName = "BackgroundLongMusic_1"
+            
+            switch(UserSettings.shared.mBackgroundSoundSelectionIndex){
+                case 0:
+                    aFileName = "BackgroundLongMusic_1"
+                case 1:
+                    aFileName = "BackgroundLongMusic_2"
+                case 2:
+                    aFileName = "BackgroundLongMusic_3"
+            }
+            
+            
+            if let path = Bundle.main.path(forResource: aFileName, ofType: "aac") {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
