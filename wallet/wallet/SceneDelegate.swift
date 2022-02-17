@@ -182,7 +182,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 case 2:
                     aFileName = "BackgroundLongMusic_3"
                 break
-                default:    
+                default:
                     print("None")
             }
             
@@ -192,7 +192,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = UserSettings.shared.mBackgroundSoundVolume ?? 0.1
+                mAVAudioPlayerObj?.volume = UserSettings.shared.mBackgroundSoundVolume ?? 0.0
                 mAVAudioPlayerObj?.play()
             }
             

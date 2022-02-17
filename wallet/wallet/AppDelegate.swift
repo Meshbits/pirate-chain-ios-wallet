@@ -51,8 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        if UserSettings.shared.mBackgroundSoundVolume == 0.0 { // Setting the default value to 0.1
-            UserSettings.shared.mBackgroundSoundVolume = 0.1
+        if UserSettings.shared.mBackgroundSoundVolume == 0.0 { // Setting the default value to 0.05
+            UserSettings.shared.mBackgroundSoundVolume = 0.05
         }
 
         
