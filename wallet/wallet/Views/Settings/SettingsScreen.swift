@@ -276,26 +276,6 @@ struct SettingsScreen: View {
                        EmptyView()
                     }
                    
-                    NavigationLink(
-                        destination: AdjustBackgroundVolume().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                            .navigationBarTitle("", displayMode: .inline)
-                            .navigationBarBackButtonHidden(true),
-                                   tag: SettingsDestination.openBackgroundSoundVolume,
-                                   selection: $destination
-                    ) {
-                       EmptyView()
-                    }
-                    
-                    NavigationLink(
-                        destination: SelectBackgroundMusic().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
-                            .navigationBarTitle("", displayMode: .inline)
-                            .navigationBarBackButtonHidden(true),
-                                   tag: SettingsDestination.openBackgroundSoundSelection,
-                                   selection: $destination
-                    ) {
-                       EmptyView()
-                    }
-                    
                     
                     NavigationLink(
                         destination: AboutUs().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
@@ -309,6 +289,27 @@ struct SettingsScreen: View {
                     
                 }
                 
+                
+                 NavigationLink(
+                     destination: AdjustBackgroundVolume().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                         .navigationBarTitle("", displayMode: .inline)
+                         .navigationBarBackButtonHidden(true),
+                                tag: SettingsDestination.openBackgroundSoundVolume,
+                                selection: $destination
+                 ) {
+                    EmptyView()
+                 }
+                 
+                 NavigationLink(
+                     destination: SelectBackgroundMusic().environmentObject(self.appEnvironment).onAppear { self.tabBar.isHidden = true }
+                         .navigationBarTitle("", displayMode: .inline)
+                         .navigationBarBackButtonHidden(true),
+                                tag: SettingsDestination.openBackgroundSoundSelection,
+                                selection: $destination
+                 ) {
+                    EmptyView()
+                 }
+                 
                 
 //                Group {
 //
