@@ -546,6 +546,12 @@
 		8D3F362524A40FCF0087687A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F362724A40FCF0087687A /* Localizable.strings */; };
 		8D73959024A40E6C00936DE3 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D73958F24A40E6C00936DE3 /* String+localized.swift */; };
 		CEFF0B0FCBB305A5F3ADBA14 /* Pods_ECC_Wallet_no_logging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B555185D7A01C76F2449023 /* Pods_ECC_Wallet_no_logging.framework */; };
+		CF2429F627BE2DF000D9C305 /* AdjustBackgroundVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F527BE2DF000D9C305 /* AdjustBackgroundVolume.swift */; };
+		CF2429F727BE2DF000D9C305 /* AdjustBackgroundVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F527BE2DF000D9C305 /* AdjustBackgroundVolume.swift */; };
+		CF2429F827BE2DF000D9C305 /* AdjustBackgroundVolume.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F527BE2DF000D9C305 /* AdjustBackgroundVolume.swift */; };
+		CF2429FA27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */; };
+		CF2429FB27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */; };
+		CF2429FC27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */; };
 		CF3019E927AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
 		CF3019EA27AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
 		CF3019EB27AE827C00609F6F /* DiskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3019E827AE827C00609F6F /* DiskStatus.swift */; };
@@ -845,6 +851,8 @@
 		91E6D79434022DD78D28E636 /* Pods-ECC-WalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-WalletTests.debug.xcconfig"; path = "Target Support Files/Pods-ECC-WalletTests/Pods-ECC-WalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B6A9DFAF884359387747F23E /* Pods-ECC-Wallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-Wallet.release.xcconfig"; path = "Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet.release.xcconfig"; sourceTree = "<group>"; };
 		CB8B88C6D24FD0EB8BE42F24 /* Pods_ECC_Wallet_Testnet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_Wallet_Testnet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF2429F527BE2DF000D9C305 /* AdjustBackgroundVolume.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdjustBackgroundVolume.swift; sourceTree = "<group>"; };
+		CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectBackgroundMusic.swift; sourceTree = "<group>"; };
 		CF3019E827AE827C00609F6F /* DiskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskStatus.swift; sourceTree = "<group>"; };
 		CF33DAD027BD868B003E7F90 /* BackgroundLongMusic.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = BackgroundLongMusic.aac; sourceTree = "<group>"; };
 		CF4782C627A04357002079EE /* FiatCurrencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiatCurrencies.swift; sourceTree = "<group>"; };
@@ -1307,6 +1315,8 @@
 				29962EC92731526B0037F5BA /* CustomSafariView.swift */,
 				CF4782C627A04357002079EE /* FiatCurrencies.swift */,
 				CF4BFC6F27A56D780084EC4A /* ExchangeSource.swift */,
+				CF2429F527BE2DF000D9C305 /* AdjustBackgroundVolume.swift */,
+				CF2429F927BE2E0900D9C305 /* SelectBackgroundMusic.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1921,6 +1931,7 @@
 				0D9E89C223DA620E00AFD118 /* ZECCWalletEnvironment.swift in Sources */,
 				0DD1C2D024F051EE0042C1E4 /* Foundation+Zcash.swift in Sources */,
 				29FABBFC26D506E800306726 /* PirateChainPaymentURI.swift in Sources */,
+				CF2429FA27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */,
 				2960027026D93BBF00B41DD0 /* HowItWorks.swift in Sources */,
 				29F066A426C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DD1C2CD24F04D470042C1E4 /* BlockExplorerUrlHandling.swift in Sources */,
@@ -2048,6 +2059,7 @@
 				0D11C23123BF966C001CF6F7 /* ScanAddress.swift in Sources */,
 				0DBA1E2124CB6951009C654E /* AddressFragment.swift in Sources */,
 				0D24DA0625A64A8200504F29 /* TxDetailWrapper.swift in Sources */,
+				CF2429F627BE2DF000D9C305 /* AdjustBackgroundVolume.swift in Sources */,
 				0D7D5DDB24BFAC7C0028083C /* KeyboardResponder.swift in Sources */,
 				0D12510323B557E40014EE3A /* AppDelegate.swift in Sources */,
 				0DEC5DF923BD60CF002EFD0D /* Ring.swift in Sources */,
@@ -2163,6 +2175,7 @@
 				0D81D0B0261FA12C003ECF47 /* FeedbackDialog.swift in Sources */,
 				0DCDFFA824B6722B000F6999 /* LazyView.swift in Sources */,
 				0D2D5C2424CF8AB2001A58AD /* ZcashNavigationBar.swift in Sources */,
+				CF2429FC27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */,
 				0D4B91DB24CA390B00A0E024 /* KeyboardAdaptive.swift in Sources */,
 				0DCDFFA924B6722B000F6999 /* ShareScreen.swift in Sources */,
 				0D24DA0725A64A8200504F29 /* TxDetailWrapper.swift in Sources */,
@@ -2278,6 +2291,7 @@
 				0D0565D824EC89C200B6AAE8 /* TransactionDetails.swift in Sources */,
 				0DCDFFD524B6722B000F6999 /* MnemonicSeedPhraseHandling.swift in Sources */,
 				0D5E9B082637197A00D98569 /* ReadableBalance.swift in Sources */,
+				CF2429F827BE2DF000D9C305 /* AdjustBackgroundVolume.swift in Sources */,
 				0DCDFFD624B6722B000F6999 /* ZcashBackground.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2303,6 +2317,7 @@
 				0DE30353263A158400CF877A /* Foundation+Zcash.swift in Sources */,
 				29FABBFD26D506E800306726 /* PirateChainPaymentURI.swift in Sources */,
 				CF4FC91C27A5531E00024BF8 /* APIConstants.swift in Sources */,
+				CF2429FB27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */,
 				2960027126D93BBF00B41DD0 /* HowItWorks.swift in Sources */,
 				29F066A526C810F900637E97 /* Bundle+Localized.swift in Sources */,
 				0DE30354263A158400CF877A /* BlockExplorerUrlHandling.swift in Sources */,
@@ -2430,6 +2445,7 @@
 				0DE3039A263A158400CF877A /* QRCodeGenerator.swift in Sources */,
 				0DE3039B263A158400CF877A /* ScanAddress.swift in Sources */,
 				0DE3039C263A158400CF877A /* AddressFragment.swift in Sources */,
+				CF2429F727BE2DF000D9C305 /* AdjustBackgroundVolume.swift in Sources */,
 				0DE3039D263A158400CF877A /* TxDetailWrapper.swift in Sources */,
 				0DE3039E263A158400CF877A /* KeyboardResponder.swift in Sources */,
 				0DE3039F263A158400CF877A /* AppDelegate.swift in Sources */,
