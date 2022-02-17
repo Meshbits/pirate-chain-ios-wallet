@@ -174,7 +174,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.numberOfLoops = -1 //logic for infinite loop just to make sure it keeps running
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.1 // very very low volume
+                mAVAudioPlayerObj?.volume = UserSettings.shared.mBackgroundSoundVolume ?? 0.1
                 mAVAudioPlayerObj?.play()
             }
             
@@ -190,7 +190,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.50 // Super low volume
+                mAVAudioPlayerObj?.volume = UserSettings.shared.mBackgroundSoundVolume ?? 0.1
                 mAVAudioPlayerObj?.play()
             }
             
@@ -213,7 +213,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
                 mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = 0.50 // Super low volume
+                mAVAudioPlayerObj?.volume = UserSettings.shared.mBackgroundSoundVolume ?? 0.1
                 mAVAudioPlayerObj?.play()
             }
             

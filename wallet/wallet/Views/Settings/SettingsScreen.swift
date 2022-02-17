@@ -33,6 +33,8 @@ enum SettingsDestination: Int {
     case openAboutUs = 12
 //    case openFiatCurrencies = 13
 //    case openExchangeSource = 14
+    case openBackgroundSoundSelection = 15
+    case openBackgroundSoundVolume = 16
 }
 
 
@@ -45,6 +47,7 @@ struct SettingsScreen: View {
     @State var mOpenSafari = false
 
     var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
+    var soundSettings = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:15,title:"Adjust Background Volume Settings".localized()),SettingsRowData(id:16,title:"Select Background Music".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
     var securitySection = [SettingsRowData(id:2,title:"Biometric ID".localized()),
                            SettingsRowData(id:3,title:"Recovery Phrase".localized()),
@@ -99,6 +102,27 @@ struct SettingsScreen: View {
                             
                         }
                         .modifier(SettingsSectionBackgroundModifier())
+                        
+                        SettingsSectionHeaderView(aTitle:"Sound Settings".localized())
+                        Text("This setting controls the volume of background music while your wallet is syncing with the blockchain network.")
+                            .multilineTextAlignment(.leading)
+                            .scaledFont(size: Device.isLarge ? 14 : 10).foregroundColor(Color.textTitleColor)
+                            .frame(height: 25,alignment: .leading)
+                                        .foregroundColor(Color.white)
+                                        .padding(.leading,20)
+                                        .padding(.trailing,20)
+                        VStack {
+                            ForEach(soundSettings, id: \.id) { settingsRowData in
+                                    SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
+                                    .onTapGesture {
+                                        self.mSelectedSettingsRowData = settingsRowData
+                                        openRespectiveScreenBasisSelection()
+                                        aSmallVibration()
+                                    }
+                            }
+                        }
+                        .modifier(SettingsSectionBackgroundModifier())
+                        
                         
                         SettingsSectionHeaderView(aTitle:"Security".localized())
                         VStack {

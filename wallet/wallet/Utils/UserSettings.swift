@@ -49,9 +49,9 @@ class UserSettings {
         }
     }
         
-    var mBackgroundSoundVolume: Double? {
+    var mBackgroundSoundVolume: Float? {
         get {
-            UserDefaults.standard.double(forKey: Keys.mBackgroundSoundVolume)
+            UserDefaults.standard.float(forKey: Keys.mBackgroundSoundVolume)
         }
         set {
             UserDefaults.standard.setValue(newValue, forKey: Keys.mBackgroundSoundVolume)
