@@ -84,6 +84,7 @@ struct SelectBackgroundMusic: View {
                                 self.mSelectedSettingsRowData = settingsRowData
                                 self.backgroundSoundViewModel.mSelectedIndex = mSelectedSettingsRowData!.id
                                 self.backgroundSoundViewModel.updateBirthdaySelectionStatus()
+                                UserSettings.shared.mBackgroundSoundSelectionIndex = mSelectedSettingsRowData!.id
                             }
                             .frame(height: Device.isLarge ?  60 : 40)
                             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -100,11 +101,6 @@ struct SelectBackgroundMusic: View {
                 
                 Spacer(minLength: 50)
                 
-                Button {
-                    UserSettings.shared.mBackgroundSoundSelectionIndex = backgroundSoundViewModel.mSelectedIndex
-                } label: {
-                    BlueButtonView(aTitle: "Update Sound File".localized())
-                }
       
             }
             
