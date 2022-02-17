@@ -51,6 +51,9 @@ struct AdjustBackgroundVolume: View {
                 }
             }
         })
+        .onDisappear {
+            UserSettings.shared.mBackgroundSoundVolume = sliderValue
+        }
     }
 }
 
