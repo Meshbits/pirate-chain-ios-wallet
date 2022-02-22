@@ -23,6 +23,8 @@ let mPlaySoundWhileSyncing = "PlaySoundWhenAppEntersBackground"
 
 let mStopSoundOnceFinishedOrInForeground = "StopSoundWhenAppEntersForeground"
 
+let mUpdateVolume = "UpdateVolume"
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
@@ -66,6 +68,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil, queue: .main) { (_) in
             self.stopSoundIfPlaying()
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(mUpdateVolume), object: nil, queue: .main) { (_) in
+            self.updateSoundIfPlaying()
         }
         
         if let url = connectionOptions.urlContexts.first?.url {
@@ -208,22 +214,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func playInitialSound(){
 //        if (UIApplication.shared.applicationState == .background){
-            if let path = Bundle.main.path(forResource: "SyncStarted", ofType: "mp3") {
-                let filePath = NSURL(fileURLWithPath:path)
-                mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
-                mAVAudioPlayerObj?.prepareToPlay()
-                mAVAudioPlayerObj?.volume = UserSettings.shared.isBackgroundSoundEnabled ? (UserSettings.shared.mBackgroundSoundVolume ?? 0.1) : 0.0
-                mAVAudioPlayerObj?.play()
+            if UIApplication.shared.applicationState == .background {
+                if let path = Bundle.main.path(forResource: "SyncStarted", ofType: "mp3") {
+                    let filePath = NSURL(fileURLWithPath:path)
+                    mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
+                    mAVAudioPlayerObj?.prepareToPlay()
+                    mAVAudioPlayerObj?.volume = UserSettings.shared.isBackgroundSoundEnabled ? (UserSettings.shared.mBackgroundSoundVolume ?? 0.1) : 0.0
+                    mAVAudioPlayerObj?.play()
+                }
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
-                self.mAVAudioPlayerObj?.stop()
-                self.playSoundWhileSyncing()
-            }
         
             if UIApplication.shared.applicationState != .background {
-                self.mAVAudioPlayerObj?.stop()
                 self.playSoundWhileSyncing()
+            }else{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                    self.mAVAudioPlayerObj?.stop()
+                    self.playSoundWhileSyncing()
+                }
             }
                         
             showNotificationInNotificationTrayWhileSyncing()
@@ -262,6 +270,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             removeNotificationInNotificationTrayWhileSyncingIsFinished()
         }
         
+    }
+    
+    func updateSoundIfPlaying(){
+        if let player = mAVAudioPlayerObj, player.isPlaying {
+            mAVAudioPlayerObj?.volume = UserSettings.shared.isBackgroundSoundEnabled ? (UserSettings.shared.mBackgroundSoundVolume ?? 0.1) : 0.0
+        }
     }
     
     static var shared: SceneDelegate {

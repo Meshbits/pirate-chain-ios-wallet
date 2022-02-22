@@ -121,12 +121,16 @@ struct SettingsScreen: View {
                                 .foregroundColor(Color.textTitleColor)
                                 .padding(.top,20)
                             
-                                Slider(value: $sliderValue, in: 0.05...1, step: 0.05)
+                                Slider(value: $sliderValue, in: 0.00...1, step: 0.05)
                                     .accentColor(Color.arrrBlue)
                                     .frame(height: 40)
                                     .padding(.leading,30)
                                     .padding(.trailing,30)
                                       .padding(.horizontal)
+                                      .onChange(of: self.sliderValue) { newValue in
+                                          UserSettings.shared.mBackgroundSoundVolume = newValue
+                                          NotificationCenter.default.post(name: NSNotification.Name(mUpdateVolume), object: nil)
+                                      }
                                 Text("\(sliderValue, specifier: "%.2f")")
                                     .scaledFont(size: Device.isLarge ?  16 : 12)
                                     .foregroundColor(Color.textTitleColor)
