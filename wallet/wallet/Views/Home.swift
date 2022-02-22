@@ -120,7 +120,7 @@ final class HomeViewModel: ObservableObject {
                            return
                        }
                        self.openQRCodeScanner = false
-//                       logger.debug("got address \(address)")
+                       logger.debug("got address \(address)")
                        
                }
                .store(in: &diposables)

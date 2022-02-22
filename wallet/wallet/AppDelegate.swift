@@ -51,11 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
-        if UserSettings.shared.mBackgroundSoundVolume == 0.0 { // Setting the default value to 0.05
-            UserSettings.shared.mBackgroundSoundVolume = 0.05
-        }
-
-        
         UNUserNotificationCenter.current().requestAuthorization(options:[.alert, .sound]) { (granted, error) in
 
               if granted {
@@ -89,7 +84,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 defaults.set("We're using SecureDefaults!", forKey: "secure.greeting")
             }
         }
+        
+        defaultsForBackgroundSoundSettings()
         return true
+    }
+    
+    func defaultsForBackgroundSoundSettings(){
+        let userDefaults = UserDefaults.standard
+
+        if userDefaults.bool(forKey: "didWeInstallItBefore") == false {
+
+               // updating the local flag
+               userDefaults.set(true, forKey: "didWeInstallItBefore")
+               userDefaults.synchronize() // forces the app to update the NSUserDefaults
+
+               UserSettings.shared.isBackgroundSoundEnabled = true
+               UserSettings.shared.mBackgroundSoundVolume = 0.1
+               return
+       }
     }
     
     /*

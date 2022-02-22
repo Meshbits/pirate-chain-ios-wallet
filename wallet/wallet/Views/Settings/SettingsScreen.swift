@@ -81,7 +81,7 @@ struct SettingsScreen: View {
     
     @State var sliderValue: Float = UserSettings.shared.mBackgroundSoundVolume ?? 0.05
     
-    @State var isChecked = UserSettings.shared.isForegroundSoundEnabled ?? true
+    @State var isChecked = UserSettings.shared.isBackgroundSoundEnabled ?? true
     
     var body: some View {
             ZStack{
@@ -134,14 +134,14 @@ struct SettingsScreen: View {
                                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
                                 .padding(.top,20)
                             
-                                VolumeCheckBoxView(isChecked: $isChecked, title: "Enable Sound in background".localized()).padding(.leading,15)
+                                VolumeCheckBoxView(isChecked: $isChecked, title: "Enable sound in background".localized()).padding(.leading,15)
                                 .padding(.trailing,10)
                                 .padding(.top,10)
 
                                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
                                 .padding(.top,10)
                                 
-                                SettingsRow(mCurrentRowData: SettingsRowData(id:16,title:"Select Background Music".localized()), mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
+                                SettingsRow(mCurrentRowData: SettingsRowData(id:16,title:"Select background music".localized()), mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
                                     .onTapGesture {
                                         self.destination = SettingsDestination(rawValue: 16)
                                         aSmallVibration()
@@ -673,7 +673,7 @@ struct VolumeCheckBoxView: View {
     func toggle()
     {
         isChecked = !isChecked
-        UserSettings.shared.isForegroundSoundEnabled = isChecked
+        UserSettings.shared.isBackgroundSoundEnabled = isChecked
     }
     
     var body: some View {

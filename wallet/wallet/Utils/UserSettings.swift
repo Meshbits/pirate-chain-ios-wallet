@@ -30,7 +30,7 @@ class UserSettings {
         static let indexOfSelectedExchange = "listOfSelectedExchange"
         static let mBackgroundSoundVolume = "mBackgroundSoundVolume"
         static let mBackgroundSoundSelectionIndex = "mBackgroundSoundSelectionIndex"
-        static let isForegroundSoundEnabled = "isForegroundSoundEnabled"
+        static let isBackgroundSoundEnabled = "isBackgroundSoundEnabled"
     }
  
     var indexOfSelectedExchange: Int? {
@@ -96,12 +96,12 @@ class UserSettings {
         }
     }
     
-    var isForegroundSoundEnabled: Bool? {
+    var isBackgroundSoundEnabled: Bool {
         get {
-            UserDefaults.standard.bool(forKey: Keys.isForegroundSoundEnabled)
+            UserDefaults.standard.bool(forKey: Keys.isBackgroundSoundEnabled)
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: Keys.isForegroundSoundEnabled)
+            UserDefaults.standard.setValue(newValue, forKey: Keys.isBackgroundSoundEnabled)
         }
     }
     

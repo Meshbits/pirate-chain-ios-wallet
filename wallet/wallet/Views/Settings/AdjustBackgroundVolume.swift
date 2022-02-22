@@ -13,7 +13,7 @@ struct AdjustBackgroundVolume: View {
     
     @State var sliderValue: Float = UserSettings.shared.mBackgroundSoundVolume ?? 0.05
     
-    @State var isChecked = UserSettings.shared.isForegroundSoundEnabled ?? true
+    @State var isChecked = UserSettings.shared.isBackgroundSoundEnabled ?? true
     
     var body: some View {
         ZStack{
