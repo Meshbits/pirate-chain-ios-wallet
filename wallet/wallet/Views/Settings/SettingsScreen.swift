@@ -47,7 +47,7 @@ struct SettingsScreen: View {
     @State var mOpenSafari = false
 
     var generalSection = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:6,title:"Private Server Config".localized()),SettingsRowData(id:11,title:"Rescan Wallet".localized())]//,
-    var soundSettings = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:15,title:"Adjust Background Volume Settings".localized()),SettingsRowData(id:16,title:"Select Background Music".localized())]//,
+//    var soundSettings = [/*SettingsRowData(id:0,title:"Language".localized()),*/SettingsRowData(id:15,title:"Adjust Background Volume Settings".localized()),SettingsRowData(id:16,title:"Select Background Music".localized())]//,
 //                          SettingsRowData(id:1,title:"Notifications")] // Moved private server config here
     var securitySection = [SettingsRowData(id:2,title:"Biometric ID".localized()),
                            SettingsRowData(id:3,title:"Recovery Phrase".localized()),
@@ -78,6 +78,10 @@ struct SettingsScreen: View {
     }
     
     @State private var tabBar: UITabBar! = nil
+    
+    @State var sliderValue: Float = UserSettings.shared.mBackgroundSoundVolume ?? 0.05
+    
+    @State var isChecked = UserSettings.shared.isForegroundSoundEnabled ?? true
     
     var body: some View {
             ZStack{
@@ -112,14 +116,36 @@ struct SettingsScreen: View {
                                         .padding(.leading,20)
                                         .padding(.trailing,20)
                         VStack {
-                            ForEach(soundSettings, id: \.id) { settingsRowData in
-                                    SettingsRow(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
+                            
+                                Text("Adjust Volume".localized()) .scaledFont(size: Device.isLarge ?  16 : 12)
+                                .foregroundColor(Color.textTitleColor)
+                                .padding(.top,20)
+                            
+                                Slider(value: $sliderValue, in: 0.05...1, step: 0.05)
+                                    .accentColor(Color.arrrBlue)
+                                    .frame(height: 40)
+                                    .padding(.leading,30)
+                                    .padding(.trailing,30)
+                                      .padding(.horizontal)
+                                Text("\(sliderValue, specifier: "%.2f")")
+                                    .scaledFont(size: Device.isLarge ?  16 : 12)
+                                    .foregroundColor(Color.textTitleColor)
+                                
+                                Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
+                                .padding(.top,20)
+                            
+                                VolumeCheckBoxView(isChecked: $isChecked, title: "Enable Sound in foreground".localized()).padding(.leading,15)
+                                .padding(.trailing,10)
+                                .padding(.top,10)
+
+                                Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
+                                .padding(.top,10)
+                                
+                                SettingsRow(mCurrentRowData: SettingsRowData(id:16,title:"Select Background Music".localized()), mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
                                     .onTapGesture {
-                                        self.mSelectedSettingsRowData = settingsRowData
-                                        openRespectiveScreenBasisSelection()
+                                        self.destination = SettingsDestination(rawValue: 16)
                                         aSmallVibration()
                                     }
-                            }
                         }
                         .modifier(SettingsSectionBackgroundModifier())
                         
@@ -374,6 +400,8 @@ struct SettingsScreen: View {
 //                    openLanguageScreen = false
 //                }
                 
+                
+             
                 if self.tabBar != nil {
                     self.tabBar.isHidden = false
                 }
@@ -633,4 +661,42 @@ struct TabBarAccessor: UIViewControllerRepresentable {
             }
         }
     }
+}
+
+
+struct VolumeCheckBoxView: View {
+    
+    @Binding var isChecked:Bool
+    
+    var title:String
+    
+    func toggle()
+    {
+        isChecked = !isChecked
+        UserSettings.shared.isForegroundSoundEnabled = isChecked
+    }
+    
+    var body: some View {
+        Button(action: toggle){
+            HStack{
+                Text(title)
+                    .scaledFont(size: Device.isLarge ?  16 : 12)
+                    .foregroundColor(Color.textTitleColor)
+                Spacer()
+//                Image(systemName: isChecked ? "checkmark.square": "square")
+//                    .scaledFont(size: Device.isLarge ?  16 : 12)
+                
+                Toggle("", isOn: $isChecked)
+                    .onChange(of: isChecked, perform: { isEnabled in
+                        toggle()
+                    })
+                    .multilineTextAlignment(.trailing)
+                    .toggleStyle(ColoredToggleStyle()).labelsHidden()
+
+            }
+
+        }.frame(height: 40,alignment: .center)
+
+    }
+
 }

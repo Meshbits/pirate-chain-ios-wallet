@@ -168,7 +168,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func playSoundWhileSyncing() {
         // Play sound only in background while syncing
-        if (UIApplication.shared.applicationState == .background){
+//        if (UIApplication.shared.applicationState == .background){
             
             var aFileName = "BackgroundLongMusic_1"
             
@@ -199,11 +199,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
             let audioSession = AVAudioSession.sharedInstance()
             try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
-        }
+//        }
     }
     
     func playInitialSound(){
-        if (UIApplication.shared.applicationState == .background){
+//        if (UIApplication.shared.applicationState == .background){
             if let path = Bundle.main.path(forResource: "SyncStarted", ofType: "mp3") {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
@@ -222,11 +222,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
             let audioSession = AVAudioSession.sharedInstance()
             try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
-        }
+//        }
     }
     
     func playFinishingSound(){
-        if (UIApplication.shared.applicationState == .background){
+//        if (UIApplication.shared.applicationState == .background){
             if let path = Bundle.main.path(forResource: "SyncEnd", ofType: "mp3") {
                 let filePath = NSURL(fileURLWithPath:path)
                 mAVAudioPlayerObj = try! AVAudioPlayer.init(contentsOf: filePath as URL)
@@ -238,7 +238,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             //Causes audio from other sessions to be ducked (reduced in volume) while audio from this session plays
             let audioSession = AVAudioSession.sharedInstance()
             try!audioSession.setCategory(AVAudioSession.Category.playback, options: AVAudioSession.CategoryOptions.duckOthers)
-        }
+//        }
     }
     
     func stopSoundIfPlaying(){

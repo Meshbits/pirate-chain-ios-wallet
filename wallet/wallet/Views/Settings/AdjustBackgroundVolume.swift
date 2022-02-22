@@ -56,31 +56,3 @@ struct AdjustBackgroundVolume: View {
         }
     }
 }
-
-struct VolumeCheckBoxView: View {
-    
-    @Binding var isChecked:Bool
-    
-    var title:String
-    
-    func toggle()
-    {
-        isChecked = !isChecked
-        UserSettings.shared.isForegroundSoundEnabled = isChecked
-    }
-    
-    var body: some View {
-        Button(action: toggle){
-            HStack{
-                Image(systemName: isChecked ? "checkmark.square": "square")
-                    .scaledFont(size: Device.isLarge ?  20 : 16)
-                Text(title)
-                    .scaledFont(size: Device.isLarge ?  20 : 16)
-                    .foregroundColor(Color.textTitleColor)
-            }
-
-        }
-
-    }
-
-}
