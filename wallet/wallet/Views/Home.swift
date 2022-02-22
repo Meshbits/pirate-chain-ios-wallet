@@ -379,6 +379,7 @@ struct Home: View {
     var aTitleStatus: String {
         switch self.viewModel.syncStatus {
             case .error:
+                NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
                 return ""
             case .unprepared:
                 return ""
@@ -404,8 +405,10 @@ struct Home: View {
             case .fetching:
                 return "Fetching".localized()
             case .stopped:
+                NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
                 return "Stopped".localized()
             case .disconnected:
+                NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
                 return "Offline".localized()
             case .synced:
                 NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
