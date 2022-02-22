@@ -134,7 +134,7 @@ struct SettingsScreen: View {
                                 Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
                                 .padding(.top,20)
                             
-                                VolumeCheckBoxView(isChecked: $isChecked, title: "Enable Sound in foreground".localized()).padding(.leading,15)
+                                VolumeCheckBoxView(isChecked: $isChecked, title: "Enable Sound in background".localized()).padding(.leading,15)
                                 .padding(.trailing,10)
                                 .padding(.top,10)
 
