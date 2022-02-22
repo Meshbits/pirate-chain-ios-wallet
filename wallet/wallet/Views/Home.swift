@@ -382,11 +382,22 @@ struct Home: View {
                 return ""
             case .unprepared:
                 return ""
-            case .downloading(let progress):
-                return "Downloading".localized() + " \(Int(progress.progress * 100))%"
+            case .downloading(let downloadingProgress):
+            if downloadingProgress.progress == 0 {
+                    NotificationCenter.default.post(name: NSNotification.Name(mPlaySoundWhileSyncing), object: nil)
+                }else if downloadingProgress.progress == 100 {
+                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                }
+            
+                return "Downloading".localized() + " \(Int(downloadingProgress.progress * 100))%"
             case .validating:
                 return "Validating".localized()
             case .scanning(let scanProgress):
+                if scanProgress.progress == 0 {
+                    NotificationCenter.default.post(name: NSNotification.Name(mPlaySoundWhileSyncing), object: nil)
+                }else if scanProgress.progress == 100 {
+                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                }
                 return "Scan".localized() + " \(Int(scanProgress.progress * 100))%"
             case .enhancing(let enhanceProgress):
                 return "Enhance".localized() + " \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)"
@@ -397,6 +408,7 @@ struct Home: View {
             case .disconnected:
                 return "Offline".localized()
             case .synced:
+                NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
                 return "Synced 100%".localized()
         }
     }
