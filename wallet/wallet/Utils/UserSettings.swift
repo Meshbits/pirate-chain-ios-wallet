@@ -33,7 +33,7 @@ class UserSettings {
         static let isBackgroundSoundEnabled = "isBackgroundSoundEnabled"
     }
     
-    var isEnableSoundSettings = false
+    var isEnableSoundSettings = false // We also need to turn on audio settings under background modes
  
     var indexOfSelectedExchange: Int? {
         get {
