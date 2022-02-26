@@ -175,7 +175,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func playSoundWhileSyncing() {
         // Play sound only in background while syncing
 //        if (UIApplication.shared.applicationState == .background){
-        
+        if !UserSettings.shared.isEnableSoundSettings {
+            return
+        }
+
             if let player = mAVAudioPlayerObj,player.isPlaying{
                     return
             }
@@ -213,6 +216,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func playInitialSound(){
+        if !UserSettings.shared.isEnableSoundSettings {
+            return
+        }
+
 //        if (UIApplication.shared.applicationState == .background){
             if UIApplication.shared.applicationState == .background {
                 if let path = Bundle.main.path(forResource: "SyncStarted", ofType: "mp3") {
@@ -243,6 +250,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func playFinishingSound(){
+        if !UserSettings.shared.isEnableSoundSettings {
+            return
+        }
+
         if (UIApplication.shared.applicationState == .background){
             if let path = Bundle.main.path(forResource: "SyncEnd", ofType: "mp3") {
                 let filePath = NSURL(fileURLWithPath:path)
@@ -263,6 +274,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func stopSoundIfPlaying(){
+        
+        if !UserSettings.shared.isEnableSoundSettings {
+            return
+        }
+        
         // If AVAudio player is playing a song then go ahead and kill it
         if mAVAudioPlayerObj != nil && mAVAudioPlayerObj?.isPlaying == true {
             mAVAudioPlayerObj?.stop()
@@ -273,6 +289,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func updateSoundIfPlaying(){
+        if !UserSettings.shared.isEnableSoundSettings {
+            return
+        }
+
         if let player = mAVAudioPlayerObj, player.isPlaying {
             mAVAudioPlayerObj?.volume = UserSettings.shared.isBackgroundSoundEnabled ? (UserSettings.shared.mBackgroundSoundVolume ?? 0.1) : 0.0
         }

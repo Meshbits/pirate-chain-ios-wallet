@@ -32,6 +32,8 @@ class UserSettings {
         static let mBackgroundSoundSelectionIndex = "mBackgroundSoundSelectionIndex"
         static let isBackgroundSoundEnabled = "isBackgroundSoundEnabled"
     }
+    
+    var isEnableSoundSettings = false
  
     var indexOfSelectedExchange: Int? {
         get {

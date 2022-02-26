@@ -107,51 +107,55 @@ struct SettingsScreen: View {
                         }
                         .modifier(SettingsSectionBackgroundModifier())
                         
-                        SettingsSectionHeaderView(aTitle:"Sound Settings".localized())
-                        Text("This setting controls the volume of background music while your wallet is syncing with the blockchain network.")
-                            .multilineTextAlignment(.leading)
-                            .scaledFont(size: Device.isLarge ? 14 : 10).foregroundColor(Color.textTitleColor)
-                            .frame(height: 25,alignment: .leading)
-                                        .foregroundColor(Color.white)
-                                        .padding(.leading,20)
-                                        .padding(.trailing,20)
-                        VStack {
+                     
+                        if UserSettings.shared.isEnableSoundSettings {
+                            SettingsSectionHeaderView(aTitle:"Sound Settings".localized())
+                            Text("This setting controls the volume of background music while your wallet is syncing with the blockchain network.")
+                                .multilineTextAlignment(.leading)
+                                .scaledFont(size: Device.isLarge ? 14 : 10).foregroundColor(Color.textTitleColor)
+                                .frame(height: 25,alignment: .leading)
+                                            .foregroundColor(Color.white)
+                                            .padding(.leading,20)
+                                            .padding(.trailing,20)
                             
-                                Text("Adjust Volume".localized()) .scaledFont(size: Device.isLarge ?  16 : 12)
-                                .foregroundColor(Color.textTitleColor)
-                                .padding(.top,20)
-                            
-                                Slider(value: $sliderValue, in: 0.00...1, step: 0.05)
-                                    .accentColor(Color.arrrBlue)
-                                    .frame(height: 40)
-                                    .padding(.leading,30)
-                                    .padding(.trailing,30)
-                                      .padding(.horizontal)
-                                      .onChange(of: self.sliderValue) { newValue in
-                                          UserSettings.shared.mBackgroundSoundVolume = newValue
-                                          NotificationCenter.default.post(name: NSNotification.Name(mUpdateVolume), object: nil)
-                                      }
-                                Text("\(sliderValue, specifier: "%.2f")")
-                                    .scaledFont(size: Device.isLarge ?  16 : 12)
+                            VStack {
+                                
+                                    Text("Adjust Volume".localized()) .scaledFont(size: Device.isLarge ?  16 : 12)
                                     .foregroundColor(Color.textTitleColor)
+                                    .padding(.top,20)
                                 
-                                Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
-                                .padding(.top,20)
-                            
-                                VolumeCheckBoxView(isChecked: $isChecked, title: "Enable sound in background".localized()).padding(.leading,15)
-                                .padding(.trailing,10)
-                                .padding(.top,10)
+                                    Slider(value: $sliderValue, in: 0.00...1, step: 0.05)
+                                        .accentColor(Color.arrrBlue)
+                                        .frame(height: 40)
+                                        .padding(.leading,30)
+                                        .padding(.trailing,30)
+                                          .padding(.horizontal)
+                                          .onChange(of: self.sliderValue) { newValue in
+                                              UserSettings.shared.mBackgroundSoundVolume = newValue
+                                              NotificationCenter.default.post(name: NSNotification.Name(mUpdateVolume), object: nil)
+                                          }
+                                    Text("\(sliderValue, specifier: "%.2f")")
+                                        .scaledFont(size: Device.isLarge ?  16 : 12)
+                                        .foregroundColor(Color.textTitleColor)
+                                    
+                                    Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
+                                    .padding(.top,20)
+                                
+                                    VolumeCheckBoxView(isChecked: $isChecked, title: "Enable sound in background".localized()).padding(.leading,15)
+                                    .padding(.trailing,10)
+                                    .padding(.top,10)
 
-                                Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
-                                .padding(.top,10)
-                                
-                                SettingsRow(mCurrentRowData: SettingsRowData(id:16,title:"Select background music".localized()), mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
-                                    .onTapGesture {
-                                        self.destination = SettingsDestination(rawValue: 16)
-                                        aSmallVibration()
-                                    }
+                                    Color.gray.frame(height:CGFloat(1) / UIScreen.main.scale)
+                                    .padding(.top,10)
+                                    
+                                    SettingsRow(mCurrentRowData: SettingsRowData(id:16,title:"Select background music".localized()), mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:16)
+                                        .onTapGesture {
+                                            self.destination = SettingsDestination(rawValue: 16)
+                                            aSmallVibration()
+                                        }
+                            }
+                            .modifier(SettingsSectionBackgroundModifier())
                         }
-                        .modifier(SettingsSectionBackgroundModifier())
                         
                         
                         SettingsSectionHeaderView(aTitle:"Security".localized())
