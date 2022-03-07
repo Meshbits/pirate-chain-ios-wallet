@@ -105,7 +105,7 @@ class CombineSynchronizer {
         let transparentSubject = CurrentValueSubject<WalletBalance, Never>(Balance(verified: 0, total: 0))
         self.transparentBalance = transparentSubject
         self.verifiedBalance = CurrentValueSubject(0)
-        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT)
+        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.saplingActivationHeight)
         self.connectionState = CurrentValueSubject(self.synchronizer.connectionState)
         
         // Subscribe to SDKSynchronizer notifications
@@ -340,7 +340,7 @@ class CombineSynchronizer {
             
             guard let self = self else { return }
             
-            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
+            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.saplingActivationHeight
             
             self.synchronizer.refreshUTXOs(address: tAddress, from: walletBirthday, result: { [weak self] (r) in
                 guard let self = self else { return }
@@ -441,12 +441,10 @@ extension CombineSynchronizer {
     }
 }
 
-
 fileprivate struct Balance: WalletBalance {
     var verified: Int64
     var total: Int64
 }
-
 
 extension CompactBlockProcessor.State {
     var syncStatus: SyncStatus? {
@@ -454,7 +452,7 @@ extension CompactBlockProcessor.State {
         case .stopped:
             return .stopped
         case .downloading:
-            return .downloading(NullProgress())
+            return .downloading(.nullProgress)
         case .error(let e):
             return .error(e)
         case .fetching:
@@ -462,12 +460,11 @@ extension CompactBlockProcessor.State {
         case .synced:
             return .synced
         case .scanning:
-            return .scanning(NullProgress())
+            return .scanning(.nullProgress)
         case .validating:
             return .validating
         case .enhancing:
             return nil
-        
         }
     }
 }
@@ -477,20 +474,6 @@ fileprivate struct NullEnhancementProgress: EnhancementProgress {
     var enhancedTransactions: Int { 0 }
     var lastFoundTransaction: ConfirmedTransactionEntity? { nil }
     var range: CompactBlockRange { 0 ... 0 }
-}
-
-fileprivate struct NullProgress: BlockProgressReporting {
-    var startHeight: BlockHeight {
-        0
-    }
-    
-    var targetHeight: BlockHeight {
-        0
-    }
-    
-    var progressHeight: BlockHeight {
-        0
-    }
 }
 
 extension CompactBlockProgress {
