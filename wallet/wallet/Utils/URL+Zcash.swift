@@ -17,15 +17,15 @@ extension URL {
     }
     
     static func cacheDbURL() throws -> URL {
-        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+ZcashSDK.DEFAULT_CACHES_DB_NAME, isDirectory: false)
+        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.defaultDbNamePrefix+ZcashSDK.defaultCacheDbName, isDirectory: false)
     }
 
     static func dataDbURL() throws -> URL {
-        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+ZcashSDK.DEFAULT_DATA_DB_NAME, isDirectory: false)
+        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.defaultDbNamePrefix+ZcashSDK.defaultDataDbName, isDirectory: false)
     }
 
     static func pendingDbURL() throws -> URL {
-        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+ZcashSDK.DEFAULT_PENDING_DB_NAME)
+        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.defaultCacheDbName+ZcashSDK.defaultPendingDbName)
     }
 
     static func spendParamsURL() throws -> URL {

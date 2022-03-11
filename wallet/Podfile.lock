@@ -23,6 +23,7 @@ PODS:
     - SwiftNIOTransportServices (< 2.0.0, >= 1.6.0)
     - SwiftProtobuf (< 2.0.0, >= 1.9.0)
   - KeychainSwift (19.0.0)
+  - libzcashlc (0.0.2)
   - Logging (1.4.0)
   - lottie-ios (3.2.3)
   - Mixpanel-swift (2.10.2):
@@ -72,8 +73,9 @@ PODS:
     - SwiftNIOTLS (< 3, >= 2.27.0)
   - SwiftProtobuf (1.17.0)
   - TinyQRScanner (1.0.1)
-  - ZcashLightClientKit (0.12.0-beta.5):
+  - ZcashLightClientKit (0.13.0-beta.2):
     - gRPC-Swift (= 1.0.0)
+    - libzcashlc (= 0.0.2)
     - SQLite.swift (~> 0.12.2)
   - zealous-logger (1.0.0):
     - CocoaLumberjack/Swift (~> 3.7.0)
@@ -87,7 +89,7 @@ DEPENDENCIES:
   - Mixpanel-swift
   - MnemonicSwift (from `https://github.com/zcash-hackworks/MnemonicSwift.git`, branch `master`)
   - TinyQRScanner
-  - ZcashLightClientKit (from `https://github.com/zcash/ZcashLightClientKit.git`, tag `0.12.0-beta.5`)
+  - ZcashLightClientKit (from `https://github.com/zcash/ZcashLightClientKit.git`, tag `0.13.0-beta.2`)
   - zealous-logger (from `https://github.com/zcash-hackworks/zealous-logger`, branch `master`)
 
 SPEC REPOS:
@@ -105,6 +107,7 @@ SPEC REPOS:
     - CombineUrlSessionDownloader
     - gRPC-Swift
     - KeychainSwift
+    - libzcashlc
     - Logging
     - lottie-ios
     - Mixpanel-swift
@@ -128,7 +131,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/zcash-hackworks/MnemonicSwift.git
   ZcashLightClientKit:
     :git: https://github.com/zcash/ZcashLightClientKit.git
-    :tag: 0.12.0-beta.5
+    :tag: 0.13.0-beta.2
   zealous-logger:
     :branch: master
     :git: https://github.com/zcash-hackworks/zealous-logger
@@ -139,7 +142,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/zcash-hackworks/MnemonicSwift.git
   ZcashLightClientKit:
     :git: https://github.com/zcash/ZcashLightClientKit.git
-    :tag: 0.12.0-beta.5
+    :tag: 0.13.0-beta.2
   zealous-logger:
     :commit: c9f8d8d9f74a456094b9143616da3b4eba91ddcf
     :git: https://github.com/zcash-hackworks/zealous-logger
@@ -158,6 +161,7 @@ SPEC CHECKSUMS:
   CombineUrlSessionDownloader: 48382df0efb182da6c1117b651d4daf0e8f09cb9
   gRPC-Swift: 77154009a019e97f8c4bd8f2bb75fe9726801157
   KeychainSwift: a06190cf933ad46b1e0abc3d77d29c06331715c7
+  libzcashlc: d32ab47e7676905990610e999fc5d15d062061d5
   Logging: beeb016c9c80cf77042d62e83495816847ef108b
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   Mixpanel-swift: dc07ae05df9ff47c80542531f55e2120ec2a410a
@@ -175,9 +179,9 @@ SPEC CHECKSUMS:
   SwiftNIOTransportServices: eee29d06a617e6b37c534d8589ae27c31b119f81
   SwiftProtobuf: 9c85136c6ba74b0a1b84279dbf0f6db8efb714e0
   TinyQRScanner: 4077088ff2e8d476af79e6035413648c2c7900ef
-  ZcashLightClientKit: 36355e1a185106eb3474a989a45c96d623643e2f
+  ZcashLightClientKit: ac11c62951bc8130abbce780705956fb7fb54fd9
   zealous-logger: 2f33820d7d7e723796dabc51d60942b51b9ab024
 
-PODFILE CHECKSUM: 5c2e86e60489054b63a80da1a21233d6f8d3465d
+PODFILE CHECKSUM: 055fde344b80177c1b84eceb95037560f2363fec
 
 COCOAPODS: 1.11.2

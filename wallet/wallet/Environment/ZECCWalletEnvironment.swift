@@ -21,7 +21,7 @@ enum WalletState {
 
 
 final class ZECCWalletEnvironment: ObservableObject {
-    static let autoShieldingThresholdInZatoshi: Int64 = Int64(ZcashSDK.ZATOSHI_PER_ZEC / 100)
+    static let autoShieldingThresholdInZatoshi: Int64 = Int64(ZcashSDK.zatoshiPerZEC / 100)
     static let genericErrorMessage = "An error ocurred, please check your device logs"
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
