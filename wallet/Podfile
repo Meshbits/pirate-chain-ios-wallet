@@ -3,9 +3,8 @@ platform :ios, min_deployment_target
 
 use_frameworks!
 def base_pods
-  pod 'ZcashLightClientKit', :git => 'https://github.com/zcash/ZcashLightClientKit.git', :tag => '0.13.0-beta.2'
+  pod 'ZcashLightClientKit', :git => 'https://github.com/zcash/ZcashLightClientKit.git', :tag => '0.13.1-beta'
 #  pod 'ZcashLightClientKit', :path => '../../ZcashLightClientKit'
-  pod 'gRPC-Swift', '= 1.0.0'
   pod 'KeychainSwift', '~> 19.0.0'
   pod 'MnemonicSwift', :git => 'https://github.com/zcash-hackworks/MnemonicSwift.git', :branch => 'master'
   pod 'TinyQRScanner'
