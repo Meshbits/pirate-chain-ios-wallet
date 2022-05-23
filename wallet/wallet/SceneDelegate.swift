@@ -146,10 +146,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = window!.frame
-        blurEffectView.tag = mBlurrViewTag
-
-        self.window?.addSubview(blurEffectView)
+        
+        if let windowObj = window {
+            blurEffectView.frame = windowObj.frame
+            blurEffectView.tag = mBlurrViewTag
+            self.window?.addSubview(blurEffectView)
+        }
+        
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
