@@ -1,0 +1,194 @@
+{
+  "pins" : [
+    {
+      "identity" : "bugsnag-cocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bugsnag/bugsnag-cocoa",
+      "state" : {
+        "revision" : "394884c5b54fa7192f28fd554c49f16fdeda2f6e",
+        "version" : "6.16.7"
+      }
+    },
+    {
+      "identity" : "cocoalumberjack",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
+      "state" : {
+        "revision" : "80ada1f753b0d53d9b57c465936a7c4169375002",
+        "version" : "3.7.4"
+      }
+    },
+    {
+      "identity" : "combine-urlsession-downloader",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pacu/combine-urlsession-downloader.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "31503ad73be6786aa0ccd1148a30e00b0059a386"
+      }
+    },
+    {
+      "identity" : "grpc-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/grpc/grpc-swift.git",
+      "state" : {
+        "revision" : "593fe0fe931f7e838969243cd137be48e8055b1d",
+        "version" : "1.7.3"
+      }
+    },
+    {
+      "identity" : "keychain-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/evgenyneu/keychain-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "32a99b537d1c6f3529a08257c28a5feb70c0c5af"
+      }
+    },
+    {
+      "identity" : "lottie-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-ios.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "b4f9b2ea44fcc47628a27c1fb876314608f1736b"
+      }
+    },
+    {
+      "identity" : "mixpanel-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mixpanel/mixpanel-swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "8520af5f88c4c83616f2d7200a0de2d0355becfd"
+      }
+    },
+    {
+      "identity" : "mnemonicswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zcash-hackworks/MnemonicSwift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "5def1fdacd934e6f1938dee6a80f1ca03d186456"
+      }
+    },
+    {
+      "identity" : "sqlite.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stephencelis/SQLite.swift.git",
+      "state" : {
+        "revision" : "4d543d811ee644fa4cc4bfa0be996b4dd6ba0f54",
+        "version" : "0.13.3"
+      }
+    },
+    {
+      "identity" : "swift-crypto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-crypto.git",
+      "state" : {
+        "revision" : "067254c79435de759aeef4a6a03e43d087d61312",
+        "version" : "2.0.5"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log.git",
+      "state" : {
+        "revision" : "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+        "version" : "1.4.2"
+      }
+    },
+    {
+      "identity" : "swift-nio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio.git",
+      "state" : {
+        "revision" : "124119f0bb12384cef35aa041d7c3a686108722d",
+        "version" : "2.40.0"
+      }
+    },
+    {
+      "identity" : "swift-nio-extras",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio-extras.git",
+      "state" : {
+        "revision" : "8eea84ec6144167354387ef9244b0939f5852dc8",
+        "version" : "1.11.0"
+      }
+    },
+    {
+      "identity" : "swift-nio-http2",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio-http2.git",
+      "state" : {
+        "revision" : "72bcaf607b40d7c51044f65b0f5ed8581a911832",
+        "version" : "1.21.0"
+      }
+    },
+    {
+      "identity" : "swift-nio-ssl",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio-ssl.git",
+      "state" : {
+        "revision" : "1750873bce84b4129b5303655cce2c3d35b9ed3a",
+        "version" : "2.19.0"
+      }
+    },
+    {
+      "identity" : "swift-nio-transport-services",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-nio-transport-services.git",
+      "state" : {
+        "revision" : "1a4692acb88156e3da1b0c6732a8a38b2a744166",
+        "version" : "1.12.0"
+      }
+    },
+    {
+      "identity" : "swift-protobuf",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-protobuf.git",
+      "state" : {
+        "revision" : "e1499bc69b9040b29184f7f2996f7bab467c1639",
+        "version" : "1.19.0"
+      }
+    },
+    {
+      "identity" : "tinyqrscanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pacu/TinyQRScanner.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "1d95381200ac14bae12bd245b6847ae68c99a0d7"
+      }
+    },
+    {
+      "identity" : "zcash-light-client-ffi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zcash-hackworks/zcash-light-client-ffi.git",
+      "state" : {
+        "revision" : "b7e8a2abab84c44046b4afe4ee4522a0fa2fcc7f",
+        "version" : "0.0.3"
+      }
+    },
+    {
+      "identity" : "zcashlightclientkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zcash/ZcashLightClientKit/",
+      "state" : {
+        "revision" : "74f3ae20f26748e162c051e5fa343c71febc4294",
+        "version" : "0.14.0-beta"
+      }
+    },
+    {
+      "identity" : "zealous-logger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zcash-hackworks/zealous-logger",
+      "state" : {
+        "branch" : "master",
+        "revision" : "8667d3b17dfc39fdc252fb49b1b02180ea2a4fc4"
+      }
+    }
+  ],
+  "version" : 2
+}
