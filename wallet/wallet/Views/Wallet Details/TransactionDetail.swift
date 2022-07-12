@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftUI
-
+import ZcashLightClientKit
 struct TransactionDetailsOLD: View {
     
     var model: DetailModel
@@ -35,7 +35,7 @@ struct TransactionDetailsOLD: View {
             VStack {
                
                 ScrollView([.vertical], showsIndicators: false) {
-                    SendZecView(zatoshi: .constant(model.zecAmount.toZecAmount()))
+                    SendZecView(zatoshi: .constant(model.amount.decimalString()))
                     Text(status).foregroundColor(.white)
                         .font(.largeTitle)
                     Spacer()
@@ -91,7 +91,7 @@ struct TransactionDetailsOLD_Previews: PreviewProvider {
                 id: "bb031",
                 zAddress: "Ztestsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6",
                 date: Date(),
-                zecAmount: -12.345,
+                amount: -Zatoshi(12_345_000),
                 status: .paid(success: true),
                 subtitle: "1 of 10 confirmations"
                 

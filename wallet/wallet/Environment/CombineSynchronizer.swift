@@ -101,8 +101,8 @@ class CombineSynchronizer {
         self.synchronizer = try SDKSynchronizer(initializer: initializer)
         self.syncStatus = CurrentValueSubject(.disconnected)
         self.balance = CurrentValueSubject(0)
-        self.shieldedBalance = CurrentValueSubject(Balance(verified: 0, total: 0))
-        let transparentSubject = CurrentValueSubject<WalletBalance, Never>(Balance(verified: 0, total: 0))
+        self.shieldedBalance = CurrentValueSubject(WalletBalance(verified: .zero, total: .zero))
+        let transparentSubject = CurrentValueSubject<WalletBalance, Never>(WalletBalance(verified: .zero, total: .zero))
         self.transparentBalance = transparentSubject
         self.verifiedBalance = CurrentValueSubject(0)
         self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.saplingActivationHeight)
@@ -277,16 +277,16 @@ class CombineSynchronizer {
            let tBalance = try? synchronizer.getTransparentBalance(address: ua.tAddress) {
             self.transparentBalance.send(tBalance)
         } else {
-            self.transparentBalance.send(Balance(verified: 0, total: 0))
+            self.transparentBalance.send(WalletBalance(verified: .zero, total: .zero))
         }
         
-        let shieldedVerifiedBalance = synchronizer.getShieldedVerifiedBalance()
-        let shieldedTotalBalance = synchronizer.getShieldedBalance(accountIndex: 0)
+        let shieldedVerifiedBalance: Zatoshi = synchronizer.getShieldedVerifiedBalance()
+        let shieldedTotalBalance: Zatoshi = synchronizer.getShieldedBalance(accountIndex: 0)
         
-        self.shieldedBalance.send(Balance(verified: shieldedVerifiedBalance, total: shieldedTotalBalance))
+        self.shieldedBalance.send(WalletBalance(verified: shieldedVerifiedBalance, total: shieldedTotalBalance))
         
-        self.balance.send(initializer.getBalance().asHumanReadableZecBalance())
-        self.verifiedBalance.send(initializer.getVerifiedBalance().asHumanReadableZecBalance())
+        self.balance.send(initializer.getBalance().decimalValue.doubleValue)
+        self.verifiedBalance.send(initializer.getVerifiedBalance().decimalValue.doubleValue)
 
         self.syncStatus.send(synchronizer.status)
         self.walletDetails.sink(receiveCompletion: { _ in
@@ -307,7 +307,7 @@ class CombineSynchronizer {
     func send(with spendingKey: String, zatoshi: Int64, to recipientAddress: String, memo: String?,from account: Int) -> Future<PendingTransactionEntity,Error>  {
         Future<PendingTransactionEntity, Error>() { [weak self]
             promise in
-            self?.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: recipientAddress, memo: memo, from: account) { [weak self](result) in
+            self?.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: Zatoshi(zatoshi), toAddress: recipientAddress, memo: memo, from: account) { [weak self](result) in
                 self?.updatePublishers()
                 switch result {
                 case .failure(let error):
@@ -439,11 +439,6 @@ extension CombineSynchronizer {
     func getShieldedAddress(account: Int = 0) -> SaplingShieldedAddress? {
         self.synchronizer.getShieldedAddress(accountIndex: account)
     }
-}
-
-fileprivate struct Balance: WalletBalance {
-    var verified: Int64
-    var total: Int64
 }
 
 extension CompactBlockProcessor.State {

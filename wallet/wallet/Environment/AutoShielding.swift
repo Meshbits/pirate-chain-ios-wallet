@@ -143,11 +143,11 @@ class ThresholdDrivenAutoShielding: AutoShieldingStrategy {
     }
     
     var session: UserSession
-    var threshold: Int64
+    var threshold: Zatoshi
     var transparentBalanceProvider: TransparentBalanceProviding
 
     init(session: UserSession,
-         threshold zatoshiThreshold: Int64,
+         threshold zatoshiThreshold: Zatoshi,
          tBalance: TransparentBalanceProviding) {
         self.session = session
         self.threshold = zatoshiThreshold
@@ -187,7 +187,7 @@ class AutoShieldingBuilder {
         
         return ConcreteAutoShielder(
             autoShielding: ThresholdDrivenAutoShielding(session: Session.unique,
-                                                        threshold: threshold,
+                                                        threshold: Zatoshi(threshold),
                                                         tBalance: balanceProviding),
             keyProviding: keyProvider,
             keyDeriver: DerivationTool(networkType: ZCASH_NETWORK.networkType),

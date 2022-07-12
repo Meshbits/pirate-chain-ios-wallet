@@ -17,7 +17,7 @@ struct DetailModel: Identifiable {
     var id: String
     var zAddress: String?
     var date: Date
-    var zecAmount: Double
+    var amount: Zatoshi
     var status: Status
     var shielded: Bool = true
     var memo: String? = nil
@@ -61,8 +61,8 @@ struct DetailCard: View {
     }
     
     var zecAmount: some View {
-        let amount = model.zecAmount.toZecAmount()
-        var text = ((model.zecAmount > 0 && model.zecAmount >= 0.001) ? "+ " : "") + ((model.zecAmount < 0.001 && model.zecAmount > 0) ? "< 0.001" : amount)
+        let amount = model.amount.amount
+        var text = ((amount > 0 && amount >= 10000) ? "+ " : "") + ((amount < 10000 && amount > 0) ? "< 0.001" : model.amount.decimalString())
         var color = Color.zPositiveZecAmount
         var opacity = Double(1)
         switch model.status {
@@ -175,7 +175,7 @@ struct DetailRow_Previews: PreviewProvider {
                         id: "bb031",
                             zAddress: "Ztestsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6",
                             date: Date(),
-                            zecAmount: -12.345,
+                            amount: Zatoshi(12_345_000),
                             status: .paid(success: true),
                             subtitle: "1 of 10 confirmations"
                             )
@@ -188,7 +188,7 @@ struct DetailRow_Previews: PreviewProvider {
                 id: "bb032",
                     zAddress: "Ztestsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6",
                     date: Date(),
-                    zecAmount: 2.0,
+                    amount: Zatoshi(2 * Zatoshi.Constants.oneZecInZatoshi),
                     status: .received,
                     subtitle: "Received 11/16/19 4:12pm"
                     )
@@ -199,7 +199,7 @@ struct DetailRow_Previews: PreviewProvider {
                 id: "bb033",
                     zAddress: "Ztestsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6",
                     date: Date(),
-                    zecAmount: 2.0,
+                    amount: Zatoshi(2 * Zatoshi.Constants.oneZecInZatoshi),
                     status: .paid(success: false),
                     subtitle: "Received 11/16/19 4:12pm"
                     )
@@ -219,6 +219,7 @@ extension Date {
     }
 }
 extension DetailModel {
+
     init(confirmedTransaction: ConfirmedTransactionEntity, sent: Bool = false) {
         self.date = Date(timeIntervalSince1970: confirmedTransaction.blockTimeInSeconds)
         self.id = confirmedTransaction.transactionEntity.transactionId.toHexStringTxId()
@@ -226,12 +227,13 @@ extension DetailModel {
         self.status = sent ? .paid(success: confirmedTransaction.minedHeight > 0) : .received
         self.subtitle = sent ? "wallet_history_sent".localized() + " \(self.date.transactionDetail)" : "Received".localized() + " \(self.date.transactionDetail)"
         self.zAddress = confirmedTransaction.toAddress
-        self.zecAmount = (sent ? -Int64(confirmedTransaction.value) : Int64(confirmedTransaction.value)).asHumanReadableZecBalance()
+        self.amount = sent ? -confirmedTransaction.value : confirmedTransaction.value
         if let memo = confirmedTransaction.memo {
             self.memo = memo.asZcashTransactionMemo()
         }
         self.minedHeight = confirmedTransaction.minedHeight
     }
+
     init(pendingTransaction: PendingTransactionEntity, latestBlockHeight: BlockHeight? = nil) {
         let submitSuccess = pendingTransaction.isSubmitSuccess
         let isPending = pendingTransaction.isPending(currentHeight: latestBlockHeight ?? -1)
@@ -245,9 +247,10 @@ extension DetailModel {
                                              isSubmitSuccess: submitSuccess,
                                              minedHeight: pendingTransaction.minedHeight,
                                              date: self.date.transactionDetail,
-                                             latestBlockHeight: latestBlockHeight)
+                                             latestBlockHeight: latestBlockHeight
+        )
         self.zAddress = pendingTransaction.toAddress
-        self.zecAmount = -Int64(pendingTransaction.value).asHumanReadableZecBalance()
+        self.amount = -pendingTransaction.value
         if let memo = pendingTransaction.memo {
             self.memo = memo.asZcashTransactionMemo()
         }
@@ -279,3 +282,8 @@ extension DetailModel {
     }
 }
     
+extension Zatoshi {
+    static prefix func -(_ zatoshi: Self) -> Self {
+        Zatoshi(-zatoshi.amount)
+    }
+}

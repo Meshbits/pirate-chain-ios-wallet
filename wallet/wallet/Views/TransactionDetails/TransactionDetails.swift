@@ -243,21 +243,21 @@ fileprivate func formatAmount(_ amount: Double) -> String {
 extension HeaderFooterFactory {
     static func header(for detail: DetailModel) -> some View {
         detail.success ?
-            Self.successHeaderWithValue(detail.zecAmount,
+        Self.successHeaderWithValue(detail.amount.decimalValue.doubleValue,
                                         shielded: detail.shielded,
                                         sent: detail.isOutbound,
                                         formatValue: formatAmount) :
-            Self.failedHeaderWithValue(detail.zecAmount,
+            Self.failedHeaderWithValue(detail.amount.decimalValue.doubleValue,
                                        shielded: detail.shielded,
                                        formatValue: formatAmount)
     }
     // adds network fee on successful transactions
     static func footer(for detail: DetailModel) -> some View {
-        detail.success ? Self.successFooterWithValue(detail.isOutbound ? detail.zecAmount.addingZcashNetworkFee() : detail.zecAmount,
+        detail.success ? Self.successFooterWithValue(detail.isOutbound ? detail.amount.addingZcashNetworkFee().decimalValue.doubleValue : detail.amount.decimalValue.doubleValue,
                                                      shielded: detail.shielded,
                                                      sent: detail.isOutbound,
                                                      formatValue: formatAmount) :
-            self.failedFooterWithValue(detail.zecAmount,
+            self.failedFooterWithValue(detail.amount.decimalValue.doubleValue,
                                        shielded: detail.shielded,
                                        formatValue: formatAmount)
     }
@@ -271,7 +271,7 @@ struct TransactionDetails_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             ZcashBackground()
-            TransactionDetails(detail: DetailModel(id: "fasdfasdf", date: Date(), zecAmount: 4.32, status: .received, subtitle: "fasdfasd"))
+            TransactionDetails(detail: DetailModel(id: "fasdfasdf", date: Date(), amount: Zatoshi(432_000_000), status: .received, subtitle: "fasdfasd"))
         }
     }
 }

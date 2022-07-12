@@ -418,11 +418,11 @@ extension ZECCWalletEnvironment {
     }
     
     private func sufficientFunds(availableBalance: Int64, zatoshiToSend: Int64) -> Bool {
-        availableBalance - zatoshiToSend  - Int64(ZCASH_NETWORK.constants.defaultFee()) >= 0
+        availableBalance - zatoshiToSend  - Int64(ZCASH_NETWORK.constants.defaultFee().amount) >= 0
     }
     
     static var minerFee: Double {
-        Int64(ZCASH_NETWORK.constants.defaultFee()).asHumanReadableZecBalance()
+        ZCASH_NETWORK.constants.defaultFee().decimalValue.doubleValue
     }
     
     func credentialsAlreadyPresent() -> Bool {
@@ -430,11 +430,11 @@ extension ZECCWalletEnvironment {
     }
     
     func getShieldedVerifiedBalance() -> Int64 {
-        self.synchronizer.initializer.getVerifiedBalance()
+        self.synchronizer.initializer.getVerifiedBalance().amount
     }
     
     func getShieldedBalance() -> Int64 {
-        self.synchronizer.initializer.getBalance()
+        self.synchronizer.initializer.getBalance().amount
     }
     
     func getShieldedAddress() -> String? {

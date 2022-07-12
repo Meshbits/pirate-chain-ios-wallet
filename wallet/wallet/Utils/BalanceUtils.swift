@@ -20,22 +20,25 @@ extension Int64 {
 
 extension Double {
     
-    
-    static var defaultNetworkFee: Double = ZCASH_NETWORK.constants.defaultFee().asHumanReadableZecBalance()
-    
     func toZatoshi() -> Int64 {
         var decimal = Decimal(self) * Decimal(ZcashSDK.zatoshiPerZEC)
         var rounded = Decimal()
         NSDecimalRound(&rounded, &decimal, 6, .bankers)
         return (rounded as NSDecimalNumber).int64Value
     }
-    // Absolute value + network fee
-    func addingZcashNetworkFee(_ fee: Double = Self.defaultNetworkFee) -> Double {
-        abs(self) + fee
-    }
     
     func toZecAmount() -> String {
         NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
+}
+
+extension Zatoshi {
+
+    static var defaultNetworkFee: Zatoshi = ZCASH_NETWORK.constants.defaultFee()
+
+    // Absolute value + network fee
+    func addingZcashNetworkFee(_ fee: Zatoshi = Self.defaultNetworkFee) -> Zatoshi {
+        Zatoshi(abs(self.amount)) + fee
     }
 }
 

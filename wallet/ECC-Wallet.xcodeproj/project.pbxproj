@@ -16,6 +16,9 @@
 		0D0565DC24EC89C200B6AAE8 /* LittleViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0565D524EC89C200B6AAE8 /* LittleViews.swift */; };
 		0D0565DD24EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0565D624EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift */; };
 		0D0565DE24EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0565D624EC89C200B6AAE8 /* HeaderFooterTxDetailView.swift */; };
+		0D099CD7286DDC2200A14E11 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D099CD6286DDC2200A14E11 /* ZcashLightClientKit */; };
+		0D099CD9286DEF4200A14E11 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D099CD8286DEF4200A14E11 /* ZcashLightClientKit */; };
+		0D099CDB286DEF5100A14E11 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D099CDA286DEF5100A14E11 /* ZcashLightClientKit */; };
 		0D0AAE0F2410237A009CD8F9 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0AAE0E24102379009CD8F9 /* LottieAnimation.swift */; };
 		0D0AAE1124102380009CD8F9 /* SyncingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0AAE1024102380009CD8F9 /* SyncingButton.swift */; };
 		0D0AAE15241048B4009CD8F9 /* FundsAtRisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0AAE14241048B4009CD8F9 /* FundsAtRisk.swift */; };
@@ -398,9 +401,6 @@
 		0DF3075524DB4A440080B0CF /* lottie_sending.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3075224DB4A440080B0CF /* lottie_sending.json */; };
 		0DF3075624DB4A440080B0CF /* lottie_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3075324DB4A440080B0CF /* lottie_success.json */; };
 		0DF3075724DB4A440080B0CF /* lottie_success.json in Resources */ = {isa = PBXBuildFile; fileRef = 0DF3075324DB4A440080B0CF /* lottie_success.json */; };
-		0DF95372283DB5F20080F118 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DF95371283DB5F20080F118 /* ZcashLightClientKit */; };
-		0DF95374283DB6B30080F118 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DF95373283DB6B30080F118 /* ZcashLightClientKit */; };
-		0DF95376283DB6C90080F118 /* ZcashLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0DF95375283DB6C90080F118 /* ZcashLightClientKit */; };
 		0DFC0CF123C7787F0009DD7E /* ZcashHoldToSendButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC0CF023C7787F0009DD7E /* ZcashHoldToSendButton.swift */; };
 		0DFC0CF323C8EA1C0009DD7E /* ZcashCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC0CF223C8EA1C0009DD7E /* ZcashCloseButton.swift */; };
 		8D3F362524A40FCF0087687A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D3F362724A40FCF0087687A /* Localizable.strings */; };
@@ -614,7 +614,7 @@
 				0D90D59D2813293F0097FAAD /* Bugsnag in Frameworks */,
 				0D90D5A9281329A30097FAAD /* combine-urlsession-downloader in Frameworks */,
 				0D90D5A7281329920097FAAD /* MnemonicSwift in Frameworks */,
-				0DF95372283DB5F20080F118 /* ZcashLightClientKit in Frameworks */,
+				0D099CD7286DDC2200A14E11 /* ZcashLightClientKit in Frameworks */,
 				0D90D5A1281329610097FAAD /* zealous-logger in Frameworks */,
 				0D90D572281323BC0097FAAD /* KeychainSwift in Frameworks */,
 				0D90D5AB281329B30097FAAD /* Mixpanel in Frameworks */,
@@ -644,7 +644,7 @@
 				0D90D575281323D20097FAAD /* KeychainSwift in Frameworks */,
 				0D90D586281326670097FAAD /* TinyQRScanner in Frameworks */,
 				0D90D57B281324270097FAAD /* MnemonicSwift in Frameworks */,
-				0DF95376283DB6C90080F118 /* ZcashLightClientKit in Frameworks */,
+				0D099CD9286DEF4200A14E11 /* ZcashLightClientKit in Frameworks */,
 				0D90D57E281324540097FAAD /* combine-urlsession-downloader in Frameworks */,
 				0D90D56F281323920097FAAD /* Lottie in Frameworks */,
 			);
@@ -657,7 +657,7 @@
 				0D90D5942813288F0097FAAD /* KeychainSwift in Frameworks */,
 				0D90D5962813289C0097FAAD /* MnemonicSwift in Frameworks */,
 				0D90D58C281327580097FAAD /* Mixpanel in Frameworks */,
-				0DF95374283DB6B30080F118 /* ZcashLightClientKit in Frameworks */,
+				0D099CDB286DEF5100A14E11 /* ZcashLightClientKit in Frameworks */,
 				0D90D59B281328F70097FAAD /* TinyQRScanner in Frameworks */,
 				0D90D589281326FA0097FAAD /* Bugsnag in Frameworks */,
 				0D90D5922813286D0097FAAD /* combine-urlsession-downloader in Frameworks */,
@@ -1005,7 +1005,7 @@
 				0D90D5A6281329920097FAAD /* MnemonicSwift */,
 				0D90D5A8281329A30097FAAD /* combine-urlsession-downloader */,
 				0D90D5AA281329B30097FAAD /* Mixpanel */,
-				0DF95371283DB5F20080F118 /* ZcashLightClientKit */,
+				0D099CD6286DDC2200A14E11 /* ZcashLightClientKit */,
 			);
 			productName = wallet;
 			productReference = 0D1250FF23B557E40014EE3A /* ECC Wallet.app */;
@@ -1072,7 +1072,7 @@
 				0D90D57A281324270097FAAD /* MnemonicSwift */,
 				0D90D57D281324540097FAAD /* combine-urlsession-downloader */,
 				0D90D585281326670097FAAD /* TinyQRScanner */,
-				0DF95375283DB6C90080F118 /* ZcashLightClientKit */,
+				0D099CD8286DEF4200A14E11 /* ZcashLightClientKit */,
 			);
 			productName = wallet;
 			productReference = 0DCDFFE624B6722B000F6999 /* ECC-Wallet-no-logs.app */;
@@ -1102,7 +1102,7 @@
 				0D90D5952813289C0097FAAD /* MnemonicSwift */,
 				0D90D598281328D20097FAAD /* zealous-logger */,
 				0D90D59A281328F70097FAAD /* TinyQRScanner */,
-				0DF95373283DB6B30080F118 /* ZcashLightClientKit */,
+				0D099CDA286DEF5100A14E11 /* ZcashLightClientKit */,
 			);
 			productName = wallet;
 			productReference = 0DE303C4263A158400CF877A /* ECC-Wallet-Testnet.app */;
@@ -1154,7 +1154,7 @@
 				0D90D587281326FA0097FAAD /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
 				0D90D58A281327580097FAAD /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 				0D90D597281328D20097FAAD /* XCRemoteSwiftPackageReference "zealous-logger" */,
-				0DF95370283DB5F20080F118 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */,
+				0D099CD5286DDC2200A14E11 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */,
 			);
 			productRefGroup = 0D12510023B557E40014EE3A /* Products */;
 			projectDirPath = "";
@@ -1917,7 +1917,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
@@ -1944,7 +1944,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
 				ENABLE_BITCODE = NO;
@@ -2054,7 +2054,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
@@ -2081,7 +2081,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
 				ENABLE_BITCODE = NO;
@@ -2107,7 +2107,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
@@ -2134,7 +2134,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 131;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
 				ENABLE_BITCODE = NO;
@@ -2214,6 +2214,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0D099CD5286DDC2200A14E11 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zcash/ZcashLightClientKit/";
+			requirement = {
+				kind = exactVersion;
+				version = "0.15.0-beta";
+			};
+		};
 		0D90D56D281323920097FAAD /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -2278,17 +2286,24 @@
 				kind = branch;
 			};
 		};
-		0DF95370283DB5F20080F118 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/zcash/ZcashLightClientKit/";
-			requirement = {
-				kind = exactVersion;
-				version = "0.14.0-beta";
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0D099CD6286DDC2200A14E11 /* ZcashLightClientKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D099CD5286DDC2200A14E11 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
+			productName = ZcashLightClientKit;
+		};
+		0D099CD8286DEF4200A14E11 /* ZcashLightClientKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D099CD5286DDC2200A14E11 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
+			productName = ZcashLightClientKit;
+		};
+		0D099CDA286DEF5100A14E11 /* ZcashLightClientKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D099CD5286DDC2200A14E11 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
+			productName = ZcashLightClientKit;
+		};
 		0D90D56E281323920097FAAD /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0D90D56D281323920097FAAD /* XCRemoteSwiftPackageReference "lottie-ios" */;
@@ -2393,21 +2408,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D90D58A281327580097FAAD /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
 			productName = Mixpanel;
-		};
-		0DF95371283DB5F20080F118 /* ZcashLightClientKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0DF95370283DB5F20080F118 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
-			productName = ZcashLightClientKit;
-		};
-		0DF95373283DB6B30080F118 /* ZcashLightClientKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0DF95370283DB5F20080F118 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
-			productName = ZcashLightClientKit;
-		};
-		0DF95375283DB6C90080F118 /* ZcashLightClientKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0DF95370283DB5F20080F118 /* XCRemoteSwiftPackageReference "ZcashLightClientKit" */;
-			productName = ZcashLightClientKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
