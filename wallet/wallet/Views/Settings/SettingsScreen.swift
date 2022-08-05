@@ -108,7 +108,7 @@ struct SettingsScreen: View {
                         .modifier(SettingsSectionBackgroundModifier())
                         
                      
-                        if UserSettings.shared.isEnableSoundSettings {
+                        if !UserSettings.shared.isEnableSoundSettings {
                             SettingsSectionHeaderView(aTitle:"Sound Settings".localized())
                             Text("This setting controls the volume of background music while your wallet is syncing with the blockchain network.")
                                 .multilineTextAlignment(.leading)

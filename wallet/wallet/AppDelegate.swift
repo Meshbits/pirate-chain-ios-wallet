@@ -92,14 +92,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func defaultsForBackgroundSoundSettings(){
         let userDefaults = UserDefaults.standard
 
-        if userDefaults.bool(forKey: "didWeInstallItBefore") == false {
+        if userDefaults.bool(forKey: "didWeInstallItAlready") == false {
 
                // updating the local flag
-               userDefaults.set(true, forKey: "didWeInstallItBefore")
+               userDefaults.set(true, forKey: "didWeInstallItAlready")
                userDefaults.synchronize() // forces the app to update the NSUserDefaults
 
                UserSettings.shared.isBackgroundSoundEnabled = true
-               UserSettings.shared.mBackgroundSoundVolume = 0.1
+               UserSettings.shared.mBackgroundSoundVolume = 0.05
                return
        }
     }
