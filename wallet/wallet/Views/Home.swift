@@ -54,8 +54,8 @@ final class HomeViewModel: ObservableObject {
     @Published var syncStatus: SyncStatus = .disconnected
     @Published var totalBalance: Double = 0
     @Published var verifiedBalance: Double = 0
-    @Published var shieldedBalance = ReadableBalance.zero
-    @Published var transparentBalance = ReadableBalance.zero
+    @Published var shieldedBalance = WalletBalance.zero
+    @Published var transparentBalance = WalletBalance.zero
     @Published var overlayType: OverlayType? = nil
     @Published var isOverlayShown = false
     @Published var pushDestination: PushDestination?
@@ -92,13 +92,11 @@ final class HomeViewModel: ObservableObject {
         
         environment.synchronizer.transparentBalance
             .receive(on: DispatchQueue.main)
-            .map({ return ReadableBalance(walletBalance: $0) })
             .assign(to: \.transparentBalance, on: self)
             .store(in: &environmentCancellables)
         
         environment.synchronizer.shieldedBalance
             .receive(on: DispatchQueue.main)
-            .map({ return ReadableBalance(walletBalance: $0) })
             .assign(to: \.shieldedBalance, on: self)
             .store(in: &environmentCancellables)
         
@@ -269,8 +267,18 @@ struct Home: View {
             
         case .downloading(let progress):
             SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
-                Text("Downloading \(Int(progress.progress * 100))%")
-                    .foregroundColor(.white)
+                if progress.targetHeight > 0 {
+                    Text("Downloading ")
+                        .foregroundColor(.white)
+                    + Text("\(progress.progressHeight) / \(progress.targetHeight)")
+                        .foregroundColor(.white)
+                        .font(.system(.body, design: .default).monospacedDigit())
+                } else {
+                    Text("Downloading \(Int(progress.progress * 100))%")
+                        .foregroundColor(.white)
+                        .font(.system(.body, design: .default).monospacedDigit())
+                }
+
             }
             .frame(width: 100, height: buttonHeight)
             
@@ -281,8 +289,18 @@ struct Home: View {
                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: .zButtonGradient)))
         case .scanning(let scanProgress):
             SyncingButton(animationType: .frameProgress(startFrame: 101, endFrame: 187,  progress: scanProgress.progress, loop: false)) {
-                Text("Scanning \(Int(scanProgress.progress * 100 ))%")
-                    .foregroundColor(.white)
+                if scanProgress.targetHeight > 0 {
+                    Text("Scanning ")
+                        .foregroundColor(.white)
+                    + Text("\(scanProgress.progressHeight) / \(scanProgress.targetHeight)")
+                        .foregroundColor(.white)
+                        .font(.system(.body, design: .default).monospacedDigit())
+
+                } else {
+                    Text("Scanning \(Int(scanProgress.progress * 100 ))%")
+                        .foregroundColor(.white)
+                        .font(.system(.body, design: .default).monospacedDigit())
+                }
             }
             .frame(width: 100, height: buttonHeight)
         case .enhancing(let enhanceProgress):
@@ -341,9 +359,6 @@ struct Home: View {
                         if pushed {
                             self.startSendFlow()
                         }
-//                        else {
-//                            self.endSendFlow()
-//                        }
                     }
                     .disabled(!canSend)
                     .opacity(canSend ? 1 : 0.6)
@@ -357,7 +372,7 @@ struct Home: View {
     }
     
     var isSendingEnabled: Bool {
-        appEnvironment.synchronizer.syncStatus.value.isSynced && self.viewModel.shieldedBalance.verified > 0
+        appEnvironment.synchronizer.syncStatus.value.isSynced && self.viewModel.shieldedBalance.verified.amount > 0
     }
     
     func startSendFlow() {
@@ -384,18 +399,19 @@ struct Home: View {
     }
     
     var isAmountValid: Bool {
-        self.viewModel.sendZecAmount > 0 && self.viewModel.sendZecAmount < self.viewModel.shieldedBalance.verified
+        self.viewModel.sendZecAmount > 0 && self.viewModel.sendZecAmount < self.viewModel.shieldedBalance.verified.decimalValue.doubleValue
         
     }
     
     var canSend: Bool {
         isSendingEnabled && isAmountValid
     }
-    @ViewBuilder func balanceView(shieldedBalance: ReadableBalance, transparentBalance: ReadableBalance) -> some View {
+
+    @ViewBuilder func balanceView(shieldedBalance: WalletBalance, transparentBalance: WalletBalance) -> some View {
         if shieldedBalance.isThereAnyBalance || transparentBalance.isThereAnyBalance {
-            BalanceDetail(availableZec: shieldedBalance.verified,
+            BalanceDetail(availableZec: shieldedBalance.verified.decimalValue.doubleValue,
                           transparentFundsAvailable: transparentBalance.isThereAnyBalance,
-                          status: appEnvironment.balanceStatus)
+                          status: BalanceStatus.from(shieldedBalance: shieldedBalance))
         } else {
             ActionableMessage(message: "balance_nofunds".localized())
         }
@@ -420,8 +436,13 @@ struct Home: View {
     var body: some View {
         ZStack {            
             NavigationLink(
-                destination: WalletBalanceBreakdown()
-                    .environmentObject(ModelFlyWeight.shared.modelBy(defaultValue: WalletBalanceBreakdownViewModel())),
+                destination: LazyView(
+                    WalletBalanceBreakdown(
+                        model: ModelFlyWeight.shared.modelBy(
+                            defaultValue: WalletBalanceBreakdownViewModel()
+                        )
+                    )
+                ),
                 tag: HomeViewModel.PushDestination.balance,
                 selection: $viewModel.pushDestination,
                 label: { EmptyView()} )
@@ -474,7 +495,7 @@ struct Home: View {
                                 .foregroundColor(.white)
                                 .opacity(self.isSendingEnabled ? 1 : 0.4)
                                 .onLongPressGesture {
-                                    self.viewModel.setAmount(self.viewModel.shieldedBalance.verified)
+                                    self.viewModel.setAmount(self.viewModel.shieldedBalance.verified.decimalValue.doubleValue)
                                 }
                         },
                         trailingItem: {
@@ -641,12 +662,12 @@ extension Home {
 }
 
 
-extension ReadableBalance {
+extension WalletBalance {
     var isThereAnyBalance: Bool {
-        verified > 0 || total > 0
+        verified.amount > 0 || total.amount > 0
     }
     
     var isSpendable: Bool {
-        verified > 0
+        verified.amount > 0
     }
 }

@@ -26,8 +26,7 @@ class CombineSynchronizer {
     var minedTransaction = PassthroughSubject<PendingTransactionEntity,Never>()
     var shieldedBalance: CurrentValueSubject<WalletBalance, Never>
     var transparentBalance: CurrentValueSubject<WalletBalance, Never>
-    var balance: CurrentValueSubject<Double,Never>
-    var verifiedBalance: CurrentValueSubject<Double,Never>
+
     var cancellables = [AnyCancellable]()
     var errorPublisher = PassthroughSubject<Error, Never>()
     
@@ -100,11 +99,9 @@ class CombineSynchronizer {
         self.walletDetailsBuffer = CurrentValueSubject([DetailModel]())
         self.synchronizer = try SDKSynchronizer(initializer: initializer)
         self.syncStatus = CurrentValueSubject(.disconnected)
-        self.balance = CurrentValueSubject(0)
         self.shieldedBalance = CurrentValueSubject(WalletBalance(verified: .zero, total: .zero))
         let transparentSubject = CurrentValueSubject<WalletBalance, Never>(WalletBalance(verified: .zero, total: .zero))
         self.transparentBalance = transparentSubject
-        self.verifiedBalance = CurrentValueSubject(0)
         self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.saplingActivationHeight)
         self.connectionState = CurrentValueSubject(self.synchronizer.connectionState)
         
@@ -112,35 +109,46 @@ class CombineSynchronizer {
         
         NotificationCenter.default.publisher(for: .synchronizerSynced)
             .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] _ in
-            guard let self = self else { return }
-                self.updatePublishers()
-        }).store(in: &cancellables)
+            .sink(receiveValue: { [weak self] notification in
+                guard let self = self else { return }
+                guard let userInfo = notification.userInfo else {
+                    logger.error("Received `.synchronizerSynced` but the userInfo is empty")
+                    self.updatePublishers()
+                    return
+                }
+                
+                guard let synchronizerState = userInfo[SDKSynchronizer.NotificationKeys.synchronizerState] as? SDKSynchronizer.SynchronizerState else {
+                    logger.error("Received `.synchronizerSynced` but the userInfo is empty")
+                    self.updatePublishers()
+                    return
+                }
+                self.updatePublishers(with: synchronizerState)
+            }).store(in: &cancellables)
         
         
         NotificationCenter.default.publisher(for: .synchronizerMinedTransaction)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] minedNotification in
-            guard let self = self else { return }
-            guard let minedTx = minedNotification.userInfo?[SDKSynchronizer.NotificationKeys.minedTransaction] as? PendingTransactionEntity else { return }
-            self.minedTransaction.send(minedTx)
-        }).store(in: &cancellables)
+                guard let self = self else { return }
+                guard let minedTx = minedNotification.userInfo?[SDKSynchronizer.NotificationKeys.minedTransaction] as? PendingTransactionEntity else { return }
+                self.minedTransaction.send(minedTx)
+            }).store(in: &cancellables)
         
         NotificationCenter.default.publisher(for: .synchronizerFailed)
             .receive(on: DispatchQueue.main)
             .sink {[weak self] (notification) in
-            
-            guard let self = self else { return }
-            
-            guard let error = notification.userInfo?[SDKSynchronizer.NotificationKeys.error] as? Error else {
-                self.errorPublisher.send(WalletError.genericErrorWithMessage(message: "An error ocurred, but we can't figure out what it is. Please check device logs for more details")
-                )
-                return
-            }
+
+                guard let self = self else { return }
+
+                guard let error = notification.userInfo?[SDKSynchronizer.NotificationKeys.error] as? Error else {
+                    self.errorPublisher.send(WalletError.genericErrorWithMessage(message: "An error ocurred, but we can't figure out what it is. Please check device logs for more details")
+                    )
+                    return
+                }
                 
-            self.errorPublisher.send(error)
-        }.store(in: &cancellables)
-            
+                self.errorPublisher.send(error)
+            }.store(in: &cancellables)
+
         Publishers.Merge(NotificationCenter.default.publisher(for: .blockProcessorStatusChanged), NotificationCenter.default.publisher(for: .blockProcessorUpdated))
             .receive(on: DispatchQueue.main)
             .compactMap { n -> SyncStatus? in
@@ -168,8 +176,8 @@ class CombineSynchronizer {
                 self?.syncStatus.send(status)
             })
             .store(in: &cancellables)
-            
-            
+
+
         NotificationCenter.default.publisher(for: .blockProcessorUpdated)
             .receive(on: DispatchQueue.main)
             .map { notification -> CompactBlockProgress? in
@@ -183,11 +191,11 @@ class CombineSynchronizer {
                 
                 return progress
             }
-            
+
             .compactMap({ progress -> SyncStatus? in
                 
                 switch progress {
-                
+
                 case .download(let progressReport):
                     return SyncStatus.downloading(progressReport)
                 case .validate:
@@ -206,7 +214,7 @@ class CombineSynchronizer {
                 self?.syncStatus.send(status)
             })
             .store(in: &cancellables)
-            
+
         NotificationCenter.default.publisher(for: .synchronizerConnectionStateChanged)
             .compactMap { notification -> ConnectionState? in
                 guard let connectionState = notification.userInfo?[SDKSynchronizer.NotificationKeys.currentConnectionState] as? ConnectionState else {
@@ -219,16 +227,6 @@ class CombineSynchronizer {
                 self?.connectionState.send(value)
             })
             .store(in: &cancellables)
-        
-        NotificationCenter.default.publisher(for: .blockProcessorFinished)
-            .compactMap { n -> BlockHeight? in
-                n.userInfo?[CompactBlockProcessorNotificationKey.latestScannedBlockHeight] as? BlockHeight
-            }
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] value in
-                self?.syncBlockHeight.send(value)
-            })
-            .store(in: &cancellables)
     }
     
     func prepare() throws {
@@ -236,7 +234,8 @@ class CombineSynchronizer {
             throw SynchronizerError.initFailed(message: "unable to derive unified address. this is probably a programming error")
         }
         do {
-            self.unifiedAddress = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveUnifiedAddressFromUnifiedViewingKey(uvk)
+            let derivationTool = DerivationTool(networkType: ZCASH_NETWORK.networkType)
+            self.unifiedAddress = try derivationTool.deriveUnifiedAddressFromUnifiedViewingKey(uvk)
         } catch {
             throw SynchronizerError.initFailed(message: "unable to derive unified address: \(error.localizedDescription)")
         }
@@ -271,7 +270,20 @@ class CombineSynchronizer {
     func rewind(_ policy: RewindPolicy) throws {
         try synchronizer.rewind(policy)
     }
-    
+
+    func updatePublishers(with state: SDKSynchronizer.SynchronizerState) {
+        self.transparentBalance.send(state.transparentBalance)
+        self.shieldedBalance.send(state.shieldedBalance)
+        self.syncStatus.send(state.syncStatus)
+        self.syncBlockHeight.send(state.latestScannedHeight)
+        self.walletDetails.sink(receiveCompletion: { _ in
+            }) { [weak self] (details) in
+                guard !details.isEmpty else { return }
+                self?.walletDetailsBuffer.send(details)
+        }
+        .store(in: &self.cancellables)
+    }
+
     func updatePublishers() {
         if let ua = self.unifiedAddress,
            let tBalance = try? synchronizer.getTransparentBalance(address: ua.tAddress) {
@@ -284,10 +296,6 @@ class CombineSynchronizer {
         let shieldedTotalBalance: Zatoshi = synchronizer.getShieldedBalance(accountIndex: 0)
         
         self.shieldedBalance.send(WalletBalance(verified: shieldedVerifiedBalance, total: shieldedTotalBalance))
-        
-        self.balance.send(initializer.getBalance().decimalValue.doubleValue)
-        self.verifiedBalance.send(initializer.getVerifiedBalance().decimalValue.doubleValue)
-
         self.syncStatus.send(synchronizer.status)
         self.walletDetails.sink(receiveCompletion: { _ in
             }) { [weak self] (details) in

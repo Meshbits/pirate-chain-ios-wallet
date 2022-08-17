@@ -14,7 +14,7 @@ class WalletDetailsViewModel: ObservableObject {
     @Published var items = [DetailModel]()
 
     var showError = false
-    var balance: Double = 0
+    @Published var balance: WalletBalance = .zero
     private var synchronizerEvents = Set<AnyCancellable>()
     private var internalEvents = Set<AnyCancellable>()
     init(){
@@ -34,11 +34,9 @@ class WalletDetailsViewModel: ObservableObject {
             })
             .store(in: &synchronizerEvents)
         
-        ZECCWalletEnvironment.shared.synchronizer.balance
+        ZECCWalletEnvironment.shared.synchronizer.shieldedBalance
             .receive(on: RunLoop.main)
-            .sink(receiveValue: { [weak self] (b) in
-                self?.balance = b
-            })
+            .assign(to: \.balance, on: self)
             .store(in: &synchronizerEvents)
     }
     
@@ -47,15 +45,6 @@ class WalletDetailsViewModel: ObservableObject {
             c.cancel()
         }
         synchronizerEvents.removeAll()
-    }
-    var balanceStatus: BalanceStatus {
-        let status = ZECCWalletEnvironment.shared.balanceStatus
-        switch status {
-        case .available(_):
-            return .available(showCaption: false)
-        default:
-            return status
-        }
     }
     
     var zAddress: String {
@@ -69,14 +58,11 @@ struct WalletDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var isActive: Bool
     @State var selectedModel: DetailModel? = nil
+
     var zAddress: String {
         viewModel.zAddress
     }
-    
-    var status: BalanceStatus {
-        viewModel.balanceStatus
-    }
-    
+
     var body: some View {
         
         ZStack {
@@ -94,8 +80,8 @@ struct WalletDetails: View {
                     },
                    headerItem: {
                         BalanceDetail(
-                            availableZec: appEnvironment.synchronizer.verifiedBalance.value,
-                            status: status)
+                            availableZec: $viewModel.balance.wrappedValue.verified.decimalValue.doubleValue,
+                            status: balanceStatus($viewModel.balance.wrappedValue))
                             
                     },
                    trailingItem: { EmptyView() }
@@ -135,7 +121,6 @@ struct WalletDetails: View {
             }
         }
         .onAppear() {
-            
             UITableView.appearance().separatorStyle = .none
             UITableView.appearance().backgroundColor = UIColor.clear
             tracker.track(.screen(screen: .history), properties: [:])
@@ -156,6 +141,16 @@ struct WalletDetails: View {
             TxDetailsWrapper(row: row)
         }
 
+    }
+
+    func balanceStatus(_ balance: WalletBalance) -> BalanceStatus {
+        let status = BalanceStatus.from(shieldedBalance: balance)
+        switch status {
+        case .available(_):
+            return .available(showCaption: false)
+        default:
+            return status
+        }
     }
 }
 

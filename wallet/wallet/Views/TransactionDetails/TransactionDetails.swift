@@ -92,9 +92,10 @@ struct TransactionDetails: View {
 
 extension DetailModel {
     var defaultFee: Int64 {
-        ZCASH_NETWORK.constants.defaultFee(for: self.minedHeight > 0 ? self.minedHeight : (self.expirationHeight > 0 ? self.expirationHeight : BlockHeight.max))
+        ZCASH_NETWORK.constants.defaultFee(for: self.minedHeight > 0 ? self.minedHeight : (self.expirationHeight > 0 ? self.expirationHeight : BlockHeight.max)).amount
     }
 }
+
 struct SubwayPathBuilder {
     static func buildSubway(detail: DetailModel, expandMemo: Binding<Bool>) -> some View {
         var views = [AnyView]()
@@ -131,7 +132,6 @@ struct SubwayPathBuilder {
                     PasteboardAlertHelper.shared.copyToPasteBoard(value: memo, notify: "feedback_addresscopied".localized())
                 }) {
                     WithAMemoView(expanded: expandMemo, memo: detail.memo ?? "")
-                    
                 }
                     .eraseToAnyView()
             )

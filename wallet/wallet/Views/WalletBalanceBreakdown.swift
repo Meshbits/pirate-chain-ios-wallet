@@ -45,13 +45,13 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
     }
     
     @Published var status: Status = .idle
-    @Published var transparentBalance = ReadableBalance.zero
-    @Published var shieldedBalance = ReadableBalance.zero
+    @Published var transparentBalance = WalletBalance.zero
+    @Published var shieldedBalance = WalletBalance.zero
     @Published var seeDetailsActive: DetailModel? = nil
     @Published var alertType: AlertType? = nil
     
     var unconfirmedFunds: Double {
-        transparentBalance.unconfirmedFunds + shieldedBalance.unconfirmedFunds
+        (transparentBalance.unconfirmedFunds + shieldedBalance.unconfirmedFunds).decimalValue.doubleValue
     }
     var appEnvironment = ZECCWalletEnvironment.shared
     
@@ -60,12 +60,10 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
     
     init() {
         self.appEnvironment.synchronizer.transparentBalance.receive(on: DispatchQueue.main)
-            .map({ return ReadableBalance(walletBalance: $0)})
             .assign(to: \.transparentBalance , on: self)
             .store(in: &cancellables)
         
         self.appEnvironment.synchronizer.shieldedBalance.receive(on: DispatchQueue.main)
-            .map({ return ReadableBalance(walletBalance: $0) })
             .assign(to: \.shieldedBalance , on: self)
             .store(in: &cancellables)
     }
@@ -73,7 +71,7 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
     var isShieldingButtonEnabled: Bool {
         switch status {
         case .idle:
-            return transparentBalance.verified >= ZECCWalletEnvironment.autoShieldingThresholdInZatoshi.asHumanReadableZecBalance()
+            return transparentBalance.verified.amount >= ZECCWalletEnvironment.autoShieldingThresholdInZatoshi
         default:
             return false
         }
@@ -128,7 +126,7 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
 }
 
 struct WalletBalanceBreakdown: View {
-    @EnvironmentObject var model: WalletBalanceBreakdownViewModel
+    @StateObject var model: WalletBalanceBreakdownViewModel
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.walletEnvironment) var appEnvironment
     @State var latestHeight: BlockHeight = ZECCWalletEnvironment.shared.synchronizer.syncBlockHeight.value
@@ -253,7 +251,7 @@ struct WalletBalanceBreakdown: View {
 
 struct WalletBalanceDetail_Previews: PreviewProvider {
     static var previews: some View {
-        WalletBalanceBreakdown()
+        WalletBalanceBreakdown(model: WalletBalanceBreakdownViewModel())
     }
 }
 
@@ -261,5 +259,12 @@ struct WalletBalanceDetail_Previews: PreviewProvider {
 extension ZECCWalletEnvironment {
     static var thresholdInZec: String {
         String(Double(ZECCWalletEnvironment.autoShieldingThresholdInZatoshi) / Double(ZcashSDK.zatoshiPerZEC))
+    }
+}
+
+
+extension WalletBalance {
+    var unconfirmedFunds: Zatoshi {
+        total - verified
     }
 }

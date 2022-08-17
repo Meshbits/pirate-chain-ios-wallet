@@ -29,7 +29,7 @@ struct TabSelector<Content: View>: View {
     @Binding var selectedTabIndex: Int
     var body: some View {
         HStack(spacing: 2) {
-            ForEach(tabs.indices) { tabIndex in
+            ForEach(tabs.indices, id: \.self) { tabIndex in
                 Button(action: {
                     self.selectedTabIndex = tabIndex
                 }, label: {

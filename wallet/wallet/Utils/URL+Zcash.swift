@@ -25,6 +25,9 @@ extension URL {
     }
 
     static func pendingDbURL() throws -> URL {
+        // FIX: this is using the wrong DB name which is not that serious because the Pending DB is purged
+        // now and then and it's information is discarded when the transaction is found on chain
+        // see https://github.com/zcash/zcash-ios-wallet/issues/309
         try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.defaultCacheDbName+ZcashSDK.defaultPendingDbName)
     }
 

@@ -28,7 +28,13 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     @Published var state: WalletState
     
-    let endpoint = LightWalletEndpoint(address: ZcashSDK.isMainnet ? "lightwalletd.electriccoin.co" : "lightwalletd.testnet.electriccoin.co", port: 9067, secure: true)
+    let endpoint = LightWalletEndpoint(
+        address: ZcashSDK.isMainnet ? "lightwalletd.electriccoin.co" : "lightwalletd.testnet.electriccoin.co",
+        port: 9067,
+        secure: true,
+        streamingCallTimeoutInMillis: 10 * 60 * 60 * 1000 // ten hours
+    )
+
     var dataDbURL: URL
     var cacheDbURL: URL
     var pendingDbURL: URL
@@ -111,9 +117,9 @@ final class ZECCWalletEnvironment: ObservableObject {
         do {
             let randomPhrase = try MnemonicSeedProvider.default.randomMnemonic()
             
-            let birthday = WalletBirthday.birthday(with: BlockHeight.max, network: ZCASH_NETWORK)
+            let birthday = BlockHeight.ofLatestCheckpoint(network: ZCASH_NETWORK)
             
-            try SeedManager.default.importBirthday(birthday.height)
+            try SeedManager.default.importBirthday(birthday)
             try SeedManager.default.importPhrase(bip39: randomPhrase)
             try self.initialize()
         
@@ -201,8 +207,6 @@ final class ZECCWalletEnvironment: ObservableObject {
         }
         
     }
-    
-    
     
     static func mapError(error: Error) -> WalletError {
         if let walletError = error as? WalletError {

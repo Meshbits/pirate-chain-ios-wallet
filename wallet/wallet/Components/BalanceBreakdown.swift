@@ -8,20 +8,20 @@
 
 import Foundation
 import SwiftUI
-
+import ZcashLightClientKit
 
 final class BalanceBreakdownViewModel: ObservableObject {
-    var transparent = ReadableBalance.zero
-    var shielded = ReadableBalance.zero
+    var transparent: WalletBalance
+    var shielded: WalletBalance
     
-    init(shielded: ReadableBalance, transparent: ReadableBalance) {
+    init(shielded: WalletBalance, transparent: WalletBalance) {
         self.shielded = shielded
         self.transparent = transparent
     }
 }
 
 struct BalanceBreakdown: View {
-    @State var model: BalanceBreakdownViewModel
+    var model: BalanceBreakdownViewModel
     
     @ViewBuilder var shieldedZecTitle: some View {
         HStack {
@@ -45,15 +45,15 @@ struct BalanceBreakdown: View {
             ZcashBackground(backgroundColor: .black, colors: [.zBalanceBreakdownGradient1, .zBalanceBreakdownGradient1], showGradient: true)
             VStack(alignment: .center, spacing: 4, content: {
                 BreakdownItem(title: shieldedZecTitle,
-                              amount: model.shielded.total,
+                              amount: model.shielded.total.decimalValue.doubleValue,
                               backgroundColor: .zBalanceBreakdownItem0)
                 
                 BreakdownItem(title: boringTitle(localizedKey: "+ TRANSPARENT"),
-                              amount: model.transparent.total,
+                              amount: model.transparent.total.decimalValue.doubleValue,
                               backgroundColor: .zBalanceBreakdownItem1)
                 
                 BreakdownItem(title: boringTitle(localizedKey: "= TOTAL"),
-                              amount: model.transparent.total + model.shielded.total,
+                              amount: (model.transparent.total + model.shielded.total).decimalValue.doubleValue,
                               backgroundColor: .zBalanceBreakdownItem2)
                 
             })
@@ -155,7 +155,7 @@ final class AmountBreakdownViewModel: ObservableObject {
 
 struct AmountBreakdown: View {
     
-    @State var model: AmountBreakdownViewModel
+    var model: AmountBreakdownViewModel
     
     var body: some View {
         Text("$"+model.breakdown.0)

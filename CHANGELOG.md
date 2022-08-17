@@ -1,4 +1,14 @@
 # Changelog
+## 0.5.0 build 135
+* [#313] Application Hangs after Syncing on iOS 16-beta
+* [#312] Download is interrupted every 30 seconds
+* [#311] Show Download and Scanning Progress as block height
+* (origin/adopt_0.16.0) Adopt WalletBalance and Zatoshi. Remove ReadableBalance
+* Fix: warnings on ForEach
+* Remove Warning for `defaultFee()` and clean up comment and spacing
+* Mark existing issue on code
+* [#308] Memory leak on WalletBalanceBreakDownViewModel
+* [#306] Adopt ZcashLightClientKit 0.16.3-beta
 ## 0.5.0 build 128
 * Fix: t-address being displayed instead of Sapling
 * point to SDK 0.12.0-beta.5

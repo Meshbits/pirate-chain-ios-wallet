@@ -16,7 +16,7 @@ struct SendTransaction: View {
     @State var addressHelperSelection: AddressHelperView.Selection = .none 
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
     var availableBalance: Bool {
-        ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value > 0
+        ZECCWalletEnvironment.shared.availableShieldedBalance > 0
     }
     
     var addressSubtitle: String {
@@ -56,7 +56,7 @@ struct SendTransaction: View {
     
     func amountSubtitle(amount: String) -> String {
         if availableBalance,
-            let balance = NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value)),
+           let balance = NumberFormatter.zecAmountFormatter.string(from: NSNumber(value: ZECCWalletEnvironment.shared.availableShieldedBalance)),
             let amountToSend = NumberFormatter.zecAmountFormatter.number(from: flow.amount)?.doubleValue {
             if ZECCWalletEnvironment.shared.sufficientFundsToSend(amount: amountToSend) {
                 return String(format:NSLocalizedString("You Have %@ sendable ZEC", comment: ""), "\(balance)")
@@ -74,7 +74,7 @@ struct SendTransaction: View {
     
     var sufficientAmount: Bool {
         let amount = (flow.doubleAmount ??  0 )
-        return amount > 0 && amount <= ZECCWalletEnvironment.shared.synchronizer.verifiedBalance.value
+        return amount > 0 && amount <= ZECCWalletEnvironment.shared.availableShieldedBalance
     }
     
     var validForm: Bool {
@@ -287,5 +287,17 @@ struct SendTransaction: View {
 struct SendTransaction_Previews: PreviewProvider {
     static var previews: some View {
         SendTransaction()
+    }
+}
+
+fileprivate extension ZECCWalletEnvironment {
+    var availableShieldedBalance: Double {
+        ZECCWalletEnvironment.shared
+            .synchronizer
+            .shieldedBalance
+            .value
+            .verified
+            .decimalValue
+            .doubleValue
     }
 }

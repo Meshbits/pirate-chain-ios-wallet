@@ -98,18 +98,16 @@ struct BalanceDetail_Previews: PreviewProvider {
     }
 }
 
-extension ZECCWalletEnvironment {
-    var balanceStatus: BalanceStatus {
-        let verifiedBalance = self.getShieldedVerifiedBalance().asHumanReadableZecBalance()
-        let balance = self.getShieldedBalance().asHumanReadableZecBalance()
-        
-        let difference = verifiedBalance - balance
-        if difference.isZero {
+extension BalanceStatus {
+    static func from(shieldedBalance: WalletBalance) -> BalanceStatus{
+        let difference = shieldedBalance.verified - shieldedBalance.total
+
+        if difference == .zero {
             return BalanceStatus.available(showCaption: true)
-        } else if difference > 0 {
-            return BalanceStatus.expecting(zec: abs(difference))
+        } else if difference.amount > 0 {
+            return BalanceStatus.expecting(zec: abs(difference.decimalValue.doubleValue))
         } else {
-            return BalanceStatus.waiting(change: abs(difference))
+            return BalanceStatus.waiting(change: abs(difference.decimalValue.doubleValue))
         }
     }
 }

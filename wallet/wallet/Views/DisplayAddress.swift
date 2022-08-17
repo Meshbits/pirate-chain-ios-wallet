@@ -57,7 +57,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
                 VStack {
                     if chips.count <= 2 {
                         
-                        ForEach(0 ..< chips.count) { i in
+                        ForEach(0 ..< chips.count, id: \.self) { i in
                             AddressFragment(number: i + 1, word: self.chips[i])
                                 .frame(height: 24)
                         }

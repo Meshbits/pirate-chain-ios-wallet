@@ -10,7 +10,6 @@ import SwiftUI
 
 @main
 struct ECCWalletApp: App {
-//    @StateObject var environment: ZECCWalletEnvironment = ZECCWalletEnvironment.shared
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) private var phase
     init() {
