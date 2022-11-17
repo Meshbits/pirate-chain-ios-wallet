@@ -23,15 +23,19 @@ extension String {
     }
     
     var isValidShieldedAddress: Bool {
-        (try? DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidShieldedAddress(self)) ?? false
+        DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidSaplingAddress(self)
     }
     
     var isValidTransparentAddress: Bool {
-        (try? DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidTransparentAddress(self)) ?? false
+        DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidTransparentAddress(self)
     }
     
     var isValidAddress: Bool {
-        self.isValidShieldedAddress || self.isValidTransparentAddress
+        guard (try? Recipient(self, network: ZCASH_NETWORK.networkType)) != nil else {
+            return false
+        }
+
+        return true
     }
     
     /**
@@ -43,4 +47,12 @@ extension String {
             + "..."
             + String(self[self.index(self.endIndex, offsetBy: -8) ..< self.endIndex])
     }
+
+    /// This only shows an abbreviated and redacted version of the an addr for UI purposes only
+    var shortAddress: String {
+        String(self[self.startIndex ..< self.index(self.startIndex, offsetBy: 8)])
+            + "..."
+            + String(self[self.index(self.endIndex, offsetBy: -8) ..< self.endIndex])
+    }
+
 }

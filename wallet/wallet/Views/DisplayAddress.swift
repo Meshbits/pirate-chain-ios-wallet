@@ -27,7 +27,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     let qrSize: CGFloat = 200
     var accessoryContent: AccesoryContent
     
-    init(address: String, title: String, chips: Int = 8, badge: Image, @ViewBuilder accessoryContent: (() -> (AccesoryContent))) {
+    init(address: String, title: String, chips: Int = 1, badge: Image, @ViewBuilder accessoryContent: (() -> (AccesoryContent))) {
         self.address = address
         self.title = title
         self.chips = address.slice(into: chips)
@@ -36,7 +36,7 @@ struct DisplayAddress<AccesoryContent: View>: View {
     }
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20) {
+        VStack(alignment: .center, spacing: 10) {
             Text(title)
                 .foregroundColor(.white)
                 .font(.system(size: 21))
@@ -55,13 +55,16 @@ struct DisplayAddress<AccesoryContent: View>: View {
                 tracker.track(.tap(action: .copyAddress), properties: [:])
             }) {
                 VStack {
-                    if chips.count <= 2 {
+                    if chips.count == 1 {
+                        Text(address)
+                            .foregroundColor(.white)
+                            .font(.system(size: 16))
+                    } else if chips.count == 2 {
                         
                         ForEach(0 ..< chips.count, id: \.self) { i in
                             AddressFragment(number: i + 1, word: self.chips[i])
                                 .frame(height: 24)
                         }
-                        self.accessoryContent
                     } else {
                         ForEach(stride(from: 0, through: chips.count - 1, by: 2).map({ i in i}), id: \.self) { i in
                             HStack {
@@ -72,8 +75,10 @@ struct DisplayAddress<AccesoryContent: View>: View {
                             }
                         }
                     }
-                    
-                }.padding([.horizontal], 15)
+                    Spacer()
+                        .frame(height: 10)
+                    self.accessoryContent
+                }
                 .frame(minHeight: 96)
                 
             }.alert(item: self.$copyItemModel) { (p) -> Alert in
@@ -107,3 +112,6 @@ struct DisplayAddress<AccesoryContent: View>: View {
 //        DisplayAddress(address: "zs1t2scx025jsy04mqyc4x0fsyspxe86gf3t6gyfhh9qdzq2a789sc2eccslflawf2kpuvxcqfjsef")
 //    }
 //}
+
+
+

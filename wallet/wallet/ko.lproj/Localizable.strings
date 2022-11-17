@@ -62,7 +62,8 @@
 
 // Address Screen
 "address_screen" = "당신의 주소";
-"address_shielded" = "당신의 쉴드된 주소";
+"address_unified" = "통합 주소";
+"address_sapling" = "묘목 주소";
 "address_transparent" = "당신의 투명 주소";
 "feedback_addresscopied" = "주소 복사";
 "Request ZEC" = "ZEC 부탁";

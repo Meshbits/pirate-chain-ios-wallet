@@ -45,14 +45,12 @@ struct HeaderFooterFactory {
         
     }
     
-    static func accessoryArrow(sent: Bool) -> AnyView {
+   @ViewBuilder static func accessoryArrow(sent: Bool) -> some View {
         if sent {
-            return Image("outgoing_confirmed")
-                .eraseToAnyView()
+            Image("outgoing_confirmed")
         } else {
-            return Image("outgoing_confirmed")
+            Image("outgoing_confirmed")
                 .rotationEffect(Angle(degrees: 180))
-                .eraseToAnyView()
         }
     }
     static func outline(success: Bool, shielded: Bool) -> Color  {
@@ -109,7 +107,7 @@ struct HeaderFooterFactory {
                                .font(Font.zoboto(size: 36))
                                .foregroundColor(.white),
                            outline: outline(success: true, shielded: shielded),
-                           accessory: accessoryArrow(sent: sent)
+                           accessory: accessoryArrow(sent: sent).eraseToAnyView()
                        )
     }
     

@@ -13,16 +13,14 @@ enum ZcashFillStyle {
     case solid(color: Color)
     case outline(color: Color, lineWidth: CGFloat)
     
-    func fill<S: Shape>(_ s: S) -> AnyView {
+    @ViewBuilder func fill<S: Shape>(_ s: S) -> some View {
         switch self {
         case .gradient(let g):
-            return AnyView (s.fill(g))
+            s.fill(g)
         case .solid(let color):
-            return AnyView(s.fill(color))
+            s.fill(color)
         case .outline(color: let color, lineWidth: let lineWidth):
-            return AnyView(
-                s.stroke(color, lineWidth: lineWidth)
-            )
+            s.stroke(color, lineWidth: lineWidth)
         }
     }
 }
@@ -40,27 +38,23 @@ struct ZcashButtonBackground: ViewModifier {
         self.buttonShape = buttonShape
     }
     
-    func backgroundWith(geometry: GeometryProxy, backgroundShape: BackgroundShape) -> AnyView {
+    @ViewBuilder func backgroundWith(
+        geometry: GeometryProxy,
+        backgroundShape: BackgroundShape
+    ) -> some View {
         
         switch backgroundShape {
         case .chamfered(let fillStyle):
-            
-            return AnyView (
-                fillStyle.fill( ZcashChamferedButtonBackground(cornerTrim: min(geometry.size.height, geometry.size.width) / 4.0))
-            )
+            fillStyle.fill( ZcashChamferedButtonBackground(cornerTrim: min(geometry.size.height, geometry.size.width) / 4.0))
+
         case .rounded(let fillStyle):
-            return AnyView(
-                fillStyle.fill(
-                    ZcashRoundedButtonBackground()
-                )
+            fillStyle.fill(
+                ZcashRoundedButtonBackground()
             )
         case .roundedCorners(let fillStyle):
-            return AnyView(
-                fillStyle.fill(
-                    ZcashRoundCorneredButtonBackground()
-                )
+            fillStyle.fill(
+                ZcashRoundCorneredButtonBackground()
             )
-        
         }
     }
     

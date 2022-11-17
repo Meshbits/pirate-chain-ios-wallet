@@ -34,7 +34,8 @@
 
 // Address Screen
 "address_screen" = "Ваш адрес";
-"address_shielded" = "Ваш защищённый адрес";
+"address_unified" = "Ваш единый адрес";
+"address_sapling" = "Ваш sapling адрес";
 "address_transparent" = "Ваш прозрачный адрес";
 "feedback_addresscopied" = "Адрес скопирован!";
 "Request ZEC" = "Запросить сумму в ZEC";

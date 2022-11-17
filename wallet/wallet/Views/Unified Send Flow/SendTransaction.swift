@@ -15,39 +15,49 @@ struct SendTransaction: View {
     @State var sendOk = false
     @State var addressHelperSelection: AddressHelperView.Selection = .none 
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
+
     var availableBalance: Bool {
         ZECCWalletEnvironment.shared.availableShieldedBalance > 0
     }
     
     var addressSubtitle: String {
-        let environment = ZECCWalletEnvironment.shared
         guard !flow.address.isEmpty else {
             return "feedback_default".localized()
         }
-        let validShielded = environment.isValidShieldedAddress(flow.address)
-        let validTransparent = environment.isValidTransparentAddress(flow.address)
-        
-        if validShielded {
-            return subtextForValid(shielded: flow.address)
+
+        do {
+            switch try Recipient(flow.address, network: ZCASH_NETWORK.networkType) {
+            case .unified(let uAddr):
+                return subtextForValid(unified: uAddr)
+            case .sapling(let zAddr):
+                return subtextForValid(shielded: zAddr)
+            case .transparent(let tAddr):
+                return subtextForValid(transparent: tAddr)
+            }
+        } catch {
+            return "feedback_invalidaddress".localized()
         }
-        
-        if validTransparent {
-            return subtextForValid(transparent: flow.address)
-        }
-        
-        return "feedback_invalidaddress".localized()
+
     }
-    
-    func subtextForValid(shielded address: String) -> String {
-        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress == address {
+
+    func subtextForValid(unified address: UnifiedAddress) -> String {
+        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress == address {
+            return "feedback_sameaddress".localized()
+        } else {
+            return "feedback_shieldedaddress".localized()
+        }
+    }
+
+    func subtextForValid(shielded address: SaplingAddress) -> String {
+        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.saplingReceiver() == address {
             return "feedback_sameaddress".localized()
         } else {
             return "feedback_shieldedaddress".localized()
         }
     }
     
-    func subtextForValid(transparent address: String) -> String {
-        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.tAddress == address {
+    func subtextForValid(transparent address: TransparentAddress) -> String {
+        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.transparentReceiver() == address {
             return "This is your Auto Shielding address".localized()
         } else {
             return "feedback_transparentaddress".localized()
@@ -85,31 +95,35 @@ struct SendTransaction: View {
         flow.memo.count >= 0 && flow.memo.count <= charLimit
     }
     
-    var addressInBuffer: AnyView {
+    @ViewBuilder var addressInBuffer: some View {
         
         if let clipboard = UIPasteboard.general.string,
             ZECCWalletEnvironment.shared.isValidAddress(clipboard),
             clipboard.shortZaddress != nil {
                 
             if let lastUsed = UserSettings.shared.lastUsedAddress {
-                return AddressHelperView(selection: $addressHelperSelection, mode: .both(clipboard: clipboard, lastUsed: lastUsed)).eraseToAnyView()
+                AddressHelperView(selection: $addressHelperSelection, mode: .both(clipboard: clipboard, lastUsed: lastUsed))
             } else {
-                return AddressHelperView(selection: $addressHelperSelection, mode: .clipboard(address: clipboard)).eraseToAnyView()
+                 AddressHelperView(selection: $addressHelperSelection, mode: .clipboard(address: clipboard))
             }
         } else if let lastUsed = UserSettings.shared.lastUsedAddress {
-            return AddressHelperView(selection: $addressHelperSelection, mode: .lastUsed(address: lastUsed)).eraseToAnyView()
+            AddressHelperView(selection: $addressHelperSelection, mode: .lastUsed(address: lastUsed))
         } else {
-            return AnyView(EmptyView())
+            EmptyView()
         }
-        
-        
     }
+
     var charLimit: Int {
-        if flow.includeSendingAddress {
-            return ZECCWalletEnvironment.memoLengthLimit - SendFlowEnvironment.replyToAddress((ZECCWalletEnvironment.shared.getShieldedAddress() ?? "")).count
+        if flow.includeSendingAddress,
+           let recipient = try? Recipient(flow.address, network: ZCASH_NETWORK.networkType),
+           let replyTo = SendFlowEnvironment.replyToAddress(to: recipient, ownAddress: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress)
+        {
+            return ZECCWalletEnvironment.memoLengthLimit - replyTo.count
         }
+
         return ZECCWalletEnvironment.memoLengthLimit
     }
+
     var recipientActiveColor: Color {
         let address = flow.address
         if ZECCWalletEnvironment.shared.isValidShieldedAddress(address) {

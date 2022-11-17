@@ -25,19 +25,17 @@ struct ZcashTextField: View {
     
     @Binding var text: String
     
-    var accessoryView: AnyView {
+    @ViewBuilder var accessoryView: some View {
         if let img = accessoryIcon, let action = action {
-            return AnyView(
-                Button(action: {
-                    action()
-                }) {
-                    img
-                        .resizable()
-                    
-                }
-            )
+            Button(action: {
+                action()
+            }) {
+                img
+                    .resizable()
+
+            }
         } else {
-            return AnyView(EmptyView())
+            EmptyView()
         }
     }
     

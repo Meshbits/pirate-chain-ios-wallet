@@ -60,9 +60,11 @@ struct ScanAddress: View {
             .padding()
     }
     
-    var torchButton: AnyView {
-        guard torchAvailable else { return AnyView(EmptyView()) }
-        return AnyView(
+    @ViewBuilder var torchButton: some View {
+        switch torchAvailable {
+        case false:
+            EmptyView()
+        case true:
             Button(action: {
                 self.toggleTorch(on: !self.torchEnabled)
                 tracker.track(.tap(action: .scanTorch),
@@ -72,7 +74,7 @@ struct ScanAddress: View {
                 Image("bolt")
                     .renderingMode(.template)
             }
-        )
+        }
     }
     
     var authorized: some View {
@@ -142,28 +144,26 @@ struct ScanAddress: View {
     }
 
     
-    func viewFor(state: CameraAccessHelper.Status) -> some View {
+    @ViewBuilder func viewFor(state: CameraAccessHelper.Status) -> some View {
         switch state {
         case .authorized, .undetermined:
             let auth = authorized.navigationBarTitle("send_scanQR", displayMode: .inline)
             
             if viewModel.showCloseButton {
-                return AnyView(
                     auth.navigationBarItems(leading: torchButton, trailing:  ZcashCloseButton(action: {
                         tracker.track(.tap(action: .scanBack), properties: [:])
                             self.isScanAddressShown = false
                     }).frame(width: 30, height: 30))
-                )
-            }
-            return AnyView(
+            } else {
                 auth.navigationBarItems(
                     trailing: torchButton
                 )
-            )
+            }
+
         case .unauthorized:
-            return AnyView(unauthorized)
+            unauthorized
         case .unavailable:
-            return AnyView(restricted)
+            restricted
         }
     }
     

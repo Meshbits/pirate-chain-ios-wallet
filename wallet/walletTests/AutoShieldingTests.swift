@@ -8,106 +8,72 @@
 
 import XCTest
 import Combine
-
+@testable import ZcashLightClientKit
 @testable import ECC_Wallet_Testnet
 class AutoShieldingTests: XCTestCase {
-    var cancellables = [AnyCancellable]()
-    func testAutoShield() throws {
-        let mockShielder = MockShielder(strategy: MockFailedManualStrategy(),
-                                        shielder: MockSuccessfulShieldingCapable(),
-                                        keyProviding: MockKeyProviding(),
-                                        keyDeriver: MockKeyDeriving())
-        
-        let expectation = XCTestExpectation(description: "Shield Expectation")
-        
-        mockShielder.shield()
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                expectation.fulfill()
-                switch completion {
-                case .failure(let error):
-                    XCTFail("failed with error: \(error)")
-                case .finished:
-                    break
-                }
-            } receiveValue: { result in
-                expectation.fulfill()
-                switch result {
-                case .notNeeded:
-                    XCTFail("manual shielding is always needed")
-                case .shielded:
-                    XCTAssertTrue(true)
-                }
+    func testAutoShield() async throws {
+        let mockShielder = MockShielder(
+            strategy: MockFailedManualStrategy(),
+            shielder: MockSuccessfulShieldingCapable(),
+            keyProviding: MockKeyProviding(),
+            keyDeriver: MockKeyDeriving()
+        )
+
+        do {
+            switch try await mockShielder.shield() {
+            case .notNeeded:
+                XCTFail("manual shielding is always needed")
+            case .shielded:
+                XCTAssertTrue(true)
             }
-            .store(in: &cancellables)
-        wait(for: [expectation], timeout: 4)
+        } catch {
+            XCTFail("failed with error: \(error)")
+            return
+        }
     }
     
-    func testAutoShieldFails() throws {
-        let mockShielder = MockShielder(strategy: MockFailedManualStrategy(),
-                                        shielder: MockFailureShieldingCapable(),
-                                        keyProviding: MockKeyProviding(),
-                                        keyDeriver: MockKeyDeriving())
+    func testAutoShieldFails() async throws {
+        let mockShielder = MockShielder(
+            strategy: MockFailedManualStrategy(),
+            shielder: MockFailureShieldingCapable(),
+            keyProviding: MockKeyProviding(),
+            keyDeriver: MockKeyDeriving()
+        )
         
         let expectation = XCTestExpectation(description: "Shield Expectation")
-        
-        mockShielder.shield()
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                expectation.fulfill()
-                switch completion {
-                case .failure(let error):
-                    switch error {
-                    case ShieldFundsError.insuficientTransparentFunds:
-                        XCTAssertTrue(true)
-                    default:
-                        XCTFail("failed with error: \(error)")
-                    }
-                case .finished:
-                    break
-                }
-            } receiveValue: { result in
-                expectation.fulfill()
-                switch result {
-                case .notNeeded:
-                    XCTFail("manual shielding is always needed")
-                case .shielded:
-                    XCTFail("this test should have failed")
-                }
+
+        do {
+            switch try await mockShielder.shield() {
+            case .notNeeded:
+                XCTFail("manual shielding is always needed")
+            case .shielded:
+                XCTFail("this test should have failed")
             }
-            .store(in: &cancellables)
-        wait(for: [expectation], timeout: 4)
+        } catch ShieldFundsError.insuficientTransparentFunds {
+            XCTAssertTrue(true)
+        } catch {
+            XCTFail("failed with error: \(error)")
+        }
     }
     
-    func testAutoShieldNonNeeded() {
-        let mockShielder = MockShielder(strategy: MockFailedManualStrategy(),
-                                        shielder: MockSuccessfulShieldingCapable(),
-                                        keyProviding: MockKeyProviding(),
-                                        keyDeriver: MockKeyDeriving())
-        
-        let expectation = XCTestExpectation(description: "Shield Expectation")
-        
-        mockShielder.shield()
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                expectation.fulfill()
-                switch completion {
-                case .failure(let error):
-                    XCTFail("failed with error: \(error)")
-                case .finished:
-                    break
-                }
-            } receiveValue: { result in
-                expectation.fulfill()
-                switch result {
-                case .notNeeded:
-                    XCTAssertTrue(true)
-                case .shielded:
-                    XCTFail("this test should have failed")
-                }
+    func testAutoShieldNonNeeded() async throws {
+        let mockShielder = MockShielder(
+            strategy: MockShieldNotNeeded(),
+            shielder: MockSuccessfulShieldingCapable(),
+            keyProviding: MockKeyProviding(),
+            keyDeriver: MockKeyDeriving()
+        )
+
+        do {
+            switch try await mockShielder.shield() {
+            case .notNeeded:
+                XCTAssertTrue(true)
+            case .shielded:
+                XCTFail("this test should have failed")
             }
-            .store(in: &cancellables)
-        wait(for: [expectation], timeout: 4)
+        } catch {
+            XCTFail("failed with error: \(error)")
+        }
     }
 }
 
@@ -130,10 +96,9 @@ class MockShielder: AutoShielder {
 }
 
 class MockShieldNotNeeded: AutoShieldingStrategy {
-    func shield(autoShielder: AutoShielder) -> Future<AutoShieldingResult, Error> {
-        Future<AutoShieldingResult, Error> { promise in
-            promise(.success(AutoShieldingResult.notNeeded))
-        }
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult {
+        try await Task.sleep(nanoseconds: NSEC_PER_MSEC)
+        return .notNeeded
     }
     
     var shouldAutoShield: Bool {
@@ -149,41 +114,50 @@ class MockShieldNotNeeded: AutoShieldingStrategy {
     }
 }
 class MockSuccessfulManualStrategy: AutoShieldingStrategy {
-    func shield(autoShielder: AutoShielder) -> Future<AutoShieldingResult, Error> {
-        Future<AutoShieldingResult,Error> { promise in
-            DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
-                promise(.success(.shielded(pendingTx: MockPendingTx())))
-            })
-        }
-        
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult {
+        try await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
+        return .shielded(pendingTx: MockPendingTx())
     }
-    
+
     var shouldAutoShield: Bool {
         true
     }
     
 }
 
-class MockFailedManualStrategy: AutoShieldingStrategy {
-    /**
-     throws ShieldFundsError.insuficientTransparentFunds) after 2 seconds
-     */
-    func shield(autoShielder: AutoShielder) -> Future<AutoShieldingResult, Error> {
-        Future<AutoShieldingResult,Error> { promise in
-            DispatchQueue.global().asyncAfter(deadline: .now() + 2, execute: {
-                promise(.failure(ShieldFundsError.insuficientTransparentFunds))
-            })
-        }
+class MockShieldingNotNeededStrategy: AutoShieldingStrategy {
+    /// throws ShieldFundsError.insuficientTransparentFunds) after 2 seconds
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult {
+        try await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
+        return AutoShieldingResult.notNeeded
     }
-    
+
     var shouldAutoShield: Bool {
         false
     }
 }
-import ZcashLightClientKit
+class MockFailedManualStrategy: AutoShieldingStrategy {
+    /// throws ShieldFundsError.insuficientTransparentFunds) after 2 seconds
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult {
+        try await Task.sleep(nanoseconds: NSEC_PER_SEC * 2)
+        throw ShieldFundsError.insuficientTransparentFunds
+    }
+
+    var shouldAutoShield: Bool {
+        true
+    }
+}
 
 struct MockPendingTx: PendingTransactionEntity {
-    var toAddress = "ztestsapling1vsrxjdmfpwz4yn8y8ux72je2hjqc82u28a5ahycsdldtd95d4mfepfmptqk22tsqxcelzmur6rr"
+    var fee: ZcashLightClientKit.Zatoshi? = Zatoshi(1000)
+
+    var recipient = PendingTransactionRecipient.address(
+        try! Recipient(
+            "ztestsapling1vsrxjdmfpwz4yn8y8ux72je2hjqc82u28a5ahycsdldtd95d4mfepfmptqk22tsqxcelzmur6rr",
+            network: .testnet
+        )
+    )
+    var value = Zatoshi(120000)
     
     var accountIndex: Int = 0
     
@@ -211,8 +185,6 @@ struct MockPendingTx: PendingTransactionEntity {
     
     var id: Int? = 1
     
-    var value: Int = 120000
-    
     var memo: Data? = nil
     
     var rawTransactionId: Data? = Data()
@@ -220,31 +192,23 @@ struct MockPendingTx: PendingTransactionEntity {
 }
 
 class MockSuccessfulShieldingCapable: ShieldingCapable {
-    func shieldFunds(spendingKey: String, transparentSecretKey: String, memo: String?, from accountIndex: Int, resultBlock: @escaping (Result<PendingTransactionEntity, Error>) -> Void) {
-        
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
-            resultBlock(.success(MockPendingTx()))
-        })
+    func shieldFunds(spendingKey: UnifiedSpendingKey, memo: Memo) async throws -> PendingTransactionEntity {
+        try await Task.sleep(nanoseconds: NSEC_PER_MSEC * 2)
+        return MockPendingTx()
     }
 }
 
 class MockFailureShieldingCapable: ShieldingCapable {
-    func shieldFunds(spendingKey: String, transparentSecretKey: String, memo: String?, from accountIndex: Int, resultBlock: @escaping (Result<PendingTransactionEntity, Error>) -> Void) {
-        
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2, execute: {
-            resultBlock(.failure(ShieldFundsError.insuficientTransparentFunds))
-        })
+    func shieldFunds(spendingKey: UnifiedSpendingKey, memo: Memo) async throws -> PendingTransactionEntity {
+        try await Task.sleep(nanoseconds: NSEC_PER_MSEC * 2)
+        throw ShieldFundsError.insuficientTransparentFunds
     }
 }
 
 
 class MockKeyProviding: ShieldingKeyProviding {
-    func getTransparentSecretKey() throws -> PrivateKeyAccountIndexPair {
-        ("someFakeKey", 0, 0)
-    }
-    
-    func getSpendingKey() throws -> PrivateKeyAccountIndexPair {
-        ("someFakeSpendingKey", 0, 0)
+    func getShieldingKey() throws -> ZcashLightClientKit.UnifiedSpendingKey {
+        UnifiedSpendingKey(network: .testnet, bytes: [0,0,0], account: 0)
     }
 }
 
@@ -252,47 +216,19 @@ enum MockError: Error {
     case notImplemented
 }
 class MockKeyDeriving: KeyDeriving {
-    func deriveViewingKeys(seed: [UInt8], numberOfAccounts: Int) throws -> [String] {
+    func deriveUnifiedSpendingKey(seed: [UInt8], accountIndex: Int) throws -> ZcashLightClientKit.UnifiedSpendingKey {
         throw MockError.notImplemented
     }
-    
-    func deriveViewingKey(spendingKey: String) throws -> String {
+
+    static func saplingReceiver(from unifiedAddress: ZcashLightClientKit.UnifiedAddress) throws -> ZcashLightClientKit.SaplingAddress? {
         throw MockError.notImplemented
     }
-    
-    func deriveSpendingKeys(seed: [UInt8], numberOfAccounts: Int) throws -> [String] {
+
+    static func transparentReceiver(from unifiedAddress: ZcashLightClientKit.UnifiedAddress) throws -> ZcashLightClientKit.TransparentAddress? {
         throw MockError.notImplemented
     }
-    
-    func deriveShieldedAddress(seed: [UInt8], accountIndex: Int) throws -> String {
-        throw MockError.notImplemented
-    }
-    
-    func deriveShieldedAddress(viewingKey: String) throws -> String {
-        throw MockError.notImplemented
-    }
-    
-    func deriveTransparentAddress(seed: [UInt8], account: Int, index: Int) throws -> String {
-        throw MockError.notImplemented
-    }
-    
-    func deriveTransparentPrivateKey(seed: [UInt8], account: Int, index: Int) throws -> String {
-        throw MockError.notImplemented
-    }
-    
-    func deriveTransparentAddressFromPrivateKey(_ tsk: String) throws -> String {
-        "tMockAddressfldkfjarqwer3oiufal"
-    }
-    
-    func deriveTransparentAddressFromPublicKey(_ pubkey: String) throws -> String {
-        throw MockError.notImplemented
-    }
-    
-    func deriveUnifiedViewingKeysFromSeed(_ seed: [UInt8], numberOfAccounts: Int) throws -> [UnifiedViewingKey] {
-        throw MockError.notImplemented
-    }
-    
-    func deriveUnifiedAddressFromUnifiedViewingKey(_ uvk: UnifiedViewingKey) throws -> UnifiedAddress {
+
+    static func receiverTypecodesFromUnifiedAddress(_ address: ZcashLightClientKit.UnifiedAddress) throws -> [ZcashLightClientKit.UnifiedAddress.ReceiverTypecodes] {
         throw MockError.notImplemented
     }
 }

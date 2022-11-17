@@ -12,50 +12,41 @@ import MnemonicSwift
 @testable import ZcashLightClientKit
 class walletTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-
-    func testReplyToMemo() {
+    func testReplyToMemo() throws {
         let memo = "Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments!"
-        let replyTo = "testsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6"
-        let replyToMemo = SendFlowEnvironment.includeReplyTo(address: replyTo, in: memo)
-        
-        let expected = memo + "\nReply-To: \(replyTo)"
-        XCTAssertTrue(replyToMemo.count <= SendFlowEnvironment.maxMemoLength)
-        XCTAssertEqual(replyToMemo, expected)
-        
+        let replyTo = "ztestsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6"
+        XCTAssertNoThrow(try SendFlowEnvironment.includeReplyTo(recipient: try Recipient(replyTo, network: .testnet), ownAddress: UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm"), in: memo))
     }
     
-    func testOnlyReplyToMemo() {
+    func testOnlyReplyToMemo() throws {
         let memo = ""
-        let replyTo = "testsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6"
-        let replyToMemo = SendFlowEnvironment.buildMemo(memo: memo, includesMemo: true, replyToAddress: replyTo)
-        
-        let expected = memo + "\nReply-To: \(replyTo)"
-        guard replyToMemo != nil else {
-            XCTFail("memo nil when it shouldn't be")
-            return }
-        XCTAssertTrue(replyToMemo!.count <= SendFlowEnvironment.maxMemoLength)
-        XCTAssertEqual(replyToMemo, expected)
-        
+        let replyTo = UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm")
+
+        // the recipient address is just to determine the type that must be included.
+        let replyToMemo = try SendFlowEnvironment.buildMemo(recipient: try Recipient("u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm", network: .mainnet), memo: memo, includesMemo: true, replyToAddress: replyTo)
+
+        let expected = memo + "\nReply-To: \(replyTo.stringEncoded)"
+
+        if case .text(let memoText) = replyToMemo {
+            XCTAssertEqual(memoText.string, expected)
+        } else {
+            XCTFail("Memo is not `.text`")
+        }
     }
     
-    func testReplyToHugeMemo() {
+    func testReplyToHugeMemo() throws {
         let memo = "Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments!"
-        let replyTo = "testsapling1ctuamfer5xjnnrdr3xdazenljx0mu0gutcf9u9e74tr2d3jwjnt0qllzxaplu54hgc2tyjdc2p6"
-        let replyToMemo = SendFlowEnvironment.includeReplyTo(address: replyTo, in: memo)
+        let replyTo = "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm"
+        let replyToMemo = try SendFlowEnvironment.includeReplyTo(recipient: try Recipient("u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm", network: .mainnet), ownAddress: UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm"), in: memo)
         
-        let trimmedExpected = "Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have "
+        let trimmedExpected = "Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Happy Birthday! Have fun spending these ZEC! visit https://paywithz.cash to know all the places that take ZEC payments! Ha"
         let expected = trimmedExpected + "\nReply-To: \(replyTo)"
-        XCTAssertTrue(replyToMemo.count <= SendFlowEnvironment.maxMemoLength)
-        XCTAssertEqual(replyToMemo, expected)
-//        XCTAssertEqual(trimmedExpected, replyToMemo.)
+
+        if case .text(let memoText) = replyToMemo {
+            XCTAssertEqual(memoText.string, expected)
+        } else {
+            XCTFail("Memo is not `.text`")
+        }
     }
     
     func testKeyPadDecimalLimit() {
@@ -110,31 +101,22 @@ class walletTests: XCTestCase {
         XCTAssertEqual(try MnemonicSeedProvider.default.toSeed(mnemonic: words).hexString, hex)
     }
     
-//    func testAlmostIncludesReplyTo() {
-//           let memo = "this is a test memo"
-//           let addr = "nowhere"
-//           let expected = "\(memo)\nReply-To: \(addr)"
-//           XCTAssertFalse(expected.includesReplyTo)
-//           XCTAssertNil(expected.replyToAddress)
-//       }
-//    
-//    func testIncludesReplyTo() {
-//        let memo = "this is a test memo"
-//        let addr = "zs1gn2ah0zqhsxnrqwuvwmgxpl5h3ha033qexhsz8tems53fw877f4gug353eefd6z8z3n4zxty65c"
-//        let expected = "\(memo)\nReply-To: \(addr)"
-//        XCTAssertTrue(expected.includesReplyTo)
-//        XCTAssertNotNil(expected.replyToAddress)
-//    }
-    
-    func testBuildMemo() {
+    func testBuildMemo() throws {
         let memo = "this is a test memo"
-        let addr = "zs1gn2ah0zqhsxnrqwuvwmgxpl5h3ha033qexhsz8tems53fw877f4gug353eefd6z8z3n4zxty65c"
-        let expected = "\(memo)\nReply-To: \(addr)"
-        
-        XCTAssertEqual(expected, SendFlowEnvironment.buildMemo(memo: memo, includesMemo: true, replyToAddress: addr))
-        
-        XCTAssertEqual(nil, SendFlowEnvironment.buildMemo(memo: "", includesMemo: true, replyToAddress: nil))
-        XCTAssertEqual(nil, SendFlowEnvironment.buildMemo(memo: memo, includesMemo: false, replyToAddress: addr))
+        let addr = UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm")
+        let expected = "\(memo)\nReply-To: \(addr.stringEncoded)"
+
+        let replyToMemo = try SendFlowEnvironment.buildMemo(recipient: try Recipient("u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm", network: .mainnet), memo: memo, includesMemo: true, replyToAddress: UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm"))
+
+        if case .text(let memoText) = replyToMemo {
+            XCTAssertEqual(expected, memoText.string)
+        } else {
+            XCTFail("Memo is not `.text`")
+        }
+
+        XCTAssertEqual(.empty, try SendFlowEnvironment.buildMemo(recipient: try Recipient("u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm", network: .mainnet), memo: "", includesMemo: false, replyToAddress: UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm")))
+
+        XCTAssertEqual(.empty, try SendFlowEnvironment.buildMemo(recipient: try Recipient("u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm", network: .mainnet), memo: memo, includesMemo: false, replyToAddress: UnifiedAddress(validatedEncoding: "u1z9vyk0d0h2k2jwuuk2gfvh5p65qsagkwcgqm6lvh8ratkzjau7stq5snlnkl0eutr687f3wcyn8a0m3n3462c0e4t4cs7m3lvumj2ddm")))
     }
     
     func testBlockExplorerUrl() {

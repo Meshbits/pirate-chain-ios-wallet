@@ -36,8 +36,7 @@ final class AutoShieldingViewModel: ObservableObject {
                         default:
                             return true
                         }
-                    } )
-            
+                    })
                 .map { status -> State in
                     switch status {
                     case .ended(let shieldingTx):
@@ -62,7 +61,9 @@ final class AutoShieldingViewModel: ObservableObject {
                 }
                 .store(in: &cancellables)
             
-            shieldFlow.shield()
+            Task(priority: .medium) {
+                await shieldFlow.shield()
+            }
             
         } catch {
             self.state = .failed(error: error)

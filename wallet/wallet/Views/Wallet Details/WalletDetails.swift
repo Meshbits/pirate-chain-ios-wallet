@@ -15,9 +15,12 @@ class WalletDetailsViewModel: ObservableObject {
 
     var showError = false
     @Published var balance: WalletBalance = .zero
+    var address: UnifiedAddress
     private var synchronizerEvents = Set<AnyCancellable>()
     private var internalEvents = Set<AnyCancellable>()
+
     init(){
+        self.address = ZECCWalletEnvironment.shared.synchronizer.unifiedAddress
         subscribeToSynchonizerEvents()
     }
     
@@ -46,10 +49,6 @@ class WalletDetailsViewModel: ObservableObject {
         }
         synchronizerEvents.removeAll()
     }
-    
-    var zAddress: String {
-        ZECCWalletEnvironment.shared.getShieldedAddress() ?? ""
-    }
 }
 
 struct WalletDetails: View {
@@ -58,10 +57,6 @@ struct WalletDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var isActive: Bool
     @State var selectedModel: DetailModel? = nil
-
-    var zAddress: String {
-        viewModel.zAddress
-    }
 
     var body: some View {
         
@@ -90,7 +85,7 @@ struct WalletDetails: View {
                 
 
                 List {
-                    WalletDetailsHeader(zAddress: zAddress)
+                    WalletDetailsHeader(zAddress: viewModel.address.stringEncoded)
                         .listRowBackground(Color.zDarkGray2)
                         .frame(height: 100)
                         .padding([.trailing], 24)

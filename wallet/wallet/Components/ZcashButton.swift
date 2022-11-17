@@ -20,30 +20,23 @@ struct ZcashButton: View {
     var fill = Color.black
     var text: String
     
-    func backgroundWith(geometry: GeometryProxy, backgroundShape: BackgroundShape) -> AnyView {
+    @ViewBuilder func backgroundWith(geometry: GeometryProxy, backgroundShape: BackgroundShape) -> some View {
         
         switch backgroundShape {
         case .chamfered:
-            
-            return AnyView (
-                Group {
+            Group {
                 ZcashChamferedButtonBackground(cornerTrim: min(geometry.size.height, geometry.size.width) / 4.0)
                     .fill(self.fill)
                 
                 ZcashChamferedButtonBackground(cornerTrim: min(geometry.size.height, geometry.size.width) / 4.0)
                     .stroke(self.color, lineWidth: 1.0)
-                }
-            )
-        case .rounded:
-            return AnyView(
-                EmptyView()
-            )
-        case .roundedCorners:
-            return AnyView(
-                EmptyView()
-            )
+            }
+
+        case .rounded, .roundedCorners:
+            EmptyView()
         }
     }
+
     var body: some View {
         
         ZStack {

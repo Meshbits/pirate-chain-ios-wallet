@@ -31,7 +31,8 @@
 // Address Screen
 "button_wallethistory" = "钱包历史";
 "address_screen" = "您的地址";
-"address_shielded" = "您的隐蔽地址";
+"address_unified" = "您的统一地址";
+"address_sapling" = "你的树苗地址";
 "address_transparent" = "您的透明地址";
 "feedback_addresscopied" = "已复制地址";
 "Request ZEC" = "请求 ZEC";

@@ -51,10 +51,10 @@ struct ProfileScreen: View {
                             Button(action: {
                                 tracker.track(.tap(action: .copyAddress),
                                               properties: [:])
-                                PasteboardAlertHelper.shared.copyToPasteBoard(value: self.appEnvironment.synchronizer.unifiedAddress.zAddress, notify: "feedback_addresscopied".localized())
+                                PasteboardAlertHelper.shared.copyToPasteBoard(value: self.appEnvironment.synchronizer.unifiedAddress.stringEncoded, notify: "feedback_addresscopied".localized())
 
                             }) {
-                                Text(self.appEnvironment.synchronizer.unifiedAddress.zAddress)
+                                Text(self.appEnvironment.synchronizer.unifiedAddress.stringEncoded)
                                 .lineLimit(3)
                                     .multilineTextAlignment(.center)
                                     .font(.system(size: 15))
@@ -176,8 +176,12 @@ struct ProfileScreen: View {
                                 }
                             }),
                             .default(Text("Quick Re-Scan"), action: {
-                                self.appEnvironment.synchronizer.quickRescan()
-                                self.presentationMode.wrappedValue.dismiss()
+                                Task {
+                                    await self.appEnvironment.synchronizer.quickRescan()
+                                    await MainActor.run {
+                                        self.presentationMode.wrappedValue.dismiss()
+                                    }
+                                }
                             }),
                             .default(Text("Dismiss".localized()))
                         ]

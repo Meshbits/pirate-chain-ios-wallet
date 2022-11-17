@@ -48,16 +48,12 @@ struct DetailCard: View {
     var model: DetailModel
     var backgroundColor: Color = .black
     
-    var shieldImage: AnyView {
-        
-        let view = model.shielded ? AnyView(Image("ic_shieldtick").renderingMode(.original)) : AnyView(EmptyView())
-        switch model.status {
-        case .paid(let success):
-            return success ? view : AnyView(EmptyView())
-        default:
-            return view
+    @ViewBuilder var shieldImage: some View {
+        if case .paid(let success) = model.status, success {
+            Image("ic_shieldtick").renderingMode(.original)
+        } else {
+            EmptyView()
         }
-        
     }
     
     var zecAmount: some View {
@@ -240,7 +236,7 @@ extension DetailModel {
         
         self.date = Date(timeIntervalSince1970: pendingTransaction.createTime)
         self.id = pendingTransaction.rawTransactionId?.toHexStringTxId() ?? String(pendingTransaction.createTime)
-        self.shielded = pendingTransaction.toAddress.isValidShieldedAddress
+        self.shielded = pendingTransaction.recipient.isShielded
         self.status = .paid(success: submitSuccess)
         self.expirationHeight = pendingTransaction.expiryHeight
         self.subtitle = DetailModel.subtitle(isPending: isPending,
@@ -249,7 +245,7 @@ extension DetailModel {
                                              date: self.date.transactionDetail,
                                              latestBlockHeight: latestBlockHeight
         )
-        self.zAddress = pendingTransaction.toAddress
+        self.zAddress = pendingTransaction.recipient.stringEncodedAddress
         self.amount = -pendingTransaction.value
         if let memo = pendingTransaction.memo {
             self.memo = memo.asZcashTransactionMemo()
@@ -257,6 +253,8 @@ extension DetailModel {
         self.minedHeight = pendingTransaction.minedHeight
     }
 }
+
+
 
 extension DetailModel {
     var isSubmitSuccess: Bool {
@@ -285,5 +283,37 @@ extension DetailModel {
 extension Zatoshi {
     static prefix func -(_ zatoshi: Self) -> Self {
         Zatoshi(-zatoshi.amount)
+    }
+}
+
+extension PendingTransactionRecipient {
+    var isShielded: Bool {
+        switch self {
+        case .address(let recipient):
+            switch recipient {
+            case .sapling, .unified:
+                return true
+            case .transparent:
+                return false
+            }
+        case .internalAccount:
+            return true
+        }
+    }
+
+    var stringEncodedAddress: String {
+        switch self {
+        case .address(let recipient):
+            switch recipient {
+            case .sapling(let saplingAddress):
+                return saplingAddress.stringEncoded.shortAddress
+            case .transparent(let transparentAddress):
+                return transparentAddress.stringEncoded.shortAddress
+            case .unified(let unified):
+                return unified.stringEncoded.shortAddress
+            }
+        case .internalAccount(let account):
+            return "Funds shielded account \(account)"
+        }
     }
 }

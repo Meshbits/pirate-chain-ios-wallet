@@ -115,7 +115,9 @@ struct Sending: View {
         }
         .onAppear() {
             tracker.track(.screen(screen: .sendFinal), properties: [:])
-            self.flow.preSend()
+            Task { @MainActor in
+                await self.flow.preSend()
+            }
         }
     }
 }

@@ -111,7 +111,8 @@
 
 //ReceiveFunds
 "QR Code for %@" = "QR Code for %@";
-"address_shielded" = "Your Shielded Address";
+"address_unified" = "Your Unified Address";
+"address_sapling" = "Your Sapling Address";
 "address_transparent" = "Your Transparent Address";
 "receive_title" = "Receive ZEC";
 

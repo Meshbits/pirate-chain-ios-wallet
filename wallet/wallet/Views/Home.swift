@@ -141,6 +141,17 @@ final class HomeViewModel: ObservableObject {
             .store(in: &environmentCancellables)
         
         environment.synchronizer.syncStatus
+            .compactMap({ status in
+                switch status {
+                case .downloading(let progressReport):
+                    if (progressReport.targetHeight - progressReport.progressHeight < 100) ||
+                               (progressReport.progressHeight % 100) == 0 {
+                        return SyncStatus.downloading(progressReport)
+                    }
+                    return nil
+                default: return status
+                }
+            })
             .receive(on: DispatchQueue.main)
             .assign(to: \.syncStatus, on: self)
             .store(in: &environmentCancellables)
@@ -267,18 +278,11 @@ struct Home: View {
             
         case .downloading(let progress):
             SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
-                if progress.targetHeight > 0 {
-                    Text("Downloading ")
-                        .foregroundColor(.white)
-                    + Text("\(progress.progressHeight) / \(progress.targetHeight)")
-                        .foregroundColor(.white)
-                        .font(.system(.body, design: .default).monospacedDigit())
-                } else {
-                    Text("Downloading \(Int(progress.progress * 100))%")
-                        .foregroundColor(.white)
-                        .font(.system(.body, design: .default).monospacedDigit())
-                }
-
+                Text("Downloading ")
+                    .foregroundColor(.white)
+                + Text("\(progress.progressHeight) / \(progress.targetHeight)")
+                    .foregroundColor(.white)
+                    .font(.system(.body, design: .default).monospacedDigit())
             }
             .frame(width: 100, height: buttonHeight)
             

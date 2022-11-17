@@ -14,20 +14,17 @@ struct ActionableMessage: View {
     var action: (() -> Void)? = nil
     let cornerRadius: CGFloat =  5
     
-    var actionView: some View {
+    @ViewBuilder var actionView: some View {
         if let action = self.action, let text = actionText {
-            return AnyView(
-                Button(action: action) {
-                    Text(text)
-                        .foregroundColor(Color.zAmberGradient2)
-                }
-            )
+            Button(action: action) {
+                Text(text)
+                    .foregroundColor(Color.zAmberGradient2)
+            }
         } else {
-            return AnyView (
-                EmptyView()
-            )
+            EmptyView()
         }
     }
+    
     var body: some View {
         
         HStack {

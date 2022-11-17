@@ -60,7 +60,8 @@
 
 // Address Screen
 "address_screen" = "Tuo Indirizzo";
-"address_shielded" = "Il tuo indirizzo blindato";
+"address_unified" = "Il tuo indirizzo unificato";
+"address_sapling" = "Il tuo indirizzo sapling";
 "address_transparent" = "Il tuo indirizzo trasparente";
 "feedback_addresscopied" = "Indirizzo Copiato!";
 "Request ZEC" = "Richiedi ZEC";
