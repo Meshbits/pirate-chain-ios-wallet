@@ -86,6 +86,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         originalDelegate?.scene!(scene, willConnectTo: session, options: connectionOptions)
 
         
+        self.addSwiftLayout(scene: scene)
     }
     
     func addSwiftLayout(scene: UIScene){
