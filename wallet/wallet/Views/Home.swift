@@ -1060,22 +1060,30 @@ struct Home: View {
 
             let queryComponents = url.getQueryParameters
             
-            guard let amount = queryComponents["amount"] else {
-                logger.info("Invalid Amount, can't proceed")
-                return
+            var amountValue = 0.0
+            
+            if let amount = queryComponents["amount"] {
+                amountValue = Double(amount)!
             }
             
-            guard let memoMessage = queryComponents["message"] else {
-                logger.info("Memo message not found, can't proceed")
-                return
+            if let amount = queryComponents["tx_amount"] {
+                amountValue = Double(amount)!
+            }
+            
+            var mMemoMessage = ""
+            
+            if let memoMessage = queryComponents["message"] {
+                mMemoMessage = memoMessage
+            } else {
+                mMemoMessage = ""
             }
 
-            self.viewModel.setAmountWithoutFee(Double(amount)!)
+            self.viewModel.setAmountWithoutFee(amountValue)
             
             if self.viewModel.isSyncing == false{
                 logger.info("Syncing is not in progress, please proceed to transaction screen")
                 
-                let memoMessageDecoded = memoMessage.removingPercentEncoding
+                let memoMessageDecoded = mMemoMessage.removingPercentEncoding
                 
                 self.startSendFlow(memo: memoMessageDecoded ?? "",address: aReplyAddress ?? "")
                 

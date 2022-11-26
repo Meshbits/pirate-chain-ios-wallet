@@ -144,7 +144,13 @@ open class PirateChainPaymentURI: PirateChainPaymentURIProtocol {
             }else{
                 
                 if let url = urlComponents.string {
-                    return url.replacingOccurrences(of: "arrr://", with: "arrr:")
+                    if url.contains("arrr://") {
+                        return url.replacingOccurrences(of: "arrr://", with: "arrr:")
+                    }
+                    
+                    if url.contains("pirate://") {
+                        return url.replacingOccurrences(of: "pirate://", with: "pirate:")
+                    }
                 }
                 
                 return nil
@@ -198,7 +204,20 @@ open class PirateChainPaymentURI: PirateChainPaymentURIProtocol {
                 return nil
             }
             anAddress = address
+        }else if pirateURI.hasPrefix("pirate://"){
+            guard let address = url.host else {
+                return nil
+            }
+            anAddress = address
         }else if pirateURI.hasPrefix("arrr:"){
+            // Use case for payment URI
+            let urlComponents = URLComponents(string: String(pirateURI))
+                    
+            guard let address = urlComponents?.path, !address.isEmpty else {
+               return nil
+            }
+            anAddress = address
+        }else if pirateURI.hasPrefix("pirate:"){
             // Use case for payment URI
             let urlComponents = URLComponents(string: String(pirateURI))
                     

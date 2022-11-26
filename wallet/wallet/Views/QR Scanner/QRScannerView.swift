@@ -114,7 +114,10 @@ public extension QRScannerView {
         self.layer.session = captureSession
         self.layer.videoGravity = .resizeAspectFill
         
-        captureSession?.startRunning()
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession?.startRunning()
+        }
+        
     }
     func scanningDidFail() {
         delegate?.qrScanningDidFail()
