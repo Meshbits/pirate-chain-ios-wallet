@@ -137,29 +137,56 @@ struct WalletDetails: View {
                 .padding(.horizontal, 10)
                 
 
-                List {
-                    
-                    ForEach(self.viewModel.headers, id: \.self) { header in
-                     
-                        Section(header: Text(converDateToString(headerDate: header)).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader).background(Color.clear).cornerRadius(20)) {
-                            ForEach(self.viewModel.groupedByDate[header]!) { row in
-                                Button(action: {
-                                    self.selectedModel = row
-                                }) {
-                                    DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:true)
+                if #available(iOS 16.0, *) {
+                    List {
+                        
+                        ForEach(self.viewModel.headers, id: \.self) { header in
+                            
+                            Section(header: Text(converDateToString(headerDate: header)).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader).background(Color.clear).cornerRadius(20)) {
+                                ForEach(self.viewModel.groupedByDate[header]!) { row in
+                                    Button(action: {
+                                        self.selectedModel = row
+                                    }) {
+                                        DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:true)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .frame(height: 60)
+                                    .cornerRadius(0)
+                                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    
                                 }
-                                .buttonStyle(PlainButtonStyle())
-                                .frame(height: 60)
-                                .cornerRadius(0)
-                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                  
-                           }
-                       }
+                            }
+                        }
+                        
                     }
-                    
+                    .modifier(BackgroundPlaceholderModifierRescanOptions())
+                        .scrollContentBackground(.hidden)
+                        .padding()
+                } else {
+                    // Fallback on earlier versions
+                    List {
+                        
+                        ForEach(self.viewModel.headers, id: \.self) { header in
+                            
+                            Section(header: Text(converDateToString(headerDate: header)).font(.barlowRegular(size: 20)).foregroundColor(Color.zSettingsSectionHeader).background(Color.clear).cornerRadius(20)) {
+                                ForEach(self.viewModel.groupedByDate[header]!) { row in
+                                    Button(action: {
+                                        self.selectedModel = row
+                                    }) {
+                                        DetailCard(model: row, backgroundColor: .zDarkGray2,isFromWalletDetails:true)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                    .frame(height: 60)
+                                    .cornerRadius(0)
+                                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                    .modifier(BackgroundPlaceholderModifierRescanOptions())
                 }
-                .modifier(BackgroundPlaceholderModifierRescanOptions())
-                .padding()
                 
             }
         }

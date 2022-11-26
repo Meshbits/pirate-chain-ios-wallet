@@ -84,27 +84,53 @@ struct RescanOptionsView: View {
             
             VStack(alignment: .center, spacing: 5) {
                 
-                List {
-                    
-                    ForEach(rescanDataViewModel.allBirthdays, id: \.id) { settingsRowData in
+                if #available(iOS 16.0, *) {
+                    List {
                         
-                        RescanRowWithCheckbox(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:48, isSelected: settingsRowData.isSelected)
-                            .onTapGesture {
-                                self.mSelectedSettingsRowData = settingsRowData
-                                self.rescanDataViewModel.mSelectedIndex = mSelectedSettingsRowData!.id
-                                self.rescanDataViewModel.updateBirthdaySelectionStatus()
-                            }
-                            .frame(height: Device.isLarge ?  60 : 40)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        ForEach(rescanDataViewModel.allBirthdays, id: \.id) { settingsRowData in
+                            
+                            RescanRowWithCheckbox(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:48, isSelected: settingsRowData.isSelected)
+                                .onTapGesture {
+                                    self.mSelectedSettingsRowData = settingsRowData
+                                    self.rescanDataViewModel.mSelectedIndex = mSelectedSettingsRowData!.id
+                                    self.rescanDataViewModel.updateBirthdaySelectionStatus()
+                                }
+                                .frame(height: Device.isLarge ?  60 : 40)
+                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        }
+                        
                     }
-                    
+                    .scrollContentBackground(.hidden)
+                    .modifier(BackgroundPlaceholderModifierRescanOptions())
+                    //                .overlay(
+                    //                    RoundedRectangle(cornerRadius: 20)
+                    //                        .stroke(Color.zGray, lineWidth: 1.0)
+                    //                )
+                    .padding()
+                } else {
+                    // Fallback on earlier versions
+                    List {
+                        
+                        ForEach(rescanDataViewModel.allBirthdays, id: \.id) { settingsRowData in
+                            
+                            RescanRowWithCheckbox(mCurrentRowData: settingsRowData, mSelectedSettingsRowData: $mSelectedSettingsRowData, noLineAfter:48, isSelected: settingsRowData.isSelected)
+                                .onTapGesture {
+                                    self.mSelectedSettingsRowData = settingsRowData
+                                    self.rescanDataViewModel.mSelectedIndex = mSelectedSettingsRowData!.id
+                                    self.rescanDataViewModel.updateBirthdaySelectionStatus()
+                                }
+                                .frame(height: Device.isLarge ?  60 : 40)
+                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        }
+                        
+                    }
+                    .modifier(BackgroundPlaceholderModifierRescanOptions())
+                    //                .overlay(
+                    //                    RoundedRectangle(cornerRadius: 20)
+                    //                        .stroke(Color.zGray, lineWidth: 1.0)
+                    //                )
+                    .padding()
                 }
-                .modifier(BackgroundPlaceholderModifierRescanOptions())
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 20)
-//                        .stroke(Color.zGray, lineWidth: 1.0)
-//                )
-                .padding()
                
                 
                 Spacer(minLength: 50)

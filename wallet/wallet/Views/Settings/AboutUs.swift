@@ -27,77 +27,153 @@ struct AboutUs: View {
                 ARRRBackground().edgesIgnoringSafeArea(.all)
             VStack {
 
-            List {
-                
-                 HStack{
-                     Text(anAppVersion).multilineTextAlignment(.leading)
-                         .lineLimit(nil)
-                         .scaledFont(size: mFontSize)
-                         .frame(alignment: .leading)
-                     Spacer()
-                 }
-                 .listRowBackground(ARRRBackground())
-                 .frame(minHeight: mHeight)
-                
-                 HStack{
-                     Text(aBuildversion).multilineTextAlignment(.leading)
-                         .lineLimit(nil)
-                         .scaledFont(size: mFontSize)
-                         .frame(alignment: .leading)
-                     Spacer()
-                 }
-                 .listRowBackground(ARRRBackground())
-                 .frame(minHeight: mHeight)
-                
-                HStack{
-                    Text(aCommitsCount).multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                        .scaledFont(size: mFontSize)
-                        .frame(alignment: .leading)
-                    Spacer()
+                if #available(iOS 16.0, *) {
+                    List {
+                        
+                        HStack{
+                            Text(anAppVersion).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aBuildversion).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aCommitsCount).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aGitHash).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aVersionDetails).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        
+                        HStack{
+                            Link(aSourceCode+aSourceCodeURL, destination: URL(string: aSourceCodeURL)!)
+                                .scaledFont(size: mFontSize)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                    }
+                    .scrollContentBackground(.hidden)
+                    .listRowBackground(ARRRBackground())
+                    .cornerRadius(0)
+                    .modifier(BackgroundPlaceholderModifierHome())
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.zGray, lineWidth: 1.0)
+                    )
+                    .padding()
+                } else {
+                    // Fallback on earlier versions
+                    List {
+                        
+                        HStack{
+                            Text(anAppVersion).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aBuildversion).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aCommitsCount).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aGitHash).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        HStack{
+                            Text(aVersionDetails).multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .scaledFont(size: mFontSize)
+                                .frame(alignment: .leading)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                        
+                        HStack{
+                            Link(aSourceCode+aSourceCodeURL, destination: URL(string: aSourceCodeURL)!)
+                                .scaledFont(size: mFontSize)
+                            Spacer()
+                        }
+                        .listRowBackground(ARRRBackground())
+                        .frame(minHeight: mHeight)
+                        
+                    }
+                    .listRowBackground(ARRRBackground())
+                    .cornerRadius(0)
+                    .modifier(BackgroundPlaceholderModifierHome())
+                    .cornerRadius(20)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 20)
+                            .stroke(Color.zGray, lineWidth: 1.0)
+                    )
+                    .padding()
                 }
-                .listRowBackground(ARRRBackground())
-                .frame(minHeight: mHeight)
-                
-                HStack{
-                    Text(aGitHash).multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                        .scaledFont(size: mFontSize)
-                        .frame(alignment: .leading)
-                    Spacer()
-                }
-                .listRowBackground(ARRRBackground())
-                .frame(minHeight: mHeight)
-            
-                HStack{
-                    Text(aVersionDetails).multilineTextAlignment(.leading)
-                        .lineLimit(nil)
-                        .scaledFont(size: mFontSize)
-                        .frame(alignment: .leading)
-                    Spacer()
-                }
-                .listRowBackground(ARRRBackground())
-                .frame(minHeight: mHeight)
-               
-                
-                HStack{
-                    Link(aSourceCode+aSourceCodeURL, destination: URL(string: aSourceCodeURL)!)
-                        .scaledFont(size: mFontSize)
-                    Spacer()
-                }
-                .listRowBackground(ARRRBackground())
-                .frame(minHeight: mHeight)
-                
-            }
-            .listRowBackground(ARRRBackground())
-            .cornerRadius(0)
-            .modifier(BackgroundPlaceholderModifierHome())
-            .cornerRadius(20)
-            .overlay(
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.zGray, lineWidth: 1.0)
-            )
-            .padding()
          
                 HStack{
                     Spacer()
