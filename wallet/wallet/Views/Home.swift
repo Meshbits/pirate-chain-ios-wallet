@@ -1074,8 +1074,10 @@ struct Home: View {
             
             if let memoMessage = queryComponents["message"] {
                 mMemoMessage = memoMessage
-            } else {
-                mMemoMessage = ""
+            }
+                        
+            if let memoMessage = queryComponents["msg"] {
+                mMemoMessage = memoMessage
             }
 
             self.viewModel.setAmountWithoutFee(amountValue)

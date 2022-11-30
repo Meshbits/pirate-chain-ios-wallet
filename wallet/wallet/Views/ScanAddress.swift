@@ -35,12 +35,35 @@ class ScanAddressViewModel: ObservableObject {
             }
         }) { (address) in
             
-            guard ZECCWalletEnvironment.shared.isValidAddress(address) else {
-                self.showInvalidAddressMessage = true
-                return
+            var mAddress = address
+                        
+            if let url:URL = URL(string: address) {
+                
+                if let actualCode = url.host {
+                    mAddress = actualCode
+                }else{
+                    guard ZECCWalletEnvironment.shared.isValidAddress(address) else {
+                        
+                        self.showInvalidAddressMessage = true
+                        return
+                    }
+                    
+                    mAddress = address
+                }
+            }else{
+                guard ZECCWalletEnvironment.shared.isValidAddress(address) else {
+                    
+                    self.showInvalidAddressMessage = true
+                    return
+                }
+                
+                mAddress = address
             }
+            
+           
             self.showInvalidAddressMessage = false
-            self.addressPublisher.send(address)
+            self.addressPublisher.send(mAddress)
+                
         }.store(in: &dispose)
     }
   
