@@ -87,6 +87,19 @@ protocol EventLogging {
 
 You can implement your own tracker proxy
 
+# Support for Deep Links:
+
+msg or message key should have the message for the transaction (optional)
+and amount, tx_amount - you can use either of these to specify the amount while generating the qr code that needs to be parsed by wallet.
+
+arrr://175tWpb8K1S7NmH4Zx6rewF9WQrcZv245W?amount=50&label=Luke-Jr&message=Donation%20for%20project%20xyz
+arrr://175tWpb8K1S7NmH4Zx6rewF9WQrcZv245W?tx_amount=50&label=Luke-Jr&message=Donation%20for%20project%20xyz
+arrr://175tWpb8K1S7NmH4Zx6rewF9WQrcZv245W?tx_amount=50&label=Luke-Jr&msg=Donation%20for%20project%20xyz
+
+pirate://175tWpb8K1S7NmH4Zx6rewF9WQrcZv245W?amount=50&label=Luke-Jr&message=Donation%20for%20project%20xyz
+pirate://175tWpb8K1S7NmH4Zx6rewF9WQrcZv245W?tx_amount=50&label=Luke-Jr&message=Donation%20for%20project%20xyz
+pirate://175tWpb8K1S7NmH4Zx6rewF9WQrcZv245W?tx_amount=50&label=Luke-Jr&msg=Donation%20for%20project%20xyz
+
 # Contributing
 
 Contributions are very much welcomed! Please read our [Contributing Guidelines](/CONTRIBUTING.md) and [Code of Conduct](/CONDUCT.md). Our backlog has many Issues tagged with the `good first issue` label. Please fork the repo and make a pull request for us to review.
