@@ -62,6 +62,7 @@ class AuthenticationHelper {
                         
                         switch authError.code {
                         case .passcodeNotSet:
+                            AppDelegate.isTouchIDVisible = false
                             authenticationPublisher.send(.success)
                         case .authenticationFailed:
                             authenticationPublisher.send(.userFailed)

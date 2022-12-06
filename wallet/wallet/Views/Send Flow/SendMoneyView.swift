@@ -13,7 +13,7 @@ struct SendMoneyView: View {
     
     @State var isSendTapped = false
     @EnvironmentObject var flow: SendFlowEnvironment
-//    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode
     @State var scanViewModel = ScanAddressViewModel(shouldShowSwitchButton: false, showCloseButton: true)
     @State var adjustTransaction = false
     @State var validateTransaction = false
@@ -212,11 +212,14 @@ struct SendMoneyView: View {
              }, trailingItem: {
                  ARRRCloseButton(action: {
                      self.onDismissRemoveObservers()
-//                     presentationMode.wrappedValue.dismiss()
-                         if UIApplication.shared.windows.count > 0 {
-                             UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
-                         }
-
+                     if #available(iOS 16.0, *) {
+                         presentationMode.wrappedValue.dismiss()
+                     }else{
+                          if UIApplication.shared.windows.count > 0 {
+                              UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
+                          }
+                     }
+                     
                      }).frame(width: 20, height: 20)
                  .padding(.top,40)
              })

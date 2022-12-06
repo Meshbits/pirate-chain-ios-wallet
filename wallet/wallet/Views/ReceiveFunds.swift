@@ -11,7 +11,7 @@ import ZcashLightClientKit
 struct ReceiveFunds: View {
     
     let unifiedAddress: UnifiedAddress
-//    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode
     @State var selectedTab: Int = 0
     @State var qrImage : Image?
     var body: some View {
@@ -37,10 +37,16 @@ struct ReceiveFunds: View {
                  }
              }, trailingItem: {
                  ARRRCloseButton(action: {
-//                     presentationMode.wrappedValue.dismiss()
-                         if UIApplication.shared.windows.count > 0 {
-                             UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
-                         }
+                     
+                     if #available(iOS 16.0, *) {
+                         presentationMode.wrappedValue.dismiss()
+                     }else{
+                          if UIApplication.shared.windows.count > 0 {
+                              UIApplication.shared.windows[0].rootViewController?.dismiss(animated: true, completion: nil)
+                          }
+                     }
+                     
+
                      }).frame(width: Device.isLarge ? 30 : 15, height: Device.isLarge ? 30 : 15).padding(.top,40)
              })
             .onAppear {
