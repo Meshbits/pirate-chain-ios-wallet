@@ -424,6 +424,8 @@ extension CompactBlockProcessor.State {
             return .validating
         case .enhancing:
             return nil
+        case .handlingSaplingFiles:
+            return nil
         }
     }
 }

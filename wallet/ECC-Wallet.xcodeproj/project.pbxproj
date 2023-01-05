@@ -2223,7 +2223,7 @@
 			repositoryURL = "https://github.com/zcash/ZcashLightClientKit/";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = "0.17.0-beta";
+				minimumVersion = "0.17.5-beta";
 			};
 		};
 		0D90D56D281323920097FAAD /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
