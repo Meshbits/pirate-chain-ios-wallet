@@ -248,21 +248,17 @@ class CombineSynchronizer {
          */
     }
     
-    func prepare() throws {
-        guard let uvk = self.initializer.viewingKeys.first else {
-            throw SynchronizerError.initFailed(message: "unable to derive unified address. this is probably a programming error".localized())
-        }
-        do {
-            self.unifiedAddress = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveUnifiedAddressFromUnifiedViewingKey(uvk)
-        } catch {
-            throw SynchronizerError.initFailed(message: "unable to derive unified address: \(error.localizedDescription)")
-        }
-        
-        try self.synchronizer.prepare()
-        
-        // BUGFIX: transactions history empty when synchronizer fails to connect to server
-        // fill with initial values
-        self.updatePublishers()
+    func prepare(with seedBytes: [UInt8]?) async throws {
+            // TODO: handle two-step prepare
+            let initDbResult = try self.synchronizer.prepare(with: seedBytes)
+            guard initDbResult == Initializer.InitializationResult.success else {
+                throw SynchronizerError.initFailed(message: "Seed is require to initialize")
+            }
+            self.unifiedAddress = await self.synchronizer.getUnifiedAddress(accountIndex: 0)
+                
+            // BUGFIX: transactions history empty when synchronizer fails to connect to server
+            // fill with initial values
+            await self.updatePublishers()
     }
     
     func start(retry: Bool = false) throws {
@@ -285,34 +281,39 @@ class CombineSynchronizer {
         synchronizer.cancelSpend(transaction: pendingTransaction)
     }
     
-    func rewind(_ policy: RewindPolicy) throws {
-        try synchronizer.rewind(policy)
+    func rewind(_ policy: RewindPolicy) async throws {
+        try await synchronizer.rewind(policy)
     }
     
-    func updatePublishers() {
-        if let ua = self.unifiedAddress,
-           let tBalance = try? synchronizer.getTransparentBalance(address: ua.tAddress) {
-            self.transparentBalance.send(tBalance)
-        } else {
-            self.transparentBalance.send(Balance(verified: 0, total: 0))
-        }
-        
-        let shieldedVerifiedBalance = synchronizer.getShieldedVerifiedBalance()
-        let shieldedTotalBalance = synchronizer.getShieldedBalance(accountIndex: 0)
-        
-        self.shieldedBalance.send(Balance(verified: shieldedVerifiedBalance, total: shieldedTotalBalance))
-        
-        self.balance.send(initializer.getBalance().asHumanReadableZecBalance())
-        self.verifiedBalance.send(initializer.getVerifiedBalance().asHumanReadableZecBalance())
-
-        self.syncStatus.send(synchronizer.status)
-        self.walletDetails.sink(receiveCompletion: { _ in
-            }) { [weak self] (details) in
-                guard !details.isEmpty else { return }
-                self?.walletDetailsBuffer.send(details)
-        }
-        .store(in: &self.cancellables)
+    func updatePublishers(with state: SDKSynchronizer.SynchronizerState) {
+            self.transparentBalance.send(state.transparentBalance)
+            self.shieldedBalance.send(state.shieldedBalance)
+            self.syncStatus.send(state.syncStatus)
+            self.syncBlockHeight.send(state.latestScannedHeight)
+            self.walletDetails.sink(receiveCompletion: { _ in
+                }) { [weak self] (details) in
+                    guard !details.isEmpty else { return }
+                    self?.walletDetailsBuffer.send(details)
+            }
+            .store(in: &self.cancellables)
     }
+    
+    func updatePublishers() async {
+           let tBalance = (try? await synchronizer.getTransparentBalance(accountIndex: 0)) ?? WalletBalance.zero
+           self.transparentBalance.send(tBalance)
+           let shieldedVerifiedBalance: Zatoshi = synchronizer.getShieldedVerifiedBalance()
+           let shieldedTotalBalance: Zatoshi = synchronizer.getShieldedBalance(accountIndex: 0)
+               
+           self.shieldedBalance.send(WalletBalance(verified: shieldedVerifiedBalance, total: shieldedTotalBalance))
+           self.syncStatus.send(synchronizer.status)
+           self.walletDetails.sink(receiveCompletion: { _ in
+               }) { [weak self] (details) in
+                   guard !details.isEmpty else { return }
+                   self?.walletDetailsBuffer.send(details)
+           }
+           .store(in: &self.cancellables)
+    }
+       
     
     deinit {
         synchronizer.stop()
@@ -321,71 +322,65 @@ class CombineSynchronizer {
         }
     }
     
-    func send(with spendingKey: String, zatoshi: Int64, to recipientAddress: String, memo: String?,from account: Int) -> Future<PendingTransactionEntity,Error>  {
-        Future<PendingTransactionEntity, Error>() { [weak self]
-            promise in
-            self?.synchronizer.sendToAddress(spendingKey: spendingKey, zatoshi: zatoshi, toAddress: recipientAddress, memo: memo, from: account) { [weak self](result) in
-                self?.updatePublishers()
-                switch result {
-                case .failure(let error):
-                    promise(.failure(error))
-                case .success(let pendingTx):
-                    promise(.success(pendingTx))
-                }
-            }
-        }
+    func send(
+            with spendingKey: UnifiedSpendingKey,
+            zatoshi: Zatoshi,
+            to recipientAddress: Recipient,
+            memo: Memo?
+        ) async throws -> PendingTransactionEntity {
+            let pendingTx = try await self.synchronizer.sendToAddress(
+                    spendingKey: spendingKey,
+                    zatoshi: zatoshi,
+                    toAddress: recipientAddress,
+                    memo: memo
+            )
+            await self.updatePublishers()
+            return pendingTx
     }
     
-    public func shieldFunds(spendingKey: String, transparentSecretKey: String, memo: String?, from accountIndex: Int) -> Future<PendingTransactionEntity, Error> {
-        Future<PendingTransactionEntity, Error>() { [weak self]
-            promise in
-            self?.synchronizer.shieldFunds(spendingKey: spendingKey, transparentSecretKey: transparentSecretKey, memo: memo, from: accountIndex) {[weak self] (result) in
-                self?.updatePublishers()
-                switch result {
-                case .failure(let error):
-                    promise(.failure(error))
-                case .success(let pendingTx):
-                    promise(.success(pendingTx))
-                }
-            }
-        }
+    
+    public func shieldFunds(
+            spendingKey: UnifiedSpendingKey,
+            memo: Memo
+        ) async throws -> PendingTransactionEntity {
+            try await self.shieldFunds(spendingKey: spendingKey, memo: memo)
     }
     
-    func unshieldedBalance(for tAddress: String) -> Future<WalletBalance,Error> {
-        Future<WalletBalance,Error>() { [weak self]
-            promise in
-            
-            guard let self = self else { return }
-            
-            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.saplingActivationHeight
-            
-            self.synchronizer.refreshUTXOs(address: tAddress, from: walletBirthday, result: { [weak self] (r) in
-                guard let self = self else { return }
-                switch r {
-                case .success:
-                    do {
-                        let balance = try self.synchronizer.getTransparentBalance(address: tAddress)
-                        promise(.success(balance))
-                    } catch {
-                        promise(.failure(error))
-                    }
-                case .failure(let error):
-                    promise(.failure(error))
-                }
-            })
-        }
-    }
-    
-    func cachedUnshieldedBalance(for tAddress: String) -> Future<WalletBalance,Error>  {
-        Future<WalletBalance,Error>() { [weak self] promise in
-            guard let self = self else { return }
-            do {
-                promise(.success(try self.synchronizer.getTransparentBalance(address: tAddress)))
-            } catch {
-                promise(.failure(error))
-            }
-        }
-    }
+//    func unshieldedBalance(for tAddress: String) -> Future<WalletBalance,Error> {
+//        Future<WalletBalance,Error>() { [weak self]
+//            promise in
+//
+//            guard let self = self else { return }
+//
+//            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.saplingActivationHeight
+//
+//            self.synchronizer.refreshUTXOs(address: tAddress, from: walletBirthday, result: { [weak self] (r) in
+//                guard let self = self else { return }
+//                switch r {
+//                case .success:
+//                    do {
+//                        let balance = try self.synchronizer.getTransparentBalance(address: tAddress)
+//                        promise(.success(balance))
+//                    } catch {
+//                        promise(.failure(error))
+//                    }
+//                case .failure(let error):
+//                    promise(.failure(error))
+//                }
+//            })
+//        }
+//    }
+//
+//    func cachedUnshieldedBalance(for tAddress: String) -> Future<WalletBalance,Error>  {
+//        Future<WalletBalance,Error>() { [weak self] promise in
+//            guard let self = self else { return }
+//            do {
+//                promise(.success(try self.synchronizer.getTransparentBalance(address: tAddress)))
+//            } catch {
+//                promise(.failure(error))
+//            }
+//        }
+//    }
 }
 
 extension CombineSynchronizer {
@@ -432,46 +427,51 @@ extension CombineSynchronizer {
 }
 
 extension CombineSynchronizer {
-    func fullRescan() {
-        do {
-            try self.rewind(.birthday)
-            try self.start(retry: true)
-        } catch {
-            logger.error("Full rescan failed \(error)")
-        }
+    func fullRescan() async {
+           do {
+               try await self.rewind(.birthday)
+               try await MainActor.run {
+                   try self.start(retry: true)
+               }
+           } catch {
+               logger.error("Full rescan failed \(error)")
+           }
+   }
+    
+    func quickRescan() async {
+            do {
+                try await self.rewind(.quick)
+                try await MainActor.run {
+                    try self.start(retry: true)
+                }
+            } catch {
+                logger.error("Quick rescan failed \(error)")
+            }
     }
     
-    func quickRescan() {
-        do {
-            try self.rewind(.quick)
-            try self.start(retry: true)
-        } catch {
-            logger.error("Quick rescan failed \(error)")
-        }
-    }
+//    func rescanWithBirthday(blockheight: BlockHeight) {
+//        do {
+//            try self.rewind(.height(blockheight: blockheight))
+//            try self.start(retry: true)
+//        } catch {
+//            logger.error("Rescan failed with new height \(error)")
+//        }
+//    }
     
-    func rescanWithBirthday(blockheight: BlockHeight) {
-        do {
-            try self.rewind(.height(blockheight: blockheight))
-            try self.start(retry: true)
-        } catch {
-            logger.error("Rescan failed with new height \(error)")
-        }
+    func getTransparentAddress(account: Int = 0) async -> TransparentAddress? {
+        await self.synchronizer.getTransparentAddress(accountIndex: account)
     }
-    
-    func getTransparentAddress(account: Int = 0) -> TransparentAddress? {
-        self.synchronizer.getTransparentAddress(accountIndex: account)
-    }
-    func getShieldedAddress(account: Int = 0) -> SaplingShieldedAddress? {
-        self.synchronizer.getShieldedAddress(accountIndex: account)
+   
+    func getShieldedAddress(account: Int = 0) async -> SaplingAddress? {
+        await self.synchronizer.getSaplingAddress(accountIndex: account)
     }
 }
 
-
-fileprivate struct Balance: WalletBalance {
-    var verified: Int64
-    var total: Int64
-}
+//
+//fileprivate struct Balance: WalletBalance {
+//    var verified: Int64
+//    var total: Int64
+//}
 
 
 extension CompactBlockProcessor.State {
@@ -480,7 +480,7 @@ extension CompactBlockProcessor.State {
         case .stopped:
             return .stopped
         case .downloading:
-            return .downloading(NullProgress())
+            return .downloading(.nullProgress)
         case .error(let e):
             return .error(e)
         case .fetching:
@@ -488,7 +488,7 @@ extension CompactBlockProcessor.State {
         case .synced:
             return .synced
         case .scanning:
-            return .scanning(NullProgress())
+            return .scanning(.nullProgress)
         case .validating:
             return .validating
         case .enhancing:
@@ -506,20 +506,20 @@ fileprivate struct NullEnhancementProgress: EnhancementProgress {
     var lastFoundTransaction: ConfirmedTransactionEntity? { nil }
     var range: CompactBlockRange { 0 ... 0 }
 }
-
-fileprivate struct NullProgress: BlockProgressReporting {
-    var startHeight: BlockHeight {
-        0
-    }
-    
-    var targetHeight: BlockHeight {
-        0
-    }
-    
-    var progressHeight: BlockHeight {
-        0
-    }
-}
+//
+//fileprivate struct NullProgress: BlockProgressReporting {
+//    var startHeight: BlockHeight {
+//        0
+//    }
+//
+//    var targetHeight: BlockHeight {
+//        0
+//    }
+//
+//    var progressHeight: BlockHeight {
+//        0
+//    }
+//}
 
 extension CompactBlockProgress {
     var syncStatus: SyncStatus {

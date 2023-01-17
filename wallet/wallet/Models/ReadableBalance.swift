@@ -15,8 +15,8 @@ struct ReadableBalance {
 
 extension ReadableBalance {
     init(walletBalance: WalletBalance) {
-        self.init(verified: walletBalance.verified.asHumanReadableZecBalance(),
-                        total: walletBalance.total.asHumanReadableZecBalance())
+        self.init(verified: walletBalance.verified.amount.asHumanReadableZecBalance(),
+                        total: walletBalance.total.amount.asHumanReadableZecBalance())
     }
     
     static var zero: ReadableBalance {

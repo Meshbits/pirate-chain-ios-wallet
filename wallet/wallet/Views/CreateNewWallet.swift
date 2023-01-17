@@ -150,19 +150,23 @@ struct CreateNewWallet: View {
     }
     
     func createNewWalletFlow(){
-        do {
-            tracker.track(.tap(action: .landingBackupWallet), properties: [:])
-            try self.appEnvironment.createNewWallet()
-            self.destination = Destinations.createNew
-        } catch WalletError.createFailed(let e) {
-            if case SeedManager.SeedManagerError.alreadyImported = e {
-                self.showError = AlertType.feedback(destination: .createNew, cause: e)
-            } else {
-                fail(WalletError.createFailed(underlying: e))
+        
+        Task { @MainActor in
+                    do {
+                        tracker.track(.tap(action: .landingBackupWallet), properties: [:])
+                        try await self.appEnvironment.createNewWallet()
+                        self.destination = Destinations.createNew
+                    } catch WalletError.createFailed(let e) {
+                        if case SeedManager.SeedManagerError.alreadyImported = e {
+                            self.showError = AlertType.feedback(destination: .createNew, cause: e)
+                        } else {
+                            fail(WalletError.createFailed(underlying: e))
+                        }
+                    } catch {
+                        fail(error)
+                    }
             }
-        } catch {
-            fail(error)
-        }
+
     }
     
     func fail(_ error: Error) {
@@ -183,37 +187,41 @@ struct CreateNewWallet: View {
               message: Text("it appears that this device already has keys stored on it. What do you want to do?".localized()),
               primaryButton: .default(Text("Restore existing keys".localized()),
                                       action: {
-                                        do {
-                                            try ZECCWalletEnvironment.shared.initialize()
-                                            self.destination = .createNew
-                                        } catch {
-                                            DispatchQueue.main.async {
-                                                self.fail(error)
+                                            Task { @MainActor in
+                                                   do {
+                                                       try await ZECCWalletEnvironment.shared.initialize()
+                                                       self.destination = .createNew
+                                                   } catch {
+                                                       DispatchQueue.main.async {
+                                                           self.fail(error)
+                                                       }
+                                                   }
                                             }
-                                        }
                                       }),
               secondaryButton: .destructive(Text("Discard them and continue".localized()),
                                             action: {
-                                                
-                                                ZECCWalletEnvironment.shared.nuke(abortApplication: false)
-                                                do {
-                                                    try ZECCWalletEnvironment.shared.reset()
-                                                } catch {
-                                                    self.fail(error)
-                                                    return
-                                                }
-                                                switch originalDestination {
-                                                case .createNew:
-                                                    do {
-                                                        try self.appEnvironment.createNewWallet()
-                                                        self.destination = originalDestination
-                                                    } catch {
-                                                            self.fail(error)
-                                                    }
-                                                case .restoreWallet:
-                                                    self.destination = originalDestination
-                                                
-                                                }
+            
+                                                Task { @MainActor in
+                                                             ZECCWalletEnvironment.shared.nuke(abortApplication: false)
+                                                             do {
+                                                                 try ZECCWalletEnvironment.shared.reset()
+                                                             } catch {
+                                                                 self.fail(error)
+                                                                 return
+                                                             }
+                                                             switch originalDestination {
+                                                             case .createNew:
+                                                                 do {
+                                                                     try await self.appEnvironment.createNewWallet()
+                                                                     self.destination = originalDestination
+                                                                 } catch {
+                                                                     self.fail(error)
+                                                                 }
+                                                             case .restoreWallet:
+                                                                 self.destination = originalDestination
+
+                                                             }
+                                                     }                                                
                                             }))
     }
     

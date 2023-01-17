@@ -57,8 +57,10 @@ final class SendFlowEnvironment: ObservableObject {
     }
     static let maxMemoLength: Int = ZECCWalletEnvironment.memoLengthLimit
     enum FlowError: Error {
+        case memoToTransparentAddress
         case invalidEnvironment
         case duplicateSent
+        case failedToDownloadParameters(message: String)
         case invalidAmount(message: String)
         case derivationFailed(error: Error)
         case derivationFailed(message: String)

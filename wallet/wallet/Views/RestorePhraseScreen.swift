@@ -85,19 +85,23 @@ struct RestorePhraseScreen: View {
 
                     }
                     Button(action: {
-                        do {
-                            try self.importSeed()
-                            try self.importBirthday()
-                            try self.appEnvironment.initialize()
-                        } catch {
-                            logger.error("\(error)")
-                            tracker.track(.error(severity: .critical), properties: [
-                                ErrorSeverity.underlyingError : "\(error)"])
-                            self.showError = true
-                            return
-                        }
-                        tracker.track(.tap(action: .walletImport), properties: [:])
-                        self.proceed = true
+                        
+                    Task { @MainActor in
+                           do {
+                               try self.importSeed()
+                               try self.importBirthday()
+                               try await self.appEnvironment.initialize()
+                           } catch {
+                               logger.error("\(error)")
+                               tracker.track(.error(severity: .critical), properties: [
+                                   ErrorSeverity.underlyingError : "\(error)"])
+                               self.showError = true
+                               return
+                           }
+                           tracker.track(.tap(action: .walletImport), properties: [:])
+                           self.proceed = true
+                    }
+                        
                     }) {
                         BlueButtonView(aTitle: "Proceed".localized())
                     }

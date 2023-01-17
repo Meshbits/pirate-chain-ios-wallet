@@ -18,17 +18,18 @@ enum AutoShieldingResult {
 protocol ShieldingCapable: AnyObject {
     /**
     Sends zatoshi.
-    - Parameter spendingKey: the key that allows spends to occur.
-    - Parameter transparentSecretKey: the key that allows to spend transaprent funds
+    - Parameter spendingKey: the key that allows to spend transaprent funds from the given account
     - Parameter memo: the optional memo to include as part of the transaction.
-    - Parameter accountIndex: the optional account id that will be used to shield  your funds to. By default, the first account is used.
     */
-    func shieldFunds(spendingKey: String, transparentSecretKey: String, memo: String?, from accountIndex: Int, resultBlock: @escaping (_ result: Result<PendingTransactionEntity, Error>) -> Void)
+    func shieldFunds(
+        spendingKey: UnifiedSpendingKey,
+        memo: Memo
+    ) async throws -> PendingTransactionEntity
 }
 
 protocol AutoShieldingStrategy {
     var shouldAutoShield: Bool { get }
-    func shield(autoShielder: AutoShielder) -> Future<AutoShieldingResult, Error>
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult
 }
 
 protocol UserSession {
@@ -38,11 +39,10 @@ protocol UserSession {
     func markAutoShield()
 }
 
-typealias PrivateKeyAccountIndexPair = (privateKey: String, account: Int, index: Int)
+//typealias PrivateKeyAccountIndexPair = (privateKey: String, account: Int, index: Int)
 
 protocol ShieldingKeyProviding {
-    func getTransparentSecretKey() throws -> PrivateKeyAccountIndexPair
-    func getSpendingKey() throws -> PrivateKeyAccountIndexPair
+    func getShieldingKey() throws -> UnifiedSpendingKey
 }
 
 protocol TransparentBalanceProviding {
@@ -71,46 +71,19 @@ protocol AutoShielder: AnyObject {
     var strategy: AutoShieldingStrategy { get }
     var shielder: ShieldingCapable { get }
     var keyDeriver: KeyDeriving { get }
-    func shield() -> Future<AutoShieldingResult, Error>
+    func shield() async throws -> AutoShieldingResult
 }
 
 extension AutoShielder {
-    func shield() -> Future<AutoShieldingResult, Error> {
-        guard strategy.shouldAutoShield else {
-            return Future<AutoShieldingResult,Error> { promise in
-                promise(.success(.notNeeded))
+    func shield() async throws -> AutoShieldingResult {
+            guard strategy.shouldAutoShield else {
+                return .notNeeded
             }
-        }
-            
-        return Future<AutoShieldingResult, Error> {[weak self] promise in
-            
-            guard let self = self else {
-                promise(.failure(ShieldFundsError.shieldingFailed(underlyingError: DeveloperFacingErrors.unexpectedBehavior(message: "Weak reference is nil. This is probably a programing error"))))
-                return
-            }
-            
-            do {
-                let spendingKeyKeyPair = try self.keyProviding.getSpendingKey()
-                let tskKeyPair = try self.keyProviding.getTransparentSecretKey()
-                let fromAccount = tskKeyPair.account
-                let tsk = tskKeyPair.privateKey
-                let spendingKey = spendingKeyKeyPair.privateKey
-                // TODO: add parameters to vary the index and the account to shield from
-                let tAddress = try self.keyDeriver.deriveTransparentAddressFromPrivateKey(tsk)
-                
-                self.shielder.shieldFunds(spendingKey: spendingKey, transparentSecretKey: tsk, memo: "Shielding from your t-address: \(tAddress)", from: fromAccount) { result in
-                    
-                    switch result {
-                    case .success(let pendingTx):
-                        promise(.success(.shielded(pendingTx: pendingTx)))
-                    case .failure(let error):
-                        promise(.failure(error))
-                    }
-                }
-            } catch {
-                promise(.failure(KeyDerivationErrors.derivationError(underlyingError: error)))
-            }
-        }
+            let usk = try self.keyProviding.getShieldingKey()
+            let memo = try Memo(string: "Shielding from your account: \(usk.account)")
+            return await .shielded(
+                pendingTx: try self.shielder.shieldFunds(spendingKey: usk, memo: memo)
+            )
     }
 }
 
@@ -143,21 +116,21 @@ class ThresholdDrivenAutoShielding: AutoShieldingStrategy {
     }
     
     var session: UserSession
-    var threshold: Int64
+    var threshold: Zatoshi
     var transparentBalanceProvider: TransparentBalanceProviding
 
     init(session: UserSession,
-         threshold zatoshiThreshold: Int64,
+         threshold zatoshiThreshold: Zatoshi,
          tBalance: TransparentBalanceProviding) {
         self.session = session
         self.threshold = zatoshiThreshold
         self.transparentBalanceProvider = tBalance
     }
     
-    func shield(autoShielder: AutoShielder) -> Future<AutoShieldingResult, Error> {
-        // this strategy attempts to shield once per session, regardless of the result.
-        return autoShielder.shield()
-    }
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult {
+           // this strategy attempts to shield once per session, regardless of the result.
+           try await autoShielder.shield()
+   }
 }
 
 class ManualShielding: AutoShieldingStrategy {
@@ -165,8 +138,8 @@ class ManualShielding: AutoShieldingStrategy {
         true
     }
     
-    func shield(autoShielder: AutoShielder) -> Future<AutoShieldingResult, Error> {
-        autoShielder.shield()
+    func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult {
+           try await autoShielder.shield()
     }
 }
 
@@ -187,7 +160,7 @@ class AutoShieldingBuilder {
         
         return ConcreteAutoShielder(
             autoShielding: ThresholdDrivenAutoShielding(session: Session.unique,
-                                                        threshold: threshold,
+                                                        threshold: Zatoshi(threshold),
                                                         tBalance: balanceProviding),
             keyProviding: keyProvider,
             keyDeriver: DerivationTool(networkType: ZCASH_NETWORK.networkType),
@@ -198,23 +171,11 @@ class AutoShieldingBuilder {
 extension SDKSynchronizer: ShieldingCapable {}
 
 class DefaultShieldingKeyProvider: ShieldingKeyProviding {
-    func getTransparentSecretKey() throws -> PrivateKeyAccountIndexPair {
-        let derivationTool = DerivationTool(networkType: ZCASH_NETWORK.networkType)
-        let s = try SeedManager.default.exportPhrase()
-        let seed = try MnemonicSeedProvider.default.toSeed(mnemonic: s)
-        let tsk = try derivationTool.deriveTransparentPrivateKey(seed: seed)
-        return (tsk, 0, 0)
-    }
-    
-    func getSpendingKey() throws -> PrivateKeyAccountIndexPair {
-        let derivationTool = DerivationTool(networkType: ZCASH_NETWORK.networkType)
-        let s = try SeedManager.default.exportPhrase()
-        let seed = try MnemonicSeedProvider.default.toSeed(mnemonic: s)
-        let keys = try derivationTool.deriveSpendingKeys(seed: seed, numberOfAccounts: 1)
-        guard let key = keys.first else {
-            throw KeyDerivationErrors.unableToDerive
-        }
-        return (key, 0, 0)
+    func getShieldingKey() throws -> UnifiedSpendingKey {
+           let derivationTool = DerivationTool(networkType: ZCASH_NETWORK.networkType)
+           let s = try SeedManager.default.exportPhrase()
+           let seed = try MnemonicSeedProvider.default.toSeed(mnemonic: s)
+           return try derivationTool.deriveUnifiedSpendingKey(seed: seed, accountIndex: 0)
     }
 }
 
