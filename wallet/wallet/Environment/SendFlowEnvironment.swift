@@ -136,46 +136,61 @@ final class SendFlowEnvironment: ObservableObject {
         self.isDone = true
         self.state = .failed(error: mapToUserFacingError(ZECCWalletEnvironment.mapError(error: error)))
     }
-    func preSend() {
-        guard case FlowState.preparing = self.state else {
-            let message = "attempt to start a pre-send stage where status was not .preparing and was \(self.state) instead"
-            logger.error(message)
-            tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : message])
-            fail(FlowError.duplicateSent)
-            return
-        }
-        
-        self.state = .downloadingParameters
-        SaplingParameterDownloader.downloadParametersIfNeeded()
-            .receive(on: DispatchQueue.main)
-            
-            .sink { [weak self] completion in
-                switch completion {
-                case .failure(let error):
-                    self?.state = .failed(error: error.code.asUserFacingError())
-                    self?.fail(error.code.asUserFacingError())
-                    break
-                case .finished:
-                    break
-                }
-            } receiveValue: { [weak self] _ in
-                self?.send()
+    @MainActor
+        func preSend() async {
+            guard case FlowState.preparing = self.state else {
+                let message = "attempt to start a pre-send stage where status was not .preparing and was \(self.state) instead"
+                logger.error(message)
+                tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : message])
+                fail(FlowError.duplicateSent)
+                return
             }
-            .store(in: &self.diposables)
-    }
+                
+            self.state = .downloadingParameters
+            do {
+                let result = try await SaplingParameterDownloader.downloadParamsIfnotPresent(
+                    spendURL: try URL.spendParamsURL(),
+                    outputURL: try URL.outputParamsURL()
+                )
+            } catch SaplingParameterDownloader.Errors.failed(let error) {
+                let message = "Failed to download parameters with error: \(error.localizedDescription)"
+                tracker.track(
+                    .error(severity: .critical),
+                    properties:  [
+                        ErrorSeverity.messageKey : message
+                    ]
+                )
+                fail(FlowError.failedToDownloadParameters(message: message))
+            } catch SaplingParameterDownloader.Errors.invalidURL {
+                let message = "Invalid URL was provided"
+                tracker.track(
+                    .error(severity: .critical),
+                    properties:  [
+                        ErrorSeverity.messageKey : message
+                    ]
+                )
+                fail(FlowError.failedToDownloadParameters(message: message))
+            } catch {
+                fail(error)
+            }
+            await send()
+        }
     
-    func send() {
+    func send() async {
+
+        self.state = .sending
+
         guard !txSent else {
-            let message = "attempt to send tx twice".localized()
+            let message = "attempt to send tx twice"
             logger.error(message)
             tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : message])
             fail(FlowError.duplicateSent)
             return
         }
-        self.state = .sending
+
         let environment = ZECCWalletEnvironment.shared
         guard let zatoshi = doubleAmount?.toZatoshi() else {
-            let message = "invalid arrr amount:".localized() + " \(String(describing: doubleAmount))"
+            let message = "invalid zatoshi amount: \(String(describing: doubleAmount))"
             logger.error(message)
             fail(FlowError.invalidAmount(message: message))
             return
@@ -185,35 +200,48 @@ final class SendFlowEnvironment: ObservableObject {
             let phrase = try SeedManager.default.exportPhrase()
             let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: phrase)
 
-//            guard let spendingKey = try DerivationTool.default.deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
-                let message = "no spending key for account 1".localized()
-            guard let spendingKey = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveSpendingKeys(seed: seedBytes, numberOfAccounts: 1).first else {
+            let usk = try DerivationTool(networkType: ZCASH_NETWORK.networkType)
+                .deriveUnifiedSpendingKey(seed: seedBytes, accountIndex: 0)
 
-                logger.error(message)
-                self.fail(FlowError.derivationFailed(message: "no spending key for account 1"))
-                return
-            }
            
-            guard let replyToAddress = environment.getShieldedAddress() else {
-                let message = "could not derive user's own address".localized()
+            guard let replyToAddress = await environment.getShieldedAddress() else {
+                let message = "could not derive user's own address"
                 logger.error(message)
-                self.fail(FlowError.derivationFailed(message: "could not derive user's own address"))
+                await MainActor.run {
+                    self.fail(FlowError.derivationFailed(message: "could not derive user's own address"))
+                }
                 return
             }
     
             UserSettings.shared.lastUsedAddress = self.address
-            environment.synchronizer.send(
-                with: spendingKey,
-                zatoshi: zatoshi,
-                to: self.address,
-                memo: try Self.buildMemo(
+
+            let memo: Memo?
+
+            let recipient: Recipient = try Recipient(self.address, network: ZCASH_NETWORK.networkType)
+
+            if case .transparent = recipient {
+                memo = nil
+            } else if self.includeSendingAddress {
+                memo = try Self.buildMemo(
+                    recipient: recipient,
                     memo: self.memo,
                     includesMemo: self.includesMemo,
-                    replyToAddress: self.includeSendingAddress ? replyToAddress : nil
-                ),
-                from: 0
-            )
-                .receive(on: DispatchQueue.main)
+                    replyToAddress: replyToAddress
+                )
+            } else {
+                memo = try Memo(string: self.memo)
+            }
+            
+            Future(operation: {
+                try await environment.synchronizer.send(
+                    with: usk,
+                    zatoshi: Zatoshi(zatoshi),
+                    to: recipient,
+                    memo: memo
+                )
+
+            })
+             .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { [weak self] (completion) in
                     guard let self = self else {
                         return
@@ -240,10 +268,8 @@ final class SendFlowEnvironment: ObservableObject {
                         self.pendingTx = transaction
                     self.state = .finished
                 }.store(in: &diposables)
-            
-                
+
             self.txSent = true
-            
         } catch {
             logger.error("failed to send: \(error)")
             self.fail(error)
@@ -268,43 +294,46 @@ final class SendFlowEnvironment: ObservableObject {
         NotificationCenter.default.post(name: .sendFlowClosed, object: nil)
     }
     
-    static func replyToAddress(_ address: String) -> String {
-        "\nReply-To: \(address)"
+    static func replyToAddress(to: Recipient, ownAddress: UnifiedAddress) -> String? {
+            switch to {
+            case .unified:
+                return "\nReply-To: \(ownAddress.stringEncoded)"
+            case .sapling:
+                guard let ownSapling = ownAddress.saplingReceiver() else {
+                    return nil
+                }
+                return "\nReply-To: \(ownSapling.stringEncoded)"
+            default:
+                return nil
+            }
     }
     
-    static func includeReplyTo(address: String, in memo: String, charLimit: Int = SendFlowEnvironment.maxMemoLength) throws -> String {
-        
-        guard let isValidZAddr = try? DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidShieldedAddress(address),
-              isValidZAddr else {
-            let msg = "the provided reply-to address is invalid".localized()
-            logger.error(msg)
-            throw SendFlowEnvironment.FlowError.derivationFailed(message: msg)
-        }
-        
-        let replyTo = replyToAddress(address)
-        
-        if (memo.count + replyTo.count) >= charLimit {
-            let truncatedMemo = String(memo[memo.startIndex ..< memo.index(memo.startIndex, offsetBy: (memo.count - replyTo.count))])
-            
-            return truncatedMemo + replyTo
-        }
-        return memo + replyTo
-        
+    static func includeReplyTo(recipient: Recipient, ownAddress: UnifiedAddress, in memo: String, charLimit: Int = SendFlowEnvironment.maxMemoLength) throws -> Memo {
+            if case Recipient.transparent = recipient {
+                throw SendFlowEnvironment.FlowError.memoToTransparentAddress
+            }
+                
+            guard let replyTo = replyToAddress(to: recipient, ownAddress: ownAddress) else {
+                throw SendFlowEnvironment.FlowError.memoToTransparentAddress
+            }
+                
+            if (memo.count + replyTo.count) >= charLimit {
+                let truncatedMemo = String(memo[memo.startIndex ..< memo.index(memo.startIndex, offsetBy: (memo.count - replyTo.count))])
+                    
+                return try Memo(string: truncatedMemo + replyTo)
+            }
+            return try Memo(string: memo + replyTo)
     }
     
-    static func buildMemo(memo: String, includesMemo: Bool, replyToAddress: String?) throws -> String? {
-        
-        guard includesMemo else { return nil }
-        
-        if let addr = replyToAddress {
-            return try includeReplyTo(address: addr, in: memo)
-        }
-        guard !memo.isEmpty else { return nil }
-        
-        guard !memo.isEmpty else { return nil }
-        
-        return memo
-       
+    static func buildMemo(recipient: Recipient, memo: String, includesMemo: Bool, replyToAddress: UnifiedAddress) throws -> Memo {
+                
+            guard includesMemo else { return .empty }
+                
+            return try includeReplyTo(
+                recipient: recipient,
+                ownAddress: replyToAddress,
+                in: memo
+            )
     }
 }
 
