@@ -1407,6 +1407,7 @@
 				0D1250FD23B557E40014EE3A /* Resources */,
 				AFBFA011C32F80A73756DCC0 /* Upload Bugsnag dSYM */,
 				0A5EBDA1C8A97EEFCE9B5134 /* [CP] Embed Pods Frameworks */,
+				AB5B0AD1A424FA00531E4181 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1426,6 +1427,7 @@
 				0D12511223B557E60014EE3A /* Frameworks */,
 				0D12511323B557E60014EE3A /* Resources */,
 				D8052294CFBC7D899C2EC0F6 /* [CP] Embed Pods Frameworks */,
+				900CCD474A075FC03CF08ADC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1472,6 +1474,7 @@
 				0DCDFFD924B6722B000F6999 /* Resources */,
 				8D71F0AD23779882122C85E7 /* [CP] Embed Pods Frameworks */,
 				CF89F1A3292FFB3D00FABCE9 /* Embed Libraries */,
+				191D941A4D9584F85487418C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1497,6 +1500,7 @@
 				0DE303B3263A158400CF877A /* Resources */,
 				0DE303C0263A158400CF877A /* Upload Bugsnag dSYM */,
 				B261EFB8B97B429C53F5B193 /* [CP] Embed Pods Frameworks */,
+				18B2DA4398D6B325C58CE0B2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1546,7 +1550,7 @@
 			mainGroup = 0D1250F623B557E40014EE3A;
 			packageReferences = (
 				29491D6426C5613500BBF144 /* XCRemoteSwiftPackageReference "neumorphic" */,
-				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */,
+				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */,
 			);
 			productRefGroup = 0D12510023B557E40014EE3A /* Products */;
 			projectDirPath = "";
@@ -1730,6 +1734,40 @@
 			shellScript = "# First, attempt to get the API key from an environment variable\napi_key = ENV[\"BUGSNAG_API_KEY\"]\n\n# If not present, attempt to lookup the value from the Info.plist\nif !api_key\n  default_info_plist_location = Dir.glob(\"./{ios/,}*/Info.plist\").reject {|path| path =~ /build|test/i }\n  plist_buddy_response = `/usr/libexec/PlistBuddy -c \"print :BugsnagAPIKey\" \"#{default_info_plist_location.first}\"`\n  api_key = plist_buddy_response if $?.success?\nend\n\nfork do\n  Process.setsid\n  STDIN.reopen(\"/dev/null\")\n  STDOUT.reopen(\"/dev/null\", \"a\")\n  STDERR.reopen(\"/dev/null\", \"a\")\n\n  require 'shellwords'\n\n  Dir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/*/Contents/Resources/DWARF/*\"].each do |dsym|\n    curl_command = \"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} \"\n    curl_command += \"-F apiKey=#{Shellwords.escape(api_key)} \" if api_key\n    curl_command += \"https://upload.bugsnag.com/\"\n    system(curl_command)\n  end\nend\n";
 			showEnvVarsInLog = 0;
 		};
+		18B2DA4398D6B325C58CE0B2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-Testnet/Pods-ECC-Wallet-Testnet-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-Testnet/Pods-ECC-Wallet-Testnet-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-Testnet/Pods-ECC-Wallet-Testnet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		191D941A4D9584F85487418C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-no-logging/Pods-ECC-Wallet-no-logging-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-no-logging/Pods-ECC-Wallet-no-logging-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-no-logging/Pods-ECC-Wallet-no-logging-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3FC4BC99161687B9D658899B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1813,6 +1851,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet-no-logging/Pods-ECC-Wallet-no-logging-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		900CCD474A075FC03CF08ADC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-WalletTests/Pods-ECC-WalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-WalletTests/Pods-ECC-WalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ECC-WalletTests/Pods-ECC-WalletTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A40CFDDA0912AA038984C3FB /* Upload Bugsnag dSYM */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1830,6 +1885,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = "/usr/bin/env ruby";
 			shellScript = "# First, attempt to get the API key from an environment variable\napi_key = ENV[\"BUGSNAG_API_KEY\"]\n\n# If not present, attempt to lookup the value from the Info.plist\nif !api_key\n  default_info_plist_location = Dir.glob(\"./{ios/,}*/Info.plist\").reject {|path| path =~ /build|test/i }\n  plist_buddy_response = `/usr/libexec/PlistBuddy -c \"print :BugsnagAPIKey\" \"#{default_info_plist_location.first}\"`\n  api_key = plist_buddy_response if $?.success?\nend\n\nfork do\n  Process.setsid\n  STDIN.reopen(\"/dev/null\")\n  STDOUT.reopen(\"/dev/null\", \"a\")\n  STDERR.reopen(\"/dev/null\", \"a\")\n\n  require 'shellwords'\n\n  Dir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/*/Contents/Resources/DWARF/*\"].each do |dsym|\n    curl_command = \"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} \"\n    curl_command += \"-F apiKey=#{Shellwords.escape(api_key)} \" if api_key\n    curl_command += \"https://upload.bugsnag.com/\"\n    system(curl_command)\n  end\nend\n";
+			showEnvVarsInLog = 0;
+		};
+		AB5B0AD1A424FA00531E4181 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ECC-Wallet/Pods-ECC-Wallet-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		AFBFA011C32F80A73756DCC0 /* Upload Bugsnag dSYM */ = {
@@ -3026,7 +3098,7 @@
 				minimumVersion = 2.0.5;
 			};
 		};
-		29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */ = {
+		29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rebeloper/WKView.git";
 			requirement = {
@@ -3044,7 +3116,7 @@
 		};
 		29DDA37826CCFA6A0041406B /* WKView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */;
+			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */;
 			productName = WKView;
 		};
 /* End XCSwiftPackageProductDependency section */

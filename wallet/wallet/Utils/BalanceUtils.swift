@@ -11,7 +11,7 @@ import ZcashLightClientKit
 
 extension Int64 {
     func asHumanReadableZecBalance() -> Double {
-        var decimal = Decimal(self) / Decimal(ZcashSDK.ZATOSHI_PER_ZEC)
+        var decimal = Decimal(self) / Decimal(ZcashSDK.zatoshiPerZEC)
         var rounded = Decimal()
         NSDecimalRound(&rounded, &decimal, 6, .bankers)
         return (rounded as NSDecimalNumber).doubleValue
@@ -28,7 +28,7 @@ extension Double {
 
     
     func toZatoshi() -> Int64 {
-        var decimal = Decimal(self) * Decimal(ZcashSDK.ZATOSHI_PER_ZEC)
+        var decimal = Decimal(self) * Decimal(ZcashSDK.zatoshiPerZEC)
         var rounded = Decimal()
         NSDecimalRound(&rounded, &decimal, 6, .bankers)
         return (rounded as NSDecimalNumber).int64Value

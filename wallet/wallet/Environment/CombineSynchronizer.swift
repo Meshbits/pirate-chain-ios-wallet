@@ -26,8 +26,8 @@ class CombineSynchronizer {
     var minedTransaction = PassthroughSubject<PendingTransactionEntity,Never>()
     var shieldedBalance: CurrentValueSubject<WalletBalance, Never>
     var transparentBalance: CurrentValueSubject<WalletBalance, Never>
-    var balance: CurrentValueSubject<Double,Never>
-    var verifiedBalance: CurrentValueSubject<Double,Never>
+//    var balance: CurrentValueSubject<Double,Never>
+//    var verifiedBalance: CurrentValueSubject<Double,Never>
     var cancellables = [AnyCancellable]()
     var errorPublisher = PassthroughSubject<Error, Never>()
     
@@ -90,60 +90,71 @@ class CombineSynchronizer {
             }
         }
     }
-    
-    func latestDownloadedHeight() throws -> BlockHeight {
-        try self.synchronizer.latestDownloadedHeight()
-    }
-    
-    
+//
+//    func latestDownloadedHeight() throws -> BlockHeight {
+//        try self.synchronizer.latestHeight()
+//    }
+//
+//
     init(initializer: Initializer) throws {
         self.walletDetailsBuffer = CurrentValueSubject([DetailModel]())
         self.synchronizer = try SDKSynchronizer(initializer: initializer)
         self.syncStatus = CurrentValueSubject(.disconnected)
-        self.balance = CurrentValueSubject(0)
-        self.shieldedBalance = CurrentValueSubject(Balance(verified: 0, total: 0))
-        let transparentSubject = CurrentValueSubject<WalletBalance, Never>(Balance(verified: 0, total: 0))
+        self.shieldedBalance = CurrentValueSubject(WalletBalance(verified: .zero, total: .zero))
+        let transparentSubject = CurrentValueSubject<WalletBalance, Never>(WalletBalance(verified: .zero, total: .zero))
         self.transparentBalance = transparentSubject
-        self.verifiedBalance = CurrentValueSubject(0)
-        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT)
+        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.saplingActivationHeight)
         self.connectionState = CurrentValueSubject(self.synchronizer.connectionState)
         
         // Subscribe to SDKSynchronizer notifications
         
         NotificationCenter.default.publisher(for: .synchronizerSynced)
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] _ in
-            guard let self = self else { return }
-                self.updatePublishers()
-                
-                if (UIApplication.shared.applicationState == .background){
-                    NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
-                }
-        }).store(in: &cancellables)
-        
+                  .receive(on: DispatchQueue.main)
+                  .sink(receiveValue: { [weak self] notification in
+                      guard let self = self else { return }
+                      guard let userInfo = notification.userInfo else {
+                          logger.error("Received `.synchronizerSynced` but the userInfo is empty")
+                          Task { @MainActor in
+                              await self.updatePublishers()
+                          }
+                          return
+                      }
+                          
+                      guard let synchronizerState = userInfo[SDKSynchronizer.NotificationKeys.synchronizerState] as? SDKSynchronizer.SynchronizerState else {
+                          logger.error("Received `.synchronizerSynced` but the userInfo is empty")
+                          Task { @MainActor in
+                              await self.updatePublishers()
+                          }
+                          return
+                      }
+                      self.updatePublishers(with: synchronizerState)
+                      
+                      if (UIApplication.shared.applicationState == .background){
+                          NotificationCenter.default.post(name: NSNotification.Name(mStopSoundOnceFinishedOrInForeground), object: nil)
+                      }
+                  }).store(in: &cancellables)
+              
         
         NotificationCenter.default.publisher(for: .synchronizerMinedTransaction)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] minedNotification in
-            guard let self = self else { return }
-            guard let minedTx = minedNotification.userInfo?[SDKSynchronizer.NotificationKeys.minedTransaction] as? PendingTransactionEntity else { return }
-            self.minedTransaction.send(minedTx)
-        }).store(in: &cancellables)
+                           guard let self = self else { return }
+                           guard let minedTx = minedNotification.userInfo?[SDKSynchronizer.NotificationKeys.minedTransaction] as? PendingTransactionEntity else { return }
+                           self.minedTransaction.send(minedTx)
+           }).store(in: &cancellables)
         
         NotificationCenter.default.publisher(for: .synchronizerFailed)
             .receive(on: DispatchQueue.main)
             .sink {[weak self] (notification) in
-            
-            guard let self = self else { return }
-            
-            guard let error = notification.userInfo?[SDKSynchronizer.NotificationKeys.error] as? Error else {
-                self.errorPublisher.send(WalletError.genericErrorWithMessage(message: "An error ocurred, but we can't figure out what it is. Please check device logs for more details".localized())
-                )
-                return
-            }
-                
-            self.errorPublisher.send(error)
-        }.store(in: &cancellables)
+                            guard let self = self else { return }
+                            guard let error = notification.userInfo?[SDKSynchronizer.NotificationKeys.error] as? Error else {
+                                self.errorPublisher.send(WalletError.genericErrorWithMessage(message: "An error ocurred, but we can't figure out what it is. Please check device logs for more details")
+                                )
+                                return
+                            }
+                                
+                            self.errorPublisher.send(error)
+            }.store(in: &cancellables)
             
         Publishers.Merge(NotificationCenter.default.publisher(for: .blockProcessorStatusChanged), NotificationCenter.default.publisher(for: .blockProcessorUpdated))
             .receive(on: DispatchQueue.main)
@@ -224,7 +235,8 @@ class CombineSynchronizer {
             })
             .store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: .blockProcessorFinished)
+        /*
+         NotificationCenter.default.publisher(for: .blockProcessorFinished)
             .compactMap { n -> BlockHeight? in
                 n.userInfo?[CompactBlockProcessorNotificationKey.latestScannedBlockHeight] as? BlockHeight
             }
@@ -233,6 +245,7 @@ class CombineSynchronizer {
                 self?.syncBlockHeight.send(value)
             })
             .store(in: &cancellables)
+         */
     }
     
     func prepare() throws {
@@ -344,7 +357,7 @@ class CombineSynchronizer {
             
             guard let self = self else { return }
             
-            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
+            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.saplingActivationHeight
             
             self.synchronizer.refreshUTXOs(address: tAddress, from: walletBirthday, result: { [weak self] (r) in
                 guard let self = self else { return }
@@ -479,6 +492,8 @@ extension CompactBlockProcessor.State {
         case .validating:
             return .validating
         case .enhancing:
+            return nil
+        case .handlingSaplingFiles:
             return nil
         
         }

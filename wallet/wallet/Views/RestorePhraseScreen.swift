@@ -181,7 +181,7 @@ struct RestorePhraseScreen: View {
             return false
         }
         
-        return b >= ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
+        return b >= ZCASH_NETWORK.constants.saplingActivationHeight
     }
     
     func validateSeed(_ seed: String) -> Bool {
@@ -194,7 +194,7 @@ struct RestorePhraseScreen: View {
     }
     
     func importBirthday() throws {
-        let b = BlockHeight(self.walletBirthDay.trimmingCharacters(in: .whitespacesAndNewlines)) ?? ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
+        let b = BlockHeight(self.walletBirthDay.trimmingCharacters(in: .whitespacesAndNewlines)) ?? ZCASH_NETWORK.constants.saplingActivationHeight
         try SeedManager.default.importBirthday(b)
     }
     

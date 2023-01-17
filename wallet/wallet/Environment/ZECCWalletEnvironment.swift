@@ -25,7 +25,7 @@ final class ZECCWalletEnvironment: ObservableObject {
 
     
     static let genericErrorMessage = "An error ocurred, please check your device logs".localized()
-    static let autoShieldingThresholdInZatoshi: Int64 = Int64(ZcashSDK.ZATOSHI_PER_ZEC / 100)
+    static let autoShieldingThresholdInZatoshi: Int64 = Int64(ZcashSDK.zatoshiPerZEC / 100)
 
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
@@ -47,9 +47,9 @@ final class ZECCWalletEnvironment: ObservableObject {
     var shouldShowAutoShieldingNotice: Bool {
         shouldShowAutoShieldingNoticeScreen()
     }
-    var shieldingAddress: String {
-        synchronizer.unifiedAddress.tAddress
-    }
+//    var shieldingAddress: String {
+//        synchronizer.unifiedAddress.tAddress
+//    }
     #if ENABLE_LOGGING
     var shouldShowFeedbackDialog: Bool { shouldShowFeedbackRequest() }
     #endif
@@ -116,28 +116,34 @@ final class ZECCWalletEnvironment: ObservableObject {
         self.synchronizer = nil
     }
     
-    func createNewWallet() throws {
+    func createNewWallet() async throws {
         
         do {
             let randomPhrase = try MnemonicSeedProvider.default.randomMnemonic()
             
-            let birthday = WalletBirthday.birthday(with: BlockHeight.max, network: ZCASH_NETWORK)
+            let birthday = BlockHeight.ofLatestCheckpoint(network: ZCASH_NETWORK)  //WalletBirthday.birthday(with: BlockHeight.max, network: ZCASH_NETWORK)
             
-            try SeedManager.default.importBirthday(birthday.height)
+            try SeedManager.default.importBirthday(birthday)
+            
             try SeedManager.default.importPhrase(bip39: randomPhrase)
+            
             SeedManager.default.importLightWalletEndpoint(address: ZECCWalletEnvironment.defaultLightWalletEndpoint)
+            
             SeedManager.default.importLightWalletPort(port: ZECCWalletEnvironment.defaultLightWalletPort)
-            try self.initialize()
+           
+            try await self.initialize()
         
         } catch {
             throw WalletError.createFailed(underlying: error)
         }
     }
     
-    func createNewWalletWithPhrase(randomPhrase:String) throws {
+    func createNewWalletWithPhrase(randomPhrase:String) async throws {
         
         do {
            
+            let birthday = BlockHeight.ofLatestCheckpoint(network: ZCASH_NETWORK)
+            
             if randomPhrase.isEmpty {
                 let mPhrase = try MnemonicSeedProvider.default.randomMnemonic()
                 try SeedManager.default.importPhrase(bip39: mPhrase)
@@ -145,23 +151,25 @@ final class ZECCWalletEnvironment: ObservableObject {
                 try SeedManager.default.importPhrase(bip39: randomPhrase)
             }
             
-            let birthday = WalletBirthday.birthday(with: BlockHeight.max, network: ZCASH_NETWORK)
-            
-            try SeedManager.default.importBirthday(birthday.height)
+            try SeedManager.default.importBirthday(birthday)
              
             SeedManager.default.importLightWalletEndpoint(address: ZECCWalletEnvironment.defaultLightWalletEndpoint)
             SeedManager.default.importLightWalletPort(port: ZECCWalletEnvironment.defaultLightWalletPort)
-            try self.initialize()
+            try await self.initialize()
         
         } catch {
             throw WalletError.createFailed(underlying: error)
         }
     }
     
-    func initialize() throws {
+    func initialize() async throws {
         let seedPhrase = try SeedManager.default.exportPhrase()
         let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: seedPhrase)
-        let viewingKeys = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveUnifiedViewingKeysFromSeed(seedBytes, numberOfAccounts: 1)
+//        let viewingKeys = try DerivationTool(networkType: ZCASH_NETWORK.networkType).deriveUnifiedViewingKeysFromSeed(seedBytes, numberOfAccounts: 1)
+        
+        let viewingKeys = try DerivationTool(networkType: ZCASH_NETWORK.networkType)
+            .deriveUnifiedSpendingKey(seed: seedBytes, accountIndex: 0)
+            .deriveFullViewingKey()
         
         let initializer = Initializer(
             cacheDbURL: self.cacheDbURL,
@@ -171,7 +179,7 @@ final class ZECCWalletEnvironment: ObservableObject {
             network: ZCASH_NETWORK,
             spendParamsURL: self.spendParamsURL,
             outputParamsURL: self.outputParamsURL,
-            viewingKeys: viewingKeys,
+            viewingKeys: [viewingKeys],
             walletBirthday: try SeedManager.default.exportBirthday(),
             loggerProxy: logger)
         
@@ -181,13 +189,17 @@ final class ZECCWalletEnvironment: ObservableObject {
             shielder: self.synchronizer.synchronizer,
             threshold: Self.autoShieldingThresholdInZatoshi,
             balanceProviding: self.synchronizer)
-        try self.synchronizer.prepare()
+        try await self.synchronizer.prepare(with: seedBytes)
         
         self.subscribeToApplicationNotificationsPublishers()
         
-        fixPendingTransactionsIfNeeded()
+//        fixPendingTransactionsIfNeeded()
+//
+//        try self.synchronizer.start()
         
-        try self.synchronizer.start()
+        try await MainActor.run {
+           try self.synchronizer.start()
+        }
     }
     
     /**
@@ -245,7 +257,8 @@ final class ZECCWalletEnvironment: ObservableObject {
     static func mapError(error: Error) -> WalletError {
         if let walletError = error as? WalletError {
             return walletError
-        } else if let rustError = error as? RustWeldingError {
+        }
+        /*else if let rustError = error as? RustWeldingError {
             switch rustError {
             case .genericError(let message):
                 return WalletError.genericErrorWithMessage(message: message)
@@ -260,7 +273,8 @@ final class ZECCWalletEnvironment: ObservableObject {
             default:
                 return WalletError.genericErrorWithError(error: rustError)
             }
-        } else if let synchronizerError = error as? SynchronizerError {
+        }*/
+        else if let synchronizerError = error as? SynchronizerError {
             switch synchronizerError {
             case .lightwalletdValidationFailed(let underlyingError):
                 return WalletError.criticalError(error: underlyingError)
@@ -467,11 +481,11 @@ extension ZECCWalletEnvironment {
     }
     
     private func sufficientFunds(availableBalance: Int64, zatoshiToSend: Int64) -> Bool {
-        availableBalance - zatoshiToSend  - Int64(ZCASH_NETWORK.constants.defaultFee()) >= 0
+        availableBalance - zatoshiToSend  - Int64(ZCASH_NETWORK.constants.defaultFee().amount) >= 0
     }
     
     static var minerFee: Double {
-        Int64(ZCASH_NETWORK.constants.defaultFee()).asHumanReadableZecBalance()
+        ZCASH_NETWORK.constants.defaultFee().decimalValue.doubleValue
     }
     
     func credentialsAlreadyPresent() -> Bool {
@@ -479,15 +493,15 @@ extension ZECCWalletEnvironment {
     }
     
     func getShieldedVerifiedBalance() -> Int64 {
-        self.synchronizer.initializer.getVerifiedBalance()
+        self.synchronizer.initializer.getVerifiedBalance().amount
     }
     
     func getShieldedBalance() -> Int64 {
-        self.synchronizer.initializer.getBalance()
+        self.synchronizer.initializer.getBalance().amount
     }
     
-    func getShieldedAddress() -> String? {
-        self.synchronizer.initializer.getAddress()
+    func getShieldedAddress() async -> UnifiedAddress? {
+        await self.synchronizer.synchronizer.getUnifiedAddress(accountIndex: 0)
     }
 }
 
@@ -510,72 +524,6 @@ extension EnvironmentValues {
 extension View {
     func walletEnvironment(_ env: ZECCWalletEnvironment) -> some View {
         environment(\.walletEnvironment, env)
-    }
-}
- 
-
-extension ZECCWalletEnvironment {
-    func fixPendingTransactionsIfNeeded() {
-        // check if we need to perform the fix or leave
-        guard !UserSettings.shared.didRescanPendingFix else {
-            return
-        }
-        logger.debug("Starting to pending transaction fix")
-        tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "Starting to pending transaction fix"])
-        
-        do {
-            // get all the pending transactions
-            let txs = try synchronizer.synchronizer.allPendingTransactions()
-            guard !txs.isEmpty else {
-                logger.debug("no pending txs. saving settings")
-                UserSettings.shared.didRescanPendingFix = true
-                return
-            }
-            
-            logger.debug("found pending transactions")
-            tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "found pending transactions"])
-            
-            // fetch the first one that's reported to be unmined
-            guard let firstUnmined = txs.filter({ !$0.isMined }).first?.transactionEntity else {
-                logger.debug("no unmined txs. saving settings")
-                tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "no unmined txs. saving settings"])
-                UserSettings.shared.didRescanPendingFix = true
-                return
-            }
-            
-            logger.debug("found unmined pending transactions with expiry height: \(String(describing: firstUnmined.expiryHeight))")
-            tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "found unmined pending transactions with expiry : \(String(describing: firstUnmined.expiryHeight))"])
-            
-            try self.synchronizer.rewind(.transaction(firstUnmined))
-            UserSettings.shared.didRescanPendingFix = true
-            logger.debug("rewind successfull. saving settings")
-            tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "rewind successfull. saving settings"])
-            
-        } catch SynchronizerError.rewindErrorUnknownArchorHeight {
-            do {
-                try self.synchronizer.rewind(.quick)
-                UserSettings.shared.didRescanPendingFix = true
-                tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "rewind successful after recovering from error SynchronizerError.rewindErrorUnknownArchorHeight. saving settings"])
-            } catch {
-                logger.error("attempt to fix pending transactions failed with error: \(error)")
-                tracker.track(.error(severity: .critical), properties: ["pendingTxFix" : "attempt to fix pending transactions failed with error: \(error)"])
-            }
-        } catch {
-            logger.error("attempt to fix pending transactions failed with error: \(error)")
-            tracker.track(.error(severity: .critical), properties: ["pendingTxFix" : "attempt to fix pending transactions failed with error: \(error)"])
-            
-        }
-        
-        do {
-            let latestDownloadedHeight = try self.synchronizer.synchronizer.latestDownloadedHeight()
-            
-            logger.debug("rewound to height \(latestDownloadedHeight)")
-            tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "rewind successfull. saving settings"])
-        } catch {
-            logger.debug("call to latestDownloadedHeight failed with error \(error)")
-            tracker.track(.screen(screen: .home), properties: ["pendingTxFix" : "call to latestDownloadedHeight failed with error \(error)"])
-            
-        }
     }
 }
 
