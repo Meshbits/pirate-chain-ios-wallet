@@ -1414,6 +1414,8 @@
 			dependencies = (
 			);
 			name = "ECC-Wallet";
+			packageProductDependencies = (
+			);
 			productName = wallet;
 			productReference = 0D1250FF23B557E40014EE3A /* ECC Wallet.app */;
 			productType = "com.apple.product-type.application";
@@ -1550,7 +1552,7 @@
 			mainGroup = 0D1250F623B557E40014EE3A;
 			packageReferences = (
 				29491D6426C5613500BBF144 /* XCRemoteSwiftPackageReference "neumorphic" */,
-				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */,
+				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */,
 			);
 			productRefGroup = 0D12510023B557E40014EE3A /* Products */;
 			projectDirPath = "";
@@ -3098,7 +3100,7 @@
 				minimumVersion = 2.0.5;
 			};
 		};
-		29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */ = {
+		29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/rebeloper/WKView.git";
 			requirement = {
@@ -3116,7 +3118,7 @@
 		};
 		29DDA37826CCFA6A0041406B /* WKView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView.git" */;
+			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */;
 			productName = WKView;
 		};
 /* End XCSwiftPackageProductDependency section */

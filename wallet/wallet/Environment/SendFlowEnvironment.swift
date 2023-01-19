@@ -173,108 +173,108 @@ final class SendFlowEnvironment: ObservableObject {
             } catch {
                 fail(error)
             }
-            await send()
+//            await send()
         }
     
-    func send() async {
-
-        self.state = .sending
-
-        guard !txSent else {
-            let message = "attempt to send tx twice"
-            logger.error(message)
-            tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : message])
-            fail(FlowError.duplicateSent)
-            return
-        }
-
-        let environment = ZECCWalletEnvironment.shared
-        guard let zatoshi = doubleAmount?.toZatoshi() else {
-            let message = "invalid zatoshi amount: \(String(describing: doubleAmount))"
-            logger.error(message)
-            fail(FlowError.invalidAmount(message: message))
-            return
-        }
-            
-        do {
-            let phrase = try SeedManager.default.exportPhrase()
-            let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: phrase)
-
-            let usk = try DerivationTool(networkType: ZCASH_NETWORK.networkType)
-                .deriveUnifiedSpendingKey(seed: seedBytes, accountIndex: 0)
-
-           
-            guard let replyToAddress = await environment.getShieldedAddress() else {
-                let message = "could not derive user's own address"
-                logger.error(message)
-                await MainActor.run {
-                    self.fail(FlowError.derivationFailed(message: "could not derive user's own address"))
-                }
-                return
-            }
-    
-            UserSettings.shared.lastUsedAddress = self.address
-
-            let memo: Memo?
-
-            let recipient: Recipient = try Recipient(self.address, network: ZCASH_NETWORK.networkType)
-
-            if case .transparent = recipient {
-                memo = nil
-            } else if self.includeSendingAddress {
-                memo = try Self.buildMemo(
-                    recipient: recipient,
-                    memo: self.memo,
-                    includesMemo: self.includesMemo,
-                    replyToAddress: replyToAddress
-                )
-            } else {
-                memo = try Memo(string: self.memo)
-            }
-            
-            Future(operation: {
-                try await environment.synchronizer.send(
-                    with: usk,
-                    zatoshi: Zatoshi(zatoshi),
-                    to: recipient,
-                    memo: memo
-                )
-
-            })
-             .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { [weak self] (completion) in
-                    guard let self = self else {
-                        return
-                    }
-                    
-                    switch completion {
-                    case .finished:
-                        logger.debug("send flow finished")
-                    case .failure(let error):
-                        tracker.report(handledException: DeveloperFacingErrors.handledException(error: error))
-                        logger.error("\(error)")
-                        self.error = error
-                        self.showError = true
-                        tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : "\(ZECCWalletEnvironment.mapError(error: error))"])
-                        
-                    }
-                    // fix me:
-                    self.isDone = true
-                    
-                }) { [weak self] (transaction) in
-                    guard let self = self else {
-                        return
-                    }
-                        self.pendingTx = transaction
-                    self.state = .finished
-                }.store(in: &diposables)
-
-            self.txSent = true
-        } catch {
-            logger.error("failed to send: \(error)")
-            self.fail(error)
-        }
-    }
+//    func send() async {
+//
+//        self.state = .sending
+//
+//        guard !txSent else {
+//            let message = "attempt to send tx twice"
+//            logger.error(message)
+//            tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : message])
+//            fail(FlowError.duplicateSent)
+//            return
+//        }
+//
+//        let environment = ZECCWalletEnvironment.shared
+//        guard let zatoshi = doubleAmount?.toZatoshi() else {
+//            let message = "invalid zatoshi amount: \(String(describing: doubleAmount))"
+//            logger.error(message)
+//            fail(FlowError.invalidAmount(message: message))
+//            return
+//        }
+//            
+//        do {
+//            let phrase = try SeedManager.default.exportPhrase()
+//            let seedBytes = try MnemonicSeedProvider.default.toSeed(mnemonic: phrase)
+//
+//            let usk = try DerivationTool(networkType: ZCASH_NETWORK.networkType)
+//                .deriveUnifiedSpendingKey(seed: seedBytes, accountIndex: 0)
+//
+//           
+//            guard let replyToAddress = await environment.getShieldedAddress() else {
+//                let message = "could not derive user's own address"
+//                logger.error(message)
+//                await MainActor.run {
+//                    self.fail(FlowError.derivationFailed(message: "could not derive user's own address"))
+//                }
+//                return
+//            }
+//    
+//            UserSettings.shared.lastUsedAddress = self.address
+//
+//            let memo: Memo?
+//
+//            let recipient: Recipient = try Recipient(self.address, network: ZCASH_NETWORK.networkType)
+//
+//            if case .transparent = recipient {
+//                memo = nil
+//            } else if self.includeSendingAddress {
+//                memo = try Self.buildMemo(
+//                    recipient: recipient,
+//                    memo: self.memo,
+//                    includesMemo: self.includesMemo,
+//                    replyToAddress: replyToAddress
+//                )
+//            } else {
+//                memo = try Memo(string: self.memo)
+//            }
+//            
+//            Future(operation: {
+//                try await environment.synchronizer.send(
+//                    with: usk,
+//                    zatoshi: Zatoshi(zatoshi),
+//                    to: recipient,
+//                    memo: memo
+//                )
+//
+//            })
+//             .receive(on: DispatchQueue.main)
+//                .sink(receiveCompletion: { [weak self] (completion) in
+//                    guard let self = self else {
+//                        return
+//                    }
+//                    
+//                    switch completion {
+//                    case .finished:
+//                        logger.debug("send flow finished")
+//                    case .failure(let error):
+//                        tracker.report(handledException: DeveloperFacingErrors.handledException(error: error))
+//                        logger.error("\(error)")
+//                        self.error = error
+//                        self.showError = true
+//                        tracker.track(.error(severity: .critical), properties:  [ErrorSeverity.messageKey : "\(ZECCWalletEnvironment.mapError(error: error))"])
+//                        
+//                    }
+//                    // fix me:
+//                    self.isDone = true
+//                    
+//                }) { [weak self] (transaction) in
+//                    guard let self = self else {
+//                        return
+//                    }
+//                        self.pendingTx = transaction
+//                    self.state = .finished
+//                }.store(in: &diposables)
+//
+//            self.txSent = true
+//        } catch {
+//            logger.error("failed to send: \(error)")
+//            self.fail(error)
+//        }
+//    }
     
     var hasErrors: Bool {
         self.error != nil || self.showError

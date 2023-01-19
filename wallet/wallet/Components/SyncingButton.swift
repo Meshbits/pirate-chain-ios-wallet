@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftUI
-import Lottie
 
 struct SyncingButton<Content: View>: View {
     

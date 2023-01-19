@@ -8,8 +8,8 @@
 
 import Foundation
 import SwiftUI
+import UIKit
 import Lottie
-
 
 struct LottieAnimation: UIViewRepresentable {
     
@@ -38,13 +38,13 @@ struct LottieAnimation: UIViewRepresentable {
         }
     }
     
-    func makeUIView(context: UIViewRepresentableContext<LottieAnimation>) -> AnimationView {
-        let animationView = AnimationView()
+    func makeUIView(context: UIViewRepresentableContext<LottieAnimation>) -> LottieAnimationView {
+        let animationView = LottieAnimationView()
         
-        let animation = Lottie.Animation.named(filename)
+        let animation =  LottieAnimation(filename: filename, animationType: animationType)
         
         animationView.backgroundBehavior = .pauseAndRestore
-        animationView.animation = animation
+//        animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
         
         return animationView
@@ -54,7 +54,7 @@ struct LottieAnimation: UIViewRepresentable {
         Coordinator(parent: self)
     }
     
-    func updateUIView(_ uiView: AnimationView, context: UIViewRepresentableContext<LottieAnimation>) {
+    func updateUIView(_ uiView: LottieAnimationView, context: UIViewRepresentableContext<LottieAnimation>) {
         guard isPlaying else {
             uiView.stop()
             return

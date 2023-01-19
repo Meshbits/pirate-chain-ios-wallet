@@ -42,13 +42,16 @@ struct AddressHelperView: View {
     }
     
     func viewFor(_ mode: Mode) -> some View {
+        
+        let shieldingAddress = appEnvironment.synchronizer.unifiedAddress.transparentReceiver()?.stringEncoded ?? ""
+
         switch mode {
         case .lastUsed(let address):
             return VStack(spacing: 0) {
                 AddressHelperViewSection(title: "LAST USED".localized()) {
 //                    AddrezzHelperViewCell(address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
 //                AddressHelperViewSection(title: "LAST USED") {
-                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
+                    AddrezzHelperViewCell(shieldingAddress: shieldingAddress, address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.lastUsedSelection)
 
                 }.onTapGesture {
                     self.onTap(selection: Selection.lastUsedSelection, value: address)
@@ -57,7 +60,7 @@ struct AddressHelperView: View {
         case .both(let clipboard, let lastUsed):
             return VStack(spacing: 0) {
                 AddressHelperViewSection(title: "send_onclipboard".localized()) {
-                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: clipboard, shielded: isValidZ(address: clipboard),selected: self.selection == Selection.clipboardSelection)
+                    AddrezzHelperViewCell(shieldingAddress: shieldingAddress, address: clipboard, shielded: isValidZ(address: clipboard),selected: self.selection == Selection.clipboardSelection)
                 }
                 .onTapGesture {
                     self.onTap(selection: Selection.clipboardSelection, value: clipboard)
@@ -67,7 +70,7 @@ struct AddressHelperView: View {
 //                    AddrezzHelperViewCell(address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
 
 //                AddressHelperViewSection(title: "LAST USED") {
-                    AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
+                    AddrezzHelperViewCell(shieldingAddress: shieldingAddress, address: lastUsed, shielded: isValidZ(address: lastUsed   ),selected: self.selection == Selection.lastUsedSelection)
 
                 }
                 .onTapGesture {
@@ -78,7 +81,7 @@ struct AddressHelperView: View {
         case .clipboard(let address):
            return  VStack(spacing: 0) {
             AddressHelperViewSection(title: "send_onclipboard".localized()) {
-                AddrezzHelperViewCell(shieldingAddress: appEnvironment.shieldingAddress, address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.clipboardSelection)
+                AddrezzHelperViewCell(shieldingAddress: shieldingAddress, address: address, shielded: isValidZ(address: address),selected: self.selection == Selection.clipboardSelection)
                 }
             .onTapGesture {
                 self.onTap(selection: Selection.clipboardSelection, value: address)
