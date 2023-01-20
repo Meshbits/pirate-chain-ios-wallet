@@ -143,10 +143,10 @@ final class HomeViewModel: ObservableObject {
         environment.synchronizer.syncStatus
             .compactMap({ status in
                 switch status {
-                case .downloading(let progressReport):
+                case .syncing(let progressReport):
                     if (progressReport.targetHeight - progressReport.progressHeight < 100) ||
                                (progressReport.progressHeight % 100) == 0 {
-                        return SyncStatus.downloading(progressReport)
+                        return SyncStatus.syncing(progressReport)
                     }
                     return nil
                 default: return status
@@ -276,9 +276,9 @@ struct Home: View {
                 .foregroundColor(.red)
                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .zGray2, lineWidth: 2)))
             
-        case .downloading(let progress):
+        case .syncing(let progress):
             SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
-                Text("Downloading ")
+                Text("Syncing ")
                     .foregroundColor(.white)
                 + Text("\(progress.progressHeight) / \(progress.targetHeight)")
                     .foregroundColor(.white)
@@ -286,27 +286,6 @@ struct Home: View {
             }
             .frame(width: 100, height: buttonHeight)
             
-        case .validating:
-            Text("Validating")
-                .font(.system(size: 15).italic())
-                .foregroundColor(.black)
-                .zcashButtonBackground(shape: .roundedCorners(fillStyle: .gradient(gradient: .zButtonGradient)))
-        case .scanning(let scanProgress):
-            SyncingButton(animationType: .frameProgress(startFrame: 101, endFrame: 187,  progress: scanProgress.progress, loop: false)) {
-                if scanProgress.targetHeight > 0 {
-                    Text("Scanning ")
-                        .foregroundColor(.white)
-                    + Text("\(scanProgress.progressHeight) / \(scanProgress.targetHeight)")
-                        .foregroundColor(.white)
-                        .font(.system(.body, design: .default).monospacedDigit())
-
-                } else {
-                    Text("Scanning \(Int(scanProgress.progress * 100 ))%")
-                        .foregroundColor(.white)
-                        .font(.system(.body, design: .default).monospacedDigit())
-                }
-            }
-            .frame(width: 100, height: buttonHeight)
         case .enhancing(let enhanceProgress):
             SyncingButton(animationType: .circularLoop) {
                 Text("Enhancing \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)")

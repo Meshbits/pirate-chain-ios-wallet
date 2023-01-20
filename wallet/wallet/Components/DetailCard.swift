@@ -214,20 +214,20 @@ extension Date {
         return formatter.string(from: self)
     }
 }
+
 extension DetailModel {
 
-    init(confirmedTransaction: ConfirmedTransactionEntity, sent: Bool = false) {
-        self.date = Date(timeIntervalSince1970: confirmedTransaction.blockTimeInSeconds)
-        self.id = confirmedTransaction.transactionEntity.transactionId.toHexStringTxId()
-        self.shielded = confirmedTransaction.toAddress?.isValidShieldedAddress ?? true
-        self.status = sent ? .paid(success: confirmedTransaction.minedHeight > 0) : .received
-        self.subtitle = sent ? "wallet_history_sent".localized() + " \(self.date.transactionDetail)" : "Received".localized() + " \(self.date.transactionDetail)"
-        self.zAddress = confirmedTransaction.toAddress
-        self.amount = sent ? -confirmedTransaction.value : confirmedTransaction.value
-        if let memo = confirmedTransaction.memo {
-            self.memo = memo.asZcashTransactionMemo()
+    init(transaction: ZcashLightClientKit.Transaction.Overview, memos: [Memo]) {
+        self.date = Date(timeIntervalSince1970: transaction.blockTime ?? 0)
+        self.id = transaction.rawID.toHexStringTxId()
+        self.shielded = true
+        self.status = transaction.isSentTransaction ? .paid(success: (transaction.minedHeight ?? 0) > 0) : .received
+        self.subtitle = transaction.isSentTransaction ? "wallet_history_sent".localized() + " \(self.date.transactionDetail)" : "Received".localized() + " \(self.date.transactionDetail)"
+        self.zAddress = nil
+        self.amount = transaction.isSentTransaction ? -transaction.value : transaction.value
+        if let memo = memos.first {
+            self.memo = memo.toString()
         }
-        self.minedHeight = confirmedTransaction.minedHeight
     }
 
     init(pendingTransaction: PendingTransactionEntity, latestBlockHeight: BlockHeight? = nil) {

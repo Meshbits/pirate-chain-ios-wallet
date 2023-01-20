@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 import ZcashLightClientKit
+
 class CombineSynchronizer {
     enum SubscriberErrors: Error {
         case notifactionMissingValueForKey(_ key: String)
@@ -30,8 +31,8 @@ class CombineSynchronizer {
     var cancellables = [AnyCancellable]()
     var errorPublisher = PassthroughSubject<Error, Never>()
     
-    var receivedTransactions: Future<[ConfirmedTransactionEntity],Never> {
-        Future<[ConfirmedTransactionEntity], Never>() {
+    var receivedTransactions: Future<[Transaction.Received],Never> {
+        Future<[Transaction.Received], Never>() {
             promise in
             DispatchQueue.global().async {
                 [weak self] in
@@ -44,8 +45,8 @@ class CombineSynchronizer {
         }
     }
     
-    var sentTransactions: Future<[ConfirmedTransactionEntity], Never> {
-        Future<[ConfirmedTransactionEntity], Never>() {
+    var sentTransactions: Future<[Transaction.Sent], Never> {
+        Future<[Transaction.Sent], Never>() {
             promise in
             DispatchQueue.global().async {
                 [weak self] in
@@ -148,41 +149,40 @@ class CombineSynchronizer {
                 self.errorPublisher.send(error)
             }.store(in: &cancellables)
 
-        Publishers.Merge(NotificationCenter.default.publisher(for: .blockProcessorStatusChanged), NotificationCenter.default.publisher(for: .blockProcessorUpdated))
+        Publishers.Merge(NotificationCenter.default.publisher(for: .synchronizerStatusWillUpdate), NotificationCenter.default.publisher(for: .synchronizerProgressUpdated))
             .receive(on: DispatchQueue.main)
             .compactMap { n -> SyncStatus? in
                 guard let userInfo = n.userInfo else {
                     logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey("userInfo"))")
                     return nil }
-                
+
                 switch  n.name {
-                case .blockProcessorStatusChanged:
-                    guard let status = userInfo[CompactBlockProcessorNotificationKey.newStatus] as? CompactBlockProcessor.State else {
-                        logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey(CompactBlockProcessorNotificationKey.newStatus))")
+                case .synchronizerStatusWillUpdate:
+                    guard let status = userInfo[SDKSynchronizer.NotificationKeys.currentStatus] as? SyncStatus else {
+                        logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey(SDKSynchronizer.NotificationKeys.currentStatus))")
                         return nil}
-                    return status.syncStatus
-                case .blockProcessorUpdated:
-                    guard let update = userInfo[CompactBlockProcessorNotificationKey.progress] as? CompactBlockProgress else {
-                        logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey(CompactBlockProcessorNotificationKey.progress))")
+                    return status
+                case .synchronizerProgressUpdated:
+                    guard let update = userInfo[SDKSynchronizer.NotificationKeys.progress] as? CompactBlockProgress else {
+                        logger.error("error: \(SubscriberErrors.notifactionMissingValueForKey(SDKSynchronizer.NotificationKeys.progress))")
                         return nil }
                     return update.syncStatus
                 default:
                     return nil
                 }
-                
+
             }
             .sink(receiveValue: { [weak self] status in
                 self?.syncStatus.send(status)
             })
             .store(in: &cancellables)
 
-
-        NotificationCenter.default.publisher(for: .blockProcessorUpdated)
+        NotificationCenter.default.publisher(for: .synchronizerProgressUpdated)
             .receive(on: DispatchQueue.main)
             .map { notification -> CompactBlockProgress? in
                 
-                guard let progress = notification.userInfo?[CompactBlockProcessorNotificationKey.progress] as? CompactBlockProgress else {
-                    let error = SubscriberErrors.notifactionMissingValueForKey(CompactBlockProcessorNotificationKey.progress)
+                guard let progress = notification.userInfo?[SDKSynchronizer.NotificationKeys.progress] as? CompactBlockProgress else {
+                    let error = SubscriberErrors.notifactionMissingValueForKey(SDKSynchronizer.NotificationKeys.progress)
                     
                     tracker.report(handledException: error)
                     return nil
@@ -192,15 +192,9 @@ class CombineSynchronizer {
             }
 
             .compactMap({ progress -> SyncStatus? in
-                
                 switch progress {
-
-                case .download(let progressReport):
-                    return SyncStatus.downloading(progressReport)
-                case .validate:
-                    return .validating
-                case .scan(let progressReport):
-                    return .scanning(progressReport)
+                case .syncing(let progressReport):
+                    return SyncStatus.syncing(progressReport)
                 case .enhance(let enhancingReport):
                     return .enhancing(enhancingReport)
                 case .fetch:
@@ -273,10 +267,9 @@ class CombineSynchronizer {
         self.shieldedBalance.send(state.shieldedBalance)
         self.syncStatus.send(state.syncStatus)
         self.syncBlockHeight.send(state.latestScannedHeight)
-        self.walletDetails.sink(receiveCompletion: { _ in
-            }) { [weak self] (details) in
-                guard !details.isEmpty else { return }
-                self?.walletDetailsBuffer.send(details)
+        self.walletDetails.sink(receiveCompletion: { _ in }) { [weak self] details in
+            guard !details.isEmpty else { return }
+            self?.walletDetailsBuffer.send(details)
         }
         .store(in: &self.cancellables)
     }
@@ -333,39 +326,39 @@ class CombineSynchronizer {
 
 extension CombineSynchronizer {
     var walletDetails: Future<[DetailModel], Error> {
-        Future<[DetailModel],Error>() {
-            [weak self] promise in
+        Future<[DetailModel],Error>() { [weak self] promise in
             guard let self = self else {
                 promise(.success([]))
                 return
             }
-            DispatchQueue.global().async {
-                [weak self] in
+
+            DispatchQueue.global().async { [weak self] in
                 guard let self = self else { return }
-                var collectables = Set<AnyCancellable>()
-                
+
                 do {
-                    
+
                     let blockHeight = self.syncBlockHeight.value
                     let pending = try self.synchronizer.allPendingTransactions().map { DetailModel(pendingTransaction: $0, latestBlockHeight: blockHeight) }
-                    
-                    let txs = try self.synchronizer.allClearedTransactions().map { DetailModel(confirmedTransaction: $0, sent: ($0.toAddress != nil)) }.filter({ s in
-                        pending.first { (p) -> Bool in
-                            p.id == s.id
-                            } == nil })
-      
-                    Publishers.Merge( Publishers.Sequence<[DetailModel],Never>(sequence: txs),
-                                      Publishers.Sequence<[DetailModel],Never>(sequence: pending)
-                    ).collect().sink { details in
-                        
-                        promise(.success(
-                            details.sorted(by: { (a,b) in
-                                a.date > b.date
-                            })
-                            )
-                        )
-                    }
-                    .store(in: &collectables)
+
+                    let txs: [DetailModel] = try self.synchronizer.allClearedTransactions()
+                        .map { transaction in
+                            let memos: [Memo]
+                            do {
+                                memos = try self.synchronizer.getMemos(for: transaction)
+                            } catch let error {
+                                logger.debug("Can't get memos for transaction. \(error)")
+                                memos = []
+                            }
+
+                            return DetailModel(transaction: transaction, memos: memos)
+                        }
+                        .filter { detailModel in
+                            pending.first { (p) -> Bool in p.id == detailModel.id } == nil
+                        }
+
+                    let details = (txs + pending).sorted(by: { (a,b) in a.date > b.date })
+                    promise(.success(details))
+
                 } catch {
                     promise(.failure(error))
                 }
@@ -405,47 +398,18 @@ extension CombineSynchronizer {
     }
 }
 
-extension CompactBlockProcessor.State {
-    var syncStatus: SyncStatus? {
-        switch self {
-        case .stopped:
-            return .stopped
-        case .downloading:
-            return .downloading(.nullProgress)
-        case .error(let e):
-            return .error(e)
-        case .fetching:
-            return .fetching
-        case .synced:
-            return .synced
-        case .scanning:
-            return .scanning(.nullProgress)
-        case .validating:
-            return .validating
-        case .enhancing:
-            return nil
-        case .handlingSaplingFiles:
-            return nil
-        }
-    }
-}
-
 fileprivate struct NullEnhancementProgress: EnhancementProgress {
     var totalTransactions: Int { 0 }
     var enhancedTransactions: Int { 0 }
-    var lastFoundTransaction: ConfirmedTransactionEntity? { nil }
+    var lastFoundTransaction: Transaction.Overview? { nil }
     var range: CompactBlockRange { 0 ... 0 }
 }
 
 extension CompactBlockProgress {
     var syncStatus: SyncStatus {
         switch self {
-        case .download(let progress):
-            return .downloading(progress)
-        case .validate:
-            return .validating
-        case .scan(let progress):
-            return .scanning(progress)
+        case .syncing(let progress):
+            return .syncing(progress)
         case .enhance(let enhanceProgress):
             return .enhancing(enhanceProgress)
         case .fetch:

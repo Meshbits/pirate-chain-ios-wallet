@@ -243,6 +243,8 @@ final class ZECCWalletEnvironment: ObservableObject {
                 return WalletError.genericErrorWithMessage(message: "unable to rescan to specified height")
             case .invalidAccount:
                 return WalletError.genericErrorWithMessage(message: "your wallet asked a balance for an account index that is not derived. This is probably a programming mistake.")
+            case .wipeAttemptWhileProcessing:
+                return WalletError.genericErrorWithMessage(message: "Wipe was called while sync process was running.")
             }
         } else if let serviceError = error as? LightWalletServiceError {
             switch serviceError {

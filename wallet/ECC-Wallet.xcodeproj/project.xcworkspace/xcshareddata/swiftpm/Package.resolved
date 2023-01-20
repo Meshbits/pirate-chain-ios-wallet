@@ -192,10 +192,10 @@
     {
       "identity" : "zcashlightclientkit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zcash/ZcashLightClientKit/",
+      "location" : "https://github.com/zcash/ZcashLightClientKit",
       "state" : {
-        "revision" : "c0f8d465018d4b5b7661f1adeecf9cf31935d225",
-        "version" : "0.17.5-beta"
+        "branch" : "556_using_transactions_db_views",
+        "revision" : "82ac6ea4f36bb05636a0b8b8239f6e10366d5cc1"
       }
     },
     {
