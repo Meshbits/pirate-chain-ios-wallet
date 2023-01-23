@@ -31,8 +31,8 @@ class CombineSynchronizer {
     var cancellables = [AnyCancellable]()
     var errorPublisher = PassthroughSubject<Error, Never>()
     
-    var receivedTransactions: Future<[Transaction.Received],Never> {
-        Future<[Transaction.Received], Never>() {
+    var receivedTransactions: Future<[ZcashTransaction.Received],Never> {
+        Future<[ZcashTransaction.Received], Never>() {
             promise in
             DispatchQueue.global().async {
                 [weak self] in
@@ -45,8 +45,8 @@ class CombineSynchronizer {
         }
     }
     
-    var sentTransactions: Future<[Transaction.Sent], Never> {
-        Future<[Transaction.Sent], Never>() {
+    var sentTransactions: Future<[ZcashTransaction.Sent], Never> {
+        Future<[ZcashTransaction.Sent], Never>() {
             promise in
             DispatchQueue.global().async {
                 [weak self] in
@@ -190,20 +190,7 @@ class CombineSynchronizer {
                 
                 return progress
             }
-
-            .compactMap({ progress -> SyncStatus? in
-                switch progress {
-                case .syncing(let progressReport):
-                    return SyncStatus.syncing(progressReport)
-                case .enhance(let enhancingReport):
-                    return .enhancing(enhancingReport)
-                case .fetch:
-                    return .fetching
-                case .none:
-                    return nil
-                }
-            })
-
+            .compactMap({ $0?.syncStatus })
             .sink(receiveValue: { [weak self] status in
                 self?.syncStatus.send(status)
             })
@@ -397,19 +384,20 @@ extension CombineSynchronizer {
         await self.synchronizer.getSaplingAddress(accountIndex: account)
     }
 }
+    
 
 fileprivate struct NullEnhancementProgress: EnhancementProgress {
     var totalTransactions: Int { 0 }
     var enhancedTransactions: Int { 0 }
-    var lastFoundTransaction: Transaction.Overview? { nil }
+    var lastFoundTransaction: ZcashTransaction.Overview? { nil }
     var range: CompactBlockRange { 0 ... 0 }
 }
 
 extension CompactBlockProgress {
     var syncStatus: SyncStatus {
         switch self {
-        case .syncing(let progress):
-            return .syncing(progress)
+        case .syncing(let syncProgress):
+            return .syncing(syncProgress)
         case .enhance(let enhanceProgress):
             return .enhancing(enhanceProgress)
         case .fetch:

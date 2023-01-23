@@ -141,17 +141,6 @@ final class HomeViewModel: ObservableObject {
             .store(in: &environmentCancellables)
         
         environment.synchronizer.syncStatus
-            .compactMap({ status in
-                switch status {
-                case .syncing(let progressReport):
-                    if (progressReport.targetHeight - progressReport.progressHeight < 100) ||
-                               (progressReport.progressHeight % 100) == 0 {
-                        return SyncStatus.syncing(progressReport)
-                    }
-                    return nil
-                default: return status
-                }
-            })
             .receive(on: DispatchQueue.main)
             .assign(to: \.syncStatus, on: self)
             .store(in: &environmentCancellables)
@@ -248,12 +237,10 @@ final class HomeViewModel: ObservableObject {
 }
 
 struct Home: View {
-    
     let buttonHeight: CGFloat = 64
     let buttonPadding: CGFloat = 40
     @State var sendingPushed = false
     @State var feedbackRating: Int? = nil
-    
     
     @StateObject var viewModel: HomeViewModel
     @Environment(\.walletEnvironment) var appEnvironment: ZECCWalletEnvironment
@@ -270,22 +257,30 @@ struct Home: View {
                     .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .red, lineWidth: 2)))
             })
             
-            
         case .unprepared:
             Text("Unprepared")
                 .foregroundColor(.red)
                 .zcashButtonBackground(shape: .roundedCorners(fillStyle: .outline(color: .zGray2, lineWidth: 2)))
             
         case .syncing(let progress):
-            SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
-                Text("Syncing ")
-                    .foregroundColor(.white)
-                + Text("\(progress.progressHeight) / \(progress.targetHeight)")
-                    .foregroundColor(.white)
-                    .font(.system(.body, design: .default).monospacedDigit())
+            if progress == .nullProgress {
+                SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
+                    Text("Syncing")
+                        .foregroundColor(.white)
+                }
+                .frame(width: 100, height: buttonHeight)
+
+            } else {
+                SyncingButton(animationType: .frameProgress(startFrame: 0, endFrame: 100, progress: 1.0, loop: true)) {
+                    Text("Syncing ")
+                        .foregroundColor(.white)
+                    + Text("\(progress.progressHeight) / \(progress.targetHeight)")
+                        .foregroundColor(.white)
+                        .font(.system(.body, design: .default).monospacedDigit())
+                }
+                .frame(width: 100, height: buttonHeight)
+
             }
-            .frame(width: 100, height: buttonHeight)
-            
         case .enhancing(let enhanceProgress):
             SyncingButton(animationType: .circularLoop) {
                 Text("Enhancing \(enhanceProgress.enhancedTransactions) of \(enhanceProgress.totalTransactions)")

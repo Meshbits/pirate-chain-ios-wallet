@@ -217,7 +217,7 @@ extension Date {
 
 extension DetailModel {
 
-    init(transaction: ZcashLightClientKit.Transaction.Overview, memos: [Memo]) {
+    init(transaction: ZcashTransaction.Overview, memos: [Memo]) {
         self.date = Date(timeIntervalSince1970: transaction.blockTime ?? 0)
         self.id = transaction.rawID.toHexStringTxId()
         self.shielded = true
@@ -228,6 +228,7 @@ extension DetailModel {
         if let memo = memos.first {
             self.memo = memo.toString()
         }
+        self.minedHeight = transaction.minedHeight ?? .unmined
     }
 
     init(pendingTransaction: PendingTransactionEntity, latestBlockHeight: BlockHeight? = nil) {

@@ -2294,8 +2294,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zcash/ZcashLightClientKit";
 			requirement = {
-				branch = 556_using_transactions_db_views;
-				kind = branch;
+				kind = revision;
+				revision = 43e00ecb621abbeaca50281e1bedf97778df40a7;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

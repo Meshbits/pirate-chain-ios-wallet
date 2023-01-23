@@ -164,35 +164,18 @@ final class ZECCWalletEnvironment: ObservableObject {
      only for internal use
      */
     func nuke(abortApplication: Bool = false) {
-        if self.synchronizer != nil {
-            self.synchronizer.stop()
-        }
-        
-        SeedManager.default.nukeWallet()
-        
-        do {
-            try deleteWalletFiles()
-        }
-        catch {
-            logger.error("could not nuke wallet: \(error)")
-        }
-        
-        if abortApplication {
-            abort()
-        }
-    }
-    
-    fileprivate func deleteWalletFiles() throws {
-        if self.synchronizer != nil {
-            self.synchronizer.stop()
-        }
-        do {
-            try FileManager.default.removeItem(at: self.dataDbURL)
-            try FileManager.default.removeItem(at: self.cacheDbURL)
-            try FileManager.default.removeItem(at: self.pendingDbURL)
-        } catch {
-            logger.error("could not wipe wallet: \(error)")
-            throw WalletError.criticalError(error: error)
+        Task { @MainActor in
+            do {
+                SeedManager.default.nukeWallet()
+                try await synchronizer.synchronizer.wipe()
+
+                if abortApplication {
+                    abort()
+                }
+            }
+            catch {
+                logger.error("could not nuke wallet: \(error)")
+            }
         }
     }
     
@@ -200,12 +183,12 @@ final class ZECCWalletEnvironment: ObservableObject {
      Deletes the wallet's files but keeps the user's keys
      */
     func wipe(abortApplication: Bool = true) throws {
-        try deleteWalletFiles()
-        
-        if abortApplication {
-            abort()
+        Task { @MainActor in
+            try await synchronizer.synchronizer.wipe()
+            if abortApplication {
+                abort()
+            }
         }
-        
     }
     
     static func mapError(error: Error) -> WalletError {
@@ -244,7 +227,7 @@ final class ZECCWalletEnvironment: ObservableObject {
             case .invalidAccount:
                 return WalletError.genericErrorWithMessage(message: "your wallet asked a balance for an account index that is not derived. This is probably a programming mistake.")
             case .wipeAttemptWhileProcessing:
-                return WalletError.genericErrorWithMessage(message: "Wipe was called while sync process was running.")
+                return WalletError.genericErrorWithMessage(message: synchronizerError.localizedDescription)
             }
         } else if let serviceError = error as? LightWalletServiceError {
             switch serviceError {
