@@ -24,10 +24,14 @@ struct SendMoneyView: View {
     }
     
     var charLimit: Int {
-        if flow.includeSendingAddress {
-            return ZECCWalletEnvironment.memoLengthLimit - SendFlowEnvironment.replyToAddress((ZECCWalletEnvironment.shared.getShieldedAddress() ?? "")).count
-        }
-        return ZECCWalletEnvironment.memoLengthLimit
+           if flow.includeSendingAddress,
+              let recipient = try? Recipient(flow.address, network: ZCASH_NETWORK.networkType),
+              let replyTo = SendFlowEnvironment.replyToAddress(to: recipient, ownAddress: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress)
+           {
+               return ZECCWalletEnvironment.memoLengthLimit - replyTo.count
+           }
+
+           return ZECCWalletEnvironment.memoLengthLimit
     }
     
     var validAddress: Bool {
@@ -62,7 +66,7 @@ struct SendMoneyView: View {
             return "feedback_shieldedaddress".localized()
         } else if environment.isValidTransparentAddress(flow.address) {
             return "feedback_transparentaddress".localized()
-        } else if (environment.getShieldedAddress() ?? "") == flow.address {
+        } else if (environment.isValidShieldedAddress(flow.address)) {
             return "feedback_sameaddress".localized()
         } else {
             return "feedback_invalidaddress".localized()

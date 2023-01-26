@@ -27,7 +27,7 @@ class CombineSynchronizer {
     var shieldedBalance: CurrentValueSubject<WalletBalance, Never>
     var transparentBalance: CurrentValueSubject<WalletBalance, Never>
 //    var balance: CurrentValueSubject<Double,Never>
-//    var verifiedBalance: CurrentValueSubject<Double,Never>
+    var verifiedBalance: CurrentValueSubject<Double,Never>
     var cancellables = [AnyCancellable]()
     var errorPublisher = PassthroughSubject<Error, Never>()
     
@@ -103,6 +103,7 @@ class CombineSynchronizer {
         self.shieldedBalance = CurrentValueSubject(WalletBalance(verified: .zero, total: .zero))
         let transparentSubject = CurrentValueSubject<WalletBalance, Never>(WalletBalance(verified: .zero, total: .zero))
         self.transparentBalance = transparentSubject
+        self.verifiedBalance = CurrentValueSubject(0)
         self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.saplingActivationHeight)
         self.connectionState = CurrentValueSubject(self.synchronizer.connectionState)
         
@@ -449,14 +450,16 @@ extension CombineSynchronizer {
             }
     }
     
-//    func rescanWithBirthday(blockheight: BlockHeight) {
-//        do {
-//            try self.rewind(.height(blockheight: blockheight))
-//            try self.start(retry: true)
-//        } catch {
-//            logger.error("Rescan failed with new height \(error)")
-//        }
-//    }
+    func rescanWithBirthday(blockheight: BlockHeight) async {
+        do {
+            try await self.rewind(.height(blockheight: blockheight))
+            try await MainActor.run {
+                try self.start(retry: true)
+            }
+        } catch {
+            logger.error("Rescan failed with new height \(error)")
+        }
+    }
     
     func getTransparentAddress(account: Int = 0) async -> TransparentAddress? {
         await self.synchronizer.getTransparentAddress(accountIndex: account)

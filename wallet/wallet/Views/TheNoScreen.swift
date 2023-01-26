@@ -23,19 +23,22 @@ struct TheNoScreen: View {
         .navigationBarHidden(true)
         .onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                do {
-                    let initialState = ZECCWalletEnvironment.getInitialState()
-                    switch initialState {
-                    case .unprepared, .initalized:
-                        try appEnvironment.initialize()
-                        appEnvironment.state = .initalized
+                
+                Task { @MainActor in
+                    do {
+                        let initialState = ZECCWalletEnvironment.getInitialState()
+                        switch initialState {
+                        case .unprepared, .initalized:
+                            try await self.appEnvironment.initialize()
+                            appEnvironment.state = .initalized
 
-                    default:
-                        appEnvironment.state = initialState
+                        default:
+                            appEnvironment.state = initialState
+                        }
+
+                    } catch {
+                        self.appEnvironment.state = .failure(error: error)
                     }
-
-                } catch {
-                    self.appEnvironment.state = .failure(error: error)
                 }
             }
         }

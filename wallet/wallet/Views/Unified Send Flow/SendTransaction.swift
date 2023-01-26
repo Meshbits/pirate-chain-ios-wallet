@@ -24,35 +24,57 @@ struct SendTransaction: View {
         guard !flow.address.isEmpty else {
             return "feedback_default".localized()
         }
-        let validShielded = environment.isValidShieldedAddress(flow.address)
-        let validTransparent = environment.isValidTransparentAddress(flow.address)
+//        let validShielded = environment.isValidShieldedAddress(flow.address)
+//        let validTransparent = environment.isValidTransparentAddress(flow.address)
+//
+//        if validShielded {
+//            return subtextForValid(shielded: flow.address)
+//        }
+//
+//        if validTransparent {
+//            return subtextForValid(transparent: flow.address)
+//        }
         
-        if validShielded {
-            return subtextForValid(shielded: flow.address)
-        }
+        do {
+                   switch try Recipient(flow.address, network: ZCASH_NETWORK.networkType) {
+                   case .unified(let uAddr):
+                       return subtextForValid(unified: uAddr)
+                   case .sapling(let zAddr):
+                       return subtextForValid(shielded: zAddr)
+                   case .transparent(let tAddr):
+                       return subtextForValid(transparent: tAddr)
+                   }
+           } catch {
+               return "feedback_invalidaddress".localized()
+           }
         
-        if validTransparent {
-            return subtextForValid(transparent: flow.address)
-        }
         
         return "feedback_invalidaddress".localized()
     }
     
-    func subtextForValid(shielded address: String) -> String {
-        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress == address {
+    func subtextForValid(unified address: UnifiedAddress) -> String {
+        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress == address {
             return "feedback_sameaddress".localized()
         } else {
             return "feedback_shieldedaddress".localized()
         }
     }
     
-    func subtextForValid(transparent address: String) -> String {
-        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.tAddress == address {
+    func subtextForValid(shielded address: SaplingAddress) -> String {
+        if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.saplingReceiver() == address {
             return "This is your Auto Shielding address".localized()
         } else {
             return "feedback_transparentaddress".localized()
         }
     }
+    
+    func subtextForValid(transparent address: TransparentAddress) -> String {
+          if ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.transparentReceiver() == address {
+              return "This is your Auto Shielding address".localized()
+          } else {
+              return "feedback_transparentaddress".localized()
+          }
+      }
     
     func amountSubtitle(amount: String) -> String {
         if availableBalance,
@@ -104,12 +126,18 @@ struct SendTransaction: View {
         
         
     }
+
     var charLimit: Int {
-        if flow.includeSendingAddress {
-            return ZECCWalletEnvironment.memoLengthLimit - SendFlowEnvironment.replyToAddress((ZECCWalletEnvironment.shared.getShieldedAddress() ?? "")).count
-        }
-        return ZECCWalletEnvironment.memoLengthLimit
+          if flow.includeSendingAddress,
+             let recipient = try? Recipient(flow.address, network: ZCASH_NETWORK.networkType),
+             let replyTo = SendFlowEnvironment.replyToAddress(to: recipient, ownAddress: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress)
+          {
+              return ZECCWalletEnvironment.memoLengthLimit - replyTo.count
+          }
+
+          return ZECCWalletEnvironment.memoLengthLimit
     }
+    
     var recipientActiveColor: Color {
         let address = flow.address
         if ZECCWalletEnvironment.shared.isValidShieldedAddress(address) {

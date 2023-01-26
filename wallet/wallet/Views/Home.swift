@@ -154,8 +154,8 @@ final class HomeViewModel: ObservableObject {
 //    }
     
     func generateQRCodeImage(){
-           if let img = QRCodeGenerator.generate(from: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress) {
-               qrCodeImage = Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress)") ))
+           if let img = QRCodeGenerator.generate(from: ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.stringEncoded) {
+               qrCodeImage = Image(img, scale: 1, label: Text(String(format:NSLocalizedString("QR Code for %@", comment: ""),"\(ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.stringEncoded)") ))
            } else {
                qrCodeImage = Image("QRCodeIcon")
            }
@@ -260,12 +260,12 @@ final class HomeViewModel: ObservableObject {
                 })
                 .store(in: &environmentCancellables)
 
-        environment.synchronizer.balance
-            .receive(on: RunLoop.main)
-            .sink(receiveValue: { [weak self] (b) in
-                self?.balance = b
-            })
-            .store(in: &environmentCancellables)
+//        environment.synchronizer.balance
+//            .receive(on: RunLoop.main)
+//            .sink(receiveValue: { [weak self] (b) in
+//                self?.balance = b
+//            })
+//            .store(in: &environmentCancellables)
     }
     
     func unbindSubcribedEnvironmentEvents() {

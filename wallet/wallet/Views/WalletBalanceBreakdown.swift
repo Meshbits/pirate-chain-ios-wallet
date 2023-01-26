@@ -119,7 +119,9 @@ final class WalletBalanceBreakdownViewModel: ObservableObject {
                 }
             }.store(in: &cancellables)
         
-        shieldEnvironment.shield()
+            Task(priority: .medium) {
+                  await shieldEnvironment.shield()
+              }
             
         } catch {
             self.status = .failed(error: error)

@@ -23,7 +23,7 @@ struct ConfirmTransaction: View {
                 
                 ConfirmTableSectionHeaderView(aTitle:"From: ".localized())
                     HStack{
-                        Text(ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.zAddress)
+                        Text(ZECCWalletEnvironment.shared.synchronizer.unifiedAddress.stringEncoded)
                             .foregroundColor(.white)
                             .scaledFont(size: 15)
                             .multilineTextAlignment(.leading)

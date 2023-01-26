@@ -62,7 +62,9 @@ final class AutoShieldingViewModel: ObservableObject {
                 }
                 .store(in: &cancellables)
             
-            shieldFlow.shield()
+              Task(priority: .medium) {
+                          await shieldFlow.shield()
+              }
             
         } catch {
             self.state = .failed(error: error)

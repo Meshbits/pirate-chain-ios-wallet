@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        /*
        
         BGTaskScheduler.shared.register(
             forTaskWithIdentifier: BackgroundTaskSyncronizing.backgroundProcessingTaskIdentifier,
@@ -50,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           using: nil) { (task) in
             
         }
+        */
         
         UNUserNotificationCenter.current().requestAuthorization(options:[.alert, .sound]) { (granted, error) in
 

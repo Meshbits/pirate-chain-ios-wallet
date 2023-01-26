@@ -72,22 +72,26 @@ struct CreateAndSetupNewWallet: View {
     }
     
     func createNewWalletFlow(){
-        do {
-            tracker.track(.tap(action: .landingBackupWallet), properties: [:])
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                openHomeScreen = true
+      
+        Task { @MainActor in
+                do {
+                    tracker.track(.tap(action: .landingBackupWallet), properties: [:])
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        openHomeScreen = true
+                    }
+                    try await self.appEnvironment.createNewWalletWithPhrase(randomPhrase: self.viewModel.mCompletePhrase!.joined(separator: " "))
+                    
+                } catch WalletError.createFailed(let e) {
+                    if case SeedManager.SeedManagerError.alreadyImported = e {
+                        self.showError = AlertType.feedback(destination: .createNew, cause: e)
+                    } else {
+                        fail(WalletError.createFailed(underlying: e))
+                    }
+                } catch {
+                    fail(error)
+                }
+                
             }
-            try self.appEnvironment.createNewWalletWithPhrase(randomPhrase: self.viewModel.mCompletePhrase!.joined(separator: " "))
-            
-        } catch WalletError.createFailed(let e) {
-            if case SeedManager.SeedManagerError.alreadyImported = e {
-                self.showError = AlertType.feedback(destination: .createNew, cause: e)
-            } else {
-                fail(WalletError.createFailed(underlying: e))
-            }
-        } catch {
-            fail(error)
-        }
     }
     
     func fail(_ error: Error) {
@@ -108,14 +112,16 @@ struct CreateAndSetupNewWallet: View {
               message: Text("it appears that this device already has keys stored on it. What do you want to do?".localized()),
               primaryButton: .default(Text("Restore existing keys".localized()),
                                       action: {
-                                        do {
-                                            try ZECCWalletEnvironment.shared.initialize()
-                                            self.destination = .createNew
-                                        } catch {
-                                            DispatchQueue.main.async {
-                                                self.fail(error)
+                                        Task { @MainActor in
+                                               do {
+                                                   try await ZECCWalletEnvironment.shared.initialize()
+                                                   self.destination = .createNew
+                                               } catch {
+                                                   DispatchQueue.main.async {
+                                                       self.fail(error)
+                                                   }
+                                               }
                                             }
-                                        }
                                       }),
               secondaryButton: .destructive(Text("Discard them and continue".localized()),
                                             action: {
@@ -129,12 +135,15 @@ struct CreateAndSetupNewWallet: View {
                                                 }
                                                 switch originalDestination {
                                                 case .createNew:
-                                                    do {
-                                                        try self.appEnvironment.createNewWallet()
-                                                        self.destination = originalDestination
-                                                    } catch {
-                                                            self.fail(error)
-                                                    }
+                                                   
+                                                    Task { @MainActor in
+                                                            do {
+                                                                try await self.appEnvironment.createNewWallet()
+                                                                self.destination = originalDestination
+                                                            } catch {
+                                                                    self.fail(error)
+                                                            }
+                                                        }
                                                 case .restoreWallet:
                                                     self.destination = originalDestination
                                                 

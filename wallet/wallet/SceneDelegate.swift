@@ -168,7 +168,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        #if !targetEnvironment(simulator)
         //FIXME: disable background tasks for the time being 
 //        BackgroundTaskSyncronizing.default.scheduleAppRefresh()
+        /*
         BackgroundTaskSyncronizing.default.scheduleBackgroundProcessing()
+        */
 //        #endif
     }
     

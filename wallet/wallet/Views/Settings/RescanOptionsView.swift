@@ -151,7 +151,11 @@ struct RescanOptionsView: View {
                             
                             (try? SeedManager.default.importNewBirthdayOnRescan(mCurrentWalletBirthday))
                             
-                            self.appEnvironment.synchronizer.rescanWithBirthday(blockheight: mCurrentWalletBirthday)
+                            
+                            
+                            Task {
+                                await self.appEnvironment.synchronizer.rescanWithBirthday(blockheight: mCurrentWalletBirthday)
+                            }
 
                         }
                         
@@ -165,7 +169,10 @@ struct RescanOptionsView: View {
                             
                             mCurrentWalletBirthday = (try? SeedManager.default.exportBirthday()) ?? SeedManager.mDefaultHeight
                             
-                            self.appEnvironment.synchronizer.fullRescan()
+                            Task {
+                                await self.appEnvironment.synchronizer.fullRescan()
+                            }
+                            
                         }
                     }
                     

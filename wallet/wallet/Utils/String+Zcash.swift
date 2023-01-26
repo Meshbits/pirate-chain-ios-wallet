@@ -16,19 +16,21 @@ extension String {
     static var ZEC: String {
         switch ZCASH_NETWORK.networkType {
         case .mainnet:
-            return "ZEC"
+            return "ARRR" // Changed from "ZEC" by Lokesh
         case .testnet:
             return "TAZ"
         }
     }
     
-    var isValidShieldedAddress: Bool {
-        (try? DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidShieldedAddress(self)) ?? false
-    }
     
-    var isValidTransparentAddress: Bool {
-        (try? DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidTransparentAddress(self)) ?? false
-    }
+    var isValidShieldedAddress: Bool {
+           DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidSaplingAddress(self)
+       }
+       
+       var isValidTransparentAddress: Bool {
+           DerivationTool(networkType: ZCASH_NETWORK.networkType).isValidTransparentAddress(self)
+       }
+       
     
     var isValidAddress: Bool {
         self.isValidShieldedAddress || self.isValidTransparentAddress

@@ -57,10 +57,10 @@ class WalletDetailsViewModel: ObservableObject {
             })
             .store(in: &synchronizerEvents)
         
-        ZECCWalletEnvironment.shared.synchronizer.balance
+        ZECCWalletEnvironment.shared.synchronizer.shieldedBalance
             .receive(on: RunLoop.main)
             .sink(receiveValue: { [weak self] (b) in
-                self?.balance = b
+                self?.balance = b.verified.amount.asHumanReadableZecBalance()
             })
             .store(in: &synchronizerEvents)
     }
@@ -81,9 +81,9 @@ class WalletDetailsViewModel: ObservableObject {
         }
     }
     
-    var zAddress: String {
-        ZECCWalletEnvironment.shared.getShieldedAddress() ?? ""
-    }
+//    var zAddress: String {
+//        ZECCWalletEnvironment.shared.getShieldedAddress(). ?? ""
+//    }
 }
 
 struct WalletDetails: View {
@@ -92,9 +92,9 @@ struct WalletDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var isActive: Bool
     @State var selectedModel: DetailModel? = nil
-    var zAddress: String {
-        viewModel.zAddress
-    }
+//    var zAddress: String {
+//        viewModel.zAddress
+//    }
     
     var status: BalanceStatus {
         viewModel.balanceStatus

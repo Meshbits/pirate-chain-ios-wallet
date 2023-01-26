@@ -13,7 +13,7 @@ import ZcashLightClientKit
 
 protocol ShieldingPowers {
     var status: CurrentValueSubject<ShieldFlow.Status,Error> { get set }
-    func shield()
+    func shield() async
 }
 
 final class ShieldFlow: ShieldingPowers {
@@ -68,51 +68,33 @@ final class ShieldFlow: ShieldingPowers {
         _currentFlow = nil
     }
     
-    func shield() {
-        self.status.send(.shielding)
-        
-        SaplingParameterDownloader.downloadParametersIfNeeded()
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let urlError):
-                    self.status.send(completion: .failure(urlError.code.asUserFacingError()))
-                    break
-                case .finished:
-                    break
-                }
-            }, receiveValue: { [weak self] result in
-                guard let self = self else {
-                    return
-                }
-                    self.shielder.shield()
-                    .receive(on: DispatchQueue.main)
-                    .sink { [weak self] completion in
-                        Session.unique.markAutoShield()
-                        switch completion {
-                           case .failure(let e):
-                               logger.error("failed to shield funds \(e.localizedDescription)")
-                               tracker.report(handledException: DeveloperFacingErrors.handledException(error: e))
-                               self?.status.send(completion: .failure(e))
-                           case .finished:
-                               self?.status.send(completion: .finished)
-                           }
-                    } receiveValue: { [weak self] result in
-                        Session.unique.markAutoShield()
-                        switch result{
-                        case .notNeeded:
-                            logger.warn(" -- WARNING -- You shielded funds but the result was not needed. This is probably a programming error")
-                            self?.status.send(.notNeeded)
-                        case .shielded(let pendingTx):
-                            logger.debug("shielded \(pendingTx)")
-                            self?.status.send(.ended(shieldingTx: pendingTx))
-                        }
-                    }
-                    .store(in: &self.cancellables)
-            })
-            .store(in: &cancellables)
-            
-    }
+    func shield() async {
+           self.status.send(.shielding)
+           do {
+               _ = try await SaplingParameterDownloader.downloadParamsIfnotPresent(
+                   spendURL: try URL.spendParamsURL(),
+                   outputURL: try URL.outputParamsURL()
+               )
+
+
+               switch try await self.shielder.shield() {
+               case .shielded(let pendingTx):
+                   logger.debug("shielded \(pendingTx)")
+                   self.status.send(.ended(shieldingTx: pendingTx))
+
+                   break
+               case .notNeeded:
+                   logger.warn(" -- WARNING -- You shielded funds but the result was not needed. This is probably a programming error")
+                   self.status.send(completion: .finished)
+               }
+
+               self.status.send(completion: .finished)
+           } catch {
+               logger.error("failed to shield funds \(error.localizedDescription)")
+               tracker.report(handledException: DeveloperFacingErrors.handledException(error: error))
+               self.status.send(completion: .failure(error))
+           }
+       }
 }
 
 fileprivate struct ShieldFlowEnvironmentKey: EnvironmentKey {

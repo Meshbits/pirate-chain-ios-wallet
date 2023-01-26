@@ -222,7 +222,7 @@ extension DetailModel {
         self.status = sent ? .paid(success: confirmedTransaction.minedHeight > 0) : .received
         self.subtitle = sent ? "wallet_history_sent".localized() + " \(self.date.transactionDetail)" : "Received".localized() + " \(self.date.transactionDetail)"
         self.arrrAddress = confirmedTransaction.toAddress
-        self.arrrAmount = (sent ? -Int64(confirmedTransaction.value) : Int64(confirmedTransaction.value)).asHumanReadableZecBalance()
+        self.arrrAmount = (sent ? (-Int64(confirmedTransaction.value.amount)) : (Int64(confirmedTransaction.value.amount))).asHumanReadableZecBalance()
         if let memo = confirmedTransaction.memo {
             self.memo = memo.asZcashTransactionMemo()
         }
@@ -234,7 +234,7 @@ extension DetailModel {
         
         self.date = Date(timeIntervalSince1970: pendingTransaction.createTime)
         self.id = pendingTransaction.rawTransactionId?.toHexStringTxId() ?? String(pendingTransaction.createTime)
-        self.shielded = pendingTransaction.toAddress.isValidShieldedAddress
+        self.shielded = true //pendingTransaction.toAddress?.isValidShieldedAddress ?? true
         self.status = .paid(success: submitSuccess)
         self.expirationHeight = pendingTransaction.expiryHeight
         self.subtitle = DetailModel.subtitle(isPending: isPending,
@@ -242,8 +242,8 @@ extension DetailModel {
                                              minedHeight: pendingTransaction.minedHeight,
                                              date: self.date.transactionDetail,
                                              latestBlockHeight: latestBlockHeight)
-        self.arrrAddress = pendingTransaction.toAddress
-        self.arrrAmount = -Int64(pendingTransaction.value).asHumanReadableZecBalance()
+//        self.arrrAddress = pendingTransaction.recipient.stringEncodedAddress
+        self.arrrAmount = -Int64(pendingTransaction.value.amount).asHumanReadableZecBalance()
         if let memo = pendingTransaction.memo {
             self.memo = memo.asZcashTransactionMemo()
         }
