@@ -23,12 +23,14 @@ protocol ShieldingCapable: AnyObject {
     */
     func shieldFunds(
         spendingKey: UnifiedSpendingKey,
-        memo: Memo
+        memo: Memo,
+        shieldingThreshold: Zatoshi
     ) async throws -> PendingTransactionEntity
 }
 
 protocol AutoShieldingStrategy {
     var shouldAutoShield: Bool { get }
+    var shieldingThreshold: Zatoshi { get }
     func shield(autoShielder: AutoShielder) async throws -> AutoShieldingResult
 }
 
@@ -83,7 +85,11 @@ extension AutoShielder {
         let memo = try Memo(string: "Shielding from your account: \(usk.account)")
 
         return await .shielded(
-            pendingTx: try self.shielder.shieldFunds(spendingKey: usk, memo: memo)
+            pendingTx: try self.shielder.shieldFunds(
+                spendingKey: usk,
+                memo: memo,
+                shieldingThreshold: self.strategy.shieldingThreshold
+            )
         )
     }
 }
@@ -116,6 +122,8 @@ class ThresholdDrivenAutoShielding: AutoShieldingStrategy {
         let overThreshold = transparentBalanceProvider.transparentFunds.verified >= threshold
         return didFirstSync && haventAlreadyAutoshielded && overThreshold
     }
+
+    var shieldingThreshold: Zatoshi { threshold }
     
     var session: UserSession
     var threshold: Zatoshi
@@ -136,6 +144,10 @@ class ThresholdDrivenAutoShielding: AutoShieldingStrategy {
 }
 
 class ManualShielding: AutoShieldingStrategy {
+    var shieldingThreshold: Zatoshi {
+        ZCASH_NETWORK.constants.defaultFee(for: .max)
+    }
+
     var shouldAutoShield: Bool {
         true
     }

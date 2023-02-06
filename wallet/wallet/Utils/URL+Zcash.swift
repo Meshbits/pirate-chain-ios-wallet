@@ -15,7 +15,15 @@ extension URL {
     static func documentsDirectory() throws -> URL {
         try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
-    
+
+    static func fsBlockDbRoot() throws -> URL {
+        try documentsDirectory()
+            .appendingPathComponent(ZCASH_NETWORK.networkType.chainName)
+            .appendingPathComponent(ZcashSDK.defaultFsCacheName, isDirectory: true)
+
+    }
+
+    /// this is no longer needed. You should use this to clean up the existing cache database
     static func cacheDbURL() throws -> URL {
         try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.defaultDbNamePrefix+ZcashSDK.defaultCacheDbName, isDirectory: false)
     }
@@ -25,6 +33,10 @@ extension URL {
     }
 
     static func pendingDbURL() throws -> URL {
+        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.defaultDbNamePrefix+ZcashSDK.defaultPendingDbName)
+    }
+
+    static func wrongPendingDbURL() throws -> URL {
         // FIX: this is using the wrong DB name which is not that serious because the Pending DB is purged
         // now and then and it's information is discarded when the transaction is found on chain
         // see https://github.com/zcash/zcash-ios-wallet/issues/309

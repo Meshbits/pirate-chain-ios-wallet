@@ -36,7 +36,7 @@ final class ZECCWalletEnvironment: ObservableObject {
     )
 
     var dataDbURL: URL
-    var cacheDbURL: URL
+    var fsBlockDbRoot: URL
     var pendingDbURL: URL
     var outputParamsURL: URL
     var spendParamsURL: URL
@@ -96,7 +96,7 @@ final class ZECCWalletEnvironment: ObservableObject {
     
     private init() throws {
         self.dataDbURL = try URL.dataDbURL()
-        self.cacheDbURL = try URL.cacheDbURL()
+        self.fsBlockDbRoot = try URL.fsBlockDbRoot()
         self.pendingDbURL = try URL.pendingDbURL()
         self.outputParamsURL = try URL.outputParamsURL()
         self.spendParamsURL = try  URL.spendParamsURL()
@@ -132,9 +132,11 @@ final class ZECCWalletEnvironment: ObservableObject {
         let viewingKey = try DerivationTool(networkType: ZCASH_NETWORK.networkType)
             .deriveUnifiedSpendingKey(seed: seedBytes, accountIndex: 0)
             .deriveFullViewingKey()
-        
+
+        try self.fixPendingDbName()
+
         let initializer = Initializer(
-            cacheDbURL: self.cacheDbURL,
+            fsBlockDbRoot: self.fsBlockDbRoot,
             dataDbURL: self.dataDbURL,
             pendingDbURL: self.pendingDbURL,
             endpoint: endpoint,
@@ -144,8 +146,9 @@ final class ZECCWalletEnvironment: ObservableObject {
             viewingKeys: [viewingKey],
             walletBirthday: try SeedManager.default.exportBirthday(),
             loggerProxy: logger)
-        
+
         self.synchronizer = try CombineSynchronizer(initializer: initializer)
+
         self.autoShielder = AutoShieldingBuilder.thresholdAutoShielder(
             keyProvider: DefaultShieldingKeyProvider(),
             shielder: self.synchronizer.synchronizer,
@@ -477,6 +480,20 @@ extension ZcashSDK {
             return true
         case .testnet:
             return false
+        }
+    }
+}
+
+
+extension ZECCWalletEnvironment {
+    func fixPendingDbName() throws {
+        do {
+            if FileManager.default.isReadableFile(atPath: try URL.wrongPendingDbURL().path) && !FileManager.default.isReadableFile(atPath: pendingDbURL.path) {
+                try FileManager.default.moveItem(at: URL.wrongPendingDbURL(), to: pendingDbURL)
+            }
+        } catch {
+            logger.error("fixPendingDbName failed with error \(error)")
+            throw error
         }
     }
 }

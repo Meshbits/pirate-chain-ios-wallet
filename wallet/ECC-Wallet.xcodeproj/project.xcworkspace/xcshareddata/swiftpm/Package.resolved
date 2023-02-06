@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "7e3b50b38e4e66f31db6cf4a784c6af148bac846",
-        "version" : "2.46.0"
+        "revision" : "45167b8006448c79dda4b7bd604e07a034c15c49",
+        "version" : "2.48.0"
       }
     },
     {
@@ -185,17 +185,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/zcash-hackworks/zcash-light-client-ffi",
       "state" : {
-        "revision" : "b6013b8b313523b2c72ce62dbdc17f6ffad3a500",
-        "version" : "0.1.1"
-      }
-    },
-    {
-      "identity" : "zcashlightclientkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/zcash/ZcashLightClientKit",
-      "state" : {
-        "branch" : "main",
-        "revision" : "43e00ecb621abbeaca50281e1bedf97778df40a7"
+        "revision" : "c2dd0eff1defbe6dfb6197c3a42ab21ea2db2fc2",
+        "version" : "0.2.0"
       }
     },
     {

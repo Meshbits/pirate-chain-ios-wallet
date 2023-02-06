@@ -548,6 +548,7 @@
 		0D9E89BA23DA3A9900AFD118 /* RestoreWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWallet.swift; sourceTree = "<group>"; };
 		0D9E89BC23DA3BD600AFD118 /* SeedManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedManagement.swift; sourceTree = "<group>"; };
 		0D9E89C123DA620E00AFD118 /* ZECCWalletEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZECCWalletEnvironment.swift; sourceTree = "<group>"; };
+		0D9F91D7297F2EF70012617D /* ZcashLightClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ZcashLightClientKit; path = ../../ZcashLightClientKit; sourceTree = "<group>"; };
 		0DAC4DC528EE3829007466F3 /* Future+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+async.swift"; sourceTree = "<group>"; };
 		0DACBB32264980620085F1CD /* OhMyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyScreen.swift; sourceTree = "<group>"; };
 		0DB020B2268CECA50010ABC4 /* AutoShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoShieldView.swift; sourceTree = "<group>"; };
@@ -982,6 +983,7 @@
 		34030EE8297A88B300552CAD /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				0D9F91D7297F2EF70012617D /* ZcashLightClientKit */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -2295,7 +2297,7 @@
 			repositoryURL = "https://github.com/zcash/ZcashLightClientKit";
 			requirement = {
 				kind = revision;
-				revision = 43e00ecb621abbeaca50281e1bedf97778df40a7;
+				revision = fad3aae1743467686db8e3a77998baa2ca823fce;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
