@@ -548,7 +548,6 @@
 		0D9E89BA23DA3A9900AFD118 /* RestoreWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreWallet.swift; sourceTree = "<group>"; };
 		0D9E89BC23DA3BD600AFD118 /* SeedManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedManagement.swift; sourceTree = "<group>"; };
 		0D9E89C123DA620E00AFD118 /* ZECCWalletEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZECCWalletEnvironment.swift; sourceTree = "<group>"; };
-		0D9F91D7297F2EF70012617D /* ZcashLightClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ZcashLightClientKit; path = ../../ZcashLightClientKit; sourceTree = "<group>"; };
 		0DAC4DC528EE3829007466F3 /* Future+async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Future+async.swift"; sourceTree = "<group>"; };
 		0DACBB32264980620085F1CD /* OhMyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyScreen.swift; sourceTree = "<group>"; };
 		0DB020B2268CECA50010ABC4 /* AutoShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoShieldView.swift; sourceTree = "<group>"; };
@@ -1918,7 +1917,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 142;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
@@ -1945,7 +1944,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 142;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
 				ENABLE_BITCODE = NO;
@@ -2110,7 +2109,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 142;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
@@ -2139,7 +2138,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Testnet";
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 142;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
 				DEVELOPMENT_TEAM = RLPRR8CPQG;
 				ENABLE_BITCODE = NO;
