@@ -754,7 +754,6 @@
 		0D1250F623B557E40014EE3A = {
 			isa = PBXGroup;
 			children = (
-				34030EE8297A88B300552CAD /* Packages */,
 				0D12510123B557E40014EE3A /* wallet */,
 				0D12511823B557E60014EE3A /* walletTests */,
 				0D12512323B557E60014EE3A /* walletUITests */,
@@ -978,14 +977,6 @@
 				0D5E9B0C263748E400D98569 /* BalanceBreakdown.swift */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		34030EE8297A88B300552CAD /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				0D9F91D7297F2EF70012617D /* ZcashLightClientKit */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2297,7 +2288,7 @@
 			repositoryURL = "https://github.com/zcash/ZcashLightClientKit";
 			requirement = {
 				kind = revision;
-				revision = fad3aae1743467686db8e3a77998baa2ca823fce;
+				revision = cf60f44aa83938432c81361917406483ff42c719;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

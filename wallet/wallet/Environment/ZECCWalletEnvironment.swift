@@ -232,27 +232,6 @@ final class ZECCWalletEnvironment: ObservableObject {
             case .wipeAttemptWhileProcessing:
                 return WalletError.genericErrorWithMessage(message: synchronizerError.localizedDescription)
             }
-        } else if let serviceError = error as? LightWalletServiceError {
-            switch serviceError {
-            case .criticalError:
-                return WalletError.criticalError(error: serviceError)
-            case .userCancelled:
-                return WalletError.connectionFailed
-            case .unknown:
-                return WalletError.connectionFailed
-            case .failed:
-                return WalletError.connectionFailedWithError(error: error)
-            case .generalError:
-                return WalletError.connectionFailed
-            case .invalidBlock:
-                return WalletError.genericErrorWithError(error: error)
-            case .sentFailed(let error):
-                return WalletError.sendFailed(error: error)
-            case .genericError(error: let error):
-                return WalletError.genericErrorWithError(error: error)
-            case .timeOut:
-                return WalletError.networkTimeout
-            }
         }
         
         return WalletError.genericErrorWithError(error: error)

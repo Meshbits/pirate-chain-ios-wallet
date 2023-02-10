@@ -337,7 +337,9 @@ extension CombineSynchronizer {
                                 memos = []
                             }
 
-                            return DetailModel(transaction: transaction, memos: memos)
+                            let recipients = self.synchronizer.getRecipients(for: transaction)
+
+                            return DetailModel(transaction: transaction, memos: memos, recipients: recipients)
                         }
                         .filter { detailModel in
                             pending.first { (p) -> Bool in p.id == detailModel.id } == nil

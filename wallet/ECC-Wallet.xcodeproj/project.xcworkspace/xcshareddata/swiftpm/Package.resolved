@@ -190,6 +190,14 @@
       }
     },
     {
+      "identity" : "zcashlightclientkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zcash/ZcashLightClientKit",
+      "state" : {
+        "revision" : "cf60f44aa83938432c81361917406483ff42c719"
+      }
+    },
+    {
       "identity" : "zealous-logger",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/zcash-hackworks/zealous-logger",

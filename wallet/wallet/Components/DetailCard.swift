@@ -217,13 +217,13 @@ extension Date {
 
 extension DetailModel {
 
-    init(transaction: ZcashTransaction.Overview, memos: [Memo]) {
+    init(transaction: ZcashTransaction.Overview, memos: [Memo], recipients: [TransactionRecipient]) {
         self.date = Date(timeIntervalSince1970: transaction.blockTime ?? 0)
         self.id = transaction.rawID.toHexStringTxId()
         self.shielded = true
         self.status = transaction.isSentTransaction ? .paid(success: (transaction.minedHeight ?? 0) > 0) : .received
         self.subtitle = transaction.isSentTransaction ? "wallet_history_sent".localized() + " \(self.date.transactionDetail)" : "Received".localized() + " \(self.date.transactionDetail)"
-        self.zAddress = nil
+        self.zAddress = recipients.first?.stringEncodedAddress 
         self.amount = transaction.isSentTransaction ? -transaction.value : transaction.value
         if let memo = memos.first {
             self.memo = memo.toString()
@@ -307,11 +307,11 @@ extension PendingTransactionRecipient {
         case .address(let recipient):
             switch recipient {
             case .sapling(let saplingAddress):
-                return saplingAddress.stringEncoded.shortAddress
+                return saplingAddress.stringEncoded
             case .transparent(let transparentAddress):
-                return transparentAddress.stringEncoded.shortAddress
+                return transparentAddress.stringEncoded
             case .unified(let unified):
-                return unified.stringEncoded.shortAddress
+                return unified.stringEncoded
             }
         case .internalAccount(let account):
             return "Funds shielded account \(account)"
