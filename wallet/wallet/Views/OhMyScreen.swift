@@ -46,12 +46,12 @@ struct OhMyScreen: View {
                     Text("We couldn't initialize your wallet".localized())
                         .foregroundColor(.white)
                         .font(.system(size: 15))
-                    if let error = environment.error {
-                        Text("""
-                             Reason:
-                             \(error.localizedDescription)
-                             """).font(.system(size: 12))
-                    }
+//                    if let error = environment.error {
+//                        Text("""
+//                             Reason:
+//                             \(error.localizedDescription)
+//                             """).font(.system(size: 12))
+//                    }
                     
                     VStack(alignment: .leading) {
                         Text("Close the app and try to restart it.".localized())
