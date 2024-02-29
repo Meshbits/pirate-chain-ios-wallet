@@ -116,7 +116,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                 .navigationBarBackButtonHidden(true)
                         }
                     )
-            ,ignoreSafeArea: true)
+              )
+//            ,ignoreSafeArea: true)
             self.window = window
             _zECCWalletNavigationBarLookTweaks()
             window.makeKeyAndVisible()

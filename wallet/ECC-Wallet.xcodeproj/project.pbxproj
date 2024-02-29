@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -588,6 +588,7 @@
 		CF4FC91B27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 		CF4FC91C27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 		CF4FC91D27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
+		CFB085BE2B90868100711486 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CFB085BD2B90868100711486 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -920,6 +921,7 @@
 				29491D6626C5613500BBF144 /* Neumorphic in Frameworks */,
 				29DDA37926CCFA6A0041406B /* WKView in Frameworks */,
 				CEFF0B0FCBB305A5F3ADBA14 /* Pods_ECC_Wallet_no_logging.framework in Frameworks */,
+				CFB085BE2B90868100711486 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1481,6 +1483,7 @@
 			packageProductDependencies = (
 				29491D6526C5613500BBF144 /* Neumorphic */,
 				29DDA37826CCFA6A0041406B /* WKView */,
+				CFB085BD2B90868100711486 /* Lottie */,
 			);
 			productName = wallet;
 			productReference = 0DCDFFE624B6722B000F6999 /* ECC-Wallet-no-logs.app */;
@@ -1547,6 +1550,7 @@
 			packageReferences = (
 				29491D6426C5613500BBF144 /* XCRemoteSwiftPackageReference "neumorphic" */,
 				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */,
+				CFB085BC2B90868100711486 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 0D12510023B557E40014EE3A /* Products */;
 			projectDirPath = "";
@@ -2914,7 +2918,7 @@
 				CURRENT_PROJECT_VERSION = 128;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
-				DEVELOPMENT_TEAM = RLPRR8CPQG;
+				DEVELOPMENT_TEAM = 9TR5BMPZP3;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/ECC-Wallet-Testnet-Info.plist";
@@ -2941,7 +2945,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 128;
 				DEVELOPMENT_ASSET_PATHS = "\"wallet/Preview Content\"";
-				DEVELOPMENT_TEAM = RLPRR8CPQG;
+				DEVELOPMENT_TEAM = 9TR5BMPZP3;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/ECC-Wallet-Testnet-Info.plist";
@@ -3035,6 +3039,14 @@
 				minimumVersion = 0.1.6;
 			};
 		};
+		CFB085BC2B90868100711486 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3047,6 +3059,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */;
 			productName = WKView;
+		};
+		CFB085BD2B90868100711486 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFB085BC2B90868100711486 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
