@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 
 fileprivate struct ScreenConstants {
     static let buttonHeight = CGFloat(48)

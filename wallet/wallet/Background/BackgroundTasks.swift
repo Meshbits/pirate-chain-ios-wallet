@@ -13,7 +13,7 @@ class BackgroundTaskSyncronizing {
     static let backgroundProcessingBlockThreshold = 1000
     static let backgroundProcessingTaskIdentifier = "io.meshbits.piratewallet.ios.backgroundProcessingTask"
     static let backgroundAppRefreshTaskIdentifier = "io.meshbits.piratewallet.ios.backgroundAppRefreshTask"
-    static let backgroundProcessingTaskIdentifierARRR = "ZcashLightClientKit.SDKSynchronizer"
+    static let backgroundProcessingTaskIdentifierARRR = "PirateLightClientKit.SDKSynchronizer"
     var cancellables = [AnyCancellable]()
     static let `default` = BackgroundTaskSyncronizing()
     enum BGTaskError: Error {

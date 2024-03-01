@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct TransactionDetailsTitle: View {
     var availableZec: Double

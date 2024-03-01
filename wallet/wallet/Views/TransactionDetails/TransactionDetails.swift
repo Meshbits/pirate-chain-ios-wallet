@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 import AlertToast
 
 struct TransactionDetails: View {

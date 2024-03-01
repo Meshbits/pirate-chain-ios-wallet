@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct TheNoScreen: View {
 //    @EnvironmentObject var appEnvironment: ZECCWalletEnvironment

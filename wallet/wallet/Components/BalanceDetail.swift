@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 enum BalanceStatus {
     case available(showCaption: Bool)
     case expecting(zec: Double)
@@ -84,7 +84,7 @@ struct BalanceDetail: View {
     }
     
     var zec: String {
-        if ZcashSDK.isMainnet {
+        if PirateSDK.isMainnet {
             return "ARRR"
         } else {
             return "TAZ"

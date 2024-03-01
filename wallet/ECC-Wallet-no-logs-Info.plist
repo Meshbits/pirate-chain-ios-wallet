@@ -6,7 +6,7 @@
 	<array>
 		<string>io.meshbits.piratewallet.ios.backgroundProcessingTask</string>
 		<string>io.meshbits.piratewallet.ios.backgroundAppRefreshTask</string>
-		<string>ZcashLightClientKit.SDKSynchronizer</string>
+		<string>PirateLightClientKit.SDKSynchronizer</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

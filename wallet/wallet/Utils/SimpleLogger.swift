@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import ZcashLightClientKit
+import PirateLightClientKit
 
 
-class SimpleLogger: ZcashLightClientKit.Logger {
+class SimpleLogger: PirateLightClientKit.Logger {
     enum LogLevel: Int {
         case debug
         case error
@@ -70,7 +70,7 @@ class SimpleLogger: ZcashLightClientKit.Logger {
 #if ENABLE_LOGGING
 
 import zealous_logger
-class SimpleFileLogger: ZcashLightClientKit.Logger {
+class SimpleFileLogger: PirateLightClientKit.Logger {
     
     let logger: zealous_logger.Logger
     

@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import ZcashLightClientKit
+import PirateLightClientKit
 class UrlHandler {
     
     static func blockExplorerURL(for txId: String) -> URL? {
-        ZcashSDK.isMainnet ? blockExplorerURLMainnet(for: txId) : blockExplorerURLTestnet(for: txId)
+        PirateSDK.isMainnet ? blockExplorerURLMainnet(for: txId) : blockExplorerURLTestnet(for: txId)
     }
     
     // blockchair does not support testnet zcash

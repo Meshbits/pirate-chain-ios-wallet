@@ -1,0 +1,11 @@
+language: swift
+os: osx
+osx_image: xcode14
+xcode_project: ./Example/PirateLightClientSample/PirateLightClientSample.xcodeproj
+xcode_scheme: PirateLightClientSample
+xcode_destination: platform=iOS Simulator,OS=16.0,name=iPhone 14
+addons:
+  homebrew:
+    packages:
+    - sourcery
+    - swiftlint

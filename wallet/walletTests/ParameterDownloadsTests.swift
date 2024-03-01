@@ -8,7 +8,7 @@
 
 import XCTest
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 @testable import ECC_Wallet_Testnet
 class ParameterDownloadsTests: XCTestCase {
 

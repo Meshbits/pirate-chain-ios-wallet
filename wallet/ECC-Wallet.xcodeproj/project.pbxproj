@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -589,6 +589,7 @@
 		CF4FC91C27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 		CF4FC91D27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 		CFB085BE2B90868100711486 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CFB085BD2B90868100711486 /* Lottie */; };
+		CFEA0CB22B92045A00436E1C /* PirateLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = CFEA0CB12B92045A00436E1C /* PirateLightClientKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -883,6 +884,498 @@
 		CF4FC91227A415C100024BF8 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyEndpoint.swift; sourceTree = "<group>"; };
 		CF4FC91A27A5531E00024BF8 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		CFEA0A9D2B9202B800436E1C /* PirateLightClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PirateLightClientKit; path = "../../../../Desktop/Lokesh Resumes/PirateLightClientKit"; sourceTree = "<group>"; };
+		CFEA0AA02B9202F900436E1C /* SDKMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKMetrics.swift; sourceTree = "<group>"; };
+		CFEA0AA22B9202F900436E1C /* TransactionEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEncoder.swift; sourceTree = "<group>"; };
+		CFEA0AA32B9202F900436E1C /* WalletTransactionEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTransactionEncoder.swift; sourceTree = "<group>"; };
+		CFEA0AA52B9202F900436E1C /* UnspentTransactionOutputRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnspentTransactionOutputRepository.swift; sourceTree = "<group>"; };
+		CFEA0AA62B9202F900436E1C /* PaginatedTransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedTransactionRepository.swift; sourceTree = "<group>"; };
+		CFEA0AA72B9202F900436E1C /* TransactionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepository.swift; sourceTree = "<group>"; };
+		CFEA0AA82B9202F900436E1C /* BlockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockRepository.swift; sourceTree = "<group>"; };
+		CFEA0AA92B9202F900436E1C /* CompactBlockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactBlockRepository.swift; sourceTree = "<group>"; };
+		CFEA0AAA2B9202F900436E1C /* TransactionRepositoryBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionRepositoryBuilder.swift; sourceTree = "<group>"; };
+		CFEA0AAB2B9202F900436E1C /* NotesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesRepository.swift; sourceTree = "<group>"; };
+		CFEA0AAC2B9202F900436E1C /* Synchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synchronizer.swift; sourceTree = "<group>"; };
+		CFEA0AAE2B9202F900436E1C /* TransactionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEntity.swift; sourceTree = "<group>"; };
+		CFEA0AAF2B9202F900436E1C /* ZcashCompactBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashCompactBlock.swift; sourceTree = "<group>"; };
+		CFEA0AB02B9202F900436E1C /* SentNoteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentNoteEntity.swift; sourceTree = "<group>"; };
+		CFEA0AB12B9202F900436E1C /* BlockProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockProgress.swift; sourceTree = "<group>"; };
+		CFEA0AB22B9202F900436E1C /* AccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountEntity.swift; sourceTree = "<group>"; };
+		CFEA0AB32B9202F900436E1C /* UnspentTransactionOutputEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnspentTransactionOutputEntity.swift; sourceTree = "<group>"; };
+		CFEA0AB42B9202F900436E1C /* EncodedTransactionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncodedTransactionEntity.swift; sourceTree = "<group>"; };
+		CFEA0AB62B9202F900436E1C /* ZcashSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashSDK.swift; sourceTree = "<group>"; };
+		CFEA0AB72B9202F900436E1C /* Checkpoint+testnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Checkpoint+testnet.swift"; sourceTree = "<group>"; };
+		CFEA0AB82B9202F900436E1C /* Checkpoint+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Checkpoint+Constants.swift"; sourceTree = "<group>"; };
+		CFEA0AB92B9202F900436E1C /* Checkpoint+mainnet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Checkpoint+mainnet.swift"; sourceTree = "<group>"; };
+		CFEA0ABB2B9202F900436E1C /* LatestBlocksDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestBlocksDataProvider.swift; sourceTree = "<group>"; };
+		CFEA0ABC2B9202F900436E1C /* ResourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceProvider.swift; sourceTree = "<group>"; };
+		CFEA0AC02B9202F900436E1C /* 930000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 930000.json; sourceTree = "<group>"; };
+		CFEA0AC12B9202F900436E1C /* 920000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 920000.json; sourceTree = "<group>"; };
+		CFEA0AC22B9202F900436E1C /* 1150000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1150000.json; sourceTree = "<group>"; };
+		CFEA0AC32B9202F900436E1C /* 480000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 480000.json; sourceTree = "<group>"; };
+		CFEA0AC42B9202F900436E1C /* 1140000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1140000.json; sourceTree = "<group>"; };
+		CFEA0AC52B9202F900436E1C /* 490000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 490000.json; sourceTree = "<group>"; };
+		CFEA0AC62B9202F900436E1C /* 1860000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1860000.json; sourceTree = "<group>"; };
+		CFEA0AC72B9202F900436E1C /* 1620000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1620000.json; sourceTree = "<group>"; };
+		CFEA0AC82B9202F900436E1C /* 1630000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1630000.json; sourceTree = "<group>"; };
+		CFEA0AC92B9202F900436E1C /* 760000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 760000.json; sourceTree = "<group>"; };
+		CFEA0ACA2B9202F900436E1C /* 770000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 770000.json; sourceTree = "<group>"; };
+		CFEA0ACB2B9202F900436E1C /* 420000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 420000.json; sourceTree = "<group>"; };
+		CFEA0ACC2B9202F900436E1C /* 430000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 430000.json; sourceTree = "<group>"; };
+		CFEA0ACD2B9202F900436E1C /* 990000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 990000.json; sourceTree = "<group>"; };
+		CFEA0ACE2B9202F900436E1C /* 980000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 980000.json; sourceTree = "<group>"; };
+		CFEA0ACF2B9202F900436E1C /* 1560000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1560000.json; sourceTree = "<group>"; };
+		CFEA0AD02B9202F900436E1C /* 1570000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1570000.json; sourceTree = "<group>"; };
+		CFEA0AD12B9202F900436E1C /* 1210000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1210000.json; sourceTree = "<group>"; };
+		CFEA0AD22B9202F900436E1C /* 1200000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1200000.json; sourceTree = "<group>"; };
+		CFEA0AD32B9202F900436E1C /* 1680000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1680000.json; sourceTree = "<group>"; };
+		CFEA0AD42B9202F900436E1C /* 350000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 350000.json; sourceTree = "<group>"; };
+		CFEA0AD52B9202F900436E1C /* 1690000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1690000.json; sourceTree = "<group>"; };
+		CFEA0AD62B9202F900436E1C /* 340000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 340000.json; sourceTree = "<group>"; };
+		CFEA0AD72B9202F900436E1C /* 1020000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1020000.json; sourceTree = "<group>"; };
+		CFEA0AD82B9202FA00436E1C /* 1030000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1030000.json; sourceTree = "<group>"; };
+		CFEA0AD92B9202FA00436E1C /* 840000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 840000.json; sourceTree = "<group>"; };
+		CFEA0ADA2B9202FA00436E1C /* 850000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 850000.json; sourceTree = "<group>"; };
+		CFEA0ADB2B9202FA00436E1C /* 610000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 610000.json; sourceTree = "<group>"; };
+		CFEA0ADC2B9202FA00436E1C /* 600000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 600000.json; sourceTree = "<group>"; };
+		CFEA0ADD2B9202FA00436E1C /* 280000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 280000.json; sourceTree = "<group>"; };
+		CFEA0ADE2B9202FA00436E1C /* 1750000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1750000.json; sourceTree = "<group>"; };
+		CFEA0ADF2B9202FA00436E1C /* 290000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 290000.json; sourceTree = "<group>"; };
+		CFEA0AE02B9202FA00436E1C /* 1740000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1740000.json; sourceTree = "<group>"; };
+		CFEA0AE12B9202FA00436E1C /* 1410000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1410000.json; sourceTree = "<group>"; };
+		CFEA0AE22B9202FA00436E1C /* 1400000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1400000.json; sourceTree = "<group>"; };
+		CFEA0AE32B9202FA00436E1C /* 550000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 550000.json; sourceTree = "<group>"; };
+		CFEA0AE42B9202FA00436E1C /* 1080000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1080000.json; sourceTree = "<group>"; };
+		CFEA0AE52B9202FA00436E1C /* 540000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 540000.json; sourceTree = "<group>"; };
+		CFEA0AE62B9202FA00436E1C /* 1090000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1090000.json; sourceTree = "<group>"; };
+		CFEA0AE72B9202FA00436E1C /* 1360000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1360000.json; sourceTree = "<group>"; };
+		CFEA0AE82B9202FA00436E1C /* 1370000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1370000.json; sourceTree = "<group>"; };
+		CFEA0AE92B9202FA00436E1C /* 580000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 580000.json; sourceTree = "<group>"; };
+		CFEA0AEA2B9202FA00436E1C /* 1050000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1050000.json; sourceTree = "<group>"; };
+		CFEA0AEB2B9202FA00436E1C /* 590000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 590000.json; sourceTree = "<group>"; };
+		CFEA0AEC2B9202FA00436E1C /* 1040000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1040000.json; sourceTree = "<group>"; };
+		CFEA0AED2B9202FA00436E1C /* 830000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 830000.json; sourceTree = "<group>"; };
+		CFEA0AEE2B9202FA00436E1C /* 820000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 820000.json; sourceTree = "<group>"; };
+		CFEA0AEF2B9202FA00436E1C /* 660000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 660000.json; sourceTree = "<group>"; };
+		CFEA0AF02B9202FA00436E1C /* 670000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 670000.json; sourceTree = "<group>"; };
+		CFEA0AF12B9202FA00436E1C /* 1720000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1720000.json; sourceTree = "<group>"; };
+		CFEA0AF22B9202FA00436E1C /* 1730000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1730000.json; sourceTree = "<group>"; };
+		CFEA0AF32B9202FA00436E1C /* 890000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 890000.json; sourceTree = "<group>"; };
+		CFEA0AF42B9202FA00436E1C /* 880000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 880000.json; sourceTree = "<group>"; };
+		CFEA0AF52B9202FA00436E1C /* 1460000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1460000.json; sourceTree = "<group>"; };
+		CFEA0AF62B9202FA00436E1C /* 1470000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1470000.json; sourceTree = "<group>"; };
+		CFEA0AF72B9202FA00436E1C /* 520000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 520000.json; sourceTree = "<group>"; };
+		CFEA0AF82B9202FA00436E1C /* 530000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 530000.json; sourceTree = "<group>"; };
+		CFEA0AF92B9202FA00436E1C /* 1780000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1780000.json; sourceTree = "<group>"; };
+		CFEA0AFA2B9202FA00436E1C /* 1790000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1790000.json; sourceTree = "<group>"; };
+		CFEA0AFB2B9202FA00436E1C /* 1310000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1310000.json; sourceTree = "<group>"; };
+		CFEA0AFC2B9202FA00436E1C /* 1300000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1300000.json; sourceTree = "<group>"; };
+		CFEA0AFD2B9202FA00436E1C /* 940000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 940000.json; sourceTree = "<group>"; };
+		CFEA0AFE2B9202FA00436E1C /* 950000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 950000.json; sourceTree = "<group>"; };
+		CFEA0AFF2B9202FA00436E1C /* 1800000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1800000.json; sourceTree = "<group>"; };
+		CFEA0B002B9202FA00436E1C /* 1810000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1810000.json; sourceTree = "<group>"; };
+		CFEA0B012B9202FA00436E1C /* 1120000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1120000.json; sourceTree = "<group>"; };
+		CFEA0B022B9202FA00436E1C /* 1130000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1130000.json; sourceTree = "<group>"; };
+		CFEA0B032B9202FA00436E1C /* 1650000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1650000.json; sourceTree = "<group>"; };
+		CFEA0B042B9202FA00436E1C /* 380000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 380000.json; sourceTree = "<group>"; };
+		CFEA0B052B9202FA00436E1C /* 1640000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1640000.json; sourceTree = "<group>"; };
+		CFEA0B062B9202FA00436E1C /* 390000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 390000.json; sourceTree = "<group>"; };
+		CFEA0B072B9202FA00436E1C /* 710000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 710000.json; sourceTree = "<group>"; };
+		CFEA0B082B9202FA00436E1C /* 700000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 700000.json; sourceTree = "<group>"; };
+		CFEA0B092B9202FA00436E1C /* 1180000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1180000.json; sourceTree = "<group>"; };
+		CFEA0B0A2B9202FA00436E1C /* 450000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 450000.json; sourceTree = "<group>"; };
+		CFEA0B0B2B9202FA00436E1C /* 1190000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1190000.json; sourceTree = "<group>"; };
+		CFEA0B0C2B9202FA00436E1C /* 440000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 440000.json; sourceTree = "<group>"; };
+		CFEA0B0D2B9202FA00436E1C /* 1510000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1510000.json; sourceTree = "<group>"; };
+		CFEA0B0E2B9202FA00436E1C /* 1500000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1500000.json; sourceTree = "<group>"; };
+		CFEA0B0F2B9202FA00436E1C /* 1260000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1260000.json; sourceTree = "<group>"; };
+		CFEA0B102B9202FA00436E1C /* 1270000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1270000.json; sourceTree = "<group>"; };
+		CFEA0B112B9202FA00436E1C /* 320000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 320000.json; sourceTree = "<group>"; };
+		CFEA0B122B9202FA00436E1C /* 330000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 330000.json; sourceTree = "<group>"; };
+		CFEA0B132B9202FA00436E1C /* 1420000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1420000.json; sourceTree = "<group>"; };
+		CFEA0B142B9202FA00436E1C /* 1430000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1430000.json; sourceTree = "<group>"; };
+		CFEA0B152B9202FA00436E1C /* 560000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 560000.json; sourceTree = "<group>"; };
+		CFEA0B162B9202FA00436E1C /* 570000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 570000.json; sourceTree = "<group>"; };
+		CFEA0B172B9202FA00436E1C /* 680000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 680000.json; sourceTree = "<group>"; };
+		CFEA0B182B9202FA00436E1C /* 1350000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1350000.json; sourceTree = "<group>"; };
+		CFEA0B192B9202FA00436E1C /* 690000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 690000.json; sourceTree = "<group>"; };
+		CFEA0B1A2B9202FA00436E1C /* 1340000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1340000.json; sourceTree = "<group>"; };
+		CFEA0B1B2B9202FA00436E1C /* 1010000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1010000.json; sourceTree = "<group>"; };
+		CFEA0B1C2B9202FA00436E1C /* 1000000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1000000.json; sourceTree = "<group>"; };
+		CFEA0B1D2B9202FA00436E1C /* 870000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 870000.json; sourceTree = "<group>"; };
+		CFEA0B1E2B9202FA00436E1C /* 860000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 860000.json; sourceTree = "<group>"; };
+		CFEA0B1F2B9202FA00436E1C /* 1480000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1480000.json; sourceTree = "<group>"; };
+		CFEA0B202B9202FA00436E1C /* 1490000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1490000.json; sourceTree = "<group>"; };
+		CFEA0B212B9202FA00436E1C /* 620000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 620000.json; sourceTree = "<group>"; };
+		CFEA0B222B9202FA00436E1C /* 630000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 630000.json; sourceTree = "<group>"; };
+		CFEA0B232B9202FA00436E1C /* 1760000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1760000.json; sourceTree = "<group>"; };
+		CFEA0B242B9202FA00436E1C /* 1770000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1770000.json; sourceTree = "<group>"; };
+		CFEA0B252B9202FA00436E1C /* 410000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 410000.json; sourceTree = "<group>"; };
+		CFEA0B262B9202FA00436E1C /* 400000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 400000.json; sourceTree = "<group>"; };
+		CFEA0B272B9202FA00436E1C /* 1550000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1550000.json; sourceTree = "<group>"; };
+		CFEA0B282B9202FA00436E1C /* 1540000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1540000.json; sourceTree = "<group>"; };
+		CFEA0B292B9202FA00436E1C /* 1220000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1220000.json; sourceTree = "<group>"; };
+		CFEA0B2A2B9202FA00436E1C /* 1230000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1230000.json; sourceTree = "<group>"; };
+		CFEA0B2B2B9202FA00436E1C /* 360000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 360000.json; sourceTree = "<group>"; };
+		CFEA0B2C2B9202FA00436E1C /* 370000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 370000.json; sourceTree = "<group>"; };
+		CFEA0B2D2B9202FA00436E1C /* 900000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 900000.json; sourceTree = "<group>"; };
+		CFEA0B2E2B9202FA00436E1C /* 910000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 910000.json; sourceTree = "<group>"; };
+		CFEA0B2F2B9202FA00436E1C /* 1160000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1160000.json; sourceTree = "<group>"; };
+		CFEA0B302B9202FA00436E1C /* 1170000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1170000.json; sourceTree = "<group>"; };
+		CFEA0B312B9202FA00436E1C /* 1840000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1840000.json; sourceTree = "<group>"; };
+		CFEA0B322B9202FA00436E1C /* 1850000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1850000.json; sourceTree = "<group>"; };
+		CFEA0B332B9202FA00436E1C /* 1610000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1610000.json; sourceTree = "<group>"; };
+		CFEA0B342B9202FA00436E1C /* 1600000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1600000.json; sourceTree = "<group>"; };
+		CFEA0B352B9202FA00436E1C /* 1280000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1280000.json; sourceTree = "<group>"; };
+		CFEA0B362B9202FA00436E1C /* 750000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 750000.json; sourceTree = "<group>"; };
+		CFEA0B372B9202FA00436E1C /* 1290000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1290000.json; sourceTree = "<group>"; };
+		CFEA0B382B9202FA00436E1C /* 740000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 740000.json; sourceTree = "<group>"; };
+		CFEA0B392B9202FA00436E1C /* 460000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 460000.json; sourceTree = "<group>"; };
+		CFEA0B3A2B9202FA00436E1C /* 470000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 470000.json; sourceTree = "<group>"; };
+		CFEA0B3B2B9202FA00436E1C /* 1520000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1520000.json; sourceTree = "<group>"; };
+		CFEA0B3C2B9202FA00436E1C /* 1530000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1530000.json; sourceTree = "<group>"; };
+		CFEA0B3D2B9202FA00436E1C /* 1250000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1250000.json; sourceTree = "<group>"; };
+		CFEA0B3E2B9202FA00436E1C /* 780000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 780000.json; sourceTree = "<group>"; };
+		CFEA0B3F2B9202FA00436E1C /* 1240000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1240000.json; sourceTree = "<group>"; };
+		CFEA0B402B9202FA00436E1C /* 790000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 790000.json; sourceTree = "<group>"; };
+		CFEA0B412B9202FA00436E1C /* 310000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 310000.json; sourceTree = "<group>"; };
+		CFEA0B422B9202FA00436E1C /* 300000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 300000.json; sourceTree = "<group>"; };
+		CFEA0B432B9202FA00436E1C /* 970000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 970000.json; sourceTree = "<group>"; };
+		CFEA0B442B9202FA00436E1C /* 960000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 960000.json; sourceTree = "<group>"; };
+		CFEA0B452B9202FA00436E1C /* 1580000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1580000.json; sourceTree = "<group>"; };
+		CFEA0B462B9202FA00436E1C /* 1590000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1590000.json; sourceTree = "<group>"; };
+		CFEA0B472B9202FA00436E1C /* 1830000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1830000.json; sourceTree = "<group>"; };
+		CFEA0B482B9202FA00436E1C /* 1820000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1820000.json; sourceTree = "<group>"; };
+		CFEA0B492B9202FA00436E1C /* 1110000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1110000.json; sourceTree = "<group>"; };
+		CFEA0B4A2B9202FA00436E1C /* 1100000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1100000.json; sourceTree = "<group>"; };
+		CFEA0B4B2B9202FA00436E1C /* 1660000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1660000.json; sourceTree = "<group>"; };
+		CFEA0B4C2B9202FA00436E1C /* 1670000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1670000.json; sourceTree = "<group>"; };
+		CFEA0B4D2B9202FA00436E1C /* 720000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 720000.json; sourceTree = "<group>"; };
+		CFEA0B4E2B9202FA00436E1C /* 730000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 730000.json; sourceTree = "<group>"; };
+		CFEA0B4F2B9202FA00436E1C /* 1450000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1450000.json; sourceTree = "<group>"; };
+		CFEA0B502B9202FA00436E1C /* 1440000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1440000.json; sourceTree = "<group>"; };
+		CFEA0B512B9202FA00436E1C /* 510000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 510000.json; sourceTree = "<group>"; };
+		CFEA0B522B9202FA00436E1C /* 500000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 500000.json; sourceTree = "<group>"; };
+		CFEA0B532B9202FA00436E1C /* 1320000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1320000.json; sourceTree = "<group>"; };
+		CFEA0B542B9202FA00436E1C /* 1330000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1330000.json; sourceTree = "<group>"; };
+		CFEA0B552B9202FA00436E1C /* 1060000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1060000.json; sourceTree = "<group>"; };
+		CFEA0B562B9202FA00436E1C /* 1070000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1070000.json; sourceTree = "<group>"; };
+		CFEA0B572B9202FA00436E1C /* 800000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 800000.json; sourceTree = "<group>"; };
+		CFEA0B582B9202FA00436E1C /* 810000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 810000.json; sourceTree = "<group>"; };
+		CFEA0B592B9202FA00436E1C /* 650000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 650000.json; sourceTree = "<group>"; };
+		CFEA0B5A2B9202FA00436E1C /* 1380000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1380000.json; sourceTree = "<group>"; };
+		CFEA0B5B2B9202FA00436E1C /* 640000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 640000.json; sourceTree = "<group>"; };
+		CFEA0B5C2B9202FA00436E1C /* 1390000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1390000.json; sourceTree = "<group>"; };
+		CFEA0B5D2B9202FA00436E1C /* 1710000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1710000.json; sourceTree = "<group>"; };
+		CFEA0B5E2B9202FA00436E1C /* 1700000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1700000.json; sourceTree = "<group>"; };
+		CFEA0B602B9202FA00436E1C /* 930000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 930000.json; sourceTree = "<group>"; };
+		CFEA0B612B9202FA00436E1C /* 920000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 920000.json; sourceTree = "<group>"; };
+		CFEA0B622B9202FA00436E1C /* 2320000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2320000.json; sourceTree = "<group>"; };
+		CFEA0B632B9202FA00436E1C /* 2330000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2330000.json; sourceTree = "<group>"; };
+		CFEA0B642B9202FA00436E1C /* 1150000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1150000.json; sourceTree = "<group>"; };
+		CFEA0B652B9202FA00436E1C /* 480000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 480000.json; sourceTree = "<group>"; };
+		CFEA0B662B9202FA00436E1C /* 1140000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1140000.json; sourceTree = "<group>"; };
+		CFEA0B672B9202FA00436E1C /* 490000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 490000.json; sourceTree = "<group>"; };
+		CFEA0B682B9202FA00436E1C /* 1870000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1870000.json; sourceTree = "<group>"; };
+		CFEA0B692B9202FA00436E1C /* 1860000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1860000.json; sourceTree = "<group>"; };
+		CFEA0B6A2B9202FA00436E1C /* 1620000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1620000.json; sourceTree = "<group>"; };
+		CFEA0B6B2B9202FA00436E1C /* 1630000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1630000.json; sourceTree = "<group>"; };
+		CFEA0B6C2B9202FA00436E1C /* 760000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 760000.json; sourceTree = "<group>"; };
+		CFEA0B6D2B9202FA00436E1C /* 770000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 770000.json; sourceTree = "<group>"; };
+		CFEA0B6E2B9202FA00436E1C /* 2450000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2450000.json; sourceTree = "<group>"; };
+		CFEA0B6F2B9202FA00436E1C /* 2440000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2440000.json; sourceTree = "<group>"; };
+		CFEA0B702B9202FA00436E1C /* 420000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 420000.json; sourceTree = "<group>"; };
+		CFEA0B712B9202FA00436E1C /* 430000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 430000.json; sourceTree = "<group>"; };
+		CFEA0B722B9202FA00436E1C /* 2380000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2380000.json; sourceTree = "<group>"; };
+		CFEA0B732B9202FA00436E1C /* 2390000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2390000.json; sourceTree = "<group>"; };
+		CFEA0B742B9202FA00436E1C /* 990000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 990000.json; sourceTree = "<group>"; };
+		CFEA0B752B9202FA00436E1C /* 980000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 980000.json; sourceTree = "<group>"; };
+		CFEA0B762B9202FA00436E1C /* 1560000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1560000.json; sourceTree = "<group>"; };
+		CFEA0B772B9202FA00436E1C /* 1570000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1570000.json; sourceTree = "<group>"; };
+		CFEA0B782B9202FA00436E1C /* 1210000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1210000.json; sourceTree = "<group>"; };
+		CFEA0B792B9202FA00436E1C /* 1200000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1200000.json; sourceTree = "<group>"; };
+		CFEA0B7A2B9202FA00436E1C /* 2060000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2060000.json; sourceTree = "<group>"; };
+		CFEA0B7B2B9202FA00436E1C /* 2070000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2070000.json; sourceTree = "<group>"; };
+		CFEA0B7C2B9202FA00436E1C /* 1680000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1680000.json; sourceTree = "<group>"; };
+		CFEA0B7D2B9202FA00436E1C /* 350000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 350000.json; sourceTree = "<group>"; };
+		CFEA0B7E2B9202FA00436E1C /* 1690000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1690000.json; sourceTree = "<group>"; };
+		CFEA0B7F2B9202FA00436E1C /* 340000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 340000.json; sourceTree = "<group>"; };
+		CFEA0B802B9202FA00436E1C /* 1900000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1900000.json; sourceTree = "<group>"; };
+		CFEA0B812B9202FA00436E1C /* 1910000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1910000.json; sourceTree = "<group>"; };
+		CFEA0B822B9202FA00436E1C /* 1020000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1020000.json; sourceTree = "<group>"; };
+		CFEA0B832B9202FA00436E1C /* 1030000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1030000.json; sourceTree = "<group>"; };
+		CFEA0B842B9202FA00436E1C /* 840000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 840000.json; sourceTree = "<group>"; };
+		CFEA0B852B9202FA00436E1C /* 850000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 850000.json; sourceTree = "<group>"; };
+		CFEA0B862B9202FA00436E1C /* 2250000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2250000.json; sourceTree = "<group>"; };
+		CFEA0B872B9202FA00436E1C /* 2240000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2240000.json; sourceTree = "<group>"; };
+		CFEA0B882B9202FA00436E1C /* 2520000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2520000.json; sourceTree = "<group>"; };
+		CFEA0B892B9202FA00436E1C /* 2530000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2530000.json; sourceTree = "<group>"; };
+		CFEA0B8A2B9202FA00436E1C /* 610000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 610000.json; sourceTree = "<group>"; };
+		CFEA0B8B2B9202FA00436E1C /* 600000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 600000.json; sourceTree = "<group>"; };
+		CFEA0B8C2B9202FA00436E1C /* 280000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 280000.json; sourceTree = "<group>"; };
+		CFEA0B8D2B9202FA00436E1C /* 1750000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1750000.json; sourceTree = "<group>"; };
+		CFEA0B8E2B9202FA00436E1C /* 290000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 290000.json; sourceTree = "<group>"; };
+		CFEA0B8F2B9202FA00436E1C /* 1740000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1740000.json; sourceTree = "<group>"; };
+		CFEA0B902B9202FA00436E1C /* 1410000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1410000.json; sourceTree = "<group>"; };
+		CFEA0B912B9202FA00436E1C /* 1400000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1400000.json; sourceTree = "<group>"; };
+		CFEA0B922B9202FA00436E1C /* 550000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 550000.json; sourceTree = "<group>"; };
+		CFEA0B932B9202FA00436E1C /* 1080000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1080000.json; sourceTree = "<group>"; };
+		CFEA0B942B9202FA00436E1C /* 540000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 540000.json; sourceTree = "<group>"; };
+		CFEA0B952B9202FA00436E1C /* 1090000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1090000.json; sourceTree = "<group>"; };
+		CFEA0B962B9202FA00436E1C /* 220000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 220000.json; sourceTree = "<group>"; };
+		CFEA0B972B9202FA00436E1C /* 230000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 230000.json; sourceTree = "<group>"; };
+		CFEA0B982B9202FA00436E1C /* 2110000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2110000.json; sourceTree = "<group>"; };
+		CFEA0B992B9202FA00436E1C /* 2100000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2100000.json; sourceTree = "<group>"; };
+		CFEA0B9A2B9202FA00436E1C /* 1360000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1360000.json; sourceTree = "<group>"; };
+		CFEA0B9B2B9202FA00436E1C /* 1370000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1370000.json; sourceTree = "<group>"; };
+		CFEA0B9C2B9202FA00436E1C /* 580000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 580000.json; sourceTree = "<group>"; };
+		CFEA0B9D2B9202FA00436E1C /* 1050000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1050000.json; sourceTree = "<group>"; };
+		CFEA0B9E2B9202FA00436E1C /* 590000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 590000.json; sourceTree = "<group>"; };
+		CFEA0B9F2B9202FA00436E1C /* 1040000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1040000.json; sourceTree = "<group>"; };
+		CFEA0BA02B9202FA00436E1C /* 1970000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1970000.json; sourceTree = "<group>"; };
+		CFEA0BA12B9202FA00436E1C /* 1960000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1960000.json; sourceTree = "<group>"; };
+		CFEA0BA22B9202FA00436E1C /* 830000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 830000.json; sourceTree = "<group>"; };
+		CFEA0BA32B9202FA00436E1C /* 820000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 820000.json; sourceTree = "<group>"; };
+		CFEA0BA42B9202FA00436E1C /* 2220000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2220000.json; sourceTree = "<group>"; };
+		CFEA0BA52B9202FA00436E1C /* 2230000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2230000.json; sourceTree = "<group>"; };
+		CFEA0BA62B9202FA00436E1C /* 660000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 660000.json; sourceTree = "<group>"; };
+		CFEA0BA72B9202FA00436E1C /* 670000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 670000.json; sourceTree = "<group>"; };
+		CFEA0BA82B9202FA00436E1C /* 2550000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2550000.json; sourceTree = "<group>"; };
+		CFEA0BA92B9202FA00436E1C /* 2540000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2540000.json; sourceTree = "<group>"; };
+		CFEA0BAA2B9202FA00436E1C /* 1720000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1720000.json; sourceTree = "<group>"; };
+		CFEA0BAB2B9202FA00436E1C /* 1730000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1730000.json; sourceTree = "<group>"; };
+		CFEA0BAC2B9202FA00436E1C /* 2280000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2280000.json; sourceTree = "<group>"; };
+		CFEA0BAD2B9202FA00436E1C /* 2290000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2290000.json; sourceTree = "<group>"; };
+		CFEA0BAE2B9202FA00436E1C /* 890000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 890000.json; sourceTree = "<group>"; };
+		CFEA0BAF2B9202FA00436E1C /* 880000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 880000.json; sourceTree = "<group>"; };
+		CFEA0BB02B9202FA00436E1C /* 1460000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1460000.json; sourceTree = "<group>"; };
+		CFEA0BB12B9202FA00436E1C /* 1470000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1470000.json; sourceTree = "<group>"; };
+		CFEA0BB22B9202FA00436E1C /* 152855.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 152855.json; sourceTree = "<group>"; };
+		CFEA0BB32B9202FA00436E1C /* 520000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 520000.json; sourceTree = "<group>"; };
+		CFEA0BB42B9202FA00436E1C /* 530000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 530000.json; sourceTree = "<group>"; };
+		CFEA0BB52B9202FA00436E1C /* 2160000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2160000.json; sourceTree = "<group>"; };
+		CFEA0BB62B9202FA00436E1C /* 2170000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2170000.json; sourceTree = "<group>"; };
+		CFEA0BB72B9202FA00436E1C /* 250000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 250000.json; sourceTree = "<group>"; };
+		CFEA0BB82B9202FA00436E1C /* 1780000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1780000.json; sourceTree = "<group>"; };
+		CFEA0BB92B9202FA00436E1C /* 240000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 240000.json; sourceTree = "<group>"; };
+		CFEA0BBA2B9202FA00436E1C /* 1790000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1790000.json; sourceTree = "<group>"; };
+		CFEA0BBB2B9202FA00436E1C /* 1310000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1310000.json; sourceTree = "<group>"; };
+		CFEA0BBC2B9202FA00436E1C /* 1300000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1300000.json; sourceTree = "<group>"; };
+		CFEA0BBD2B9202FA00436E1C /* 940000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 940000.json; sourceTree = "<group>"; };
+		CFEA0BBE2B9202FA00436E1C /* 950000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 950000.json; sourceTree = "<group>"; };
+		CFEA0BBF2B9202FA00436E1C /* 2350000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2350000.json; sourceTree = "<group>"; };
+		CFEA0BC02B9202FA00436E1C /* 2340000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2340000.json; sourceTree = "<group>"; };
+		CFEA0BC12B9202FA00436E1C /* 1800000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1800000.json; sourceTree = "<group>"; };
+		CFEA0BC22B9202FA00436E1C /* 1810000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1810000.json; sourceTree = "<group>"; };
+		CFEA0BC32B9202FA00436E1C /* 1120000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1120000.json; sourceTree = "<group>"; };
+		CFEA0BC42B9202FA00436E1C /* 1130000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1130000.json; sourceTree = "<group>"; };
+		CFEA0BC52B9202FA00436E1C /* 1650000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1650000.json; sourceTree = "<group>"; };
+		CFEA0BC62B9202FA00436E1C /* 380000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 380000.json; sourceTree = "<group>"; };
+		CFEA0BC72B9202FA00436E1C /* 1640000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1640000.json; sourceTree = "<group>"; };
+		CFEA0BC82B9202FA00436E1C /* 390000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 390000.json; sourceTree = "<group>"; };
+		CFEA0BC92B9202FA00436E1C /* 2420000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2420000.json; sourceTree = "<group>"; };
+		CFEA0BCA2B9202FA00436E1C /* 2430000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2430000.json; sourceTree = "<group>"; };
+		CFEA0BCB2B9202FA00436E1C /* 710000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 710000.json; sourceTree = "<group>"; };
+		CFEA0BCC2B9202FA00436E1C /* 700000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 700000.json; sourceTree = "<group>"; };
+		CFEA0BCD2B9202FA00436E1C /* 1180000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1180000.json; sourceTree = "<group>"; };
+		CFEA0BCE2B9202FA00436E1C /* 450000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 450000.json; sourceTree = "<group>"; };
+		CFEA0BCF2B9202FA00436E1C /* 1190000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1190000.json; sourceTree = "<group>"; };
+		CFEA0BD02B9202FA00436E1C /* 440000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 440000.json; sourceTree = "<group>"; };
+		CFEA0BD12B9202FA00436E1C /* 1510000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1510000.json; sourceTree = "<group>"; };
+		CFEA0BD22B9202FA00436E1C /* 1500000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1500000.json; sourceTree = "<group>"; };
+		CFEA0BD32B9202FA00436E1C /* 1260000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1260000.json; sourceTree = "<group>"; };
+		CFEA0BD42B9202FA00436E1C /* 1270000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1270000.json; sourceTree = "<group>"; };
+		CFEA0BD52B9202FA00436E1C /* 2480000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2480000.json; sourceTree = "<group>"; };
+		CFEA0BD62B9202FA00436E1C /* 2490000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2490000.json; sourceTree = "<group>"; };
+		CFEA0BD72B9202FA00436E1C /* 320000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 320000.json; sourceTree = "<group>"; };
+		CFEA0BD82B9202FA00436E1C /* 330000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 330000.json; sourceTree = "<group>"; };
+		CFEA0BD92B9202FA00436E1C /* 2010000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2010000.json; sourceTree = "<group>"; };
+		CFEA0BDA2B9202FA00436E1C /* 2000000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2000000.json; sourceTree = "<group>"; };
+		CFEA0BDB2B9202FA00436E1C /* 1420000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1420000.json; sourceTree = "<group>"; };
+		CFEA0BDC2B9202FA00436E1C /* 1430000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1430000.json; sourceTree = "<group>"; };
+		CFEA0BDD2B9202FA00436E1C /* 560000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 560000.json; sourceTree = "<group>"; };
+		CFEA0BDE2B9202FA00436E1C /* 570000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 570000.json; sourceTree = "<group>"; };
+		CFEA0BDF2B9202FA00436E1C /* 1990000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1990000.json; sourceTree = "<group>"; };
+		CFEA0BE02B9202FA00436E1C /* 1980000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1980000.json; sourceTree = "<group>"; };
+		CFEA0BE12B9202FA00436E1C /* 210000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 210000.json; sourceTree = "<group>"; };
+		CFEA0BE22B9202FA00436E1C /* 200000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 200000.json; sourceTree = "<group>"; };
+		CFEA0BE32B9202FA00436E1C /* 2120000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2120000.json; sourceTree = "<group>"; };
+		CFEA0BE42B9202FA00436E1C /* 2130000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2130000.json; sourceTree = "<group>"; };
+		CFEA0BE52B9202FA00436E1C /* 680000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 680000.json; sourceTree = "<group>"; };
+		CFEA0BE62B9202FA00436E1C /* 1350000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1350000.json; sourceTree = "<group>"; };
+		CFEA0BE72B9202FA00436E1C /* 690000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 690000.json; sourceTree = "<group>"; };
+		CFEA0BE82B9202FA00436E1C /* 1340000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1340000.json; sourceTree = "<group>"; };
+		CFEA0BE92B9202FA00436E1C /* 1930000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1930000.json; sourceTree = "<group>"; };
+		CFEA0BEA2B9202FA00436E1C /* 1920000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1920000.json; sourceTree = "<group>"; };
+		CFEA0BEB2B9202FA00436E1C /* 1010000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1010000.json; sourceTree = "<group>"; };
+		CFEA0BEC2B9202FA00436E1C /* 1000000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1000000.json; sourceTree = "<group>"; };
+		CFEA0BED2B9202FA00436E1C /* 2260000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2260000.json; sourceTree = "<group>"; };
+		CFEA0BEE2B9202FA00436E1C /* 2270000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2270000.json; sourceTree = "<group>"; };
+		CFEA0BEF2B9202FA00436E1C /* 870000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 870000.json; sourceTree = "<group>"; };
+		CFEA0BF02B9202FA00436E1C /* 860000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 860000.json; sourceTree = "<group>"; };
+		CFEA0BF12B9202FA00436E1C /* 1480000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1480000.json; sourceTree = "<group>"; };
+		CFEA0BF22B9202FA00436E1C /* 1490000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1490000.json; sourceTree = "<group>"; };
+		CFEA0BF32B9202FA00436E1C /* 2510000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2510000.json; sourceTree = "<group>"; };
+		CFEA0BF42B9202FA00436E1C /* 2500000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2500000.json; sourceTree = "<group>"; };
+		CFEA0BF52B9202FA00436E1C /* 620000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 620000.json; sourceTree = "<group>"; };
+		CFEA0BF62B9202FA00436E1C /* 630000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 630000.json; sourceTree = "<group>"; };
+		CFEA0BF72B9202FA00436E1C /* 2180000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2180000.json; sourceTree = "<group>"; };
+		CFEA0BF82B9202FA00436E1C /* 2190000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2190000.json; sourceTree = "<group>"; };
+		CFEA0BF92B9202FA00436E1C /* 1760000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1760000.json; sourceTree = "<group>"; };
+		CFEA0BFA2B9202FA00436E1C /* 1770000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1770000.json; sourceTree = "<group>"; };
+		CFEA0BFB2B9202FA00436E1C /* 410000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 410000.json; sourceTree = "<group>"; };
+		CFEA0BFC2B9202FA00436E1C /* 400000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 400000.json; sourceTree = "<group>"; };
+		CFEA0BFD2B9202FA00436E1C /* 1550000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1550000.json; sourceTree = "<group>"; };
+		CFEA0BFE2B9202FA00436E1C /* 1540000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1540000.json; sourceTree = "<group>"; };
+		CFEA0BFF2B9202FA00436E1C /* 1220000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1220000.json; sourceTree = "<group>"; };
+		CFEA0C002B9202FA00436E1C /* 1230000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1230000.json; sourceTree = "<group>"; };
+		CFEA0C012B9202FA00436E1C /* 2050000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2050000.json; sourceTree = "<group>"; };
+		CFEA0C022B9202FA00436E1C /* 2040000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2040000.json; sourceTree = "<group>"; };
+		CFEA0C032B9202FA00436E1C /* 360000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 360000.json; sourceTree = "<group>"; };
+		CFEA0C042B9202FA00436E1C /* 370000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 370000.json; sourceTree = "<group>"; };
+		CFEA0C052B9202FA00436E1C /* 2310000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2310000.json; sourceTree = "<group>"; };
+		CFEA0C062B9202FA00436E1C /* 2300000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2300000.json; sourceTree = "<group>"; };
+		CFEA0C072B9202FA00436E1C /* 900000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 900000.json; sourceTree = "<group>"; };
+		CFEA0C082B9202FA00436E1C /* 910000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 910000.json; sourceTree = "<group>"; };
+		CFEA0C092B9202FA00436E1C /* 1160000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1160000.json; sourceTree = "<group>"; };
+		CFEA0C0A2B9202FA00436E1C /* 1170000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1170000.json; sourceTree = "<group>"; };
+		CFEA0C0B2B9202FA00436E1C /* 1840000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1840000.json; sourceTree = "<group>"; };
+		CFEA0C0C2B9202FA00436E1C /* 1850000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1850000.json; sourceTree = "<group>"; };
+		CFEA0C0D2B9202FA00436E1C /* 1610000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1610000.json; sourceTree = "<group>"; };
+		CFEA0C0E2B9202FA00436E1C /* 1600000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1600000.json; sourceTree = "<group>"; };
+		CFEA0C0F2B9202FA00436E1C /* 1280000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1280000.json; sourceTree = "<group>"; };
+		CFEA0C102B9202FA00436E1C /* 750000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 750000.json; sourceTree = "<group>"; };
+		CFEA0C112B9202FA00436E1C /* 1290000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1290000.json; sourceTree = "<group>"; };
+		CFEA0C122B9202FA00436E1C /* 740000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 740000.json; sourceTree = "<group>"; };
+		CFEA0C132B9202FA00436E1C /* 2460000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2460000.json; sourceTree = "<group>"; };
+		CFEA0C142B9202FA00436E1C /* 2470000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2470000.json; sourceTree = "<group>"; };
+		CFEA0C152B9202FA00436E1C /* 460000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 460000.json; sourceTree = "<group>"; };
+		CFEA0C162B9202FA00436E1C /* 470000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 470000.json; sourceTree = "<group>"; };
+		CFEA0C172B9202FA00436E1C /* 1890000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1890000.json; sourceTree = "<group>"; };
+		CFEA0C182B9202FA00436E1C /* 1880000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1880000.json; sourceTree = "<group>"; };
+		CFEA0C192B9202FA00436E1C /* 1520000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1520000.json; sourceTree = "<group>"; };
+		CFEA0C1A2B9202FA00436E1C /* 1530000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1530000.json; sourceTree = "<group>"; };
+		CFEA0C1B2B9202FA00436E1C /* 1250000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1250000.json; sourceTree = "<group>"; };
+		CFEA0C1C2B9202FA00436E1C /* 780000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 780000.json; sourceTree = "<group>"; };
+		CFEA0C1D2B9202FA00436E1C /* 1240000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1240000.json; sourceTree = "<group>"; };
+		CFEA0C1E2B9202FA00436E1C /* 790000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 790000.json; sourceTree = "<group>"; };
+		CFEA0C1F2B9202FA00436E1C /* 310000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 310000.json; sourceTree = "<group>"; };
+		CFEA0C202B9202FA00436E1C /* 300000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 300000.json; sourceTree = "<group>"; };
+		CFEA0C212B9202FA00436E1C /* 2020000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2020000.json; sourceTree = "<group>"; };
+		CFEA0C222B9202FA00436E1C /* 2030000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2030000.json; sourceTree = "<group>"; };
+		CFEA0C232B9202FA00436E1C /* 2360000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2360000.json; sourceTree = "<group>"; };
+		CFEA0C242B9202FA00436E1C /* 2370000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2370000.json; sourceTree = "<group>"; };
+		CFEA0C252B9202FA00436E1C /* 970000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 970000.json; sourceTree = "<group>"; };
+		CFEA0C262B9202FA00436E1C /* 960000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 960000.json; sourceTree = "<group>"; };
+		CFEA0C272B9202FA00436E1C /* 1580000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1580000.json; sourceTree = "<group>"; };
+		CFEA0C282B9202FA00436E1C /* 1590000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1590000.json; sourceTree = "<group>"; };
+		CFEA0C292B9202FA00436E1C /* 1830000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1830000.json; sourceTree = "<group>"; };
+		CFEA0C2A2B9202FA00436E1C /* 1820000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1820000.json; sourceTree = "<group>"; };
+		CFEA0C2B2B9202FA00436E1C /* 1110000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1110000.json; sourceTree = "<group>"; };
+		CFEA0C2C2B9202FA00436E1C /* 1100000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1100000.json; sourceTree = "<group>"; };
+		CFEA0C2D2B9202FA00436E1C /* 2080000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2080000.json; sourceTree = "<group>"; };
+		CFEA0C2E2B9202FA00436E1C /* 2090000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2090000.json; sourceTree = "<group>"; };
+		CFEA0C2F2B9202FA00436E1C /* 1660000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1660000.json; sourceTree = "<group>"; };
+		CFEA0C302B9202FA00436E1C /* 1670000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1670000.json; sourceTree = "<group>"; };
+		CFEA0C312B9202FA00436E1C /* 2410000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2410000.json; sourceTree = "<group>"; };
+		CFEA0C322B9202FA00436E1C /* 2400000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2400000.json; sourceTree = "<group>"; };
+		CFEA0C332B9202FA00436E1C /* 720000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 720000.json; sourceTree = "<group>"; };
+		CFEA0C342B9202FA00436E1C /* 730000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 730000.json; sourceTree = "<group>"; };
+		CFEA0C352B9202FA00436E1C /* 1450000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1450000.json; sourceTree = "<group>"; };
+		CFEA0C362B9202FA00436E1C /* 1440000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1440000.json; sourceTree = "<group>"; };
+		CFEA0C372B9202FA00436E1C /* 510000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 510000.json; sourceTree = "<group>"; };
+		CFEA0C382B9202FA00436E1C /* 500000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 500000.json; sourceTree = "<group>"; };
+		CFEA0C392B9202FA00436E1C /* 2150000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2150000.json; sourceTree = "<group>"; };
+		CFEA0C3A2B9202FA00436E1C /* 2140000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2140000.json; sourceTree = "<group>"; };
+		CFEA0C3B2B9202FA00436E1C /* 260000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 260000.json; sourceTree = "<group>"; };
+		CFEA0C3C2B9202FA00436E1C /* 270000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 270000.json; sourceTree = "<group>"; };
+		CFEA0C3D2B9202FA00436E1C /* 1320000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1320000.json; sourceTree = "<group>"; };
+		CFEA0C3E2B9202FA00436E1C /* 1330000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1330000.json; sourceTree = "<group>"; };
+		CFEA0C3F2B9202FA00436E1C /* 1060000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1060000.json; sourceTree = "<group>"; };
+		CFEA0C402B9202FA00436E1C /* 1070000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1070000.json; sourceTree = "<group>"; };
+		CFEA0C412B9202FA00436E1C /* 1940000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1940000.json; sourceTree = "<group>"; };
+		CFEA0C422B9202FA00436E1C /* 1950000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1950000.json; sourceTree = "<group>"; };
+		CFEA0C432B9202FA00436E1C /* 2210000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2210000.json; sourceTree = "<group>"; };
+		CFEA0C442B9202FA00436E1C /* 2200000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2200000.json; sourceTree = "<group>"; };
+		CFEA0C452B9202FA00436E1C /* 800000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 800000.json; sourceTree = "<group>"; };
+		CFEA0C462B9202FA00436E1C /* 810000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 810000.json; sourceTree = "<group>"; };
+		CFEA0C472B9202FA00436E1C /* 650000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 650000.json; sourceTree = "<group>"; };
+		CFEA0C482B9202FA00436E1C /* 1380000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1380000.json; sourceTree = "<group>"; };
+		CFEA0C492B9202FA00436E1C /* 640000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 640000.json; sourceTree = "<group>"; };
+		CFEA0C4A2B9202FA00436E1C /* 1390000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1390000.json; sourceTree = "<group>"; };
+		CFEA0C4B2B9202FA00436E1C /* 2560000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 2560000.json; sourceTree = "<group>"; };
+		CFEA0C4C2B9202FA00436E1C /* 1710000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1710000.json; sourceTree = "<group>"; };
+		CFEA0C4D2B9202FA00436E1C /* 1700000.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = 1700000.json; sourceTree = "<group>"; };
+		CFEA0C4F2B9202FA00436E1C /* ZcashKeyDerivationBackendWelding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashKeyDerivationBackendWelding.swift; sourceTree = "<group>"; };
+		CFEA0C502B9202FA00436E1C /* ZcashRustBackendWelding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashRustBackendWelding.swift; sourceTree = "<group>"; };
+		CFEA0C512B9202FA00436E1C /* ZcashKeyDerivationBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashKeyDerivationBackend.swift; sourceTree = "<group>"; };
+		CFEA0C522B9202FA00436E1C /* ZcashRustBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashRustBackend.swift; sourceTree = "<group>"; };
+		CFEA0C542B9202FA00436E1C /* TransactionDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDao.swift; sourceTree = "<group>"; };
+		CFEA0C552B9202FA00436E1C /* BlockDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDao.swift; sourceTree = "<group>"; };
+		CFEA0C562B9202FA00436E1C /* PagedTransactionDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagedTransactionDao.swift; sourceTree = "<group>"; };
+		CFEA0C572B9202FA00436E1C /* UnspentTransactionOutputDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnspentTransactionOutputDao.swift; sourceTree = "<group>"; };
+		CFEA0C592B9202FA00436E1C /* AsyncToClosureGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncToClosureGateway.swift; sourceTree = "<group>"; };
+		CFEA0C5A2B9202FA00436E1C /* SaplingParameterDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaplingParameterDownloader.swift; sourceTree = "<group>"; };
+		CFEA0C5B2B9202FA00436E1C /* SyncSessionIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncSessionIDGenerator.swift; sourceTree = "<group>"; };
+		CFEA0C5C2B9202FA00436E1C /* GenericActor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericActor.swift; sourceTree = "<group>"; };
+		CFEA0C5D2B9202FA00436E1C /* LoggingProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingProxy.swift; sourceTree = "<group>"; };
+		CFEA0C5E2B9202FA00436E1C /* Task+sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+sleep.swift"; sourceTree = "<group>"; };
+		CFEA0C5F2B9202FA00436E1C /* SpecificCombineTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecificCombineTypes.swift; sourceTree = "<group>"; };
+		CFEA0C602B9202FA00436E1C /* AsyncToCombineGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncToCombineGateway.swift; sourceTree = "<group>"; };
+		CFEA0C612B9202FA00436E1C /* Clamped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clamped.swift; sourceTree = "<group>"; };
+		CFEA0C622B9202FA00436E1C /* OSLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogger.swift; sourceTree = "<group>"; };
+		CFEA0C632B9202FA00436E1C /* DIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIContainer.swift; sourceTree = "<group>"; };
+		CFEA0C642B9202FA00436E1C /* UsedAliasesChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedAliasesChecker.swift; sourceTree = "<group>"; };
+		CFEA0C662B9202FA00436E1C /* HexEncode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexEncode.swift; sourceTree = "<group>"; };
+		CFEA0C672B9202FA00436E1C /* NumberFormatter+Zcash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Zcash.swift"; sourceTree = "<group>"; };
+		CFEA0C682B9202FA00436E1C /* ZcashSDK+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZcashSDK+extensions.swift"; sourceTree = "<group>"; };
+		CFEA0C692B9202FA00436E1C /* Error+ZcashError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+ZcashError.swift"; sourceTree = "<group>"; };
+		CFEA0C6A2B9202FA00436E1C /* Data+Zcash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Zcash.swift"; sourceTree = "<group>"; };
+		CFEA0C6B2B9202FA00436E1C /* Zatoshi+SQLite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Zatoshi+SQLite.swift"; sourceTree = "<group>"; };
+		CFEA0C6C2B9202FA00436E1C /* ZcashRust+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZcashRust+Utils.swift"; sourceTree = "<group>"; };
+		CFEA0C6D2B9202FA00436E1C /* Data+internal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+internal.swift"; sourceTree = "<group>"; };
+		CFEA0C6E2B9202FA00436E1C /* URL+UpdateWithAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+UpdateWithAlias.swift"; sourceTree = "<group>"; };
+		CFEA0C6F2B9202FA00436E1C /* Undescribable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Undescribable.swift; sourceTree = "<group>"; };
+		CFEA0C702B9202FA00436E1C /* Initializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
+		CFEA0C722B9202FA00436E1C /* Checkpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkpoint.swift; sourceTree = "<group>"; };
+		CFEA0C732B9202FA00436E1C /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		CFEA0C742B9202FA00436E1C /* Zatoshi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zatoshi.swift; sourceTree = "<group>"; };
+		CFEA0C752B9202FA00436E1C /* WalletTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTypes.swift; sourceTree = "<group>"; };
+		CFEA0C772B9202FA00436E1C /* ClosureSDKSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureSDKSynchronizer.swift; sourceTree = "<group>"; };
+		CFEA0C782B9202FA00436E1C /* CombineSDKSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineSDKSynchronizer.swift; sourceTree = "<group>"; };
+		CFEA0C792B9202FA00436E1C /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		CFEA0C7A2B9202FA00436E1C /* SDKSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKSynchronizer.swift; sourceTree = "<group>"; };
+		CFEA0C7B2B9202FA00436E1C /* CombineSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineSynchronizer.swift; sourceTree = "<group>"; };
+		CFEA0C7F2B9202FA00436E1C /* LightWalletGRPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightWalletGRPCService.swift; sourceTree = "<group>"; };
+		CFEA0C812B9202FA00436E1C /* service.grpc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = service.grpc.swift; sourceTree = "<group>"; };
+		CFEA0C822B9202FA00436E1C /* compact_formats.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = compact_formats.pb.swift; sourceTree = "<group>"; };
+		CFEA0C842B9202FA00436E1C /* compact_formats.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = compact_formats.proto; sourceTree = "<group>"; };
+		CFEA0C852B9202FA00436E1C /* service.proto */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.protobuf; path = service.proto; sourceTree = "<group>"; };
+		CFEA0C872B9202FA00436E1C /* Protocolbuffer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Protocolbuffer+Extensions.swift"; sourceTree = "<group>"; };
+		CFEA0C882B9202FA00436E1C /* service.pb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = service.pb.swift; sourceTree = "<group>"; };
+		CFEA0C892B9202FA00436E1C /* LightWalletService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightWalletService.swift; sourceTree = "<group>"; };
+		CFEA0C8B2B9202FA00436E1C /* ZcashErrorCodeDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashErrorCodeDefinition.swift; sourceTree = "<group>"; };
+		CFEA0C8C2B9202FA00436E1C /* ZcashErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashErrorCode.swift; sourceTree = "<group>"; };
+		CFEA0C8E2B9202FA00436E1C /* generateErrorCode.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generateErrorCode.sh; sourceTree = "<group>"; };
+		CFEA0C8F2B9202FA00436E1C /* ZcashError.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZcashError.stencil; sourceTree = "<group>"; };
+		CFEA0C902B9202FA00436E1C /* ZcashErrorCode.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = ZcashErrorCode.stencil; sourceTree = "<group>"; };
+		CFEA0C912B9202FA00436E1C /* ZcashError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZcashError.swift; sourceTree = "<group>"; };
+		CFEA0C922B9202FA00436E1C /* ClosureSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosureSynchronizer.swift; sourceTree = "<group>"; };
+		CFEA0C942B9202FA00436E1C /* DerivationTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DerivationTool.swift; sourceTree = "<group>"; };
+		CFEA0C972B9202FA00436E1C /* UTXOFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTXOFetcher.swift; sourceTree = "<group>"; };
+		CFEA0C992B9202FA00436E1C /* BlockValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockValidator.swift; sourceTree = "<group>"; };
+		CFEA0C9B2B9202FA00436E1C /* SaplingParametersHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaplingParametersHandler.swift; sourceTree = "<group>"; };
+		CFEA0C9D2B9202FA00436E1C /* DatabaseStorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseStorageError.swift; sourceTree = "<group>"; };
+		CFEA0C9E2B9202FA00436E1C /* ConnectorProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorProvider.swift; sourceTree = "<group>"; };
+		CFEA0C9F2B9202FA00436E1C /* SimpleConnectionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleConnectionProvider.swift; sourceTree = "<group>"; };
+		CFEA0CA12B9202FA00436E1C /* InternalSyncProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalSyncProgress.swift; sourceTree = "<group>"; };
+		CFEA0CA22B9202FA00436E1C /* AfterSyncHooksManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AfterSyncHooksManager.swift; sourceTree = "<group>"; };
+		CFEA0CA42B9202FA00436E1C /* BlockScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockScanner.swift; sourceTree = "<group>"; };
+		CFEA0CA62B9202FA00436E1C /* FSCompactBlockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCompactBlockRepository.swift; sourceTree = "<group>"; };
+		CFEA0CA82B9202FA00436E1C /* BlockDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDownloader.swift; sourceTree = "<group>"; };
+		CFEA0CA92B9202FA00436E1C /* BlockDownloaderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDownloaderService.swift; sourceTree = "<group>"; };
+		CFEA0CAA2B9202FA00436E1C /* CompactBlockProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactBlockProcessor.swift; sourceTree = "<group>"; };
+		CFEA0CAC2B9202FA00436E1C /* BlockEnhancer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockEnhancer.swift; sourceTree = "<group>"; };
 		DD3D7B793DE6921B3FCB8A72 /* Pods_ECC_WalletTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_WalletTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E588C3F8BFCFFD097672B5DC /* Pods-ECC-Wallet-no-logging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ECC-Wallet-no-logging.debug.xcconfig"; path = "Target Support Files/Pods-ECC-Wallet-no-logging/Pods-ECC-Wallet-no-logging.debug.xcconfig"; sourceTree = "<group>"; };
 		ECAAD2E9E29DF170A35B9B7B /* Pods_ECC_WalletUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ECC_WalletUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -922,6 +1415,7 @@
 				29DDA37926CCFA6A0041406B /* WKView in Frameworks */,
 				CEFF0B0FCBB305A5F3ADBA14 /* Pods_ECC_Wallet_no_logging.framework in Frameworks */,
 				CFB085BE2B90868100711486 /* Lottie in Frameworks */,
+				CFEA0CB22B92045A00436E1C /* PirateLightClientKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1284,6 +1778,8 @@
 		0F65A46FFC0823E2EE87ED5E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CFEA0A9D2B9202B800436E1C /* PirateLightClientKit */,
+				CFEA0A9E2B9202F900436E1C /* PirateLightClientKit */,
 				29414BCA26D41DCD0022401F /* PirateChainPaymentURI.framework */,
 				FC35302B85AAF85BE64099A6 /* Pods_ECC_Wallet.framework */,
 				CB8B88C6D24FD0EB8BE42F24 /* Pods_ECC_Wallet_Testnet.framework */,
@@ -1376,6 +1872,785 @@
 				29FABBFB26D506E800306726 /* Parameter.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		CFEA0A9E2B9202F900436E1C /* PirateLightClientKit */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0A9F2B9202F900436E1C /* Metrics */,
+				CFEA0AA12B9202F900436E1C /* Transaction */,
+				CFEA0AA42B9202F900436E1C /* Repository */,
+				CFEA0AAC2B9202F900436E1C /* Synchronizer.swift */,
+				CFEA0AAD2B9202F900436E1C /* Entity */,
+				CFEA0AB52B9202F900436E1C /* Constants */,
+				CFEA0ABA2B9202F900436E1C /* Providers */,
+				CFEA0ABD2B9202F900436E1C /* Resources */,
+				CFEA0C4E2B9202FA00436E1C /* Rust */,
+				CFEA0C532B9202FA00436E1C /* DAO */,
+				CFEA0C582B9202FA00436E1C /* Utils */,
+				CFEA0C652B9202FA00436E1C /* Extensions */,
+				CFEA0C702B9202FA00436E1C /* Initializer.swift */,
+				CFEA0C712B9202FA00436E1C /* Model */,
+				CFEA0C762B9202FA00436E1C /* Synchronizer */,
+				CFEA0C7B2B9202FA00436E1C /* CombineSynchronizer.swift */,
+				CFEA0C7C2B9202FA00436E1C /* Modules */,
+				CFEA0C8A2B9202FA00436E1C /* Error */,
+				CFEA0C922B9202FA00436E1C /* ClosureSynchronizer.swift */,
+				CFEA0C932B9202FA00436E1C /* Tool */,
+				CFEA0C952B9202FA00436E1C /* Block */,
+			);
+			name = PirateLightClientKit;
+			path = "../../../../Desktop/Lokesh Resumes/PirateLightClientKit/Sources/PirateLightClientKit";
+			sourceTree = "<group>";
+		};
+		CFEA0A9F2B9202F900436E1C /* Metrics */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0AA02B9202F900436E1C /* SDKMetrics.swift */,
+			);
+			path = Metrics;
+			sourceTree = "<group>";
+		};
+		CFEA0AA12B9202F900436E1C /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0AA22B9202F900436E1C /* TransactionEncoder.swift */,
+				CFEA0AA32B9202F900436E1C /* WalletTransactionEncoder.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+		CFEA0AA42B9202F900436E1C /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0AA52B9202F900436E1C /* UnspentTransactionOutputRepository.swift */,
+				CFEA0AA62B9202F900436E1C /* PaginatedTransactionRepository.swift */,
+				CFEA0AA72B9202F900436E1C /* TransactionRepository.swift */,
+				CFEA0AA82B9202F900436E1C /* BlockRepository.swift */,
+				CFEA0AA92B9202F900436E1C /* CompactBlockRepository.swift */,
+				CFEA0AAA2B9202F900436E1C /* TransactionRepositoryBuilder.swift */,
+				CFEA0AAB2B9202F900436E1C /* NotesRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		CFEA0AAD2B9202F900436E1C /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0AAE2B9202F900436E1C /* TransactionEntity.swift */,
+				CFEA0AAF2B9202F900436E1C /* ZcashCompactBlock.swift */,
+				CFEA0AB02B9202F900436E1C /* SentNoteEntity.swift */,
+				CFEA0AB12B9202F900436E1C /* BlockProgress.swift */,
+				CFEA0AB22B9202F900436E1C /* AccountEntity.swift */,
+				CFEA0AB32B9202F900436E1C /* UnspentTransactionOutputEntity.swift */,
+				CFEA0AB42B9202F900436E1C /* EncodedTransactionEntity.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		CFEA0AB52B9202F900436E1C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0AB62B9202F900436E1C /* ZcashSDK.swift */,
+				CFEA0AB72B9202F900436E1C /* Checkpoint+testnet.swift */,
+				CFEA0AB82B9202F900436E1C /* Checkpoint+Constants.swift */,
+				CFEA0AB92B9202F900436E1C /* Checkpoint+mainnet.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		CFEA0ABA2B9202F900436E1C /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0ABB2B9202F900436E1C /* LatestBlocksDataProvider.swift */,
+				CFEA0ABC2B9202F900436E1C /* ResourceProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		CFEA0ABD2B9202F900436E1C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0ABE2B9202F900436E1C /* piratesaplingtree-checkpoints */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		CFEA0ABE2B9202F900436E1C /* piratesaplingtree-checkpoints */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0ABF2B9202F900436E1C /* testnet */,
+				CFEA0B5F2B9202FA00436E1C /* mainnet */,
+			);
+			path = "piratesaplingtree-checkpoints";
+			sourceTree = "<group>";
+		};
+		CFEA0ABF2B9202F900436E1C /* testnet */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0AC02B9202F900436E1C /* 930000.json */,
+				CFEA0AC12B9202F900436E1C /* 920000.json */,
+				CFEA0AC22B9202F900436E1C /* 1150000.json */,
+				CFEA0AC32B9202F900436E1C /* 480000.json */,
+				CFEA0AC42B9202F900436E1C /* 1140000.json */,
+				CFEA0AC52B9202F900436E1C /* 490000.json */,
+				CFEA0AC62B9202F900436E1C /* 1860000.json */,
+				CFEA0AC72B9202F900436E1C /* 1620000.json */,
+				CFEA0AC82B9202F900436E1C /* 1630000.json */,
+				CFEA0AC92B9202F900436E1C /* 760000.json */,
+				CFEA0ACA2B9202F900436E1C /* 770000.json */,
+				CFEA0ACB2B9202F900436E1C /* 420000.json */,
+				CFEA0ACC2B9202F900436E1C /* 430000.json */,
+				CFEA0ACD2B9202F900436E1C /* 990000.json */,
+				CFEA0ACE2B9202F900436E1C /* 980000.json */,
+				CFEA0ACF2B9202F900436E1C /* 1560000.json */,
+				CFEA0AD02B9202F900436E1C /* 1570000.json */,
+				CFEA0AD12B9202F900436E1C /* 1210000.json */,
+				CFEA0AD22B9202F900436E1C /* 1200000.json */,
+				CFEA0AD32B9202F900436E1C /* 1680000.json */,
+				CFEA0AD42B9202F900436E1C /* 350000.json */,
+				CFEA0AD52B9202F900436E1C /* 1690000.json */,
+				CFEA0AD62B9202F900436E1C /* 340000.json */,
+				CFEA0AD72B9202F900436E1C /* 1020000.json */,
+				CFEA0AD82B9202FA00436E1C /* 1030000.json */,
+				CFEA0AD92B9202FA00436E1C /* 840000.json */,
+				CFEA0ADA2B9202FA00436E1C /* 850000.json */,
+				CFEA0ADB2B9202FA00436E1C /* 610000.json */,
+				CFEA0ADC2B9202FA00436E1C /* 600000.json */,
+				CFEA0ADD2B9202FA00436E1C /* 280000.json */,
+				CFEA0ADE2B9202FA00436E1C /* 1750000.json */,
+				CFEA0ADF2B9202FA00436E1C /* 290000.json */,
+				CFEA0AE02B9202FA00436E1C /* 1740000.json */,
+				CFEA0AE12B9202FA00436E1C /* 1410000.json */,
+				CFEA0AE22B9202FA00436E1C /* 1400000.json */,
+				CFEA0AE32B9202FA00436E1C /* 550000.json */,
+				CFEA0AE42B9202FA00436E1C /* 1080000.json */,
+				CFEA0AE52B9202FA00436E1C /* 540000.json */,
+				CFEA0AE62B9202FA00436E1C /* 1090000.json */,
+				CFEA0AE72B9202FA00436E1C /* 1360000.json */,
+				CFEA0AE82B9202FA00436E1C /* 1370000.json */,
+				CFEA0AE92B9202FA00436E1C /* 580000.json */,
+				CFEA0AEA2B9202FA00436E1C /* 1050000.json */,
+				CFEA0AEB2B9202FA00436E1C /* 590000.json */,
+				CFEA0AEC2B9202FA00436E1C /* 1040000.json */,
+				CFEA0AED2B9202FA00436E1C /* 830000.json */,
+				CFEA0AEE2B9202FA00436E1C /* 820000.json */,
+				CFEA0AEF2B9202FA00436E1C /* 660000.json */,
+				CFEA0AF02B9202FA00436E1C /* 670000.json */,
+				CFEA0AF12B9202FA00436E1C /* 1720000.json */,
+				CFEA0AF22B9202FA00436E1C /* 1730000.json */,
+				CFEA0AF32B9202FA00436E1C /* 890000.json */,
+				CFEA0AF42B9202FA00436E1C /* 880000.json */,
+				CFEA0AF52B9202FA00436E1C /* 1460000.json */,
+				CFEA0AF62B9202FA00436E1C /* 1470000.json */,
+				CFEA0AF72B9202FA00436E1C /* 520000.json */,
+				CFEA0AF82B9202FA00436E1C /* 530000.json */,
+				CFEA0AF92B9202FA00436E1C /* 1780000.json */,
+				CFEA0AFA2B9202FA00436E1C /* 1790000.json */,
+				CFEA0AFB2B9202FA00436E1C /* 1310000.json */,
+				CFEA0AFC2B9202FA00436E1C /* 1300000.json */,
+				CFEA0AFD2B9202FA00436E1C /* 940000.json */,
+				CFEA0AFE2B9202FA00436E1C /* 950000.json */,
+				CFEA0AFF2B9202FA00436E1C /* 1800000.json */,
+				CFEA0B002B9202FA00436E1C /* 1810000.json */,
+				CFEA0B012B9202FA00436E1C /* 1120000.json */,
+				CFEA0B022B9202FA00436E1C /* 1130000.json */,
+				CFEA0B032B9202FA00436E1C /* 1650000.json */,
+				CFEA0B042B9202FA00436E1C /* 380000.json */,
+				CFEA0B052B9202FA00436E1C /* 1640000.json */,
+				CFEA0B062B9202FA00436E1C /* 390000.json */,
+				CFEA0B072B9202FA00436E1C /* 710000.json */,
+				CFEA0B082B9202FA00436E1C /* 700000.json */,
+				CFEA0B092B9202FA00436E1C /* 1180000.json */,
+				CFEA0B0A2B9202FA00436E1C /* 450000.json */,
+				CFEA0B0B2B9202FA00436E1C /* 1190000.json */,
+				CFEA0B0C2B9202FA00436E1C /* 440000.json */,
+				CFEA0B0D2B9202FA00436E1C /* 1510000.json */,
+				CFEA0B0E2B9202FA00436E1C /* 1500000.json */,
+				CFEA0B0F2B9202FA00436E1C /* 1260000.json */,
+				CFEA0B102B9202FA00436E1C /* 1270000.json */,
+				CFEA0B112B9202FA00436E1C /* 320000.json */,
+				CFEA0B122B9202FA00436E1C /* 330000.json */,
+				CFEA0B132B9202FA00436E1C /* 1420000.json */,
+				CFEA0B142B9202FA00436E1C /* 1430000.json */,
+				CFEA0B152B9202FA00436E1C /* 560000.json */,
+				CFEA0B162B9202FA00436E1C /* 570000.json */,
+				CFEA0B172B9202FA00436E1C /* 680000.json */,
+				CFEA0B182B9202FA00436E1C /* 1350000.json */,
+				CFEA0B192B9202FA00436E1C /* 690000.json */,
+				CFEA0B1A2B9202FA00436E1C /* 1340000.json */,
+				CFEA0B1B2B9202FA00436E1C /* 1010000.json */,
+				CFEA0B1C2B9202FA00436E1C /* 1000000.json */,
+				CFEA0B1D2B9202FA00436E1C /* 870000.json */,
+				CFEA0B1E2B9202FA00436E1C /* 860000.json */,
+				CFEA0B1F2B9202FA00436E1C /* 1480000.json */,
+				CFEA0B202B9202FA00436E1C /* 1490000.json */,
+				CFEA0B212B9202FA00436E1C /* 620000.json */,
+				CFEA0B222B9202FA00436E1C /* 630000.json */,
+				CFEA0B232B9202FA00436E1C /* 1760000.json */,
+				CFEA0B242B9202FA00436E1C /* 1770000.json */,
+				CFEA0B252B9202FA00436E1C /* 410000.json */,
+				CFEA0B262B9202FA00436E1C /* 400000.json */,
+				CFEA0B272B9202FA00436E1C /* 1550000.json */,
+				CFEA0B282B9202FA00436E1C /* 1540000.json */,
+				CFEA0B292B9202FA00436E1C /* 1220000.json */,
+				CFEA0B2A2B9202FA00436E1C /* 1230000.json */,
+				CFEA0B2B2B9202FA00436E1C /* 360000.json */,
+				CFEA0B2C2B9202FA00436E1C /* 370000.json */,
+				CFEA0B2D2B9202FA00436E1C /* 900000.json */,
+				CFEA0B2E2B9202FA00436E1C /* 910000.json */,
+				CFEA0B2F2B9202FA00436E1C /* 1160000.json */,
+				CFEA0B302B9202FA00436E1C /* 1170000.json */,
+				CFEA0B312B9202FA00436E1C /* 1840000.json */,
+				CFEA0B322B9202FA00436E1C /* 1850000.json */,
+				CFEA0B332B9202FA00436E1C /* 1610000.json */,
+				CFEA0B342B9202FA00436E1C /* 1600000.json */,
+				CFEA0B352B9202FA00436E1C /* 1280000.json */,
+				CFEA0B362B9202FA00436E1C /* 750000.json */,
+				CFEA0B372B9202FA00436E1C /* 1290000.json */,
+				CFEA0B382B9202FA00436E1C /* 740000.json */,
+				CFEA0B392B9202FA00436E1C /* 460000.json */,
+				CFEA0B3A2B9202FA00436E1C /* 470000.json */,
+				CFEA0B3B2B9202FA00436E1C /* 1520000.json */,
+				CFEA0B3C2B9202FA00436E1C /* 1530000.json */,
+				CFEA0B3D2B9202FA00436E1C /* 1250000.json */,
+				CFEA0B3E2B9202FA00436E1C /* 780000.json */,
+				CFEA0B3F2B9202FA00436E1C /* 1240000.json */,
+				CFEA0B402B9202FA00436E1C /* 790000.json */,
+				CFEA0B412B9202FA00436E1C /* 310000.json */,
+				CFEA0B422B9202FA00436E1C /* 300000.json */,
+				CFEA0B432B9202FA00436E1C /* 970000.json */,
+				CFEA0B442B9202FA00436E1C /* 960000.json */,
+				CFEA0B452B9202FA00436E1C /* 1580000.json */,
+				CFEA0B462B9202FA00436E1C /* 1590000.json */,
+				CFEA0B472B9202FA00436E1C /* 1830000.json */,
+				CFEA0B482B9202FA00436E1C /* 1820000.json */,
+				CFEA0B492B9202FA00436E1C /* 1110000.json */,
+				CFEA0B4A2B9202FA00436E1C /* 1100000.json */,
+				CFEA0B4B2B9202FA00436E1C /* 1660000.json */,
+				CFEA0B4C2B9202FA00436E1C /* 1670000.json */,
+				CFEA0B4D2B9202FA00436E1C /* 720000.json */,
+				CFEA0B4E2B9202FA00436E1C /* 730000.json */,
+				CFEA0B4F2B9202FA00436E1C /* 1450000.json */,
+				CFEA0B502B9202FA00436E1C /* 1440000.json */,
+				CFEA0B512B9202FA00436E1C /* 510000.json */,
+				CFEA0B522B9202FA00436E1C /* 500000.json */,
+				CFEA0B532B9202FA00436E1C /* 1320000.json */,
+				CFEA0B542B9202FA00436E1C /* 1330000.json */,
+				CFEA0B552B9202FA00436E1C /* 1060000.json */,
+				CFEA0B562B9202FA00436E1C /* 1070000.json */,
+				CFEA0B572B9202FA00436E1C /* 800000.json */,
+				CFEA0B582B9202FA00436E1C /* 810000.json */,
+				CFEA0B592B9202FA00436E1C /* 650000.json */,
+				CFEA0B5A2B9202FA00436E1C /* 1380000.json */,
+				CFEA0B5B2B9202FA00436E1C /* 640000.json */,
+				CFEA0B5C2B9202FA00436E1C /* 1390000.json */,
+				CFEA0B5D2B9202FA00436E1C /* 1710000.json */,
+				CFEA0B5E2B9202FA00436E1C /* 1700000.json */,
+			);
+			path = testnet;
+			sourceTree = "<group>";
+		};
+		CFEA0B5F2B9202FA00436E1C /* mainnet */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0B602B9202FA00436E1C /* 930000.json */,
+				CFEA0B612B9202FA00436E1C /* 920000.json */,
+				CFEA0B622B9202FA00436E1C /* 2320000.json */,
+				CFEA0B632B9202FA00436E1C /* 2330000.json */,
+				CFEA0B642B9202FA00436E1C /* 1150000.json */,
+				CFEA0B652B9202FA00436E1C /* 480000.json */,
+				CFEA0B662B9202FA00436E1C /* 1140000.json */,
+				CFEA0B672B9202FA00436E1C /* 490000.json */,
+				CFEA0B682B9202FA00436E1C /* 1870000.json */,
+				CFEA0B692B9202FA00436E1C /* 1860000.json */,
+				CFEA0B6A2B9202FA00436E1C /* 1620000.json */,
+				CFEA0B6B2B9202FA00436E1C /* 1630000.json */,
+				CFEA0B6C2B9202FA00436E1C /* 760000.json */,
+				CFEA0B6D2B9202FA00436E1C /* 770000.json */,
+				CFEA0B6E2B9202FA00436E1C /* 2450000.json */,
+				CFEA0B6F2B9202FA00436E1C /* 2440000.json */,
+				CFEA0B702B9202FA00436E1C /* 420000.json */,
+				CFEA0B712B9202FA00436E1C /* 430000.json */,
+				CFEA0B722B9202FA00436E1C /* 2380000.json */,
+				CFEA0B732B9202FA00436E1C /* 2390000.json */,
+				CFEA0B742B9202FA00436E1C /* 990000.json */,
+				CFEA0B752B9202FA00436E1C /* 980000.json */,
+				CFEA0B762B9202FA00436E1C /* 1560000.json */,
+				CFEA0B772B9202FA00436E1C /* 1570000.json */,
+				CFEA0B782B9202FA00436E1C /* 1210000.json */,
+				CFEA0B792B9202FA00436E1C /* 1200000.json */,
+				CFEA0B7A2B9202FA00436E1C /* 2060000.json */,
+				CFEA0B7B2B9202FA00436E1C /* 2070000.json */,
+				CFEA0B7C2B9202FA00436E1C /* 1680000.json */,
+				CFEA0B7D2B9202FA00436E1C /* 350000.json */,
+				CFEA0B7E2B9202FA00436E1C /* 1690000.json */,
+				CFEA0B7F2B9202FA00436E1C /* 340000.json */,
+				CFEA0B802B9202FA00436E1C /* 1900000.json */,
+				CFEA0B812B9202FA00436E1C /* 1910000.json */,
+				CFEA0B822B9202FA00436E1C /* 1020000.json */,
+				CFEA0B832B9202FA00436E1C /* 1030000.json */,
+				CFEA0B842B9202FA00436E1C /* 840000.json */,
+				CFEA0B852B9202FA00436E1C /* 850000.json */,
+				CFEA0B862B9202FA00436E1C /* 2250000.json */,
+				CFEA0B872B9202FA00436E1C /* 2240000.json */,
+				CFEA0B882B9202FA00436E1C /* 2520000.json */,
+				CFEA0B892B9202FA00436E1C /* 2530000.json */,
+				CFEA0B8A2B9202FA00436E1C /* 610000.json */,
+				CFEA0B8B2B9202FA00436E1C /* 600000.json */,
+				CFEA0B8C2B9202FA00436E1C /* 280000.json */,
+				CFEA0B8D2B9202FA00436E1C /* 1750000.json */,
+				CFEA0B8E2B9202FA00436E1C /* 290000.json */,
+				CFEA0B8F2B9202FA00436E1C /* 1740000.json */,
+				CFEA0B902B9202FA00436E1C /* 1410000.json */,
+				CFEA0B912B9202FA00436E1C /* 1400000.json */,
+				CFEA0B922B9202FA00436E1C /* 550000.json */,
+				CFEA0B932B9202FA00436E1C /* 1080000.json */,
+				CFEA0B942B9202FA00436E1C /* 540000.json */,
+				CFEA0B952B9202FA00436E1C /* 1090000.json */,
+				CFEA0B962B9202FA00436E1C /* 220000.json */,
+				CFEA0B972B9202FA00436E1C /* 230000.json */,
+				CFEA0B982B9202FA00436E1C /* 2110000.json */,
+				CFEA0B992B9202FA00436E1C /* 2100000.json */,
+				CFEA0B9A2B9202FA00436E1C /* 1360000.json */,
+				CFEA0B9B2B9202FA00436E1C /* 1370000.json */,
+				CFEA0B9C2B9202FA00436E1C /* 580000.json */,
+				CFEA0B9D2B9202FA00436E1C /* 1050000.json */,
+				CFEA0B9E2B9202FA00436E1C /* 590000.json */,
+				CFEA0B9F2B9202FA00436E1C /* 1040000.json */,
+				CFEA0BA02B9202FA00436E1C /* 1970000.json */,
+				CFEA0BA12B9202FA00436E1C /* 1960000.json */,
+				CFEA0BA22B9202FA00436E1C /* 830000.json */,
+				CFEA0BA32B9202FA00436E1C /* 820000.json */,
+				CFEA0BA42B9202FA00436E1C /* 2220000.json */,
+				CFEA0BA52B9202FA00436E1C /* 2230000.json */,
+				CFEA0BA62B9202FA00436E1C /* 660000.json */,
+				CFEA0BA72B9202FA00436E1C /* 670000.json */,
+				CFEA0BA82B9202FA00436E1C /* 2550000.json */,
+				CFEA0BA92B9202FA00436E1C /* 2540000.json */,
+				CFEA0BAA2B9202FA00436E1C /* 1720000.json */,
+				CFEA0BAB2B9202FA00436E1C /* 1730000.json */,
+				CFEA0BAC2B9202FA00436E1C /* 2280000.json */,
+				CFEA0BAD2B9202FA00436E1C /* 2290000.json */,
+				CFEA0BAE2B9202FA00436E1C /* 890000.json */,
+				CFEA0BAF2B9202FA00436E1C /* 880000.json */,
+				CFEA0BB02B9202FA00436E1C /* 1460000.json */,
+				CFEA0BB12B9202FA00436E1C /* 1470000.json */,
+				CFEA0BB22B9202FA00436E1C /* 152855.json */,
+				CFEA0BB32B9202FA00436E1C /* 520000.json */,
+				CFEA0BB42B9202FA00436E1C /* 530000.json */,
+				CFEA0BB52B9202FA00436E1C /* 2160000.json */,
+				CFEA0BB62B9202FA00436E1C /* 2170000.json */,
+				CFEA0BB72B9202FA00436E1C /* 250000.json */,
+				CFEA0BB82B9202FA00436E1C /* 1780000.json */,
+				CFEA0BB92B9202FA00436E1C /* 240000.json */,
+				CFEA0BBA2B9202FA00436E1C /* 1790000.json */,
+				CFEA0BBB2B9202FA00436E1C /* 1310000.json */,
+				CFEA0BBC2B9202FA00436E1C /* 1300000.json */,
+				CFEA0BBD2B9202FA00436E1C /* 940000.json */,
+				CFEA0BBE2B9202FA00436E1C /* 950000.json */,
+				CFEA0BBF2B9202FA00436E1C /* 2350000.json */,
+				CFEA0BC02B9202FA00436E1C /* 2340000.json */,
+				CFEA0BC12B9202FA00436E1C /* 1800000.json */,
+				CFEA0BC22B9202FA00436E1C /* 1810000.json */,
+				CFEA0BC32B9202FA00436E1C /* 1120000.json */,
+				CFEA0BC42B9202FA00436E1C /* 1130000.json */,
+				CFEA0BC52B9202FA00436E1C /* 1650000.json */,
+				CFEA0BC62B9202FA00436E1C /* 380000.json */,
+				CFEA0BC72B9202FA00436E1C /* 1640000.json */,
+				CFEA0BC82B9202FA00436E1C /* 390000.json */,
+				CFEA0BC92B9202FA00436E1C /* 2420000.json */,
+				CFEA0BCA2B9202FA00436E1C /* 2430000.json */,
+				CFEA0BCB2B9202FA00436E1C /* 710000.json */,
+				CFEA0BCC2B9202FA00436E1C /* 700000.json */,
+				CFEA0BCD2B9202FA00436E1C /* 1180000.json */,
+				CFEA0BCE2B9202FA00436E1C /* 450000.json */,
+				CFEA0BCF2B9202FA00436E1C /* 1190000.json */,
+				CFEA0BD02B9202FA00436E1C /* 440000.json */,
+				CFEA0BD12B9202FA00436E1C /* 1510000.json */,
+				CFEA0BD22B9202FA00436E1C /* 1500000.json */,
+				CFEA0BD32B9202FA00436E1C /* 1260000.json */,
+				CFEA0BD42B9202FA00436E1C /* 1270000.json */,
+				CFEA0BD52B9202FA00436E1C /* 2480000.json */,
+				CFEA0BD62B9202FA00436E1C /* 2490000.json */,
+				CFEA0BD72B9202FA00436E1C /* 320000.json */,
+				CFEA0BD82B9202FA00436E1C /* 330000.json */,
+				CFEA0BD92B9202FA00436E1C /* 2010000.json */,
+				CFEA0BDA2B9202FA00436E1C /* 2000000.json */,
+				CFEA0BDB2B9202FA00436E1C /* 1420000.json */,
+				CFEA0BDC2B9202FA00436E1C /* 1430000.json */,
+				CFEA0BDD2B9202FA00436E1C /* 560000.json */,
+				CFEA0BDE2B9202FA00436E1C /* 570000.json */,
+				CFEA0BDF2B9202FA00436E1C /* 1990000.json */,
+				CFEA0BE02B9202FA00436E1C /* 1980000.json */,
+				CFEA0BE12B9202FA00436E1C /* 210000.json */,
+				CFEA0BE22B9202FA00436E1C /* 200000.json */,
+				CFEA0BE32B9202FA00436E1C /* 2120000.json */,
+				CFEA0BE42B9202FA00436E1C /* 2130000.json */,
+				CFEA0BE52B9202FA00436E1C /* 680000.json */,
+				CFEA0BE62B9202FA00436E1C /* 1350000.json */,
+				CFEA0BE72B9202FA00436E1C /* 690000.json */,
+				CFEA0BE82B9202FA00436E1C /* 1340000.json */,
+				CFEA0BE92B9202FA00436E1C /* 1930000.json */,
+				CFEA0BEA2B9202FA00436E1C /* 1920000.json */,
+				CFEA0BEB2B9202FA00436E1C /* 1010000.json */,
+				CFEA0BEC2B9202FA00436E1C /* 1000000.json */,
+				CFEA0BED2B9202FA00436E1C /* 2260000.json */,
+				CFEA0BEE2B9202FA00436E1C /* 2270000.json */,
+				CFEA0BEF2B9202FA00436E1C /* 870000.json */,
+				CFEA0BF02B9202FA00436E1C /* 860000.json */,
+				CFEA0BF12B9202FA00436E1C /* 1480000.json */,
+				CFEA0BF22B9202FA00436E1C /* 1490000.json */,
+				CFEA0BF32B9202FA00436E1C /* 2510000.json */,
+				CFEA0BF42B9202FA00436E1C /* 2500000.json */,
+				CFEA0BF52B9202FA00436E1C /* 620000.json */,
+				CFEA0BF62B9202FA00436E1C /* 630000.json */,
+				CFEA0BF72B9202FA00436E1C /* 2180000.json */,
+				CFEA0BF82B9202FA00436E1C /* 2190000.json */,
+				CFEA0BF92B9202FA00436E1C /* 1760000.json */,
+				CFEA0BFA2B9202FA00436E1C /* 1770000.json */,
+				CFEA0BFB2B9202FA00436E1C /* 410000.json */,
+				CFEA0BFC2B9202FA00436E1C /* 400000.json */,
+				CFEA0BFD2B9202FA00436E1C /* 1550000.json */,
+				CFEA0BFE2B9202FA00436E1C /* 1540000.json */,
+				CFEA0BFF2B9202FA00436E1C /* 1220000.json */,
+				CFEA0C002B9202FA00436E1C /* 1230000.json */,
+				CFEA0C012B9202FA00436E1C /* 2050000.json */,
+				CFEA0C022B9202FA00436E1C /* 2040000.json */,
+				CFEA0C032B9202FA00436E1C /* 360000.json */,
+				CFEA0C042B9202FA00436E1C /* 370000.json */,
+				CFEA0C052B9202FA00436E1C /* 2310000.json */,
+				CFEA0C062B9202FA00436E1C /* 2300000.json */,
+				CFEA0C072B9202FA00436E1C /* 900000.json */,
+				CFEA0C082B9202FA00436E1C /* 910000.json */,
+				CFEA0C092B9202FA00436E1C /* 1160000.json */,
+				CFEA0C0A2B9202FA00436E1C /* 1170000.json */,
+				CFEA0C0B2B9202FA00436E1C /* 1840000.json */,
+				CFEA0C0C2B9202FA00436E1C /* 1850000.json */,
+				CFEA0C0D2B9202FA00436E1C /* 1610000.json */,
+				CFEA0C0E2B9202FA00436E1C /* 1600000.json */,
+				CFEA0C0F2B9202FA00436E1C /* 1280000.json */,
+				CFEA0C102B9202FA00436E1C /* 750000.json */,
+				CFEA0C112B9202FA00436E1C /* 1290000.json */,
+				CFEA0C122B9202FA00436E1C /* 740000.json */,
+				CFEA0C132B9202FA00436E1C /* 2460000.json */,
+				CFEA0C142B9202FA00436E1C /* 2470000.json */,
+				CFEA0C152B9202FA00436E1C /* 460000.json */,
+				CFEA0C162B9202FA00436E1C /* 470000.json */,
+				CFEA0C172B9202FA00436E1C /* 1890000.json */,
+				CFEA0C182B9202FA00436E1C /* 1880000.json */,
+				CFEA0C192B9202FA00436E1C /* 1520000.json */,
+				CFEA0C1A2B9202FA00436E1C /* 1530000.json */,
+				CFEA0C1B2B9202FA00436E1C /* 1250000.json */,
+				CFEA0C1C2B9202FA00436E1C /* 780000.json */,
+				CFEA0C1D2B9202FA00436E1C /* 1240000.json */,
+				CFEA0C1E2B9202FA00436E1C /* 790000.json */,
+				CFEA0C1F2B9202FA00436E1C /* 310000.json */,
+				CFEA0C202B9202FA00436E1C /* 300000.json */,
+				CFEA0C212B9202FA00436E1C /* 2020000.json */,
+				CFEA0C222B9202FA00436E1C /* 2030000.json */,
+				CFEA0C232B9202FA00436E1C /* 2360000.json */,
+				CFEA0C242B9202FA00436E1C /* 2370000.json */,
+				CFEA0C252B9202FA00436E1C /* 970000.json */,
+				CFEA0C262B9202FA00436E1C /* 960000.json */,
+				CFEA0C272B9202FA00436E1C /* 1580000.json */,
+				CFEA0C282B9202FA00436E1C /* 1590000.json */,
+				CFEA0C292B9202FA00436E1C /* 1830000.json */,
+				CFEA0C2A2B9202FA00436E1C /* 1820000.json */,
+				CFEA0C2B2B9202FA00436E1C /* 1110000.json */,
+				CFEA0C2C2B9202FA00436E1C /* 1100000.json */,
+				CFEA0C2D2B9202FA00436E1C /* 2080000.json */,
+				CFEA0C2E2B9202FA00436E1C /* 2090000.json */,
+				CFEA0C2F2B9202FA00436E1C /* 1660000.json */,
+				CFEA0C302B9202FA00436E1C /* 1670000.json */,
+				CFEA0C312B9202FA00436E1C /* 2410000.json */,
+				CFEA0C322B9202FA00436E1C /* 2400000.json */,
+				CFEA0C332B9202FA00436E1C /* 720000.json */,
+				CFEA0C342B9202FA00436E1C /* 730000.json */,
+				CFEA0C352B9202FA00436E1C /* 1450000.json */,
+				CFEA0C362B9202FA00436E1C /* 1440000.json */,
+				CFEA0C372B9202FA00436E1C /* 510000.json */,
+				CFEA0C382B9202FA00436E1C /* 500000.json */,
+				CFEA0C392B9202FA00436E1C /* 2150000.json */,
+				CFEA0C3A2B9202FA00436E1C /* 2140000.json */,
+				CFEA0C3B2B9202FA00436E1C /* 260000.json */,
+				CFEA0C3C2B9202FA00436E1C /* 270000.json */,
+				CFEA0C3D2B9202FA00436E1C /* 1320000.json */,
+				CFEA0C3E2B9202FA00436E1C /* 1330000.json */,
+				CFEA0C3F2B9202FA00436E1C /* 1060000.json */,
+				CFEA0C402B9202FA00436E1C /* 1070000.json */,
+				CFEA0C412B9202FA00436E1C /* 1940000.json */,
+				CFEA0C422B9202FA00436E1C /* 1950000.json */,
+				CFEA0C432B9202FA00436E1C /* 2210000.json */,
+				CFEA0C442B9202FA00436E1C /* 2200000.json */,
+				CFEA0C452B9202FA00436E1C /* 800000.json */,
+				CFEA0C462B9202FA00436E1C /* 810000.json */,
+				CFEA0C472B9202FA00436E1C /* 650000.json */,
+				CFEA0C482B9202FA00436E1C /* 1380000.json */,
+				CFEA0C492B9202FA00436E1C /* 640000.json */,
+				CFEA0C4A2B9202FA00436E1C /* 1390000.json */,
+				CFEA0C4B2B9202FA00436E1C /* 2560000.json */,
+				CFEA0C4C2B9202FA00436E1C /* 1710000.json */,
+				CFEA0C4D2B9202FA00436E1C /* 1700000.json */,
+			);
+			path = mainnet;
+			sourceTree = "<group>";
+		};
+		CFEA0C4E2B9202FA00436E1C /* Rust */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C4F2B9202FA00436E1C /* ZcashKeyDerivationBackendWelding.swift */,
+				CFEA0C502B9202FA00436E1C /* ZcashRustBackendWelding.swift */,
+				CFEA0C512B9202FA00436E1C /* ZcashKeyDerivationBackend.swift */,
+				CFEA0C522B9202FA00436E1C /* ZcashRustBackend.swift */,
+			);
+			path = Rust;
+			sourceTree = "<group>";
+		};
+		CFEA0C532B9202FA00436E1C /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C542B9202FA00436E1C /* TransactionDao.swift */,
+				CFEA0C552B9202FA00436E1C /* BlockDao.swift */,
+				CFEA0C562B9202FA00436E1C /* PagedTransactionDao.swift */,
+				CFEA0C572B9202FA00436E1C /* UnspentTransactionOutputDao.swift */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
+		CFEA0C582B9202FA00436E1C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C592B9202FA00436E1C /* AsyncToClosureGateway.swift */,
+				CFEA0C5A2B9202FA00436E1C /* SaplingParameterDownloader.swift */,
+				CFEA0C5B2B9202FA00436E1C /* SyncSessionIDGenerator.swift */,
+				CFEA0C5C2B9202FA00436E1C /* GenericActor.swift */,
+				CFEA0C5D2B9202FA00436E1C /* LoggingProxy.swift */,
+				CFEA0C5E2B9202FA00436E1C /* Task+sleep.swift */,
+				CFEA0C5F2B9202FA00436E1C /* SpecificCombineTypes.swift */,
+				CFEA0C602B9202FA00436E1C /* AsyncToCombineGateway.swift */,
+				CFEA0C612B9202FA00436E1C /* Clamped.swift */,
+				CFEA0C622B9202FA00436E1C /* OSLogger.swift */,
+				CFEA0C632B9202FA00436E1C /* DIContainer.swift */,
+				CFEA0C642B9202FA00436E1C /* UsedAliasesChecker.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CFEA0C652B9202FA00436E1C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C662B9202FA00436E1C /* HexEncode.swift */,
+				CFEA0C672B9202FA00436E1C /* NumberFormatter+Zcash.swift */,
+				CFEA0C682B9202FA00436E1C /* ZcashSDK+extensions.swift */,
+				CFEA0C692B9202FA00436E1C /* Error+ZcashError.swift */,
+				CFEA0C6A2B9202FA00436E1C /* Data+Zcash.swift */,
+				CFEA0C6B2B9202FA00436E1C /* Zatoshi+SQLite.swift */,
+				CFEA0C6C2B9202FA00436E1C /* ZcashRust+Utils.swift */,
+				CFEA0C6D2B9202FA00436E1C /* Data+internal.swift */,
+				CFEA0C6E2B9202FA00436E1C /* URL+UpdateWithAlias.swift */,
+				CFEA0C6F2B9202FA00436E1C /* Undescribable.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CFEA0C712B9202FA00436E1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C722B9202FA00436E1C /* Checkpoint.swift */,
+				CFEA0C732B9202FA00436E1C /* Memo.swift */,
+				CFEA0C742B9202FA00436E1C /* Zatoshi.swift */,
+				CFEA0C752B9202FA00436E1C /* WalletTypes.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CFEA0C762B9202FA00436E1C /* Synchronizer */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C772B9202FA00436E1C /* ClosureSDKSynchronizer.swift */,
+				CFEA0C782B9202FA00436E1C /* CombineSDKSynchronizer.swift */,
+				CFEA0C792B9202FA00436E1C /* Dependencies.swift */,
+				CFEA0C7A2B9202FA00436E1C /* SDKSynchronizer.swift */,
+			);
+			path = Synchronizer;
+			sourceTree = "<group>";
+		};
+		CFEA0C7C2B9202FA00436E1C /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C7D2B9202FA00436E1C /* Service */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		CFEA0C7D2B9202FA00436E1C /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C7E2B9202FA00436E1C /* GRPC */,
+				CFEA0C892B9202FA00436E1C /* LightWalletService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		CFEA0C7E2B9202FA00436E1C /* GRPC */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C7F2B9202FA00436E1C /* LightWalletGRPCService.swift */,
+				CFEA0C802B9202FA00436E1C /* ProtoBuf */,
+			);
+			path = GRPC;
+			sourceTree = "<group>";
+		};
+		CFEA0C802B9202FA00436E1C /* ProtoBuf */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C812B9202FA00436E1C /* service.grpc.swift */,
+				CFEA0C822B9202FA00436E1C /* compact_formats.pb.swift */,
+				CFEA0C832B9202FA00436E1C /* proto */,
+				CFEA0C862B9202FA00436E1C /* Extensions */,
+				CFEA0C882B9202FA00436E1C /* service.pb.swift */,
+			);
+			path = ProtoBuf;
+			sourceTree = "<group>";
+		};
+		CFEA0C832B9202FA00436E1C /* proto */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C842B9202FA00436E1C /* compact_formats.proto */,
+				CFEA0C852B9202FA00436E1C /* service.proto */,
+			);
+			path = proto;
+			sourceTree = "<group>";
+		};
+		CFEA0C862B9202FA00436E1C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C872B9202FA00436E1C /* Protocolbuffer+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CFEA0C8A2B9202FA00436E1C /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C8B2B9202FA00436E1C /* ZcashErrorCodeDefinition.swift */,
+				CFEA0C8C2B9202FA00436E1C /* ZcashErrorCode.swift */,
+				CFEA0C8D2B9202FA00436E1C /* Sourcery */,
+				CFEA0C912B9202FA00436E1C /* ZcashError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		CFEA0C8D2B9202FA00436E1C /* Sourcery */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C8E2B9202FA00436E1C /* generateErrorCode.sh */,
+				CFEA0C8F2B9202FA00436E1C /* ZcashError.stencil */,
+				CFEA0C902B9202FA00436E1C /* ZcashErrorCode.stencil */,
+			);
+			path = Sourcery;
+			sourceTree = "<group>";
+		};
+		CFEA0C932B9202FA00436E1C /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C942B9202FA00436E1C /* DerivationTool.swift */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		CFEA0C952B9202FA00436E1C /* Block */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C962B9202FA00436E1C /* FetchUnspentTxOutputs */,
+				CFEA0C982B9202FA00436E1C /* Validate */,
+				CFEA0C9A2B9202FA00436E1C /* SaplingParameters */,
+				CFEA0C9C2B9202FA00436E1C /* DatabaseStorage */,
+				CFEA0CA02B9202FA00436E1C /* Utils */,
+				CFEA0CA32B9202FA00436E1C /* Scan */,
+				CFEA0CA52B9202FA00436E1C /* FilesystemStorage */,
+				CFEA0CA72B9202FA00436E1C /* Download */,
+				CFEA0CAA2B9202FA00436E1C /* CompactBlockProcessor.swift */,
+				CFEA0CAB2B9202FA00436E1C /* Enhance */,
+			);
+			path = Block;
+			sourceTree = "<group>";
+		};
+		CFEA0C962B9202FA00436E1C /* FetchUnspentTxOutputs */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C972B9202FA00436E1C /* UTXOFetcher.swift */,
+			);
+			path = FetchUnspentTxOutputs;
+			sourceTree = "<group>";
+		};
+		CFEA0C982B9202FA00436E1C /* Validate */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C992B9202FA00436E1C /* BlockValidator.swift */,
+			);
+			path = Validate;
+			sourceTree = "<group>";
+		};
+		CFEA0C9A2B9202FA00436E1C /* SaplingParameters */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C9B2B9202FA00436E1C /* SaplingParametersHandler.swift */,
+			);
+			path = SaplingParameters;
+			sourceTree = "<group>";
+		};
+		CFEA0C9C2B9202FA00436E1C /* DatabaseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0C9D2B9202FA00436E1C /* DatabaseStorageError.swift */,
+				CFEA0C9E2B9202FA00436E1C /* ConnectorProvider.swift */,
+				CFEA0C9F2B9202FA00436E1C /* SimpleConnectionProvider.swift */,
+			);
+			path = DatabaseStorage;
+			sourceTree = "<group>";
+		};
+		CFEA0CA02B9202FA00436E1C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0CA12B9202FA00436E1C /* InternalSyncProgress.swift */,
+				CFEA0CA22B9202FA00436E1C /* AfterSyncHooksManager.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CFEA0CA32B9202FA00436E1C /* Scan */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0CA42B9202FA00436E1C /* BlockScanner.swift */,
+			);
+			path = Scan;
+			sourceTree = "<group>";
+		};
+		CFEA0CA52B9202FA00436E1C /* FilesystemStorage */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0CA62B9202FA00436E1C /* FSCompactBlockRepository.swift */,
+			);
+			path = FilesystemStorage;
+			sourceTree = "<group>";
+		};
+		CFEA0CA72B9202FA00436E1C /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0CA82B9202FA00436E1C /* BlockDownloader.swift */,
+				CFEA0CA92B9202FA00436E1C /* BlockDownloaderService.swift */,
+			);
+			path = Download;
+			sourceTree = "<group>";
+		};
+		CFEA0CAB2B9202FA00436E1C /* Enhance */ = {
+			isa = PBXGroup;
+			children = (
+				CFEA0CAC2B9202FA00436E1C /* BlockEnhancer.swift */,
+			);
+			path = Enhance;
 			sourceTree = "<group>";
 		};
 		EA66A8F666D2E80F5C4EC4F5 /* Pods */ = {
@@ -1484,6 +2759,7 @@
 				29491D6526C5613500BBF144 /* Neumorphic */,
 				29DDA37826CCFA6A0041406B /* WKView */,
 				CFB085BD2B90868100711486 /* Lottie */,
+				CFEA0CB12B92045A00436E1C /* PirateLightClientKit */,
 			);
 			productName = wallet;
 			productReference = 0DCDFFE624B6722B000F6999 /* ECC-Wallet-no-logs.app */;
@@ -1551,6 +2827,7 @@
 				29491D6426C5613500BBF144 /* XCRemoteSwiftPackageReference "neumorphic" */,
 				29DDA37726CCFA6A0041406B /* XCRemoteSwiftPackageReference "WKView" */,
 				CFB085BC2B90868100711486 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				CFEA0CAE2B9203DF00436E1C /* XCLocalSwiftPackageReference "../../../../Desktop/Lokesh Resumes/PirateLightClientKit" */,
 			);
 			productRefGroup = 0D12510023B557E40014EE3A /* Products */;
 			projectDirPath = "";
@@ -3022,6 +4299,13 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		CFEA0CAE2B9203DF00436E1C /* XCLocalSwiftPackageReference "../../../../Desktop/Lokesh Resumes/PirateLightClientKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../../Desktop/Lokesh Resumes/PirateLightClientKit";
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCRemoteSwiftPackageReference section */
 		29491D6426C5613500BBF144 /* XCRemoteSwiftPackageReference "neumorphic" */ = {
 			isa = XCRemoteSwiftPackageReference;
@@ -3064,6 +4348,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CFB085BC2B90868100711486 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		CFEA0CB12B92045A00436E1C /* PirateLightClientKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PirateLightClientKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

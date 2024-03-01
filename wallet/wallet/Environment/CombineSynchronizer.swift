@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 class CombineSynchronizer {
     enum SubscriberErrors: Error {
         case notifactionMissingValueForKey(_ key: String)

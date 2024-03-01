@@ -7,5 +7,5 @@
 //
 
 import Foundation
-import ZcashLightClientKit
+import PirateLightClientKit
 let ZCASH_NETWORK = ZcashNetworkBuilder.network(for: .testnet)

@@ -8,7 +8,7 @@
 
 import Foundation
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 
 enum AutoShieldingResult {
     case notNeeded

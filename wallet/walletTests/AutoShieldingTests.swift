@@ -180,7 +180,7 @@ class MockFailedManualStrategy: AutoShieldingStrategy {
         false
     }
 }
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct MockPendingTx: PendingTransactionEntity {
     var toAddress = "ztestsapling1vsrxjdmfpwz4yn8y8ux72je2hjqc82u28a5ahycsdldtd95d4mfepfmptqk22tsqxcelzmur6rr"

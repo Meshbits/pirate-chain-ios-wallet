@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ZcashLightClientKit
+import PirateLightClientKit
 
 extension String {
     /**

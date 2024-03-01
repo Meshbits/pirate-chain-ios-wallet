@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 
 protocol ShieldingPowers {
     var status: CurrentValueSubject<ShieldFlow.Status,Error> { get set }

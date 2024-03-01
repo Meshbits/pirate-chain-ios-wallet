@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct BalanceDetailView: View {
     var availableZec: Double
@@ -85,7 +85,7 @@ struct BalanceDetailView: View {
     }
     
     var zec: String {
-        if ZcashSDK.isMainnet {
+        if PirateSDK.isMainnet {
             return "ARRR"
         } else {
             return "TAZ"

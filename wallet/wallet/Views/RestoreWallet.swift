@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct RestoreWallet: View {
     @EnvironmentObject var appEnvironment: ZECCWalletEnvironment

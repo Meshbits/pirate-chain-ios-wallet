@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct Sending: View {
     
@@ -47,7 +47,7 @@ struct Sending: View {
             return Text("label_unabletosend".localized())
         }
         
-        return flow.isDone ? Text("send_sent".localized()).foregroundColor(.white) :     Text(String(format: NSLocalizedString(ZcashSDK.isMainnet ? "send_sending" : "send_sending_taz", comment: ""), flow.amount)).foregroundColor(.white)
+        return flow.isDone ? Text("send_sent".localized()).foregroundColor(.white) :     Text(String(format: NSLocalizedString(PirateSDK.isMainnet ? "send_sending" : "send_sending_taz", comment: ""), flow.amount)).foregroundColor(.white)
     }
     
     var body: some View {

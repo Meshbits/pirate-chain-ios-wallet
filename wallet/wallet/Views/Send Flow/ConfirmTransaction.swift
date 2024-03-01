@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 
 struct ConfirmTransaction: View {
     @EnvironmentObject var flow: SendFlowEnvironment

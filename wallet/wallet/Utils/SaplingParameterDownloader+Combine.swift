@@ -8,7 +8,7 @@
 
 import Foundation
 import combine_urlsession_downloader
-import ZcashLightClientKit
+import PirateLightClientKit
 import Combine
 
 extension SaplingParameterDownloader {

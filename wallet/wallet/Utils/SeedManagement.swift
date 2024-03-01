@@ -6,7 +6,7 @@
 //  Copyright © 2020 Francisco Gindre. All rights reserved.
 //
 import Foundation
-import ZcashLightClientKit
+import PirateLightClientKit
 import SecureDefaults
 final class SeedManager {
     

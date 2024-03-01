@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ZcashLightClientKit
+import PirateLightClientKit
 
 
 extension URL {
@@ -17,16 +17,16 @@ extension URL {
     }
     
     static func cacheDbURL() throws -> URL {
-        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+ZcashSDK.DEFAULT_CACHES_DB_NAME, isDirectory: false)
+        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+PirateSDK.defaultCacheDbName, isDirectory: false)
     }
 
     static func dataDbURL() throws -> URL {
-        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+ZcashSDK.DEFAULT_DATA_DB_NAME, isDirectory: false)
+        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+PirateSDK.defaultDataDbName, isDirectory: false)
     }
 
-    static func pendingDbURL() throws -> URL {
-        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+ZcashSDK.DEFAULT_PENDING_DB_NAME)
-    }
+//    static func pendingDbURL() throws -> URL {
+//        try documentsDirectory().appendingPathComponent(ZCASH_NETWORK.constants.DEFAULT_DB_NAME_PREFIX+PirateSDK.DEFAULT_PENDING_DB_NAME)
+//    }
 
     static func spendParamsURL() throws -> URL {
         try documentsDirectory().appendingPathComponent("sapling-spend.params")

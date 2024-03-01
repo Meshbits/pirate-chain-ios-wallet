@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 struct SendTransaction: View {
     @EnvironmentObject var flow: SendFlowEnvironment
     @State var showError = false

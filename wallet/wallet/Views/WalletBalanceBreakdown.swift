@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 
 final class WalletBalanceBreakdownViewModel: ObservableObject {
     
@@ -288,6 +288,6 @@ struct WalletBalanceDetail_Previews: PreviewProvider {
 
 extension ZECCWalletEnvironment {
     static var thresholdInZec: String {
-        String(Double(ZECCWalletEnvironment.autoShieldingThresholdInZatoshi) / Double(ZcashSDK.ZATOSHI_PER_ZEC))
+        String(Double(ZECCWalletEnvironment.autoShieldingThresholdInZatoshi) / Double(PirateSDK.zatoshiPerZEC))
     }
 }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 final class AutoShieldingViewModel: ObservableObject {
     enum State {
         case shielding

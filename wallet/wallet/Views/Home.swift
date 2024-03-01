@@ -8,7 +8,7 @@
 
 import SwiftUI
 import Combine
-import ZcashLightClientKit
+import PirateLightClientKit
 import LocalAuthentication
 import AlertToast
 

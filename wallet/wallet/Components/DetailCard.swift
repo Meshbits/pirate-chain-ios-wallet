@@ -205,7 +205,7 @@ struct DetailRow_Previews: PreviewProvider {
 }
 
 
-import ZcashLightClientKit
+import PirateLightClientKit
 extension Date {
     var transactionDetail: String {
         let formatter = DateFormatter()

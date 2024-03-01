@@ -8,7 +8,7 @@
 
 import Foundation
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 import Combine
 
 enum WalletState {
@@ -25,11 +25,11 @@ final class ZECCWalletEnvironment: ObservableObject {
 
     
     static let genericErrorMessage = "An error ocurred, please check your device logs".localized()
-    static let autoShieldingThresholdInZatoshi: Int64 = Int64(ZcashSDK.ZATOSHI_PER_ZEC / 100)
+    static let autoShieldingThresholdInZatoshi: Int64 = Int64(PirateSDK.zatoshiPerZEC / 100)
 
     static var shared: ZECCWalletEnvironment = try! ZECCWalletEnvironment() // app can't live without this existing.
     static let memoLengthLimit: Int = 512
-    static let defaultLightWalletEndpoint = "lightd.pirate.black"
+    static let defaultLightWalletEndpoint = "lightd1.pirate.black"
     static let defaultLightWalletPort: Int = 443
 //    static let defaultFee = 10_000 // Earlier we have used ZcashSDK.defaultFee()
     @Published var state: WalletState
@@ -38,7 +38,7 @@ final class ZECCWalletEnvironment: ObservableObject {
 
     var dataDbURL: URL
     var cacheDbURL: URL
-    var pendingDbURL: URL
+//    var pendingDbURL: URL
     var outputParamsURL: URL
     var spendParamsURL: URL
     var synchronizer: CombineSynchronizer!
@@ -100,7 +100,7 @@ final class ZECCWalletEnvironment: ObservableObject {
     private init() throws {
         self.dataDbURL = try URL.dataDbURL()
         self.cacheDbURL = try URL.cacheDbURL()
-        self.pendingDbURL = try URL.pendingDbURL()
+//        self.pendingDbURL = try URL.pendingDbURL()
         self.outputParamsURL = try URL.outputParamsURL()
         self.spendParamsURL = try  URL.spendParamsURL()
         self.state = .unprepared
@@ -166,7 +166,6 @@ final class ZECCWalletEnvironment: ObservableObject {
         let initializer = Initializer(
             cacheDbURL: self.cacheDbURL,
             dataDbURL: self.dataDbURL,
-            pendingDbURL: self.pendingDbURL,
             endpoint: endpoint,
             network: ZCASH_NETWORK,
             spendParamsURL: self.spendParamsURL,
@@ -221,7 +220,7 @@ final class ZECCWalletEnvironment: ObservableObject {
         do {
             try FileManager.default.removeItem(at: self.dataDbURL)
             try FileManager.default.removeItem(at: self.cacheDbURL)
-            try FileManager.default.removeItem(at: self.pendingDbURL)
+//            try FileManager.default.removeItem(at: self.pendingDbURL)
         } catch {
             logger.error("could not wipe wallet: \(error)")
             throw WalletError.criticalError(error: error)
@@ -436,7 +435,7 @@ final class ZECCWalletEnvironment: ObservableObject {
 extension ZECCWalletEnvironment {
     
     static var appName: String {
-        if ZcashSDK.isMainnet {
+        if PirateSDK.isMainnet {
             return "Pirate Chain Wallet".localized()
         } else {
             return "ECC Testnet"
@@ -611,7 +610,7 @@ extension ZECCWalletEnvironment {
 #endif
 
 
-extension ZcashSDK {
+extension PirateSDK {
     static var isMainnet: Bool {
         switch ZCASH_NETWORK.networkType {
         case .mainnet:

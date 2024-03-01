@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import ZcashLightClientKit
+import PirateLightClientKit
 struct ReceiveFunds: View {
     
     let unifiedAddress: UnifiedAddress
