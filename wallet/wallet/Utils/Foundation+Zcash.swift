@@ -11,6 +11,6 @@ import PirateLightClientKit
 
 extension Int {
     var isMined: Bool {
-        self >= ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
+        self >= ZCASH_NETWORK.constants.saplingActivationHeight
     }
 }

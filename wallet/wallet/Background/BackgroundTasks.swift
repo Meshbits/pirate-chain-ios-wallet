@@ -53,29 +53,28 @@ class BackgroundTaskSyncronizing {
         }
         
         ZECCWalletEnvironment.shared.synchronizer.syncStatus.dropFirst(1).sink { (status) in
-            switch status {
-            case .synced:
+            
+            if status.isSynced {
                 task.setTaskCompleted(success: true)
                 tracker.track(.tap(action: .backgroundAppRefreshEnd), properties: ["completion": "true"])
-            case .disconnected, .stopped:
+            }else{
                 task.setTaskCompleted(success: false)
                 tracker.track(.tap(action: .backgroundAppRefreshEnd), properties: ["completion": "false"])
-            default:
-                break
             }
         }.store(in: &self.cancellables)
         
         task.expirationHandler = {
             
             let status = ZECCWalletEnvironment.shared.synchronizer.syncStatus.value
-            switch status {
-            case .synced:
+          
+            if status.isSynced {
                 task.setTaskCompleted(success: true)
                 tracker.track(.tap(action: .backgroundAppRefreshEnd), properties: ["completion": "true"])
-            default:
+            }else{
                 task.setTaskCompleted(success: false)
                 tracker.track(.tap(action: .backgroundAppRefreshEnd), properties: ["completion": "false"])
             }
+            
             ZECCWalletEnvironment.shared.synchronizer.stop()
         }
         

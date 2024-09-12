@@ -588,6 +588,9 @@
 		CF4FC91B27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 		CF4FC91C27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
 		CF4FC91D27A5531E00024BF8 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4FC91A27A5531E00024BF8 /* APIConstants.swift */; };
+		CF796B662B94A0B700014C21 /* AsyncToClosureGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF796B652B94A0B700014C21 /* AsyncToClosureGateway.swift */; };
+		CF796B672B94A0B700014C21 /* AsyncToClosureGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF796B652B94A0B700014C21 /* AsyncToClosureGateway.swift */; };
+		CF796B682B94A0B700014C21 /* AsyncToClosureGateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF796B652B94A0B700014C21 /* AsyncToClosureGateway.swift */; };
 		CFB085BE2B90868100711486 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CFB085BD2B90868100711486 /* Lottie */; };
 		CFEA0CB22B92045A00436E1C /* PirateLightClientKit in Frameworks */ = {isa = PBXBuildFile; productRef = CFEA0CB12B92045A00436E1C /* PirateLightClientKit */; };
 /* End PBXBuildFile section */
@@ -884,6 +887,7 @@
 		CF4FC91227A415C100024BF8 /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyEndpoint.swift; sourceTree = "<group>"; };
 		CF4FC91A27A5531E00024BF8 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		CF796B652B94A0B700014C21 /* AsyncToClosureGateway.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncToClosureGateway.swift; sourceTree = "<group>"; };
 		CFEA0A9D2B9202B800436E1C /* PirateLightClientKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = PirateLightClientKit; path = "../../../../Desktop/Lokesh Resumes/PirateLightClientKit"; sourceTree = "<group>"; };
 		CFEA0AA02B9202F900436E1C /* SDKMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKMetrics.swift; sourceTree = "<group>"; };
 		CFEA0AA22B9202F900436E1C /* TransactionEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionEncoder.swift; sourceTree = "<group>"; };
@@ -1526,6 +1530,7 @@
 				CF4FC91627A54A0000024BF8 /* CurrencyEndpoint.swift */,
 				CF4FC91A27A5531E00024BF8 /* APIConstants.swift */,
 				CF3019E827AE827C00609F6F /* DiskStatus.swift */,
+				CF796B652B94A0B700014C21 /* AsyncToClosureGateway.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -3288,6 +3293,7 @@
 				0D421AFF23C67DCF00E5E55E /* DetailCard.swift in Sources */,
 				29D53C9526D5606700A22656 /* ARRRToggleStyle.swift in Sources */,
 				0D9E89BD23DA3BD600AFD118 /* SeedManagement.swift in Sources */,
+				CF796B662B94A0B700014C21 /* AsyncToClosureGateway.swift in Sources */,
 				290B22EE27045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */,
 				0D4364C723CCF4CC008B7DAC /* SendFlowEnvironment.swift in Sources */,
 				0DDF876723DB5400002BF158 /* URL+Zcash.swift in Sources */,
@@ -3480,6 +3486,7 @@
 				0DCDFFA824B6722B000F6999 /* LazyView.swift in Sources */,
 				0D2D5C2424CF8AB2001A58AD /* ZcashNavigationBar.swift in Sources */,
 				CF2429FC27BE2E0900D9C305 /* SelectBackgroundMusic.swift in Sources */,
+				CF796B682B94A0B700014C21 /* AsyncToClosureGateway.swift in Sources */,
 				0D4B91DB24CA390B00A0E024 /* KeyboardAdaptive.swift in Sources */,
 				0DCDFFA924B6722B000F6999 /* ShareScreen.swift in Sources */,
 				0D24DA0725A64A8200504F29 /* TxDetailWrapper.swift in Sources */,
@@ -3674,6 +3681,7 @@
 				0DE3036E263A158400CF877A /* SeedManagement.swift in Sources */,
 				290B22EF27045BF000D378A2 /* PasscodeValidationScreen.swift in Sources */,
 				0DE3036F263A158400CF877A /* SendFlowEnvironment.swift in Sources */,
+				CF796B672B94A0B700014C21 /* AsyncToClosureGateway.swift in Sources */,
 				0DE30370263A158400CF877A /* URL+Zcash.swift in Sources */,
 				0DE30371263A158400CF877A /* MnemonicSeedPhraseProvider.swift in Sources */,
 				0DE30372263A158400CF877A /* ZecAmountHeader.swift in Sources */,

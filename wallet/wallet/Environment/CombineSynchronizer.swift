@@ -80,6 +80,7 @@ class CombineSynchronizer {
             [weak self ] promise in
             
             guard let self = self else { return }
+            
             self.synchronizer.latestHeight { (result) in
                 switch result {
                 case .success(let height):
@@ -91,8 +92,8 @@ class CombineSynchronizer {
         }
     }
     
-    func latestDownloadedHeight() throws -> BlockHeight {
-        try self.synchronizer.latestDownloadedHeight()
+    func latestDownloadedHeight() async throws -> BlockHeight {
+        try await self.synchronizer.latestHeight()
     }
     
     
@@ -105,7 +106,7 @@ class CombineSynchronizer {
         let transparentSubject = CurrentValueSubject<WalletBalance, Never>(Balance(verified: 0, total: 0))
         self.transparentBalance = transparentSubject
         self.verifiedBalance = CurrentValueSubject(0)
-        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT)
+        self.syncBlockHeight = CurrentValueSubject(ZCASH_NETWORK.constants.saplingActivationHeight)
         self.connectionState = CurrentValueSubject(self.synchronizer.connectionState)
         
         // Subscribe to SDKSynchronizer notifications
@@ -344,7 +345,7 @@ class CombineSynchronizer {
             
             guard let self = self else { return }
             
-            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.SAPLING_ACTIVATION_HEIGHT
+            let walletBirthday = (try? SeedManager.default.exportBirthday()) ?? ZCASH_NETWORK.constants.saplingActivationHeight
             
             self.synchronizer.refreshUTXOs(address: tAddress, from: walletBirthday, result: { [weak self] (r) in
                 guard let self = self else { return }
@@ -506,19 +507,16 @@ fileprivate struct NullProgress: BlockProgressReporting {
     }
 }
 
+// TODO: Changed by Lokesh - need to observe
 extension CompactBlockProgress {
     var syncStatus: SyncStatus {
         switch self {
-        case .download(let progress):
-            return .downloading(progress)
-        case .validate:
-            return .validating
-        case .scan(let progress):
-            return .scanning(progress)
-        case .enhance(let enhanceProgress):
-            return .enhancing(enhanceProgress)
-        case .fetch:
-            return .fetching
+        case .syncing(let syncingProgress):
+            return .syncing(syncingProgress.progress)
+        case .enhance(let progress):
+            return .syncing(0.9 + 0.08 * progress.progress)
+        case .fetch(let progress):
+            return .syncing(0.98 + 0.02 * progress)
         }
     }
 }

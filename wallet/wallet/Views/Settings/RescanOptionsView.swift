@@ -143,7 +143,7 @@ struct RescanOptionsView: View {
                         
                         mCurrentWalletBirthday = Int(height) ?? SeedManager.mDefaultHeight
                         
-                        if self.appEnvironment.synchronizer.syncStatus.value != .synced {
+                        if self.appEnvironment.synchronizer.syncStatus.value.isSynced == false {
                                 self.showErrorScanToast = true
                         }else{
                             
@@ -157,7 +157,7 @@ struct RescanOptionsView: View {
                         
                     }else{
                         
-                        if self.appEnvironment.synchronizer.syncStatus.value != .synced {
+                        if self.appEnvironment.synchronizer.syncStatus.value.isSynced == false {
                                 self.showErrorScanToast = true
                         }else{
                             

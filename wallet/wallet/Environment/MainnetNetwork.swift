@@ -8,4 +8,4 @@
 
 import Foundation
 import PirateLightClientKit
-let ZCASH_NETWORK = ZcashNetworkBuilder.network(for: .mainnet)
+let ZCASH_NETWORK = PirateNetworkBuilder.network(for: .mainnet)
